@@ -140,6 +140,8 @@ public class ClinicDaoImpl implements ClinicDao {
         return clinciListEmail;
     }
 
+
+
     @Override
     public List<Clinic> getClinic() {
         List<Clinic> getClinicDetails=null;
