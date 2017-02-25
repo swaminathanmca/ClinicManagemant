@@ -92,7 +92,7 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <button type="button" class="btn btn-primary">Add Clinic</button>
+                        <button type="button" class="btn btn-primary" ng-click="addClinic()">Add Clinic</button>
                         <label class="input-group pull-right" style="width: 180px">
                             <span class="input-group-addon glyphicon glyphicon-search" style="top:0px;"></span>
                             <input type="text" ng-model="search" class="input-group  form-control" placeholder="Search">
@@ -121,7 +121,7 @@
                                             <td>
                                                 <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myModal" ng-click="editClinic(x.clinicId)">Edit
                                                 </button>
-                                                <a class="glyphicon glyphicon-trash hv_change" ng-click="delete(x.clinicId)"></a>
+                                                <a class="glyphicon glyphicon-trash hv_change"  data-toggle="modal" data-target="#myModal1" ng-click="openDelete(x.clinicId)"></a>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -148,7 +148,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
+                    <h4 class="modal-title">Edit Clinic</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal ng-invalid" role="form" name="edit" ng-submit="submit(data.clinicId)" novalidate>
@@ -226,13 +226,38 @@
                         </fieldset>
                     </form>
                 </div>
-                <%--<div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>--%>
             </div>
-
         </div>
     </div>
+
+   <%--Delete Clinic Model--%>
+    <div class="modal fade" id="myModal1" role="dialog">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header panel-primary">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Delete Clinic</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure  want to delete the clinic?</p>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-lg-offset-4 col-lg-7">
+                                <button type="button" class="btn btn-inverse" data-dismiss="modal">Cancel</button>
+                                &nbsp;&nbsp;
+                                <button type="submit" class="btn btn-primary" ng-click="delete(clinicId)">Delete </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
 
 </div>
 

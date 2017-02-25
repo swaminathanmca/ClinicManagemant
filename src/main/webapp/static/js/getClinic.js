@@ -20,6 +20,7 @@ app.controller('getClinic', function ($scope, $http, $window) {
             $scope.data = response.data;
             $scope.clinic = $scope.data.clinic;
         });
+
     $scope.editClinic = function (id) {
 
         $scope.id = id;
@@ -113,5 +114,11 @@ app.controller('getClinic', function ($scope, $http, $window) {
         });
     }
 
+    $scope.openDelete=function(id){
+        $scope.clinicId=id;
+    }
 
+$scope.addClinic=function(){
+    location.href="Dashboard";
+}
 });

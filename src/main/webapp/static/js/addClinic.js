@@ -5,6 +5,7 @@
 app.controller('dashboard', function ($scope, $http, $window) {
     $scope.authError="The Email Already Taken";
     $scope.authErrorEmail="The Email Already Take";
+
     console.log($window.sessionStorage.role_name);
     $scope.validate = function () {
 
@@ -17,7 +18,8 @@ app.controller('dashboard', function ($scope, $http, $window) {
                 if($scope.error==false){
                     $scope.authError="";
                     console.log(!$scope.authError);
-
+                }else{
+                    $scope.authError="The Email Already Take";
                 }
             });
     }
@@ -29,6 +31,8 @@ app.controller('dashboard', function ($scope, $http, $window) {
                 $scope.error_email = response.data.status;
                 if($scope.error_email==false){
                     $scope.authErrorEmail="";
+                }else{
+                    $scope.authErrorEmail="The Email Already Take";
                 }
 
 
@@ -39,7 +43,7 @@ app.controller('dashboard', function ($scope, $http, $window) {
         $scope.submit = function () {
             if ($scope.error == true && $scope.error_email == true) {
             var clinic = {
-
+                image:$scope.image,
                 clinic_name: $scope.clinic_name,
                 contact_no: $scope.contact_no,
                 email_id: $scope.email_id,
@@ -54,9 +58,9 @@ app.controller('dashboard', function ($scope, $http, $window) {
                 then(function (response, status, headers, config) {
                     $scope.data = response.data;
                     console.log("Added",$scope.data.status);
-                    if($scope.data.status){
+                   /* if($scope.data.status){
                         location.href="GetClinic";
-                    }
+                    }*/
                 });
         }
                 }

@@ -11,6 +11,9 @@ public class Clinic {
 
     private String clinic_name;
 
+    private String location;
+    private String country;
+
     private String address;
 
     private String city;
@@ -118,11 +121,29 @@ public class Clinic {
         this.state = state;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
     public String toString(){
 
         return  "Clinic{"+
                 "clinic_id="+ clinic_id +
                 ",clinic_name="+ clinic_name +
+                ",location="+location+
+                ",country="+country+
                 ",address="+address +
                 ",contact_no="+contact_no+
                 ",email_id="+email_id+
