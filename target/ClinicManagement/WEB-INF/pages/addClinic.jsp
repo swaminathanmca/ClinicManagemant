@@ -51,6 +51,7 @@
 
             </li>
 
+
         </ul>
 
 
@@ -69,6 +70,18 @@
                             </li>
                             <li>
                                 <a href="GetClinic">View Clinic</a>
+                            </li>
+                        </ul>
+
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Doctor<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">Add Doctor</a>
+                            </li>
+                            <li>
+                                <a href="#">View Doctor</a>
                             </li>
                         </ul>
 
@@ -150,16 +163,15 @@
                                             <div class="col-lg-4">
                                                 <select id="countries_states1"
                                                         class="input-medium bfh-countries form-control" name="country"
-                                                        ng-model="country" data-country="IN" required></select>
+                                                        ng-model="country" data-country="" required></select>
                                                 <span class="text-danger wrapper text-center ng-binding"
                                                       ng-show="myform.country.$invalid &&  myform.country.$touched">Please Enter State</span>
 
                                             </div>
                                             <label class="col-lg-2 control-label">State</label>
                                             <div class="col-lg-4">
-                                                <select class="input-medium bfh-states form-control" name="state"
-                                                        ng-model="state" data-country="countries_states1"
-                                                        required></select>
+
+                                                <input type="text" ng-model="state" class="form-control" name="state" required>
                                                 <span class="text-danger wrapper text-center ng-binding"
                                                       ng-show="myform.state.$invalid &&  myform.state.$touched">Please Enter State</span>
                                             </div>
@@ -208,20 +220,14 @@
                                                       ng-show="myform.email.$invalid &&  ! myform.email.$pristine &&  myform.email.$touched "> Enter Valid Email</span>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-lg-2 control-label">Description</label>
 
-                                            <div class="col-lg-4">
-                                               <input type="file" accept="image/*" image="image" ng-model="image" class="form-control"/></input>
-                                            </div>
-                                        </div>
                                         <div class="form-group">
                                             <label class="col-lg-2 control-label">Description</label>
 
                                             <div class="col-lg-10">
                                                 <textarea class="form-control"
                                                           placeholder="Write Clinic Description Here.." name="desc"
-                                                          type="text" value="" ng-model="desc"></textarea>
+                                                          type="text" value="" ng-model="desc"  ></textarea>
                                             </div>
                                         </div>
 
@@ -233,7 +239,7 @@
                                                     <button type="submit" class="btn btn-success"
                                                             ng-disabled="myform.$invalid || !authError || !authErrorEmail "
                                                             ng-click="submitted=true">Save
-                                                    </button>{{myform.$invalid}}{{!authError}}{{!authErrorEmail}}
+                                                    </button>
                                                     <button type="button" class="btn btn-inverse">Cancel</button>
                                                 </div>
                                             </div>

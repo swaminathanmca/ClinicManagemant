@@ -18,6 +18,8 @@ app.controller('dashboard', function ($scope, $http, $window) {
                     $scope.authError="";
                     console.log(!$scope.authError);
 
+                }else{
+                    $scope.authError="The Email Already Taken";
                 }
             });
     }
@@ -29,6 +31,8 @@ app.controller('dashboard', function ($scope, $http, $window) {
                 $scope.error_email = response.data.status;
                 if($scope.error_email==false){
                     $scope.authErrorEmail="";
+                }else{
+                    $scope.authErrorEmail="The Email Already Take";
                 }
 
 
@@ -44,6 +48,8 @@ app.controller('dashboard', function ($scope, $http, $window) {
                 contact_no: $scope.contact_no,
                 email_id: $scope.email_id,
                 address: $scope.address,
+                location:$scope.location,
+                country:$scope.country,
                 city: $scope.city,
                 state: $scope.state,
                 pincode: $scope.pincode,

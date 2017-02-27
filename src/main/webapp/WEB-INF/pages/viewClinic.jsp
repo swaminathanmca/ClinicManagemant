@@ -13,6 +13,12 @@
     <link href="<%=request.getContextPath()%>/static/css/sb-admin-2.css" rel="stylesheet">
     <link href="<%=request.getContextPath()%>/static/vendor/metisMenu/metisMenu.css" rel="stylesheet">
     <link href="<%=request.getContextPath()%>/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/css/bootstrap-formhelpers.min.css" rel="stylesheet">
+
+
+
+
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
 </head>
@@ -64,6 +70,18 @@
                             </li>
                             <li>
                                 <a href="GetClinic">View Clinic</a>
+                            </li>
+                        </ul>
+
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Doctor<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">Add Doctor</a>
+                            </li>
+                            <li>
+                                <a href="#">View Doctor</a>
                             </li>
                         </ul>
 
@@ -161,6 +179,57 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="col-lg-3 control-label">Location</label>
+                                <div class="col-lg-5">
+                                    <input class="form-control"  name="location" type="text" value=""  ng-model="data.location"  required>
+                                    <span class="text-danger wrapper text-center ng-binding" ng-show="edit.location.$invalid &&  edit.location.$touched">Please Enter Address</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Address</label>
+                                <div class="col-lg-5">
+                                    <input class="form-control"  name="address" type="text" value=""  ng-model="data.address"  required>
+                                    <span class="text-danger wrapper text-center ng-binding" ng-show="edit.address.$invalid &&  edit.address.$touched">Please Enter Address</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Country</label>
+                                <div class="col-lg-5">
+                                    <select id="countries1"
+                                            class="input-medium bfhcountries form-control" name="country"
+                                            data-country="data.country" required></select>
+                                    <span class="text-danger wrapper text-center ng-binding" ng-show="edit.country.$invalid">Please Enter Country</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">City</label>
+                                <div class="col-lg-5">
+                                    <input class="form-control"  name="city" type="text" value=""  ng-model="data.city"  required>
+                                    <span class="text-danger wrapper text-center ng-binding" ng-show="edit.city.$invalid &&  edit.city.$touched">Please Enter City</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">State</label>
+                                <div class="col-lg-5 ">
+                                    <%--<select class="input-medium bfh-states form-control" name="state"   data-country="countries_states1"
+                                            required></select>--%>
+                                    <input type="text" class="form-control" ng-model="data.state" name="state" required>
+
+
+                                    <span class="text-danger wrapper text-center ng-binding" ng-show="edit.state.$invalid &&  edit.state.$touched">Please Enter State</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Pin Code</label>
+                                <div class="col-lg-5">
+                                    <input class="form-control"  name="pincode" type="text" value=""  ng-model="data.pincode"  required>
+                                    <span class="text-danger wrapper text-center ng-binding" ng-show="edit.pincode.$error.pattern">Please Enter Valid Pin Code</span>
+                                    <span class="text-danger wrapper text-center ng-binding" ng-show="edit.pincode.$invalid &&  edit.pincode.$touched">Please Enter Pin Code</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-lg-3 control-label">Phone No</label>
                                 <div class="col-lg-5">
                                     <input class="form-control"  name="branch_no" type="text" value="" ui-mask="999-999-9999" ng-model="data.phone_no" ng-blur="validate(data.clinicId)"  required>
@@ -178,35 +247,6 @@
                                    The Email Already Taken
                                    </span>
                                     <span class="text-danger wrapper text-center ng-binding" ng-show="edit.email.$invalid &&  ! edit.email.$pristine &&  edit.email.$touched "> Enter Valid Email</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-lg-3 control-label">Address</label>
-                                <div class="col-lg-5">
-                                    <input class="form-control"  name="address" type="text" value=""  ng-model="data.address"  required>
-                                    <span class="text-danger wrapper text-center ng-binding" ng-show="edit.address.$invalid &&  edit.address.$touched">Please Enter Address</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-lg-3 control-label">City</label>
-                                <div class="col-lg-5">
-                                    <input class="form-control"  name="city" type="text" value=""  ng-model="data.city"  required>
-                                    <span class="text-danger wrapper text-center ng-binding" ng-show="edit.city.$invalid &&  edit.city.$touched">Please Enter City</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-lg-3 control-label">State</label>
-                                <div class="col-lg-5">
-                                    <input class="form-control"  name="state" type="text" value=""  ng-model="data.state"  required>
-                                    <span class="text-danger wrapper text-center ng-binding" ng-show="edit.state.$invalid &&  edit.state.$touched">Please Enter State</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-lg-3 control-label">Pin Code</label>
-                                <div class="col-lg-5">
-                                    <input class="form-control"  name="pincode" type="text" value=""  ng-model="data.pincode"  required>
-                                    <span class="text-danger wrapper text-center ng-binding" ng-show="edit.pincode.$error.pattern">Please Enter Valid Pin Code</span>
-                                    <span class="text-danger wrapper text-center ng-binding" ng-show="edit.pincode.$invalid &&  edit.pincode.$touched">Please Enter Pin Code</span>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -270,5 +310,8 @@
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/getClinic.js"></script>
+
+<script src="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/js/bootstrap-formhelpers.min.js"></script>
+
 </body>
 </html>

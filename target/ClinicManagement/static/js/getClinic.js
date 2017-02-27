@@ -14,23 +14,25 @@ app.controller('getClinic', function ($scope, $http, $window) {
     $scope.desc = "";
     $scope.authError = "The Email Already Taken";
     $scope.authErrorEmail = "The Email Already Take";
+    $scope.statem = 0;
 
     $http.get("ViewClinic")
         .then(function (response) {
             $scope.data = response.data;
             $scope.clinic = $scope.data.clinic;
+
+
         });
 
     $scope.editClinic = function (id) {
 
         $scope.id = id;
+        $scope.data.country = "";
         $http.get("GetDetails/" + $scope.id).
             then(function (response, status, headers, config) {
                 $scope.data = response.data;
-
-
-                console.log($scope.data);
-
+                $('#countries1').bfhcountries({country: $scope.data.country});
+                /* $('#states1').bfhstates({country: $scope.data.country, state: $scope.data.state});*/
             });
     }
 
@@ -72,17 +74,22 @@ app.controller('getClinic', function ($scope, $http, $window) {
 
     $scope.submit = function (id) {
         $scope.clinicID = id;
+        $scope.location = $scope.data.location;
+        $scope.state = $scope.data.state;
         $scope.clinic_name = $scope.data.clinicName;
         $scope.contact_no = $scope.data.phone_no;
         $scope.email_id = $scope.data.email_id;
         $scope.address = $scope.data.address;
         $scope.city = $scope.data.city;
-        $scope.state = $scope.data.state;
+
+
         $scope.pincode = $scope.data.pincode;
         $scope.desc = $scope.data.description;
         var clinic = {
             clinic_id: $scope.clinicID,
             clinic_name: $scope.clinic_name,
+            location: $scope.location,
+            country: $('#countries1').val(),
             contact_no: $scope.contact_no,
             email_id: $scope.email_id,
             address: $scope.address,
@@ -101,24 +108,25 @@ app.controller('getClinic', function ($scope, $http, $window) {
             });
 
     }
-    $scope.delete=function(id){
-        $scope.clinicID=id;
+    $scope.delete = function (id) {
+        $scope.clinicID = id;
 
-        $http.delete("DeleteClinic/"+$scope.clinicID).
-            then(function(response, status, headers, config){
+        $http.delete("DeleteClinic/" + $scope.clinicID).
+            then(function (response, status, headers, config) {
                 $scope.data = response.data;
                 console.log("Updated", $scope.data.status);
                 if ($scope.data.status) {
                     location.href = "GetClinic";
                 }
-        });
+            });
     }
 
-    $scope.openDelete=function(id){
-        $scope.clinicId=id;
+    $scope.openDelete = function (id) {
+        $scope.clinicId = id;
     }
 
-$scope.addClinic=function(){
-    location.href="Dashboard";
-}
+    $scope.addClinic = function () {
+        location.href = "Dashboard";
+    }
+
 });

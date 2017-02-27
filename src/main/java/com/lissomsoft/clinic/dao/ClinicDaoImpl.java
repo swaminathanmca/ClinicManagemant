@@ -31,11 +31,13 @@ public class ClinicDaoImpl implements ClinicDao {
         int result = 0;
         try {
             System.out.println("Number"+clinic.getContact_no());
-            String insertBranchSql = "INSERT INTO clinic (clinic_name,address,city,state,zip,contact_number,email,description,created_at,updated_at) VALUES (:clinic_name,:address,:city,:state,:pincode,:contact_number,:email,:description,:created_at,:updated_at)";
+            String insertBranchSql = "INSERT INTO clinic (clinic_name,address,country,location,city,state,zip,contact_number,email,description,created_at,updated_at) VALUES (:clinic_name,:address,:location,:country,:city,:state,:pincode,:contact_number,:email,:description,:created_at,:updated_at)";
 
             System.out.println(insertBranchSql);
             Map<String, Object> parameters = new HashMap<String, Object>();
             parameters.put("clinic_name", clinic.getClinic_name());
+            parameters.put("country",clinic.getCountry());
+            parameters.put("location",clinic.getLocation());
             parameters.put("address", clinic.getAddress());
             parameters.put("city", clinic.getCity());
             parameters.put("state", clinic.getState());
@@ -62,12 +64,14 @@ public class ClinicDaoImpl implements ClinicDao {
 
         try {
 
-            String editBranchSql = "UPDATE clinic SET  clinic_name=:clinic_name,address=:address,city=:city,state=:state,zip=:pincode,contact_number=:contact_number,email=:email,description=:description,updated_at=:updated_at WHERE clinic_id=:clinic_id";
+            String editBranchSql = "UPDATE clinic SET  clinic_name=:clinic_name,address=:address,country=:country,location=:location,city=:city,state=:state,zip=:pincode,contact_number=:contact_number,email=:email,description=:description,updated_at=:updated_at WHERE clinic_id=:clinic_id";
             System.out.println(editBranchSql);
             Map<String, Object> parameters = new HashMap<String, Object>();
             parameters.put("clinic_id",clinic.getClinic_id());
             parameters.put("clinic_name", clinic.getClinic_name());
             parameters.put("address", clinic.getAddress());
+            parameters.put("country",clinic.getCountry());
+            parameters.put("location",clinic.getLocation());
             parameters.put("city", clinic.getCity());
             parameters.put("state", clinic.getState());
             parameters.put("pincode", clinic.getPincode());

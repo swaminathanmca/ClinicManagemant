@@ -24,6 +24,8 @@ public class ClinicMapper implements RowMapper<Clinic> {
         clinic.setCity(resultSet.getString("city"));
         clinic.setState(resultSet.getString("state"));
         clinic.setPincode(resultSet.getInt("zip"));
+        clinic.setLocation(resultSet.getString("location"));
+        clinic.setCountry(resultSet.getString("country"));
 
         return clinic;
     }

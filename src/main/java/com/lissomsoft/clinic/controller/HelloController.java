@@ -126,7 +126,7 @@ public class HelloController {
     String addClinic(@RequestBody Clinic clinic, HttpServletRequest request) throws JSONException {
       JSONObject jsonObject=new JSONObject();
         boolean flag;
-     //   System.out.println(branch);
+      System.out.println(clinic);
         flag = clinicService.addClinic(clinic);
         jsonObject.put("status",flag);
         return jsonObject.toString();
@@ -139,7 +139,7 @@ public class HelloController {
     String editClinic(@RequestBody Clinic clinic, HttpServletRequest request) throws JSONException {
         JSONObject jsonObject=new JSONObject();
         boolean flag;
-         System.out.println(clinic);
+
        flag = clinicService.editClinic(clinic);
         jsonObject.put("status",flag);
         return jsonObject.toString();
@@ -173,6 +173,8 @@ public class HelloController {
             jsonObject.put("phoneNo",clinicdetails.getContact_no());
             jsonObject.put("emailid",clinicdetails.getEmail_id());
             jsonObject.put("address",clinicdetails.getAddress());
+            jsonObject.put("location",clinicdetails.getLocation());
+            jsonObject.put("country",clinicdetails.getCountry());
             jsonObject.put("description",clinicdetails.getDescription());
 
             jsonArray.put(jsonObject);
@@ -244,6 +246,8 @@ public class HelloController {
             jsonObject.put("address",clinicdetails.getAddress());
             jsonObject.put("city",clinicdetails.getCity());
             jsonObject.put("pincode",clinicdetails.getPincode());
+            jsonObject.put("country",clinicdetails.getCountry());
+            jsonObject.put("location",clinicdetails.getLocation());
             jsonObject.put("state",clinicdetails.getState());
             jsonObject.put("status",true);
 
