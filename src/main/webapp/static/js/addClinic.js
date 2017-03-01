@@ -67,7 +67,7 @@ app.controller('dashboard', function ($scope, $http, $window) {
             chief_contact_no:$scope.chief_contact_no,
             chief_email_id:$scope.cheif_email_id,
             chief_pin_code:$scope.chef_pin,
-            chief_gender:$scope.chief_gender
+            gender:$scope.chief_gender
         }
 
             $http.post("AddClinic", ClinicUser).

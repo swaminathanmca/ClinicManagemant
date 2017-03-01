@@ -165,7 +165,7 @@ public class HelloController {
 
        boolean satus;
         JSONObject data = new JSONObject();
-        List<Clinic> validateClinic;
+        List<Branch> validateClinic;
 
         validateClinic= clinicService.validateno(contact_no);
         if(validateClinic.isEmpty()){
@@ -183,7 +183,7 @@ public class HelloController {
     @ResponseBody
     String emailvalidate(@PathVariable String email_id)throws JSONException{
         JSONObject datajson=new JSONObject();
-        List<Clinic> emailValidate;
+        List<Branch> emailValidate;
 
         emailValidate=clinicService.email(email_id);
         if(emailValidate.isEmpty()){
@@ -232,16 +232,16 @@ public class HelloController {
     @ResponseBody
     String validateId(@PathVariable String contact_no,@PathVariable Integer clinicID) throws JSONException {
         JSONObject data = new JSONObject();
-        List<Clinic> validateClinic;
+        List<Branch> validateClinic;
         validateClinic= clinicService.validateno(contact_no);
 
         if(validateClinic.isEmpty()){
             data.put("status", true);
         }
         else{
-            Iterator<Clinic> it=validateClinic.iterator();
+            Iterator<Branch> it=validateClinic.iterator();
             while (it.hasNext()){
-                Clinic validateNo=it.next();
+                Branch validateNo=it.next();
 
                 if(validateNo.getClinic_id()==clinicID){
                     data.put("status", true);
@@ -257,7 +257,7 @@ public class HelloController {
     @ResponseBody
     String emailvalidateId(@PathVariable String email_id,@PathVariable Integer clinicID)throws JSONException{
         JSONObject datajson=new JSONObject();
-        List<Clinic> emailValidate;
+        List<Branch> emailValidate;
 
         emailValidate=clinicService.email(email_id);
         if(emailValidate.isEmpty()){
@@ -265,9 +265,9 @@ public class HelloController {
         }
         else
         {
-            Iterator<Clinic> it=emailValidate.iterator();
+            Iterator<Branch> it=emailValidate.iterator();
             while (it.hasNext()){
-                Clinic validateEmail=it.next();
+                Branch validateEmail=it.next();
                 if(validateEmail.getClinic_id()==clinicID){
                     datajson.put("status",true);
                 }else {

@@ -1,6 +1,7 @@
 package com.lissomsoft.clinic.service;
 
 import com.lissomsoft.clinic.dao.ClinicDaoImpl;
+import com.lissomsoft.clinic.domain.Branch;
 import com.lissomsoft.clinic.domain.Clinic;
 import com.lissomsoft.clinic.dao.ClinicDao;
 import com.lissomsoft.clinic.vo.ClinicUser;
@@ -23,12 +24,12 @@ public class ClinicServiceImpl implements ClinicService {
     }
 
     @Override
-    public List<Clinic> validateno(String contact_no) {
+    public List<Branch> validateno(String contact_no) {
         return clinicDao.validateno(contact_no);
     }
 
     @Override
-    public List<Clinic> email(String email_id) {
+    public List<Branch> email(String email_id) {
         return clinicDao.email(email_id);
     }
 

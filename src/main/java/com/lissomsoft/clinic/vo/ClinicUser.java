@@ -41,6 +41,8 @@ public class ClinicUser {
 
     private String password;
 
+    private String description;
+
     private String chief_address1;
 
     private String chief_address2;
@@ -203,6 +205,14 @@ public class ClinicUser {
         this.password = password;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getChief_address1() {
         return chief_address1;
     }
@@ -278,33 +288,34 @@ public class ClinicUser {
     public String toString(){
 
         return "ClinicUser{"+
-                "clinic_id="+ clinic_id +
-                "clinic_name="+clinic_name+
-                "register_no="+register_no+
-                "status="+status+
-                "chief_name="+chief_name+
-                "branch_id="+branch_id+
-                "branch_name="+branch_name+
-                "ho="+ho+
-                "chief_id="+chief_id+
-                "address1="+address1+
-                "address2="+address2+
-                "city="+city+
-                "state="+state+
-                "country="+country+
-                "pin_code="+pin_code+
-                "contact_no="+contact_no+
-                "email_id="+email_id+
-                "password="+password+
-                "chief_address1="+chief_address1+
-                "chief_address2="+chief_address2+
-                "chief_city="+chief_city+
-                "chief_state="+chief_state+
-                "chief_country="+chief_country+
-                "chief_contact_no="+chief_contact_no+
-                "chief_email_id="+chief_email_id+
-                "chief_pin_code="+chief_pin_code+
-                "gender="+gender+
+                "  clinic_id="+ clinic_id +
+                ", clinic_name="+clinic_name+
+                ", register_no="+register_no+
+                ", status="+status+
+                ", chief_name="+chief_name+
+                ", branch_id="+branch_id+
+                ", branch_name="+branch_name+
+                ", ho="+ho+
+                ", chief_id="+chief_id+
+                ", address1="+address1+
+                ", address2="+address2+
+                ", city="+city+
+                ", state="+state+
+                ", country="+country+
+                ", pin_code="+pin_code+
+                ", contact_no="+contact_no+
+                ", email_id="+email_id+
+                ", password="+password+
+                ", description="+description+
+                ", chief_address1="+chief_address1+
+                ", chief_address2="+chief_address2+
+                ", chief_city="+chief_city+
+                ", chief_state="+chief_state+
+                ", chief_country="+chief_country+
+                ", chief_contact_no="+chief_contact_no+
+                ", chief_email_id="+chief_email_id+
+                ", chief_pin_code="+chief_pin_code+
+                ", gender="+gender+
                 '}';
     }
 }

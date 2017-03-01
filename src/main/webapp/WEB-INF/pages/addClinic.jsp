@@ -252,34 +252,34 @@
                                                 <label class="col-lg-2 control-label">Address 1</label>
                                                 <div class="col-lg-4">
                                                     <input class="form-control" placeholder="Address"
-                                                           name="cheif_address1" type="text" ng-model="cheif_address1" required>
+                                                           name="chief_address1" type="text" ng-model="chief_address1" required>
                                                 <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.cheif_address1.$invalid &&  myform.cheif_address1.$touched">Please Enter Address</span>
+                                                      ng-show="myform.chief_address1.$invalid &&  myform.chief_address1.$touched">Please Enter Address</span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-lg-2 control-label">Address 2</label>
                                                 <div class="col-lg-4">
-                                                    <input class="form-control" placeholder="Address" name="cheif_address2"
-                                                           type="text" ng-model="cheif_address2" maxlength="30" required>
+                                                    <input class="form-control" placeholder="Address" name="chief_address2"
+                                                           type="text" ng-model="chief_address2" maxlength="30" required>
                                                 <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.cheif_address2.$invalid &&  myform.cheif_address2.$touched">Please Enter Address</span>
+                                                      ng-show="myform.chief_address2.$invalid &&  myform.chief_address2.$touched">Please Enter Address</span>
                                                 </div>
                                                 <label class="col-lg-2 control-label">City</label>
                                                 <div class="col-lg-4">
                                                     <input class="form-control" placeholder="City"
-                                                           name="cheif_city" type="text" ng-model="cheif_city" required>
+                                                           name="chief_city" type="text" ng-model="chief_city" required>
                                                 <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.cheif_city.$invalid &&  myform.cheif_city.$touched">Please Enter City</span>
+                                                      ng-show="myform.chief_city.$invalid &&  myform.chief_city.$touched">Please Enter City</span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-lg-2 control-label">State</label>
                                                 <div class="col-lg-4">
-                                                    <input class="form-control" placeholder="State" name="chef_state"
-                                                           type="text" ng-model="chef_state" maxlength="30" required>
+                                                    <input class="form-control" placeholder="State" name="chief_state"
+                                                           type="text" ng-model="chief_state" maxlength="30" required>
                                                 <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.chef_state.$invalid &&  myform.chef_state.$touched">Please Enter State</span>
+                                                      ng-show="myform.chief_state.$invalid &&  myform.chief_state.$touched">Please Enter State</span>
                                                 </div>
                                                 <label class="col-lg-2 control-label">Country</label>
                                                 <div class="col-lg-4">

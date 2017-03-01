@@ -1,4 +1,5 @@
 package com.lissomsoft.clinic.dao;
+import com.lissomsoft.clinic.domain.Branch;
 import com.lissomsoft.clinic.domain.Clinic;
 import com.lissomsoft.clinic.vo.ClinicUser;
 
@@ -11,8 +12,8 @@ public interface ClinicDao {
     boolean addClinic(ClinicUser clinic);
     boolean editClinic(Clinic clinic);
     boolean deleteClinic(Integer clinicID);
-    List<Clinic> validateno(String contact_no);
-    List<Clinic> email(String email_id);
+    List<Branch> validateno(String contact_no);
+    List<Branch> email(String email_id);
     List<Clinic> getClinic();
     List<Clinic> getClinicById(Integer id);
 }
