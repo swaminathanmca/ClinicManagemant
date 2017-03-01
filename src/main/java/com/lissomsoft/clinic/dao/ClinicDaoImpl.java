@@ -42,12 +42,13 @@ public class ClinicDaoImpl implements ClinicDao {
         int result_profile=0;
         int result_user=0;
         int result_member=0;
+        int result_role=0;
         DefaultTransactionDefinition paramTransactionDefinition = new DefaultTransactionDefinition();
         TransactionStatus status=platformTransactionManager.getTransaction(paramTransactionDefinition );
 
         try {
 
-            String insertClinicSql = "INSERT INTO clinic_master (clinic_name,reg_no,status,chief,created_at,updated_at) VALUES (:clinic_name,:reg_no,:status,:chief,:created_at,:updated_at)";
+            String insertClinicSql = "INSERT INTO clinic_master (clinic_name,reg_no,status,chief,created_at,updated_at) VALUES (:clinic_name,:reg_no,:status,:chief,:created_at,:created_at)";
 
             System.out.println(insertClinicSql);
             Map<String, Object> parameters = new HashMap<String, Object>();
@@ -58,37 +59,37 @@ public class ClinicDaoImpl implements ClinicDao {
             parameters.put("created_at", format.format(new Date()));
             parameters.put("updated_at", format.format(new Date()));
             result = jdbcTemplate.update(insertClinicSql, parameters);
-            platformTransactionManager.commit(status);
+            System.out.println("insertClinicSql,"+result);
+
 
         } catch (Exception e) {
             e.printStackTrace();
-            platformTransactionManager.rollback(status);
+
 
 
         }
             if((result > 0) ? true : false){
                 try {
-                    String insertUserSql = "INSERT INTO user (username,password,email,status,created_at,updated_at) VALUES (:user_name,:password,:email,:1)";
+                    System.out.println(format.format(new Date()));
+                    String insertUserSql = "INSERT INTO user (username,password,email,status,created_at,updated_at) VALUES (:user_name,:password,:email,1,:created_at,:created_at)";
                     Map<String, Object> parameters1 = new HashMap<String, Object>();
                     parameters1.put("user_name", clinic.getClinic_name());
                     parameters1.put("password", clinic.getPassword());
-                    parameters1.put("email", clinic.getEmail_id());
+                    parameters1.put("email", clinic.getChief_email_id());
                     parameters1.put("created_at", format.format(new Date()));
                     parameters1.put("updated_at", format.format(new Date()));
 
                     result_user = jdbcTemplate.update(insertUserSql, parameters1);
-                    platformTransactionManager.commit(status);
+                    System.out.println("insertUserSql,"+result_user);
                 }catch (Exception e){
                     e.printStackTrace();
-                    platformTransactionManager.rollback(status);
+
                 }
-            }else{
-                platformTransactionManager.rollback(status);
             }
         if((result_user > 0) ? true : false){
 
             try{
-                String insertProfileSql="INSERT INTO profile_master(name,address1,address2,city,state,country,phone,email,pincode,gender,created_at,updated_at)VALUES(:name,:address1,:address2,:city,:state,:country,:phone,:email,:pincode,:gender,:created_at,:updated_at)";
+                String insertProfileSql="INSERT INTO profile_master(name,address1,address2,city,state,country,phone,email,pincode,gender,created_at,updated_at)VALUES(:name,:address1,:address2,:city,:state,:country,:phone,:email,:pincode,:gender,:created_at,:created_at)";
                 Map<String,Object> parameters2=new HashMap<String, Object>();
                 parameters2.put("name",clinic.getChief_name());
                 parameters2.put("address1",clinic.getChief_address1());
@@ -103,30 +104,27 @@ public class ClinicDaoImpl implements ClinicDao {
                 parameters2.put("created_at", format.format(new Date()));
                 parameters2.put("updated_at", format.format(new Date()));
                 result_profile=jdbcTemplate.update(insertProfileSql,parameters2);
-                platformTransactionManager.commit(status);
+                System.out.println("insertProfileSql,"+result_profile);
             }catch (Exception e){
                 e.printStackTrace();
-                platformTransactionManager.rollback(status);
+
             }
-        }else{
-            platformTransactionManager.rollback(status);
         }
         if((result_profile >0)? true :false){
             try{
-                String insertMemberSql="INSERT INTO member_master(user_id,profile_id) SELECT user.user_id,profile_master.profile_id FROM user INNER JOIN profile_master ON user.email=profile_master.email and user.email=:email; ";
+                String insertMemberSql="INSERT INTO member_master(user_id,profile_id) SELECT  user.user_id,profile_master.profile_id FROM user INNER JOIN profile_master ON user.email=profile_master.email and user.email=:email ";
                 Map<String,Object> member=new HashMap<String, Object>();
                 member.put("email",clinic.getChief_email_id());
                 result_member=jdbcTemplate.update(insertMemberSql,member);
+                System.out.println("insertMemberSql,"+result_member);
             }catch (Exception e){
                 e.printStackTrace();
             }
-        }else{
-            platformTransactionManager.rollback(status);
         }
     if((result_member>0)?true :false){
         try{
 
-            String insertBranchSql="INSERT INTO branch_master(branch_name,clinic_id,ho,chief_id,address1,address2,city,state,country,pin_code,email,contact_no,status,created_at,updated_at) VALUES ()";
+            String insertBranchSql="INSERT INTO branch_master(branch_name,clinic_id,ho,chief_id,address1,address2,city,state,country,pin_code,email,contact_no,status,created_at,updated_at) VALUES (:branch_name,(SELECT  clinic_master.clinic_id FROM clinic_master where clinic_master.clinic_name=:clinic_name),1,(SELECT  user.user_id FROM user where user.email=:chief_email),:address1,:address2,:city,:state,:country,:pin_code,:email,:contact_no,1,:created_at,:created_at)";
             Map<String,Object> branch=new HashMap<String, Object>();
             branch.put("branch_name",clinic.getBranch_name());
             branch.put("address1",clinic.getAddress1());
@@ -138,12 +136,33 @@ public class ClinicDaoImpl implements ClinicDao {
             branch.put("email",clinic.getEmail_id());
             branch.put("pin_code",clinic.getPin_code());
             branch.put("chief_email",clinic.getChief_email_id());
+            branch.put("clinic_name",clinic.getClinic_name());
+            branch.put("created_at", format.format(new Date()));
+            branch.put("updated_at", format.format(new Date()));
+            result_branch=jdbcTemplate.update(insertBranchSql,branch);
+            System.out.println("insertBranchSql,"+result_branch);
         }catch (Exception e){
             e.printStackTrace();
         }
     }
+        if((result_branch>0)?true:false){
+                try {
+                    String insertRoleSql="INSERT INTO role_master(user_id,clinic_id,branch_id,role_name) VALUES((SELECT user.user_id FROM user WHERE email=:email),(SELECT clinic_master.clinic_id FROM clinic_master where clinic_name=:clinic_name),(SELECT branch_master.branch_id FROM branch_master where email=:email_id),'Admin')";
 
-        return (result > 0) ? true : false;
+                    Map<String,Object> role=new HashMap<String, Object>();
+                    role.put("email",clinic.getChief_email_id());
+                    role.put("clinic_name",clinic.getClinic_name());
+                    role.put("email_id",clinic.getEmail_id());
+                    result_role=jdbcTemplate.update(insertRoleSql,role);
+                    System.out.println("insertRoleSql,"+result_role);
+                    platformTransactionManager.commit(status);
+                }catch (Exception e){
+                    e.printStackTrace();
+                    platformTransactionManager.rollback(status);
+                }
+        }
+
+        return (result_role > 0) ? true : false;
 
     }
 
