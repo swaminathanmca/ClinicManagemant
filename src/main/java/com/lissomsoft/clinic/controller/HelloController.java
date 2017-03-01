@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.lissomsoft.clinic.domain.*;
+import com.lissomsoft.clinic.vo.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,33 +46,7 @@ public class HelloController {
     }
 
 
-    @RequestMapping(value = "/GetPatient", method = RequestMethod.GET)
-    public
-    @ResponseBody
-    String getPatient() throws JSONException {
-    /*	model.addAttribute("message", "Hello world!");*/
-        JSONArray jsonArray = new JSONArray();
-        JSONObject mainObj = new JSONObject();
-        JSONObject jsonObject = new JSONObject();
-        Patient patient = new Patient();
-        patient.setFullName("Jayaswaminathan");
-        patient.setBloodGroup("AB");
-        patient.setDob("24/07/1992");
-        patient.setFactor("Positive");
-        patient.setGender("Male");
-        patient.setmStatus("Single");
-        patient.setStatus("active");
-        jsonObject.put("FullName", patient.getFullName());
-        jsonObject.put("BloodGroup", patient.getBloodGroup());
-        jsonObject.put("Dob", patient.getDob());
-        jsonObject.put("Factor", patient.getFactor());
-        jsonObject.put("Gender", patient.getGender());
-        jsonObject.put("Mstatus", patient.getmStatus());
-        jsonObject.put("Status", patient.getStatus());
-        jsonArray.put(jsonObject);
-        mainObj.put("Patient", jsonArray);
-        return mainObj.toString();
-    }
+
 
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
     public
@@ -86,7 +61,8 @@ public class HelloController {
         JSONObject jsonObject = new JSONObject();
         JSONObject data = new JSONObject();
         JSONObject status = new JSONObject();
-        userList = userService.authenticateUser(user.getUsername(), user.getPassword());
+
+        userList = userService.authenticateUser(user.getEmail_id(), user.getPassword());
 
         Iterator<User> it = userList.iterator();
 
@@ -123,7 +99,7 @@ public class HelloController {
     @RequestMapping(value = "/AddClinic", method = RequestMethod.POST)
     public
     @ResponseBody
-    String addClinic(@RequestBody Clinic clinic, HttpServletRequest request) throws JSONException {
+    String addClinic(@RequestBody ClinicUser clinic ,HttpServletRequest request) throws JSONException {
       JSONObject jsonObject=new JSONObject();
         boolean flag;
       System.out.println(clinic);
@@ -170,12 +146,6 @@ public class HelloController {
             JSONObject jsonObject =new JSONObject();
             jsonObject.put("clinicId",clinicdetails.getClinic_id());
             jsonObject.put("clinicName",clinicdetails.getClinic_name());
-            jsonObject.put("phoneNo",clinicdetails.getContact_no());
-            jsonObject.put("emailid",clinicdetails.getEmail_id());
-            jsonObject.put("address",clinicdetails.getAddress());
-            jsonObject.put("location",clinicdetails.getLocation());
-            jsonObject.put("country",clinicdetails.getCountry());
-            jsonObject.put("description",clinicdetails.getDescription());
 
             jsonArray.put(jsonObject);
             sendResponse.put("clinic",jsonArray);
@@ -240,7 +210,7 @@ public class HelloController {
             Clinic clinicdetails=it.next();
             jsonObject.put("clinicId",clinicdetails.getClinic_id());
             jsonObject.put("clinicName",clinicdetails.getClinic_name());
-            jsonObject.put("phone_no",clinicdetails.getContact_no());
+           /* jsonObject.put("phone_no",clinicdetails.getContact_no());
             jsonObject.put("email_id",clinicdetails.getEmail_id());
             jsonObject.put("description",clinicdetails.getDescription());
             jsonObject.put("address",clinicdetails.getAddress());
@@ -248,7 +218,7 @@ public class HelloController {
             jsonObject.put("pincode",clinicdetails.getPincode());
             jsonObject.put("country",clinicdetails.getCountry());
             jsonObject.put("location",clinicdetails.getLocation());
-            jsonObject.put("state",clinicdetails.getState());
+            jsonObject.put("state",clinicdetails.getState());*/
             jsonObject.put("status",true);
 
         }

@@ -3,6 +3,7 @@ package com.lissomsoft.clinic.service;
 import com.lissomsoft.clinic.dao.ClinicDaoImpl;
 import com.lissomsoft.clinic.domain.Clinic;
 import com.lissomsoft.clinic.dao.ClinicDao;
+import com.lissomsoft.clinic.vo.ClinicUser;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class ClinicServiceImpl implements ClinicService {
 
 
     @Override
-    public boolean addClinic(Clinic clinic) {
+    public boolean addClinic(ClinicUser clinic) {
         return clinicDao.addClinic(clinic);
     }
 

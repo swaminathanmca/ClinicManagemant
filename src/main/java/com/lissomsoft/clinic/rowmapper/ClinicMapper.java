@@ -17,7 +17,7 @@ public class ClinicMapper implements RowMapper<Clinic> {
         Clinic clinic=new Clinic();
         clinic.setClinic_id(resultSet.getInt("clinic_id"));
         clinic.setClinic_name(resultSet.getString("clinic_name"));
-        clinic.setAddress(resultSet.getString("address"));
+     /*   clinic.setAddress(resultSet.getString("address"));
         clinic.setDescription(resultSet.getString("description"));
         clinic.setContact_no(resultSet.getString("contact_number"));
         clinic.setEmail_id(resultSet.getString("email"));
@@ -25,7 +25,7 @@ public class ClinicMapper implements RowMapper<Clinic> {
         clinic.setState(resultSet.getString("state"));
         clinic.setPincode(resultSet.getInt("zip"));
         clinic.setLocation(resultSet.getString("location"));
-        clinic.setCountry(resultSet.getString("country"));
+        clinic.setCountry(resultSet.getString("country"));*/
 
         return clinic;
     }

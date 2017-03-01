@@ -20,18 +20,21 @@ public class UserDaoImpl implements  UserDao {
     @Autowired(required = false)
     private NamedParameterJdbcTemplate jdbcTemplate;
 
-    public List<User> authenticateUser(String username,String password){
+    public List<User> authenticateUser(String email_id,String password){
 
         List<User> userList = null;
         User userDetails = null;
         try{
 
-            String authenticateSQL="SELECT u.user_id, u.username,a.role_name, u.email FROM user u INNER JOIN auth_assignment a ON u.user_id =a.user_id  and u.email=:username and u.password=:password ORDER BY CLINIC.u.user_id";
+
+            String authenticateSQL="SELECT r.role_name,u.username,r.branch_id,u.email FROM clinic.role_master r JOIN clinic.user u on r.user_id=u.user_id and u.email=:email and u.password=:password";
+
             Map<String, Object> parameters = new HashMap<String, Object>();
-            parameters.put("username", username);
+            parameters.put("email", email_id);
             parameters.put("password", password);
 
             userList = jdbcTemplate.query(authenticateSQL, parameters, new UserMapper());
+
             if(userList == null){
 
             }

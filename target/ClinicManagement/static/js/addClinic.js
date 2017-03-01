@@ -41,30 +41,44 @@ app.controller('dashboard', function ($scope, $http, $window) {
 
 
         $scope.submit = function () {
-            if ($scope.error == true && $scope.error_email == true) {
-            var clinic = {
 
-                clinic_name: $scope.clinic_name,
-                contact_no: $scope.contact_no,
-                email_id: $scope.email_id,
-                address: $scope.address,
-                location:$scope.location,
-                country:$scope.country,
-                city: $scope.city,
-                state: $scope.state,
-                pincode: $scope.pincode,
-                description: $scope.desc
-            }
 
-            $http.post("AddClinic", clinic).
+        var ClinicUser={
+            clinic_name: $scope.clinic_name,
+            register_no:$scope.reg_no,
+            chief:$scope.chief_name,
+            branch_name:$scope.clinic_name,
+            address1: $scope.address1,
+            address2:$scope.address2,
+            city: $scope.city,
+            state: $scope.state,
+            country:$scope.country,
+            pin_code: $scope.pincode,
+            contact_no: $scope.contact_no,
+            email_id: $scope.email_id,
+            description: $scope.desc,
+            password:$scope.password,
+            chief_name:$scope.chief_name,
+            chief_address1:$scope.chief_address1,
+            chief_address2:$scope.chief_address2,
+            chief_city:$scope.chief_city,
+            chief_state:$scope.chief_state,
+            chief_country:$scope.chief_country,
+            chief_contact_no:$scope.chief_contact_no,
+            chief_email_id:$scope.cheif_email_id,
+            chief_pin_code:$scope.chef_pin,
+            chief_gender:$scope.chief_gender
+        }
+
+            $http.post("AddClinic", ClinicUser).
                 then(function (response, status, headers, config) {
                     $scope.data = response.data;
                     console.log("Added",$scope.data.status);
-                    if($scope.data.status){
+                   /* if($scope.data.status){
                         location.href="GetClinic";
-                    }
+                    }*/
                 });
-        }
+
                 }
 
 

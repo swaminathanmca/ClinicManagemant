@@ -12,11 +12,11 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
 
-    @Autowired(required=true)
+    @Autowired(required = true)
     private UserDaoImpl userDao;
     @Override
-    public List<User> authenticateUser(String username,String password) {
+    public List<User> authenticateUser(String email_id,String password) {
 
-        return userDao.authenticateUser(username,password);
+        return userDao.authenticateUser(email_id,password);
     }
 }

@@ -8,5 +8,5 @@ import java.util.List;
  */
 public interface UserDao {
 
-    List<User> authenticateUser(String username,String password);
+    List<User> authenticateUser(String email_id,String password);
 }

@@ -59,6 +59,9 @@
         <constructor-arg type="javax.sql.DataSource" ref="mysqlDataSource"/>
         <!--<property name="dataSource" ref="dataSource"></property>-->
     </bean>
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="mysqlDataSource"></property>
+    </bean>
 
     <bean id="userService" class="com.lissomsoft.clinic.service.UserServiceImpl"/>
     <bean id="userDao" class="com.lissomsoft.clinic.dao.UserDaoImpl"/>

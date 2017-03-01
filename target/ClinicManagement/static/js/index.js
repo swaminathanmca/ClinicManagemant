@@ -5,18 +5,14 @@
 var app = angular.module('myApp', ['ui.mask']);
 app.controller('myCtrl', function ($scope, $http, $window) {
 
-    $http.get("GetPatient")
-        .then(function (response) {
-            $scope.user = response.data;
-            console.log($scope.user.Patient);
-        });
+
 
 
     $scope.submit = function () {
 
         var user = {
 
-            username: $scope.email,
+            email_id: $scope.email,
             password: $scope.password
 
         }

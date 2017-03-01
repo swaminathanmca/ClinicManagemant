@@ -122,7 +122,7 @@
                                 <form class="form-horizontal ng-invalid" role="form" name="myform" ng-submit="submit()"
                                       novalidate>
                                     <fieldset>
-
+                                    <div class="panel brd_img">
                                         <div class="form-group">
                                             <label class="col-lg-2 control-label">Clinic Name</label>
                                             <div class="col-lg-4">
@@ -141,20 +141,20 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="col-lg-2 control-label">Location</label>
+                                            <label class="col-lg-2 control-label">Address1</label>
                                             <div class="col-lg-4">
-                                                <input class="form-control" placeholder="Location"
-                                                       name="location" type="text" ng-model="location" required>
+                                                <input class="form-control" placeholder="Address"
+                                                       name="address1" type="text" ng-model="address1" required>
                                                 <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.location.$invalid &&  myform.location.$touched">Please Enter Location Number</span>
+                                                      ng-show="myform.address1.$invalid &&  myform.address1.$touched">Please Enter Location Number</span>
                                             </div>
-                                            <label class="col-lg-2 control-label">Address</label>
+                                            <label class="col-lg-2 control-label">Address2</label>
 
                                             <div class="col-lg-4">
-                                                <input class="form-control" placeholder="Address" name="address"
-                                                       type="text" value="" ng-model="address" required>
+                                                <input class="form-control" placeholder="Address" name="address2"
+                                                       type="text" value="" ng-model="address2" required>
                                                 <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.address.$invalid &&  myform.address.$touched">Please Enter Address</span>
+                                                      ng-show="myform.address2.$invalid &&  myform.address2.$touched">Please Enter Address</span>
                                             </div>
                                         </div>
 
@@ -220,6 +220,14 @@
                                                       ng-show="myform.email.$invalid &&  ! myform.email.$pristine &&  myform.email.$touched "> Enter Valid Email</span>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Password</label>
+                                            <div class="col-lg-4">
+                                                <input class="form-control" name="password" type="text" ng-model="password" required>
+                                                <span class="text-danger wrapper text-center ng-binding" ng-show="myform.password.$invalid && myform.password.$touched">Please Enter Password</span>
+                                            </div>
+
+                                        </div>
 
                                         <div class="form-group">
                                             <label class="col-lg-2 control-label">Description</label>
@@ -230,6 +238,96 @@
                                                           type="text" value="" ng-model="desc"  ></textarea>
                                             </div>
                                         </div>
+                                    </div>
+
+                                        <div class="panel ">
+                                            <div class="form-group">
+                                                <label class="col-lg-2 control-label">Chief Name</label>
+                                                <div class="col-lg-4">
+                                                    <input class="form-control" placeholder="Chief Name" name="chief_name"
+                                                           type="text" ng-model="chief_name" maxlength="30" required>
+                                                <span class="text-danger wrapper text-center ng-binding"
+                                                      ng-show="myform.chief_name.$invalid &&  myform.chief_name.$touched">Please Enter Chief Name</span>
+                                                </div>
+                                                <label class="col-lg-2 control-label">Address 1</label>
+                                                <div class="col-lg-4">
+                                                    <input class="form-control" placeholder="Address"
+                                                           name="cheif_address1" type="text" ng-model="cheif_address1" required>
+                                                <span class="text-danger wrapper text-center ng-binding"
+                                                      ng-show="myform.cheif_address1.$invalid &&  myform.cheif_address1.$touched">Please Enter Address</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-2 control-label">Address 2</label>
+                                                <div class="col-lg-4">
+                                                    <input class="form-control" placeholder="Address" name="cheif_address2"
+                                                           type="text" ng-model="cheif_address2" maxlength="30" required>
+                                                <span class="text-danger wrapper text-center ng-binding"
+                                                      ng-show="myform.cheif_address2.$invalid &&  myform.cheif_address2.$touched">Please Enter Address</span>
+                                                </div>
+                                                <label class="col-lg-2 control-label">City</label>
+                                                <div class="col-lg-4">
+                                                    <input class="form-control" placeholder="City"
+                                                           name="cheif_city" type="text" ng-model="cheif_city" required>
+                                                <span class="text-danger wrapper text-center ng-binding"
+                                                      ng-show="myform.cheif_city.$invalid &&  myform.cheif_city.$touched">Please Enter City</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-2 control-label">State</label>
+                                                <div class="col-lg-4">
+                                                    <input class="form-control" placeholder="State" name="chef_state"
+                                                           type="text" ng-model="chef_state" maxlength="30" required>
+                                                <span class="text-danger wrapper text-center ng-binding"
+                                                      ng-show="myform.chef_state.$invalid &&  myform.chef_state.$touched">Please Enter State</span>
+                                                </div>
+                                                <label class="col-lg-2 control-label">Country</label>
+                                                <div class="col-lg-4">
+                                                    <select class="input-medium bfh-countries form-control" name="chief_country"
+                                                            ng-model="chief_country" data-country="" required></select>
+                                                <span class="text-danger wrapper text-center ng-binding"
+                                                      ng-show="myform.chief_country.$invalid &&  myform.chief_country.$touched">Please Enter Country</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-2 control-label">Pin/Zip</label>
+                                                <div class="col-lg-4">
+                                                    <input class="form-control" placeholder="Pin /Zip" name="chef_pin" ng-pattern="/^[0-9]*$/"
+                                                           type="text" ng-model="chef_pin" maxlength="30" required>
+                                                      <span class="text-danger wrapper text-center ng-binding"
+                                                            ng-show="myform.chef_pin.$error.pattern">Please Enter Valid Pin Code</span>
+                                                <span class="text-danger wrapper text-center ng-binding"
+                                                      ng-show="myform.chef_pin.$invalid &&  myform.chef_pin.$touched">Please Enter Pin Code</span>
+                                                </div>
+                                                <label class="col-lg-2 control-label">Gender</label>
+                                                <div class="col-lg-4">
+                                                    <select class=" form-control" name="chief_gender"
+                                                            ng-model="chief_gender"  required>
+                                                        <option value="0">Female</option>
+                                                        <option value="1">Male</option>
+                                                    </select>
+                                                <span class="text-danger wrapper text-center ng-binding"
+                                                      ng-show="myform.chief_country.$invalid &&  myform.chief_country.$touched">Please Enter Gender</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-2 control-label">Phone Number</label>
+                                                <div class="col-lg-4">
+                                                    <input class="form-control"  name="chief_contact_no" ui-mask="999-999-9999"  type="text" ng-model="chief_contact_no" maxlength="30" required>
+                                                <span class="text-danger wrapper text-center ng-binding"
+                                                      ng-show="myform.chief_contact_no.$invalid &&  myform.chief_contact_no.$touched">Please Enter Phone No</span>
+                                                </div>
+                                                <label class="col-lg-2 control-label">Eamil Id</label>
+                                                <div class="col-lg-4">
+                                                    <input class="form-control" placeholder="Email"
+                                                           name="cheif_email_id" type="text" ng-model="cheif_email_id" required>
+                                                <span class="text-danger wrapper text-center ng-binding"
+                                                      ng-show="myform.cheif_email_id.$invalid &&  myform.cheif_email_id.$touched">Please Enter Email Id</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
 
 
                                         <!-- Change this to a button or input when using this as a form -->

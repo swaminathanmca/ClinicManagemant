@@ -2,6 +2,7 @@ package com.lissomsoft.clinic.service;
 
 
 import com.lissomsoft.clinic.domain.Clinic;
+import com.lissomsoft.clinic.vo.ClinicUser;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  */
 public interface ClinicService {
 
-   boolean addClinic(Clinic clinic);
+   boolean addClinic(ClinicUser clinic);
    List<Clinic> validateno(String contact_no);
    List<Clinic> email(String email_id);
    List<Clinic> getClinic();

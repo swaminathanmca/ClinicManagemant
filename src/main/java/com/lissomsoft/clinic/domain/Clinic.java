@@ -11,22 +11,11 @@ public class Clinic {
 
     private String clinic_name;
 
-    private String location;
-    private String country;
+    private String register_no;
 
-    private String address;
+    private String status;
 
-    private String city;
-
-    private  String state;
-
-    private String contact_no;
-
-    private String email_id;
-
-    private int pincode;
-
-    private String description;
+    private String chief;
 
     private String created_at;
 
@@ -49,52 +38,28 @@ public class Clinic {
         this.clinic_name = clinic_name;
     }
 
-    public String getCity() {
-        return city;
+    public String getRegister_no() {
+        return register_no;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setRegister_no(String register_no) {
+        this.register_no = register_no;
     }
 
-    public String getAddress() {
-        return address;
+    public String getStatus() {
+        return status;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getContact_no() {
-        return contact_no;
+    public String getChief() {
+        return chief;
     }
 
-    public void setContact_no(String contact_no) {
-        this.contact_no = contact_no;
-    }
-
-    public String getEmail_id() {
-        return email_id;
-    }
-
-    public void setEmail_id(String email_id) {
-        this.email_id = email_id;
-    }
-
-    public int getPincode() {
-        return pincode;
-    }
-
-    public void setPincode(int pincode) {
-        this.pincode = pincode;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setChief(String chief) {
+        this.chief = chief;
     }
 
     public String getCreated_at() {
@@ -113,44 +78,16 @@ public class Clinic {
         this.updated_at = updated_at;
     }
 
-    public String getState() {
-        return state;
-    }
 
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
 
     public String toString(){
 
         return  "Clinic{"+
                 "clinic_id="+ clinic_id +
                 ",clinic_name="+ clinic_name +
-                ",location="+location+
-                ",country="+country+
-                ",address="+address +
-                ",contact_no="+contact_no+
-                ",email_id="+email_id+
-                ",city="+city+
-                ",state="+state+
-                ",pincode="+pincode+
-                ",description="+description+
+                ",register_no="+register_no+
+                ",status="+status+
+                ",chief="+chief+
                 ",created_at="+created_at+
                 ",updated_at="+updated_at+
                 '}';
