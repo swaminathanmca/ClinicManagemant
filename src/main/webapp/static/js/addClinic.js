@@ -7,6 +7,7 @@ app.controller('dashboard', function ($scope, $http, $window) {
     $scope.authErrorEmail="The Email Already Take";
     $scope.chiefError="The Phone No Already Taken";
     $scope.chiefEmail="Email taken";
+    $scope.name="name";
     console.log($window.sessionStorage.role_name);
     $scope.validate = function () {
 
@@ -72,7 +73,17 @@ app.controller('dashboard', function ($scope, $http, $window) {
             })
     }
 
-
+$scope.valName=function(){
+    $http.get("valName/"+$scope.clinic_name).
+        then(function(response,status,headers,config){
+            $scope.err_name=response.data.status;
+            if($scope.err_name==false){
+                $scope.name="";
+            }else{
+                $scope.name="name";
+            }
+        })
+}
         $scope.submit = function () {
 
 
@@ -107,9 +118,9 @@ app.controller('dashboard', function ($scope, $http, $window) {
                 then(function (response, status, headers, config) {
                     $scope.data = response.data;
                     console.log("Added",$scope.data.status);
-                   /* if($scope.data.status){
+                    if($scope.data.status){
                         location.href="GetClinic";
-                    }*/
+                    }
                 });
 
                 }

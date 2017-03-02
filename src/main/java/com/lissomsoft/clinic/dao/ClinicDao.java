@@ -13,6 +13,7 @@ public interface ClinicDao {
     boolean editClinic(Clinic clinic);
     boolean deleteClinic(Integer clinicID);
     List<Branch> validateno(String contact_no);
+    List<Clinic> validateName(String clinic_name);
     List<Branch> email(String email_id);
     List<ClinicUser> getClinic();
     List<Clinic> getClinicById(Integer id);

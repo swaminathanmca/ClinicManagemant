@@ -127,20 +127,16 @@
                                             <th>Description</th>
                                             <th>Address</th>
                                             <th>Contact No</th>
-                                            <th>Options</th>
+
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr ng-repeat="x in clinic | filter:search ">
                                             <td>{{x.clinicName}}</td>
                                             <td>{{x.description}}</td>
-                                            <td>{{x.address}}</td>
-                                            <td>{{x.phoneNo}}</td>
-                                            <td>
-                                                <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myModal" ng-click="editClinic(x.clinicId)">Edit
-                                                </button>
-                                                <a class="glyphicon glyphicon-trash hv_change"  data-toggle="modal" data-target="#myModal1" ng-click="openDelete(x.clinicId)"></a>
-                                            </td>
+                                            <td>{{x.address1}},{{x.address2}}</td>
+                                            <td>{{x.contact_no}}</td>
+
                                         </tr>
                                         </tbody>
 
@@ -159,7 +155,7 @@
         </div>
 
     </div>
-    <div class="modal fade" id="myModal" role="dialog">
+<%--    <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->
@@ -212,8 +208,8 @@
                             <div class="form-group">
                                 <label class="col-lg-3 control-label">State</label>
                                 <div class="col-lg-5 ">
-                                    <%--<select class="input-medium bfh-states form-control" name="state"   data-country="countries_states1"
-                                            required></select>--%>
+                                    &lt;%&ndash;<select class="input-medium bfh-states form-control" name="state"   data-country="countries_states1"
+                                            required></select>&ndash;%&gt;
                                     <input type="text" class="form-control" ng-model="data.state" name="state" required>
 
 
@@ -268,7 +264,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>--%>
 
    <%--Delete Clinic Model--%>
     <div class="modal fade" id="myModal1" role="dialog">

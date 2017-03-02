@@ -141,7 +141,7 @@ public class HelloController {
         JSONObject sendResponse=new JSONObject();
         List<ClinicUser> clinicDetails;
         clinicDetails=clinicService.getClinic();
-        System.out.println(clinicDetails);
+
         Iterator<ClinicUser> it = clinicDetails.iterator();
         while (it.hasNext()){
 
@@ -212,6 +212,24 @@ public class HelloController {
 
 
         return data.toString();
+    }
+
+    @RequestMapping(value = "/valName/{clinic_name}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String valName(@PathVariable String clinic_name)throws JSONException{
+
+        JSONObject data=new JSONObject();
+        List<Clinic> validateName;
+        validateName=clinicService.validateName(clinic_name);
+        if(validateName.isEmpty()){
+            data.put("status",true);
+        }else{
+            data.put("status",false);
+        }
+
+        return data.toString();
+
     }
 
     @RequestMapping(value = "/validateEmail/{email:.+}",method = RequestMethod.GET)

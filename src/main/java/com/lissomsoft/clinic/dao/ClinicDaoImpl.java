@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.transaction.support.TransactionCallback;
@@ -39,6 +40,7 @@ public class ClinicDaoImpl implements ClinicDao {
     private PlatformTransactionManager platformTransactionManager;
 
 
+
     @Override
     public boolean addClinic(ClinicUser clinic) {
         int result = 0;
@@ -47,8 +49,11 @@ public class ClinicDaoImpl implements ClinicDao {
         int result_user = 0;
         int result_member = 0;
         int result_role = 0;
+
+
         DefaultTransactionDefinition paramTransactionDefinition = new DefaultTransactionDefinition();
         TransactionStatus status = platformTransactionManager.getTransaction(paramTransactionDefinition);
+
 
         try {
 
@@ -66,6 +71,7 @@ public class ClinicDaoImpl implements ClinicDao {
             System.out.println("insertClinicSql," + result);
         } catch (Exception e) {
             e.printStackTrace();
+
         }
         if ((result > 0) ? true : false) {
             try {
@@ -82,7 +88,7 @@ public class ClinicDaoImpl implements ClinicDao {
                 System.out.println("insertUserSql," + result_user);
             } catch (Exception e) {
                 e.printStackTrace();
-
+                platformTransactionManager.rollback(status);
             }
         }
         if ((result_user > 0) ? true : false) {
@@ -228,6 +234,21 @@ public class ClinicDaoImpl implements ClinicDao {
     }
 
     @Override
+    public List<Clinic> validateName(String clinic_name) {
+
+        List<Clinic> clincList=null;
+        try {
+            String clinicName="SELECT * FROM clinic_master WHERE clinic_name=:clinic_name";
+            Map<String, Object> parameters = new HashMap<String, Object>();
+            parameters.put("clinic_name", clinic_name);
+            clincList=jdbcTemplate.query(clinicName,parameters,new ClinicMapper());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return clincList;
+    }
+
+    @Override
     public List<Branch> email(String email_id) {
         List<Branch> clinciListEmail = null;
 
@@ -254,7 +275,7 @@ public class ClinicDaoImpl implements ClinicDao {
             String clinicDetails ="SELECT c.clinic_id,c.clinic_name,c.chief,c.reg_no,c.status,b.address1,b.address2,b.city,b.state,b.country,b.pin_code,b.contact_no,b.email,b.description FROM branch_master b JOIN clinic_master c ON c.clinic_id=b.clinic_id and ho=1";
 
             getClinicDetails = jdbcTemplate.query(clinicDetails, new ClinicBranchMapper());
-            System.out.println(getClinicDetails);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

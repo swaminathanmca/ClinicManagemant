@@ -29,6 +29,11 @@ public class ClinicServiceImpl implements ClinicService {
     }
 
     @Override
+    public List<Clinic> validateName(String clinic_name) {
+        return clinicDao.validateName(clinic_name);
+    }
+
+    @Override
     public List<Branch> email(String email_id) {
         return clinicDao.email(email_id);
     }

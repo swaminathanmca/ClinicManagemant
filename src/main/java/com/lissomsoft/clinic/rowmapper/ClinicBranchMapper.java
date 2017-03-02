@@ -21,6 +21,7 @@ public class ClinicBranchMapper implements RowMapper<ClinicUser> {
         clinicUser.setClinic_name(resultSet.getString("clinic_name"));
         clinicUser.setRegister_no(resultSet.getString("reg_no"));
         clinicUser.setStatus(resultSet.getString("status"));
+        clinicUser.setContact_no(resultSet.getString("contact_no"));;
         clinicUser.setEmail_id(resultSet.getString("email"));
         clinicUser.setAddress1(resultSet.getString("address1"));
         clinicUser.setAddress2(resultSet.getString("address2"));

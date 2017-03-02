@@ -14,6 +14,7 @@ public interface ClinicService {
 
    boolean addClinic(ClinicUser clinic);
    List<Branch> validateno(String contact_no);
+   List<Clinic> validateName(String clinic_name);
    List<Branch> email(String email_id);
    List<ClinicUser> getClinic();
    List<Clinic> getClinicById(Integer id);
