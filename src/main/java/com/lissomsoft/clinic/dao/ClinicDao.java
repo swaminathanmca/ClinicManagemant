@@ -14,6 +14,6 @@ public interface ClinicDao {
     boolean deleteClinic(Integer clinicID);
     List<Branch> validateno(String contact_no);
     List<Branch> email(String email_id);
-    List<Clinic> getClinic();
+    List<ClinicUser> getClinic();
     List<Clinic> getClinicById(Integer id);
 }

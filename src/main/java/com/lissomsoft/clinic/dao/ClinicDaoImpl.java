@@ -3,6 +3,7 @@ package com.lissomsoft.clinic.dao;
 import com.lissomsoft.clinic.domain.Branch;
 import com.lissomsoft.clinic.domain.Clinic;
 import com.lissomsoft.clinic.rowmapper.BranchMapper;
+import com.lissomsoft.clinic.rowmapper.ClinicBranchMapper;
 import com.lissomsoft.clinic.rowmapper.ClinicMapper;
 import com.lissomsoft.clinic.vo.ClinicUser;
 import org.slf4j.Logger;
@@ -247,12 +248,13 @@ public class ClinicDaoImpl implements ClinicDao {
 
 
     @Override
-    public List<Clinic> getClinic() {
-        List<Clinic> getClinicDetails = null;
+    public List<ClinicUser> getClinic() {
+        List<ClinicUser> getClinicDetails = null;
         try {
-            String clinicDetails = "SELECT * FROM branch_master";
-            getClinicDetails = jdbcTemplate.query(clinicDetails, new ClinicMapper());
+            String clinicDetails ="SELECT c.clinic_id,c.clinic_name,c.chief,c.reg_no,c.status,b.address1,b.address2,b.city,b.state,b.country,b.pin_code,b.contact_no,b.email,b.description FROM branch_master b JOIN clinic_master c ON c.clinic_id=b.clinic_id and ho=1";
 
+            getClinicDetails = jdbcTemplate.query(clinicDetails, new ClinicBranchMapper());
+            System.out.println(getClinicDetails);
         } catch (Exception e) {
             e.printStackTrace();
         }

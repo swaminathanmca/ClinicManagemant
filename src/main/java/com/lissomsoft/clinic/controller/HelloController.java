@@ -139,16 +139,30 @@ public class HelloController {
 
         JSONArray jsonArray=new JSONArray();
         JSONObject sendResponse=new JSONObject();
-        List<Clinic> clinicDetails;
+        List<ClinicUser> clinicDetails;
         clinicDetails=clinicService.getClinic();
-
-        Iterator<Clinic> it = clinicDetails.iterator();
+        System.out.println(clinicDetails);
+        Iterator<ClinicUser> it = clinicDetails.iterator();
         while (it.hasNext()){
-            Clinic clinicdetails=it.next();
+
+            ClinicUser clinicdetails=it.next();
 
             JSONObject jsonObject =new JSONObject();
             jsonObject.put("clinicId",clinicdetails.getClinic_id());
             jsonObject.put("clinicName",clinicdetails.getClinic_name());
+            jsonObject.put("Chief",clinicdetails.getChief_name());
+            jsonObject.put("reg_no",clinicdetails.getRegister_no());
+            jsonObject.put("st",clinicdetails.getStatus());
+            jsonObject.put("address1",clinicdetails.getAddress1());
+            jsonObject.put("address2",clinicdetails.getAddress2());
+            jsonObject.put("city",clinicdetails.getCity());
+            jsonObject.put("state",clinicdetails.getState());
+            jsonObject.put("country",clinicdetails.getCountry());
+            jsonObject.put("pin_code",clinicdetails.getPin_code());
+            jsonObject.put("contact_no",clinicdetails.getContact_no());
+            jsonObject.put("email_id",clinicdetails.getEmail_id());
+            jsonObject.put("description",clinicdetails.getDescription());
+
 
             jsonArray.put(jsonObject);
             sendResponse.put("clinic",jsonArray);

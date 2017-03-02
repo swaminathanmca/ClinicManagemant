@@ -34,7 +34,7 @@ public class ClinicServiceImpl implements ClinicService {
     }
 
     @Override
-    public List<Clinic> getClinic() {
+    public List<ClinicUser> getClinic() {
         return clinicDao.getClinic();
     }
 
