@@ -67,5 +67,7 @@
     <bean id="userDao" class="com.lissomsoft.clinic.dao.UserDaoImpl"/>
     <bean id="branchService" class="com.lissomsoft.clinic.service.ClinicServiceImpl"/>
     <bean id="branchDao" class="com.lissomsoft.clinic.dao.ClinicDaoImpl"/>
+    <bean id="profileService" class="com.lissomsoft.clinic.service.ProfileServiceImpl"/>
+    <bean id="profileDao" class="com.lissomsoft.clinic.dao.ProfileDaoImpl"/>
 
 </beans>

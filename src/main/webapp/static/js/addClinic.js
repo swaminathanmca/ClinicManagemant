@@ -5,6 +5,8 @@
 app.controller('dashboard', function ($scope, $http, $window) {
     $scope.authError="The Email Already Taken";
     $scope.authErrorEmail="The Email Already Take";
+    $scope.chiefError="The Phone No Already Taken";
+    $scope.chiefEmail="Email taken";
     console.log($window.sessionStorage.role_name);
     $scope.validate = function () {
 
@@ -23,7 +25,24 @@ app.controller('dashboard', function ($scope, $http, $window) {
                 }
             });
     }
-    console.log(!$scope.authError);
+
+    $scope.validatecontact=function(){
+
+        $http.get("validateChief/"+$scope.chief_contact_no).
+            then(function (response,status,header,config){
+                $scope.err=response.data.status;
+
+                if($scope.err==false){
+                        $scope.chiefError="";
+                }else{
+                    $scope.chiefError="Already Taken";
+                }
+            })
+    }
+
+
+
+
     $scope.emailvalidate=function(){
         $http.get("emailvalidate/" + $scope.email_id).
             then(function (response, status, headers, config) {
@@ -37,6 +56,20 @@ app.controller('dashboard', function ($scope, $http, $window) {
 
 
             });
+    }
+
+    $scope.validateEmail=function(){
+        $http.get("validateEmail/"+$scope.cheif_email_id).
+            then(function(response,status,headers,config){
+                $scope.err_chief_email=response.data.status;
+                console.log($scope.err_chief_email);
+                if($scope.err_chief_email==false){
+                    $scope.chiefEmail="";
+                }else{
+                    $scope.chiefEmail="Taken";
+                }
+
+            })
     }
 
 

@@ -159,14 +159,13 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="col-lg-2 control-label">Country</label>
-                                            <div class="col-lg-4">
-                                                <select id="countries_states1"
-                                                        class="input-medium bfh-countries form-control" name="country"
-                                                        ng-model="country" data-country="" required></select>
-                                                <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.country.$invalid &&  myform.country.$touched">Please Enter State</span>
+                                            <label class="col-lg-2 control-label">City</label>
 
+                                            <div class="col-lg-4">
+                                                <input class="form-control" placeholder="City" name="city" type="text"
+                                                       value="" ng-model="city" required>
+                                                <span class="text-danger wrapper text-center ng-binding"
+                                                      ng-show="myform.city.$invalid &&  myform.city.$touched">Please Enter City</span>
                                             </div>
                                             <label class="col-lg-2 control-label">State</label>
                                             <div class="col-lg-4">
@@ -178,13 +177,16 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="col-lg-2 control-label">City</label>
 
+
+                                            <label class="col-lg-2 control-label">Country</label>
                                             <div class="col-lg-4">
-                                                <input class="form-control" placeholder="City" name="city" type="text"
-                                                       value="" ng-model="city" required>
+                                                <select id="countries_states1"
+                                                        class="input-medium bfh-countries form-control" name="country"
+                                                        ng-model="country" data-country="" required></select>
                                                 <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.city.$invalid &&  myform.city.$touched">Please Enter City</span>
+                                                      ng-show="myform.country.$invalid &&  myform.country.$touched">Please Enter State</span>
+
                                             </div>
                                             <label class="col-lg-2 control-label">Pin Code</label>
 
@@ -313,16 +315,22 @@
                                             <div class="form-group">
                                                 <label class="col-lg-2 control-label">Phone Number</label>
                                                 <div class="col-lg-4">
-                                                    <input class="form-control"  name="chief_contact_no" ui-mask="999-999-9999"  type="text" ng-model="chief_contact_no" maxlength="30" required>
+                                                    <input class="form-control"  name="chief_contact_no" ui-mask="999-999-9999"  type="text" ng-model="chief_contact_no" ng-blur="validatecontact()" required>
                                                 <span class="text-danger wrapper text-center ng-binding"
                                                       ng-show="myform.chief_contact_no.$invalid &&  myform.chief_contact_no.$touched">Please Enter Phone No</span>
+                                                     <span class="text-danger wrapper text-center ng-binding" ng-show="err==false">
+                                                       The Mobile Number Already Taken
+                                                           </span>
                                                 </div>
-                                                <label class="col-lg-2 control-label">Eamil Id</label>
+                                                <label class="col-lg-2 control-label">Email Id</label>
                                                 <div class="col-lg-4">
                                                     <input class="form-control" placeholder="Email"
-                                                           name="cheif_email_id" type="text" ng-model="cheif_email_id" required>
+                                                           name="cheif_email_id" type="text" ng-model="cheif_email_id" ng-blur="validateEmail()" required>
                                                 <span class="text-danger wrapper text-center ng-binding"
                                                       ng-show="myform.cheif_email_id.$invalid &&  myform.cheif_email_id.$touched">Please Enter Email Id</span>
+                                                     <span class="text-danger wrapper text-center ng-binding" ng-show="err_chief_email==false">
+                                                       The Email Already Taken
+                                                           </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -335,7 +343,7 @@
                                             <div class="row">
                                                 <div class="col-lg-offset-4 col-lg-7">
                                                     <button type="submit" class="btn btn-success"
-                                                            ng-disabled="myform.$invalid || !authError || !authErrorEmail "
+                                                            ng-disabled="myform.$invalid || !authError || !authErrorEmail || !chiefError || !chiefEmail "
                                                             ng-click="submitted=true">Save
                                                     </button>
                                                     <button type="button" class="btn btn-inverse">Cancel</button>

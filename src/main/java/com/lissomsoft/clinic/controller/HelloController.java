@@ -1,5 +1,6 @@
 package com.lissomsoft.clinic.controller;
 
+import com.lissomsoft.clinic.service.ProfileService;
 import com.lissomsoft.clinic.service.UserServiceImpl;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
@@ -34,6 +35,8 @@ public class HelloController {
     private UserService userService;
     @Autowired(required = false)
     private ClinicService clinicService;
+    @Autowired(required = false)
+    private ProfileService profileService;
 
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -172,6 +175,41 @@ public class HelloController {
             data.put("status", true);
         }
         else{
+            data.put("status",false);
+        }
+
+        return data.toString();
+    }
+
+    @RequestMapping(value = "/validateChief/{contact_no}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String validateChief(@PathVariable String contact_no)throws JSONException{
+
+
+        JSONObject data=new JSONObject();
+        List<Profile> validateContact;
+        validateContact=profileService.validateno(contact_no);
+        if(validateContact.isEmpty()){
+            data.put("status",true);
+        }else{
+            data.put("status",false);
+        }
+
+
+        return data.toString();
+    }
+
+    @RequestMapping(value = "/validateEmail/{email:.+}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String validateEmail(@PathVariable String email)throws JSONException{
+        JSONObject data=new JSONObject();
+        List<Profile>validateEmail;
+        validateEmail=profileService.validateEmail(email);
+        if(validateEmail.isEmpty()){
+            data.put("status",true);
+        }else{
             data.put("status",false);
         }
 

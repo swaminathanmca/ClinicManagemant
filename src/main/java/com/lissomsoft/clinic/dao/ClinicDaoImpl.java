@@ -207,7 +207,7 @@ public class ClinicDaoImpl implements ClinicDao {
     @Override
     public List<Branch> validateno(String contact_no) {
 
-        Clinic clinicDetails = null;
+
         List<Branch> branchiList = null;
 
         try {
