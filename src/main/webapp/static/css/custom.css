@@ -3,13 +3,13 @@
 }
 .brd_img{
     padding: 35px;
-    background: #f2f2f2 url(../img/nannybg.png) no-repeat right bottom;;
+    background: #fff url(../img/nannybg.png) no-repeat right bottom;;
 }
 
 .fileRadioBox{
-border: 1px solid #dddddd;
-background: #ffffff;
-padding: 4px 0;
+   border: 1px solid #dddddd;
+    background: #ffffff;
+    padding: 4px 0;
 }
 hr{
     border-top: 1px solid #ccc;

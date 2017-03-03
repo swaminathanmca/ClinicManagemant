@@ -161,6 +161,7 @@ public class HelloController {
             jsonObject.put("Chief_email_id",clinicdetails.getChief_email_id());
             jsonObject.put("Chief_pincode",clinicdetails.getChief_pin_code());
             jsonObject.put("Chief_gender",clinicdetails.getGender());
+            jsonObject.put("Chief_id",clinicdetails.getChief_id());
             data.put("success",true);
             data.put("clinic",jsonObject);
 
@@ -208,6 +209,7 @@ public class HelloController {
             jsonObject.put("contact_no",clinicdetails.getContact_no());
             jsonObject.put("email_id",clinicdetails.getEmail_id());
             jsonObject.put("description",clinicdetails.getDescription());
+            jsonObject.put("Chief_id",clinicdetails.getChief_id());
 
 
             jsonArray.put(jsonObject);
@@ -302,9 +304,35 @@ public class HelloController {
                 }
 
         }
-
         return data.toString();
+    }
 
+    @RequestMapping(value = "/EditEmail/{clinic_id}/{clinic_email:.+}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String EditEmail(@PathVariable Integer clinic_id,@PathVariable String clinic_email)throws JSONException{
+
+        JSONObject data=new JSONObject();
+        List<Branch> editEmail;
+
+        editEmail=clinicService.email(clinic_email);
+        if(editEmail.isEmpty()){
+            data.put("status",true);
+        }else{
+            Iterator<Branch> it=editEmail.iterator();
+            while (it.hasNext()){
+                Branch emailValidate=it.next();
+                System.out.println(emailValidate);
+                if(clinic_id==emailValidate.getClinic_id()){
+                    data.put("status",true);
+                }else {
+                    data.put("status",false);
+                }
+
+            }
+
+        }
+        return data.toString();
     }
 
     @RequestMapping(value = "/validateEmail/{email:.+}",method = RequestMethod.GET)
@@ -318,6 +346,31 @@ public class HelloController {
             data.put("status",true);
         }else{
             data.put("status",false);
+        }
+
+        return data.toString();
+    }
+
+    @RequestMapping(value = "/EditChiefEmail/{chief_id}/{email_id:.+}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String EditChiefEmail(@PathVariable Integer chief_id,@PathVariable String email_id)throws JSONException{
+        JSONObject data=new JSONObject();
+        List<Profile>validateEmail;
+        validateEmail=profileService.validateEmail(email_id);
+        if(validateEmail.isEmpty()){
+            data.put("status",true);
+        }else{
+            Iterator<Profile> it=validateEmail.iterator();
+            while (it.hasNext()){
+                Profile emailChief=it.next();
+                if(chief_id==emailChief.getProfile_id()){
+                    data.put("status",true);
+                }else{
+                    data.put("status",false);
+                }
+            }
+
         }
 
         return data.toString();
@@ -344,23 +397,23 @@ public class HelloController {
 
 
 
-    @RequestMapping(value ="/validate/{contact_no}/{clinicID}",method = RequestMethod.GET)
+    @RequestMapping(value ="/EditChiefContact/{chief_id}/{cihef_contactno}",method = RequestMethod.GET)
     public
     @ResponseBody
-    String validateId(@PathVariable String contact_no,@PathVariable Integer clinicID) throws JSONException {
+    String validateId(@PathVariable Integer chief_id,@PathVariable String cihef_contactno) throws JSONException {
         JSONObject data = new JSONObject();
-        List<Branch> validateClinic;
-        validateClinic= clinicService.validateno(contact_no);
+        List<Profile> validateContact;
+        validateContact= profileService.validateno(cihef_contactno);
 
-        if(validateClinic.isEmpty()){
+        if(validateContact.isEmpty()){
             data.put("status", true);
         }
         else{
-            Iterator<Branch> it=validateClinic.iterator();
+            Iterator<Profile> it=validateContact.iterator();
             while (it.hasNext()){
-                Branch validateNo=it.next();
+                Profile validateNo=it.next();
 
-                if(validateNo.getClinic_id()==clinicID){
+                if(validateNo.getProfile_id()==chief_id){
                     data.put("status", true);
                 }else {
                     data.put("status",false);

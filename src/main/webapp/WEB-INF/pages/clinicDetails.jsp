@@ -94,7 +94,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h4 class="page-header">Clinic Details</h4>
+<p></p>
             </div>
         </div>
         <div class="row">
@@ -179,7 +179,7 @@
                                             </div>
                                         </div>
                                         <hr>
-                                    <h2>Chief Information</h2>
+                                    <h4>Chief Information</h4>
                                         <div class="form-group">
                                             <div class="col-lg-6">
                                                 <div class="input-group">
@@ -274,15 +274,15 @@
 
         </div>
 
-    </div>
 
+        </div>
 
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header primary">
+                <div class="modal-header panel-primary">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Edit Clinic</h4>
                 </div>
@@ -352,7 +352,7 @@
                                         <div class="col-lg-3">
                                             <div class="input-group">
                                                 <span class="input-group-addon">Country</span>
-                                                <select id="countries3" class="input-medium form-control" name="country" ng-model="country" required></select>
+                                                <select id="countries3" class="input-medium form-control" name="country"  required></select>
                                             </div>
                                             <span class="text-danger wrapper text-center ng-binding"
                                                   ng-show="myform.country.$invalid &&  myform.country.$touched">Please Enter Country</span>
@@ -382,6 +382,9 @@
                                             </div>
                                             <span class="text-danger wrapper text-center ng-binding"
                                                   ng-show="myform.email_id.$invalid  "> Enter Valid Email</span>
+                                             <span class="text-danger wrapper text-center ng-binding" ng-show="error_email==false">
+                                                   The Email Already Taken
+                                                     </span>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="input-group">
@@ -390,11 +393,14 @@
                                             </div>
                                             <span class="text-danger wrapper text-center ng-binding"
                                                   ng-show="myform.contact_no.$invalid"> Enter Phone  No</span>
+                                             <span class="text-danger wrapper text-center ng-binding" ng-show="error==false">
+                                                       The Mobile Number Already Taken
+                                                           </span>
 
                                         </div>
                                     </div>
                                     <hr>
-                                    <h2>Chief Information</h2>
+                                    <h4>Chief Information</h4>
                                     <div class="form-group">
                                         <div class="col-lg-6">
                                             <div class="input-group">
@@ -445,7 +451,7 @@
                                         <div class="col-lg-3">
                                             <div class="input-group">
                                                 <span class="input-group-addon">Country</span>
-                                                <select id="countries4" class="input-medium form-control" name="ccountry" ng-model="chief_country"></select>
+                                                <select id="countries4" class="input-medium form-control" name="ccountry"></select>
                                             </div>
                                             <span class="text-danger wrapper text-center ng-binding"
                                                   ng-show="myform.ccountry.$invalid">Please  Select Country</span>
@@ -463,20 +469,26 @@
                                         <div class="col-lg-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon">Chief Email</span>
-                                                <input class="form-control" type="text" ng-model="x.Chief_email_id" name="cemail" required/>
+                                                <input class="form-control" type="text" ng-model="x.Chief_email_id" name="cemail" ng-blur="EditCemail(x.Chief_id,x.Chief_email_id)" required/>
                                             </div>
                                             <span class="text-danger wrapper text-center ng-binding"
                                                   ng-show="myform.cemail.$invalid">Please  Enter Email-id </span>
+                                            <span class="text-danger wrapper text-center ng-binding" ng-show="err_chief_email==false">
+                                                       The Email Already Taken
+                                                           </span>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-lg-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon">Chief PhoneNo</span>
-                                                <input class="form-control" type="text" ng-model="x.Chief_conatct_no" name="cphoneno" required/>
+                                                <input class="form-control" type="text" ng-model="x.Chief_conatct_no" name="cphoneno" ng-blur="EditChiefContact(x.Chief_id,x.Chief_conatct_no)" required/>
                                             </div>
                                             <span class="text-danger wrapper text-center ng-binding"
                                                   ng-show="myform.cphoneno.$invalid">Please  Enter Phone No </span>
+                                            <span class="text-danger wrapper text-center ng-binding" ng-show="err==false">
+                                                       The Mobile Number Already Taken
+                                                           </span>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="input-group">
@@ -498,7 +510,7 @@
                                         <div class="row">
                                             <div class="col-lg-offset-4 col-lg-7">
                                                 <button type="submit" class="btn btn-success"
-                                                        ng-disabled=""
+                                                        ng-disabled="myform.$invalid || !authError || !authErrorEmail || !chiefError || !chiefEmail || !name"
                                                         ng-click="submitted=true">Save
                                                 </button>
                                                 <button type="button" class="btn btn-inverse" data-dismiss="modal">Cancel</button>
@@ -517,7 +529,7 @@
 
 </div>
 
-
+</div>
 <script src="<%=request.getContextPath()%>/static/vendor/jquery/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/metisMenu/metisMenu.js"></script>

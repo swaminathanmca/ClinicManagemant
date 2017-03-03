@@ -36,6 +36,7 @@ public class ClinicBranchMapper implements RowMapper<ClinicUser> {
         clinicUser.setChief_city(resultSet.getString("ch_city"));
         clinicUser.setChief_state(resultSet.getString("ch_state"));
         clinicUser.setChief_country(resultSet.getString("ch_country"));
+        clinicUser.setChief_id(resultSet.getInt("profile_id"));
         clinicUser.setChief_pin_code(resultSet.getString("pincode"));
         clinicUser.setChief_contact_no(resultSet.getString("phone"));
         clinicUser.setChief_email_id(resultSet.getString("ch_email"));
