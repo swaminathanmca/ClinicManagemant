@@ -149,7 +149,7 @@
                                                 <input class="form-control" placeholder="Address"
                                                        name="address1" type="text" ng-model="address1" required>
                                                 <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.address1.$invalid &&  myform.address1.$touched">Please Enter Location Number</span>
+                                                      ng-show="myform.address1.$invalid &&  myform.address1.$touched">Please Enter Location </span>
                                             </div>
                                             <label class="col-lg-2 control-label">Address2</label>
 

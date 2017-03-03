@@ -272,7 +272,8 @@ public class ClinicDaoImpl implements ClinicDao {
     public List<ClinicUser> getClinic() {
         List<ClinicUser> getClinicDetails = null;
         try {
-            String clinicDetails ="SELECT c.clinic_id,c.clinic_name,c.chief,c.reg_no,c.status,b.address1,b.address2,b.city,b.state,b.country,b.pin_code,b.contact_no,b.email,b.description FROM branch_master b JOIN clinic_master c ON c.clinic_id=b.clinic_id and ho=1";
+           /* String clinicDetails ="SELECT c.clinic_id,c.clinic_name,c.chief,c.reg_no,c.status,b.address1,b.address2,b.city,b.state,b.country,b.pin_code,b.contact_no,b.email,b.description FROM branch_master b JOIN clinic_master c ON c.clinic_id=b.clinic_id and ho=1";*/
+            String clinicDetails="SELECT c.clinic_id,c.clinic_name,c.reg_no,c.status,c.chief,b.address1,b.address2,b.city,b.state,b.country,b.pin_code,b.contact_no,b.email,b.description,p.profile_id,p.name,p.address1 ch_addrs1, p.address2 ch_addrs2,p.city ch_city,p.state ch_state,p.country ch_country,p.phone,p.email ch_email,p.pincode,p.gender FROM clinic.clinic_master c INNER JOIN clinic.branch_master b ON c.clinic_id = b.clinic_id INNER JOIN clinic.member_master m ON b.chief_id = m.user_id INNER JOIN  clinic.profile_master p ON p.profile_id = m.profile_id  AND b.ho = 1";
 
             getClinicDetails = jdbcTemplate.query(clinicDetails, new ClinicBranchMapper());
 
@@ -281,19 +282,37 @@ public class ClinicDaoImpl implements ClinicDao {
         }
         return getClinicDetails;
     }
-
-    @Override
+    /*@Override
     public List<Clinic> getClinicById(Integer id) {
         List<Clinic> getClinicId = null;
         try {
-            String clinicDetails = "SELECT * FROM clinic where clinic_id=:clinicId";
+            String clinicDetails = "SELECT * FROM clinic_master where clinic_id=:clinicId";
             Map<String, Object> parameter = new HashMap<String, Object>();
             parameter.put("clinicId", id);
             getClinicId = jdbcTemplate.query(clinicDetails, parameter, new ClinicMapper());
+            System.out.println("dataWrong"  +getClinicId);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         return getClinicId;
+    }*/
+
+    @Override
+    public List<ClinicUser> viewDetails(Integer clinic_id) {
+        List<ClinicUser> getClinicDetails=null;
+        try{
+            String viewClinic="SELECT c.clinic_id,c.clinic_name,c.reg_no,c.status,c.chief,b.address1,b.address2,b.city,b.state,b.country,b.pin_code,b.contact_no,b.email,b.description,p.profile_id,p.name,p.address1 ch_addrs1, p.address2 ch_addrs2,p.city ch_city,p.state ch_state,p.country ch_country,p.phone,p.email ch_email,p.pincode,p.gender FROM clinic.clinic_master c INNER JOIN clinic.branch_master b ON c.clinic_id = b.clinic_id INNER JOIN\n clinic.member_master m ON b.chief_id = m.user_id INNER JOIN  clinic.profile_master p ON p.profile_id = m.profile_id  AND c.clinic_id = :clinic_id AND b.ho=1" ;
+            Map<String, Object> parameter = new HashMap<String, Object>();
+            parameter.put("clinic_id", clinic_id);
+            getClinicDetails=jdbcTemplate.query(viewClinic,parameter,new ClinicBranchMapper());
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return getClinicDetails;
     }
 }

@@ -34,6 +34,11 @@ public class ClinicServiceImpl implements ClinicService {
     }
 
     @Override
+    public List<ClinicUser> clinicDetails(Integer clinic_id) {
+        return clinicDao.viewDetails(clinic_id);
+    }
+
+    @Override
     public List<Branch> email(String email_id) {
         return clinicDao.email(email_id);
     }
@@ -43,9 +48,9 @@ public class ClinicServiceImpl implements ClinicService {
         return clinicDao.getClinic();
     }
 
-    public  List<Clinic> getClinicById(Integer id){
+   /* public  List<Clinic> getClinicById(Integer id){
         return clinicDao.getClinicById(id);
-    }
+    }*/
 
     @Override
     public boolean editClinic(Clinic clinic) {

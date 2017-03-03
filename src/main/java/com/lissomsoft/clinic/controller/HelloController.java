@@ -123,13 +123,59 @@ public class HelloController {
         jsonObject.put("status",flag);
         return jsonObject.toString();
     }
+    @RequestMapping(value = "/ViewDetails/{clinic_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String viewDetails(@PathVariable Integer clinic_id)throws JSONException{
 
+        JSONObject data=new JSONObject();
+        JSONArray jsonArray=new JSONArray();
+        List<ClinicUser> viewClinic;
+        viewClinic =  clinicService.clinicDetails(clinic_id);
+        Iterator<ClinicUser> it = viewClinic.iterator();
+        while (it.hasNext()){
+
+            ClinicUser clinicdetails=it.next();
+
+            JSONObject jsonObject =new JSONObject();
+            jsonObject.put("clinicId",clinicdetails.getClinic_id());
+            jsonObject.put("clinicName",clinicdetails.getClinic_name());
+            jsonObject.put("Chief",clinicdetails.getChief_name());
+            jsonObject.put("reg_no",clinicdetails.getRegister_no());
+            jsonObject.put("st",clinicdetails.getStatus());
+            jsonObject.put("address1",clinicdetails.getAddress1());
+            jsonObject.put("address2",clinicdetails.getAddress2());
+            jsonObject.put("city",clinicdetails.getCity());
+            jsonObject.put("state",clinicdetails.getState());
+            jsonObject.put("country",clinicdetails.getCountry());
+            jsonObject.put("pin_code",clinicdetails.getPin_code());
+            jsonObject.put("contact_no",clinicdetails.getContact_no());
+            jsonObject.put("email_id",clinicdetails.getEmail_id());
+            jsonObject.put("description",clinicdetails.getDescription());
+            jsonObject.put("Chief_address1",clinicdetails.getChief_address1());
+            jsonObject.put("Chief_address2",clinicdetails.getChief_address2());
+            jsonObject.put("Chief_city",clinicdetails.getChief_city());
+            jsonObject.put("Chief_state",clinicdetails.getChief_state());
+            jsonObject.put("chief_country",clinicdetails.getChief_country());
+            jsonObject.put("Chief_conatct_no",clinicdetails.getChief_contact_no());
+            jsonObject.put("Chief_email_id",clinicdetails.getChief_email_id());
+            jsonObject.put("Chief_pincode",clinicdetails.getChief_pin_code());
+            jsonObject.put("Chief_gender",clinicdetails.getGender());
+            data.put("success",true);
+            data.put("clinic",jsonObject);
+
+        }
+        return data.toString();
+    }
     @RequestMapping(value = "/GetClinic")
     public String getClinic(HttpServletRequest request) throws Exception {
         return "viewClinic";
     }
 
-
+    @RequestMapping(value = "/clinicDetails")
+    public String clinicDetails(HttpServletRequest request)throws Exception{
+        return "clinicDetails";
+    }
 
     @RequestMapping(value ="/ViewClinic",method = RequestMethod.GET)
     public
@@ -225,7 +271,36 @@ public class HelloController {
         if(validateName.isEmpty()){
             data.put("status",true);
         }else{
+
             data.put("status",false);
+        }
+
+        return data.toString();
+
+    }
+
+    @RequestMapping(value = "/EditName/{clinic_id}/{clinic_name}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String EditName(@PathVariable Integer clinic_id,@PathVariable String clinic_name)throws JSONException{
+
+        JSONObject data=new JSONObject();
+        List<Clinic> validateName;
+        validateName=clinicService.validateName(clinic_name);
+        if(validateName.isEmpty()){
+            data.put("status",true);
+        }else{
+            Iterator<Clinic> it=validateName.iterator();
+            while (it.hasNext()){
+                Clinic validatename=it.next();
+                if(clinic_id==validatename.getClinic_id()){
+                    data.put("status",true);
+                }else {
+                    data.put("status",false);
+                }
+
+                }
+
         }
 
         return data.toString();
@@ -267,35 +342,7 @@ public class HelloController {
         return datajson.toString();
     }
 
-    @RequestMapping(value = "/GetDetails/{id}",method = RequestMethod.GET)
-    public
-    @ResponseBody
-    String getDetails(@PathVariable Integer id)throws Exception{
 
-        JSONObject jsonObject=new JSONObject();
-        List<Clinic> getDetails;
-        getDetails=clinicService.getClinicById(id);
-        Iterator<Clinic> it = getDetails.iterator();
-        while (it.hasNext()){
-            Clinic clinicdetails=it.next();
-            jsonObject.put("clinicId",clinicdetails.getClinic_id());
-            jsonObject.put("clinicName",clinicdetails.getClinic_name());
-           /* jsonObject.put("phone_no",clinicdetails.getContact_no());
-            jsonObject.put("email_id",clinicdetails.getEmail_id());
-            jsonObject.put("description",clinicdetails.getDescription());
-            jsonObject.put("address",clinicdetails.getAddress());
-            jsonObject.put("city",clinicdetails.getCity());
-            jsonObject.put("pincode",clinicdetails.getPincode());
-            jsonObject.put("country",clinicdetails.getCountry());
-            jsonObject.put("location",clinicdetails.getLocation());
-            jsonObject.put("state",clinicdetails.getState());*/
-            jsonObject.put("status",true);
-
-        }
-
-        return jsonObject.toString();
-
-    }
 
     @RequestMapping(value ="/validate/{contact_no}/{clinicID}",method = RequestMethod.GET)
     public

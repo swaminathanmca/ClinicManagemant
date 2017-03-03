@@ -21,7 +21,7 @@ public class ClinicBranchMapper implements RowMapper<ClinicUser> {
         clinicUser.setClinic_name(resultSet.getString("clinic_name"));
         clinicUser.setRegister_no(resultSet.getString("reg_no"));
         clinicUser.setStatus(resultSet.getString("status"));
-        clinicUser.setContact_no(resultSet.getString("contact_no"));;
+        clinicUser.setContact_no(resultSet.getString("contact_no"));
         clinicUser.setEmail_id(resultSet.getString("email"));
         clinicUser.setAddress1(resultSet.getString("address1"));
         clinicUser.setAddress2(resultSet.getString("address2"));
@@ -31,6 +31,16 @@ public class ClinicBranchMapper implements RowMapper<ClinicUser> {
         clinicUser.setPin_code(resultSet.getInt("pin_code"));
         clinicUser.setChief_name(resultSet.getString("chief"));
         clinicUser.setDescription(resultSet.getString("description"));
+        clinicUser.setChief_address1(resultSet.getString("ch_addrs1"));
+        clinicUser.setChief_address2(resultSet.getString("ch_addrs2"));
+        clinicUser.setChief_city(resultSet.getString("ch_city"));
+        clinicUser.setChief_state(resultSet.getString("ch_state"));
+        clinicUser.setChief_country(resultSet.getString("ch_country"));
+        clinicUser.setChief_pin_code(resultSet.getString("pincode"));
+        clinicUser.setChief_contact_no(resultSet.getString("phone"));
+        clinicUser.setChief_email_id(resultSet.getString("ch_email"));
+        clinicUser.setGender(resultSet.getString("gender"));
+
 
 
         return clinicUser;

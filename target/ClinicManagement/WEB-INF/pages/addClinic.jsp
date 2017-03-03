@@ -127,9 +127,12 @@
                                             <label class="col-lg-2 control-label">Clinic Name</label>
                                             <div class="col-lg-4">
                                                 <input class="form-control" placeholder="Clinic Name" name="branch_name"
-                                                       type="text" ng-model="clinic_name" maxlength="30" required>
+                                                       type="text" ng-model="clinic_name" maxlength="30" ng-blur="valName()" required>
                                                 <span class="text-danger wrapper text-center ng-binding"
                                                       ng-show="myform.branch_name.$invalid &&  myform.branch_name.$touched">Please Enter Clinic Name</span>
+                                                 <span class="text-danger wrapper text-center ng-binding" ng-show="err_name==false">
+                                                       The Clinic Name Already Taken
+                                                           </span>
                                             </div>
                                             <label class="col-lg-2 control-label">Registration No</label>
                                             <div class="col-lg-4">
@@ -146,7 +149,7 @@
                                                 <input class="form-control" placeholder="Address"
                                                        name="address1" type="text" ng-model="address1" required>
                                                 <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.address1.$invalid &&  myform.address1.$touched">Please Enter Location Number</span>
+                                                      ng-show="myform.address1.$invalid &&  myform.address1.$touched">Please Enter Location </span>
                                             </div>
                                             <label class="col-lg-2 control-label">Address2</label>
 
@@ -343,7 +346,7 @@
                                             <div class="row">
                                                 <div class="col-lg-offset-4 col-lg-7">
                                                     <button type="submit" class="btn btn-success"
-                                                            ng-disabled="myform.$invalid || !authError || !authErrorEmail || !chiefError || !chiefEmail "
+                                                            ng-disabled="myform.$invalid || !authError || !authErrorEmail || !chiefError || !chiefEmail || !name"
                                                             ng-click="submitted=true">Save
                                                     </button>
                                                     <button type="button" class="btn btn-inverse">Cancel</button>

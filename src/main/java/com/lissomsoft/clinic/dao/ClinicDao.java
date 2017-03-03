@@ -16,5 +16,6 @@ public interface ClinicDao {
     List<Clinic> validateName(String clinic_name);
     List<Branch> email(String email_id);
     List<ClinicUser> getClinic();
-    List<Clinic> getClinicById(Integer id);
+ /*   List<Clinic> getClinicById(Integer id);*/
+    List<ClinicUser> viewDetails(Integer clinic_id);
 }
