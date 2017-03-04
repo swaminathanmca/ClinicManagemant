@@ -111,7 +111,7 @@
         </div>
         <div class="row">
 
-            <div class="col-lg-10">
+            <div class="col-lg-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h3 class="panel-title">Add Clinic</h3>
@@ -122,222 +122,278 @@
                                 <form class="form-horizontal ng-invalid" role="form" name="myform" ng-submit="submit()"
                                       novalidate>
                                     <fieldset>
-                                    <div class="panel brd_img">
+
                                         <div class="form-group">
-                                            <label class="col-lg-2 control-label">Clinic Name</label>
-                                            <div class="col-lg-4">
-                                                <input class="form-control" placeholder="Clinic Name" name="branch_name"
-                                                       type="text" ng-model="clinic_name" maxlength="30" ng-blur="valName()" required>
+                                            <div class="col-lg-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Clinic Name</span>
+                                                    <input class="form-control" placeholder="Clinic Name" name="branch_name"
+                                                           type="text" ng-model="clinic_name" maxlength="30" ng-blur="valName()" required>
+                                                </div>
                                                 <span class="text-danger wrapper text-center ng-binding"
                                                       ng-show="myform.branch_name.$invalid &&  myform.branch_name.$touched">Please Enter Clinic Name</span>
                                                  <span class="text-danger wrapper text-center ng-binding" ng-show="err_name==false">
                                                        The Clinic Name Already Taken
                                                            </span>
                                             </div>
-                                            <label class="col-lg-2 control-label">Registration No</label>
-                                            <div class="col-lg-4">
-                                                <input class="form-control" placeholder="Registration Number"
-                                                       name="reg_no" type="text" ng-model="reg_no" required>
-                                                <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.reg_no.$invalid &&  myform.reg_no.$touched">Please Enter Registration Number</span>
+                                           <div class="col-lg-6">
+                                               <div class="input-group">
+                                                   <span class="input-group-addon">Registration No</span>
+                                                   <input class="form-control" placeholder="Registration Number"
+                                                          name="reg_no" type="text" ng-model="reg_no" required>
+                                               </div>
+                                                 <span class="text-danger wrapper text-center ng-binding"
+                                                       ng-show="myform.reg_no.$invalid &&  myform.reg_no.$touched">Please Enter Registration Number</span>
+                                           </div>
                                             </div>
-                                        </div>
 
                                         <div class="form-group">
-                                            <label class="col-lg-2 control-label">Address1</label>
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-6">
+                                                <div class="input-group">
+                                            <span class="input-group-addon">Address1</span>
                                                 <input class="form-control" placeholder="Address"
                                                        name="address1" type="text" ng-model="address1" required>
-                                                <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.address1.$invalid &&  myform.address1.$touched">Please Enter Location </span>
-                                            </div>
-                                            <label class="col-lg-2 control-label">Address2</label>
-
-                                            <div class="col-lg-4">
+                                              </div>
+                                            <span class="text-danger wrapper text-center ng-binding"
+                                                  ng-show="myform.address1.$invalid &&  myform.address1.$touched">Please Enter Address </span>
+                                                </div>
+                                            <div class="col-lg-6">
+                                                <div class="input-group">
+                                                <span class="input-group-addon">Address2</span>
                                                 <input class="form-control" placeholder="Address" name="address2"
                                                        type="text" value="" ng-model="address2" required>
-                                                <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.address2.$invalid &&  myform.address2.$touched">Please Enter Address</span>
                                             </div>
-                                        </div>
+                                             <span class="text-danger wrapper text-center ng-binding"
+                                                   ng-show="myform.address2.$invalid &&  myform.address2.$touched">Please Enter Address</span>
+                                            </div>
+                                            </div>
+
 
                                         <div class="form-group">
-                                            <label class="col-lg-2 control-label">City</label>
-
-                                            <div class="col-lg-4">
-                                                <input class="form-control" placeholder="City" name="city" type="text"
-                                                       value="" ng-model="city" required>
-                                                <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.city.$invalid &&  myform.city.$touched">Please Enter City</span>
+                                            <div class="col-lg-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">City</span>
+                                                    <input class="form-control" placeholder="City" name="city" type="text"
+                                                           value="" ng-model="city" required>
+                                                </div>
+                                                 <span class="text-danger wrapper text-center ng-binding"
+                                                       ng-show="myform.city.$invalid &&  myform.city.$touched">Please Enter City</span>
                                             </div>
-                                            <label class="col-lg-2 control-label">State</label>
-                                            <div class="col-lg-4">
 
-                                                <input type="text" ng-model="state" class="form-control" name="state" required>
-                                                <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.state.$invalid &&  myform.state.$touched">Please Enter State</span>
+                                            <div class="col-lg-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">State</span>
+                                                    <input type="text" ng-model="state" class="form-control" placeholder="State" name="state" required>
+                                                    </div>
+                                                 <span class="text-danger wrapper text-center ng-binding"
+                                                       ng-show="myform.state.$invalid &&  myform.state.$touched">Please Enter State</span>
+                                                </div>
+                                            <div class="col-lg-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Country</span>
+                                                    <select id="countries_states1"
+                                                            class="input-medium bfh-countries form-control" name="country"
+                                                            ng-model="country" data-country="" required></select>
+                                                </div>
+                                                  <span class="text-danger wrapper text-center ng-binding"
+                                                        ng-show="myform.country.$invalid &&  myform.country.$touched">Please Enter Country</span>
                                             </div>
-                                        </div>
-
-                                        <div class="form-group">
-
-
-                                            <label class="col-lg-2 control-label">Country</label>
-                                            <div class="col-lg-4">
-                                                <select id="countries_states1"
-                                                        class="input-medium bfh-countries form-control" name="country"
-                                                        ng-model="country" data-country="" required></select>
-                                                <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.country.$invalid &&  myform.country.$touched">Please Enter State</span>
-
-                                            </div>
-                                            <label class="col-lg-2 control-label">Pin Code</label>
-
-                                            <div class="col-lg-4">
-                                                <input class="form-control" placeholder="PinCode" name="pincode"
-                                                       type="text" value="" ng-model="pincode" maxlength="6"
-                                                       ng-pattern="/^[0-9]*$/" required>
+                                            <div class="col-lg-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Pin Code</span>
+                                                    <input class="form-control" placeholder="PinCode" name="pincode"
+                                                           type="text" value="" ng-model="pincode" maxlength="6"
+                                                           ng-pattern="/^[0-9]*$/" required>
+                                                </div>
                                                 <span class="text-danger wrapper text-center ng-binding"
                                                       ng-show="myform.pincode.$error.pattern">Please Enter Valid Pin Code</span>
                                                 <span class="text-danger wrapper text-center ng-binding"
                                                       ng-show="myform.pincode.$invalid &&  myform.pincode.$touched">Please Enter Pin Code</span>
-                                            </div>
+                                                </div>
+
                                         </div>
 
+
                                         <div class="form-group">
-                                            <label class="col-lg-2 control-label">Phone Number</label>
-                                            <div class="col-lg-4">
-                                                <input class="form-control" name="branch_no" type="text" value=""
-                                                       ui-mask="999-999-9999" ng-model="contact_no" ng-blur="validate()"
-                                                       required>
-                                                        <span class="text-danger wrapper text-center ng-binding" ng-show="error==false">
-                                                       The Mobile Number Already Taken
-                                                           </span>
-                                                <span class="text-danger wrapper text-center ng-binding" ng-show="myform.branch_no.$invalid &&  myform.branch_no.$touched">Please Enter Contact Number</span>
-                                            </div>
-                                            <label class="col-lg-2 control-label">Email </label>
-                                            <div class="col-lg-4">
-                                                <input class="form-control" name="email" type="email" value="" ng-model="email_id" ng-blur="emailvalidate()" required>
-                                                    <span class="text-danger wrapper text-center ng-binding" ng-show="error_email==false">
+                                            <div class="col-lg-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Email</span>
+                                                    <input class="form-control" name="email" type="email" value="" ng-model="email_id" ng-blur="emailvalidate()" required>
+                                                </div>
+                                                 <span class="text-danger wrapper text-center ng-binding" ng-show="error_email==false">
                                                    The Email Already Taken
                                                      </span>
                                                 <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.email.$invalid &&  ! myform.email.$pristine &&  myform.email.$touched "> Enter Valid Email</span>
+                                                      ng-show="myform.email.$invalid &&  myform.email.$touched"> Enter Valid Email</span>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-lg-2 control-label">Password</label>
+                                            <div class="col-lg-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Phone No</span>
+                                                    <input class="form-control" name="branch_no" type="text" value=""
+                                                           ui-mask="999-999-9999" ng-model="contact_no" ng-blur="validate()"
+                                                           required>
+                                                    </div>
+                                                 <span class="text-danger wrapper text-center ng-binding" ng-show="error==false">
+                                                       The Mobile Number Already Taken
+                                                           </span>
+                                                <span class="text-danger wrapper text-center ng-binding" ng-show="myform.branch_no.$invalid &&  myform.branch_no.$touched">Please Enter Contact Number</span>
+                                                </div>
+
+
+
                                             <div class="col-lg-4">
-                                                <input class="form-control" name="password" type="text" ng-model="password" required>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Password</span>
+                                                    <input class="form-control" name="password" type="text" ng-model="password" required>
+                                                    </div>
                                                 <span class="text-danger wrapper text-center ng-binding" ng-show="myform.password.$invalid && myform.password.$touched">Please Enter Password</span>
+                                                </div>
+
+
                                             </div>
 
-                                        </div>
-
                                         <div class="form-group">
-                                            <label class="col-lg-2 control-label">Description</label>
+                                            <div class="col-lg-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Description</span>
 
-                                            <div class="col-lg-10">
                                                 <textarea class="form-control"
                                                           placeholder="Write Clinic Description Here.." name="desc"
                                                           type="text" value="" ng-model="desc"  ></textarea>
-                                            </div>
+                                                    </div>
+                                                </div>
                                         </div>
-                                    </div>
 
-                                        <div class="panel ">
-                                            <div class="form-group">
-                                                <label class="col-lg-2 control-label">Chief Name</label>
-                                                <div class="col-lg-4">
-                                                    <input class="form-control" placeholder="Chief Name" name="chief_name"
-                                                           type="text" ng-model="chief_name" maxlength="30" required>
-                                                <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.chief_name.$invalid &&  myform.chief_name.$touched">Please Enter Chief Name</span>
+
+
+                                        <hr>
+                                        <div class="form-group">
+                                                <div class="col-lg-6">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">Chief Name</span>
+                                                        <input class="form-control" placeholder="Chief Name" name="chief_name"
+                                                               type="text" ng-model="chief_name" maxlength="30" required>
+                                                        </div>
+                                                     <span class="text-danger wrapper text-center ng-binding"
+                                                           ng-show="myform.chief_name.$invalid &&  myform.chief_name.$touched">Please Enter Chief Name</span>
+                                                    </div>
+
+
+                                                    <div class="col-lg-6">
+                                                        <div class="input-group">
+                                                        <span class="input-group-addon">Address 1</span>
+                                                        <input class="form-control" placeholder="Address"
+                                                               name="chief_address1" type="text" ng-model="chief_address1" required>
+                                                        </div>
+                                                         <span class="text-danger wrapper text-center ng-binding"
+                                                               ng-show="myform.chief_address1.$invalid &&  myform.chief_address1.$touched">Please Enter Address</span>
+                                                    </div>
+
                                                 </div>
-                                                <label class="col-lg-2 control-label">Address 1</label>
-                                                <div class="col-lg-4">
-                                                    <input class="form-control" placeholder="Address"
-                                                           name="chief_address1" type="text" ng-model="chief_address1" required>
-                                                <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.chief_address1.$invalid &&  myform.chief_address1.$touched">Please Enter Address</span>
+
+
+                                            <div class="form-group">
+                                                <div class="col-lg-6">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">Address 2</span>
+                                                        <input class="form-control" placeholder="Address" name="chief_address2"
+                                                               type="text" ng-model="chief_address2" maxlength="30" required>
+                                                        </div>
+                                                    <span class="text-danger wrapper text-center ng-binding"
+                                                          ng-show="myform.chief_address2.$invalid &&  myform.chief_address2.$touched">Please Enter Address</span>
+                                                    </div>
+
+                                                <div class="col-lg-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">City</span>
+                                                        <input class="form-control" placeholder="City"
+                                                               name="chief_city" type="text" ng-model="chief_city" required>
+                                                        </div>
+                                                    <span class="text-danger wrapper text-center ng-binding"
+                                                          ng-show="myform.chief_city.$invalid &&  myform.chief_city.$touched">Please Enter City</span>
+                                                    </div>
+                                                <div class="col-lg-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">State</span>
+                                                        <input class="form-control" placeholder="State" name="chief_state"
+                                                               type="text" ng-model="chief_state" maxlength="30" required>
+                                                    </div>
+                                                    <span class="text-danger wrapper text-center ng-binding"
+                                                          ng-show="myform.chief_state.$invalid &&  myform.chief_state.$touched">Please Enter State</span>
                                                 </div>
                                             </div>
+
+
                                             <div class="form-group">
-                                                <label class="col-lg-2 control-label">Address 2</label>
-                                                <div class="col-lg-4">
-                                                    <input class="form-control" placeholder="Address" name="chief_address2"
-                                                           type="text" ng-model="chief_address2" maxlength="30" required>
-                                                <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.chief_address2.$invalid &&  myform.chief_address2.$touched">Please Enter Address</span>
-                                                </div>
-                                                <label class="col-lg-2 control-label">City</label>
-                                                <div class="col-lg-4">
-                                                    <input class="form-control" placeholder="City"
-                                                           name="chief_city" type="text" ng-model="chief_city" required>
-                                                <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.chief_city.$invalid &&  myform.chief_city.$touched">Please Enter City</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-lg-2 control-label">State</label>
-                                                <div class="col-lg-4">
-                                                    <input class="form-control" placeholder="State" name="chief_state"
-                                                           type="text" ng-model="chief_state" maxlength="30" required>
-                                                <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.chief_state.$invalid &&  myform.chief_state.$touched">Please Enter State</span>
-                                                </div>
-                                                <label class="col-lg-2 control-label">Country</label>
-                                                <div class="col-lg-4">
-                                                    <select class="input-medium bfh-countries form-control" name="chief_country"
-                                                            ng-model="chief_country" data-country="" required></select>
-                                                <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.chief_country.$invalid &&  myform.chief_country.$touched">Please Enter Country</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-lg-2 control-label">Pin/Zip</label>
-                                                <div class="col-lg-4">
-                                                    <input class="form-control" placeholder="Pin /Zip" name="chef_pin" ng-pattern="/^[0-9]*$/"
-                                                           type="text" ng-model="chef_pin" maxlength="30" required>
-                                                      <span class="text-danger wrapper text-center ng-binding"
-                                                            ng-show="myform.chef_pin.$error.pattern">Please Enter Valid Pin Code</span>
+
+                                                <div class="col-lg-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">Country</span>
+                                                        <select class="input-medium bfh-countries form-control" name="chief_country"
+                                                                ng-model="chief_country" data-country="" required></select>
+                                                        </div>
+                                                     <span class="text-danger wrapper text-center ng-binding"
+                                                           ng-show="myform.chief_country.$invalid &&  myform.chief_country.$touched">Please Enter Country</span>
+                                                    </div>
+                                                <div class="col-lg-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">Pin/Zip</span>
+                                                        <input class="form-control" placeholder="Pin /Zip" name="chef_pin" ng-pattern="/^[0-9]*$/"
+                                                               type="text" ng-model="chef_pin" maxlength="6" required>
+                                                    </div>
+                                                     <span class="text-danger wrapper text-center ng-binding"
+                                                           ng-show="myform.chef_pin.$error.pattern">Please Enter Valid Pin Code</span>
                                                 <span class="text-danger wrapper text-center ng-binding"
                                                       ng-show="myform.chef_pin.$invalid &&  myform.chef_pin.$touched">Please Enter Pin Code</span>
                                                 </div>
-                                                <label class="col-lg-2 control-label">Gender</label>
                                                 <div class="col-lg-4">
-                                                    <select class=" form-control" name="chief_gender"
-                                                            ng-model="chief_gender"  required>
-                                                        <option value="0">Female</option>
-                                                        <option value="1">Male</option>
-                                                    </select>
-                                                <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.chief_country.$invalid &&  myform.chief_country.$touched">Please Enter Gender</span>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">Gender</span>
+
+                                                        <div class="checkbox  fileRadioBox form-control">
+                                                            <label>
+                                                                <input type="radio" name="sex" value="1" ng-model="chief_gender" required="" class="ng-pristine ng-untouched ng-valid ng-valid-required">&nbsp;Male
+                                                            </label>
+                                                            <label>
+                                                                <input type="radio" name="sex" value="0" ng-model="chief_gender" required="" class="ng-pristine ng-untouched ng-valid ng-valid-required ">&nbsp;Female
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <span class="text-danger wrapper text-center ng-binding"
+                                                          ng-show="myform.chief_country.$invalid &&  myform.chief_country.$touched">Please Enter Gender</span>
                                                 </div>
-                                            </div>
+
+                                                </div>
+
+
                                             <div class="form-group">
-                                                <label class="col-lg-2 control-label">Phone Number</label>
-                                                <div class="col-lg-4">
-                                                    <input class="form-control"  name="chief_contact_no" ui-mask="999-999-9999"  type="text" ng-model="chief_contact_no" ng-blur="validatecontact()" required>
-                                                <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.chief_contact_no.$invalid &&  myform.chief_contact_no.$touched">Please Enter Phone No</span>
+
+
+                                                </div>
+                                                <div class="form-group">
+                                                <div class="col-lg-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">Phone No</span>
+                                                        <input class="form-control"  name="chief_contact_no" ui-mask="999-999-9999"  type="text" ng-model="chief_contact_no" ng-blur="validatecontact()" required>
+                                                        </div>
+                                                     <span class="text-danger wrapper text-center ng-binding"
+                                                           ng-show="myform.chief_contact_no.$invalid &&  myform.chief_contact_no.$touched">Please Enter Phone No</span>
                                                      <span class="text-danger wrapper text-center ng-binding" ng-show="err==false">
                                                        The Mobile Number Already Taken
                                                            </span>
-                                                </div>
-                                                <label class="col-lg-2 control-label">Email Id</label>
-                                                <div class="col-lg-4">
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Email Id</span>
                                                     <input class="form-control" placeholder="Email"
                                                            name="cheif_email_id" type="text" ng-model="cheif_email_id" ng-blur="validateEmail()" required>
+                                                </div>
                                                 <span class="text-danger wrapper text-center ng-binding"
                                                       ng-show="myform.cheif_email_id.$invalid &&  myform.cheif_email_id.$touched">Please Enter Email Id</span>
                                                      <span class="text-danger wrapper text-center ng-binding" ng-show="err_chief_email==false">
                                                        The Email Already Taken
-                                                           </span>
-                                                </div>
+                                                           </span></div>
                                             </div>
-                                        </div>
-
 
 
 
