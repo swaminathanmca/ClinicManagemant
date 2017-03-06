@@ -2,7 +2,7 @@
  * Created by Admin on 2/16/2017.
  */
 
-var app = angular.module('myApp', ['ui.mask']);
+var app = angular.module('myApp', ['ui.mask','angularUtils.directives.dirPagination']);
 app.controller('myCtrl', function ($scope, $http, $window) {
 
 

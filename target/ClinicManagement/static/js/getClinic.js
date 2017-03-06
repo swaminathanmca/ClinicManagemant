@@ -29,15 +29,7 @@ app.controller('getClinic', function ($scope, $http, $window) {
         $scope.clinic_id = id;
         $window.sessionStorage.clinic_id=$scope.clinic_id;
         location.href="clinicDetails"
-       /* $scope.data.country = "";
-        $http.get("GetDetails/" + $scope.id).
-            then(function (response, status, headers, config) {
 
-
-                $scope.data = response.data;
-                $('#countries1').bfhcountries({country: $scope.data.country});
-                /!* $('#states1').bfhstates({country: $scope.data.country, state: $scope.data.state});*!/
-            });*/
     }
 
     $scope.validate = function (id) {

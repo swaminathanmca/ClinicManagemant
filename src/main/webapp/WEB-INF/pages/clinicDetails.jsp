@@ -112,7 +112,7 @@
                                         <div class="col-xs-3">
                                             </div>
                                         <div class="col-xs-1 col-xs-offset-8">
-                                            <h4><img ng-click="" src="<%=request.getContextPath()%>/static/img/editicon.png" class=" pull-left" data-toggle="modal" data-target="#myModal" style="padding-left: 45px"></h4>
+                                            <h4><img  src="<%=request.getContextPath()%>/static/img/editicon.png" class=" pull-left" data-toggle="modal" data-target="#myModal" style="padding-left: 45px" ng-click="editUser(clinic.clinicId)"></h4>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-6">
@@ -289,7 +289,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <form role="form" class="form-horizontal" name="myform">
+                            <form role="form" class="form-horizontal" name="myform"  ng-submit="submit(id)">
                                 <fieldset>
                                     <div class="form-group">
                                         <div class="col-lg-6">
@@ -537,6 +537,7 @@
 <script src="<%=request.getContextPath()%>/static/js/angular.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/getClinic.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/clinicDetails.js"></script>
 

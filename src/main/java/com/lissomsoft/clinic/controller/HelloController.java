@@ -105,7 +105,7 @@ public class HelloController {
     String addClinic(@RequestBody ClinicUser clinic ,HttpServletRequest request) throws JSONException {
       JSONObject jsonObject=new JSONObject();
         boolean flag;
-      System.out.println(clinic);
+
         flag = clinicService.addClinic(clinic);
         jsonObject.put("status",flag);
         return jsonObject.toString();
@@ -115,11 +115,11 @@ public class HelloController {
     @RequestMapping(value = "/EditClinic", method = RequestMethod.POST)
     public
     @ResponseBody
-    String editClinic(@RequestBody Clinic clinic, HttpServletRequest request) throws JSONException {
+    String editClinic(@RequestBody ClinicUser clinicUser, HttpServletRequest request) throws JSONException {
         JSONObject jsonObject=new JSONObject();
         boolean flag;
-
-       flag = clinicService.editClinic(clinic);
+        System.out.println(clinicUser);
+       flag = clinicService.editClinic(clinicUser);
         jsonObject.put("status",flag);
         return jsonObject.toString();
     }
@@ -322,7 +322,7 @@ public class HelloController {
             Iterator<Branch> it=editEmail.iterator();
             while (it.hasNext()){
                 Branch emailValidate=it.next();
-                System.out.println(emailValidate);
+
                 if(clinic_id==emailValidate.getClinic_id()){
                     data.put("status",true);
                 }else {

@@ -119,8 +119,8 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="table-responsive ">
-                                    <table class="table table-striped table-bordered table-hover ">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover " id="dataTables-example">
                                         <thead>
                                         <tr class="success">
                                             <th>Clinic Name</th>
@@ -131,7 +131,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr ng-repeat="x in clinic | filter:search" ng-click="editClinic(x.clinicId)">
+                                        <tr dir-paginate="x in clinic | filter:search | orderBy : clinicName | itemsPerPage :5" ng-click="editClinic(x.clinicId)">
                                             <td>{{x.clinicName}}</td>
                                             <td>{{x.description}}</td>
                                             <td>{{x.address1}},{{x.address2}}</td>
@@ -141,7 +141,10 @@
                                         </tbody>
 
                                     </table>
-                                </div>
+                                    <p class=" text-center">
+                                    <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" ></dir-pagination-controls>
+                                    </p>
+                                    </div>
                             </div>
 
                         </div>
@@ -173,6 +176,7 @@
 <script src="<%=request.getContextPath()%>/static/js/angular.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/getClinic.js"></script>
 
 <script src="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/js/bootstrap-formhelpers.min.js"></script>

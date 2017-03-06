@@ -19,6 +19,7 @@ import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 
 
+import java.lang.ref.SoftReference;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -175,25 +176,110 @@ public class ClinicDaoImpl implements ClinicDao {
     }
 
     @Override
-    public boolean editClinic(Clinic clinic) {
+    public boolean editClinic(ClinicUser clinicUser) {
         int result = 0;
+        int result_branch = 0;
+        int result_profile = 0;
+        int result_user = 0;
+        int result_member = 0;
+        int result_role = 0;
+
+
+        DefaultTransactionDefinition paramTransactionDefinition = new DefaultTransactionDefinition();
+        TransactionStatus status = platformTransactionManager.getTransaction(paramTransactionDefinition);
 
         try {
 
-            String editBranchSql = "UPDATE clinic SET  clinic_name=:clinic_name,address=:address,country=:country,location=:location,city=:city,state=:state,zip=:pincode,contact_number=:contact_number,email=:email,description=:description,updated_at=:updated_at WHERE clinic_id=:clinic_id";
-            System.out.println(editBranchSql);
+            String editClinicSql = "UPDATE clinic_master SET  clinic_name=:clinic_name,reg_no=:reg_no,chief=:Chief_name,updated_at=:updated_at WHERE clinic_id=:clinic_id";
             Map<String, Object> parameters = new HashMap<String, Object>();
-            parameters.put("clinic_id", clinic.getClinic_id());
-            parameters.put("clinic_name", clinic.getClinic_name());
-
+            parameters.put("clinic_id", clinicUser.getClinic_id());
+            parameters.put("clinic_name", clinicUser.getClinic_name());
+            parameters.put("reg_no",clinicUser.getRegister_no());
+            parameters.put("Chief_name",clinicUser.getChief_name());
+            System.out.println(clinicUser.getClinic_id());
+            System.out.println(clinicUser.getClinic_name());
+            System.out.println(clinicUser.getRegister_no());
+            System.out.println(clinicUser.getChief_name());
+            System.out.println(format.format(new Date()));
             parameters.put("updated_at", format.format(new Date()));
 
-            result = jdbcTemplate.update(editBranchSql, parameters);
+            result = jdbcTemplate.update(editClinicSql, parameters);
+
         } catch (Exception e) {
 
             e.printStackTrace();
+            platformTransactionManager.rollback(status);
         }
-        return (result > 0) ? true : false;
+
+        if((result > 0) ? true : false) {
+
+            try{
+                String editBranchSql="UPDATE branch_master SET branch_name=:branch_name,address1=:address1,address2=:address2,city=:city,state=:state,country=:country,pin_code=:pincode,contact_no=:contact_no,email=:email,description=:description WHERE clinic_id=:clinic_id AND ho=1";
+                Map<String,Object> branch=new HashMap<String, Object>();
+                branch.put("branch_name",clinicUser.getClinic_name());
+                branch.put("clinic_id",clinicUser.getClinic_id());
+                branch.put("address1",clinicUser.getAddress1());
+                branch.put("address2",clinicUser.getAddress2());
+                branch.put("city",clinicUser.getCity());
+                branch.put("state",clinicUser.getState());
+                branch.put("country",clinicUser.getCountry());
+                branch.put("pincode",clinicUser.getPin_code());
+                branch.put("contact_no",clinicUser.getContact_no());
+                branch.put("email",clinicUser.getEmail_id());
+                branch.put("description",clinicUser.getDescription());
+                branch.put("updated_at",format.format(new Date()));
+                result_branch=jdbcTemplate.update(editBranchSql, branch);
+
+            }catch (Exception e){
+                e.printStackTrace();
+                platformTransactionManager.rollback(status);
+            }
+        }
+        if((result_branch>0) ? true :false){
+            try
+            {
+            String edituserSql="UPDATE user SET username=:username,email=:email,updated_at=:updated_at WHERE user_id=(SELECT member_master.user_id FROM member_master where member_master.profile_id=:profile_id)";
+                Map<String, Object> user = new HashMap<String, Object>();
+                user.put("username",clinicUser.getClinic_name());
+                user.put("email",clinicUser.getChief_email_id());
+                System.out.println(clinicUser.getChief_id());
+                user.put("profile_id",clinicUser.getChief_id());
+                user.put("updated_at",format.format(new Date()));
+                result_user=jdbcTemplate.update(edituserSql,user);
+
+
+            }catch (Exception e){
+                e.printStackTrace();
+                platformTransactionManager.rollback(status);
+            }
+        }
+        if((result_user>0) ? true :false){
+            try {
+                String editProfileSql="UPDATE profile_master SET name=:name,address1=:address1,address2=:address2,city=:city,state=:state,country=:country,pincode=:pincode,phone=:contact_no,email=:email,gender=:gender,updated_at=:updated_at  WHERE  profile_id=:profile_id";
+
+                Map<String,Object> profile=new HashMap<String, Object>();
+                profile.put("name",clinicUser.getChief_name());
+                profile.put("profile_id",clinicUser.getChief_id());
+                profile.put("address1",clinicUser.getChief_address1());
+                profile.put("address2",clinicUser.getChief_address2());
+                profile.put("city",clinicUser.getChief_city());
+                profile.put("state",clinicUser.getChief_state());
+                profile.put("country",clinicUser.getChief_country());
+                profile.put("pincode",clinicUser.getChief_pin_code());
+                profile.put("contact_no",clinicUser.getChief_contact_no());
+                profile.put("email",clinicUser.getChief_email_id());
+                profile.put("gender",clinicUser.getGender());
+                profile.put("updated_at",format.format(new Date()));
+                result_profile=jdbcTemplate.update(editProfileSql,profile);
+
+                platformTransactionManager.commit(status);
+            }catch (Exception e){
+                e.printStackTrace();
+                platformTransactionManager.rollback(status);
+            }
+        }
+
+        return (result_profile > 0) ? true : false;
     }
 
     @Override

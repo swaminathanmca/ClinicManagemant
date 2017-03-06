@@ -48,6 +48,7 @@
 <script src="<%=request.getContextPath()%>/static/js/angular.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>
 
 </body>
 </html>

@@ -53,8 +53,8 @@ public class ClinicServiceImpl implements ClinicService {
     }*/
 
     @Override
-    public boolean editClinic(Clinic clinic) {
-        return clinicDao.editClinic(clinic);
+    public boolean editClinic(ClinicUser clinicUser) {
+        return clinicDao.editClinic(clinicUser);
     }
 
     @Override

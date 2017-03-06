@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface ClinicDao {
     boolean addClinic(ClinicUser clinic);
-    boolean editClinic(Clinic clinic);
+    boolean editClinic(ClinicUser clinicUser);
     boolean deleteClinic(Integer clinicID);
     List<Branch> validateno(String contact_no);
     List<Clinic> validateName(String clinic_name);
