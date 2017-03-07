@@ -70,13 +70,13 @@
 
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Doctor<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>  User<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#">Add Doctor</a>
+                                <a href="AddUser">Add User</a>
                             </li>
                             <li>
-                                <a href="#">View Doctor</a>
+                                <a href="#">View User</a>
                             </li>
                         </ul>
 

@@ -18,4 +18,5 @@ public interface ClinicDao {
     List<ClinicUser> getClinic();
  /*   List<Clinic> getClinicById(Integer id);*/
     List<ClinicUser> viewDetails(Integer clinic_id);
+    List<ClinicUser> track_id(String email);
 }

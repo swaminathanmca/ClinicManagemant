@@ -27,7 +27,7 @@ public class UserDaoImpl implements  UserDao {
         try{
 
 
-            String authenticateSQL="SELECT r.role_name,u.username,r.branch_id,u.email FROM clinic.role_master r JOIN clinic.user u on r.user_id=u.user_id and u.email=:email and u.password=:password";
+            String authenticateSQL="SELECT r.role_name,r.user_id,r.clinic_id,u.username,r.branch_id,u.email FROM clinic.role_master r JOIN clinic.user u on r.user_id=u.user_id and u.email=:email and u.password=:password";
 
             Map<String, Object> parameters = new HashMap<String, Object>();
             parameters.put("email", email_id);
@@ -35,9 +35,7 @@ public class UserDaoImpl implements  UserDao {
 
             userList = jdbcTemplate.query(authenticateSQL, parameters, new UserMapper());
 
-            if(userList == null){
 
-            }
 
 
         }catch (Exception ex){

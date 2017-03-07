@@ -9,6 +9,7 @@ app.controller('dashboard', function ($scope, $http, $window) {
     $scope.chiefEmail="Email taken";
     $scope.name="name";
     console.log($window.sessionStorage.role_name);
+    $('#loader').append(' ');
     $scope.validate = function () {
 
 

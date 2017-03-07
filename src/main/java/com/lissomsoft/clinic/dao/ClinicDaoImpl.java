@@ -5,6 +5,7 @@ import com.lissomsoft.clinic.domain.Clinic;
 import com.lissomsoft.clinic.rowmapper.BranchMapper;
 import com.lissomsoft.clinic.rowmapper.ClinicBranchMapper;
 import com.lissomsoft.clinic.rowmapper.ClinicMapper;
+import com.lissomsoft.clinic.rowmapper.TrackMapper;
 import com.lissomsoft.clinic.vo.ClinicUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,7 +70,7 @@ public class ClinicDaoImpl implements ClinicDao {
             parameters.put("created_at", format.format(new Date()));
             parameters.put("updated_at", format.format(new Date()));
             result = jdbcTemplate.update(insertClinicSql, parameters);
-            System.out.println("insertClinicSql," + result);
+
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -86,7 +87,7 @@ public class ClinicDaoImpl implements ClinicDao {
                 parameters1.put("updated_at", format.format(new Date()));
 
                 result_user = jdbcTemplate.update(insertUserSql, parameters1);
-                System.out.println("insertUserSql," + result_user);
+
             } catch (Exception e) {
                 e.printStackTrace();
                 platformTransactionManager.rollback(status);
@@ -110,7 +111,7 @@ public class ClinicDaoImpl implements ClinicDao {
                 parameters2.put("created_at", format.format(new Date()));
                 parameters2.put("updated_at", format.format(new Date()));
                 result_profile = jdbcTemplate.update(insertProfileSql, parameters2);
-                System.out.println("insertProfileSql," + result_profile);
+
             } catch (Exception e) {
                 e.printStackTrace();
 
@@ -196,11 +197,7 @@ public class ClinicDaoImpl implements ClinicDao {
             parameters.put("clinic_name", clinicUser.getClinic_name());
             parameters.put("reg_no",clinicUser.getRegister_no());
             parameters.put("Chief_name",clinicUser.getChief_name());
-            System.out.println(clinicUser.getClinic_id());
-            System.out.println(clinicUser.getClinic_name());
-            System.out.println(clinicUser.getRegister_no());
-            System.out.println(clinicUser.getChief_name());
-            System.out.println(format.format(new Date()));
+
             parameters.put("updated_at", format.format(new Date()));
 
             result = jdbcTemplate.update(editClinicSql, parameters);
@@ -242,7 +239,7 @@ public class ClinicDaoImpl implements ClinicDao {
                 Map<String, Object> user = new HashMap<String, Object>();
                 user.put("username",clinicUser.getClinic_name());
                 user.put("email",clinicUser.getChief_email_id());
-                System.out.println(clinicUser.getChief_id());
+
                 user.put("profile_id",clinicUser.getChief_id());
                 user.put("updated_at",format.format(new Date()));
                 result_user=jdbcTemplate.update(edituserSql,user);
@@ -400,5 +397,26 @@ public class ClinicDaoImpl implements ClinicDao {
 
 
         return getClinicDetails;
+    }
+
+    @Override
+    public List<ClinicUser> track_id(String email) {
+
+       List<ClinicUser> getTrack_id=null;
+        try {
+            String trackSql="SELECT c.clinic_id, b.branch_id,c.clinic_name,b.ho,b.branch_name FROM clinic.clinic_master c, clinic.branch_master b, clinic.role_master r,clinic.member_master m, clinic.profile_master p WHERE c.clinic_id = b.clinic_id  AND b.branch_id = r.branch_id AND r.user_id = m.user_id AND m.profile_id = p.profile_id AND p.email = :email_id";
+            Map<String,Object> tracking=new HashMap<String, Object>();
+            tracking.put("email_id",email);
+            getTrack_id=jdbcTemplate.query(trackSql,tracking,new TrackMapper());
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+
+
+        return getTrack_id;
     }
 }

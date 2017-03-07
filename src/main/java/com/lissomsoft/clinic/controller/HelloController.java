@@ -2,6 +2,7 @@ package com.lissomsoft.clinic.controller;
 
 import com.lissomsoft.clinic.service.ProfileService;
 import com.lissomsoft.clinic.service.UserServiceImpl;
+import com.sun.deploy.panel.ITreeNode;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -78,6 +79,7 @@ public class HelloController {
                 jsonObject.put("username", userdetails.getUsername());
                 jsonObject.put("email_id", userdetails.getEmail_id());
                 jsonObject.put("role_name", userdetails.getRole_name());
+
                 data.put("data", jsonObject);
                 status.put("status", true);
                 data.put("status", true);
@@ -176,6 +178,12 @@ public class HelloController {
     @RequestMapping(value = "/clinicDetails")
     public String clinicDetails(HttpServletRequest request)throws Exception{
         return "clinicDetails";
+    }
+
+
+    @RequestMapping(value = "/AddUser")
+    public String addUser(HttpServletRequest request)throws Exception{
+        return "addUser";
     }
 
     @RequestMapping(value ="/ViewClinic",method = RequestMethod.GET)
@@ -347,6 +355,29 @@ public class HelloController {
         }else{
             data.put("status",false);
         }
+
+        return data.toString();
+    }
+
+    @RequestMapping(value = "/trackSession/{email:.+}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String trackSession(@PathVariable String email)throws JSONException{
+
+        JSONObject data=new JSONObject();
+        List<ClinicUser> emailValidate;
+        emailValidate=clinicService.track_id(email);
+        Iterator<ClinicUser> itr=emailValidate.iterator();
+        while (itr.hasNext()){
+            ClinicUser cuser=itr.next();
+            data.put("clinic_id",cuser.getClinic_id());
+            data.put("branch_id",cuser.getBranch_id());
+            data.put("clinic_name",cuser.getClinic_name());
+            data.put("ho",cuser.getHo());
+            data.put("branch_name",cuser.getBranch_name());
+            data.put("status",true);
+        }
+
 
         return data.toString();
     }

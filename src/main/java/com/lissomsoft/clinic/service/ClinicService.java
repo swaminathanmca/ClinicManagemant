@@ -21,4 +21,5 @@ public interface ClinicService {
   /* List<Clinic> getClinicById(Integer id);*/
    boolean editClinic(ClinicUser clinicUser);
    boolean deleteclinic(Integer clinicID);
+    List<ClinicUser> track_id(String email);
 }

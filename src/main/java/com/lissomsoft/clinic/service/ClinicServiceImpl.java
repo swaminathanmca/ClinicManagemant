@@ -61,4 +61,9 @@ public class ClinicServiceImpl implements ClinicService {
     public boolean deleteclinic(Integer clinicID) {
         return clinicDao.deleteClinic(clinicID);
     }
+
+    @Override
+    public List<ClinicUser> track_id(String email) {
+        return clinicDao.track_id(email);
+    }
 }

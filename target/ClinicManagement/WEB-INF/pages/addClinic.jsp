@@ -19,7 +19,8 @@
     <title></title>
 </head>
 <body>
-<div id="wrapper">
+<div id="wrapper" id="loader">
+
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -75,13 +76,13 @@
 
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Doctor<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> User<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#">Add Doctor</a>
+                                <a href="AddUser">Add User</a>
                             </li>
                             <li>
-                                <a href="#">View Doctor</a>
+                                <a href="#">View User</a>
                             </li>
                         </ul>
 
@@ -117,6 +118,7 @@
                         <h3 class="panel-title">Add Clinic</h3>
                     </div>
                     <div class="panel-body">
+
                         <div class="row">
                             <div class="col-lg-12">
                                 <form class="form-horizontal ng-invalid" role="form" name="myform" ng-submit="submit()"
@@ -413,6 +415,7 @@
                                 </form>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
