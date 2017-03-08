@@ -76,6 +76,9 @@
 
                     </li>
                     <li>
+                        <a href="AddBranch"><i class="fa fa-table fa-fw"></i> Branch</a>
+                    </li>
+                    <li>
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> User<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>

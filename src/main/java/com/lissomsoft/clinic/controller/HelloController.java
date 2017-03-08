@@ -49,7 +49,31 @@ public class HelloController {
         return "login";
     }
 
+    @RequestMapping(value = "/Dashboard")
+    public String dashBoard(HttpServletRequest request) throws Exception {
+        return "addClinic";
+    }
 
+    @RequestMapping(value = "/AddBranch")
+    public String addBranch(HttpServletRequest request)throws Exception{
+        return "addBranch";
+    }
+
+    @RequestMapping(value = "/GetClinic")
+    public String getClinic(HttpServletRequest request) throws Exception {
+        return "viewClinic";
+    }
+
+    @RequestMapping(value = "/clinicDetails")
+    public String clinicDetails(HttpServletRequest request)throws Exception{
+        return "clinicDetails";
+    }
+
+
+    @RequestMapping(value = "/AddUser")
+    public String addUser(HttpServletRequest request)throws Exception{
+        return "addUser";
+    }
 
 
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
@@ -96,10 +120,6 @@ public class HelloController {
 
     }
 
-    @RequestMapping(value = "/Dashboard")
-    public String dashBoard(HttpServletRequest request) throws Exception {
-        return "addClinic";
-    }
 
     @RequestMapping(value = "/AddClinic", method = RequestMethod.POST)
     public
@@ -170,21 +190,7 @@ public class HelloController {
         }
         return data.toString();
     }
-    @RequestMapping(value = "/GetClinic")
-    public String getClinic(HttpServletRequest request) throws Exception {
-        return "viewClinic";
-    }
 
-    @RequestMapping(value = "/clinicDetails")
-    public String clinicDetails(HttpServletRequest request)throws Exception{
-        return "clinicDetails";
-    }
-
-
-    @RequestMapping(value = "/AddUser")
-    public String addUser(HttpServletRequest request)throws Exception{
-        return "addUser";
-    }
 
     @RequestMapping(value ="/ViewClinic",method = RequestMethod.GET)
     public
