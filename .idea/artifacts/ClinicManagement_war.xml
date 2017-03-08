@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="ClinicManagement:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="ClinicManagement.war">
-      <element id="artifact" artifact-name="ClinicManagement:war exploded" />
-    </root>
-  </artifact>
-</component>
