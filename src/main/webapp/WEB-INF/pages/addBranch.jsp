@@ -64,7 +64,7 @@
                     <li>
                         <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
-                    <li>
+                    <li ng-show="role==SuperAdmin">
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Clinic<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -76,8 +76,16 @@
                         </ul>
 
                     </li>
-                    <li>
-                        <a href="AddBranch"><i class="fa fa-table fa-fw"></i> Branch</a>
+                    <li ng-hide="role==SuperAdmin">
+                        <a href="#"><i class="fa fa-table fa-fw"></i> Branch<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="AddBranch">Add Branch</a>
+                            </li>
+                            <li>
+                                <a href="#">View Branch</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> User<span class="fa arrow"></span></a>
@@ -125,8 +133,7 @@
 
                         <div class="row">
                             <div class="col-lg-12">
-                                <form class="form-horizontal ng-invalid" role="form" name="myform"
-                                      novalidate>
+                                <form class="form-horizontal ng-invalid" role="form" name="myform" ng-submit="submit(clinic_id)" novalidate>
                                     <fieldset>
 
                                         <div class="form-group">
@@ -288,7 +295,32 @@
                                                            ng-show="myform.branch_admin_name.$invalid &&  myform.branch_admin_name.$touched">Please Enter Branch Admin</span>
                                             </div>
 
+                                            <div class="col-lg-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Gender</span>
 
+                                                    <div class="checkbox  fileRadioBox form-control">
+                                                        <label>
+                                                            <input type="radio" name="sex" value="1"
+                                                                   ng-model="chief_gender" required=""
+                                                                   class="ng-pristine ng-untouched ng-valid ng-valid-required">&nbsp;Male
+                                                        </label>
+                                                        <label>
+                                                            <input type="radio" name="sex" value="0"
+                                                                   ng-model="chief_gender" required=""
+                                                                   class="ng-pristine ng-untouched ng-valid ng-valid-required ">&nbsp;Female
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                    <span class="text-danger wrapper text-center ng-binding"
+                                                          ng-show="myform.chief_country.$invalid &&  myform.chief_country.$touched">Please Enter Gender</span>
+                                            </div>
+
+
+                                        </div>
+
+
+                                        <div class="form-group">
                                             <div class="col-lg-6">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">Address 1</span>
@@ -299,11 +331,6 @@
                                                          <span class="text-danger wrapper text-center ng-binding"
                                                                ng-show="myform.admin_address1.$invalid &&  myform.admin_address1.$touched">Please Enter Address</span>
                                             </div>
-
-                                        </div>
-
-
-                                        <div class="form-group">
                                             <div class="col-lg-6">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">Address 2</span>
@@ -316,6 +343,11 @@
                                                           ng-show="myform.admin_address2.$invalid &&  myform.admin_address2.$touched">Please Enter Address</span>
                                             </div>
 
+
+                                        </div>
+
+
+                                        <div class="form-group">
                                             <div class="col-lg-3">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">City</span>
@@ -334,11 +366,6 @@
                                                     <span class="text-danger wrapper text-center ng-binding"
                                                           ng-show="myform.chief_state.$invalid &&  myform.chief_state.$touched">Please Enter State</span>
                                             </div>
-                                        </div>
-
-
-                                        <div class="form-group">
-
                                             <div class="col-lg-3">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">Country</span>
@@ -361,26 +388,7 @@
                                                 <span class="text-danger wrapper text-center ng-binding"
                                                       ng-show="myform.chef_pin.$invalid &&  myform.chef_pin.$touched">Please Enter Pin Code</span>
                                             </div>
-                                            <div class="col-lg-4">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">Gender</span>
 
-                                                    <div class="checkbox  fileRadioBox form-control">
-                                                        <label>
-                                                            <input type="radio" name="sex" value="1"
-                                                                   ng-model="chief_gender" required=""
-                                                                   class="ng-pristine ng-untouched ng-valid ng-valid-required">&nbsp;Male
-                                                        </label>
-                                                        <label>
-                                                            <input type="radio" name="sex" value="0"
-                                                                   ng-model="chief_gender" required=""
-                                                                   class="ng-pristine ng-untouched ng-valid ng-valid-required ">&nbsp;Female
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                    <span class="text-danger wrapper text-center ng-binding"
-                                                          ng-show="myform.chief_country.$invalid &&  myform.chief_country.$touched">Please Enter Gender</span>
-                                            </div>
 
                                         </div>
 

@@ -1,7 +1,6 @@
 package com.lissomsoft.clinic.controller;
 
-import com.lissomsoft.clinic.service.ProfileService;
-import com.lissomsoft.clinic.service.UserServiceImpl;
+import com.lissomsoft.clinic.service.*;
 import com.sun.deploy.panel.ITreeNode;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
@@ -23,9 +22,6 @@ import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.List;
 
-import com.lissomsoft.clinic.service.UserService;
-import com.lissomsoft.clinic.service.ClinicService;
-
 
 @Controller
 @Component
@@ -38,6 +34,8 @@ public class HelloController {
     private ClinicService clinicService;
     @Autowired(required = false)
     private ProfileService profileService;
+    @Autowired(required = false)
+    private BranchService branchService;
 
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -48,7 +46,10 @@ public class HelloController {
     public String homePage(HttpServletRequest request) throws Exception {
         return "login";
     }
-
+    @RequestMapping(value = "/Login")
+    public String login(HttpServletRequest request) throws Exception {
+        return "login";
+    }
     @RequestMapping(value = "/Dashboard")
     public String dashBoard(HttpServletRequest request) throws Exception {
         return "addClinic";
@@ -74,7 +75,14 @@ public class HelloController {
     public String addUser(HttpServletRequest request)throws Exception{
         return "addUser";
     }
-
+    @RequestMapping(value = "/AddPatient")
+    public String addPatient(HttpServletRequest request)throws Exception{
+        return "patientReg";
+    }
+    @RequestMapping(value = "/PatientVisit")
+    public String patientVisit(HttpServletRequest request)throws Exception{
+        return "patientVisit";
+    }
 
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
     public
@@ -133,6 +141,20 @@ public class HelloController {
         return jsonObject.toString();
     }
 
+    @RequestMapping(value = "/AddBranch",method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String addBranch(@RequestBody ClinicUser branch,HttpServletRequest request )throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        boolean flag;
+        flag=branchService.addBranch(branch);
+
+        jsonObject.put("status",flag);
+        return jsonObject.toString();
+    }
+
+
+
 
     @RequestMapping(value = "/EditClinic", method = RequestMethod.POST)
     public
@@ -164,6 +186,7 @@ public class HelloController {
             jsonObject.put("clinicName",clinicdetails.getClinic_name());
             jsonObject.put("Chief",clinicdetails.getChief_name());
             jsonObject.put("reg_no",clinicdetails.getRegister_no());
+            jsonObject.put("password",clinicdetails.getPassword());
             jsonObject.put("st",clinicdetails.getStatus());
             jsonObject.put("address1",clinicdetails.getAddress1());
             jsonObject.put("address2",clinicdetails.getAddress2());
@@ -196,8 +219,6 @@ public class HelloController {
     public
     @ResponseBody
     String viewClinic()throws Exception{
-
-
         JSONArray jsonArray=new JSONArray();
         JSONObject sendResponse=new JSONObject();
         List<ClinicUser> clinicDetails;
@@ -205,9 +226,7 @@ public class HelloController {
 
         Iterator<ClinicUser> it = clinicDetails.iterator();
         while (it.hasNext()){
-
             ClinicUser clinicdetails=it.next();
-
             JSONObject jsonObject =new JSONObject();
             jsonObject.put("clinicId",clinicdetails.getClinic_id());
             jsonObject.put("clinicName",clinicdetails.getClinic_name());
@@ -224,15 +243,10 @@ public class HelloController {
             jsonObject.put("email_id",clinicdetails.getEmail_id());
             jsonObject.put("description",clinicdetails.getDescription());
             jsonObject.put("Chief_id",clinicdetails.getChief_id());
-
-
             jsonArray.put(jsonObject);
             sendResponse.put("clinic",jsonArray);
             sendResponse.put("status",true);
-
         }
-
-
         return sendResponse.toString();
     }
 

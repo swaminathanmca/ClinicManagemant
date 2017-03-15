@@ -184,7 +184,7 @@
                                             <div class="col-lg-6">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
-                                                        Chief Name
+                                                         Name
                                                     </span>
                                                     <label class="form-control" type="text">{{clinic.Chief}}</label>
                                                 </div>
@@ -192,7 +192,7 @@
                                             <div class="col-lg-6">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
-                                                        Chief Address
+                                                         Address
                                                     </span>
                                                     <label class="form-control" type="text">{{clinic.Chief_address1}},{{clinic.Chief_address2}}</label>
                                                 </div>
@@ -306,6 +306,17 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="input-group">
+                                                <span class="input-group-addon">Register No</span>
+                                                <input type="text" class="form-control" ng-model="x.reg_no" name="reg_no" required>
+                                            </div>
+                                             <span class="text-danger wrapper text-center ng-binding"
+                                                   ng-show="myform.reg_no.$invalid &&  myform.reg_no.$touched">Please Enter Registration Number</span>
+                                        </div>
+
+                                        </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <div class="input-group">
                                                     <span class="input-group-addon">
                                                         Address1
                                                     </span>
@@ -314,9 +325,6 @@
                                             <span class="text-danger wrapper text-center ng-binding"
                                                   ng-show="myform.address1.$invalid &&  myform.address1.$touched">Please Enter Address</span>
                                         </div>
-
-                                        </div>
-                                    <div class="form-group">
                                         <div class="col-lg-6">
                                             <div class="input-group">
                                                     <span class="input-group-addon">
@@ -327,6 +335,9 @@
                                             <span class="text-danger wrapper text-center ng-binding"
                                                   ng-show="myform.address2.$invalid &&  myform.address2.$touched">Please Enter Address</span>
                                         </div>
+
+                                    </div>
+                                    <div class="form-group">
                                         <div class="col-lg-3">
                                             <div class="input-group">
                                                     <span class="input-group-addon">
@@ -345,10 +356,8 @@
                                                 <input class="form-control" type="text" ng-model="x.state" name="state" required/>
                                             </div>
                                             <span class="text-danger wrapper text-center ng-binding"
-                                                  ng-show="myform.state.$invalid &&  myform.state.$touched">Please Enter PinCode</span>
+                                                  ng-show="myform.state.$invalid &&  myform.state.$touched">Please Enter State</span>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
                                         <div class="col-lg-3">
                                             <div class="input-group">
                                                 <span class="input-group-addon">Country</span>
@@ -367,15 +376,11 @@
                                             <span class="text-danger wrapper text-center ng-binding"
                                                   ng-show="myform.pin_code.$error.pattern">Please Enter Valid Pin Code</span>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">Description</span>
-                                                <input class="form-control" type="text" ng-model="x.description"/>
-                                            </div>
-                                        </div>
+
                                         </div>
                                     <div class="form-group">
-                                        <div class="col-lg-6">
+
+                                        <div class="col-lg-4">
                                             <div class="input-group">
                                                 <span class="input-group-addon">E-Mail</span>
                                                 <input class="form-control" type="email" ng-model="x.email_id" name="email_id" ng-blur="editEmail(x.clinicId,x.email_id)" required/>
@@ -386,7 +391,7 @@
                                                    The Email Already Taken
                                                      </span>
                                         </div>
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-4">
                                             <div class="input-group">
                                                 <span class="input-group-addon">PhoneNo</span>
                                                 <input class="form-control" type="text" ng-model="x.contact_no" ui-mask="999-999-9999" name="contact_no" ng-blur="editContact(x.clinicId,x.contact_no)" required/>
@@ -398,40 +403,78 @@
                                                            </span>
 
                                         </div>
+                                        <div class="col-lg-4">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Password</span>
+                                                <input type="text" ng-model="x.password" class="form-control" name="password" required/>
+                                            </div>
+                                            <span class="text-danger wrapper text-center ng-binding"
+                                                  ng-show="myform.password.$invalid &&  myform.password.$touched">Please Enter Password</span>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Description</span>
+                                                <input class="form-control" type="text" ng-model="x.description"/>
+                                            </div>
+                                        </div>
                                     </div>
                                     <hr>
                                     <h4>Chief Information</h4>
                                     <div class="form-group">
                                         <div class="col-lg-6">
                                             <div class="input-group">
-                                                <span class="input-group-addon">Chief Name</span>
+                                                <span class="input-group-addon"> Name</span>
                                                 <input class="form-control" type="text" ng-model="x.Chief" name="chief_name" required/>
 
                                             </div>
                                             <span class="text-danger wrapper text-center ng-binding"
                                                   ng-show="myform.chief_name.$invalid">Please Enter  Name</span>
                                         </div>
+
                                         <div class="col-lg-6">
                                             <div class="input-group">
-                                                <span class="input-group-addon">Chief Address1</span>
+                                                <span class="input-group-addon">
+                                                    Gender
+                                                </span>
+                                                <div class="checkbox  fileRadioBox">
+                                                    <label>
+                                                        <input type="radio" name="sex" value="1" ng-model="x.Chief_gender" required>Male
+                                                    </label>
+                                                    <label>
+                                                        <input type="radio" name="sex" value="0" ng-model="x.Chief_gender" required>FeMale
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> Address1</span>
                                                 <input class="form-control" type="text" ng-model="x.Chief_address1" name="caddress1" required/>
                                             </div>
                                              <span class="text-danger wrapper text-center ng-binding"
                                                    ng-show="myform.caddress1.$invalid">Please  Enter Address</span>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
                                         <div class="col-lg-6">
                                             <div class="input-group">
-                                                <span class="input-group-addon">Chief Address2</span>
+                                                <span class="input-group-addon"> Address2</span>
                                                 <input class="form-control" type="text" ng-model="x.Chief_address2" name="caddress2" required/>
                                             </div>
                                             <span class="text-danger wrapper text-center ng-binding"
                                                   ng-show="myform.caddress2.$invalid">Please  Enter Address</span>
                                         </div>
+
+
+                                    </div>
+                                    <div class="form-group">
                                         <div class="col-lg-3">
                                             <div class="input-group">
-                                                <span class="input-group-addon">Chief City</span>
+                                                <span class="input-group-addon"> City</span>
                                                 <input class="form-control" type="text" ng-model="x.Chief_city" name="ccity" required/>
                                             </div>
                                             <span class="text-danger wrapper text-center ng-binding"
@@ -439,15 +482,12 @@
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="input-group">
-                                                <span class="input-group-addon">Chief State</span>
+                                                <span class="input-group-addon"> State</span>
                                                 <input class="form-control" type="text" ng-model="x.Chief_state" name="cstate" required/>
                                             </div>
                                              <span class="text-danger wrapper text-center ng-binding"
                                                    ng-show="myform.cstate.$invalid">Please  Enter State</span>
                                         </div>
-
-                                    </div>
-                                    <div class="form-group">
                                         <div class="col-lg-3">
                                             <div class="input-group">
                                                 <span class="input-group-addon">Country</span>
@@ -466,9 +506,12 @@
                                             <span class="text-danger wrapper text-center ng-binding"
                                                   ng-show="myform.cpincode.$error.pattern">Please Enter Valid Pin Code</span>
                                         </div>
+
+                                    </div>
+                                    <div class="form-group">
                                         <div class="col-lg-6">
                                             <div class="input-group">
-                                                <span class="input-group-addon">Chief Email</span>
+                                                <span class="input-group-addon"> Email</span>
                                                 <input class="form-control" type="text" ng-model="x.Chief_email_id" name="cemail" ng-blur="EditCemail(x.Chief_id,x.Chief_email_id)" required/>
                                             </div>
                                             <span class="text-danger wrapper text-center ng-binding"
@@ -477,11 +520,9 @@
                                                        The Email Already Taken
                                                            </span>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
                                         <div class="col-lg-6">
                                             <div class="input-group">
-                                                <span class="input-group-addon">Chief PhoneNo</span>
+                                                <span class="input-group-addon"> PhoneNo</span>
                                                 <input class="form-control" type="text" ng-model="x.Chief_conatct_no" name="cphoneno" ng-blur="EditChiefContact(x.Chief_id,x.Chief_conatct_no)" required/>
                                             </div>
                                             <span class="text-danger wrapper text-center ng-binding"
@@ -490,21 +531,7 @@
                                                        The Mobile Number Already Taken
                                                            </span>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    Gender
-                                                </span>
-                                                <div class="checkbox  fileRadioBox">
-                                                <label>
-                                                <input type="radio" name="sex" value="1" ng-model="x.Chief_gender" required>Male
-                                                </label>
-                                                <label>
-                                                    <input type="radio" name="sex" value="0" ng-model="x.Chief_gender" required>FeMale
-                                                </label>
-                                                    </div>
-                                            </div>
-                                            </div>
+
                                     </div>
                                     <div class="form-action">
                                         <div class="row">

@@ -75,10 +75,8 @@
                         </ul>
 
                     </li>
-                    <li>
-                        <a href="AddBranch"><i class="fa fa-table fa-fw"></i> Branch</a>
-                    </li>
-                    <li>
+
+                    <li ng-hide="role==SuperAdmin">
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> User<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -91,10 +89,10 @@
 
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-table fa-fw"></i> Tables</a>
+                        <a href="AddPatient"><i class="fa fa-edit fa-fw"></i> Patient </a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-edit fa-fw"></i> Forms</a>
+                        <a href="PatientVisit"><i class="fa fa-edit fa-fw"></i> Patient Visit</a>
                     </li>
 
 
@@ -272,10 +270,11 @@
 
 
                                         <hr>
+                                        <h4>Chief Information</h4>
                                         <div class="form-group">
                                                 <div class="col-lg-6">
                                                     <div class="input-group">
-                                                        <span class="input-group-addon">Chief Name</span>
+                                                        <span class="input-group-addon">Name</span>
                                                         <input class="form-control" placeholder="Chief Name" name="chief_name"
                                                                type="text" ng-model="chief_name" maxlength="30" required>
                                                         </div>
@@ -283,21 +282,37 @@
                                                            ng-show="myform.chief_name.$invalid &&  myform.chief_name.$touched">Please Enter Chief Name</span>
                                                     </div>
 
+                                            <div class="col-lg-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Gender</span>
 
-                                                    <div class="col-lg-6">
-                                                        <div class="input-group">
-                                                        <span class="input-group-addon">Address 1</span>
-                                                        <input class="form-control" placeholder="Address"
-                                                               name="chief_address1" type="text" ng-model="chief_address1" required>
-                                                        </div>
-                                                         <span class="text-danger wrapper text-center ng-binding"
-                                                               ng-show="myform.chief_address1.$invalid &&  myform.chief_address1.$touched">Please Enter Address</span>
+                                                    <div class="checkbox  fileRadioBox form-control">
+                                                        <label>
+                                                            <input type="radio" name="sex" value="1" ng-model="chief_gender" required="" class="ng-pristine ng-untouched ng-valid ng-valid-required">&nbsp;Male
+                                                        </label>
+                                                        <label>
+                                                            <input type="radio" name="sex" value="0" ng-model="chief_gender" required="" class="ng-pristine ng-untouched ng-valid ng-valid-required ">&nbsp;Female
+                                                        </label>
                                                     </div>
+                                                </div>
+                                                    <span class="text-danger wrapper text-center ng-binding"
+                                                          ng-show="myform.sex.$invalid &&  myform.sex.$touched">Please Enter Gender</span>
+                                            </div>
+
 
                                                 </div>
 
 
                                             <div class="form-group">
+                                                <div class="col-lg-6">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">Address 1</span>
+                                                        <input class="form-control" placeholder="Address"
+                                                               name="chief_address1" type="text" ng-model="chief_address1" required>
+                                                    </div>
+                                                         <span class="text-danger wrapper text-center ng-binding"
+                                                               ng-show="myform.chief_address1.$invalid &&  myform.chief_address1.$touched">Please Enter Address</span>
+                                                </div>
                                                 <div class="col-lg-6">
                                                     <div class="input-group">
                                                         <span class="input-group-addon">Address 2</span>
@@ -308,15 +323,20 @@
                                                           ng-show="myform.chief_address2.$invalid &&  myform.chief_address2.$touched">Please Enter Address</span>
                                                     </div>
 
+
+                                            </div>
+
+
+                                            <div class="form-group">
                                                 <div class="col-lg-3">
                                                     <div class="input-group">
                                                         <span class="input-group-addon">City</span>
                                                         <input class="form-control" placeholder="City"
                                                                name="chief_city" type="text" ng-model="chief_city" required>
-                                                        </div>
+                                                    </div>
                                                     <span class="text-danger wrapper text-center ng-binding"
                                                           ng-show="myform.chief_city.$invalid &&  myform.chief_city.$touched">Please Enter City</span>
-                                                    </div>
+                                                </div>
                                                 <div class="col-lg-3">
                                                     <div class="input-group">
                                                         <span class="input-group-addon">State</span>
@@ -326,11 +346,6 @@
                                                     <span class="text-danger wrapper text-center ng-binding"
                                                           ng-show="myform.chief_state.$invalid &&  myform.chief_state.$touched">Please Enter State</span>
                                                 </div>
-                                            </div>
-
-
-                                            <div class="form-group">
-
                                                 <div class="col-lg-3">
                                                     <div class="input-group">
                                                         <span class="input-group-addon">Country</span>
@@ -351,22 +366,7 @@
                                                 <span class="text-danger wrapper text-center ng-binding"
                                                       ng-show="myform.chef_pin.$invalid &&  myform.chef_pin.$touched">Please Enter Pin Code</span>
                                                 </div>
-                                                <div class="col-lg-4">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">Gender</span>
 
-                                                        <div class="checkbox  fileRadioBox form-control">
-                                                            <label>
-                                                                <input type="radio" name="sex" value="1" ng-model="chief_gender" required="" class="ng-pristine ng-untouched ng-valid ng-valid-required">&nbsp;Male
-                                                            </label>
-                                                            <label>
-                                                                <input type="radio" name="sex" value="0" ng-model="chief_gender" required="" class="ng-pristine ng-untouched ng-valid ng-valid-required ">&nbsp;Female
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                    <span class="text-danger wrapper text-center ng-binding"
-                                                          ng-show="myform.chief_country.$invalid &&  myform.chief_country.$touched">Please Enter Gender</span>
-                                                </div>
 
                                                 </div>
 

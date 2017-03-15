@@ -7,6 +7,7 @@ import com.lissomsoft.clinic.rowmapper.ClinicBranchMapper;
 import com.lissomsoft.clinic.rowmapper.ClinicMapper;
 import com.lissomsoft.clinic.rowmapper.TrackMapper;
 import com.lissomsoft.clinic.vo.ClinicUser;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
+
 
 
 import java.lang.ref.SoftReference;
@@ -57,6 +59,8 @@ public class ClinicDaoImpl implements ClinicDao {
         TransactionStatus status = platformTransactionManager.getTransaction(paramTransactionDefinition);
 
 
+
+
         try {
 
             String insertClinicSql = "INSERT INTO clinic_master (clinic_name,reg_no,status,chief,created_at,updated_at) VALUES (:clinic_name,:reg_no,:status,:chief,:created_at,:created_at)";
@@ -82,7 +86,7 @@ public class ClinicDaoImpl implements ClinicDao {
                 Map<String, Object> parameters1 = new HashMap<String, Object>();
                 parameters1.put("user_name", clinic.getClinic_name());
                 parameters1.put("password", clinic.getPassword());
-                parameters1.put("email", clinic.getChief_email_id());
+                parameters1.put("email", clinic.getEmail_id());
                 parameters1.put("created_at", format.format(new Date()));
                 parameters1.put("updated_at", format.format(new Date()));
 
@@ -114,25 +118,28 @@ public class ClinicDaoImpl implements ClinicDao {
 
             } catch (Exception e) {
                 e.printStackTrace();
+                platformTransactionManager.rollback(status);
 
             }
         }
         if ((result_profile > 0) ? true : false) {
             try {
-                String insertMemberSql = "INSERT INTO member_master(user_id,profile_id,created_at,updated_at) VALUES((SELECT  user.user_id FROM user WHERE user.email=:email),(SELECT profile_master.profile_id FROM profile_master WHERE profile_master.email=:email),:created_at,:created_at) ";
+                String insertMemberSql = "INSERT INTO member_master(user_id,profile_id,created_at,updated_at) VALUES((SELECT  user.user_id FROM user WHERE user.email=:email),(SELECT profile_master.profile_id FROM profile_master WHERE profile_master.email=:email_id),:created_at,:created_at) ";
                 Map<String, Object> member = new HashMap<String, Object>();
-                member.put("email", clinic.getChief_email_id());
+                member.put("email", clinic.getEmail_id());
+                member.put("email_id",clinic.getChief_email_id());
                 member.put("created_at", format.format(new Date()));
                 result_member = jdbcTemplate.update(insertMemberSql, member);
                 System.out.println("insertMemberSql," + result_member);
             } catch (Exception e) {
                 e.printStackTrace();
+                platformTransactionManager.rollback(status);
             }
         }
         if ((result_member > 0) ? true : false) {
             try {
 
-                String insertBranchSql = "INSERT INTO branch_master(branch_name,clinic_id,ho,chief_id,address1,address2,city,state,country,pin_code,email,contact_no,status,description,created_at,updated_at) VALUES (:branch_name,(SELECT  clinic_master.clinic_id FROM clinic_master where clinic_master.clinic_name=:clinic_name),1,(SELECT  user.user_id FROM user where user.email=:chief_email),:address1,:address2,:city,:state,:country,:pin_code,:email,:contact_no,1,:description,:created_at,:created_at)";
+                String insertBranchSql = "INSERT INTO branch_master(branch_name,clinic_id,ho,user_id,address1,address2,city,state,country,pin_code,email,contact_no,status,description,created_at,updated_at) VALUES ('MainBranch',(SELECT  clinic_master.clinic_id FROM clinic_master where clinic_master.clinic_name=:clinic_name),1,(SELECT  user.user_id FROM user where user.email=:email),:address1,:address2,:city,:state,:country,:pin_code,:email,:contact_no,1,:description,:created_at,:created_at)";
                 Map<String, Object> branch = new HashMap<String, Object>();
                 branch.put("branch_name", clinic.getBranch_name());
                 branch.put("address1", clinic.getAddress1());
@@ -152,14 +159,15 @@ public class ClinicDaoImpl implements ClinicDao {
                 System.out.println("insertBranchSql," + result_branch);
             } catch (Exception e) {
                 e.printStackTrace();
+                platformTransactionManager.rollback(status);
             }
         }
         if ((result_branch > 0) ? true : false) {
             try {
-                String insertRoleSql = "INSERT INTO role_master(user_id,clinic_id,branch_id,role_name,created_at,updated_at) VALUES((SELECT user.user_id FROM user WHERE email=:email),(SELECT clinic_master.clinic_id FROM clinic_master where clinic_name=:clinic_name),(SELECT branch_master.branch_id FROM branch_master where email=:email_id),'Admin',:created_at,:created_at)";
+                String insertRoleSql = "INSERT INTO role_mapper(user_id,role_id,created_at,updated_at) VALUES((SELECT user.user_id FROM user WHERE email=:email),2,:created_at,:created_at)";
 
                 Map<String, Object> role = new HashMap<String, Object>();
-                role.put("email", clinic.getChief_email_id());
+                role.put("email", clinic.getEmail_id());
                 role.put("clinic_name", clinic.getClinic_name());
                 role.put("email_id", clinic.getEmail_id());
                 role.put("created_at", format.format(new Date()));
@@ -171,6 +179,8 @@ public class ClinicDaoImpl implements ClinicDao {
                 platformTransactionManager.rollback(status);
             }
         }
+
+
 
         return (result_role > 0) ? true : false;
 
@@ -211,7 +221,7 @@ public class ClinicDaoImpl implements ClinicDao {
         if((result > 0) ? true : false) {
 
             try{
-                String editBranchSql="UPDATE branch_master SET branch_name=:branch_name,address1=:address1,address2=:address2,city=:city,state=:state,country=:country,pin_code=:pincode,contact_no=:contact_no,email=:email,description=:description WHERE clinic_id=:clinic_id AND ho=1";
+                String editBranchSql="UPDATE branch_master SET branch_name='MainBranch',address1=:address1,address2=:address2,city=:city,state=:state,country=:country,pin_code=:pincode,contact_no=:contact_no,email=:email,description=:description WHERE clinic_id=:clinic_id AND ho=1";
                 Map<String,Object> branch=new HashMap<String, Object>();
                 branch.put("branch_name",clinicUser.getClinic_name());
                 branch.put("clinic_id",clinicUser.getClinic_id());
@@ -235,10 +245,12 @@ public class ClinicDaoImpl implements ClinicDao {
         if((result_branch>0) ? true :false){
             try
             {
-            String edituserSql="UPDATE user SET username=:username,email=:email,updated_at=:updated_at WHERE user_id=(SELECT member_master.user_id FROM member_master where member_master.profile_id=:profile_id)";
+            String edituserSql="UPDATE user SET username=:username,email=:email,password=:password,updated_at=:updated_at WHERE user_id=(SELECT member_master.user_id FROM member_master where member_master.profile_id=:profile_id)";
                 Map<String, Object> user = new HashMap<String, Object>();
                 user.put("username",clinicUser.getClinic_name());
-                user.put("email",clinicUser.getChief_email_id());
+                user.put("email",clinicUser.getEmail_id());
+                user.put("password",clinicUser.getPassword());
+
 
                 user.put("profile_id",clinicUser.getChief_id());
                 user.put("updated_at",format.format(new Date()));
@@ -356,7 +368,7 @@ public class ClinicDaoImpl implements ClinicDao {
         List<ClinicUser> getClinicDetails = null;
         try {
            /* String clinicDetails ="SELECT c.clinic_id,c.clinic_name,c.chief,c.reg_no,c.status,b.address1,b.address2,b.city,b.state,b.country,b.pin_code,b.contact_no,b.email,b.description FROM branch_master b JOIN clinic_master c ON c.clinic_id=b.clinic_id and ho=1";*/
-            String clinicDetails="SELECT c.clinic_id,c.clinic_name,c.reg_no,c.status,c.chief,b.address1,b.address2,b.city,b.state,b.country,b.pin_code,b.contact_no,b.email,b.description,p.profile_id,p.name,p.address1 ch_addrs1, p.address2 ch_addrs2,p.city ch_city,p.state ch_state,p.country ch_country,p.phone,p.email ch_email,p.pincode,p.gender FROM clinic.clinic_master c INNER JOIN clinic.branch_master b ON c.clinic_id = b.clinic_id INNER JOIN clinic.member_master m ON b.chief_id = m.user_id INNER JOIN  clinic.profile_master p ON p.profile_id = m.profile_id  AND b.ho = 1";
+            String clinicDetails="SELECT c.clinic_id,c.clinic_name,c.reg_no,c.status,u.password,c.chief,b.address1,b.address2,b.city,b.state,b.country,b.pin_code,b.contact_no,b.email,b.description,p.profile_id,p.name,p.address1 ch_addrs1, p.address2 ch_addrs2,p.city ch_city,p.state ch_state,p.country ch_country,p.phone,p.email ch_email,p.pincode,p.gender FROM clinic.clinic_master c INNER JOIN clinic.branch_master b ON c.clinic_id = b.clinic_id INNER JOIN clinic.member_master m ON b.user_id = m.user_id INNER JOIN   clinic.user u ON u.user_id=b.user_id INNER JOIN clinic.profile_master p ON p.profile_id = m.profile_id  AND b.ho = 1";
 
             getClinicDetails = jdbcTemplate.query(clinicDetails, new ClinicBranchMapper());
 
@@ -385,7 +397,7 @@ public class ClinicDaoImpl implements ClinicDao {
     public List<ClinicUser> viewDetails(Integer clinic_id) {
         List<ClinicUser> getClinicDetails=null;
         try{
-            String viewClinic="SELECT c.clinic_id,c.clinic_name,c.reg_no,c.status,c.chief,b.address1,b.address2,b.city,b.state,b.country,b.pin_code,b.contact_no,b.email,b.description,p.profile_id,p.name,p.address1 ch_addrs1, p.address2 ch_addrs2,p.city ch_city,p.state ch_state,p.country ch_country,p.phone,p.email ch_email,p.pincode,p.gender FROM clinic.clinic_master c INNER JOIN clinic.branch_master b ON c.clinic_id = b.clinic_id INNER JOIN\n clinic.member_master m ON b.chief_id = m.user_id INNER JOIN  clinic.profile_master p ON p.profile_id = m.profile_id  AND c.clinic_id = :clinic_id AND b.ho=1" ;
+            String viewClinic="SELECT c.clinic_id,c.clinic_name,c.reg_no,u.password,c.status,c.chief,b.address1,b.address2,b.city,b.state,b.country,b.pin_code,b.contact_no,b.email,b.description,p.profile_id,p.name,p.address1 ch_addrs1, p.address2 ch_addrs2,p.city ch_city,p.state ch_state,p.country ch_country,p.phone,p.email ch_email,p.pincode,p.gender FROM clinic.clinic_master c INNER JOIN clinic.branch_master b ON c.clinic_id = b.clinic_id INNER JOIN\n clinic.member_master m ON b.user_id = m.user_id INNER JOIN clinic.user u ON u.user_id=b.user_id   INNER JOIN  clinic.profile_master p ON p.profile_id = m.profile_id  AND c.clinic_id = :clinic_id AND b.ho=1" ;
             Map<String, Object> parameter = new HashMap<String, Object>();
             parameter.put("clinic_id", clinic_id);
             getClinicDetails=jdbcTemplate.query(viewClinic,parameter,new ClinicBranchMapper());
@@ -404,7 +416,8 @@ public class ClinicDaoImpl implements ClinicDao {
 
        List<ClinicUser> getTrack_id=null;
         try {
-            String trackSql="SELECT c.clinic_id, b.branch_id,c.clinic_name,b.ho,b.branch_name FROM clinic.clinic_master c, clinic.branch_master b, clinic.role_master r,clinic.member_master m, clinic.profile_master p WHERE c.clinic_id = b.clinic_id  AND b.branch_id = r.branch_id AND r.user_id = m.user_id AND m.profile_id = p.profile_id AND p.email = :email_id";
+           /* String trackSql="SELECT c.clinic_id, b.branch_id,c.clinic_name,b.ho,b.branch_name FROM clinic.clinic_master c, clinic.branch_master b, clinic.role_master r,clinic.member_master m, clinic.profile_master p WHERE c.clinic_id = b.clinic_id  AND b.branch_id = r.branch_id AND r.user_id = m.user_id AND m.profile_id = p.profile_id AND p.email = :email_id";*/
+            String trackSql="SELECT c.clinic_id, b.branch_id,c.clinic_name,b.ho,b.branch_name FROM clinic.clinic_master c INNER JOIN clinic.branch_master b  ON c.clinic_id=b.clinic_id AND b.email=:email_id ";
             Map<String,Object> tracking=new HashMap<String, Object>();
             tracking.put("email_id",email);
             getTrack_id=jdbcTemplate.query(trackSql,tracking,new TrackMapper());

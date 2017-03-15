@@ -2,10 +2,11 @@
        xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:security="http://www.springframework.org/schema/security"
        xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-       http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/security http://www.springframwork.org/schema/security/spring-security-4.2.xsd">
 
     <context:component-scan base-package="com.lissomsoft.clinic.controller"/>
     <context:component-scan base-package="com.lissomsoft.clinic.service"/>
@@ -49,6 +50,8 @@
         </property>
     </bean>
 
+
+
     <bean id="mysqlDataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
         <property name="url" value="jdbc:mysql://localhost:3306/clinic?useUnicode=yes&amp;characterEncoding=UTF-8" />
@@ -65,9 +68,11 @@
 
     <bean id="userService" class="com.lissomsoft.clinic.service.UserServiceImpl"/>
     <bean id="userDao" class="com.lissomsoft.clinic.dao.UserDaoImpl"/>
-    <bean id="branchService" class="com.lissomsoft.clinic.service.ClinicServiceImpl"/>
-    <bean id="branchDao" class="com.lissomsoft.clinic.dao.ClinicDaoImpl"/>
+    <bean id="branchService" class="com.lissomsoft.clinic.service.BranchServiceImpl"/>
+    <bean id="branchDao" class="com.lissomsoft.clinic.dao.BranchDaoImpl"/>
     <bean id="profileService" class="com.lissomsoft.clinic.service.ProfileServiceImpl"/>
     <bean id="profileDao" class="com.lissomsoft.clinic.dao.ProfileDaoImpl"/>
+    <bean id="clinicService" class="com.lissomsoft.clinic.service.ClinicServiceImpl"/>
+    <bean id="clinicDao" class="com.lissomsoft.clinic.dao.ClinicDaoImpl"/>
 
 </beans>

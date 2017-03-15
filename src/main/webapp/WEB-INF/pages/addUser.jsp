@@ -72,9 +72,11 @@
                     </ul>
 
                 </li>
+                <li ng-hide="role==SuperAdmin">
+                    <a href="AddBranch"><i class="fa fa-table fa-fw"></i> Branch</a>
+                </li>
 
-
-                <li>
+                <li ng-hide="role==SuperAdmin">
                     <a href="#"><i class="fa fa-user-md"></i> User<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
@@ -126,20 +128,40 @@
                                                  <input class="form-control" type="text" name="firstname" id="firstname" ng-model="firstname" required/>
                                              </div>
                                          </div>
+                                         <div class="col-lg-3">
+                                             <div class="input-group">
+                                                 <span class="input-group-addon">Type</span>
+                                                 <select class="form-control" type="text" name="email" ng-model="user_type"  required>
+                                                     <option value="0">Doctor</option>
+                                                     <option value="1">Front Desk</option>
+                                                 </select>
+                                             </div>
+                                         </div>
+                                         <div class="col-lg-3">
+                                             <div class="input-group">
+                                                 <span class="input-group-addon">Clinic Name</span>
+                                                 <label class="form-control" type="text" >{{data.clinic_name}}</label>
+                                             </div>
+                                         </div>
+
+                                     </div>
+                                     <div class="form-group">
+
                                          <div class="col-lg-6">
                                              <div class="input-group">
                                                  <span class="input-group-addon">Address1 </span>
                                                  <input class="form-control" type="text" name="address1" id="address1" ng-model="address1" required/>
                                              </div>
                                          </div>
-                                     </div>
-                                     <div class="form-group">
                                          <div class="col-lg-6">
                                              <div class="input-group">
                                                  <span class="input-group-addon">Address2 </span>
                                                  <input class="form-control" type="text" name="address2" id="address2" ng-model="address2" required/>
                                              </div>
                                          </div>
+
+                                     </div>
+                                     <div class="form-group">
                                          <div class="col-lg-3">
                                              <div class="input-group">
                                                  <span class="input-group-addon">City </span>
@@ -152,8 +174,6 @@
                                                  <input class="form-control" type="text" name="state" id="state" ng-model="state" required/>
                                              </div>
                                          </div>
-                                     </div>
-                                     <div class="form-group">
 
                                          <div class="col-lg-3">
                                              <div class="input-group">
@@ -171,32 +191,11 @@
                                                 <span class="text-danger wrapper text-center ng-binding"
                                                       ng-show="myform.pincode.$invalid &&  myform.pincode.$touched">Please Enter Pin Code</span>
                                          </div>
-                                         <div class="col-lg-3">
-                                         <div class="input-group">
-                                             <span class="input-group-addon">Email</span>
-                                             <input class="form-control" type="email" name="email" ng-model="email" placeholder="" required/>
-                                         </div>
-                                         </div>
 
-                                         <div class="col-lg-3">
-                                             <div class="input-group">
-                                                 <span class="input-group-addon">Type</span>
-                                                 <select class="form-control" type="text" name="email" ng-model="user_type"  required>
-                                                     <option value="0">Doctor</option>
-                                                     <option value="1">Front Desk</option>
-                                                 </select>
-                                             </div>
-                                         </div>
                                      </div>
                                      <div class="form-group">
-                                         <div class="col-lg-4">
-                                             <div class="input-group">
-                                                 <span class="input-group-addon">Phone No
-                                                 </span>
-                                                 <input type="text" class="form-control" ui-mask="999-999-9999" name="phone_no" ng-model="phone_no" required/>
-                                             </div>
-                                         </div>
-                                         <div class="col-lg-4">
+
+                                         <div class="col-lg-3">
                                              <div class="input-group">
                                                  <span class="input-group-addon">Gender</span>
                                                  <div class="checkbox  fileRadioBox form-control">
@@ -209,14 +208,31 @@
                                                  </div>
                                              </div>
                                          </div>
-                                         <div class="col-lg-4">
+                                         <div class="col-lg-3">
+                                             <div class="input-group">
+                                                 <span class="input-group-addon">Email</span>
+                                                 <input class="form-control" type="email" name="email" ng-model="email_id" placeholder="" required/>
+                                             </div>
+                                         </div>
+
+
+                                         <div class="col-lg-3">
+                                             <div class="input-group">
+                                                 <span class="input-group-addon">Phone No
+                                                 </span>
+                                                 <input type="text" class="form-control" ui-mask="999-999-9999" name="phone_no" ng-model="phone_no" required/>
+                                             </div>
+                                         </div>
+
+
+                                     </div>
+                                     <div class="form-group" >
+                                         <div class="col-lg-3">
                                              <div class="input-group">
                                                  <span class="input-group-addon">Password</span>
                                                  <input type="text" class="form-control" name="password" ng-model="password" required/>
                                              </div>
                                          </div>
-                                     </div>
-                                     <div class="form-group" >
                                         <div class="col-lg-3" ng-show="user_type==0">
                                             <div class="input-group">
                                                 <span class="input-group-addon" >Reg-No</span>
@@ -224,12 +240,15 @@
 
                                             </div>
                                         </div>
-                                        <div class="col-lg-3">
-                                            <div class="input-group">
-                                            <span class="input-group-addon">Clinic Name</span>
-                                            <label class="form-control" type="text" >{{data.clinic_name}}</label>
-                                                </div>
-                                        </div>
+                                         <div class="col-lg-3">
+                                             <div class="input-group">
+                                                 <span class="input-group-addon">Branch</span>
+                                                 <select class="form-control">
+                                                     <option value="0"></option>
+                                                 </select>
+                                             </div>
+                                         </div>
+
 
                                      </div>
 

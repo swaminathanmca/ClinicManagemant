@@ -6,7 +6,6 @@ package com.lissomsoft.clinic.domain;
 public class Branch {
 
     private Integer branch_id;
-
     private String branch_name;
     private Integer clinic_id;
     private Integer ho;
