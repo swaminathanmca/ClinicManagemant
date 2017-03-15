@@ -11,11 +11,7 @@ app.controller('branchController',function($scope,$http,$window){
            $scope.clinic_id=$scope.data.clinic_id;
         });
 
-
-
-
-
-     $scope.submit=function(id){
+    $scope.submit=function(id){
       $scope.clinic_id=id;
          var ClinicUser={
              clinic_id:$scope.clinic_id,
@@ -49,9 +45,9 @@ app.controller('branchController',function($scope,$http,$window){
              then(function (response, status, headers, config) {
                  $scope.data = response.data;
                  console.log("Added",$scope.data.status);
-                 /*if($scope.data.status){
-                     location.href="AddBranch";
-                 }*/
+                 if($scope.data.status){
+                     location.href="GetBranch";
+                 }
              });
 
 

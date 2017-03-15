@@ -21,6 +21,8 @@ public class BranchMapper implements RowMapper<Branch>{
         branch.setAddress1(resultSet.getString("address1"));
         branch.setAddress2(resultSet.getString("address2"));
         branch.setCity(resultSet.getString("city"));
+        branch.setState(resultSet.getString("state"));
+        branch.setDescripton(resultSet.getString("description"));
         branch.setClinic_id(resultSet.getInt("clinic_id"));
         branch.setCountry(resultSet.getString("country"));
         branch.setPin_code(resultSet.getInt("pin_code"));

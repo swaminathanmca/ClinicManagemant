@@ -1,7 +1,10 @@
 package com.lissomsoft.clinic.dao;
 
+import com.lissomsoft.clinic.domain.Branch;
+import com.lissomsoft.clinic.rowmapper.BranchMapper;
 import com.lissomsoft.clinic.service.BranchService;
 import com.lissomsoft.clinic.vo.ClinicUser;
+import org.omg.PortableServer.LIFESPAN_POLICY_ID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +15,14 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Stream;
 
 /**
  * Created by Lissomsoft on 3/15/2017.
  */
+
+
 public class BranchDaoImpl implements BranchDao {
     private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
     DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -146,5 +148,25 @@ public class BranchDaoImpl implements BranchDao {
         }
 
         return (result_member >0 ) ? true :false;
+    }
+
+    @Override
+    public List<Branch> getBranch(Integer clinic_id) {
+        List<Branch> getBranchDetails=null;
+           try {
+
+               String BranchDetails="SELECT * FROM clinic.branch_master b WHERE b.clinic_id=:clinic_id AND b.ho=0";
+
+               Map<String,Object> parameter=new HashMap<String, Object>();
+               parameter.put("clinic_id",clinic_id);
+               getBranchDetails=jdbcTemplate.query(BranchDetails,parameter,new BranchMapper());
+
+           }catch (Exception e){
+               e.printStackTrace();
+           }
+
+
+
+        return getBranchDetails;
     }
 }

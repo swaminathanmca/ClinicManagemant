@@ -59,6 +59,10 @@ public class HelloController {
     public String addBranch(HttpServletRequest request)throws Exception{
         return "addBranch";
     }
+    @RequestMapping(value = "/GetBranch")
+    public String getBranch(HttpServletRequest request)throws Exception{
+        return "viewBranch";
+    }
 
     @RequestMapping(value = "/GetClinic")
     public String getClinic(HttpServletRequest request) throws Exception {
@@ -249,6 +253,34 @@ public class HelloController {
         }
         return sendResponse.toString();
     }
+    @RequestMapping(value = "/ViewBranch/{clinic_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String viewBranch(@PathVariable Integer clinic_id)throws  Exception{
+        JSONArray jsonArray=new JSONArray();
+        JSONObject sendResponse=new JSONObject();
+        List<Branch> branchDetails;
+        branchDetails=branchService.getBranch(clinic_id);
+        Iterator<Branch> it=branchDetails.iterator();
+        while (it.hasNext()){
+            Branch branch=it.next();
+            JSONObject jsonObject =new JSONObject();
+            jsonObject.put("branch_name",branch.getBranch_name());
+            jsonObject.put("clinic_id",branch.getChief_id());
+            jsonObject.put("branch_id",branch.getBranch_id());
+            jsonObject.put("description",branch.getDescripton());
+            jsonObject.put("address1",branch.getAddress1());
+            jsonObject.put("address2",branch.getAddress2());
+            jsonObject.put("contact_no",branch.getContact_no());
+            jsonArray.put(jsonObject);
+            sendResponse.put("branch",jsonArray);
+            sendResponse.put("status",true);
+        }
+        return sendResponse.toString();
+    }
+
+
+
 
 
     @RequestMapping(value ="/validate/{contact_no}",method = RequestMethod.GET)

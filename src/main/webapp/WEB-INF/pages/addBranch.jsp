@@ -83,11 +83,11 @@
                                 <a href="AddBranch">Add Branch</a>
                             </li>
                             <li>
-                                <a href="#">View Branch</a>
+                                <a href="GetBranch">View Branch</a>
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    <li ng-hide="role==SuperAdmin">
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> User<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -414,12 +414,12 @@
                                                 <div class="input-group">
                                                     <span class="input-group-addon">Email Id</span>
                                                     <input class="form-control" placeholder="Email"
-                                                           name="branch_admin_email_id" type="text"
+                                                           name="branch_admin_email_id" type="email"
                                                            ng-model="branch_admin_email_id"
                                                            required>
                                                 </div>
                                                 <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.branch_admin_email_id.$invalid &&  myform.branch_admin_email_id.$touched">Please Enter Email Id</span>
+                                                      ng-show="myform.branch_admin_email_id.$invalid &&  myform.branch_admin_email_id.$touched">Please Enter Valid Email Id</span>
                                                     </div>
                                         </div>
 

@@ -73,7 +73,15 @@
 
                 </li>
                 <li ng-hide="role==SuperAdmin">
-                    <a href="AddBranch"><i class="fa fa-table fa-fw"></i> Branch</a>
+                    <a href="#"><i class="fa fa-table fa-fw"></i> Branch<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="AddBranch">Add Branch</a>
+                        </li>
+                        <li>
+                            <a href="#">View Branch</a>
+                        </li>
+                    </ul>
                 </li>
 
                 <li ng-hide="role==SuperAdmin">
