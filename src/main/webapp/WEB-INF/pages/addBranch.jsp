@@ -64,19 +64,8 @@
                     <li>
                         <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
-                    <li ng-show="role==SuperAdmin">
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Clinic<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="Dashboard">Add Clinic</a>
-                            </li>
-                            <li>
-                                <a href="GetClinic">View Clinic</a>
-                            </li>
-                        </ul>
 
-                    </li>
-                    <li ng-hide="role==SuperAdmin">
+                    <li ng-show="role=='Admin'">
                         <a href="#"><i class="fa fa-table fa-fw"></i> Branch<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -87,7 +76,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li ng-hide="role==SuperAdmin">
+                    <li ng-hide="role=='SuperAdmin'">
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> User<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>

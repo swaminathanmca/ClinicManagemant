@@ -73,7 +73,10 @@ public class HelloController {
     public String clinicDetails(HttpServletRequest request)throws Exception{
         return "clinicDetails";
     }
-
+    @RequestMapping(value = "/EditBranch")
+    public String editBranch(HttpServletRequest request)throws Exception{
+        return "branchDetails";
+    }
 
     @RequestMapping(value = "/AddUser")
     public String addUser(HttpServletRequest request)throws Exception{
@@ -86,6 +89,11 @@ public class HelloController {
     @RequestMapping(value = "/PatientVisit")
     public String patientVisit(HttpServletRequest request)throws Exception{
         return "patientVisit";
+    }
+
+    @RequestMapping(value = "/AdminBranch")
+    public String adminBranch(HttpServletRequest request)throws Exception{
+        return "adminBranch";
     }
 
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
@@ -166,11 +174,25 @@ public class HelloController {
     String editClinic(@RequestBody ClinicUser clinicUser, HttpServletRequest request) throws JSONException {
         JSONObject jsonObject=new JSONObject();
         boolean flag;
-        System.out.println(clinicUser);
+
        flag = clinicService.editClinic(clinicUser);
         jsonObject.put("status",flag);
         return jsonObject.toString();
     }
+
+    @RequestMapping(value = "/EditBranch",method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String editBranch(@RequestBody ClinicUser clinicUser,HttpServletRequest request )throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        boolean flag;
+        flag=branchService.editBranch(clinicUser);
+        jsonObject.put("status",flag);
+
+
+      return   jsonObject.toString();
+    }
+
     @RequestMapping(value = "/ViewDetails/{clinic_id}",method = RequestMethod.GET)
     public
     @ResponseBody
@@ -279,6 +301,55 @@ public class HelloController {
         return sendResponse.toString();
     }
 
+    @RequestMapping(value = "/BranchDetails/{branch_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String branchDetails(@PathVariable Integer branch_id)throws  Exception{
+
+        JSONObject data=new JSONObject();
+        List<ClinicUser> branchInfo;
+        branchInfo=branchService.getDetails(branch_id);
+
+        Iterator<ClinicUser> it=branchInfo.iterator();
+        while (it.hasNext()){
+            ClinicUser branch=it.next();
+            JSONObject jsonObject=new JSONObject();
+
+            jsonObject.put("clinicId",branch.getClinic_id());
+            jsonObject.put("branch_name",branch.getBranch_name());
+            jsonObject.put("branch_id",branch.getBranch_id());
+            jsonObject.put("Chief",branch.getChief_name());
+            jsonObject.put("reg_no",branch.getRegister_no());
+            jsonObject.put("password",branch.getPassword());
+            jsonObject.put("st",branch.getStatus());
+            jsonObject.put("address1",branch.getAddress1());
+            jsonObject.put("address2",branch.getAddress2());
+            jsonObject.put("city",branch.getCity());
+            jsonObject.put("state",branch.getState());
+            jsonObject.put("country",branch.getCountry());
+            jsonObject.put("pin_code",branch.getPin_code());
+            jsonObject.put("contact_no",branch.getContact_no());
+            jsonObject.put("email_id",branch.getEmail_id());
+            jsonObject.put("description",branch.getDescription());
+            jsonObject.put("Chief_address1",branch.getChief_address1());
+            jsonObject.put("Chief_address2",branch.getChief_address2());
+            jsonObject.put("Chief_city",branch.getChief_city());
+            jsonObject.put("Chief_state",branch.getChief_state());
+            jsonObject.put("chief_country",branch.getChief_country());
+            jsonObject.put("Chief_conatct_no",branch.getChief_contact_no());
+            jsonObject.put("Chief_email_id",branch.getChief_email_id());
+            jsonObject.put("Chief_pincode",branch.getChief_pin_code());
+            jsonObject.put("Chief_gender",branch.getGender());
+            jsonObject.put("Chief_id",branch.getChief_id());
+            data.put("success",true);
+            data.put("branch",jsonObject);
+
+
+        }
+
+
+        return data.toString();
+    }
 
 
 

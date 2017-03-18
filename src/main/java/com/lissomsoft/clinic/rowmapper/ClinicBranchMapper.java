@@ -17,6 +17,9 @@ public class ClinicBranchMapper implements RowMapper<ClinicUser> {
     public ClinicUser mapRow(ResultSet resultSet, int i) throws SQLException {
 
         ClinicUser clinicUser=new ClinicUser();
+
+        clinicUser.setBranch_id(resultSet.getInt("branch_id"));
+        clinicUser.setBranch_name(resultSet.getString("branch_name"));
         clinicUser.setClinic_id(resultSet.getInt("clinic_id"));
         clinicUser.setClinic_name(resultSet.getString("clinic_name"));
         clinicUser.setRegister_no(resultSet.getString("reg_no"));

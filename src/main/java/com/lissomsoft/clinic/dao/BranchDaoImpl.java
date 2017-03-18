@@ -1,7 +1,9 @@
 package com.lissomsoft.clinic.dao;
 
 import com.lissomsoft.clinic.domain.Branch;
+import com.lissomsoft.clinic.domain.Clinic;
 import com.lissomsoft.clinic.rowmapper.BranchMapper;
+import com.lissomsoft.clinic.rowmapper.ClinicBranchMapper;
 import com.lissomsoft.clinic.service.BranchService;
 import com.lissomsoft.clinic.vo.ClinicUser;
 import org.omg.PortableServer.LIFESPAN_POLICY_ID;
@@ -168,5 +170,116 @@ public class BranchDaoImpl implements BranchDao {
 
 
         return getBranchDetails;
+    }
+
+    @Override
+    public List<ClinicUser> getDetails(Integer branch_id) {
+
+        List<ClinicUser> getBranchDetails=null;
+
+        try{
+            String Branchdetails="SELECT b.branch_id,b.branch_name,b.clinic_id,c.clinic_name,b.address1,b.address2,b.contact_no,b.email,b.status,b.description,c.reg_no,b.user_id,b.city,b.state,b.country,b.pin_code,p.profile_id,p.name chief,p.address1 ch_addrs1,p.address2 ch_addrs2,p.city ch_city,p.state ch_state,p.country ch_country,p.pincode,p.phone,p.email ch_email,p.gender,u.password FROM branch_master b  INNER JOIN  clinic_master c ON c.clinic_id=b.clinic_id INNER JOIN user u ON u.user_id=b.user_id INNER JOIN member_master m ON u.user_id=m.user_id INNER JOIN profile_master p ON p.profile_id=m.profile_id AND b.ho=0 AND b.branch_id=:branch_id";
+            Map<String,Object> parameter=new HashMap<String, Object>();
+            parameter.put("branch_id",branch_id);
+            getBranchDetails=jdbcTemplate.query(Branchdetails,parameter,new ClinicBranchMapper());
+
+
+
+        }catch (Exception e){
+
+        }
+
+
+
+        return getBranchDetails;
+    }
+
+    @Override
+    public boolean editBranch(ClinicUser clinicUser) {
+        int result = 0;
+        int result_branch = 0;
+        int result_profile = 0;
+        int result_user = 0;
+        int result_member = 0;
+        int result_role = 0;
+
+        DefaultTransactionDefinition paramTransactionDefinition = new DefaultTransactionDefinition();
+        TransactionStatus status = platformTransactionManager.getTransaction(paramTransactionDefinition);
+        try {
+
+            String editBranchSql="UPDATE branch_master SET branch_name=:branch_name,address1=:address1,address2=:address2,city=:city,state=:state,country=:country,pin_code=:pin_code,contact_no=:contact_no,email=:email,description=:description,updated_at=:updated_at WHERE branch_id=:branch_id ";
+            Map<String, Object> parameters = new HashMap<String, Object>();
+            parameters.put("branch_id",clinicUser.getBranch_id());
+            parameters.put("branch_name",clinicUser.getBranch_name());
+            parameters.put("address1",clinicUser.getAddress1());
+            parameters.put("address2",clinicUser.getAddress2());
+            parameters.put("city",clinicUser.getCity());
+            parameters.put("state",clinicUser.getState());
+            parameters.put("country",clinicUser.getCountry());
+            parameters.put("pin_code",clinicUser.getPin_code());
+            parameters.put("contact_no",clinicUser.getContact_no());
+            parameters.put("email",clinicUser.getEmail_id());
+            parameters.put("description",clinicUser.getDescription());
+            parameters.put("updated_at", format.format(new Date()));
+            result=jdbcTemplate.update(editBranchSql,parameters);
+
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+            platformTransactionManager.rollback(status);
+        }
+        if((result >0) ? true :false ){
+
+            try {
+                String editUserSql="UPDATE user SET username=:username,email=:email,password=:password,updated_at=:updated_at WHERE user_id=(SELECT branch_master.user_id FROM  branch_master WHERE branch_master.branch_id=:branch_id)";
+                Map<String,Object> userEdit=new HashMap<String, Object>();
+                userEdit.put("username",clinicUser.getBranch_name());
+                userEdit.put("email",clinicUser.getEmail_id());
+                userEdit.put("password",clinicUser.getPassword());
+                userEdit.put("branch_id",clinicUser.getBranch_id());
+                userEdit.put("updated_at",format.format(new Date()));
+                result_user=jdbcTemplate.update(editUserSql,userEdit);
+
+
+
+
+            }catch (Exception e){
+                e.printStackTrace();
+                platformTransactionManager.rollback(status);
+            }
+        }
+
+        if((result_user >0) ? true :false){
+
+            try {
+                    String editProfileSql="UPDATE profile_master SET name=:profile_name,address1=:address1,address2=:address2,city=:city,state=:state,country=:country,pincode=:pincode,phone=:phone,email=:email_id,gender=:gender,updated_at=:updated_at WHERE profile_id=:profile_id";
+
+                Map<String,Object> profileEdit=new HashMap<String, Object>();
+
+                profileEdit.put("profile_name",clinicUser.getChief_name());
+                profileEdit.put("profile_id",clinicUser.getChief_id());
+                profileEdit.put("address1",clinicUser.getChief_address1());
+                profileEdit.put("address2",clinicUser.getChief_address2());
+                profileEdit.put("city",clinicUser.getChief_city());
+                profileEdit.put("state",clinicUser.getChief_state());
+                profileEdit.put("country",clinicUser.getChief_country());
+                profileEdit.put("pincode",clinicUser.getChief_pin_code());
+                profileEdit.put("phone",clinicUser.getChief_contact_no());
+                profileEdit.put("email_id",clinicUser.getChief_email_id());
+                profileEdit.put("gender",clinicUser.getGender());
+                profileEdit.put("updated_at",format.format(new Date()));
+                result_profile=jdbcTemplate.update(editProfileSql,profileEdit);
+                platformTransactionManager.commit(status);
+
+            }catch (Exception e){
+                e.printStackTrace();
+                platformTransactionManager.rollback(status);
+            }
+        }
+
+
+
+        return (result_profile >0) ? true :false;
     }
 }

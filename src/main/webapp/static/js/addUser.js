@@ -5,10 +5,12 @@
 app.controller('User',function($scope,$http,$window){
     $scope.role=$window.sessionStorage.role_name;
     $scope.email= $window.sessionStorage.email;
+    console.log($scope.role);
 
     $http.get("trackSession/" + $scope.email).
         then(function (response, status, headers, config) {
-            //console.log(response.data.status);
+
+            $window.sessionStorage.clinic_id=response.data.clinic_id;
             $scope.data = response.data;
         });
 

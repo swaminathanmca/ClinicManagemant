@@ -75,8 +75,10 @@
                         </ul>
 
                     </li>
-
-                    <li ng-hide="role==SuperAdmin">
+                    <li>
+                        <a href="AdminBranch"><i class="fa fa-table fa-fw"></i> Branch</a>
+                    </li>
+                    <li ng-show="role=='Admin'">
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> User<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -108,7 +110,6 @@
 
         <div class="row">
             <div class="col-lg-12">
-
             </div>
         </div>
         <div class="row">

@@ -8,7 +8,8 @@ app.controller('dashboard', function ($scope, $http, $window) {
     $scope.chiefError="The Phone No Already Taken";
     $scope.chiefEmail="Email taken";
     $scope.name="name";
-    console.log($window.sessionStorage.role_name);
+    $scope.role=$window.sessionStorage.role_name;
+    $scope.email= $window.sessionStorage.email;
     $('#loader').append(' ');
     $scope.validate = function () {
 

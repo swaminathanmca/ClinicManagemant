@@ -24,4 +24,13 @@ public class BranchServiceImpl implements BranchService {
     public List<Branch> getBranch(Integer clinic_id) {
         return branchDao.getBranch(clinic_id);
     }
+
+    public List<ClinicUser> getDetails(Integer branch_id){
+        return branchDao.getDetails(branch_id);
+    }
+
+    @Override
+    public boolean editBranch(ClinicUser clinicUser) {
+        return branchDao.editBranch(clinicUser);
+    }
 }

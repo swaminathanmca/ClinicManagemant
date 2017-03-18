@@ -87,7 +87,7 @@
 
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-table fa-fw"></i> Tables</a>
+                        <a href="AdminBranch"><i class="fa fa-table fa-fw"></i> Branch</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-edit fa-fw"></i> Forms</a>
@@ -116,6 +116,7 @@
                             <input type="text" ng-model="search" class="input-group  form-control" placeholder="Search">
                         </label>
                     </div>
+
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">

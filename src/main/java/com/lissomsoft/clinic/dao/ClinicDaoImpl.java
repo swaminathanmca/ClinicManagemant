@@ -368,7 +368,7 @@ public class ClinicDaoImpl implements ClinicDao {
         List<ClinicUser> getClinicDetails = null;
         try {
            /* String clinicDetails ="SELECT c.clinic_id,c.clinic_name,c.chief,c.reg_no,c.status,b.address1,b.address2,b.city,b.state,b.country,b.pin_code,b.contact_no,b.email,b.description FROM branch_master b JOIN clinic_master c ON c.clinic_id=b.clinic_id and ho=1";*/
-            String clinicDetails="SELECT c.clinic_id,c.clinic_name,c.reg_no,c.status,u.password,c.chief,b.address1,b.address2,b.city,b.state,b.country,b.pin_code,b.contact_no,b.email,b.description,p.profile_id,p.name,p.address1 ch_addrs1, p.address2 ch_addrs2,p.city ch_city,p.state ch_state,p.country ch_country,p.phone,p.email ch_email,p.pincode,p.gender FROM clinic.clinic_master c INNER JOIN clinic.branch_master b ON c.clinic_id = b.clinic_id INNER JOIN clinic.member_master m ON b.user_id = m.user_id INNER JOIN   clinic.user u ON u.user_id=b.user_id INNER JOIN clinic.profile_master p ON p.profile_id = m.profile_id  AND b.ho = 1";
+            String clinicDetails="SELECT c.clinic_id,c.clinic_name,b.branch_id,b.branch_name,c.reg_no,c.status,u.password,c.chief,b.address1,b.address2,b.city,b.state,b.country,b.pin_code,b.contact_no,b.email,b.description,p.profile_id,p.name,p.address1 ch_addrs1, p.address2 ch_addrs2,p.city ch_city,p.state ch_state,p.country ch_country,p.phone,p.email ch_email,p.pincode,p.gender FROM clinic.clinic_master c INNER JOIN clinic.branch_master b ON c.clinic_id = b.clinic_id INNER JOIN clinic.member_master m ON b.user_id = m.user_id INNER JOIN   clinic.user u ON u.user_id=b.user_id INNER JOIN clinic.profile_master p ON p.profile_id = m.profile_id  AND b.ho = 1";
 
             getClinicDetails = jdbcTemplate.query(clinicDetails, new ClinicBranchMapper());
 
@@ -397,7 +397,7 @@ public class ClinicDaoImpl implements ClinicDao {
     public List<ClinicUser> viewDetails(Integer clinic_id) {
         List<ClinicUser> getClinicDetails=null;
         try{
-            String viewClinic="SELECT c.clinic_id,c.clinic_name,c.reg_no,u.password,c.status,c.chief,b.address1,b.address2,b.city,b.state,b.country,b.pin_code,b.contact_no,b.email,b.description,p.profile_id,p.name,p.address1 ch_addrs1, p.address2 ch_addrs2,p.city ch_city,p.state ch_state,p.country ch_country,p.phone,p.email ch_email,p.pincode,p.gender FROM clinic.clinic_master c INNER JOIN clinic.branch_master b ON c.clinic_id = b.clinic_id INNER JOIN\n clinic.member_master m ON b.user_id = m.user_id INNER JOIN clinic.user u ON u.user_id=b.user_id   INNER JOIN  clinic.profile_master p ON p.profile_id = m.profile_id  AND c.clinic_id = :clinic_id AND b.ho=1" ;
+            String viewClinic="SELECT c.clinic_id,c.clinic_name,b.branch_id,b.branch_name,c.reg_no,u.password,c.status,c.chief,b.address1,b.address2,b.city,b.state,b.country,b.pin_code,b.contact_no,b.email,b.description,p.profile_id,p.name,p.address1 ch_addrs1, p.address2 ch_addrs2,p.city ch_city,p.state ch_state,p.country ch_country,p.phone,p.email ch_email,p.pincode,p.gender FROM clinic.clinic_master c INNER JOIN clinic.branch_master b ON c.clinic_id = b.clinic_id INNER JOIN\n clinic.member_master m ON b.user_id = m.user_id INNER JOIN clinic.user u ON u.user_id=b.user_id   INNER JOIN  clinic.profile_master p ON p.profile_id = m.profile_id  AND c.clinic_id = :clinic_id AND b.ho=1" ;
             Map<String, Object> parameter = new HashMap<String, Object>();
             parameter.put("clinic_id", clinic_id);
             getClinicDetails=jdbcTemplate.query(viewClinic,parameter,new ClinicBranchMapper());
@@ -417,7 +417,7 @@ public class ClinicDaoImpl implements ClinicDao {
        List<ClinicUser> getTrack_id=null;
         try {
            /* String trackSql="SELECT c.clinic_id, b.branch_id,c.clinic_name,b.ho,b.branch_name FROM clinic.clinic_master c, clinic.branch_master b, clinic.role_master r,clinic.member_master m, clinic.profile_master p WHERE c.clinic_id = b.clinic_id  AND b.branch_id = r.branch_id AND r.user_id = m.user_id AND m.profile_id = p.profile_id AND p.email = :email_id";*/
-            String trackSql="SELECT c.clinic_id, b.branch_id,c.clinic_name,b.ho,b.branch_name FROM clinic.clinic_master c INNER JOIN clinic.branch_master b  ON c.clinic_id=b.clinic_id AND b.email=:email_id ";
+            String trackSql="SELECT c.clinic_id,b.branch_id,c.clinic_name,b.ho,b.branch_name FROM clinic.clinic_master c INNER JOIN clinic.branch_master b  ON c.clinic_id=b.clinic_id AND b.email=:email_id ";
             Map<String,Object> tracking=new HashMap<String, Object>();
             tracking.put("email_id",email);
             getTrack_id=jdbcTemplate.query(trackSql,tracking,new TrackMapper());

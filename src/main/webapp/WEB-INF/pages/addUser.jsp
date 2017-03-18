@@ -72,19 +72,19 @@
                     </ul>
 
                 </li>
-                <li ng-hide="role==SuperAdmin">
+                <li ng-show="role=='Admin'">
                     <a href="#"><i class="fa fa-table fa-fw"></i> Branch<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
                             <a href="AddBranch">Add Branch</a>
                         </li>
                         <li>
-                            <a href="#">View Branch</a>
+                            <a href="GetBranch">View Branch</a>
                         </li>
                     </ul>
                 </li>
 
-                <li ng-hide="role==SuperAdmin">
+                <li ng-show="role=='Admin'">
                     <a href="#"><i class="fa fa-user-md"></i> User<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>

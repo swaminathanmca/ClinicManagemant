@@ -13,5 +13,7 @@ public interface BranchService {
     boolean addBranch(ClinicUser branch);
 
     List<Branch>  getBranch(Integer clinic_id);
+    List<ClinicUser> getDetails(Integer branch_id);
+    boolean editBranch(ClinicUser clinicUser);
 
 }

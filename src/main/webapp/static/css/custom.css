@@ -14,3 +14,10 @@
 hr{
     border-top: 1px solid #ccc;
 }
+
+.btn-blue{
+    background-color: #20A8D8;
+}
+.txt-clr{
+    color:#20A8D8;
+}

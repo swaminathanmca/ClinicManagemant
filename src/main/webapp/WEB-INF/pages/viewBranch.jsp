@@ -133,7 +133,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr dir-paginate="x in branch | filter:search | orderBy : branch_name | itemsPerPage :5" >
+                    <tr dir-paginate="x in branch | filter:search | orderBy : branch_name | itemsPerPage :5"  ng-click="EditBranch(x.branch_id)">
                       <td>{{x.branch_name}}</td>
                       <td>{{x.description}}</td>
                       <td>{{x.address1}},{{x.address2}}</td>
@@ -181,7 +181,8 @@
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>
-
+<script src="<%=request.getContextPath()%>/static/js/addUser.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/addBranch.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/getBranch.js"></script>
 
 <script src="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/js/bootstrap-formhelpers.min.js"></script>

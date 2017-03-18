@@ -49,7 +49,9 @@ app.controller('myCtrl', function ($scope, $http, $window) {
                         if($window.sessionStorage.role_name=="SuperAdmin"){
                             location.href = "Dashboard";
                         }else if($window.sessionStorage.role_name=="Admin"){
-                            location.href="AddUser";
+                            location.href="AddBranch";
+                        }else if($window.sessionStorage.role_name=="BranchAdmin"){
+
                         }
 
                     } else {

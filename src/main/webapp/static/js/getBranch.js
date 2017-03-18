@@ -10,7 +10,7 @@ app.controller('getBranch',function($scope,$window,$http){
     $http.get("trackSession/" + $scope.email)
         .then(function (response, status, headers, config) {
             $scope.data = response.data;
-            $window.sessionStorage.clinic_id=$scope.data.clinic_id;
+          console.log($window.sessionStorage.clinic_id);
             $scope.clinic_name=$scope.data.clinic_name;
 
 
@@ -21,7 +21,14 @@ app.controller('getBranch',function($scope,$window,$http){
         .then(function (response){
             $scope.branch=response.data.branch;
 
+
         });
+
+
+  $scope.EditBranch=function(id){
+      $window.sessionStorage.branch_id=id;
+      location.href="EditBranch"
+  }
 
 
 $scope.addBranch=function(){

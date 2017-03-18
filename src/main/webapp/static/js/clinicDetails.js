@@ -9,6 +9,8 @@ app.controller('clinicDetails',function($scope,$window,$http){
     $scope.authError="The Email Already Taken";
     $scope.chiefEmail="Taken";
     $scope.chiefError="Already Taken";
+    $scope.role=$window.sessionStorage.role_name;
+    $scope.email= $window.sessionStorage.email;
 
     $http.get("ViewDetails/"+$window.sessionStorage.clinic_id).
         then(function(response,status,error,headers, config){
