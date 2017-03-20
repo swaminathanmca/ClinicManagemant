@@ -74,5 +74,6 @@
     <bean id="profileDao" class="com.lissomsoft.clinic.dao.ProfileDaoImpl"/>
     <bean id="clinicService" class="com.lissomsoft.clinic.service.ClinicServiceImpl"/>
     <bean id="clinicDao" class="com.lissomsoft.clinic.dao.ClinicDaoImpl"/>
-
+    <bean id="doctorService" class="com.lissomsoft.clinic.service.DoctorServiceImpl"/>
+    <bean id="doctorDao" class="com.lissomsoft.clinic.dao.DoctorDaoImpl"/>
 </beans>

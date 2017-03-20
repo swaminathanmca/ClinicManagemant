@@ -25,10 +25,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 import java.lang.ref.SoftReference;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -77,11 +74,12 @@ public class ClinicDaoImpl implements ClinicDao {
 
         } catch (Exception e) {
             e.printStackTrace();
+            platformTransactionManager.rollback(status);
 
         }
         if ((result > 0) ? true : false) {
             try {
-                System.out.println(format.format(new Date()));
+
                 String insertUserSql = "INSERT INTO user (username,password,email,status,created_at,updated_at) VALUES (:user_name,:password,:email,1,:created_at,:created_at)";
                 Map<String, Object> parameters1 = new HashMap<String, Object>();
                 parameters1.put("user_name", clinic.getClinic_name());
@@ -421,6 +419,7 @@ public class ClinicDaoImpl implements ClinicDao {
             Map<String,Object> tracking=new HashMap<String, Object>();
             tracking.put("email_id",email);
             getTrack_id=jdbcTemplate.query(trackSql,tracking,new TrackMapper());
+
 
         }catch (Exception e){
             e.printStackTrace();

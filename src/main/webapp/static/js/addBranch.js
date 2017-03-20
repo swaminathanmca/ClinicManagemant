@@ -8,7 +8,7 @@ app.controller('branchController',function($scope,$http,$window){
     $http.get("trackSession/" + $scope.email).
         then(function (response, status, headers, config) {
             $scope.data = response.data;
-           $scope.clinic_id=$scope.data.clinic_id;
+            $window.sessionStorage.clinic_id=$scope.data.clinic_id;
         });
 
     $scope.submit=function(id){

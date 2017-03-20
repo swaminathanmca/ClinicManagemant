@@ -96,7 +96,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-lg-3">
-                                    <select class="form-control" ng-options="s.clinicId as s.clinicName for s in clinic" ng-model="s.clinicId" ng-change="branch(s.clinicId)"></select>
+                                    <select class="form-control" ng-options="s.clinicId as s.clinicName for s in clinic" ng-model="s.clinicId" ng-change="branch(s.clinicId)" ></select>
                                 </div>
                                 <div class="col-lg-6">
 
@@ -170,6 +170,7 @@
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/angular-base64-upload.js"></script>
 
 <script src="<%=request.getContextPath()%>/static/js/adminBranch.js"></script>
 

@@ -61,6 +61,7 @@ $http.get("BranchDetails/"+$window.sessionStorage.branch_id).
         $http.post("EditBranch",ClinicUser).
             then(function (response,status,headers,config){
                 $scope.data = response.data;
+                location.href="EditBranch";
 
 
         });

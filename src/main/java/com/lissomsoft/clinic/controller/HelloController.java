@@ -36,6 +36,8 @@ public class HelloController {
     private ProfileService profileService;
     @Autowired(required = false)
     private BranchService branchService;
+    @Autowired(required = false)
+    private DoctorService doctorService;
 
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -78,9 +80,9 @@ public class HelloController {
         return "branchDetails";
     }
 
-    @RequestMapping(value = "/AddUser")
+    @RequestMapping(value = "/AddDoctor")
     public String addUser(HttpServletRequest request)throws Exception{
-        return "addUser";
+        return "addDoctor";
     }
     @RequestMapping(value = "/AddPatient")
     public String addPatient(HttpServletRequest request)throws Exception{
@@ -165,6 +167,19 @@ public class HelloController {
         return jsonObject.toString();
     }
 
+
+    @RequestMapping(value = "/AddDoctor",method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String addDoctor(@RequestBody DoctorUser doctor,HttpServletRequest request)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        boolean flag;
+        flag=doctorService.addDoctor(doctor);
+
+        jsonObject.put("status",flag);
+
+        return jsonObject.toString();
+    }
 
 
 

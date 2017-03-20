@@ -81,14 +81,14 @@
                             </li>
                         </ul>
                     </li>
-                    <li ng-show="role=='Admin'">
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> User<span class="fa arrow"></span></a>
+                    <li ng-hide="role=='SuperAdmin'">
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Doctor<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="AddUser">Add User</a>
+                                <a href="AddDoctor">Add Doctor</a>
                             </li>
                             <li>
-                                <a href="#">View User</a>
+                                <a href="#">View Doctor</a>
                             </li>
                         </ul>
 
@@ -618,8 +618,7 @@
 <script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/getBranch.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/branchDetails.js"></script>
-
-
+<script src="<%=request.getContextPath()%>/static/js/angular-base64-upload.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/js/bootstrap-formhelpers.min.js"></script>
 
 </body>

@@ -10,15 +10,11 @@ app.controller('adminBranch',function($scope,$window,$http){
 
         });
 
-$scope.branch=function(id){
+     $scope.branch=function(id){
        $scope.id=id;
     $http.get("ViewBranch/"+ $scope.id)
         .then(function (response){
             $scope.branchDetails=response.data.branch;
-
-
-
-
         });
 
 }

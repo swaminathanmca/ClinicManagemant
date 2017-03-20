@@ -2,7 +2,7 @@
  * Created by Admin on 2/16/2017.
  */
 
-var app = angular.module('myApp', ['ui.mask','angularUtils.directives.dirPagination']);
+var app = angular.module('myApp', ['ui.mask','angularUtils.directives.dirPagination','naif.base64']);
 /*
     .directive('loading', function () {
         return {
@@ -46,12 +46,13 @@ app.controller('myCtrl', function ($scope, $http, $window) {
                     if ($scope.details.status) {
                         $window.sessionStorage.role_name = $scope.details.data.role_name;
                         $window.sessionStorage.email=$scope.details.data.email_id;
+                        $window.sessionStorage.clinic_id=$scope.details.data.clinic_id;
                         if($window.sessionStorage.role_name=="SuperAdmin"){
                             location.href = "Dashboard";
                         }else if($window.sessionStorage.role_name=="Admin"){
                             location.href="AddBranch";
                         }else if($window.sessionStorage.role_name=="BranchAdmin"){
-
+                            location.href="AddDoctor";
                         }
 
                     } else {

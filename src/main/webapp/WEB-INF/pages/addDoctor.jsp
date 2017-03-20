@@ -1,261 +1,332 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Admin
-  Date: 2/27/2017
-  Time: 12:04 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html ng-app="myApp" ng-controller="addDoctor">
+<html ng-app="myApp" ng-controller="User">
 <head>
-  <link href="<%=request.getContextPath()%>/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="<%=request.getContextPath()%>/static/css/custom.css" rel="stylesheet">
-  <link href="<%=request.getContextPath()%>/static/css/sb-admin-2.css" rel="stylesheet">
-  <link href="<%=request.getContextPath()%>/static/vendor/metisMenu/metisMenu.css" rel="stylesheet">
-  <link href="<%=request.getContextPath()%>/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/css/bootstrap-formhelpers.min.css"
-        rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title></title>
+    <link href="<%=request.getContextPath()%>/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/static/css/custom.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/static/css/sb-admin-2.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/static/vendor/metisMenu/metisMenu.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
 </head>
 <body>
+
+
+
+
 <div id="wrapper">
-  <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+
+
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#"><img src="../Clinic/static/img/logo.png" width="30" height="30"></a>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#"><img src="../Clinic/static/img/logo.png" width="30" height="30"></a>
     </div>
     <!-- /.navbar-header -->
 
     <ul class="nav navbar-top-links navbar-right">
 
 
-      <li class="dropdown ">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-        </a>
-        <ul class="dropdown-menu dropdown-user">
-          <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-          </li>
-          <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-          </li>
-          <li class="divider"></li>
-          <li><a href="/Clinic"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-          </li>
-        </ul>
+        <li class="dropdown ">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+                <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                </li>
+                <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                </li>
+                <li class="divider"></li>
+                <li><a href="/Clinic"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                </li>
+            </ul>
 
-      </li>
+        </li>
 
     </ul>
 
 
     <div class="navbar-default sidebar" role="navigation">
-      <div class="sidebar-nav navbar-collapse">
-        <ul class="nav" id="side-menu">
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav" id="side-menu">
 
-          <li>
-            <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-          </li>
-          <li>
-            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Clinic<span class="fa arrow"></span></a>
-            <ul class="nav nav-second-level">
-              <li>
-                <a href="Dashboard">Add Clinic</a>
-              </li>
-              <li>
-                <a href="GetClinic">View Clinic</a>
-              </li>
+                <li>
+                    <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                </li>
+                <li ng-show="role=='SuperAdmin'">
+                    <a href="#"><i class="fa fa-hospital-o"></i> Clinic<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="Dashboard">Add CLinic</a>
+                        </li>
+                        <li>
+                            <a href="GetClinic">View Clinic</a>
+                        </li>
+                    </ul>
+
+                </li>
+                <li ng-show="role=='Admin'">
+                    <a href="#"><i class="fa fa-table fa-fw"></i> Branch<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="AddBranch">Add Branch</a>
+                        </li>
+                        <li>
+                            <a href="GetBranch">View Branch</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li ng-hide="role=='SuperAdmin'">
+                    <a href="#"><i class="fa fa-user-md"></i> Doctor<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="AddDoctor">Add Doctor</a>
+                        </li>
+                        <li>
+                            <a href="#">View Doctor</a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+                <li>
+                    <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
+                </li>
+                <li>
+                    <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
+                </li>
+
+
             </ul>
-
-          </li>
-          <li>
-            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Doctor<span class="fa arrow"></span></a>
-            <ul class="nav nav-second-level">
-              <li>
-                <a href="#">Add Doctor</a>
-              </li>
-              <li>
-                <a href="#">View Doctor</a>
-              </li>
-            </ul>
-
-          </li>
-          <li>
-            <a href="#"><i class="fa fa-table fa-fw"></i> Tables</a>
-          </li>
-          <li>
-            <a href="#"><i class="fa fa-edit fa-fw"></i> Forms</a>
-          </li>
-
-
-        </ul>
-      </div>
-
+        </div>
+        <!-- /.sidebar-collapse -->
     </div>
+    <!-- /.navbar-static-side -->
+</nav>
 
-  </nav>
+ <div id="page-wrapper" >
 
-  <div id="page-wrapper">
-    <br>
+     <br>
+     <div class="row">
+         <p></p>
+     </div>
+     <div class="row">
+         <div class="col-lg-12">
+             <div class="panel panel-primary">
+                 <div class="panel-heading">
+                     <h3 class="panel-title">Add User</h3>
+                 </div>
+                 <div class="panel-body">
+                     <div class="row">
+                         <div class="col-lg-12">
+                             <form class="form-horizontal ng-invalid" role="form" name="myform" ng-submit="submit()"
+                                   novalidate>
+                                 <fieldset>
+                                     <div class="form-group">
+                                         <div class="col-lg-6">
+                                             <div class="input-group">
+                                                 <span class="input-group-addon"> Name</span>
+                                                 <input class="form-control" type="text" name="firstname" id="firstname" ng-model="firstname" required/>
+                                             </div>
+                                             <span class="text-danger wrapper text-center ng-binding"
+                                                   ng-show="myform.firstname.$invalid &&  myform.firstname.$touched">Please Enter The Name</span>
+                                         </div>
+                                         <div class="col-lg-2" >
+                                             <div class="input-group">
+                                                 <span class="input-group-addon" >Reg-No</span>
+                                                 <input class="form-control" type="text" name="reg_no" ng-model="reg_no" required>
 
-    <div class="row">
-      <div class="col-lg-12">
+                                             </div>
+                                              <span class="text-danger wrapper text-center ng-binding"
+                                                    ng-show="myform.reg_no.$invalid &&  myform.reg_no.$touched">Please Enter Reg_Id</span>
+                                         </div>
+                                         <div class="col-lg-4">
+                                             <div class="input-group">
+                                                 <span class="input-group-addon">Gender</span>
+                                                 <div class="checkbox  fileRadioBox form-control">
+                                                     <label>
+                                                         <input type="radio" name="sex" value="1" ng-model="chief_gender"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked"/>&nbsp;Male
+                                                     </label>
+                                                     <label>
+                                                         <input type="radio" name="sex" value="0" ng-model="chief_gender"  class="ng-pristine ng-untouched ng-valid ng-valid-required">&nbsp;Female
+                                                     </label>
+                                                 </div>
+                                             </div>
+                                         </div>
 
-      </div>
-    </div>
-    <div class="row">
 
-      <div class="col-lg-10">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">Add Doctor</h3>
-          </div>
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-lg-12">
-                <form class="form-horizontal ng-invalid" role="form" name="myform" ng-submit="submit()"
-                      novalidate>
-                  <fieldset>
+                                     </div>
+                                     <div class="form-group">
+                                         <div class="col-lg-6">
+                                             <div class="input-group">
+                                                 <span class="input-group-addon">Qualification</span>
+                                                 <input class="form-control"  type="text" name="qualification" id="qualification" ng-model="qualification" required>
+                                             </div>
+                                             <span class="text-danger wrapper text-center ng-binding"
+                                                   ng-show="myform.qualification.$invalid &&  myform.qualification.$touched">Please Enter The Qulaification</span>
+                                         </div>
+                                         <div class="col-lg-6">
+                                             <div class="input-group">
+                                                 <span class="input-group-addon">Specializations</span>
+                                                 <input class="form-control"  type="text" name="specialization" id="specialization" ng-model="specialization" required>
+                                             </div>
+                                              <span class="text-danger wrapper text-center ng-binding"
+                                                    ng-show="myform.specialization.$invalid &&  myform.specialization.$touched">Please Enter The specialization</span>
+                                         </div>
 
-                    <div class="form-group">
-                      <label class="col-lg-2 control-label">Doctor Name</label>
-                      <div class="col-lg-4">
-                        <input class="form-control" placeholder="Clinic Name" name="branch_name"
-                               type="text" ng-model="clinic_name" maxlength="30" required>
-                                                <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.branch_name.$invalid &&  myform.branch_name.$touched">Please Enter Clinic Name</span>
-                      </div>
-                      <label class="col-lg-2 control-label">Registration No</label>
-                      <div class="col-lg-4">
-                        <input class="form-control" placeholder="Registration Number"
-                               name="reg_no" type="text" ng-model="reg_no" required>
-                                                <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.reg_no.$invalid &&  myform.reg_no.$touched">Please Enter Registration Number</span>
-                      </div>
-                    </div>
+                                     </div>
 
-                    <div class="form-group">
-                      <label class="col-lg-2 control-label">Location</label>
-                      <div class="col-lg-4">
-                        <input class="form-control" placeholder="Location"
-                               name="location" type="text" ng-model="location" required>
-                                                <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.location.$invalid &&  myform.location.$touched">Please Enter Location Number</span>
-                      </div>
-                      <label class="col-lg-2 control-label">Address</label>
+                                     <div class="form-group">
 
-                      <div class="col-lg-4">
-                        <input class="form-control" placeholder="Address" name="address"
-                               type="text" value="" ng-model="address" required>
-                                                <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.address.$invalid &&  myform.address.$touched">Please Enter Address</span>
-                      </div>
-                    </div>
+                                         <div class="col-lg-6">
+                                             <div class="input-group">
+                                                 <span class="input-group-addon">Address1 </span>
+                                                 <input class="form-control" type="text" name="address1" id="address1" ng-model="address1" required/>
+                                             </div>
+                                             <span class="text-danger wrapper text-center ng-binding"
+                                                   ng-show="myform.address1.$invalid &&  myform.address1.$touched">Please Enter The Address</span>
+                                         </div>
+                                         <div class="col-lg-6">
+                                             <div class="input-group">
+                                                 <span class="input-group-addon">Address2 </span>
+                                                 <input class="form-control" type="text" name="address2" id="address2" ng-model="address2" required/>
+                                             </div>
+                                             <span class="text-danger wrapper text-center ng-binding"
+                                                   ng-show="myform.address2.$invalid &&  myform.address2.$touched">Please Enter The Address</span>
+                                         </div>
 
-                    <div class="form-group">
-                      <label class="col-lg-2 control-label">Country</label>
-                      <div class="col-lg-4">
-                        <select id="countries_states1"
-                                class="input-medium bfh-countries form-control" name="country"
-                                ng-model="country" data-country="" required></select>
-                                                <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.country.$invalid &&  myform.country.$touched">Please Enter State</span>
+                                     </div>
+                                     <div class="form-group">
+                                         <div class="col-lg-3">
+                                             <div class="input-group">
+                                                 <span class="input-group-addon">City </span>
+                                                 <input class="form-control" type="text" name="city" id="city" ng-model="city" required/>
+                                             </div>
+                                             <span class="text-danger wrapper text-center ng-binding"
+                                                   ng-show="myform.city.$invalid &&  myform.city.$touched">Please Enter The City</span>
+                                         </div>
+                                         <div class="col-lg-3">
+                                             <div class="input-group">
+                                                 <span class="input-group-addon">State </span>
+                                                 <input class="form-control" type="text" name="state" id="state" ng-model="state" required/>
+                                             </div>
+                                             <span class="text-danger wrapper text-center ng-binding"
+                                                   ng-show="myform.state.$invalid &&  myform.state.$touched">Please Enter The State</span>
+                                         </div>
 
-                      </div>
-                      <label class="col-lg-2 control-label">State</label>
-                      <div class="col-lg-4">
-                        <select class="input-medium bfh-states form-control" name="state"
-                                ng-model="state" data-country="countries_states1"
-                                required></select>
-                                                <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.state.$invalid &&  myform.state.$touched">Please Enter State</span>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-lg-2 control-label">City</label>
-
-                      <div class="col-lg-4">
-                        <input class="form-control" placeholder="City" name="city" type="text"
-                               value="" ng-model="city" required>
-                                                <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.city.$invalid &&  myform.city.$touched">Please Enter City</span>
-                      </div>
-                      <label class="col-lg-2 control-label">Pin Code</label>
-
-                      <div class="col-lg-4">
-                        <input class="form-control" placeholder="PinCode" name="pincode"
-                               type="text" value="" ng-model="pincode" maxlength="6"
-                               ng-pattern="/^[0-9]*$/" required>
-                                                <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.pincode.$error.pattern">Please Enter Valid Pin Code</span>
+                                         <div class="col-lg-3">
+                                             <div class="input-group">
+                                                 <span class="input-group-addon">Country</span>
+                                                 <select class="input-medium bfh-countries form-control" data-country="IN" ng-model="country" required></select>
+                                             </div>
+                                              <span class="text-danger wrapper text-center ng-binding"
+                                                    ng-show="myform.country.$invalid &&  myform.country.$touched">Please Enter The Country</span>
+                                         </div>
+                                         <div class="col-lg-3">
+                                             <div class="input-group">
+                                                 <span class="input-group-addon">Pin-Code</span>
+                                              <input class="form-control" type="text" id="pincode" name="pincode" ng-model="pincode" maxlength="6" ng-pattern="/^[0-9]*$/" required/>
+                                             </div>
+                                              <span class="text-danger wrapper text-center ng-binding"
+                                                    ng-show="myform.pincode.$error.pattern">Please Enter Valid Pin Code</span>
                                                 <span class="text-danger wrapper text-center ng-binding"
                                                       ng-show="myform.pincode.$invalid &&  myform.pincode.$touched">Please Enter Pin Code</span>
-                      </div>
-                    </div>
+                                         </div>
 
-                    <div class="form-group">
-                      <label class="col-lg-2 control-label">Phone Number</label>
-                      <div class="col-lg-4">
-                        <input class="form-control" name="branch_no" type="text" value=""
-                               ui-mask="999-999-9999" ng-model="contact_no" ng-blur="validate()"
-                               required>
-                                                        <span class="text-danger wrapper text-center ng-binding" ng-show="error==false">
-                                                       The Mobile Number Already Taken
-                                                           </span>
-                        <span class="text-danger wrapper text-center ng-binding" ng-show="myform.branch_no.$invalid &&  myform.branch_no.$touched">Please Enter Contact Number</span>
-                      </div>
-                      <label class="col-lg-2 control-label">Email </label>
-                      <div class="col-lg-4">
-                        <input class="form-control" name="email" type="email" value="" ng-model="email_id" ng-blur="emailvalidate()" required>
-                                                    <span class="text-danger wrapper text-center ng-binding" ng-show="error_email==false">
-                                                   The Email Already Taken
-                                                     </span>
-                                                <span class="text-danger wrapper text-center ng-binding"
-                                                      ng-show="myform.email.$invalid &&  ! myform.email.$pristine &&  myform.email.$touched "> Enter Valid Email</span>
-                      </div>
-                    </div>
+                                     </div>
+                                     <div class="form-group">
+                                         <div class="col-lg-3">
+                                             <div class="input-group">
+                                                 <span class="input-group-addon">Clinic Name</span>
+                                                 <label class="form-control" type="text" >{{data.clinic_name}}</label>
+                                             </div>
+                                         </div>
+                                         <div class="col-lg-3">
+                                             <div class="input-group">
+                                                 <span class="input-group-addon">Branch Name</span>
+                                                 <label class="form-control" type="text" >{{data.branch_name}}</label>
+                                             </div>
+                                         </div>
+                                         <div class="col-lg-3">
+                                             <div class="input-group">
+                                                 <span class="input-group-addon">Email</span>
+                                                 <input class="form-control" type="email" name="email_id" ng-model="email_id" placeholder="" required/>
+                                             </div>
+                                              <span class="text-danger wrapper text-center ng-binding"
+                                                    ng-show="myform.email_id.$invalid &&  myform.email_id.$touched">Please Enter The Email</span>
+                                         </div>
+                                         <div class="col-lg-3">
+                                             <div class="input-group">
+                                                 <span class="input-group-addon">Phone No
+                                                 </span>
+                                                 <input type="text" class="form-control" ui-mask="999-999-9999" name="phone_no" ng-model="phone_no" required/>
+                                             </div>
+                                              <span class="text-danger wrapper text-center ng-binding"
+                                                    ng-show="myform.phone_no.$invalid &&  myform.phone_no.$touched">Please Enter The Phone No</span>
+                                         </div>
 
-                    <div class="form-group">
-                      <label class="col-lg-2 control-label">Description</label>
+                                     </div>
+                                     <div class="form-group" >
+                                         <div class="col-lg-3">
+                                             <div class="input-group">
+                                                 <span class="input-group-addon">
+                                                     Password
+                                                 </span>
+                                                 <input type="text" ng-model="password" name="password" class="form-control" required>
+                                             </div>
+                                              <span class="text-danger wrapper text-center ng-binding"
+                                                    ng-show="myform.password.$invalid &&  myform.password.$touched">Please Enter The Password</span>
+                                         </div>
+                                     </div>
 
-                      <div class="col-lg-10">
-                        <textarea class="form-control" placeholder="Write Clinic Description Here.." name="desc" type="text" value="" ng-model="desc"></textarea>
-                      </div>
-                    </div>
 
 
-                    <!-- Change this to a button or input when using this as a form -->
-                    <div class="form-actions">
-                      <div class="row">
-                        <div class="col-lg-offset-4 col-lg-7">
-                          <button type="submit" class="btn btn-success"
-                                  ng-disabled="myform.$invalid || !authError || !authErrorEmail "
-                                  ng-click="submitted=true">Save
-                          </button>
-                          <button type="button" class="btn btn-inverse">Cancel</button>
-                        </div>
-                      </div>
-                    </div>
-                  </fieldset>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+                                         <%-- <input type="file" ng-model="file" name="file" base-sixty-four-input required onload="onLoad" maxsize="500" accept="image/*">--%>
+                                         <%--<img src="data:image/png;base64,{{file.base64}}" class="img-responsive" />--%>
+                                           <%--  <textarea type="text" class="form-control" ng-model="file.base64"></textarea>--%>
 
-  </div>
+
+
+                                     <div class="form-actions">
+                                         <div class="row">
+                                             <div class="col-lg-offset-4 col-lg-7">
+                                                 <button type="submit" class="btn btn-success"
+
+                                                         ng-click="submitted=true">Save
+                                                 </button>
+                                                 <button type="button" class="btn btn-inverse">Cancel</button>
+                                             </div>
+                                         </div>
+                                     </div>
+
+
+                                 </fieldset>
+                                 </form>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
+
+
+
+
+
+
+
+
+
+
 </div>
-
-
-
 
 <script src="<%=request.getContextPath()%>/static/vendor/jquery/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -264,6 +335,12 @@
 <script src="<%=request.getContextPath()%>/static/js/angular.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
+
+<script src="<%=request.getContextPath()%>/static/js/addUser.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/js/bootstrap-formhelpers.min.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/angular-base64-upload.js"></script>
+
+
 </body>
 </html>

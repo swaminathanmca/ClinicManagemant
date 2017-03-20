@@ -5,38 +5,60 @@
 app.controller('User',function($scope,$http,$window){
     $scope.role=$window.sessionStorage.role_name;
     $scope.email= $window.sessionStorage.email;
-    console.log($scope.role);
+
 
     $http.get("trackSession/" + $scope.email).
         then(function (response, status, headers, config) {
 
             $window.sessionStorage.clinic_id=response.data.clinic_id;
+            $window.sessionStorage.branch_id=response.data.branch_id;
+
             $scope.data = response.data;
         });
 
-$scope.submit=function(){
-    var User={
+   /* $http.get("ViewBranch/"+ $window.sessionStorage.clinic_id)
+        .then(function (response){
+            $scope.branchDetails=response.data.branch;
+        });*/
 
-        name:$scope.firstname,
+    $scope.onLoad = function (e, reader, file, fileList,fileObj ) {
+
+        $scope.user=fileObj.base64;
+
+    };
+
+
+
+$scope.submit=function(){
+    var Doctor={
+
+        firstname:$scope.firstname,
         address1:$scope.address1,
         address2:$scope.address2,
+        clinic_id:$window.sessionStorage.clinic_id,
+        branch_id:$window.sessionStorage.branch_id,
         city:$scope.city,
         state:$scope.state,
         country:$scope.country,
         pincode:$scope.pincode,
-        email:$scope.email_id,
-        user_type:$scope.user_type,
+        email_id:$scope.email_id,
         phone_no:$scope.phone_no,
         gender:$scope.gender,
         password:$scope.password,
-        reg_no:$scope.reg_no
+        reg_no:$scope.reg_no,
+        qualification:$scope.qualification,
+        specialization:$scope.specialization
 }
 
-    $http.post('',User).
+    $http.post('',Doctor).
         then(function (response,status,headers,config){
 
             console.log(response.data);
         });
+
+
+
+
 }
 
 
