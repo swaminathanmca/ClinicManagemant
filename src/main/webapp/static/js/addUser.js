@@ -42,7 +42,7 @@ $scope.submit=function(){
         country:$scope.country,
         pincode:$scope.pincode,
         email_id:$scope.email_id,
-        phone_no:$scope.phone_no,
+        contact_no:$scope.phone_no,
         gender:$scope.gender,
         password:$scope.password,
         reg_no:$scope.reg_no,
@@ -52,8 +52,7 @@ $scope.submit=function(){
 
     $http.post('',Doctor).
         then(function (response,status,headers,config){
-
-            console.log(response.data);
+            location.href="ViewDoctor";
         });
 
 

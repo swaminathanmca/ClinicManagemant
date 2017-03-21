@@ -8,7 +8,7 @@
 
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<html ng-app="myApp" ng-controller="getDoctor">
 <head>
   <link href="<%=request.getContextPath()%>/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/css/custom.css" rel="stylesheet">
@@ -94,7 +94,7 @@
                 <a href="AddDoctor">Add Doctor</a>
               </li>
               <li>
-                <a href="#">View Doctor</a>
+                <a href="ViewDoctor">View Doctor</a>
               </li>
             </ul>
             <!-- /.nav-second-level -->
@@ -115,7 +115,60 @@
   </nav>
 
 
+<div id="page-wrapper">
+  <div class="row">
+    <div class="col-lg-12">
+      <h4 class="page-header">Doctor Details</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <button class="btn btn-primary" type="button" ng-click="addDoctor()">Add Doctor</button>
+          <label class="input-group pull-right" style="width: 180px">
+            <span class="input-group-addon glyphicon glyphicon-search" style="top:0px;"></span>
+            <input type="text" ng-model="search" class="input-group  form-control" placeholder="Search">
+          </label>
+        </div>
 
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <thead>
+                <tr class="success">
+                  <th>Doctor Name</th>
+                  <th>E-Mail</th>
+                  <th>Contact</th>
+                  <th>Address</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr dir-paginate="x in data | filter:search | orderBy : clinicName | itemsPerPage :5"  ng-click="editDoctor(x.profile_id)">
+                  <td>{{x.name}}</td>
+                  <td>{{x.email_id}}</td>
+                  <td>{{x.contact_no}}</td>
+                  <td>{{x.address1}},{{x.address2}}</td>
+                </tr>
+                </tbody>
+
+              </table>
+              <p class=" text-center">
+                <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" ></dir-pagination-controls>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
 
 
 </div>
@@ -133,9 +186,10 @@
 <script src="<%=request.getContextPath()%>/static/js/angular.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/addUser.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/getDoctor.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>
-<script src="<%=request.getContextPath()%>/static/js/getClinic.js"></script>
-<script src="<%=request.getContextPath()%>/static/js/angular-base64-upload.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/js/bootstrap-formhelpers.min.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/angular-base64-upload.js"></script>
 </body>
 </html>

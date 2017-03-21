@@ -1,5 +1,10 @@
 package com.lissomsoft.clinic.dao;
 
+import com.lissomsoft.clinic.domain.Doctor;
+import com.lissomsoft.clinic.domain.Profile;
+import com.lissomsoft.clinic.rowmapper.DoctorMapper;
+import com.lissomsoft.clinic.rowmapper.ProfileMapper;
+import com.lissomsoft.clinic.rowmapper.TrackMapper;
 import com.lissomsoft.clinic.vo.DoctorUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +19,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -61,7 +67,7 @@ public class DoctorDaoImpl implements DoctorDao {
 
             try{
 
-                String insertProfileSql="INSERT INTO profile_master(name,address1,address2,city,state,country,phone,email,pincode,gender,created_at,updated_at) VALUES(:first_name,:address1,address2,:city,:state,:country,:phone,:email,:pincode,:gender,:created_at,:created_at)";
+                String insertProfileSql="INSERT INTO profile_master(name,address1,address2,city,state,country,phone,email,pincode,gender,created_at,updated_at) VALUES(:first_name,:address1,:address2,:city,:state,:country,:phone,:email,:pincode,:gender,:created_at,:created_at)";
 
                 Map<String, Object> parameters2 = new HashMap<String, Object>();
                 parameters2.put("first_name",doctorUser.getFirstname());
@@ -85,7 +91,7 @@ public class DoctorDaoImpl implements DoctorDao {
         if((result_profile > 0)? true :false ){
 
             try {
-                String insertDoctorSql="INSERT INTO doctor_detail(user_id,clinic_id,branch_id,qualification,specialization,reg_id,created_at,updated_at)  VALUES ((SELECT u.user_id FROM user u WHERE u.email=:email),:clinic_id,:branch_id,:qualification,:specialization,:reg_id,:created_at,:created_at)";
+                String insertDoctorSql="INSERT INTO doctor_detail(user_id,clinic_id,branch_id,qualification,specialization,reg_id,type,created_at,updated_at)  VALUES ((SELECT u.user_id FROM user u WHERE u.email=:email),:clinic_id,:branch_id,:qualification,:specialization,:reg_id,1,:created_at,:created_at)";
                 Map<String, Object> doctorParameter = new HashMap<String, Object>();
                 doctorParameter.put("email",doctorUser.getEmail_id());
                 doctorParameter.put("qualification",doctorUser.getQualification());
@@ -131,4 +137,43 @@ public class DoctorDaoImpl implements DoctorDao {
 
         return result_role > 0 ? true :false;
     }
+
+    @Override
+    public List<Profile> viewDoctor(Integer branch_id) {
+
+            List<Profile> getDoctordetails=null;
+        try {
+
+            String viewdetails="SELECT p.profile_id,p.name,p.email,p.phone,p.address1,p.address2 FROM profile_master p INNER JOIN member_master m  ON m.profile_id=p.profile_id INNER JOIN user u ON u.user_id=m.user_id INNER JOIN doctor_detail d ON d.user_id=u.user_id AND d.branch_id=:branch_id";
+
+            Map<String ,Object> parameter=new HashMap<String, Object>();
+            parameter.put("branch_id",branch_id);
+            getDoctordetails= jdbcTemplate.query(viewdetails,parameter,new ProfileMapper());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return getDoctordetails;
+    }
+
+    @Override
+    public List<DoctorUser> doctorDetails(Integer profile_id) {
+       List<DoctorUser> doctordetails=null;
+try {
+    String doctorDetailsSql="SELECT p.profile_id,p.name,p.address1,p.address2,p.city,p.state,p.country,p.pincode,p.gender,p.email,p.phone,c.clinic_name,c.clinic_id,b.branch_name,b.branch_id,d.doctor_detail_id,d.qualification,d.specialization,d.reg_id,u.password FROM profile_master p INNER JOIN member_master m ON p.profile_id=m.profile_id INNER JOIN user u ON m.user_id=u.user_id INNER JOIN doctor_detail d ON u.user_id=d.user_id INNER JOIN branch_master b ON b.branch_id=d.branch_id INNER JOIN clinic_master c ON c.clinic_id=d.clinic_id AND p.profile_id=:profile_id";
+
+    Map<String,Object> parameter=new HashMap<String, Object>();
+    parameter.put("profile_id",profile_id);
+    doctordetails=jdbcTemplate.query(doctorDetailsSql,parameter,new DoctorMapper());
+        }
+    catch (Exception e){
+    e.printStackTrace();
+
+    }
+
+
+
+        return doctordetails;
+    }
+
+
 }

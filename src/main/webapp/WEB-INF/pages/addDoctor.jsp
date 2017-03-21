@@ -19,7 +19,7 @@
 <div id="wrapper">
 
 
-<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0px">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -91,7 +91,7 @@
                             <a href="AddDoctor">Add Doctor</a>
                         </li>
                         <li>
-                            <a href="#">View Doctor</a>
+                            <a href="ViewDoctor">View Doctor</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
@@ -121,7 +121,7 @@
          <div class="col-lg-12">
              <div class="panel panel-primary">
                  <div class="panel-heading">
-                     <h3 class="panel-title">Add User</h3>
+                     <h3 class="panel-title">Add Doctor</h3>
                  </div>
                  <div class="panel-body">
                      <div class="row">
@@ -152,10 +152,10 @@
                                                  <span class="input-group-addon">Gender</span>
                                                  <div class="checkbox  fileRadioBox form-control">
                                                      <label>
-                                                         <input type="radio" name="sex" value="1" ng-model="chief_gender"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked"/>&nbsp;Male
+                                                         <input type="radio" name="sex" value="1" ng-model="gender"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked"/>&nbsp;Male
                                                      </label>
                                                      <label>
-                                                         <input type="radio" name="sex" value="0" ng-model="chief_gender"  class="ng-pristine ng-untouched ng-valid ng-valid-required">&nbsp;Female
+                                                         <input type="radio" name="sex" value="0" ng-model="gender"  class="ng-pristine ng-untouched ng-valid ng-valid-required">&nbsp;Female
                                                      </label>
                                                  </div>
                                              </div>
@@ -335,7 +335,6 @@
 <script src="<%=request.getContextPath()%>/static/js/angular.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
-
 <script src="<%=request.getContextPath()%>/static/js/addUser.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/js/bootstrap-formhelpers.min.js"></script>

@@ -17,7 +17,10 @@ public class ProfileMapper implements RowMapper<Profile> {
         Profile profile=new Profile();
         profile.setProfile_id(resultSet.getInt("profile_id"));
         profile.setName(resultSet.getString("name"));
-
+        profile.setEmail(resultSet.getString("email"));
+        profile.setAddress1(resultSet.getString("address1"));
+        profile.setAddress2(resultSet.getString("address2"));
+        profile.setContact_no(resultSet.getString("phone"));
         return profile;
     }
 }
