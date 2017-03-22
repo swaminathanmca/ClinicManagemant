@@ -12,16 +12,14 @@ app.controller('getFrontdesk',function($scope,$http,$window){
             $scope.data = response.data.user;
 
         })
-    $scope.addDoctor=function(){
+    $scope.addFrontDesk=function(){
 
         location.href="AddFrontDesk";
     }
 
-    $scope.editDoctor=function(id){
+    $scope.editFrontDesk=function(id){
         $scope.profile_id=id;
         $window.sessionStorage.profile_id=$scope.profile_id;
-
+        location.href="FrontDeskDetail";
     }
-
-
 })

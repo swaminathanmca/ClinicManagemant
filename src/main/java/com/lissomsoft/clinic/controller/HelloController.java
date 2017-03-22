@@ -124,6 +124,11 @@ public class HelloController {
         return "adminBranch";
     }
 
+    @RequestMapping(value = "/FrontDeskDetail")
+    public String frontDeskdetail (HttpServletRequest request) throws Exception {
+        return "FrontDesk";
+    }
+
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
     public
     @ResponseBody

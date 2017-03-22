@@ -125,14 +125,14 @@
   <div id="page-wrapper">
     <div class="row">
       <div class="col-lg-12">
-        <h4 class="page-header">Doctor Details</h4>
+        <h4 class="page-header">FrontDesk Details</h4>
       </div>
     </div>
     <div class="row">
       <div class="col-lg-12">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <button class="btn btn-primary" type="button" ng-click="addDoctor()">Add Doctor</button>
+            <button class="btn btn-primary" type="button" ng-click="addFrontDesk()">Add FrontDesk</button>
             <label class="input-group pull-right" style="width: 180px">
               <span class="input-group-addon glyphicon glyphicon-search" style="top:0px;"></span>
               <input type="text" ng-model="search" class="input-group  form-control" placeholder="Search">
@@ -146,7 +146,7 @@
                   <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                     <thead>
                     <tr class="success">
-                      <th>Doctor Name</th>
+                      <th>FrontDesk Name</th>
                       <th>E-Mail</th>
                       <th>Contact</th>
                       <th>Address</th>
@@ -154,7 +154,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr dir-paginate="x in data | filter:search | orderBy : clinicName | itemsPerPage :5"  ng-click="editDoctor(x.profile_id)">
+                    <tr dir-paginate="x in data | filter:search | orderBy : clinicName | itemsPerPage :5"  ng-click="editFrontDesk(x.profile_id)">
                       <td>{{x.name}}</td>
                       <td>{{x.email_id}}</td>
                       <td>{{x.contact_no}}</td>
