@@ -33,4 +33,9 @@ public class DoctorServiceImpl implements  DoctorService {
 
         return doctorDao.doctorDetails(profile_id);
     }
+
+    @Override
+    public boolean editDoctor(DoctorUser doctorUser) {
+        return doctorDao.editDoctor(doctorUser);
+    }
 }

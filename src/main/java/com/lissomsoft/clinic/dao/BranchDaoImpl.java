@@ -111,7 +111,7 @@ public class BranchDaoImpl implements BranchDao {
 
             try{
 
-                String insertMemberSql="INSERT INTO member_master (user_id,profile_id,created_at,updated_at) VALUES ((SELECT u.user_id FROM user u WHERE u.email=:email),(SELECT p.profile_id FROM profile_master p INNER JOIN member_master m  ON m.profile_id=p.profile_id INNER JOIN user u ON u.user_id=m.user_id  AND u.email=:email),:created_at,:created_at)";
+                String insertMemberSql="INSERT INTO member_master (user_id,profile_id,created_at,updated_at) VALUES ((SELECT u.user_id FROM user u WHERE u.email=:email),(SELECT p.profile_id FROM profile_master p WHERE p.email=:email),:created_at,:created_at)";
 
                 Map<String,Object> memberparameters=new HashMap<String, Object>();
                 memberparameters.put("email",branch.getEmail_id());
@@ -182,10 +182,11 @@ public class BranchDaoImpl implements BranchDao {
             Map<String,Object> parameter=new HashMap<String, Object>();
             parameter.put("branch_id",branch_id);
             getBranchDetails=jdbcTemplate.query(Branchdetails,parameter,new ClinicBranchMapper());
-
+            System.out.println(getBranchDetails);
 
 
         }catch (Exception e){
+            e.printStackTrace();
 
         }
 

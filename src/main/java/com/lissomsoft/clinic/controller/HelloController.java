@@ -369,6 +369,7 @@ public class HelloController {
         List<ClinicUser> branchInfo;
         branchInfo = branchService.getDetails(branch_id);
 
+
         Iterator<ClinicUser> it = branchInfo.iterator();
         while (it.hasNext()) {
             ClinicUser branch = it.next();
@@ -444,12 +445,25 @@ public class HelloController {
             jsonObject.put("profile_id",user.getProfile_id());
             jsonObject.put("clinic_id",user.getClinic_id());
             jsonObject.put("branch_id",user.getBranch_id());
+            jsonObject.put("doctor_id",user.getDoctor_id());
             data.put("branch", jsonObject);
 
         }
 
 
         return data.toString();
+    }
+
+    @RequestMapping(value = "/EditDoctor", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String editDoctor(@RequestBody DoctorUser doctorUser, HttpServletRequest request) throws JSONException{
+
+        boolean flag;
+        flag=doctorService.editDoctor(doctorUser);
+        JSONObject jsonObject=new JSONObject();
+        jsonObject.put("status",flag);
+        return jsonObject.toString();
     }
 
 

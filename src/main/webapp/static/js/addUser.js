@@ -50,7 +50,7 @@ $scope.submit=function(){
         specialization:$scope.specialization
 }
 
-    $http.post('',Doctor).
+    $http.post('AddDoctor',Doctor).
         then(function (response,status,headers,config){
             location.href="ViewDoctor";
         });

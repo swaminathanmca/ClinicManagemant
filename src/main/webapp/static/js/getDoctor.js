@@ -4,6 +4,7 @@
 
 app.controller('getDoctor',function($scope,$http,$window){
     $scope.branch_id=$window.sessionStorage.branch_id;
+    $scope.role=$window.sessionStorage.role_name;
 
     $http.get("ViewDoctor/"+$scope.branch_id)
         .then(function (response){

@@ -28,4 +28,39 @@ app.controller('doctorDetails',function($scope,$window,$http){
 
 
     }
+
+
+
+    $scope.submit=function(){
+
+        $scope.country=$('#countries2').val();
+       var doctor={
+
+           firstname:$scope.x.name,
+           gender:$scope.x.gender,
+           reg_no:$scope.x.reg_id,
+           qualification:$scope.x.qualification,
+           specialization:$scope.x.specialization,
+           address1:$scope.x.address1,
+           address2:$scope.x.address2,
+           city:$scope.x.city,
+           state:$scope.x.state,
+           country:$scope.country,
+           pincode:$scope.x.pincode,
+           contact_no:$scope.x.phone,
+           email_id:$scope.x.email,
+           password:$scope.x.password,
+           clinic_id:$scope.x.clinic_id,
+           profile_id:$scope.x.profile_id,
+           branch_id:$scope.x.branch_id,
+           doctor_id:$scope.x.doctor_id
+       }
+
+        $http.post("EditDoctor",doctor).
+            then(function(response,status,header,config){
+                $scope.status=response.data;
+                location.href="doctorDetail";
+            })
+
+    }
 })

@@ -342,22 +342,28 @@
               </div>
             </div>
                 <div class="form-group">
-                  <div class="col-lg-4">
+                  <div class="col-lg-3">
                     <div class="input-group">
                       <span class="input-group-addon">Phone No</span>
                       <input  type="text " class="form-control" ng-model="x.phone">
                     </div>
                   </div>
-                  <div class="col-lg-4">
+                  <div class="col-lg-3">
                     <div class="input-group">
                       <span class="input-group-addon">Email Id</span>
                       <input  type="text " class="form-control" ng-model="x.email">
                     </div>
                   </div>
-                  <div class="col-lg-4">
+                  <div class="col-lg-3">
                     <div class="input-group">
                       <span class="input-group-addon">Branch</span>
                       <select class="form-control"  ng-options="s.branch_id as s.branch_name for s in branch" ng-model="x.branch_id"></select>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="input-group">
+                      <span class="input-group-addon">Password</span>
+                      <input class="form-control" ng-model="x.password" name="password">
                     </div>
                   </div>
                 </div>
