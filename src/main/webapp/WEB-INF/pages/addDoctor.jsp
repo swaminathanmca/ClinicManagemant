@@ -232,7 +232,7 @@
                                          <div class="col-lg-3">
                                              <div class="input-group">
                                                  <span class="input-group-addon">Country</span>
-                                                 <select class="input-medium bfh-countries form-control" data-country="IN" ng-model="country" required></select>
+                                                 <select class="input-medium bfh-countries form-control"  ng-model="country" required></select>
                                              </div>
                                               <span class="text-danger wrapper text-center ng-binding"
                                                     ng-show="myform.country.$invalid &&  myform.country.$touched">Please Enter The Country</span>

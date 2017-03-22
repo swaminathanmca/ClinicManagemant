@@ -200,6 +200,7 @@ public class HelloController {
     String addDoctor(@RequestBody DoctorUser doctor, HttpServletRequest request) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         boolean flag;
+
         flag = doctorService.addDoctor(doctor);
 
         jsonObject.put("status", flag);
