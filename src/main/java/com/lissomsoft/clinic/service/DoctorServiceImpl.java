@@ -38,4 +38,14 @@ public class DoctorServiceImpl implements  DoctorService {
     public boolean editDoctor(DoctorUser doctorUser) {
         return doctorDao.editDoctor(doctorUser);
     }
+
+    @Override
+    public boolean addFrontdesk(DoctorUser frontdesk) {
+        return doctorDao.addFrontdesk(frontdesk);
+    }
+
+    @Override
+    public List<Profile> viewFrontDesk(Integer branch_id) {
+        return doctorDao.viewFrontDesk(branch_id);
+    }
 }

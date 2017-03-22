@@ -144,7 +144,7 @@ public class DoctorDaoImpl implements DoctorDao {
             List<Profile> getDoctordetails=null;
         try {
 
-            String viewdetails="SELECT p.profile_id,p.name,p.email,p.phone,p.address1,p.address2 FROM profile_master p INNER JOIN member_master m  ON m.profile_id=p.profile_id INNER JOIN user u ON u.user_id=m.user_id INNER JOIN doctor_detail d ON d.user_id=u.user_id AND d.branch_id=:branch_id";
+            String viewdetails="SELECT p.profile_id,p.name,p.email,p.phone,p.address1,p.address2 FROM profile_master p INNER JOIN member_master m  ON m.profile_id=p.profile_id INNER JOIN user u ON u.user_id=m.user_id INNER JOIN doctor_detail d ON d.user_id=u.user_id AND d.branch_id=:branch_id AND d.type=1";
 
             Map<String ,Object> parameter=new HashMap<String, Object>();
             parameter.put("branch_id",branch_id);
@@ -252,6 +252,125 @@ try {
 
 
         return result_profile >0 ? true :false;
+    }
+
+    @Override
+    public boolean addFrontdesk(DoctorUser frontdesk) {
+        int result = 0;
+        int result_branch = 0;
+        int result_profile = 0;
+        int result_user = 0;
+        int result_member = 0;
+        int result_role = 0;
+
+        DefaultTransactionDefinition paramTransactionDefinition = new DefaultTransactionDefinition();
+        TransactionStatus status = platformTransactionManager.getTransaction(paramTransactionDefinition);
+
+
+        try{
+            String insertUserSql="INSERT INTO user (username,password,email,status,created_at,updated_at) VALUES (:user_name,:password,:email,1,:created_at,:created_at)";
+            Map<String, Object> parameters1 = new HashMap<String, Object>();
+            parameters1.put("user_name",frontdesk.getFirstname());
+            parameters1.put("password",frontdesk.getPassword());
+            parameters1.put("email",frontdesk.getEmail_id());
+            parameters1.put("created_at",format.format(new Date()));
+
+            result_user = jdbcTemplate.update(insertUserSql, parameters1);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            platformTransactionManager.rollback(status);
+        }
+
+        if((result_user >0) ? true :false){
+
+            try{
+
+                String insertProfileSql="INSERT INTO profile_master(name,address1,address2,city,state,country,phone,email,pincode,gender,created_at,updated_at) VALUES(:first_name,:address1,:address2,:city,:state,:country,:phone,:email,:pincode,:gender,:created_at,:created_at)";
+
+                Map<String, Object> parameters2 = new HashMap<String, Object>();
+                parameters2.put("first_name",frontdesk.getFirstname());
+                parameters2.put("address1",frontdesk.getAddress1());
+                parameters2.put("address2",frontdesk.getAddress2());
+                parameters2.put("city",frontdesk.getCity());
+                parameters2.put("state",frontdesk.getState());
+                parameters2.put("country",frontdesk.getCountry());
+                parameters2.put("phone",frontdesk.getContact_no());
+                parameters2.put("email",frontdesk.getEmail_id());
+                parameters2.put("pincode",frontdesk.getPincode());
+                parameters2.put("gender",frontdesk.getGender());
+                parameters2.put("created_at",format.format(new Date()));
+                result_profile=jdbcTemplate.update(insertProfileSql,parameters2);
+
+            }catch (Exception e){
+                e.printStackTrace();
+                platformTransactionManager.rollback(status);
+            }
+        }
+        if((result_profile > 0)? true :false ){
+
+            try {
+                String insertDoctorSql="INSERT INTO doctor_detail(user_id,clinic_id,branch_id,qualification,type,created_at,updated_at)  VALUES ((SELECT u.user_id FROM user u WHERE u.email=:email),:clinic_id,:branch_id,:qualification,0,:created_at,:created_at)";
+                Map<String, Object> doctorParameter = new HashMap<String, Object>();
+                doctorParameter.put("email",frontdesk.getEmail_id());
+                doctorParameter.put("qualification",frontdesk.getQualification());
+                doctorParameter.put("clinic_id",frontdesk.getClinic_id());
+                doctorParameter.put("branch_id",frontdesk.getBranch_id());
+
+                doctorParameter.put("created_at",format.format(new Date()));
+                result=jdbcTemplate.update(insertDoctorSql,doctorParameter);
+            }catch (Exception e){
+                e.printStackTrace();
+                platformTransactionManager.rollback(status);
+            }
+
+        }
+        if((result >0)? true :false){
+            try {
+                String insertMemberSql="INSERT INTO member_master(user_id,profile_id,created_at,updated_at) VALUES((SELECT  user.user_id FROM user WHERE user.email=:email),(SELECT profile_master.profile_id FROM profile_master WHERE profile_master.email=:email),:created_at,:created_at)";
+                Map<String,Object> memberParameter=new HashMap<String, Object>();
+                memberParameter.put("email",frontdesk.getEmail_id());
+                memberParameter.put("created_at",format.format(new Date()));
+                result_member=jdbcTemplate.update(insertMemberSql,memberParameter);
+
+            }catch (Exception e){
+                e.printStackTrace();
+                platformTransactionManager.rollback(status);
+            }
+        }
+        if((result_member >0) ? true :false){
+            try {
+                String insertRoleSql="INSERT INTO role_mapper(user_id,role_id,created_at,updated_at) VALUES((SELECT user.user_id FROM user WHERE email=:email),5,:created_at,:created_at)";
+                Map<String,Object> roleParameter=new HashMap<String, Object>();
+                roleParameter.put("email",frontdesk.getEmail_id());
+                roleParameter.put("created_at",format.format(new Date()));
+                result_role=jdbcTemplate.update(insertRoleSql,roleParameter);
+
+                platformTransactionManager.commit(status);
+            }catch (Exception e){
+                e.printStackTrace();
+                platformTransactionManager.rollback(status);
+            }
+        }
+
+        return result_role > 0 ? true :false;
+    }
+
+    @Override
+    public List<Profile> viewFrontDesk(Integer branch_id) {
+
+        List<Profile> getFrontdetails=null;
+        try {
+
+            String viewdetails="SELECT p.profile_id,p.name,p.email,p.phone,p.address1,p.address2 FROM profile_master p INNER JOIN member_master m  ON m.profile_id=p.profile_id INNER JOIN user u ON u.user_id=m.user_id INNER JOIN doctor_detail d ON d.user_id=u.user_id AND d.branch_id=:branch_id AND d.type=0";
+
+            Map<String ,Object> parameter=new HashMap<String, Object>();
+            parameter.put("branch_id",branch_id);
+            getFrontdetails= jdbcTemplate.query(viewdetails,parameter,new ProfileMapper());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return getFrontdetails;
     }
 
 

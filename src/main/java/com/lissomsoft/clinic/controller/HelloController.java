@@ -43,7 +43,6 @@ public class HelloController {
         this.userService = userService;
     }
 
-
     @RequestMapping(value = "/")
     public String homePage(HttpServletRequest request) throws Exception {
         return "login";
@@ -94,6 +93,11 @@ public class HelloController {
         return "addDoctor";
     }
 
+    @RequestMapping(value = "/AddFrontDesk")
+    public  String addFrontdesk(HttpServletRequest request)throws Exception{
+        return "addFrontdesk";
+    }
+
     @RequestMapping(value = "/AddPatient")
     public String addPatient(HttpServletRequest request) throws Exception {
         return "patientReg";
@@ -102,6 +106,12 @@ public class HelloController {
     @RequestMapping(value = "/ViewDoctor")
     public String addDoctor(HttpServletRequest request) throws Exception {
         return "viewDoctor";
+    }
+
+    @RequestMapping(value = "/ViewFrontDesk")
+    public String viewFrontdesk(HttpServletRequest request)throws  Exception{
+
+        return "viewFrontdesk";
     }
 
     @RequestMapping(value = "/PatientVisit")
@@ -197,6 +207,19 @@ public class HelloController {
         return jsonObject.toString();
     }
 
+
+    @RequestMapping(value = "/AddFrontDesk",method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String addFrontDesk(@RequestBody DoctorUser frontdesk,HttpServletRequest request)throws JSONException{
+
+        JSONObject data=new JSONObject();
+        boolean flag;
+        flag=doctorService.addFrontdesk(frontdesk);
+        data.put("status",flag);
+
+        return data.toString();
+    }
 
     @RequestMapping(value = "/EditClinic", method = RequestMethod.POST)
     public
@@ -358,6 +381,33 @@ public class HelloController {
             sendResponse.put("status", true);
         }
         return sendResponse.toString();
+    }
+
+    @RequestMapping(value = "/ViewFrontdesk/{branch_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String viewFrontDesk(@PathVariable Integer branch_id)throws Exception{
+        JSONArray jsonArray=new JSONArray();
+        JSONObject data=new JSONObject();
+        List<Profile> frontDesk;
+        frontDesk=doctorService.viewFrontDesk(branch_id);
+        Iterator<Profile> it = frontDesk.iterator();
+
+        while (it.hasNext()) {
+            JSONObject jsonObject = new JSONObject();
+
+            Profile profile = it.next();
+            jsonObject.put("profile_id", profile.getProfile_id());
+            jsonObject.put("name", profile.getName());
+            jsonObject.put("address1", profile.getAddress1());
+            jsonObject.put("address2", profile.getAddress2());
+            jsonObject.put("contact_no", profile.getContact_no());
+            jsonObject.put("email_id", profile.getEmail());
+            jsonArray.put(jsonObject);
+            data.put("user", jsonArray);
+        }
+
+        return data.toString();
     }
 
     @RequestMapping(value = "/BranchDetails/{branch_id}", method = RequestMethod.GET)

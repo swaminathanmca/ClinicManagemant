@@ -14,4 +14,6 @@ public interface DoctorDao {
     List<Profile> viewDoctor(Integer branch_id);
     List<DoctorUser> doctorDetails(Integer profile_id);
     boolean editDoctor(DoctorUser doctorUser);
+    boolean addFrontdesk(DoctorUser frontdesk);
+    List<Profile> viewFrontDesk(Integer branch_id);
 }
