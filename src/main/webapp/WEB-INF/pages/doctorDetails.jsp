@@ -96,11 +96,17 @@
             </ul>
             <!-- /.nav-second-level -->
           </li>
-          <li>
-            <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
-          </li>
-          <li>
-            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
+          <li ng-show="role=='BranchAdmin'">
+            <a href="#"><i class="fa fa-user-o"></i> FrontDesk<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+              <li>
+                <a href="AddFrontDesk">Add FrontDesk</a>
+              </li>
+              <li>
+                <a href="ViewFrontDesk">View FrontDesk</a>
+              </li>
+            </ul>
+            <!-- /.nav-second-level -->
           </li>
 
 

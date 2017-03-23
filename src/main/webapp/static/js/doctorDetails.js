@@ -4,7 +4,8 @@
 
 app.controller('doctorDetails',function($scope,$window,$http){
 
-
+    $scope.role=$window.sessionStorage.role_name;
+    $scope.email= $window.sessionStorage.email;
     $http.get("doctorDetails/"+$window.sessionStorage.profile_id)
         .then(function(response){
             $scope.data=response.data.branch;
