@@ -96,7 +96,7 @@
             </ul>
             <!-- /.nav-second-level -->
           </li>
-          <li ng-show="role=='BranchAdmin'">
+          <li ng-show="role=='BranchAdmin' || role=='Admin'">
             <a href="#"><i class="fa fa-user-o"></i> FrontDesk<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <li>
@@ -125,7 +125,7 @@
       <div class="col-lg-12">
         <div class="panel panel-primary">
           <div class="panel-heading">
-            <h3 class="panel-title">Add Doctor</h3>
+            <h3 class="panel-title">Doctor Details</h3>
           </div>
           <div class="panel-body">
             <div class="row">

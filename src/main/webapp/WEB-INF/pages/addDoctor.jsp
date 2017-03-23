@@ -72,18 +72,6 @@
                     </ul>
 
                 </li>
-                <li ng-hide="role=='SuperAdmin'">
-                    <a href="#"><i class="fa fa-user-md"></i> Doctor<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="AddDoctor">Add Doctor</a>
-                        </li>
-                        <li>
-                            <a href="ViewDoctor">View Doctor</a>
-                        </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                </li>
                 <li ng-show="role=='Admin'">
                     <a href="#"><i class="fa fa-table fa-fw"></i> Branch<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
@@ -95,9 +83,22 @@
                         </li>
                     </ul>
                 </li>
+                <li ng-show="role=='Admin'  || role=='BranchAdmin'">
+                    <a href="#"><i class="fa fa-user-md"></i> Doctor<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="AddDoctor">Add Doctor</a>
+                        </li>
+                        <li>
+                            <a href="ViewDoctor">View Doctor</a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
 
 
-                <li ng-show="role=='BranchAdmin'">
+
+                <li ng-show="role=='BranchAdmin' || role=='Admin'">
                     <a href="#"><i class="fa fa-user-o"></i> FrontDesk<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
@@ -128,7 +129,7 @@
      <div class="row">
          <div class="col-lg-12">
              <div class="panel panel-primary">
-                 <div class="panel-heading">
+                 <div class="panel-heading" >
                      <h3 class="panel-title">Add Doctor</h3>
                  </div>
                  <div class="panel-body">
@@ -256,10 +257,16 @@
                                                  <label class="form-control" type="text" >{{data.clinic_name}}</label>
                                              </div>
                                          </div>
-                                         <div class="col-lg-3">
+                                         <div class="col-lg-3" ng-if="role=='BranchAdmin'">
                                              <div class="input-group">
                                                  <span class="input-group-addon">Branch Name</span>
                                                  <label class="form-control" type="text" >{{data.branch_name}}</label>
+                                             </div>
+                                         </div>
+                                         <div class="col-lg-3" ng-if="role=='Admin'">
+                                             <div class="input-group">
+                                                 <span class="input-group-addon">Branch Name</span>
+                                                 <select class="form-control" ng-options="s.branch_id as s.branch_name for s in branchDetails" ng-model="data.branch_id"></select>
                                              </div>
                                          </div>
                                          <div class="col-lg-3">

@@ -70,12 +70,7 @@
                         </ul>
 
                     </li>
-                    <li>
-                        <a href="AdminBranch"><i class="fa fa-table fa-fw"></i> Branch</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-edit fa-fw"></i> Forms</a>
-                    </li>
+
 
 
                 </ul>

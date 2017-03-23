@@ -157,7 +157,7 @@ public class BranchDaoImpl implements BranchDao {
         List<Branch> getBranchDetails=null;
            try {
 
-               String BranchDetails="SELECT * FROM clinic.branch_master b WHERE b.clinic_id=:clinic_id AND b.ho=0";
+               String BranchDetails="SELECT * FROM clinic.branch_master b WHERE b.clinic_id=:clinic_id";
 
                Map<String,Object> parameter=new HashMap<String, Object>();
                parameter.put("clinic_id",clinic_id);

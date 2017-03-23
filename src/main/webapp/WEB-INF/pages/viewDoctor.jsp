@@ -99,7 +99,7 @@
             </ul>
             <!-- /.nav-second-level -->
           </li>
-          <li ng-show="role=='BranchAdmin'">
+          <li ng-show="role=='BranchAdmin' || role=='Admin'">
             <a href="#"><i class="fa fa-user-o"></i> FrontDesk<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <li>
@@ -130,13 +130,23 @@
   </div>
   <div class="row">
     <div class="col-lg-12">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <button class="btn btn-primary" type="button" ng-click="addDoctor()">Add Doctor</button>
-          <label class="input-group pull-right" style="width: 180px">
-            <span class="input-group-addon glyphicon glyphicon-search" style="top:0px;"></span>
-            <input type="text" ng-model="search" class="input-group  form-control" placeholder="Search">
-          </label>
+      <div class="panel panel-default" >
+
+        <div class="panel-heading" >
+          <div class="row">
+            <div class="col-lg-3">
+              <select class="form-control" name="branch_id"  ng-options="s.branch_id as s.branch_name for s in branchDetails"  ng-change="doctor(branch_iid)" ng-model="branch_iid" ng-if="role=='Admin'"></select>
+              <button class="btn btn-primary" type="button" ng-click="addDoctor()" ng-if="role=='BranchAdmin'">Add Doctor</button>
+            </div>
+            <div class="col-lg-6">
+            </div>
+            <div class="col-lg-3">
+              <label class="input-group pull-right" style="width: 180px">
+                <span class="input-group-addon glyphicon glyphicon-search" style="top:0px;"></span>
+                <input type="text" ng-model="search" class="input-group  form-control" placeholder="Search">
+              </label>
+            </div>
+          </div>
         </div>
 
       <div class="panel-body">
@@ -154,7 +164,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr dir-paginate="x in data | filter:search | orderBy : clinicName | itemsPerPage :5"  ng-click="editDoctor(x.profile_id)">
+                <tr dir-paginate="x in data | filter : search | orderBy : name | itemsPerPage :5"  ng-click="editDoctor(x.profile_id)">
                   <td>{{x.name}}</td>
                   <td>{{x.email_id}}</td>
                   <td>{{x.contact_no}}</td>

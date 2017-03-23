@@ -87,12 +87,7 @@
 
           </li>
 
-          <li>
-            <a href="#"><i class="fa fa-table fa-fw"></i> Tables</a>
-          </li>
-          <li>
-            <a href="#"><i class="fa fa-edit fa-fw"></i> Forms</a>
-          </li>
+
 
 
         </ul>

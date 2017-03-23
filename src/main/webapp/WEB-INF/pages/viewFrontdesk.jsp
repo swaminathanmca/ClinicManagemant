@@ -99,7 +99,7 @@
             </ul>
             <!-- /.nav-second-level -->
           </li>
-          <li ng-show="role=='BranchAdmin'">
+          <li ng-show="role=='BranchAdmin' || role=='Admin'">
             <a href="#"><i class="fa fa-user-o"></i> FrontDesk<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <li>
@@ -132,11 +132,23 @@
       <div class="col-lg-12">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <button class="btn btn-primary" type="button" ng-click="addFrontDesk()">Add FrontDesk</button>
-            <label class="input-group pull-right" style="width: 180px">
-              <span class="input-group-addon glyphicon glyphicon-search" style="top:0px;"></span>
-              <input type="text" ng-model="search" class="input-group  form-control" placeholder="Search">
-            </label>
+            <div class="row">
+              <div class="col-lg-3">
+                <button class="btn btn-primary" type="button" ng-click="addFrontDesk()" ng-if="role=='BranchAdmin'">Add FrontDesk</button>
+                <select class="form-control" name="branch_id"  ng-options="s.branch_id as s.branch_name for s in branchDetails" ng-change="frontDesk(branch_iid)" ng-model="branch_iid" ng-if="role=='Admin'"></select>
+              </div>
+              <div class="col-lg-6">
+
+              </div>
+              <div class="col-lg-3">
+                <label class="input-group pull-right" style="width: 180px">
+                  <span class="input-group-addon glyphicon glyphicon-search" style="top:0px;"></span>
+                  <input type="text" ng-model="search" class="input-group  form-control" placeholder="Search">
+                </label>
+              </div>
+            </div>
+
+
           </div>
 
           <div class="panel-body">

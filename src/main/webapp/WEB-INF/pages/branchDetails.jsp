@@ -97,9 +97,7 @@
                     <li ng-show="role=='SuperAdmin'">
                         <a href="AdminBranch"><i class="fa fa-table fa-fw"></i> Branch</a>
                     </li>
-                    <li>
-                        <a href="#"><i class="fa fa-edit fa-fw"></i> Forms</a>
-                    </li>
+
 
 
                 </ul>
@@ -316,7 +314,7 @@
             <div class="modal-content">
                 <div class="modal-header panel-primary">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Edit Clinic</h4>
+                    <h4 class="modal-title">Edit Branch</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">

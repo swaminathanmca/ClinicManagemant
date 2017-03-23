@@ -13,8 +13,14 @@
         <div class="col-md-4 col-md-offset-4">
             <div class="login-panel panel">
                 <div class="panel-heading">
-                    <h1 >Login</h1>
-                    <p class="text-muted">Sign In to your account</p>
+
+                        <p class="text-center">
+                    <img src="../Clinic/static/img/logo.png"  width="70" height="50" >
+
+                        </p>
+                    <h1 class="text-center" style="color:#0F80A2" >Login</h1>
+                  <%--  <h1 class="text-center">Login</h1>--%>
+                  <%--  <p class="text-muted">Sign In to your account</p>--%>
                 </div>
                 <div class="panel-body">
                     <form role="form" >

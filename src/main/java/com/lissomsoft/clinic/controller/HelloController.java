@@ -94,7 +94,7 @@ public class HelloController {
     }
 
     @RequestMapping(value = "/AddFrontDesk")
-    public  String addFrontdesk(HttpServletRequest request)throws Exception{
+    public String addFrontdesk(HttpServletRequest request) throws Exception {
         return "addFrontdesk";
     }
 
@@ -109,7 +109,7 @@ public class HelloController {
     }
 
     @RequestMapping(value = "/ViewFrontDesk")
-    public String viewFrontdesk(HttpServletRequest request)throws  Exception{
+    public String viewFrontdesk(HttpServletRequest request) throws Exception {
 
         return "viewFrontdesk";
     }
@@ -125,7 +125,7 @@ public class HelloController {
     }
 
     @RequestMapping(value = "/FrontDeskDetail")
-    public String frontDeskdetail (HttpServletRequest request) throws Exception {
+    public String frontDeskdetail(HttpServletRequest request) throws Exception {
         return "FrontDesk";
     }
 
@@ -214,15 +214,15 @@ public class HelloController {
     }
 
 
-    @RequestMapping(value = "/AddFrontDesk",method = RequestMethod.POST)
+    @RequestMapping(value = "/AddFrontDesk", method = RequestMethod.POST)
     public
     @ResponseBody
-    String addFrontDesk(@RequestBody DoctorUser frontdesk,HttpServletRequest request)throws JSONException{
+    String addFrontDesk(@RequestBody DoctorUser frontdesk, HttpServletRequest request) throws JSONException {
 
-        JSONObject data=new JSONObject();
+        JSONObject data = new JSONObject();
         boolean flag;
-        flag=doctorService.addFrontdesk(frontdesk);
-        data.put("status",flag);
+        flag = doctorService.addFrontdesk(frontdesk);
+        data.put("status", flag);
 
         return data.toString();
     }
@@ -363,6 +363,35 @@ public class HelloController {
         return sendResponse.toString();
     }
 
+    @RequestMapping(value = "/ViewBranchAdmin/{clinic_id}", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String viewBranchAdmin(@PathVariable Integer clinic_id) throws Exception {
+        JSONArray jsonArray = new JSONArray();
+        JSONObject sendResponse = new JSONObject();
+        List<Branch> branchDetails;
+        branchDetails = branchService.getBranch(clinic_id);
+        Iterator<Branch> it = branchDetails.iterator();
+        while (it.hasNext()) {
+            Branch branch = it.next();
+            if(branch.getHo()==0) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("branch_name", branch.getBranch_name());
+                jsonObject.put("clinic_id", branch.getChief_id());
+                jsonObject.put("branch_id", branch.getBranch_id());
+                jsonObject.put("description", branch.getDescripton());
+                jsonObject.put("address1", branch.getAddress1());
+                jsonObject.put("address2", branch.getAddress2());
+                jsonObject.put("contact_no", branch.getContact_no());
+                jsonArray.put(jsonObject);
+                sendResponse.put("branch", jsonArray);
+                sendResponse.put("status", true);
+            }
+        }
+        return sendResponse.toString();
+    }
+
+
     @RequestMapping(value = "/ViewBranch/{clinic_id}", method = RequestMethod.GET)
     public
     @ResponseBody
@@ -374,6 +403,7 @@ public class HelloController {
         Iterator<Branch> it = branchDetails.iterator();
         while (it.hasNext()) {
             Branch branch = it.next();
+
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("branch_name", branch.getBranch_name());
             jsonObject.put("clinic_id", branch.getChief_id());
@@ -385,18 +415,19 @@ public class HelloController {
             jsonArray.put(jsonObject);
             sendResponse.put("branch", jsonArray);
             sendResponse.put("status", true);
+
         }
         return sendResponse.toString();
     }
 
-    @RequestMapping(value = "/ViewFrontdesk/{branch_id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/ViewFrontdesk/{branch_id}", method = RequestMethod.GET)
     public
     @ResponseBody
-    String viewFrontDesk(@PathVariable Integer branch_id)throws Exception{
-        JSONArray jsonArray=new JSONArray();
-        JSONObject data=new JSONObject();
+    String viewFrontDesk(@PathVariable Integer branch_id) throws Exception {
+        JSONArray jsonArray = new JSONArray();
+        JSONObject data = new JSONObject();
         List<Profile> frontDesk;
-        frontDesk=doctorService.viewFrontDesk(branch_id);
+        frontDesk = doctorService.viewFrontDesk(branch_id);
         Iterator<Profile> it = frontDesk.iterator();
 
         while (it.hasNext()) {
@@ -498,10 +529,10 @@ public class HelloController {
             jsonObject.put("specialization", user.getSpecialization());
             jsonObject.put("reg_id", user.getReg_no());
             jsonObject.put("password", user.getPassword());
-            jsonObject.put("profile_id",user.getProfile_id());
-            jsonObject.put("clinic_id",user.getClinic_id());
-            jsonObject.put("branch_id",user.getBranch_id());
-            jsonObject.put("doctor_id",user.getDoctor_id());
+            jsonObject.put("profile_id", user.getProfile_id());
+            jsonObject.put("clinic_id", user.getClinic_id());
+            jsonObject.put("branch_id", user.getBranch_id());
+            jsonObject.put("doctor_id", user.getDoctor_id());
             data.put("branch", jsonObject);
 
         }
@@ -513,12 +544,12 @@ public class HelloController {
     @RequestMapping(value = "/EditDoctor", method = RequestMethod.POST)
     public
     @ResponseBody
-    String editDoctor(@RequestBody DoctorUser doctorUser, HttpServletRequest request) throws JSONException{
+    String editDoctor(@RequestBody DoctorUser doctorUser, HttpServletRequest request) throws JSONException {
 
         boolean flag;
-        flag=doctorService.editDoctor(doctorUser);
-        JSONObject jsonObject=new JSONObject();
-        jsonObject.put("status",flag);
+        flag = doctorService.editDoctor(doctorUser);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("status", flag);
         return jsonObject.toString();
     }
 

@@ -83,18 +83,24 @@
                                 <a href="AddDoctor">Add Doctor</a>
                             </li>
                             <li>
-                                <a href="#">View Doctor</a>
+                                <a href="ViewDoctor">View Doctor</a>
                             </li>
                         </ul>
 
                     </li>
-                    <li>
-                        <a href="#"><i class="fa fa-table fa-fw"></i> Tables</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-edit fa-fw"></i> Forms</a>
-                    </li>
 
+                    <li ng-show="role=='BranchAdmin' || role=='Admin'">
+                        <a href="#"><i class="fa fa-user-o"></i> FrontDesk<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="AddFrontDesk">Add FrontDesk</a>
+                            </li>
+                            <li>
+                                <a href="ViewFrontDesk">View FrontDesk</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
 
                 </ul>
             </div>

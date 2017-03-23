@@ -95,7 +95,7 @@
                     </li>
 
 
-                    <li ng-show="role=='BranchAdmin'">
+                    <li ng-show="role=='BranchAdmin' || role=='Admin'">
                         <a href="#"><i class="fa fa-user-o"></i> FrontDesk<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -182,10 +182,16 @@
                                                     <label class="form-control" type="text">{{data.clinic_name}}</label>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-3">
+                                            <div class="col-lg-3" ng-if="role=='BranchAdmin'">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">Branch Name</span>
                                                     <label class="form-control" type="text">{{data.branch_name}}</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3" ng-if="role=='Admin'">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Branch Name</span>
+                                                    <select class="form-control" ng-options= " s.branch_id as s.branch_name for s in branchDetails" ng-model="data.branch_id"></select>
                                                 </div>
                                             </div>
 

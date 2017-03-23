@@ -17,7 +17,11 @@ app.controller('Frontdesk',function($scope,$http,$window){
             $scope.data = response.data;
         });
 
+    $http.get("ViewBranch/"+ $window.sessionStorage.clinic_id)
+        .then(function (response){
+            $scope.branchDetails=response.data.branch;
 
+        });
 
     $scope.submit=function(){
         var Frontdesk={
@@ -26,7 +30,7 @@ app.controller('Frontdesk',function($scope,$http,$window){
             address1:$scope.address1,
             address2:$scope.address2,
             clinic_id:$window.sessionStorage.clinic_id,
-            branch_id:$window.sessionStorage.branch_id,
+            branch_id:$scope.data.branch_id,
             city:$scope.city,
             state:$scope.state,
             country:$scope.country,
@@ -42,6 +46,7 @@ app.controller('Frontdesk',function($scope,$http,$window){
         $http.post('AddFrontDesk',Frontdesk).
             then(function (response,status,headers,config){
                $scope.data=response.data;
+                location.href="ViewFrontDesk";
             });
 
 

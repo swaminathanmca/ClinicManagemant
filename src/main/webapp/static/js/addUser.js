@@ -16,10 +16,11 @@ app.controller('User',function($scope,$http,$window){
             $scope.data = response.data;
         });
 
-   /* $http.get("ViewBranch/"+ $window.sessionStorage.clinic_id)
+    $http.get("ViewBranch/"+ $window.sessionStorage.clinic_id)
         .then(function (response){
             $scope.branchDetails=response.data.branch;
-        });*/
+            console.log($scope.branchDetails);
+        });
 
     $scope.onLoad = function (e, reader, file, fileList,fileObj ) {
 
@@ -36,7 +37,7 @@ $scope.submit=function(){
         address1:$scope.address1,
         address2:$scope.address2,
         clinic_id:$window.sessionStorage.clinic_id,
-        branch_id:$window.sessionStorage.branch_id,
+        branch_id:$scope.data.branch_id,
         city:$scope.city,
         state:$scope.state,
         country:$scope.country,
@@ -49,6 +50,7 @@ $scope.submit=function(){
         qualification:$scope.qualification,
         specialization:$scope.specialization
 }
+
 
     $http.post('AddDoctor',Doctor).
         then(function (response,status,headers,config){
