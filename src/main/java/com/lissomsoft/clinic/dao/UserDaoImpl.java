@@ -27,7 +27,7 @@ public class UserDaoImpl implements  UserDao {
         try{
 
 
-            String authenticateSQL="select role_name,u.user_id,u.username,b.clinic_id,b.branch_id,b.email from clinic.role_mapper map,clinic.role_mastr master,clinic.user u,clinic.branch_master b where map.role_id=master.role_id and u.user_id=map.user_id and b.user_id=u.user_id and u.email=:email and u.password=:password";
+            String authenticateSQL="SELECT rm.role_name,u.username,u.email FROM role_mapper r INNER JOIN user u ON u.user_id=r.user_id INNER JOIN role_mastr rm ON r.role_id=rm.role_id AND u.email=:email AND u.password=:password";
 
             Map<String, Object> parameters = new HashMap<String, Object>();
             parameters.put("email", email_id);

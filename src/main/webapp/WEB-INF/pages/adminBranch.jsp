@@ -70,6 +70,9 @@
                         </ul>
 
                     </li>
+                    <li>
+                        <a href="AdminBranch"><i class="fa fa-table fa-fw"></i> Branch</a>
+                    </li>
 
 
 
@@ -162,6 +165,7 @@
 <script src="<%=request.getContextPath()%>/static/vendor/metisMenu/metisMenu.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/sb-admin-2.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/angular.min.js"></script>
+<script src="<%=request.getContextPath()%>/static/vendor/js-custom-select/customSelect.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>

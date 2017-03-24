@@ -69,24 +69,10 @@
                         </ul>
 
                     </li>
-                    <li ng-show="role==Admin">
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>  User<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="AddUser">Add User</a>
-                            </li>
-                            <li>
-                                <a href="#">View User</a>
-                            </li>
-                        </ul>
+                    <li>
+                        <a href="AdminBranch"><i class="fa fa-table fa-fw"></i> Branch</a>
+                    </li>
 
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-table fa-fw"></i> Tables</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-edit fa-fw"></i> Forms</a>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -562,6 +548,7 @@
 <script src="<%=request.getContextPath()%>/static/vendor/metisMenu/metisMenu.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/sb-admin-2.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/angular.min.js"></script>
+<script src="<%=request.getContextPath()%>/static/vendor/js-custom-select/customSelect.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>

@@ -374,7 +374,7 @@ public class HelloController {
         Iterator<Branch> it = branchDetails.iterator();
         while (it.hasNext()) {
             Branch branch = it.next();
-            if(branch.getHo()==0) {
+            if (branch.getHo() == 0) {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("branch_name", branch.getBranch_name());
                 jsonObject.put("clinic_id", branch.getChief_id());

@@ -2,7 +2,7 @@
  * Created by Admin on 2/16/2017.
  */
 
-var app = angular.module('myApp', ['ui.mask','angularUtils.directives.dirPagination','naif.base64']);
+var app = angular.module('myApp', ['ui.mask','angularUtils.directives.dirPagination','naif.base64','AxelSoft']);
 /*
     .directive('loading', function () {
         return {
@@ -53,6 +53,8 @@ app.controller('myCtrl', function ($scope, $http, $window) {
                             location.href="AddBranch";
                         }else if($window.sessionStorage.role_name=="BranchAdmin"){
                             location.href="AddDoctor";
+                        }else if($window.sessionStorage.role_name=="FrontDesk"){
+                            location.href="AddPatient";
                         }
 
                     } else {

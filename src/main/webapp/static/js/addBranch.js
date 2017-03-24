@@ -10,6 +10,7 @@ app.controller('branchController',function($scope,$http,$window){
             $scope.data = response.data;
             $window.sessionStorage.clinic_id=$scope.data.clinic_id;
             $scope.clinic_id=$window.sessionStorage.clinic_id;
+            $scope.sessionStorage.branch_id=$scope.data.branch_id;
         });
 
     $scope.submit=function(id){

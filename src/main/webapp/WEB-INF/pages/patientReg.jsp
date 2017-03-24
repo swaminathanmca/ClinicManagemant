@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html ng-app="myApp">
+<html ng-app="myApp" ng-controller="Patient">
 <head>
   <link href="<%=request.getContextPath()%>/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/css/custom.css" rel="stylesheet">
@@ -65,38 +65,9 @@
             <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
           </li>
           <li>
-            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Clinic<span class="fa arrow"></span></a>
-            <ul class="nav nav-second-level">
-              <li>
-                <a href="Dashboard">Add Clinic</a>
-              </li>
-              <li>
-                <a href="GetClinic">View Clinic</a>
-              </li>
-            </ul>
-
-          </li>
-          <li>
-            <a href="AddBranch"><i class="fa fa-table fa-fw"></i> Branch</a>
-          </li>
-          <li>
-            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> User<span class="fa arrow"></span></a>
-            <ul class="nav nav-second-level">
-              <li>
-                <a href="AddUser">Add User</a>
-              </li>
-              <li>
-                <a href="#">View User</a>
-              </li>
-            </ul>
-
-          </li>
-          <li>
             <a href="AddPatient"><i class="fa fa-table fa-fw"></i> Patient </a>
           </li>
-          <li>
-            <a href="#"><i class="fa fa-edit fa-fw"></i> Forms</a>
-          </li>
+
 
 
         </ul>
@@ -144,20 +115,16 @@
               <div class="col-lg-3">
                 <div class="input-group">
                   <span class="input-group-addon">Gender</span>
-                  <div class="radio  fileRadioBox form-control">&nbsp;
-                    <label>
-                      <input type="radio" name="sex" value="1" ng-model="patient.gender" required="" class="ng-pristine ng-untouched ng-valid ng-valid-required" checked>&nbsp;Male
-                    </label>
-                    <label>
-                      <input type="radio" name="sex" value="0" ng-model="patient.gender" required="" class="ng-pristine ng-untouched ng-valid ng-valid-required ">&nbsp;Female
-                    </label>
-                  </div>
+                 <SELECT class="form-control" ng-model="gender" >
+                   <option value="1">Male</option>
+                   <option value="0">FeMale</option>
+                 </SELECT>
                 </div>
               </div>
               <div class="col-lg-3">
                 <div class="input-group">
                   <span class="input-group-addon">Marital Status</span>
-                  <select class="form-control">
+                  <select class="form-control" ng-model="maritalstatus">
                     <option value="1">Married</option>
                     <option value="0">Single</option>
                   </select>
@@ -166,7 +133,7 @@
               <div class="col-lg-3">
                 <div class="input-group">
                   <span class="input-group-addon">Blood Group</span>
-                  <select class="form-control">
+                  <select class="form-control" ng-model="bloodgroup">
                     <option value="1">A</option>
                     <option value="0">AB</option>
                     <option value="2">B</option>
@@ -177,7 +144,7 @@
               <div class="col-lg-3">
                 <div class="input-group">
                   <span class="input-group-addon">RH(D) Factor</span>
-                  <select class="form-control">
+                  <select class="form-control" ng-model="rhdfactor">
                     <option value="1">POSITIVE</option>
                     <option value="0">NEGATIVE</option>
 
@@ -188,59 +155,17 @@
             </div>
             <div class="form-group">
               <div class="col-lg-3">
-                <div class="bfh-datepicker "  data-max="today"  ng-mpdel="">
+
+                <div class="bfh-datepicker" id="dob" data-max="today" placeholder="DOB"  >
                   </div>
               </div>
               <div class="col-lg-3">
                 <div class="input-group">
                   <span class="input-group-addon">Patient Category</span>
-                  <select class="form-control" ">
+                  <select class="form-control" ng-model="category">
                     <option value="1">Normal</option>
                     <option value="0">Urgent</option>
                   </select>
-                </div>
-              </div>
-
-                <div class="col-lg-6">
-                  <div class="input-group">
-                    <span class="input-group-addon">Address1</span>
-                    <input type="text" class="form-control" ng-model="address1" name="address1">
-                  </div>
-                </div>
-
-            </div>
-            <div class="form-group">
-              <div class="col-lg-6">
-                <div class="input-group">
-                  <span class="input-group-addon">Address2</span>
-                  <input type="text" class="form-control" ng-model="address2" name="address2">
-                </div>
-              </div>
-              <div class="col-lg-3">
-                <div class="input-group">
-                  <span class="input-group-addon">City</span>
-                  <input type="text" class="form-control" ng-model="city" name="city">
-                </div>
-              </div>
-              <div class="col-lg-3">
-                <div class="input-group">
-                  <span class="input-group-addon">State</span>
-                  <input type="text" class="form-control" ng-model="state" name="state">
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-lg-3">
-                <div class="input-group">
-                  <span class="input-group-addon">Country</span>
-
-                  <select class="form-control bfh-countries" data-country="IN" ></select>
-                </div>
-              </div>
-              <div class="col-lg-3">
-                <div class="input-group">
-                  <span class="input-group-addon">Pin Code</span>
-                  <input type="text" class="form-control" ng-model="pin_code"  name="pin_code">
                 </div>
               </div>
               <div class="col-lg-3">
@@ -255,6 +180,52 @@
                   <input class="form-control" type="text" ui-mask="999-999-9999" name="res_no" ng-model="res_no">
                 </div>
               </div>
+
+
+            </div>
+            <div class="form-group">
+              <div class="col-lg-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Address1</span>
+                  <input type="text" class="form-control" ng-model="address1" name="address1" ng-model="address1">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Address2</span>
+                  <input type="text" class="form-control" ng-model="address2" name="address2" ng-model="address2">
+                </div>
+              </div>
+
+            </div>
+
+            <div class="form-group">
+              <div class="col-lg-3">
+                <div class="input-group">
+                  <span class="input-group-addon">City</span>
+                  <input type="text" class="form-control" ng-model="city" name="city" ng-model="city">
+                </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="input-group">
+                  <span class="input-group-addon">State</span>
+                  <input type="text" class="form-control" ng-model="state" name="state" ng-model="state">
+                </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="input-group">
+                  <span class="input-group-addon">Country</span>
+
+                  <select class="form-control bfh-countries"   ng-model="country"></select>
+                </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="input-group">
+                  <span class="input-group-addon">Pin Code</span>
+                  <input type="text" class="form-control" ng-model="pincode"  name="pin_code" >
+                </div>
+              </div>
+
             </div>
 
             <hr>
@@ -277,16 +248,17 @@
             <div class="form-group">
               <div class="col-lg-6">
                 <div class="input-group">
-                  <span class="input-group-addon">Address2</span>
-                  <input type="text" class="form-control" name="address2" ng-model="emr_address2">
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="input-group">
                   <span class="input-group-addon">Address1</span>
                   <input type="text" class="form-control" name="emr_address1" ng-model="emr_address1">
                 </div>
               </div>
+              <div class="col-lg-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Address2</span>
+                  <input type="text" class="form-control" name="address2" ng-model="emr_address2">
+                </div>
+              </div>
+
 
             </div>
             <div class="form-group">
@@ -305,13 +277,15 @@
               <div class="col-lg-3">
                 <div class="input-group">
                   <span class="input-group-addon">Country</span>
-                  <select class="form-control bfh-countries" data-country="IN" ></select>
+                  <div class="bfh-selectbox bfh-countries" data-country="IN" data-filter="true">
+                  </div>
+
                 </div>
               </div>
               <div class="col-lg-3">
                 <div class="input-group">
                   <span class="input-group-addon">PinCode</span>
-                  <input type="text" class="form-control" ng-model="emr_pin_code" name="emr_pin_code">
+                  <input type="text" class="form-control" ng-model="emr_pin_code" name="emr_pincode">
                 </div>
               </div>
             </div>
@@ -329,7 +303,16 @@
                 </div>
               </div>
           </div>
-
+            <div class="form-actions">
+              <div class="row">
+                <div class="col-lg-offset-4 col-lg-7">
+                  <button type="submit" class="btn btn-success"
+                          ng-disabled="myform.$invalid " ng-click="submitted=true">Save
+                  </button>
+                  <button type="button" class="btn btn-inverse">Cancel</button>
+                </div>
+              </div>
+            </div>
           </fieldset>
           </form>
                 </div>
@@ -350,8 +333,10 @@
 <script src="<%=request.getContextPath()%>/static/vendor/metisMenu/metisMenu.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/sb-admin-2.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/angular.min.js"></script>
+<script src="<%=request.getContextPath()%>/static/vendor/js-custom-select/customSelect.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/addClinic.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/addPatient.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/angular-base64-upload.js"></script>

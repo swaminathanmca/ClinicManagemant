@@ -14,6 +14,7 @@
   <link href="<%=request.getContextPath()%>/static/css/custom.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/css/sb-admin-2.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/vendor/metisMenu/metisMenu.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/static/vendor/js-custom-select/style.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/css/bootstrap-formhelpers.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -135,7 +136,10 @@
         <div class="panel-heading" >
           <div class="row">
             <div class="col-lg-3">
-              <select class="form-control" name="branch_id"  ng-options="s.branch_id as s.branch_name for s in branchDetails"  ng-change="doctor(branch_iid)" ng-model="branch_iid" ng-if="role=='Admin'"></select>
+
+              <div   name="branch_id" custom-select="s.branch_id as s.branch_name for s in branchDetails | filter: { branch_name: $searchTerm }"  ng-change="doctor(branch_iid)" ng-model="branch_iid" ng-if="role=='Admin'">
+
+              </div>
               <button class="btn btn-primary" type="button" ng-click="addDoctor()" ng-if="role=='BranchAdmin'">Add Doctor</button>
             </div>
             <div class="col-lg-6">
@@ -199,8 +203,10 @@
 <script src="<%=request.getContextPath()%>/static/vendor/jquery/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/metisMenu/metisMenu.js"></script>
+
 <script src="<%=request.getContextPath()%>/static/js/sb-admin-2.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/angular.min.js"></script>
+<script src="<%=request.getContextPath()%>/static/vendor/js-custom-select/customSelect.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/addUser.js"></script>

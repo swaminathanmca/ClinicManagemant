@@ -63,7 +63,7 @@
             <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
           </li>
 
-          <li ng-hide="role==SuperAdmin">
+          <li ng-show="role=='Admin'">
             <a href="#"><i class="fa fa-table fa-fw"></i> Branch<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <li>
@@ -74,19 +74,30 @@
               </li>
             </ul>
           </li>
-          <li ng-hide="role=='SuperAdmin'">
+          <li ng-show="role=='BranchAdmin' || role=='Admin'">
             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Doctor<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <li>
                 <a href="AddDoctor">Add Doctor</a>
               </li>
               <li>
-                <a href="#">View Doctor</a>
+                <a href="ViewDoctor">View Doctor</a>
               </li>
             </ul>
 
           </li>
-
+          <li ng-show="role=='BranchAdmin' || role=='Admin'">
+            <a href="#"><i class="fa fa-user-o"></i> FrontDesk<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+              <li>
+                <a href="AddFrontDesk">Add FrontDesk</a>
+              </li>
+              <li>
+                <a href="ViewFrontDesk">View FrontDesk</a>
+              </li>
+            </ul>
+            <!-- /.nav-second-level -->
+          </li>
 
 
 
@@ -173,6 +184,7 @@
 <script src="<%=request.getContextPath()%>/static/vendor/metisMenu/metisMenu.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/sb-admin-2.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/angular.min.js"></script>
+<script src="<%=request.getContextPath()%>/static/vendor/js-custom-select/customSelect.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>
