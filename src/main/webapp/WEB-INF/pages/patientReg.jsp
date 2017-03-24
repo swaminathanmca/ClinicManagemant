@@ -93,7 +93,7 @@
           <div class="panel-body">
             <div class="row">
               <div class="col-lg-12">
-        <form class="form-horizontal ng-invalid" role="form" name="myform" ng-submit="submit()"
+        <form class="form-horizontal ng-invalid" role="form" name="myform" ng-submit="submit(branch_id)"
               novalidate>
           <fieldset>
             <div class="form-group">
@@ -285,7 +285,7 @@
               <div class="col-lg-3">
                 <div class="input-group">
                   <span class="input-group-addon">PinCode</span>
-                  <input type="text" class="form-control" ng-model="emr_pin_code" name="emr_pincode">
+                  <input type="text" class="form-control" ng-model="emr_pincode" name="emr_pincode">
                 </div>
               </div>
             </div>
@@ -302,6 +302,12 @@
                   <input type="text" class="form-control" ui-mask="999-999-9999" name="emr_res_no" ng-model="emr_res_no">
                 </div>
               </div>
+            <div class="col-lg-3">
+              <div class="input-group">
+                <span class="input-group-addon">Email-Id</span>
+                <input  type="text" class="form-control" ng-model="emr_email">
+              </div>
+            </div>
           </div>
             <div class="form-actions">
               <div class="row">

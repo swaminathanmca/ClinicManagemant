@@ -16,4 +16,5 @@ public interface DoctorDao {
     boolean editDoctor(DoctorUser doctorUser);
     boolean addFrontdesk(DoctorUser frontdesk);
     List<Profile> viewFrontDesk(Integer branch_id);
+    List<Doctor> trackSeason(String email);
 }

@@ -1,6 +1,7 @@
 package com.lissomsoft.clinic.service;
 
 import com.lissomsoft.clinic.dao.DoctorDaoImpl;
+import com.lissomsoft.clinic.domain.Doctor;
 import com.lissomsoft.clinic.domain.Profile;
 import com.lissomsoft.clinic.vo.DoctorUser;
 import com.lissomsoft.clinic.dao.DoctorDao;
@@ -47,5 +48,10 @@ public class DoctorServiceImpl implements  DoctorService {
     @Override
     public List<Profile> viewFrontDesk(Integer branch_id) {
         return doctorDao.viewFrontDesk(branch_id);
+    }
+
+    @Override
+    public List<Doctor> trackSeason(String email) {
+        return doctorDao.trackSeason(email);
     }
 }

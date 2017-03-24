@@ -6,25 +6,27 @@ app.controller('Patient',function($scope,$http,$window){
     $scope.email= $window.sessionStorage.email;
 
 
-    $http.get("trackSession/" + $scope.email).
+    $http.get("trackSessionBranch/" + $scope.email).
         then(function (response, status, headers, config) {
 
             $window.sessionStorage.clinic_id=response.data.clinic_id;
             $window.sessionStorage.branch_id=response.data.branch_id;
-
+            $scope.clinic_id=response.data.clinic_id;
+            $scope.branch_id=response.data.branch_id;
             $scope.data = response.data;
         });
 
 
-    $scope.submit=function(){
+    $scope.submit=function(id){
+        console.log(id);
         var patient={
 
             first_name:$scope.first_name,
             last_name:$scope.last_name,
             gender:$scope.gender,
-            maritalstatus:$scope.maritalstatus,
-            bloodgroup:$scope.bloodgroup,
-            rhdfactor:$scope.rhdfactor,
+            mStatus:$scope.maritalstatus,
+            bloodGroup:$scope.bloodgroup,
+            factor:$scope.rhdfactor,
             dob:$('#dob').val(),
             category:$scope.category,
             contact_no:$scope.mobile_no,
@@ -44,11 +46,14 @@ app.controller('Patient',function($scope,$http,$window){
             emergency_country:$scope.country,
             emergency_pincode:$scope.emr_pincode,
             emergency_contact_no:$scope.emr_mobile_no,
-            emergency_residental_no:$scope.emr_res_no
-
+            emergency_residental_no:$scope.emr_res_no,
+            emergency_email:$scope.emr_email
         }
 
-        console.log(patient);
+       $http.post('AddPatient'+id,patient).
+           then(function (response,status,headers,config){
+
+           });
     }
 
 })

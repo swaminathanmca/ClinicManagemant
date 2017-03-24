@@ -1,5 +1,6 @@
 package com.lissomsoft.clinic.service;
 
+import com.lissomsoft.clinic.domain.Doctor;
 import com.lissomsoft.clinic.domain.Profile;
 import com.lissomsoft.clinic.vo.DoctorUser;
 
@@ -17,4 +18,5 @@ public interface DoctorService {
     boolean editDoctor(DoctorUser doctorUser);
     boolean addFrontdesk(DoctorUser frontdesk);
     List<Profile> viewFrontDesk(Integer branch_id);
+    List<Doctor> trackSeason(String email);
 }

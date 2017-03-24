@@ -38,6 +38,8 @@ public class HelloController {
     private BranchService branchService;
     @Autowired(required = false)
     private DoctorService doctorService;
+    @Autowired(required = false)
+    private PatientService patientService;
 
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -183,6 +185,17 @@ public class HelloController {
 
         flag = clinicService.addClinic(clinic);
         jsonObject.put("status", flag);
+        return jsonObject.toString();
+    }
+
+    @RequestMapping(value = "/AddPatient/{email_id:.+}",method = RequestMethod.POST)
+    public
+    String addPatient(@RequestBody Patient patient,@PathVariable String  email,HttpServletRequest request)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        boolean flag;
+        flag=patientService.addPatient(patient,email);
+        jsonObject.put("status",flag);
+
         return jsonObject.toString();
     }
 
@@ -637,6 +650,29 @@ public class HelloController {
         return data.toString();
     }
 
+    @RequestMapping(value = "/EditContact/{clinic_id}/{contact_no}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String EditContact(@PathVariable Integer clinic_id,@PathVariable String contact_no)throws JSONException{
+        JSONObject data=new JSONObject();
+        List<Branch> validateNo;
+        validateNo=clinicService.validateno(contact_no);
+        if(validateNo.isEmpty()){
+            data.put("status",true);
+        }else{
+            Iterator<Branch> it=validateNo.iterator();
+            while (it.hasNext()){
+                Branch validateNumber=it.next();
+                if(clinic_id==validateNumber.getClinic_id()){
+                    data.put("status",true);
+                }else{
+                    data.put("status",false);
+                }
+            }
+        }
+        return data.toString();
+    }
+
     @RequestMapping(value = "/EditEmail/{clinic_id}/{clinic_email:.+}", method = RequestMethod.GET)
     public
     @ResponseBody
@@ -702,6 +738,27 @@ public class HelloController {
 
 
         return data.toString();
+    }
+
+
+
+    @RequestMapping(value = "/trackSessionBranch/{email:.+}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String trackSessionBranch(@PathVariable String email) throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        List<Doctor> trackDetails;
+        trackDetails=doctorService.trackSeason(email);
+        Iterator<Doctor> itr=trackDetails.iterator();
+        while (itr.hasNext()){
+            Doctor track=itr.next();
+            jsonObject.put("clinic_id",track.getClinic_id());
+            jsonObject.put("branch_id",track.getBranch_id());
+            jsonObject.put("status",true);
+        }
+
+
+     return  jsonObject.toString();
     }
 
     @RequestMapping(value = "/EditChiefEmail/{chief_id}/{email_id:.+}", method = RequestMethod.GET)
