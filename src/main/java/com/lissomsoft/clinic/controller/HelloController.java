@@ -188,12 +188,12 @@ public class HelloController {
         return jsonObject.toString();
     }
 
-    @RequestMapping(value = "/AddPatient/{email_id:.+}",method = RequestMethod.POST)
+    @RequestMapping(value = "/AddPatient/{branch_id}",method = RequestMethod.POST)
     public
-    String addPatient(@RequestBody Patient patient,@PathVariable String  email,HttpServletRequest request)throws JSONException{
+    String addPatient(@RequestBody Patient patient,@PathVariable Integer  branch_id,HttpServletRequest request)throws JSONException{
         JSONObject jsonObject=new JSONObject();
         boolean flag;
-        flag=patientService.addPatient(patient,email);
+        flag=patientService.addPatient(patient,branch_id);
         jsonObject.put("status",flag);
 
         return jsonObject.toString();

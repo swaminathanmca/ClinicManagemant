@@ -28,7 +28,7 @@ public class Patient {
 
     private String status;
 
-    private String category;
+    private String email;
 
     private String contact_no;
 
@@ -144,12 +144,12 @@ public class Patient {
         this.lastName = lastName;
     }
 
-    public String getCategory() {
-        return category;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getContact_no() {
@@ -310,7 +310,7 @@ public class Patient {
                 ",factor='"+factor+ '\'' +
                 ", dob='" + dob + '\'' +
                 ",status='"+status+ '\'' +
-                ",category='"+category+ '\'' +
+                ",email='"+email+ '\'' +
                 ",contact_no='"+contact_no+ '\'' +
                 ",residental_no='"+residental_no+ '\'' +
                 ",address1='"+address1+ '\'' +

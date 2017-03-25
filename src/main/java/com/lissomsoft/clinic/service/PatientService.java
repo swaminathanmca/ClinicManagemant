@@ -7,5 +7,5 @@ import com.lissomsoft.clinic.domain.Patient;
  */
 public interface PatientService {
 
-    boolean addPatient(Patient patient,String email);
+    boolean addPatient(Patient patient,Integer clinic_id);
 }

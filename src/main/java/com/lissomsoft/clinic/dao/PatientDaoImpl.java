@@ -9,16 +9,17 @@ public class PatientDaoImpl implements  PatientDao {
 
 
     @Override
-    public boolean addPatient(Patient patient,String email) {
+    public boolean addPatient(Patient patient,Integer clinic_id) {
 
         int result=0;
-        try{
+       /* try{
 
             String insertPateientSql="";
 
         }catch (Exception e){
             e.printStackTrace();
-        }
+        }*/
+        System.out.println(patient+","+clinic_id);
 
         return result >0 ? true :false;
     }

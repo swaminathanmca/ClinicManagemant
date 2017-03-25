@@ -161,11 +161,8 @@
               </div>
               <div class="col-lg-3">
                 <div class="input-group">
-                  <span class="input-group-addon">Patient Category</span>
-                  <select class="form-control" ng-model="category">
-                    <option value="1">Normal</option>
-                    <option value="0">Urgent</option>
-                  </select>
+                  <span class="input-group-addon">Email</span>
+                 <input  type="email" class="form-control" name="email" ng-model="email_id">
                 </div>
               </div>
               <div class="col-lg-3">

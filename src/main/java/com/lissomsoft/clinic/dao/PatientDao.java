@@ -6,5 +6,5 @@ import com.lissomsoft.clinic.domain.Patient;
  * Created by Lissomsoft on 3/24/2017.
  */
 public interface PatientDao {
-    boolean addPatient(Patient patient,String email);
+    boolean addPatient(Patient patient,Integer clinic_id);
 }

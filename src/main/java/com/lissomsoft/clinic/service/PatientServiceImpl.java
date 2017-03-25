@@ -12,7 +12,7 @@ public class PatientServiceImpl implements PatientService {
     private PatientDao patientDao;
 
     @Override
-    public boolean addPatient(Patient patient,String email) {
-        return patientDao.addPatient(patient,email);
+    public boolean addPatient(Patient patient,Integer clinic_id) {
+        return patientDao.addPatient(patient,clinic_id);
     }
 }

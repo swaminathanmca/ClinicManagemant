@@ -111,10 +111,11 @@ public class BranchDaoImpl implements BranchDao {
 
             try{
 
-                String insertMemberSql="INSERT INTO member_master (user_id,profile_id,created_at,updated_at) VALUES ((SELECT u.user_id FROM user u WHERE u.email=:email),(SELECT p.profile_id FROM profile_master p WHERE p.email=:email),:created_at,:created_at)";
+                String insertMemberSql="INSERT INTO member_master (user_id,profile_id,created_at,updated_at) VALUES ((SELECT u.user_id FROM user u WHERE u.email=:email_id),(SELECT p.profile_id FROM profile_master p WHERE p.email=:email),:created_at,:created_at)";
 
                 Map<String,Object> memberparameters=new HashMap<String, Object>();
-                memberparameters.put("email",branch.getEmail_id());
+                memberparameters.put("email_id",branch.getEmail_id());
+                memberparameters.put("email",branch.getChief_email_id());
                 memberparameters.put("created_at",format.format(new Date()));
                 result_member=jdbcTemplate.update(insertMemberSql,memberparameters);
 

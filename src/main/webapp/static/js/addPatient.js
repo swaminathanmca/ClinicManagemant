@@ -18,17 +18,17 @@ app.controller('Patient',function($scope,$http,$window){
 
 
     $scope.submit=function(id){
-        console.log(id);
+       $scope.branch_id=id;
         var patient={
 
-            first_name:$scope.first_name,
-            last_name:$scope.last_name,
+            fullName:$scope.first_name,
+            lastName:$scope.last_name,
             gender:$scope.gender,
             mStatus:$scope.maritalstatus,
             bloodGroup:$scope.bloodgroup,
             factor:$scope.rhdfactor,
             dob:$('#dob').val(),
-            category:$scope.category,
+            email:$scope.email_id,
             contact_no:$scope.mobile_no,
             residental_no:$scope.res_no,
             address1:$scope.address1,
@@ -50,7 +50,7 @@ app.controller('Patient',function($scope,$http,$window){
             emergency_email:$scope.emr_email
         }
 
-       $http.post('AddPatient'+id,patient).
+       $http.post('AddPatient/'+$scope.branch_id,patient).
            then(function (response,status,headers,config){
 
            });
