@@ -369,7 +369,7 @@
                                         <div class="col-lg-4">
                                             <div class="input-group">
                                                 <span class="input-group-addon">E-Mail</span>
-                                                <input class="form-control" type="email" ng-model="x.email_id" name="email_id" ng-blur="editEmail(x.clinicId,x.email_id)" required/>
+                                                <input class="form-control" type="email" ng-model="x.email_id" name="email_id" ng-blur="editEmail(x.branch_id,x.email_id)" required/>
                                             </div>
                                             <span class="text-danger wrapper text-center ng-binding"
                                                   ng-show="myform.email_id.$invalid  "> Enter Valid Email</span>
@@ -380,7 +380,7 @@
                                         <div class="col-lg-4">
                                             <div class="input-group">
                                                 <span class="input-group-addon">PhoneNo</span>
-                                                <input class="form-control" type="text" ng-model="x.contact_no" ui-mask="999-999-9999" name="contact_no" ng-blur="editContact(x.clinicId,x.contact_no)" required/>
+                                                <input class="form-control" type="text" ng-model="x.contact_no" ui-mask="999-999-9999" name="contact_no" ng-blur="editContact(x.branch_id,x.contact_no)" required/>
                                             </div>
                                             <span class="text-danger wrapper text-center ng-binding"
                                                   ng-show="myform.contact_no.$invalid"> Enter Phone  No</span>

@@ -2,7 +2,12 @@
  * Created by Lissomsoft on 3/15/2017.
  */
 app.controller('branchdetails',function($scope,$window,$http){
-console.log($window.sessionStorage.branch_id);
+
+
+    $scope.authErrorEmail="The Email Already Take";
+    $scope.authError="The Email Already Taken";
+    $scope.chiefEmail="Taken";
+    $scope.chiefError="Already Taken";
     $scope.role=$window.sessionStorage.role_name;
 $http.get("BranchDetails/"+$window.sessionStorage.branch_id).
     then(function(response,status,headers,config){
@@ -26,6 +31,67 @@ $http.get("BranchDetails/"+$window.sessionStorage.branch_id).
             });
     }
 
+    $scope.editEmail=function(id,email){
+        $scope.branch_id=id;
+        $scope.clinic_email=email;
+        $http.get("EditEmail/"+$scope.branch_id+"/"+$scope.clinic_email).
+            then(function (response,status,error,headers,config){
+                $scope.error_email=response.data.status;
+
+                if($scope.error_email==false){
+                    $scope.authErrorEmail="";
+                }else{
+                    $scope.authErrorEmail="The Email Already Take";
+                }
+            })
+
+    }
+
+    $scope.editContact=function(id,contact_no){
+        $scope.branch_id=id;
+        $scope.contact_no=contact_no;
+        $http.get("EditContact/"+$scope.branch_id+"/"+$scope.contact_no).
+            then(function(response,status,error){
+                $scope.error = response.data.status;
+                if($scope.error==false){
+                    $scope.authError="";
+
+                }else{
+                    $scope.authError="The Email Already Taken";
+                }
+            })
+    }
+
+
+    $scope.EditCemail=function(id,email_id){
+        $scope.chief_id=id;
+        $scope.email_id=email_id;
+        $http.get("EditChiefEmail/"+$scope.chief_id+"/"+$scope.email_id).
+            then(function(response,status,error){
+                $scope.err_chief_email=response.data.status;
+                console.log($scope.err_chief_email);
+                if($scope.err_chief_email==false){
+                    $scope.chiefEmail="";
+                }else{
+                    $scope.chiefEmail="Taken";
+                }
+            })
+    }
+
+    $scope.EditChiefContact=function(id,contact_no){
+        $scope.chief_id=id;
+        $scope.cihef_contactno=contact_no;
+        $http.get("EditChiefContact/"+$scope.chief_id+"/"+$scope.cihef_contactno).
+            then(function(response,status,error){
+                $scope.err=response.data.status;
+
+                if($scope.err==false){
+                    $scope.chiefError="";
+                }else{
+                    $scope.chiefError="Already Taken";
+                }
+            })
+    }
 
     $scope.submit=function(id){
         $scope.branch_id=id;

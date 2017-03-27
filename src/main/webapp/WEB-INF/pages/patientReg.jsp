@@ -132,25 +132,12 @@
               </div>
               <div class="col-lg-3">
                 <div class="input-group">
-                  <span class="input-group-addon">Blood Group</span>
-                  <select class="form-control" ng-model="bloodgroup">
-                    <option value="1">A</option>
-                    <option value="0">AB</option>
-                    <option value="2">B</option>
-                    <option value="3">O</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-lg-3">
-                <div class="input-group">
-                  <span class="input-group-addon">RH(D) Factor</span>
-                  <select class="form-control" ng-model="rhdfactor">
-                    <option value="1">POSITIVE</option>
-                    <option value="0">NEGATIVE</option>
+                  <span class="input-group-addon">BloodGroup</span>
 
-                  </select>
+                  <select class="form-control" ng-options="s.blood_id as s.blood_type for s in blood" ng-model="blood_id"  ></select>
                 </div>
               </div>
+
 
             </div>
             <div class="form-group">
@@ -168,13 +155,13 @@
               <div class="col-lg-3">
                 <div class="input-group">
                   <span class="input-group-addon">Mobile No</span>
-                  <input class="form-control" type="text" ui-mask="999-999-9999" name="mobile_no" ng-model="mobile_no">
+                  <input class="form-control" type="text" ui-mask="999-999-9999" name="mobile_no" ng-model="mobile_no" ng-blur="validate()">
                 </div>
               </div>
               <div class="col-lg-3">
                 <div class="input-group">
                   <span class="input-group-addon">Res No</span>
-                  <input class="form-control" type="text" ui-mask="999-999-9999" name="res_no" ng-model="res_no">
+                  <input class="form-control" type="text" ui-mask="999-999-9999" name="res_no" ng-model="res_no" >
                 </div>
               </div>
 
@@ -274,8 +261,7 @@
               <div class="col-lg-3">
                 <div class="input-group">
                   <span class="input-group-addon">Country</span>
-                  <div class="bfh-selectbox bfh-countries" data-country="IN" data-filter="true">
-                  </div>
+                  <select class="form-control bfh-countries"   ng-model="country"></select>
 
                 </div>
               </div>

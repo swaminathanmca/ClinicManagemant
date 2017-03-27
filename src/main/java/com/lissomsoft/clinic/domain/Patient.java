@@ -66,6 +66,8 @@ public class Patient {
 
     private String emergency_residental_no;
 
+    private String emergency_email;
+
 
 
 
@@ -296,6 +298,14 @@ public class Patient {
         this.emergency_residental_no = emergency_residental_no;
     }
 
+    public String getEmergency_email() {
+        return emergency_email;
+    }
+
+    public void setEmergency_email(String emergency_email) {
+        this.emergency_email = emergency_email;
+    }
+
     @Override
  public String toString(){
 
@@ -329,7 +339,7 @@ public class Patient {
                 ",emergency_pincode='"+emergency_pincode+ '\'' +
                 ",emergency_contact_no='"+emergency_contact_no+ '\'' +
                 ",emergency_residental_no='"+emergency_residental_no+ '\'' +
-
+                ",emergency_email='"+emergency_email+'\'' +
                 '}';
 
  }

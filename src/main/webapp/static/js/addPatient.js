@@ -16,6 +16,20 @@ app.controller('Patient',function($scope,$http,$window){
             $scope.data = response.data;
         });
 
+    $http.get("BloodGroup")
+        .then(function(response,status,headers,config){
+            $scope.blood=response.data.blood;
+
+        })
+$scope.validate=function(){
+    $scope.no=$scope.mobile_no;
+    console.log($scope.no);
+    $http.get("ValidatePatient/"+$scope.no)
+        .then(function(response,status,config){
+            $scope.validatePatient=response.data;
+        })
+
+}
 
     $scope.submit=function(id){
        $scope.branch_id=id;
@@ -25,8 +39,7 @@ app.controller('Patient',function($scope,$http,$window){
             lastName:$scope.last_name,
             gender:$scope.gender,
             mStatus:$scope.maritalstatus,
-            bloodGroup:$scope.bloodgroup,
-            factor:$scope.rhdfactor,
+            bloodGroup:$scope.blood_id,
             dob:$('#dob').val(),
             email:$scope.email_id,
             contact_no:$scope.mobile_no,

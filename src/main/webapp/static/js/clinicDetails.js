@@ -50,9 +50,9 @@ app.controller('clinicDetails',function($scope,$window,$http){
     }
 
         $scope.editEmail=function(id,email){
-            $scope.clinic_id=id;
+            $scope.branch_id=id;
             $scope.clinic_email=email;
-            $http.get("EditEmail/"+$scope.clinic_id+"/"+$scope.clinic_email).
+            $http.get("EditEmail/"+$scope.branch_id+"/"+$scope.clinic_email).
                 then(function (response,status,error,headers,config){
                     $scope.error_email=response.data.status;
 
@@ -65,9 +65,9 @@ app.controller('clinicDetails',function($scope,$window,$http){
 
         }
     $scope.editContact=function(id,contact_no){
-        $scope.clinic_id=id;
+        $scope.branch_id=id;
         $scope.contact_no=contact_no;
-        $http.get("EditContact/"+$scope.clinic_id+"/"+$scope.contact_no).
+        $http.get("EditContact/"+$scope.branch_id+"/"+$scope.contact_no).
             then(function(response,status,error){
                 $scope.error = response.data.status;
                 if($scope.error==false){

@@ -88,10 +88,22 @@
                                 <a href="AddDoctor">Add Doctor</a>
                             </li>
                             <li>
-                                <a href="#">View Doctor</a>
+                                <a href="ViewDoctor">View Doctor</a>
                             </li>
                         </ul>
 
+                    </li>
+                    <li ng-show="role=='BranchAdmin' || role=='Admin'">
+                        <a href="#"><i class="fa fa-user-o"></i> FrontDesk<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="AddFrontDesk">Add FrontDesk</a>
+                            </li>
+                            <li>
+                                <a href="ViewFrontDesk">View FrontDesk</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
                     </li>
 
                     <li ng-show="role=='SuperAdmin'">
@@ -422,20 +434,26 @@
                                             <div class="input-group">
                                                 <span class="input-group-addon">E-Mail</span>
                                                 <input class="form-control" type="email" ng-model="x.email_id"
-                                                       name="email_id" required/>
+                                                       name="email_id" ng-blur="editEmail(x.branch_id,x.email_id)" required/>
                                             </div>
                                             <span class="text-danger wrapper text-center ng-binding"
                                                   ng-show="myform.email_id.$invalid  "> Enter Valid Email</span>
+                                            <span class="text-danger wrapper text-center ng-binding" ng-show="error_email==false">
+                                                   The Email Already Taken
+                                                     </span>
 
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="input-group">
                                                 <span class="input-group-addon">PhoneNo</span>
                                                 <input class="form-control" type="text" ng-model="x.contact_no"
-                                                       ui-mask="999-999-9999" name="contact_no" required/>
+                                                       ui-mask="999-999-9999" name="contact_no" ng-blur="editContact(x.branch_id,x.contact_no)" required/>
                                             </div>
                                             <span class="text-danger wrapper text-center ng-binding"
                                                   ng-show="myform.contact_no.$invalid"> Enter Phone  No</span>
+                                            <span class="text-danger wrapper text-center ng-binding" ng-show="error==false">
+                                                       The Mobile Number Already Taken
+                                                           </span>
 
 
                                         </div>
@@ -561,10 +579,13 @@
                                             <div class="input-group">
                                                 <span class="input-group-addon"> Email</span>
                                                 <input class="form-control" type="text" ng-model="x.Chief_email_id"
-                                                       name="cemail" required/>
+                                                       name="cemail" ng-blur="EditCemail(x.Chief_id,x.Chief_email_id)" required/>
                                             </div>
                                             <span class="text-danger wrapper text-center ng-binding"
                                                   ng-show="myform.cemail.$invalid">Please  Enter Email-id </span>
+                                            <span class="text-danger wrapper text-center ng-binding" ng-show="err_chief_email==false">
+                                                       The Email Already Taken
+                                                           </span>
 
                                         </div>
                                         <div class="col-lg-6">
@@ -577,6 +598,9 @@
                                             </div>
                                             <span class="text-danger wrapper text-center ng-binding"
                                                   ng-show="myform.cphoneno.$invalid">Please  Enter Phone No </span>
+                                              <span class="text-danger wrapper text-center ng-binding" ng-show="err==false">
+                                                       The Mobile Number Already Taken
+                                                           </span>
 
                                         </div>
 
@@ -585,7 +609,7 @@
                                         <div class="row">
                                             <div class="col-lg-offset-4 col-lg-7">
                                                 <button type="submit" class="btn btn-success"
-                                                        ng-disabled="myform.$invalid " ng-click="submitted=true">Save
+                                                        ng-disabled="myform.$invalid  || !authError || !authErrorEmail  || !chiefError || !chiefEmail " ng-click="submitted=true">Save
                                                 </button>
                                                 <button type="button" class="btn btn-inverse" data-dismiss="modal">
                                                     Cancel

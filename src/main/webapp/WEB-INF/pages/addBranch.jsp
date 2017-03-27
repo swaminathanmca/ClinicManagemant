@@ -230,21 +230,24 @@
                                                 <div class="input-group">
                                                     <span class="input-group-addon">Email</span>
                                                     <input class="form-control" name="email" type="email" value=""
-                                                           ng-model="email_id"  required>
+                                                           ng-model="email_id" ng-blur="emailvalidate()"  required>
                                                 </div>
 
                                                 <span class="text-danger wrapper text-center ng-binding"
                                                       ng-show="myform.email.$invalid &&  myform.email.$touched"> Enter Valid Email</span>
+                                                  <span class="text-danger wrapper text-center ng-binding" ng-show="error_email==false">
+                                                   The Email Already Taken
+                                                     </span>
                                             </div>
                                             <div class="col-lg-3">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">Phone No</span>
                                                     <input class="form-control" name="branch_no" type="text" value=""
-                                                           ui-mask="999-999-9999" ng-model="contact_no"
-
-                                                           required>
+                                                           ui-mask="999-999-9999" ng-model="contact_no"  ng-blur="validate()" required>
                                                 </div>
-
+                                                <span class="text-danger wrapper text-center ng-binding" ng-show="error==false">
+                                                       The Mobile Number Already Taken
+                                                           </span>
                                                 <span class="text-danger wrapper text-center ng-binding"
                                                       ng-show="myform.branch_no.$invalid &&  myform.branch_no.$touched">Please Enter Contact Number</span>
                                             </div>
@@ -397,12 +400,15 @@
                                                 <div class="input-group">
                                                     <span class="input-group-addon">Phone No</span>
                                                     <input class="form-control" name="chief_contact_no"
-                                                           ui-mask="999-999-9999" type="text"
+                                                           ui-mask="999-999-9999" type="text" ng-blur="validatecontact()"
                                                            ng-model="chief_contact_no"
                                                            required>
                                                 </div>
                                                      <span class="text-danger wrapper text-center ng-binding"
                                                            ng-show="myform.chief_contact_no.$invalid &&  myform.chief_contact_no.$touched">Please Enter Phone No</span>
+                                                <span class="text-danger wrapper text-center ng-binding" ng-show="err==false">
+                                                       The Mobile Number Already Taken
+                                                           </span>
 
                                             </div>
                                             <div class="col-lg-3">
@@ -410,11 +416,14 @@
                                                     <span class="input-group-addon">Email Id</span>
                                                     <input class="form-control" placeholder="Email"
                                                            name="branch_admin_email_id" type="email"
-                                                           ng-model="branch_admin_email_id"
+                                                           ng-model="branch_admin_email_id" ng-blur="validateEmail()"
                                                            required>
                                                 </div>
                                                 <span class="text-danger wrapper text-center ng-binding"
                                                       ng-show="myform.branch_admin_email_id.$invalid &&  myform.branch_admin_email_id.$touched">Please Enter Valid Email Id</span>
+                                                <span class="text-danger wrapper text-center ng-binding" ng-show="err_chief_email==false">
+                                                       The Email Already Taken
+                                                           </span></div>
                                                     </div>
                                         </div>
 
@@ -423,9 +432,7 @@
                                         <div class="form-actions">
                                             <div class="row">
                                                 <div class="col-lg-offset-4 col-lg-7">
-                                                    <button type="submit" class="btn btn-success"
-                                                            ng-disabled="myform.$invalid"
-                                                            ng-click="submitted=true">Save
+                                                    <button type="submit" class="btn btn-success" ng-disabled="myform.$invalid || !authError || !authErrorEmail || !chiefError || !chiefEmail " ng-click="submitted=true">Save
                                                     </button>
                                                     <button type="button" class="btn btn-inverse">Cancel</button>
                                                 </div>

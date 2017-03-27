@@ -137,7 +137,7 @@ public class HelloController {
     String signin(@RequestBody User user, HttpServletRequest request) throws JSONException {
 
         HttpSession session = request.getSession();
-        //System.out.println("Hello"+user.toString());
+
 
         String message = "Enter Correct Username And Password";
         List<User> userList;
@@ -190,10 +190,13 @@ public class HelloController {
 
     @RequestMapping(value = "/AddPatient/{branch_id}",method = RequestMethod.POST)
     public
+    @ResponseBody
     String addPatient(@RequestBody Patient patient,@PathVariable Integer  branch_id,HttpServletRequest request)throws JSONException{
         JSONObject jsonObject=new JSONObject();
         boolean flag;
+
         flag=patientService.addPatient(patient,branch_id);
+
         jsonObject.put("status",flag);
 
         return jsonObject.toString();
@@ -281,6 +284,7 @@ public class HelloController {
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("clinicId", clinicdetails.getClinic_id());
+            jsonObject.put("branch_id",clinicdetails.getBranch_id());
             jsonObject.put("clinicName", clinicdetails.getClinic_name());
             jsonObject.put("Chief", clinicdetails.getChief_name());
             jsonObject.put("reg_no", clinicdetails.getRegister_no());
@@ -632,6 +636,7 @@ public class HelloController {
         JSONObject data = new JSONObject();
         List<Clinic> validateName;
         validateName = clinicService.validateName(clinic_name);
+
         if (validateName.isEmpty()) {
             data.put("status", true);
         } else {
@@ -650,20 +655,21 @@ public class HelloController {
         return data.toString();
     }
 
-    @RequestMapping(value = "/EditContact/{clinic_id}/{contact_no}",method = RequestMethod.GET)
+    @RequestMapping(value = "/EditContact/{branch_id}/{contact_no}",method = RequestMethod.GET)
     public
     @ResponseBody
-    String EditContact(@PathVariable Integer clinic_id,@PathVariable String contact_no)throws JSONException{
+    String EditContact(@PathVariable Integer branch_id,@PathVariable String contact_no)throws JSONException{
         JSONObject data=new JSONObject();
         List<Branch> validateNo;
         validateNo=clinicService.validateno(contact_no);
+
         if(validateNo.isEmpty()){
             data.put("status",true);
         }else{
             Iterator<Branch> it=validateNo.iterator();
             while (it.hasNext()){
                 Branch validateNumber=it.next();
-                if(clinic_id==validateNumber.getClinic_id()){
+                if(branch_id==validateNumber.getBranch_id()){
                     data.put("status",true);
                 }else{
                     data.put("status",false);
@@ -673,10 +679,10 @@ public class HelloController {
         return data.toString();
     }
 
-    @RequestMapping(value = "/EditEmail/{clinic_id}/{clinic_email:.+}", method = RequestMethod.GET)
+    @RequestMapping(value = "/EditEmail/{branch_id}/{clinic_email:.+}", method = RequestMethod.GET)
     public
     @ResponseBody
-    String EditEmail(@PathVariable Integer clinic_id, @PathVariable String clinic_email) throws JSONException {
+    String EditEmail(@PathVariable Integer branch_id, @PathVariable String clinic_email) throws JSONException {
 
         JSONObject data = new JSONObject();
         List<Branch> editEmail;
@@ -689,7 +695,7 @@ public class HelloController {
             while (it.hasNext()) {
                 Branch emailValidate = it.next();
 
-                if (clinic_id == emailValidate.getClinic_id()) {
+                if (branch_id == emailValidate.getBranch_id()) {
                     data.put("status", true);
                 } else {
                     data.put("status", false);
@@ -866,4 +872,45 @@ public class HelloController {
         return jsonObject.toString();
     }
 
+
+    @RequestMapping(value = "/BloodGroup",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String bloodgroup(HttpServletRequest request)throws JSONException{
+
+        JSONArray jsonArray=new JSONArray();
+        JSONObject data=new JSONObject();
+        List<Blood> bloodDetails;
+        bloodDetails=patientService.bloodtypeDetails();
+        Iterator<Blood> it=bloodDetails.iterator();
+        while (it.hasNext()){
+            Blood getDetails=it.next();
+            JSONObject jsonObject=new JSONObject();
+            jsonObject.put("blood_id",getDetails.getBlood_id());
+            jsonObject.put("blood_type",getDetails.getBlood_type());
+            jsonArray.put(jsonObject);
+
+        }
+        data.put("blood",jsonArray);
+
+        return data.toString();
+
+    }
+
+    @RequestMapping(value = "/ValidatePatient/{contact_no}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String validatePatient(@PathVariable String contact_no,HttpServletRequest request)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        List<Patient> validateNo;
+        validateNo=patientService.validatePatient(contact_no);
+        if(validateNo.isEmpty()){
+            jsonObject.put("status",true);
+        }else{
+            jsonObject.put("status",false);
+        }
+
+
+        return jsonObject.toString();
+    }
 }

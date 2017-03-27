@@ -1,8 +1,11 @@
 package com.lissomsoft.clinic.service;
 
 import com.lissomsoft.clinic.dao.PatientDao;
+import com.lissomsoft.clinic.domain.Blood;
 import com.lissomsoft.clinic.domain.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 /**
  * Created by Lissomsoft on 3/24/2017.
@@ -14,5 +17,16 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public boolean addPatient(Patient patient,Integer clinic_id) {
         return patientDao.addPatient(patient,clinic_id);
+    }
+
+    @Override
+    public List<Blood> bloodtypeDetails() {
+
+        return patientDao.bloodtypeDetails();
+    }
+
+    @Override
+    public List<Patient> validatePatient(String contact_no) {
+        return patientDao.validatePatient(contact_no);
     }
 }
