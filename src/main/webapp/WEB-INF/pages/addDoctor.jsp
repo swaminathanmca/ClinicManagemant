@@ -6,7 +6,7 @@
     <link href="<%=request.getContextPath()%>/static/css/sb-admin-2.css" rel="stylesheet">
     <link href="<%=request.getContextPath()%>/static/vendor/metisMenu/metisMenu.css" rel="stylesheet">
     <link href="<%=request.getContextPath()%>/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-
+    <link href="<%=request.getContextPath()%>/static/vendor/multiple-select/multiple-select.css" rel="stylesheet">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
@@ -263,12 +263,7 @@
                                                  <label class="form-control" type="text" >{{data.branch_name}}</label>
                                              </div>
                                          </div>
-                                         <div class="col-lg-3" ng-if="role=='Admin'">
-                                             <div class="input-group">
-                                                 <span class="input-group-addon">Branch Name</span>
-                                                 <select class="form-control" ng-options="s.branch_id as s.branch_name for s in branchDetails" ng-model="data.branch_id"></select>
-                                             </div>
-                                         </div>
+
                                          <div class="col-lg-3">
                                              <div class="input-group">
                                                  <span class="input-group-addon">Email</span>
@@ -286,9 +281,6 @@
                                               <span class="text-danger wrapper text-center ng-binding"
                                                     ng-show="myform.phone_no.$invalid &&  myform.phone_no.$touched">Please Enter The Phone No</span>
                                          </div>
-
-                                     </div>
-                                     <div class="form-group" >
                                          <div class="col-lg-3">
                                              <div class="input-group">
                                                  <span class="input-group-addon">
@@ -298,6 +290,22 @@
                                              </div>
                                               <span class="text-danger wrapper text-center ng-binding"
                                                     ng-show="myform.password.$invalid &&  myform.password.$touched">Please Enter The Password</span>
+                                         </div>
+                                     </div>
+                                     <div class="form-group" >
+                                         <div class="col-lg-6" ng-if="role=='Admin'">
+                                               <div class="input-group">
+                                                   <span class="input-group-addon">Branch Name</span>
+                                                  <%-- <select class="form-control" ng-options="s.branch_id as s.branch_name for s in branchDetails" ng-model="data.branch_id"></select>--%>
+                                                   <multiple-autocomplete ng-model="selectedList "
+                                                                          object-property="branch_name"
+                                                                          after-select-item="afterSelectItem"
+                                                                          after-remove-item="afterRemoveItem"
+
+                                                                          suggestions-arr="branchDetails">
+                                                   </multiple-autocomplete>
+                                               </div>
+
                                          </div>
                                      </div>
 
@@ -349,6 +357,7 @@
 <script src="<%=request.getContextPath()%>/static/js/sb-admin-2.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/angular.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/js-custom-select/customSelect.js"></script>
+<script src="<%=request.getContextPath()%>/static/vendor/multiple-select/multiple-select.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/addUser.js"></script>

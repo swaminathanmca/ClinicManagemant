@@ -2,7 +2,7 @@
  * Created by Admin on 2/16/2017.
  */
 
-var app = angular.module('myApp', ['ui.mask','angularUtils.directives.dirPagination','naif.base64','AxelSoft']);
+var app = angular.module('myApp', ['ui.mask','angularUtils.directives.dirPagination','naif.base64','AxelSoft', 'multipleSelect']);
 /*
     .directive('loading', function () {
         return {

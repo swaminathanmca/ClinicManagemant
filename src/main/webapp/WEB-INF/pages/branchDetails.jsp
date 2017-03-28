@@ -592,7 +592,7 @@
                                             <div class="input-group">
                                                 <span class="input-group-addon"> PhoneNo</span>
                                                 <input class="form-control" type="text" ng-model="x.Chief_conatct_no"
-                                                       name="cphoneno"
+                                                       name="cphoneno"  ui-mask="999-999-9999"
                                                        ng-blur="EditChiefContact(x.Chief_id,x.Chief_conatct_no)"
                                                        required/>
                                             </div>
@@ -635,7 +635,9 @@
 <script src="<%=request.getContextPath()%>/static/vendor/metisMenu/metisMenu.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/sb-admin-2.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/angular.min.js"></script>
+<script src="<%=request.getContextPath()%>/static/vendor/multiple-select/multiple-select.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/js-custom-select/customSelect.js"></script>
+
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>

@@ -12,9 +12,6 @@ app.controller('dashboard', function ($scope, $http, $window) {
     $scope.email= $window.sessionStorage.email;
     $('#loader').append(' ');
     $scope.validate = function () {
-
-
-
         $http.get("validate/" + $scope.contact_no).
             then(function (response, status, headers, config) {
                 //console.log(response.data.status);

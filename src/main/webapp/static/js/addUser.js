@@ -5,8 +5,9 @@
 app.controller('User',function($scope,$http,$window){
     $scope.role=$window.sessionStorage.role_name;
     $scope.email= $window.sessionStorage.email;
-
-
+    $scope.selectedList=[];
+    var obj;
+    $scope.branches=[];
     $http.get("trackSession/" + $scope.email).
         then(function (response, status, headers, config) {
 
@@ -19,7 +20,7 @@ app.controller('User',function($scope,$http,$window){
     $http.get("ViewBranch/"+ $window.sessionStorage.clinic_id)
         .then(function (response){
             $scope.branchDetails=response.data.branch;
-            console.log($scope.branchDetails);
+
         });
 
     $scope.onLoad = function (e, reader, file, fileList,fileObj ) {
@@ -28,16 +29,31 @@ app.controller('User',function($scope,$http,$window){
 
     };
 
+    $scope.afterSelectItem = function(item){
+         obj = {
+            branch_id: item.branch_id
+        };
+
+        $scope.selectedList.push(obj)
+
+    }
+
+    $scope.afterRemoveItem = function(item){
+        var index = $scope.selectedList.indexOf(item);
+        $scope.selectedList.splice(index,1);
+
+    }
+
+    $scope.submit=function(){
 
 
-$scope.submit=function(){
     var Doctor={
 
         firstname:$scope.firstname,
         address1:$scope.address1,
         address2:$scope.address2,
         clinic_id:$window.sessionStorage.clinic_id,
-        branch_id:$scope.data.branch_id,
+        branch_id:$scope.selectedList,
         city:$scope.city,
         state:$scope.state,
         country:$scope.country,
@@ -50,8 +66,7 @@ $scope.submit=function(){
         qualification:$scope.qualification,
         specialization:$scope.specialization
 }
-
-
+console.log(Doctor);
     $http.post('AddDoctor',Doctor).
         then(function (response,status,headers,config){
             location.href="ViewDoctor";

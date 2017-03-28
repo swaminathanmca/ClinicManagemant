@@ -222,8 +222,8 @@ public class HelloController {
         JSONObject jsonObject = new JSONObject();
         boolean flag;
 
-        flag = doctorService.addDoctor(doctor);
-
+       /* flag = doctorService.addDoctor(doctor);*/
+        flag=true;
         jsonObject.put("status", flag);
 
         return jsonObject.toString();
