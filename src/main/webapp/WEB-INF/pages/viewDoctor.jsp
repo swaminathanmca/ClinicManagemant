@@ -137,9 +137,13 @@
           <div class="row">
             <div class="col-lg-3">
 
-              <div   name="branch_id" custom-select="s.branch_id as s.branch_name for s in branchDetails | filter: { branch_name: $searchTerm }"  ng-change="doctor(branch_iid)" ng-model="branch_iid" ng-if="role=='Admin'">
+             <%-- <div   name="branch_id" custom-select="s.branch_id as s.branch_name for s in branchDetails | filter: { branch_name: $searchTerm }"  ng-change="doctor(branch_iid)" ng-model="branch_iid" ng-if="role=='Admin'">
 
-              </div>
+
+              </div>--%>
+               <select ng-model="branch_iid" class="form-control" ng-options="s.branch_id as s.branch_name for s in branchDetails" ng-change="doctor(branch_iid)">
+
+               </select>
               <button class="btn btn-primary" type="button" ng-click="addDoctor()" ng-if="role=='BranchAdmin'">Add Doctor</button>
             </div>
             <div class="col-lg-6">

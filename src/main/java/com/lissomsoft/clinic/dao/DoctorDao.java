@@ -11,7 +11,8 @@ import java.util.List;
  */
 public interface DoctorDao {
     boolean addDoctor(DoctorUser doctorUser);
-    List<Profile> viewDoctor(Integer branch_id);
+    List<Profile> viewDoctor(String branch_id);
+    List<Profile> viewAllDoctor(String clinic_id);
     List<DoctorUser> doctorDetails(Integer profile_id);
     boolean editDoctor(DoctorUser doctorUser);
     boolean addFrontdesk(DoctorUser frontdesk);

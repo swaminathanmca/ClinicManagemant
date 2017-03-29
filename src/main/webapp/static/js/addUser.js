@@ -31,7 +31,8 @@ app.controller('User',function($scope,$http,$window){
 
     $scope.afterSelectItem = function(item){
          obj = {
-            branch_id: item.branch_id
+             branch_id: item.branch_id,
+             branch_name:item.branch_name
         };
 
         $scope.selectedList.push(obj)
@@ -48,12 +49,11 @@ app.controller('User',function($scope,$http,$window){
 
 
     var Doctor={
-
         firstname:$scope.firstname,
         address1:$scope.address1,
         address2:$scope.address2,
         clinic_id:$window.sessionStorage.clinic_id,
-        branch_id:$scope.selectedList,
+        branch:$scope.selectedList,
         city:$scope.city,
         state:$scope.state,
         country:$scope.country,
@@ -65,12 +65,14 @@ app.controller('User',function($scope,$http,$window){
         reg_no:$scope.reg_no,
         qualification:$scope.qualification,
         specialization:$scope.specialization
-}
-console.log(Doctor);
-    $http.post('AddDoctor',Doctor).
+    }
+
+
+
+         $http.post('AddDoctor',Doctor).
         then(function (response,status,headers,config){
             location.href="ViewDoctor";
-        });
+    });
 
 
 

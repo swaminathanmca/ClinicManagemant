@@ -12,27 +12,34 @@ app.controller('getDoctor',function($scope,$http,$window){
         then(function (response, status, headers, config) {
             $scope.branch_iid=response.data.branch_id;
 
+
         });
 
 
     $http.get("ViewBranch/"+ $window.sessionStorage.clinic_id)
         .then(function (response){
             $scope.branchDetails=response.data.branch;
+            var branchInfo = {branch_id: "ALL", branch_name: "All"}
+            $scope.branchDetails.push(branchInfo);
 
         });
 
-    $http.get("ViewDoctor/"+$scope.branch_id)
+    $scope.doctor=function(id){
+        $scope.branch_id=id;
+
+        $http.get("ViewDoctor/"+ $scope.branch_id +"/"+$scope.clinic_id)
+            .then(function (response){
+                $scope.data = response.data.user;
+            })
+
+    }
+
+    $http.get("ViewDoctor/"+$scope.branch_id+"/"+$scope.clinic_id)
         .then(function (response){
             $scope.data = response.data.user;
         })
 
-            $scope.doctor=function(id){
-                $http.get("ViewDoctor/"+id)
-                    .then(function (response){
-                        $scope.data = response.data.user;
-                    })
 
-            }
         $scope.addDoctor=function(){
             location.href="AddDoctor";
         }

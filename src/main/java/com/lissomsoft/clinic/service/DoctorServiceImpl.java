@@ -24,8 +24,13 @@ public class DoctorServiceImpl implements  DoctorService {
     }
 
     @Override
-    public List<Profile> viewDoctor(Integer branch_id) {
+    public List<Profile> viewDoctor(String branch_id) {
         return doctorDao.viewDoctor(branch_id);
+    }
+
+    @Override
+    public List<Profile> viewAllDoctor(String clinic_id) {
+        return doctorDao.viewAllDoctor(clinic_id);
     }
 
     @Override

@@ -1,5 +1,9 @@
 package com.lissomsoft.clinic.vo;
 
+import com.lissomsoft.clinic.domain.Branch;
+
+import java.util.List;
+
 /**
  * Created by Lissomsoft on 3/20/2017.
  */
@@ -11,6 +15,7 @@ public class DoctorUser {
     private int profile_id;
     private int clinic_id;
     private int branch_id;
+    private List<Branch> branch;
     private String firstname;
     private String reg_no;
     private String qualification;
@@ -75,6 +80,15 @@ public class DoctorUser {
 
     public void setBranch_id(int branch_id) {
         this.branch_id = branch_id;
+    }
+
+
+    public List<Branch> getBranch() {
+        return branch;
+    }
+
+    public void setBranch(List<Branch> branch) {
+        this.branch = branch;
     }
 
     public String getFirstname() {
@@ -214,6 +228,7 @@ public class DoctorUser {
                 ", profile_id="+profile_id+
                 ", clinic_id="+clinic_id+
                 ", branch_id="+branch_id+
+                ", branch="+branch+
                 ", firstname="+firstname+
                 ", reg_no="+reg_no+
                 ", qualification="+qualification+

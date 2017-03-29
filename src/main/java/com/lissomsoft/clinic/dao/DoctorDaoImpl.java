@@ -1,11 +1,9 @@
 package com.lissomsoft.clinic.dao;
 
+import com.lissomsoft.clinic.domain.Branch;
 import com.lissomsoft.clinic.domain.Doctor;
 import com.lissomsoft.clinic.domain.Profile;
-import com.lissomsoft.clinic.rowmapper.DoctorMapper;
-import com.lissomsoft.clinic.rowmapper.ProfileMapper;
-import com.lissomsoft.clinic.rowmapper.TrackMapper;
-import com.lissomsoft.clinic.rowmapper.UserTrackMapper;
+import com.lissomsoft.clinic.rowmapper.*;
 import com.lissomsoft.clinic.vo.DoctorUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,10 +16,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import java.security.spec.DSAGenParameterSpec;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Lissomsoft on 3/20/2017.
@@ -44,6 +39,7 @@ public class DoctorDaoImpl implements DoctorDao {
         int result_user = 0;
         int result_member = 0;
         int result_role = 0;
+        int ressult_maper=0;
 
         DefaultTransactionDefinition paramTransactionDefinition = new DefaultTransactionDefinition();
         TransactionStatus status = platformTransactionManager.getTransaction(paramTransactionDefinition);
@@ -129,18 +125,43 @@ public class DoctorDaoImpl implements DoctorDao {
                 roleParameter.put("created_at",format.format(new Date()));
                 result_role=jdbcTemplate.update(insertRoleSql,roleParameter);
 
-                platformTransactionManager.commit(status);
+
             }catch (Exception e){
                 e.printStackTrace();
                 platformTransactionManager.rollback(status);
             }
         }
 
-        return result_role > 0 ? true :false;
+        if((result_role>0)? true :false){
+
+            try{
+                List<Branch> branches;
+                branches=doctorUser.getBranch();
+                Iterator<Branch> it=branches.iterator();
+                while (it.hasNext()) {
+                    Branch br=it.next();
+
+                    String insertDoctorMapSql="INSERT INTO  doctor_mapper (doctor_detail_id,branch_id) VALUES ((SELECT d.doctor_detail_id FROM doctor_detail d INNER JOIN user u ON u.user_id=d.user_id AND email=:email),:branch_id)";
+                    Map<String,Object> DoctorMapperParameter=new HashMap<String, Object>();
+                    DoctorMapperParameter.put("email",doctorUser.getEmail_id());
+                    DoctorMapperParameter.put("branch_id",br.getBranch_id());
+                    ressult_maper=jdbcTemplate.update(insertDoctorMapSql,DoctorMapperParameter);
+
+                }
+                platformTransactionManager.commit(status);
+
+            }catch (Exception e){
+                e.printStackTrace();
+                platformTransactionManager.rollback(status);
+            }
+
+        }
+
+        return ressult_maper > 0 ? true :false;
     }
 
     @Override
-    public List<Profile> viewDoctor(Integer branch_id) {
+    public List<Profile> viewDoctor(String branch_id) {
 
             List<Profile> getDoctordetails=null;
         try {
@@ -157,22 +178,49 @@ public class DoctorDaoImpl implements DoctorDao {
     }
 
     @Override
+    public List<Profile> viewAllDoctor(String clinic_id) {
+        List<Profile> getDoctordetails=null;
+        try {
+
+            String viewdetails="SELECT p.profile_id,p.name,p.email,p.phone,p.address1,p.address2 FROM profile_master p INNER JOIN member_master m  ON m.profile_id=p.profile_id INNER JOIN user u ON u.user_id=m.user_id INNER JOIN doctor_detail d ON d.user_id=u.user_id AND d.clinic_id=:clinic_id AND  d.type=1";
+
+            Map<String ,Object> parameter=new HashMap<String, Object>();
+            parameter.put("clinic_id",clinic_id);
+            getDoctordetails= jdbcTemplate.query(viewdetails,parameter,new ProfileMapper());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return getDoctordetails;
+    }
+
+    @Override
     public List<DoctorUser> doctorDetails(Integer profile_id) {
        List<DoctorUser> doctordetails=null;
+
+        DoctorUser doctorUser=new DoctorUser();
+
+
 try {
     String doctorDetailsSql="SELECT p.profile_id,p.name,p.address1,p.address2,p.city,p.state,p.country,p.pincode,p.gender,p.email,p.phone,c.clinic_name,c.clinic_id,b.branch_name,b.branch_id,d.doctor_detail_id,d.qualification,d.specialization,d.reg_id,u.password FROM profile_master p INNER JOIN member_master m ON p.profile_id=m.profile_id INNER JOIN user u ON m.user_id=u.user_id INNER JOIN doctor_detail d ON u.user_id=d.user_id INNER JOIN branch_master b ON b.branch_id=d.branch_id INNER JOIN clinic_master c ON c.clinic_id=d.clinic_id AND p.profile_id=:profile_id";
+    String branchDetailsSql="SELECT dm.branch_id,b.branch_name,b.address1,b.address2,b.city,b.state,b.country,b.description,b.clinic_id,b.pin_code,b.contact_no,b.ho,b.email FROM doctor_mapper dm INNER JOIN doctor_detail d ON d.doctor_detail_id=dm.doctor_detail_id INNER JOIN branch_master b ON b.branch_id=dm.branch_id INNER JOIN  user u ON u.user_id=d.user_id INNER JOIN member_master m ON m.user_id=u.user_id AND m.profile_id=:profile_id";
+    List<Branch> branch=null;
+
 
     Map<String,Object> parameter=new HashMap<String, Object>();
     parameter.put("profile_id",profile_id);
     doctordetails=jdbcTemplate.query(doctorDetailsSql,parameter,new DoctorMapper());
-        }
-    catch (Exception e){
+    branch=jdbcTemplate.query(branchDetailsSql,parameter,new BranchMapper());
+    doctorUser.setBranch(branch);
+
+
+
+
+} catch (Exception e){
+
     e.printStackTrace();
 
     }
-
-
-
         return doctordetails;
     }
 

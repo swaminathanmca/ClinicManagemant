@@ -2,6 +2,7 @@ package com.lissomsoft.clinic.controller;
 
 import com.lissomsoft.clinic.service.*;
 import com.sun.deploy.panel.ITreeNode;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -222,8 +223,11 @@ public class HelloController {
         JSONObject jsonObject = new JSONObject();
         boolean flag;
 
-       /* flag = doctorService.addDoctor(doctor);*/
-        flag=true;
+
+
+        flag = doctorService.addDoctor(doctor);
+
+
         jsonObject.put("status", flag);
 
         return jsonObject.toString();
@@ -316,13 +320,19 @@ public class HelloController {
         return data.toString();
     }
 
-    @RequestMapping(value = "/ViewDoctor/{branch_id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/ViewDoctor/{branch_id}/{clinic_id}", method = RequestMethod.GET)
     public
     @ResponseBody
-    String viewDoctor(@PathVariable Integer branch_id) throws Exception {
+    String viewDoctor(@PathVariable String branch_id,@PathVariable String clinic_id) throws Exception {
 
         List<Profile> viewDoctor;
-        viewDoctor = doctorService.viewDoctor(branch_id);
+        if(branch_id.equalsIgnoreCase("ALL")){
+
+            viewDoctor=doctorService.viewAllDoctor(clinic_id);
+        }else{
+            viewDoctor = doctorService.viewDoctor(branch_id);
+        }
+
         JSONObject data = new JSONObject();
         JSONArray jsonArray = new JSONArray();
         Iterator<Profile> it = viewDoctor.iterator();
@@ -549,6 +559,7 @@ public class HelloController {
             jsonObject.put("profile_id", user.getProfile_id());
             jsonObject.put("clinic_id", user.getClinic_id());
             jsonObject.put("branch_id", user.getBranch_id());
+            jsonObject.put("branches",user.getBranch());
             jsonObject.put("doctor_id", user.getDoctor_id());
             data.put("branch", jsonObject);
 

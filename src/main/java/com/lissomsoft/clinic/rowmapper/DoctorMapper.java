@@ -26,6 +26,7 @@ public class DoctorMapper implements RowMapper<DoctorUser> {
         user.setContact_no(resultSet.getString("phone"));
         user.setEmail_id(resultSet.getString("email"));
         user.setClinic_id(resultSet.getInt("clinic_id"));
+
         user.setProfile_id(resultSet.getInt("profile_id"));
         user.setClinic_name(resultSet.getString("clinic_name"));
         user.setBranch_id(resultSet.getInt("branch_id"));
