@@ -29,8 +29,8 @@ public class DoctorMapper implements RowMapper<DoctorUser> {
 
         user.setProfile_id(resultSet.getInt("profile_id"));
         user.setClinic_name(resultSet.getString("clinic_name"));
-        user.setBranch_id(resultSet.getInt("branch_id"));
-        user.setBranch_name(resultSet.getString("branch_name"));
+       /* user.setBranch_id(resultSet.getInt("branch_id"));
+        user.setBranch_name(resultSet.getString("branch_name"));*/
         user.setDoctor_id(resultSet.getInt("doctor_detail_id"));
         user.setQualification(resultSet.getString("qualification"));
         user.setSpecialization(resultSet.getString("specialization"));

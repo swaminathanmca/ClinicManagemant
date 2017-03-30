@@ -34,7 +34,7 @@ public class DoctorServiceImpl implements  DoctorService {
     }
 
     @Override
-    public List<DoctorUser> doctorDetails(Integer profile_id) {
+    public DoctorUser doctorDetails(Integer profile_id) {
 
 
         return doctorDao.doctorDetails(profile_id);

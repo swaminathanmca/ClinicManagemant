@@ -534,37 +534,38 @@ public class HelloController {
         JSONObject data = new JSONObject();
         JSONArray jsonArray = new JSONArray();
         List<DoctorUser> doctorDetails;
-        doctorDetails = doctorService.doctorDetails(profile_id);
-        Iterator<DoctorUser> it = doctorDetails.iterator();
-        while (it.hasNext()) {
+        DoctorUser doctorUser = doctorService.doctorDetails(profile_id);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("name",doctorUser.getFirstname());
+        jsonObject.put("address1", doctorUser.getAddress1());
+        jsonObject.put("address2", doctorUser.getAddress2());
+        jsonObject.put("city", doctorUser.getCity());
+        jsonObject.put("state", doctorUser.getState());
+        jsonObject.put("country", doctorUser.getCountry());
+        jsonObject.put("pincode", doctorUser.getPincode());
+        jsonObject.put("gender", doctorUser.getGender());
+        jsonObject.put("email", doctorUser.getEmail_id());
+        jsonObject.put("phone", doctorUser.getContact_no());
+        jsonObject.put("clinic_id",doctorUser.getClinic_id());
+        jsonObject.put("clinic_name", doctorUser.getClinic_name());
+        jsonObject.put("qualification", doctorUser.getQualification());
+        jsonObject.put("specialization", doctorUser.getSpecialization());
+        jsonObject.put("reg_id", doctorUser.getReg_no());
+        jsonObject.put("password", doctorUser.getPassword());
+        jsonObject.put("profile_id", doctorUser.getProfile_id());
+        jsonObject.put("doctor_id", doctorUser.getDoctor_id());
 
-            DoctorUser user = it.next();
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("name", user.getFirstname());
-            jsonObject.put("address1", user.getAddress1());
-            jsonObject.put("address2", user.getAddress2());
-            jsonObject.put("city", user.getCity());
-            jsonObject.put("state", user.getState());
-            jsonObject.put("country", user.getCountry());
-            jsonObject.put("pincode", user.getPincode());
-            jsonObject.put("gender", user.getGender());
-            jsonObject.put("email", user.getEmail_id());
-            jsonObject.put("phone", user.getContact_no());
-            jsonObject.put("clinic_name", user.getClinic_name());
-            jsonObject.put("branch_name", user.getBranch_name());
-            jsonObject.put("qualification", user.getQualification());
-            jsonObject.put("specialization", user.getSpecialization());
-            jsonObject.put("reg_id", user.getReg_no());
-            jsonObject.put("password", user.getPassword());
-            jsonObject.put("profile_id", user.getProfile_id());
-            jsonObject.put("clinic_id", user.getClinic_id());
-            jsonObject.put("branch_id", user.getBranch_id());
-            jsonObject.put("branches",user.getBranch());
-            jsonObject.put("doctor_id", user.getDoctor_id());
-            data.put("branch", jsonObject);
-
+        List<Branch> branches=doctorUser.getBranch();
+        Iterator<Branch> it=branches.iterator();
+        while (it.hasNext()){
+            Branch branch=it.next();
+            JSONObject branchObject=new JSONObject();
+            branchObject.put("branch_id",branch.getBranch_id());
+            branchObject.put("branch_name",branch.getBranch_name());
+            jsonArray.put(branchObject);
         }
-
+        jsonObject.put("branches",jsonArray);
+        data.put("branch",jsonObject);
 
         return data.toString();
     }

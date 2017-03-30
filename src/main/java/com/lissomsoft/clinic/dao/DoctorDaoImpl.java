@@ -166,7 +166,7 @@ public class DoctorDaoImpl implements DoctorDao {
             List<Profile> getDoctordetails=null;
         try {
 
-            String viewdetails="SELECT p.profile_id,p.name,p.email,p.phone,p.address1,p.address2 FROM profile_master p INNER JOIN member_master m  ON m.profile_id=p.profile_id INNER JOIN user u ON u.user_id=m.user_id INNER JOIN doctor_detail d ON d.user_id=u.user_id AND d.branch_id=:branch_id AND d.type=1";
+            String viewdetails="SELECT p.profile_id,p.name,p.email,p.phone,p.address1,p.address2 FROM profile_master p INNER JOIN member_master m  ON m.profile_id=p.profile_id INNER JOIN user u ON u.user_id=m.user_id INNER JOIN doctor_detail d ON d.user_id=u.user_id INNER JOIN doctor_mapper dm ON dm.doctor_detail_id=d.doctor_detail_id  AND dm.branch_id=:branch_id AND d.type=1";
 
             Map<String ,Object> parameter=new HashMap<String, Object>();
             parameter.put("branch_id",branch_id);
@@ -195,33 +195,25 @@ public class DoctorDaoImpl implements DoctorDao {
     }
 
     @Override
-    public List<DoctorUser> doctorDetails(Integer profile_id) {
+    public DoctorUser doctorDetails(Integer profile_id) {
        List<DoctorUser> doctordetails=null;
-
         DoctorUser doctorUser=new DoctorUser();
-
-
-try {
-    String doctorDetailsSql="SELECT p.profile_id,p.name,p.address1,p.address2,p.city,p.state,p.country,p.pincode,p.gender,p.email,p.phone,c.clinic_name,c.clinic_id,b.branch_name,b.branch_id,d.doctor_detail_id,d.qualification,d.specialization,d.reg_id,u.password FROM profile_master p INNER JOIN member_master m ON p.profile_id=m.profile_id INNER JOIN user u ON m.user_id=u.user_id INNER JOIN doctor_detail d ON u.user_id=d.user_id INNER JOIN branch_master b ON b.branch_id=d.branch_id INNER JOIN clinic_master c ON c.clinic_id=d.clinic_id AND p.profile_id=:profile_id";
+        try {
+    String doctorDetailsSql="SELECT p.profile_id,p.name,p.address1,p.address2,p.city,p.state,p.country,p.pincode,p.gender,p.email,p.phone,c.clinic_name,c.clinic_id,d.doctor_detail_id,d.qualification,d.specialization,d.reg_id,u.password FROM profile_master p INNER JOIN member_master m ON p.profile_id=m.profile_id INNER JOIN user u ON m.user_id=u.user_id INNER JOIN doctor_detail d ON u.user_id=d.user_id INNER JOIN clinic_master c ON c.clinic_id=d.clinic_id AND p.profile_id=:profile_id";
     String branchDetailsSql="SELECT dm.branch_id,b.branch_name,b.address1,b.address2,b.city,b.state,b.country,b.description,b.clinic_id,b.pin_code,b.contact_no,b.ho,b.email FROM doctor_mapper dm INNER JOIN doctor_detail d ON d.doctor_detail_id=dm.doctor_detail_id INNER JOIN branch_master b ON b.branch_id=dm.branch_id INNER JOIN  user u ON u.user_id=d.user_id INNER JOIN member_master m ON m.user_id=u.user_id AND m.profile_id=:profile_id";
     List<Branch> branch=null;
 
 
     Map<String,Object> parameter=new HashMap<String, Object>();
     parameter.put("profile_id",profile_id);
-    doctordetails=jdbcTemplate.query(doctorDetailsSql,parameter,new DoctorMapper());
+
+    doctorUser= jdbcTemplate.queryForObject(doctorDetailsSql,parameter,new DoctorMapper());
     branch=jdbcTemplate.query(branchDetailsSql,parameter,new BranchMapper());
     doctorUser.setBranch(branch);
 
-
-
-
-} catch (Exception e){
-
+   } catch (Exception e){
     e.printStackTrace();
-
-    }
-        return doctordetails;
+}return doctorUser;
     }
 
     @Override
