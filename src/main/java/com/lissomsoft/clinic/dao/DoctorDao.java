@@ -19,4 +19,5 @@ public interface DoctorDao {
     List<Profile> viewFrontDesk(String branch_id);
     List<Profile> viewFrontDeskAll(Integer clinic_id);
     List<Doctor> trackSeason(String email);
+    DoctorUser frontdeskDetails(Integer profile_id);
 }

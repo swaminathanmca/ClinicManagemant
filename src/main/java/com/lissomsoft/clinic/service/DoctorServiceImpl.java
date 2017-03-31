@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by Lissomsoft on 3/20/2017.
  */
-public class DoctorServiceImpl implements  DoctorService {
+ public class DoctorServiceImpl implements  DoctorService {
     @Autowired(required = true)
     private DoctorDaoImpl doctorDao;
 
@@ -63,5 +63,12 @@ public class DoctorServiceImpl implements  DoctorService {
     @Override
     public List<Doctor> trackSeason(String email) {
         return doctorDao.trackSeason(email);
+    }
+
+    @Override
+    public DoctorUser frontdeskDetails(Integer profile_id) {
+
+
+        return doctorDao.frontdeskDetails(profile_id);
     }
 }

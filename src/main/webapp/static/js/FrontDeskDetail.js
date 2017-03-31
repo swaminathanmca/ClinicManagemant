@@ -10,17 +10,17 @@ app.controller('frontdeskdetail',function($scope,$window,$http){
     $scope.role=$window.sessionStorage.role_name;
     $scope.email= $window.sessionStorage.email;
 
-    $http.get("doctorDetails/"+$window.sessionStorage.profile_id)
+    $http.get("frontdeskDetails/"+$window.sessionStorage.profile_id)
         .then(function(response){
-            $scope.data=response.data.branch;
+            $scope.data=response.data.frontdesk;
             $('#countries1').bfhcountries({country: $scope.data.country})
         })
 
     $scope.editUser=function(id){
         $scope.profile_id=id;
-        $http.get("doctorDetails/"+$scope.profile_id)
+        $http.get("frontdeskDetails/"+$scope.profile_id)
             .then(function(response,status){
-                $scope.x=response.data.branch;
+                $scope.x=response.data.frontdesk;
                 $('#countries2').bfhcountries({country: $scope.data.country})
 
                 $http.get("ViewBranch/"+$scope.x.clinic_id)

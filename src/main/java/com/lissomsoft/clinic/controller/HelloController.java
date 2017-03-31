@@ -583,6 +583,35 @@ public class HelloController {
         return data.toString();
     }
 
+    @RequestMapping(value = "/frontdeskDetails/{profile_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String frontdeskDetails(@PathVariable Integer profile_id)throws Exception{
+        JSONObject jsonObject=new JSONObject();
+        JSONObject data=new JSONObject();
+        DoctorUser doctorUser=doctorService.frontdeskDetails(profile_id);
+        jsonObject.put("name",doctorUser.getFirstname());
+        jsonObject.put("address1", doctorUser.getAddress1());
+        jsonObject.put("address2", doctorUser.getAddress2());
+        jsonObject.put("city", doctorUser.getCity());
+        jsonObject.put("state", doctorUser.getState());
+        jsonObject.put("country", doctorUser.getCountry());
+        jsonObject.put("pincode", doctorUser.getPincode());
+        jsonObject.put("gender", doctorUser.getGender());
+        jsonObject.put("email", doctorUser.getEmail_id());
+        jsonObject.put("phone", doctorUser.getContact_no());
+        jsonObject.put("clinic_id",doctorUser.getClinic_id());
+        jsonObject.put("clinic_name", doctorUser.getClinic_name());
+        jsonObject.put("branch_id",doctorUser.getBranch_id());
+        jsonObject.put("branch_name",doctorUser.getBranch_name());
+        jsonObject.put("qualification", doctorUser.getQualification());
+        jsonObject.put("profile_id", doctorUser.getProfile_id());
+        jsonObject.put("doctor_id", doctorUser.getDoctor_id());
+        data.put("frontdesk",jsonObject);
+
+         return  data.toString();
+    }
+
     @RequestMapping(value = "/EditDoctor", method = RequestMethod.POST)
     public
     @ResponseBody

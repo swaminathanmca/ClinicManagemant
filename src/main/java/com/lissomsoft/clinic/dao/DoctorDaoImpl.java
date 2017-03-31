@@ -196,24 +196,25 @@ public class DoctorDaoImpl implements DoctorDao {
 
     @Override
     public DoctorUser doctorDetails(Integer profile_id) {
-       List<DoctorUser> doctordetails=null;
-        DoctorUser doctorUser=new DoctorUser();
+        List<DoctorUser> doctordetails = null;
+        DoctorUser doctorUser = new DoctorUser();
         try {
-    String doctorDetailsSql="SELECT p.profile_id,p.name,p.address1,p.address2,p.city,p.state,p.country,p.pincode,p.gender,p.email,p.phone,c.clinic_name,c.clinic_id,d.doctor_detail_id,d.qualification,d.specialization,d.reg_id,u.password FROM profile_master p INNER JOIN member_master m ON p.profile_id=m.profile_id INNER JOIN user u ON m.user_id=u.user_id INNER JOIN doctor_detail d ON u.user_id=d.user_id INNER JOIN clinic_master c ON c.clinic_id=d.clinic_id AND p.profile_id=:profile_id";
-    String branchDetailsSql="SELECT dm.branch_id,b.branch_name,b.address1,b.address2,b.city,b.state,b.country,b.description,b.clinic_id,b.pin_code,b.contact_no,b.ho,b.email FROM doctor_mapper dm INNER JOIN doctor_detail d ON d.doctor_detail_id=dm.doctor_detail_id INNER JOIN branch_master b ON b.branch_id=dm.branch_id INNER JOIN  user u ON u.user_id=d.user_id INNER JOIN member_master m ON m.user_id=u.user_id AND m.profile_id=:profile_id";
-    List<Branch> branch=null;
+            String doctorDetailsSql = "SELECT p.profile_id,p.name,p.address1,p.address2,p.city,p.state,p.country,p.pincode,p.gender,p.email,p.phone,c.clinic_name,c.clinic_id,d.doctor_detail_id,d.qualification,d.specialization,d.reg_id,u.password FROM profile_master p INNER JOIN member_master m ON p.profile_id=m.profile_id INNER JOIN user u ON m.user_id=u.user_id INNER JOIN doctor_detail d ON u.user_id=d.user_id INNER JOIN clinic_master c ON c.clinic_id=d.clinic_id AND p.profile_id=:profile_id";
+            String branchDetailsSql = "SELECT dm.branch_id,b.branch_name,b.address1,b.address2,b.city,b.state,b.country,b.description,b.clinic_id,b.pin_code,b.contact_no,b.ho,b.email FROM doctor_mapper dm INNER JOIN doctor_detail d ON d.doctor_detail_id=dm.doctor_detail_id INNER JOIN branch_master b ON b.branch_id=dm.branch_id INNER JOIN  user u ON u.user_id=d.user_id INNER JOIN member_master m ON m.user_id=u.user_id AND m.profile_id=:profile_id";
+            List<Branch> branch = null;
 
 
-    Map<String,Object> parameter=new HashMap<String, Object>();
-    parameter.put("profile_id",profile_id);
+            Map<String, Object> parameter = new HashMap<String, Object>();
+            parameter.put("profile_id", profile_id);
 
-    doctorUser= jdbcTemplate.queryForObject(doctorDetailsSql,parameter,new DoctorMapper());
-    branch=jdbcTemplate.query(branchDetailsSql,parameter,new BranchMapper());
-    doctorUser.setBranch(branch);
+            doctorUser = jdbcTemplate.queryForObject(doctorDetailsSql, parameter, new DoctorMapper());
+            branch = jdbcTemplate.query(branchDetailsSql, parameter, new BranchMapper());
+            doctorUser.setBranch(branch);
 
-   } catch (Exception e){
-    e.printStackTrace();
-}return doctorUser;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return doctorUser;
     }
 
 
@@ -228,9 +229,7 @@ public class DoctorDaoImpl implements DoctorDao {
         int result_update=0;
         DefaultTransactionDefinition paramTransactionDefinition = new DefaultTransactionDefinition();
         TransactionStatus status = platformTransactionManager.getTransaction(paramTransactionDefinition);
-
         try {
-
             String editDoctorSql  ="UPDATE doctor_detail SET qualification=:qualification,specialization=:specialization,reg_id=:reg_id,updated_at=:updated_at WHERE doctor_detail_id=:doctor_id";
             Map<String,Object> parameter=new HashMap<String, Object>();
             parameter.put("doctor_id",doctorUser.getDoctor_id());
@@ -240,9 +239,6 @@ public class DoctorDaoImpl implements DoctorDao {
             parameter.put("reg_id",doctorUser.getReg_no());
             parameter.put("updated_at",format.format(new Date()));
             result_doctor=jdbcTemplate.update(editDoctorSql,parameter);
-
-
-
 
         }catch (Exception e){
             e.printStackTrace();
@@ -489,6 +485,26 @@ public class DoctorDaoImpl implements DoctorDao {
             e.printStackTrace();
         }
         return getTrackdetails;
+    }
+
+    @Override
+    public DoctorUser frontdeskDetails(Integer profile_id) {
+
+        DoctorUser doctorUser = new DoctorUser();
+
+        try{
+
+            String frontdeskSql="SELECT p.profile_id,p.name,p.address1,p.address2,p.city,p.state,p.country,p.pincode,p.gender,p.email,p.phone,c.clinic_name,c.clinic_id,d.branch_id,b.branch_name,d.doctor_detail_id,d.qualification,d.specialization,d.reg_id,u.password FROM profile_master p INNER JOIN member_master m ON p.profile_id=m.profile_id INNER JOIN user u ON m.user_id=u.user_id INNER JOIN doctor_detail d ON u.user_id=d.user_id INNER JOIN clinic_master c ON c.clinic_id=d.clinic_id INNER JOIN branch_master b ON b.branch_id=d.branch_id AND p.profile_id=:profile_id";
+            Map<String,Object> parameter=new HashMap<String, Object>();
+            parameter.put("profile_id",profile_id);
+            doctorUser = (DoctorUser) jdbcTemplate.queryForObject(frontdeskSql, parameter, new FrontdeskMapper());
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return doctorUser;
     }
 
 
