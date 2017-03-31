@@ -447,14 +447,23 @@ public class HelloController {
         return sendResponse.toString();
     }
 
-    @RequestMapping(value = "/ViewFrontdesk/{branch_id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/ViewFrontdesk/{branch_id}/{clinic_id}", method = RequestMethod.GET)
     public
     @ResponseBody
-    String viewFrontDesk(@PathVariable Integer branch_id) throws Exception {
+    String viewFrontDesk(@PathVariable String branch_id,@PathVariable Integer clinic_id) throws Exception {
         JSONArray jsonArray = new JSONArray();
         JSONObject data = new JSONObject();
         List<Profile> frontDesk;
-        frontDesk = doctorService.viewFrontDesk(branch_id);
+        if (branch_id.equalsIgnoreCase("ALL")) {
+            frontDesk = doctorService.viewFrontDeskAll(clinic_id);
+
+        }else {
+            frontDesk = doctorService.viewFrontDesk(branch_id);
+
+        }
+
+
+
         Iterator<Profile> it = frontDesk.iterator();
 
         while (it.hasNext()) {

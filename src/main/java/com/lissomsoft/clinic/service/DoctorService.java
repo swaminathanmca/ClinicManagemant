@@ -18,6 +18,7 @@ public interface DoctorService {
     DoctorUser doctorDetails(Integer profile_id);
     boolean editDoctor(DoctorUser doctorUser);
     boolean addFrontdesk(DoctorUser frontdesk);
-    List<Profile> viewFrontDesk(Integer branch_id);
+    List<Profile> viewFrontDesk(String branch_id);
+    List<Profile> viewFrontDeskAll(Integer clinic_id);
     List<Doctor> trackSeason(String email);
 }

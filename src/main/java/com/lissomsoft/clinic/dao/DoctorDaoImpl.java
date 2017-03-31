@@ -216,6 +216,8 @@ public class DoctorDaoImpl implements DoctorDao {
 }return doctorUser;
     }
 
+
+
     @Override
     public boolean editDoctor(DoctorUser doctorUser) {
 
@@ -438,7 +440,7 @@ public class DoctorDaoImpl implements DoctorDao {
     }
 
     @Override
-    public List<Profile> viewFrontDesk(Integer branch_id) {
+    public List<Profile> viewFrontDesk(String branch_id) {
 
         List<Profile> getFrontdetails=null;
         try {
@@ -451,6 +453,25 @@ public class DoctorDaoImpl implements DoctorDao {
         }catch (Exception e){
             e.printStackTrace();
         }
+        return getFrontdetails;
+    }
+
+    @Override
+    public List<Profile> viewFrontDeskAll(Integer clinic_id) {
+
+        List<Profile> getFrontdetails=null;
+        try
+        {
+        String viewdetails="SELECT p.profile_id,p.name,p.email,p.phone,p.address1,p.address2 FROM profile_master p INNER JOIN member_master m  ON m.profile_id=p.profile_id INNER JOIN user u ON u.user_id=m.user_id INNER JOIN doctor_detail d ON d.user_id=u.user_id AND d.clinic_id=:clinic_id AND d.type=0";
+        Map<String ,Object> parameter=new HashMap<String, Object>();
+        parameter.put("clinic_id",clinic_id);
+        getFrontdetails= jdbcTemplate.query(viewdetails,parameter,new ProfileMapper());
+
+       }
+          catch (Exception e)
+          {
+          e.printStackTrace();
+       }
         return getFrontdetails;
     }
 

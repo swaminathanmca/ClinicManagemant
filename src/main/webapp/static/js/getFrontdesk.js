@@ -18,17 +18,19 @@ app.controller('getFrontdesk',function($scope,$http,$window){
     $http.get("ViewBranch/"+ $window.sessionStorage.clinic_id)
         .then(function (response){
             $scope.branchDetails=response.data.branch;
+            var branchInfo = {branch_id: "ALL", branch_name: "All"}
+            $scope.branchDetails.push(branchInfo);
 
         });
 
-    $http.get("ViewFrontdesk/"+$scope.branch_id)
+    $http.get("ViewFrontdesk/"+$scope.branch_id+"/"+$window.sessionStorage.clinic_id)
         .then(function (response){
             $scope.data = response.data.user;
 
         })
     $scope.frontDesk=function(id){
 
-        $http.get("ViewFrontdesk/"+id)
+        $http.get("ViewFrontdesk/"+id+"/"+$window.sessionStorage.clinic_id)
             .then(function (response){
                 $scope.data = response.data.user;
 

@@ -51,8 +51,13 @@ public class DoctorServiceImpl implements  DoctorService {
     }
 
     @Override
-    public List<Profile> viewFrontDesk(Integer branch_id) {
+    public List<Profile> viewFrontDesk(String branch_id) {
         return doctorDao.viewFrontDesk(branch_id);
+    }
+
+    @Override
+    public List<Profile> viewFrontDeskAll(Integer clinic_id) {
+        return doctorDao.viewFrontDeskAll(clinic_id);
     }
 
     @Override
