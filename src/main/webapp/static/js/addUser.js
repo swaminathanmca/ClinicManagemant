@@ -5,6 +5,7 @@
 app.controller('User',function($scope,$http,$window){
     $scope.role=$window.sessionStorage.role_name;
     $scope.email= $window.sessionStorage.email;
+    $scope.chiefError="The Phone No Already Taken";
     $scope.selectedList=[];
     var obj;
     $scope.branches=[];
@@ -45,6 +46,35 @@ app.controller('User',function($scope,$http,$window){
 
     }
 
+
+    $scope.validatecontact=function(){
+
+        $http.get("validateChief/"+$scope.phone_no).
+            then(function (response,status,header,config){
+                $scope.err=response.data.status;
+
+                if($scope.err==false){
+                    $scope.chiefError="";
+                }else{
+                    $scope.chiefError="Already Taken";
+                }
+            })
+    }
+
+
+    $scope.validateEmail=function(){
+        $http.get("validateEmail/"+$scope.email_id).
+            then(function(response,status,headers,config){
+                $scope.err_chief_email=response.data.status;
+
+                if($scope.err_chief_email==false){
+                    $scope.chiefEmail="";
+                }else{
+                    $scope.chiefEmail="Taken";
+                }
+
+            })
+    }
     $scope.submit=function(){
 
 

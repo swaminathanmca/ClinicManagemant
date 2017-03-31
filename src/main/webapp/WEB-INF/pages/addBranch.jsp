@@ -425,7 +425,7 @@
                                                        The Email Already Taken
                                                            </span></div>
                                                     </div>
-                                        </div>
+
 
 
                                         <!-- Change this to a button or input when using this as a form -->

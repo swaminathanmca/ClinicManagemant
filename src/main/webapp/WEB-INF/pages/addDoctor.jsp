@@ -264,19 +264,25 @@
                                          <div class="col-lg-3">
                                              <div class="input-group">
                                                  <span class="input-group-addon">Email</span>
-                                                 <input class="form-control" type="email" name="email_id" ng-model="email_id" placeholder="" required/>
+                                                 <input class="form-control" type="email" name="email_id" ng-model="email_id" ng-blur="validateEmail()"  placeholder="" required/>
                                              </div>
                                               <span class="text-danger wrapper text-center ng-binding"
                                                     ng-show="myform.email_id.$invalid &&  myform.email_id.$touched">Please Enter The Email</span>
+                                              <span class="text-danger wrapper text-center ng-binding" ng-show="err_chief_email==false">
+                                                       The Email Already Taken
+                                                           </span>
                                          </div>
                                          <div class="col-lg-3">
                                              <div class="input-group">
                                                  <span class="input-group-addon">Phone No
                                                  </span>
-                                                 <input type="text" class="form-control" ui-mask="999-999-9999" name="phone_no" ng-model="phone_no" required/>
+                                                 <input type="text" class="form-control" ui-mask="999-999-9999" name="phone_no" ng-model="phone_no" ng-blur="validatecontact()" required/>
                                              </div>
                                               <span class="text-danger wrapper text-center ng-binding"
                                                     ng-show="myform.phone_no.$invalid &&  myform.phone_no.$touched">Please Enter The Phone No</span>
+                                             <span class="text-danger wrapper text-center ng-binding" ng-show="err==false">
+                                                       The Mobile Number Already Taken
+                                                           </span>
                                          </div>
                                          <div class="col-lg-3">
                                              <div class="input-group">
@@ -319,7 +325,7 @@
                                              <div class="col-lg-offset-4 col-lg-7">
                                                  <button type="submit" class="btn btn-success"
 
-                                                         ng-disabled="myform.$invalid "      ng-click="submitted=true">Save
+                                                         ng-disabled="myform.$invalid  || !chiefError || !chiefEmail"      ng-click="submitted=true">Save
                                                  </button>
                                                  <button type="button" class="btn btn-inverse">Cancel</button>
                                              </div>
