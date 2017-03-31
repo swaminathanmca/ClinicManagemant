@@ -6,6 +6,7 @@ app.controller('User',function($scope,$http,$window){
     $scope.role=$window.sessionStorage.role_name;
     $scope.email= $window.sessionStorage.email;
     $scope.chiefError="The Phone No Already Taken";
+    $scope.chiefEmail="Taken";
     $scope.selectedList=[];
     var obj;
     $scope.branches=[];
