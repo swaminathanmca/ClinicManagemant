@@ -360,14 +360,24 @@
                   <div class="col-lg-6">
                     <div class="input-group">
                       <span class="input-group-addon">Phone No</span>
-                      <input  type="text " class="form-control" ui-mask="9999-999-999" ng-model="x.phone">
+                      <input  type="text " class="form-control" ui-mask="9999-999-999" ng-model="x.phone" name="cphoneno" ng-blur="EditChiefContact(x.profile_id,x.phone)" required>
                     </div>
+                     <span class="text-danger wrapper text-center ng-binding"
+                           ng-show="myform.cphoneno.$invalid">Please  Enter Phone No </span>
+                                              <span class="text-danger wrapper text-center ng-binding" ng-show="err==false">
+                                                       The Mobile Number Already Taken
+                                                           </span>
                   </div>
                   <div class="col-lg-6">
                     <div class="input-group">
                       <span class="input-group-addon">Email Id</span>
-                      <input  type="text " class="form-control" ng-model="x.email">
+                      <input  type="text " class="form-control" ng-model="x.email" name="email" ng-blur="EditCemail(x.profile_id,x.email)" required>
                     </div>
+                    <span class="text-danger wrapper text-center ng-binding"
+                          ng-show="myform.email.$invalid">Please  Enter Email-id </span>
+                                            <span class="text-danger wrapper text-center ng-binding" ng-show="err_chief_email==false">
+                                                       The Email Already Taken
+                                                           </span>
                   </div>
                  <%-- <div class="col-lg-3">
                     <div class="input-group">
@@ -396,14 +406,15 @@
                                              suggestions-arr="branch">
                       </multiple-autocomplete>
                     </div>
-
+ <span class="text-danger wrapper text-center ng-binding"
+       ng-show="myform.multipleSelect.$invalid && myform.multipleSelect.$untouched">Please  Select Branch </span>
                   </div>
                 </div>
                 <div class="form-action">
                   <div class="row">
                     <div class="col-lg-offset-4 col-lg-7">
                       <button type="submit" class="btn btn-success"
-                              ng-disabled="myform.$invalid " ng-click="submitted=true">Save
+                              ng-disabled="myform.$invalid  || !chiefError || !chiefEmail " ng-click="submitted=true">Save
                       </button>
                       <button type="button" class="btn btn-inverse" data-dismiss="modal">
                         Cancel

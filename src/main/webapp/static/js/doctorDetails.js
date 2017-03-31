@@ -8,6 +8,8 @@ app.controller('doctorDetails',function($scope,$window,$http){
     var obj;
     $scope.role=$window.sessionStorage.role_name;
     $scope.email= $window.sessionStorage.email;
+    $scope.chiefEmail="Taken";
+    $scope.chiefError="Already Taken";
     $http.get("doctorDetails/"+$window.sessionStorage.profile_id)
         .then(function(response){
             $scope.data=response.data.branch;
@@ -75,6 +77,35 @@ app.controller('doctorDetails',function($scope,$window,$http){
             $scope.selectedList.push(obj2);}
     }
 
+    $scope.EditChiefContact=function(id,contact_no){
+        $scope.chief_id=id;
+        $scope.cihef_contactno=contact_no;
+        $http.get("EditChiefContact/"+$scope.chief_id+"/"+$scope.cihef_contactno).
+            then(function(response,status,error){
+                $scope.err=response.data.status;
+
+                if($scope.err==false){
+                    $scope.chiefError="";
+                }else{
+                    $scope.chiefError="Already Taken";
+                }
+            })
+    }
+
+    $scope.EditCemail=function(id,email_id){
+        $scope.chief_id=id;
+        $scope.email_id=email_id;
+        $http.get("EditChiefEmail/"+$scope.chief_id+"/"+$scope.email_id).
+            then(function(response,status,error){
+                $scope.err_chief_email=response.data.status;
+                console.log($scope.err_chief_email);
+                if($scope.err_chief_email==false){
+                    $scope.chiefEmail="";
+                }else{
+                    $scope.chiefEmail="Taken";
+                }
+            })
+    }
 
     $scope.submit=function(){
         $scope.country=$('#countries2').val();
