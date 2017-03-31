@@ -328,8 +328,7 @@ public class DoctorDaoImpl implements DoctorDao {
             e.printStackTrace();
             platformTransactionManager.rollback(status);
         }
-
-        }
+    }
 
 
 
