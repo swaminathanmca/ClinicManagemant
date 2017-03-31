@@ -560,8 +560,12 @@ public class HelloController {
         while (it.hasNext()){
             Branch branch=it.next();
             JSONObject branchObject=new JSONObject();
+            branchObject.put("address1",branch.getAddress1());
+            branchObject.put("address2",branch.getAddress2());
             branchObject.put("branch_id",branch.getBranch_id());
             branchObject.put("branch_name",branch.getBranch_name());
+            branchObject.put("contact_no",branch.getContact_no());
+            branchObject.put("description",branch.getDescripton());
             jsonArray.put(branchObject);
         }
         jsonObject.put("branches",jsonArray);

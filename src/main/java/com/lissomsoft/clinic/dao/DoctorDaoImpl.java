@@ -222,15 +222,17 @@ public class DoctorDaoImpl implements DoctorDao {
         int result_profile = 0;
         int result_user = 0;
         int result_doctor=0;
+        int result_delete=0;
+        int result_update=0;
         DefaultTransactionDefinition paramTransactionDefinition = new DefaultTransactionDefinition();
         TransactionStatus status = platformTransactionManager.getTransaction(paramTransactionDefinition);
 
         try {
 
-            String editDoctorSql  ="UPDATE doctor_detail SET branch_id=:branch_id,qualification=:qualification,specialization=:specialization,reg_id=:reg_id,updated_at=:updated_at WHERE doctor_detail_id=:doctor_id";
+            String editDoctorSql  ="UPDATE doctor_detail SET qualification=:qualification,specialization=:specialization,reg_id=:reg_id,updated_at=:updated_at WHERE doctor_detail_id=:doctor_id";
             Map<String,Object> parameter=new HashMap<String, Object>();
             parameter.put("doctor_id",doctorUser.getDoctor_id());
-            parameter.put("branch_id",doctorUser.getBranch_id());
+        /*    parameter.put("branch_id",doctorUser.getBranch_id());*/
             parameter.put("qualification",doctorUser.getQualification());
             parameter.put("specialization",doctorUser.getSpecialization());
             parameter.put("reg_id",doctorUser.getReg_no());
@@ -280,19 +282,58 @@ public class DoctorDaoImpl implements DoctorDao {
                 profileParameter.put("profile_id",doctorUser.getProfile_id());
                 profileParameter.put("updated_at",format.format(new Date()));
                 result_profile=jdbcTemplate.update(editProfileSql,profileParameter);
-                platformTransactionManager.commit(status);
+
             }catch (Exception e){
                 e.printStackTrace();
-                platformTransactionManager.rollback(status);
+
 
             }
+        }
+    if((result_profile>0)? true :false){
+
+        try {
+
+            String deleteDoctorSql="DELETE  FROM doctor_mapper WHERE doctor_detail_id=(SELECT d.doctor_detail_id FROM doctor_detail d   INNER JOIN member_master m ON m.user_id=d.user_id AND m.profile_id=:profile_id)";
+
+            Map<String ,Object> deleteProfile=new HashMap<String, Object>();
+            deleteProfile.put("profile_id",doctorUser.getProfile_id());
+            result_delete=jdbcTemplate.update(deleteDoctorSql,deleteProfile);
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+            platformTransactionManager.rollback(status);
+        }
+    }
+    if((result_delete>0)?true :false){
+
+        try {
+            List<Branch> branches;
+            branches=doctorUser.getBranch();
+            Iterator<Branch> it=branches.iterator();
+            while (it.hasNext()) {
+                Branch br=it.next();
+
+                String insertDoctorMapSql="INSERT INTO  doctor_mapper (doctor_detail_id,branch_id) VALUES ((SELECT d.doctor_detail_id FROM doctor_detail d   INNER JOIN member_master m ON m.user_id=d.user_id AND m.profile_id=:profile_id),:branch_id)";
+                Map<String,Object> DoctorMapperParameter=new HashMap<String, Object>();
+                DoctorMapperParameter.put("profile_id",doctorUser.getProfile_id());
+                DoctorMapperParameter.put("branch_id",br.getBranch_id());
+                result_update=jdbcTemplate.update(insertDoctorMapSql,DoctorMapperParameter);
+
+            }
+            platformTransactionManager.commit(status);
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+            platformTransactionManager.rollback(status);
+        }
+
         }
 
 
 
-
-
-        return result_profile >0 ? true :false;
+        return result_update >0 ? true :false;
     }
 
     @Override

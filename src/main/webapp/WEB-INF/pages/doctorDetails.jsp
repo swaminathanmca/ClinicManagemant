@@ -6,13 +6,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html  ng-app="myApp"  ng-controller="doctorDetails">
+<html  ng-app="myApp"  ng-controller="doctorDetails ">
 <head>
   <link href="<%=request.getContextPath()%>/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/css/custom.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/css/sb-admin-2.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/vendor/metisMenu/metisMenu.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/static/vendor/multiple-select/multiple-select.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/css/bootstrap-formhelpers.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title></title>
@@ -209,31 +210,39 @@
 
                     </div>
                     <div class="form-group">
-                      <div class="col-lg-3">
+                      <div class="col-lg-6">
                         <div class="input-group">
                           <span class="input-group-addon">Email Id</span>
                           <label class="form-control" type="text">{{data.email}}</label>
                         </div>
                       </div>
-                      <div class="col-lg-3">
+                      <div class="col-lg-6">
                         <div class="input-group">
                           <span class="input-group-addon">Register Id</span>
                           <lablel class="form-control" type="text">{{data.reg_id}}</lablel>
                         </div>
                       </div>
-                      <div class="col-lg-3">
-                        <div class="input-group">
-                          <span class="input-group-addon">Clinic Name</span>
-                          <label class="form-control">{{data.clinic_name}}</label>
-                        </div>
-                      </div>
-                      <div class="col-lg-3">
-                        <div class="input-group">
-                          <span class="input-group-addon">Branch Name</span>
-                          <label class="form-control">{{data.branch_name}}</label>
-                        </div>
-                      </div>
+
+
+
                     </div>
+     <div class="form-group">
+       <div class="col-lg-6 ">
+         <div class="input-group">
+           <span class="input-group-addon">Clinic Name</span>
+           <label class="form-control">{{data.clinic_name}}</label>
+         </div>
+       </div>
+  <div class="col-lg-6">
+    <div class="input-group">
+      <span class="input-group-addon" id="branch_name">Branch</span>
+      <li  class="form-control">
+       <span ng-repeat="branch in branches"> {{branch.branch_name}},</span>
+      </li>
+    <%--  <label class="form-control" type="text">{{branch_name}}</label>--%>
+    </div>
+  </div>
+     </div>
 
                   </fieldset>
                 </form>
@@ -348,22 +357,23 @@
               </div>
             </div>
                 <div class="form-group">
-                  <div class="col-lg-3">
+                  <div class="col-lg-6">
                     <div class="input-group">
                       <span class="input-group-addon">Phone No</span>
-                      <input  type="text " class="form-control" ng-model="x.phone">
+                      <input  type="text " class="form-control" ui-mask="9999-999-999" ng-model="x.phone">
                     </div>
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-lg-6">
                     <div class="input-group">
                       <span class="input-group-addon">Email Id</span>
                       <input  type="text " class="form-control" ng-model="x.email">
                     </div>
                   </div>
-                  <div class="col-lg-3">
+                 <%-- <div class="col-lg-3">
                     <div class="input-group">
                       <span class="input-group-addon">Branch</span>
-                      <select class="form-control"  ng-options="s.branch_id as s.branch_name for s in branch" ng-model="x.branch_id"></select>
+                      &lt;%&ndash;<select class="form-control"  ng-options="s.branch_id as s.branch_name for s in branch" ng-model="x.branch_id"></select>&ndash;%&gt;
+
                     </div>
                   </div>
                   <div class="col-lg-3">
@@ -371,6 +381,22 @@
                       <span class="input-group-addon">Password</span>
                       <input class="form-control" ng-model="x.password" name="password">
                     </div>
+                  </div>--%>
+
+                </div>
+                <div class="form-group">
+                  <div class="col-lg-6" >
+                    <div class="input-group">
+                      <span class="input-group-addon">Branch Name</span>
+                      <%-- <select class="form-control" ng-options="s.branch_id as s.branch_name for s in branchDetails" ng-model="data.branch_id"></select>--%>
+                      <multiple-autocomplete ng-model="selectedList" name="multipleSelect" required="true" object-property="branch_name"
+                                             after-select-item="afterSelectItem"
+                                             after-remove-item="afterRemoveItem"
+                                             before-select-item="beforeSelectItem"
+                                             suggestions-arr="branch">
+                      </multiple-autocomplete>
+                    </div>
+
                   </div>
                 </div>
                 <div class="form-action">

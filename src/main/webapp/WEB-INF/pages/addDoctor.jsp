@@ -147,7 +147,7 @@
                                              <span class="text-danger wrapper text-center ng-binding"
                                                    ng-show="myform.firstname.$invalid &&  myform.firstname.$touched">Please Enter The Name</span>
                                          </div>
-                                         <div class="col-lg-2" >
+                                         <div class="col-lg-3" >
                                              <div class="input-group">
                                                  <span class="input-group-addon" >Reg-No</span>
                                                  <input class="form-control" type="text" name="reg_no" ng-model="reg_no" required>
@@ -156,18 +156,15 @@
                                               <span class="text-danger wrapper text-center ng-binding"
                                                     ng-show="myform.reg_no.$invalid &&  myform.reg_no.$touched">Please Enter Reg_Id</span>
                                          </div>
-                                         <div class="col-lg-4">
+                                         <div class="col-lg-3">
                                              <div class="input-group">
                                                  <span class="input-group-addon">Gender</span>
-                                                 <div class="checkbox  fileRadioBox form-control">
-                                                     <label>
-                                                         <input type="radio" name="sex" value="1" ng-model="gender"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked"/>&nbsp;Male
-                                                     </label>
-                                                     <label>
-                                                         <input type="radio" name="sex" value="0" ng-model="gender"  class="ng-pristine ng-untouched ng-valid ng-valid-required">&nbsp;Female
-                                                     </label>
-                                                 </div>
+                                                 <SELECT class="form-control" ng-model="gender" name="gender" required>
+                                                     <option value="1">Male</option>
+                                                     <option value="0">FeMale</option>
+                                                 </SELECT>
                                              </div>
+                                             <span class="text-danger wrapper text-center ng-binding" ng-show="myform.gender.$invalid &&  myform.gender.$touched">Please Select Gender</span>
                                          </div>
 
 
@@ -233,7 +230,7 @@
                                          <div class="col-lg-3">
                                              <div class="input-group">
                                                  <span class="input-group-addon">Country</span>
-                                                 <select class="input-medium bfh-countries form-control"  ng-model="country" required></select>
+                                                 <select class="input-medium bfh-countries form-control" name="country"  ng-model="country" required></select>
                                              </div>
                                               <span class="text-danger wrapper text-center ng-binding"
                                                     ng-show="myform.country.$invalid &&  myform.country.$touched">Please Enter The Country</span>
@@ -257,12 +254,12 @@
                                                  <label class="form-control" type="text" >{{data.clinic_name}}</label>
                                              </div>
                                          </div>
-                                         <div class="col-lg-3" ng-if="role=='BranchAdmin'">
+                                       <%--  <div class="col-lg-3" ng-if="role=='BranchAdmin'">
                                              <div class="input-group">
                                                  <span class="input-group-addon">Branch Name</span>
                                                  <label class="form-control" type="text" >{{data.branch_name}}</label>
                                              </div>
-                                         </div>
+                                         </div>--%>
 
                                          <div class="col-lg-3">
                                              <div class="input-group">
@@ -322,7 +319,7 @@
                                              <div class="col-lg-offset-4 col-lg-7">
                                                  <button type="submit" class="btn btn-success"
 
-                                                         ng-click="submitted=true">Save
+                                                         ng-disabled="myform.$invalid "      ng-click="submitted=true">Save
                                                  </button>
                                                  <button type="button" class="btn btn-inverse">Cancel</button>
                                              </div>

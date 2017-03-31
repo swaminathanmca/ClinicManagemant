@@ -141,7 +141,7 @@
 
 
               </div>--%>
-               <select ng-model="branch_iid" class="form-control" ng-options="s.branch_id as s.branch_name for s in branchDetails" ng-change="doctor(branch_iid)">
+               <select ng-model="branch_iid" class="form-control" ng-options="s.branch_id as s.branch_name for s in branchDetails" ng-change="doctor(branch_iid)"  ng-if="role=='Admin'">
 
                </select>
               <button class="btn btn-primary" type="button" ng-click="addDoctor()" ng-if="role=='BranchAdmin'">Add Doctor</button>
