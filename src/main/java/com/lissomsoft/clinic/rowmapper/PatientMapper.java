@@ -17,6 +17,8 @@ public class PatientMapper implements RowMapper {
         patient.setFullName(resultSet.getString("first_name"));
         patient.setLastName(resultSet.getString("last_name"));
         patient.setPatientId(resultSet.getInt("patient_id"));
+        patient.setContact_no(resultSet.getString("contact_no"));
+        patient.setEmail(resultSet.getString("email_id"));
 
         return patient;
     }

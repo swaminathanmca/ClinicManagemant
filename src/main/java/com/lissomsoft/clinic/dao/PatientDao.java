@@ -12,4 +12,5 @@ public interface PatientDao {
     boolean addPatient(Patient patient,Integer clinic_id);
     List<Blood> bloodtypeDetails();
     List<Patient> validatePatient(String contact_no);
+    List<Patient> viewPatient(String branch_id);
 }

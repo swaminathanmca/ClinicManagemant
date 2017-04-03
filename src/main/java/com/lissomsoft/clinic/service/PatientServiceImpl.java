@@ -29,4 +29,9 @@ public class PatientServiceImpl implements PatientService {
     public List<Patient> validatePatient(String contact_no) {
         return patientDao.validatePatient(contact_no);
     }
+
+    @Override
+    public List<Patient> viewPatient(String branch_id) {
+        return patientDao.viewPatient(branch_id);
+    }
 }

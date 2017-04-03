@@ -3,6 +3,7 @@ package com.lissomsoft.clinic.controller;
 import com.lissomsoft.clinic.service.*;
 import com.sun.deploy.panel.ITreeNode;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+import com.sun.xml.internal.bind.v2.util.StackRecorder;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -74,6 +75,12 @@ public class HelloController {
     @RequestMapping(value = "/GetClinic")
     public String getClinic(HttpServletRequest request) throws Exception {
         return "viewClinic";
+    }
+
+    @RequestMapping(value = "/GetPatient")
+    public String getPatient(HttpServletRequest request)throws Exception{
+
+        return "viewPatient";
     }
 
     @RequestMapping(value = "/clinicDetails")
@@ -458,19 +465,10 @@ public class HelloController {
         List<Profile> frontDesk;
         if (branch_id.equalsIgnoreCase("ALL")) {
             frontDesk = doctorService.viewFrontDeskAll(clinic_id);
-
-        }else {
-            frontDesk = doctorService.viewFrontDesk(branch_id);
-
-        }
-
-
-
+        }else {frontDesk = doctorService.viewFrontDesk(branch_id);}
         Iterator<Profile> it = frontDesk.iterator();
-
         while (it.hasNext()) {
             JSONObject jsonObject = new JSONObject();
-
             Profile profile = it.next();
             jsonObject.put("profile_id", profile.getProfile_id());
             jsonObject.put("name", profile.getName());
@@ -479,11 +477,8 @@ public class HelloController {
             jsonObject.put("contact_no", profile.getContact_no());
             jsonObject.put("email_id", profile.getEmail());
             jsonArray.put(jsonObject);
-            data.put("user", jsonArray);
-        }
-
-        return data.toString();
-    }
+            data.put("user", jsonArray);}
+            return data.toString();}
 
     @RequestMapping(value = "/BranchDetails/{branch_id}", method = RequestMethod.GET)
     public
@@ -536,7 +531,6 @@ public class HelloController {
         return data.toString();
     }
 
-
     @RequestMapping(value = "/doctorDetails/{profile_id}", method = RequestMethod.GET)
     public
     @ResponseBody
@@ -581,6 +575,34 @@ public class HelloController {
         }
         jsonObject.put("branches",jsonArray);
         data.put("branch",jsonObject);
+
+        return data.toString();
+    }
+
+    @RequestMapping(value = "/ViewPatient/{branch_id}/{clinic_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String viewpatient(@PathVariable String branch_id,@PathVariable Integer clinic_id )throws Exception{
+        JSONArray jsonArray = new JSONArray();
+        JSONObject data = new JSONObject();
+        List<Patient> getdetails;
+       /* if (branch_id.equalsIgnoreCase("ALL")) {
+            getdetails = patientService.viewPatientAll(clinic_id);
+        }else {getdetails = patientService.viewFrontDesk(branch_id);}*/
+        getdetails=patientService.viewPatient(branch_id);
+        Iterator<Patient> it=getdetails.iterator();
+        while (it.hasNext()){
+            JSONObject jsonObject=new JSONObject();
+            Patient patient=it.next();
+            jsonObject.put("patient_id",patient.getPatientId());
+            jsonObject.put("first_name",patient.getFullName());
+            jsonObject.put("last_name",patient.getLastName());
+            jsonObject.put("contact_no",patient.getContact_no());
+            jsonObject.put("email",patient.getEmail());
+            jsonArray.put(jsonObject);
+            data.put("patient",jsonArray);
+
+        }
 
         return data.toString();
     }

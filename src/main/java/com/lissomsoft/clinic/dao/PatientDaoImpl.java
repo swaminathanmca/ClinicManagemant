@@ -149,21 +149,29 @@ public class PatientDaoImpl implements  PatientDao {
     public List<Patient> validatePatient(String contact_no) {
 
         List<Patient> PatientDetails=null;
-        try{
-
-            String validatePhone="SELECT first_name,last_name,patient_id FROM patient_master WHERE  contact_no=:contact_no";
+        try{String validatePhone="SELECT first_name,last_name,patient_id FROM patient_master WHERE  contact_no=:contact_no";
             Map<String,Object> parameter=new HashMap<String, Object>();
             parameter.put("contact_no",contact_no);
-
             PatientDetails=jdbcTemplate.query(validatePhone,parameter,new PatientMapper());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return PatientDetails;
+    }
 
+    @Override
+    public List<Patient> viewPatient(String branch_id) {
+        List<Patient> PatientDetail=null;
+        try {
+            String getPatientSql="SELECT * FROM clinic.patient_master";
+            Map<String,Object>parameter=new HashMap<String, Object>();
+            parameter.put("branch_id",branch_id);
+            PatientDetail=jdbcTemplate.query(getPatientSql,parameter,new PatientMapper());
 
         }catch (Exception e){
             e.printStackTrace();
         }
 
-
-
-        return PatientDetails;
+        return PatientDetail;
     }
 }
