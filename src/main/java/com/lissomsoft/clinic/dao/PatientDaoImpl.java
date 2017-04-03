@@ -3,7 +3,9 @@ package com.lissomsoft.clinic.dao;
 import com.lissomsoft.clinic.domain.Blood;
 import com.lissomsoft.clinic.domain.Patient;
 import com.lissomsoft.clinic.rowmapper.BloodMapper;
+import com.lissomsoft.clinic.rowmapper.PatientDetailMapper;
 import com.lissomsoft.clinic.rowmapper.PatientMapper;
+import org.codehaus.jettison.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +52,7 @@ public class PatientDaoImpl implements  PatientDao {
             uId=uId.toUpperCase();
             patient.setPatient_pId(uId);
 
-            String insertPateientSql="INSERT INTO patient_master(clinic_id,branch_id,patient_pid,first_name,last_name,dob,sex,blood_group_code,address1,address2,city,state,country,pincode,contact_no,mobile_no,email_id,created_at,updated_at) VALUES ((SELECT  b.clinic_id FROM branch_master b where b.branch_id=:branch_id),:branch_id,:patient_pid,:first_name,:last_name,:dob,:gender,:blood_group,:address1,:address2,:city,:state,:country,:pincode,:contact_no,:mobile_no,:email_id,:created_at,:created_at)";
+            String insertPateientSql="INSERT INTO patient_master(clinic_id,branch_id,patient_pid,first_name,last_name,dob,mstatus,sex,blood_group_code,address1,address2,city,state,country,pincode,contact_no,mobile_no,email_id,created_at,updated_at) VALUES ((SELECT  b.clinic_id FROM branch_master b where b.branch_id=:branch_id),:branch_id,:patient_pid,:first_name,:last_name,:dob,:mstatus,:gender,:blood_group,:address1,:address2,:city,:state,:country,:pincode,:contact_no,:mobile_no,:email_id,:created_at,:created_at)";
             Map<String,Object> parameter=new HashMap<String, Object>();
             parameter.put("branch_id",clinic_id);
             parameter.put("first_name",patient.getFullName());
@@ -58,6 +60,7 @@ public class PatientDaoImpl implements  PatientDao {
             parameter.put("patient_pid",patient.getPatient_pId());
             parameter.put("dob",patient.getDob());
             parameter.put("gender",patient.getGender());
+            parameter.put("mstatus",patient.getmStatus());
             parameter.put("blood_group",patient.getBloodGroup());
             parameter.put("address1",patient.getAddress1());
             parameter.put("address2",patient.getAddress2());
@@ -173,5 +176,24 @@ public class PatientDaoImpl implements  PatientDao {
         }
 
         return PatientDetail;
+    }
+
+    @Override
+    public Patient patientdetails(Integer patient_id) {
+
+        Patient patient=new Patient();
+        try {
+
+            String patientdetailsSql="SELECT p.patient_pid,p.first_name,p.last_name,p.address1,p.address2,p.city,p.state,p.country,p.pincode,p.contact_no,p.mobile_no,p.email_id,p.sex,p.dob,p.mstatus,e.name,e.relation,e.address1 emr_address1,e.address2 emr_address2,e.city emr_city,e.state emr_state,e.country emr_country,e.pincode emr_pincode,e.contact_no emr_contact_no,e.mobile_no emr_mobile_no,e.email_id emr_email_id FROM patient_master p INNER JOIN emergency_master e ON p.patient_pid=e.patient_pid AND p.patient_id=:patient_id";
+            Map<String,Object> parameter=new HashMap<String, Object>();
+            parameter.put("patient_id",patient_id);
+             patient= (Patient) jdbcTemplate.queryForObject(patientdetailsSql,parameter,new PatientDetailMapper());
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return patient;
     }
 }

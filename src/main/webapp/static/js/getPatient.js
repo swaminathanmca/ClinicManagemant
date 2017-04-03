@@ -15,8 +15,16 @@ app.controller('getPatient',function($scope,$http,$window){
         })
 
 
-    $scope.addBranch=function(){
+    $scope.addPatient=function(){
         location.href="AddPatient";
     }
+
+    $scope.editPatient=function(id){
+        $scope.patient_id=id;
+        $window.sessionStorage.patient_id=$scope.patient_id;
+        location.href="patientDetail";
+    }
+
+
 
 })

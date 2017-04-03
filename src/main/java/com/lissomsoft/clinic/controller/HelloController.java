@@ -93,6 +93,11 @@ public class HelloController {
         return "doctorDetails";
     }
 
+    @RequestMapping(value = "/patientDetail")
+    public String patientDetails(HttpServletRequest request)throws Exception{
+        return "patientDetails";
+    }
+
     @RequestMapping(value = "/EditBranch")
     public String editBranch(HttpServletRequest request) throws Exception {
         return "branchDetails";
@@ -634,6 +639,45 @@ public class HelloController {
         data.put("frontdesk",jsonObject);
 
          return  data.toString();
+    }
+
+    @RequestMapping(value = "/patientDetails/{patient_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String patientDetails(@PathVariable Integer patient_id)throws Exception{
+        JSONObject jsonObject=new JSONObject();
+        JSONObject data=new JSONObject();
+        Patient patient=patientService.patientdetails(patient_id);
+        jsonObject.put("first_name",patient.getFullName());
+        jsonObject.put("last_name",patient.getLastName());
+        jsonObject.put("address1",patient.getAddress1());
+        jsonObject.put("address2",patient.getAddress2());
+        jsonObject.put("city",patient.getCity());
+        jsonObject.put("state",patient.getState());
+        jsonObject.put("country",patient.getCountry());
+        jsonObject.put("pincode",patient.getPincode());
+        jsonObject.put("contact_no",patient.getContact_no());
+        jsonObject.put("mobile_no",patient.getResidental_no());
+        jsonObject.put("gender",patient.getGender());
+        jsonObject.put("blood_group",patient.getBloodGroup());
+        jsonObject.put("mstatus",patient.getmStatus());
+        jsonObject.put("email",patient.getEmail());
+        jsonObject.put("patient_pid",patient.getPatient_pId());
+        jsonObject.put("patient_id",patient.getPatientId());
+        jsonObject.put("name",patient.getEmergency_name());
+        jsonObject.put("relation",patient.getRelation());
+        jsonObject.put("emr_address1",patient.getEmergency_address1());
+        jsonObject.put("emr_address2",patient.getEmergency_address2());
+        jsonObject.put("emr_city",patient.getEmergency_city());
+        jsonObject.put("emr_state",patient.getEmergency_state());
+        jsonObject.put("emr_country",patient.getEmergency_country());
+        jsonObject.put("emr_pincode",patient.getEmergency_pincode());
+        jsonObject.put("emr_contact_no",patient.getEmergency_contact_no());
+        jsonObject.put("emr_mobile_no",patient.getEmergency_residental_no());
+        jsonObject.put("email_id",patient.getEmergency_email());
+        jsonObject.put("status",true);
+
+        return jsonObject.toString();
     }
 
     @RequestMapping(value = "/EditDoctor", method = RequestMethod.POST)

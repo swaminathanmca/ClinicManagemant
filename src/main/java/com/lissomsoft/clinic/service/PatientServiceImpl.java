@@ -34,4 +34,10 @@ public class PatientServiceImpl implements PatientService {
     public List<Patient> viewPatient(String branch_id) {
         return patientDao.viewPatient(branch_id);
     }
+
+    @Override
+    public Patient patientdetails(Integer patient_id) {
+
+        return patientDao.patientdetails(patient_id);
+    }
 }

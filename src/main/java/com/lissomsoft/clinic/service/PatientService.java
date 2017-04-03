@@ -15,4 +15,5 @@ public interface PatientService {
     List<Blood> bloodtypeDetails();
     List<Patient> validatePatient(String contact_no);
     List<Patient> viewPatient(String branch_id);
+    Patient patientdetails(Integer patient_id);
 }

@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html ng-app="myApp" ng-controller="getPatient">
+<html ng-app="myApp" ng-controller="patientDetails">
 <head>
   <link href="<%=request.getContextPath()%>/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/css/custom.css" rel="stylesheet">
@@ -94,47 +94,42 @@
 
     <div class="row">
       <div class="col-lg-12">
-        <div class="panel panel-default">
+        <div class="panel panel-primary">
           <div class="panel-heading">
-          <%--  <h3 class="panel-title"></h3>--%>
-            <button type="button" class="btn btn-primary" ng-click="addPatient()">Add Patient</button>
-            <label class="input-group pull-right" style="width: 180px">
-              <span class="input-group-addon glyphicon glyphicon-search" style="top:0px;"></span>
-              <input type="text" ng-model="search" class="input-group  form-control" placeholder="Search">
-            </label>
+              <h3 class="panel-title">Patient Details</h3>
+
           </div>
           <div class="panel-body">
             <div class="row">
               <div class="col-lg-12">
-                <div class="table-responsive">
+               <form class="form-horizontal ng-invalid" role="form" name="myform"
+                     novalidate>
+                 <fieldset>
+                   <div class="col-xs-3">
+                   </div>
+                   <div class="col-xs-1 col-xs-offset-8">
+                     <h4><img src="<%=request.getContextPath()%>/static/img/editicon.png" class=" pull-left" data-toggle="modal" data-target="#myModal" style="padding-left: 45px" ng-click="editUser(data.profile_id)">
+                     </h4>
+                   </div>
+                   <div class="form-group">
+                     <div class="col-lg-6">
+                       <div class="input-group">
+                         <span class="input-group-addon">First Name</span>
+                         <label class="form-control" type="text">{{data.first_name}}</label>
+                       </div>
+                     </div>
+                     <div class="col-lg-6">
+                       <div class="input-group">
+                         <span class="input-group-addon">Last Name</span>
+                         <label class="form-control" type="text">{{data.last_name}}</label>
+                       </div>
+                     </div>
+                   </div>
 
-                  <table class="table table-striped table-bordered table-hover " id="dataTables-example">
-                    <thead>
-                    <tr class="success">
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>Email</th>
-                      <th>Contact No</th>
-
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr dir-paginate="x in data | filter:search | orderBy : first_name | itemsPerPage :5" ng-click="editPatient(x.patient_id)">
-                      <td>{{x.first_name}}</td>
-                      <td>{{x.last_name}}</td>
-                      <td>{{x.email}}</td>
-                      <td>{{x.contact_no}}</td>
-
-                    </tr>
 
 
-                    </tbody>
-
-                  </table>
-                  <p class=" text-center">
-                    <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" ></dir-pagination-controls>
-                  </p>
-                </div>
+                 </fieldset>
+                 </form>
               </div>
 
             </div>
@@ -160,6 +155,7 @@
 <script src="<%=request.getContextPath()%>/static/js/addClinic.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/addPatient.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/getPatient.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/patientDetails.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/angular-base64-upload.js"></script>
