@@ -198,6 +198,8 @@ public class HelloController {
 
         flag=patientService.addPatient(patient,branch_id);
 
+
+
         jsonObject.put("status",flag);
 
         return jsonObject.toString();

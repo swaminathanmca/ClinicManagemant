@@ -16,10 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import javax.swing.text.html.HTMLDocument;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Lissomsoft on 3/24/2017.
@@ -27,6 +24,7 @@ import java.util.Map;
 public class PatientDaoImpl implements  PatientDao {
     private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
     DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    DateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
     @Autowired(required = false)
     private NamedParameterJdbcTemplate jdbcTemplate;
     @Autowired(required = false)
@@ -43,11 +41,21 @@ public class PatientDaoImpl implements  PatientDao {
         TransactionStatus status = platformTransactionManager.getTransaction(paramTransactionDefinition);
         try{
 
-            String insertPateientSql="INSERT INTO patient_master(clinic_id,branch_id,first_name,last_name,dob,sex,blood_group_code,address1,address2,city,state,country,pincode,contact_no,mobile_no,email_id,created_at,updated_at) VALUES ((SELECT  b.clinic_id FROM branch_master b where b.branch_id=:branch_id),:branch_id,:first_name,:last_name,:dob,:gender,:blood_group,:address1,:address2,:city,:state,:country,:pincode,:contact_no,:mobile_no,:email_id,:created_at,:created_at)";
+            String date =format1.format(new Date());
+            String num1=date.replaceAll("-","");
+            num1=num1.replaceAll("0","");
+            Random generator=new Random();
+            int randomno=generator.nextInt(90)+10;
+            String uId="OP"+patient.getLastName().substring((patient.getLastName().length()-1))+patient.getFullName().charAt(0)+num1+randomno;
+            uId=uId.toUpperCase();
+            patient.setPatient_pId(uId);
+
+            String insertPateientSql="INSERT INTO patient_master(clinic_id,branch_id,patient_pid,first_name,last_name,dob,sex,blood_group_code,address1,address2,city,state,country,pincode,contact_no,mobile_no,email_id,created_at,updated_at) VALUES ((SELECT  b.clinic_id FROM branch_master b where b.branch_id=:branch_id),:branch_id,:patient_pid,:first_name,:last_name,:dob,:gender,:blood_group,:address1,:address2,:city,:state,:country,:pincode,:contact_no,:mobile_no,:email_id,:created_at,:created_at)";
             Map<String,Object> parameter=new HashMap<String, Object>();
             parameter.put("branch_id",clinic_id);
             parameter.put("first_name",patient.getFullName());
             parameter.put("last_name",patient.getLastName());
+            parameter.put("patient_pid",patient.getPatient_pId());
             parameter.put("dob",patient.getDob());
             parameter.put("gender",patient.getGender());
             parameter.put("blood_group",patient.getBloodGroup());
@@ -72,9 +80,10 @@ public class PatientDaoImpl implements  PatientDao {
 
            try {
 
-               String insertEmergencySql="INSERT INTO emergency_master(name,relation,address1,address2,city,state,country,pincode,contact_no,mobile_no,email_id,created_at,updated_at) VALUES (:name,:relation,:address1,:address2,:city,:state,:country,:pincode,:contact_no,:mobile_no,:email_id,:created_at,:created_at)";
+               String insertEmergencySql="INSERT INTO emergency_master(patient_pid,name,relation,address1,address2,city,state,country,pincode,contact_no,mobile_no,email_id,created_at,updated_at) VALUES (:patient_pid,:name,:relation,:address1,:address2,:city,:state,:country,:pincode,:contact_no,:mobile_no,:email_id,:created_at,:created_at)";
                Map<String,Object> parameter1=new HashMap<String, Object>();
                parameter1.put("name",patient.getEmergency_name());
+               parameter1.put("patient_pid",patient.getPatient_pId());
                parameter1.put("relation",patient.getRelation());
                parameter1.put("address1",patient.getEmergency_address1());
                parameter1.put("address2",patient.getEmergency_address2());
@@ -88,6 +97,7 @@ public class PatientDaoImpl implements  PatientDao {
                parameter1.put("created_at",format.format(new Date()));
 
                result_emergency=jdbcTemplate.update(insertEmergencySql,parameter1);
+               platformTransactionManager.commit(status);
 
            }catch (Exception e){
                e.printStackTrace();
@@ -96,14 +106,15 @@ public class PatientDaoImpl implements  PatientDao {
        }
 
 
-        if((result_emergency >0) ? true :false){
+       /* if((result_emergency >0) ? true :false){
 
             try {
 
-                String insertMapperSql="INSERT INTO emergency_mapper(patient_id,emergency_id,created_at,updated_at) VALUES ((SELECT patient_id FROM patient_master WHERE contact_no=:contact_no),(SELECT emergency_id FROM emergency_master WHERE contact_no=:phone_no),:created_at,:created_at)";
+                String insertMapperSql="INSERT INTO emergency_mapper(patient_id,emergency_id,created_at,updated_at) VALUES ((SELECT patient_id FROM patient_master WHERE patient_pid=:patient_pid),(SELECT emergency_id FROM emergency_master WHERE contact_no=:phone_no),:created_at,:created_at)";
                 Map<String ,Object> maperParameter=new HashMap<String, Object>();
                 maperParameter.put("contact_no",patient.getContact_no());
                 maperParameter.put("phone_no",patient.getEmergency_contact_no());
+                maperParameter.put("patient_pid",patient.getPatient_pId());
                 maperParameter.put("created_at",format.format(new Date()));
                 result_mapper=jdbcTemplate.update(insertMapperSql,maperParameter);
                 platformTransactionManager.commit(status);
@@ -113,9 +124,9 @@ public class PatientDaoImpl implements  PatientDao {
                 platformTransactionManager.rollback(status);
             }
 
-        }
+        }*/
 
-        return result_mapper >0 ? true :false;
+        return result_emergency >0 ? true :false;
     }
 
     @Override

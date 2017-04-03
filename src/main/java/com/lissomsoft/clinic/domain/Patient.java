@@ -16,6 +16,8 @@ public class Patient {
 
     private String lastName;
 
+    private String patient_pId;
+
     private Integer gender;
 
     private String mStatus;
@@ -306,6 +308,15 @@ public class Patient {
         this.emergency_email = emergency_email;
     }
 
+
+    public String getPatient_pId() {
+        return patient_pId;
+    }
+
+    public void setPatient_pId(String patient_pId) {
+        this.patient_pId = patient_pId;
+    }
+
     @Override
  public String toString(){
 
@@ -314,6 +325,7 @@ public class Patient {
                 "patientId="+patientId+
                 ",fullName='"+fullName+ '\'' +
                 ",lastName='"+lastName+'\''+
+                ",patient_pId='"+patient_pId+'\''+
                 ",gender='"+gender+ '\'' +
                 ",mStatus='"+mStatus+ '\'' +
                 ",bloodGroup='"+bloodGroup+ '\'' +
