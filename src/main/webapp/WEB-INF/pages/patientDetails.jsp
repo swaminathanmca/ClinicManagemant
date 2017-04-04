@@ -114,18 +114,78 @@
                    <div class="form-group">
                      <div class="col-lg-6">
                        <div class="input-group">
-                         <span class="input-group-addon">First Name</span>
-                         <label class="form-control" type="text">{{data.first_name}}</label>
+                         <span class="input-group-addon">Patient Id</span>
+                         <label class="form-control" type="text">{{data.patient_pid}}</label>
                        </div>
                      </div>
                      <div class="col-lg-6">
                        <div class="input-group">
-                         <span class="input-group-addon">Last Name</span>
-                         <label class="form-control" type="text">{{data.last_name}}</label>
+                         <span class="input-group-addon"> Name</span>
+                         <label class="form-control" type="text"> {{data.first_name}} &nbsp;{{data.last_name}}</label>
                        </div>
                      </div>
                    </div>
 
+                   <div class="form-group">
+                   <div class="col-lg-3">
+                     <div class="input-group">
+                       <span class="input-group-addon">Gender</span>
+                       <label class="form-control" type="text" ng-if="data.gender==1">Male</label>
+                       <label class="form-control" type="text" ng-if="data.gender==0">FeMale</label>
+                     </div>
+                   </div>
+                     <div class="col-lg-3">
+                       <div class="input-group">
+                         <span class="input-group-addon">Marital Status</span>
+                         <label class="form-control" type="text" ng-if="data.mstatus==1">Married</label>
+                         <label class="form-control" type="text" ng-if="data.mstatus==0">UnMarried</label>
+                       </div>
+                     </div>
+                  <div class="col-lg-6">
+                    <div class="input-group">
+                      <span class="input-group-addon">Address</span>
+                      <label class="form-control" type="text" >{{data.address1}},{{data.address2}}</label>
+                    </div>
+                  </div>
+                   </div>
+                   <div class="form-group">
+                     <div class="col-lg-3">
+                       <div class="input-group">
+                         <span class="input-group-addon">City</span>
+                         <label class="form-control" type="text">{{data.city}}</label>
+
+                       </div>
+                     </div>
+                     <div class="col-lg-3">
+                       <div class="input-group">
+                         <span class="input-group-addon">State</span>
+                         <label class="form-control" type="text">{{data.state}}</label>
+
+                       </div>
+                     </div>
+                     <div class="col-lg-3">
+                       <div class="input-group">
+                         <span class="input-group-addon">Country</span>
+
+                         <select id="countries1" class="input-medium form-control" name="country" disabled></select>
+                       </div>
+                     </div>
+                     <div class="col-lg-3">
+                       <div class="input-group">
+                         <span class="input-group-addon">Pincode</span>
+                        <label class="form-control" type="text">{{data.pincode}}</label>
+
+                       </div>
+                     </div>
+                   </div>
+                   <div class="form-group">
+                     <div class="col-lg-3">
+                       <div class="input-group">
+                         <span class="input-group-addon">Contact No</span>
+                         <label class="form-control" type="text">{{data.contact_no}}</label>
+                       </div>
+                     </div>
+                   </div>
 
 
                  </fieldset>
@@ -151,6 +211,7 @@
 <script src="<%=request.getContextPath()%>/static/js/angular.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/multiple-select/multiple-select.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/js-custom-select/customSelect.js"></script>
+<script src="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/js/bootstrap-formhelpers.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/addClinic.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/addPatient.js"></script>
@@ -159,6 +220,6 @@
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/angular-base64-upload.js"></script>
-<script src="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/js/bootstrap-formhelpers.min.js"></script>
+
 </body>
 </html>
