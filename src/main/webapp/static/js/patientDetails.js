@@ -40,6 +40,16 @@ $scope.editUser=function(){
 
 }
 
+    $scope.submit=function(id){
+        $scope.id=id;
+        console.log(id);
+        var patient={
+
+
+        }
+    }
+
+
 
 
 

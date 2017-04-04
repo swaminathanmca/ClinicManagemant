@@ -320,7 +320,7 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-lg-12">
-              <form role="form" class="form-horizontal" name="myform1" >
+              <form role="form" class="form-horizontal" name="myform1"  ng-submit="submit(x.patient_pid)">
                 <fieldset>
 
                   <div class="form-group">
@@ -515,8 +515,7 @@
                   <div class="form-action">
                     <div class="row">
                       <div class="col-lg-offset-4 col-lg-7">
-                        <button type="submit" class="btn btn-success">Save
-                        </button>
+                        <button type="submit" class="btn btn-success"  ng-disabled="myform.$invalid" ng-click="submitted=true">Save</button>
                         <button  class="btn btn-inverse" data-dismiss="modal">Cancel</button>
                       </div>
                     </div>
