@@ -4,6 +4,10 @@
 
 app.controller('patientDetails',function($scope,$window,$http){
 
+
+
+
+
 $http.get("patientDetails/"+$window.sessionStorage.patient_id).
     then(function(response,status,headers,config){
        /* $('#countries1').bfhcountries({country: $scope.data.country})
@@ -14,12 +18,28 @@ $http.get("patientDetails/"+$window.sessionStorage.patient_id).
         $('#countries2').bfhcountries({country: $scope.data.emr_country})
     });
 
+
+
 $scope.editUser=function(){
+
     $http.get("patientDetails/"+$window.sessionStorage.patient_id).
         then(function(response,status,headers,config){
             $scope.x=response.data;
+            $('#countries3').bfhcountries({country: $scope.x.country});
+            $('#countries4').bfhcountries({country: $scope.x.country});
+            $scope.blood_iid=response.data.blood_group;
+            $scope.gender=response.data.gender.toString();
+
+
         });
+    $http.get("BloodGroup")
+        .then(function(response,status,headers,config){
+            $scope.blood=response.data.blood;
+
+        });
+
 }
+
 
 
 

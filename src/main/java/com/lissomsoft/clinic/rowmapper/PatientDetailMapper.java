@@ -26,7 +26,7 @@ public class PatientDetailMapper implements RowMapper {
         patient.setEmail(resultSet.getString("email_id"));
         patient.setGender(resultSet.getInt("sex"));
         patient.setDob(resultSet.getString("dob"));
-        patient.setBloodGroup(resultSet.getString("blood_group_code"));
+        patient.setBloodGroup(resultSet.getInt("blood_group_code"));
         patient.setmStatus(resultSet.getString("mstatus"));
         patient.setPatient_pId(resultSet.getString("patient_pid"));
         patient.setEmergency_name(resultSet.getString("name"));

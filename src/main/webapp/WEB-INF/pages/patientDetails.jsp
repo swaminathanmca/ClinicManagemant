@@ -193,6 +193,7 @@
 
                        </div>
                      </div>
+
                    </div>
                    <div class="form-group">
                      <div class="col-lg-3">
@@ -212,6 +213,12 @@
                          <span class="input-group-addon">Email</span>
                          <label class="form-control" type="text">{{data.email}}</label>
 
+                       </div>
+                     </div>
+                     <div class="col-lg-3">
+                       <div class="input-group">
+                         <span class="input-group-addon">Dob</span>
+                         <label class="form-control" type="text">{{data.dob}}</label>
                        </div>
                      </div>
                    </div>
@@ -285,13 +292,12 @@
                      <div class="col-lg-3">
                        <div class="input-group">
                          <span class="input-group-addon">Pincode</span>
-                         <label class="form-control" type="text">{{data.pincode}}</label>
+                         <label class="form-control" type="text">{{data.emr_pincode}}</label>
 
                        </div>
                      </div>
+
                    </div>
-
-
                  </fieldset>
                  </form>
               </div>
@@ -309,23 +315,209 @@
       <div class="modal-content">
         <div class="modal-header panel-primary">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Edit Doctor</h4>
+          <h4 class="modal-title">Edit Patient</h4>
         </div>
         <div class="modal-body">
           <div class="row">
             <div class="col-lg-12">
-              <form role="form" class="form-horizontal" name="myform" >
+              <form role="form" class="form-horizontal" name="myform1" >
                 <fieldset>
+
+                  <div class="form-group">
+
+                    <div class="col-lg-6">
+                      <div class="input-group">
+                        <span class="input-group-addon">First Name</span>
+                        <input type="text" class="form-control" ng-model="x.first_name">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="input-group">
+                        <span class="input-group-addon">Last Name</span>
+                        <input type="text" class="form-control" ng-model="x.last_name">
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="form-group">
+                    <div class="col-lg-3">
+                      <div class="input-group">
+                        <span class="input-group-addon">Blood</span>
+                        <select  ng-model="blood_iid" class="form-control"   ng-options="s.blood_id as s.blood_type for s in blood"   required></select>
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="input-group">
+                        <span class="input-group-addon">Gender</span>
+
+                        <select ng-model="gender" class="form-control">
+                          <option value="1">Male</option>
+                          <option value="0">Female</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="input-group">
+                        <span class="input-group-addon">Marital Status</span>
+                        <select ng-model="x.mstatus" class="form-control">
+                          <option value="1">Married</option>
+                          <option value="0">UnMarried</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-lg-6">
+                      <div class="input-group">
+                        <span class="input-group-addon">Address1</span>
+                        <input type="text" class="form-control" ng-model="x.address1">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="input-group">
+                        <span class="input-group-addon">Address2</span>
+                        <input type="text" class="form-control" ng-model="x.address2">
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+                  <div class="form-group">
+                    <div class="col-lg-3">
+                      <div class="input-group">
+                        <span class="input-group-addon">City</span>
+                        <input type="text" class="form-control" ng-model="x.city">
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="input-group">
+                        <span class="input-group-addon">State</span>
+                        <input type="text" class="form-control" ng-model="x.state">
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="input-group">
+                        <span class="input-group-addon">Country</span>
+                        <select id="countries3" class="input-medium form-control" name="country" ></select>
+                      </div>
+                      </div>
+                    <div class="col-lg-3">
+                      <div class="input-group">
+                        <span class="input-group-addon">Pincode</span>
+                        <input type="text" class="form-control" ng-model="x.pincode">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-lg-4">
+                      <div class="input-group">
+                        <span class="input-group-addon">Contact No</span>
+                        <input type="text" class="form-control" ui-mask="9999-999-999" ng-model="x.contact_no">
+                        </div>
+                      </div>
+                    <div class="col-lg-4">
+                      <div class="input-group">
+                        <span class="input-group-addon">Res No</span>
+                        <input type="text" class="form-control" ui-mask="9999-999-999" ng-model="x.mobile_no">
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="input-group">
+                        <span class="input-group-addon">Email</span>
+                        <input type="text" class="form-control" ng-model="x.email">
+                      </div>
+                    </div>
+                    </div>
+
+                  <hr>
+                  <h4>Emergency  Contact Details</h4>
+                  <div class="form-group">
+                    <div class="col-lg-6">
+                      <div class="input-group">
+                      <span class="input-group-addon">Name</span>
+                      <input type="text" class="form-control" ng-model="x.name">
+                      </div>
+                      </div>
+                    <div class="col-lg-3">
+                      <div class="input-group">
+                      <span class="input-group-addon">Relation</span>
+                      <input type="text" class="form-control" ng-model="x.relation">
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="input-group">
+                      <span class="input-group-addon">Contact No</span>
+                      <input type="text" class="form-control" ng-model="x.emr_contact_no">
+                      </div>
+                    </div>
+                    </div>
+
+                  <div class="form-group">
+                    <div class="col-lg-6">
+                      <div class="input-group">
+                        <span class="input-group-addon">Address1</span>
+                        <input type="text" class="form-control" ng-model="x.emr_address1">
+                        </div>
+                      </div>
+                    <div class="col-lg-6">
+                      <div class="input-group">
+                        <span class="input-group-addon">Address2</span>
+                        <input type="text" class="form-control" ng-model="x.emr_address2">
+                      </div>
+                    </div>
+                    </div>
+
+                  <div class="form-group">
+                    <div class="col-lg-4">
+                      <div class="input-group">
+                        <span class="input-group-addon">Res No</span>
+                        <input type="text" class="form-control" ng-model="x.emr_mobile_no">
+                        </div>
+                      </div>
+                    <div class="col-lg-4">
+                      <div class="input-group">
+                        <span class="input-group-addon">Email</span>
+                        <input type="text" class="form-control" ng-model="x.email_id">
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="input-group">
+                        <span class="input-group-addon">City</span>
+                        <input type="text" class="form-control" ng-model="x.emr_city">
+                      </div>
+                    </div>
+                    </div>
+
+                  <div class="form-group">
+                    <div class="col-lg-4">
+                      <div class="input-group">
+                        <span class="input-group-addon">State</span>
+                        <input type="text" class="form-control" ng-model="x.emr_state">
+                        </div>
+                      </div>
+                    <div class="col-lg-4">
+                      <div class="input-group">
+                        <span class="input-group-addon">Country</span>
+                        <select id="countries4" class="input-medium form-control" name="country" ></select>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="input-group">
+                        <span class="input-group-addon">Pincode</span>
+                        <input type="text" class="form-control" ng-model="x.emr_pincode">
+                      </div>
+                    </div>
+                    </div>
 
                   <div class="form-action">
                     <div class="row">
                       <div class="col-lg-offset-4 col-lg-7">
-                        <button type="submit" class="btn btn-success"
-                                ng-disabled="myform.$invalid   ng-click="submitted=true">Save
+                        <button type="submit" class="btn btn-success">Save
                         </button>
-                        <button type="button" class="btn btn-inverse" data-dismiss="modal">
-                          Cancel
-                        </button>
+                        <button  class="btn btn-inverse" data-dismiss="modal">Cancel</button>
                       </div>
                     </div>
                   </div>

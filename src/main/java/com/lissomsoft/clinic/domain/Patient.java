@@ -22,7 +22,7 @@ public class Patient {
 
     private String mStatus;
 
-    private String bloodGroup;
+    private Integer bloodGroup;
 
     private Integer factor;
 
@@ -99,11 +99,11 @@ public class Patient {
         this.gender = gender;
     }
 
-    public String getBloodGroup() {
+    public Integer getBloodGroup() {
         return bloodGroup;
     }
 
-    public void setBloodGroup(String bloodGroup) {
+    public void setBloodGroup(Integer bloodGroup) {
         this.bloodGroup = bloodGroup;
     }
 
