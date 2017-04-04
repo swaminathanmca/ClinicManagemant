@@ -14,5 +14,13 @@ $http.get("patientDetails/"+$window.sessionStorage.patient_id).
         $('#countries2').bfhcountries({country: $scope.data.emr_country})
     });
 
+$scope.editUser=function(){
+    $http.get("patientDetails/"+$window.sessionStorage.patient_id).
+        then(function(response,status,headers,config){
+            $scope.x=response.data;
+        });
+}
+
+
 
 });

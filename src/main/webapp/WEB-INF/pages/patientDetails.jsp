@@ -110,7 +110,7 @@
                    <div class="col-xs-3">
                    </div>
                    <div class="col-xs-1 col-xs-offset-8">
-                     <h4><img src="<%=request.getContextPath()%>/static/img/editicon.png" class=" pull-left" data-toggle="modal" data-target="#myModal" style="padding-left: 45px" ng-click="editUser(data.profile_id)">
+                     <h4><img src="<%=request.getContextPath()%>/static/img/editicon.png" class=" pull-left" data-toggle="modal" data-target="#myModal" style="padding-left: 45px" ng-click="editUser()">
                      </h4>
                    </div>
                    <div class="form-group">
