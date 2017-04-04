@@ -113,6 +113,7 @@
                   <table class="table table-striped table-bordered table-hover " id="dataTables-example">
                     <thead>
                     <tr class="success">
+                      <th>Patient Id</th>
                       <th>First Name</th>
                       <th>Last Name</th>
                       <th>Email</th>
@@ -122,6 +123,7 @@
                     </thead>
                     <tbody>
                     <tr dir-paginate="x in data | filter:search | orderBy : first_name | itemsPerPage :5" ng-click="editPatient(x.patient_id)">
+                      <td>{{x.patient_pid}}</td>
                       <td>{{x.first_name}}</td>
                       <td>{{x.last_name}}</td>
                       <td>{{x.email}}</td>

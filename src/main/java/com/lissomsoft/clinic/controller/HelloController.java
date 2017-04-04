@@ -600,6 +600,7 @@ public class HelloController {
             JSONObject jsonObject=new JSONObject();
             Patient patient=it.next();
             jsonObject.put("patient_id",patient.getPatientId());
+            jsonObject.put("patient_pid",patient.getPatient_pId());
             jsonObject.put("first_name",patient.getFullName());
             jsonObject.put("last_name",patient.getLastName());
             jsonObject.put("contact_no",patient.getContact_no());
@@ -652,6 +653,7 @@ public class HelloController {
         jsonObject.put("last_name",patient.getLastName());
         jsonObject.put("address1",patient.getAddress1());
         jsonObject.put("address2",patient.getAddress2());
+        jsonObject.put("dob",patient.getDob());
         jsonObject.put("city",patient.getCity());
         jsonObject.put("state",patient.getState());
         jsonObject.put("country",patient.getCountry());
