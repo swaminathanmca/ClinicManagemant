@@ -64,37 +64,20 @@
             <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
           </li>
           <li>
-            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Clinic<span class="fa arrow"></span></a>
+            <a href="#"><i class="fa fa-table fa-fw"></i><span class="fa arrow"></span> Patient </a>
             <ul class="nav nav-second-level">
               <li>
-                <a href="Dashboard">Add Clinic</a>
+                <a href="AddPatient">Add Patient</a>
               </li>
               <li>
-                <a href="GetClinic">View Clinic</a>
+                <a href="GetPatient">View Patient</a>
               </li>
             </ul>
+          </li>
 
-          </li>
-          <li>
-            <a href="AddBranch"><i class="fa fa-table fa-fw"></i> Branch</a>
-          </li>
-          <li>
-            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> User<span class="fa arrow"></span></a>
-            <ul class="nav nav-second-level">
-              <li>
-                <a href="AddUser">Add User</a>
-              </li>
-              <li>
-                <a href="#">View User</a>
-              </li>
-            </ul>
 
-          </li>
           <li>
-            <a href="AddPatient"><i class="fa fa-table fa-fw"></i> Patient </a>
-          </li>
-          <li>
-            <a href="#"><i class="fa fa-edit fa-fw"></i> Forms</a>
+            <a href="PatientVisit"><i class="fa fa-user-md fa-fw"></i> Patient Visit </a>
           </li>
 
 

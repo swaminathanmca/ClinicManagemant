@@ -77,7 +77,9 @@
           </li>
 
 
-
+          <li>
+            <a href="PatientVisit"><i class="fa fa-user-md fa-fw"></i> Patient Visit </a>
+          </li>
         </ul>
       </div>
 
