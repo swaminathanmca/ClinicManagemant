@@ -11,6 +11,7 @@ $http.get("patientDetails/"+$window.sessionStorage.patient_id).
         $scope.data=response.data;
 
         $('#countries1').bfhcountries({country: $scope.data.country})
+        $('#countries2').bfhcountries({country: $scope.data.emr_country})
     });
 
 

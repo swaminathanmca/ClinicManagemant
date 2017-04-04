@@ -112,7 +112,7 @@
                      </h4>
                    </div>
                    <div class="form-group">
-                     <div class="col-lg-6">
+                     <div class="col-lg-3">
                        <div class="input-group">
                          <span class="input-group-addon">Patient Id</span>
                          <label class="form-control" type="text">{{data.patient_pid}}</label>
@@ -124,7 +124,21 @@
                          <label class="form-control" type="text"> {{data.first_name}} &nbsp;{{data.last_name}}</label>
                        </div>
                      </div>
-                   </div>
+                     <div class="col-lg-3">
+                       <div class="input-group">
+                         <span class="input-group-addon">Blood Group</span>
+                         <label class="form-control" type="text" ng-if="data.blood_group==1">A POSITIVE</label>
+                         <label class="form-control" type="text" ng-if="data.blood_group==2">A NEGATIVE</label>
+                         <label class="form-control" type="text" ng-if="data.blood_group==3">B POSITIVE</label>
+                         <label class="form-control" type="text" ng-if="data.blood_group==4">B NEGATIVE</label>
+                         <label class="form-control" type="text" ng-if="data.blood_group==5">O POSITIVE</label>
+                         <label class="form-control" type="text" ng-if="data.blood_group==6">O NEGATIVE</label>
+                         <label class="form-control" type="text" ng-if="data.blood_group==7">AB POSITIVE</label>
+                         <label class="form-control" type="text" ng-if="data.blood_group==8">AB NEGATIVE</label>
+                       </div>
+                     </div>
+                     </div>
+
 
                    <div class="form-group">
                    <div class="col-lg-3">
@@ -183,6 +197,94 @@
                        <div class="input-group">
                          <span class="input-group-addon">Contact No</span>
                          <label class="form-control" type="text">{{data.contact_no}}</label>
+                       </div>
+                     </div>
+                     <div class="col-lg-3">
+                       <div class="input-group">
+                         <span class="input-group-addon">Res No</span>
+                         <label class="form-control" type="text">{{data.mobile_no}}</label>
+                       </div>
+                     </div>
+                     <div class="col-lg-3">
+                       <div class="input-group">
+                         <span class="input-group-addon">Email</span>
+                         <label class="form-control" type="text">{{data.email}}</label>
+
+                       </div>
+                     </div>
+                   </div>
+                   <hr>
+                   <h4>Emergency  Contact Details</h4>
+                   <div class="form-group">
+                   <div class="col-lg-6">
+                     <div class="input-group">
+                       <span class="input-group-addon"> Name</span>
+                       <label class="form-control" type="text"> {{data.name}}</label>
+                     </div>
+                   </div>
+                   <div class="col-lg-3">
+                     <div class="input-group">
+                       <span class="input-group-addon"> Relation </span>
+                       <label class="form-control" type="text"> {{data.relation}}</label>
+                     </div>
+                   </div>
+                     <div class="col-lg-3">
+                       <div class="input-group">
+                         <span class="input-group-addon">Contact No</span>
+                         <label class="form-control" type="text">{{data.emr_contact_no}}</label>
+                       </div>
+                     </div>
+                   </div>
+                   <div class="form-group">
+                   <div class="col-lg-6">
+                     <div class="input-group">
+                       <span class="input-group-addon">Address</span>
+                       <label class="form-control" type="text" >{{data.emr_address1}},{{data.emr_address2}}</label>
+                     </div>
+                   </div>
+                     <div class="col-lg-3">
+                       <div class="input-group">
+                         <span class="input-group-addon">Res No</span>
+                         <label class="form-control" type="text">{{data.emr_mobile_no}}</label>
+                       </div>
+                     </div>
+                     <div class="col-lg-3">
+                       <div class="input-group">
+                         <span class="input-group-addon">Email</span>
+                         <label class="form-control" type="text">{{data.email_id}}</label>
+
+                       </div>
+                     </div>
+                   </div>
+
+                   <div class="form-group">
+                     <div class="col-lg-3">
+                       <div class="input-group">
+                         <span class="input-group-addon">City</span>
+                         <label class="form-control" type="text">{{data.emr_city}}</label>
+
+                       </div>
+                     </div>
+                     <div class="col-lg-3">
+                       <div class="input-group">
+                         <span class="input-group-addon">State</span>
+                         <label class="form-control" type="text">{{data.emr_state}}</label>
+                       </div>
+                     </div>
+
+
+                     <div class="col-lg-3">
+                       <div class="input-group">
+                         <span class="input-group-addon">Country</span>
+
+                         <select id="countries2" class="input-medium form-control" name="country" disabled></select>
+                       </div>
+                     </div>
+                     <div class="col-lg-3">
+                       <div class="input-group">
+                         <span class="input-group-addon">Pincode</span>
+                         <label class="form-control" type="text">{{data.pincode}}</label>
+
                        </div>
                      </div>
                    </div>
