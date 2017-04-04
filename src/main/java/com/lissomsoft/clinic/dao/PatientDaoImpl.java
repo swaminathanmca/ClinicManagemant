@@ -184,7 +184,7 @@ public class PatientDaoImpl implements  PatientDao {
         Patient patient=new Patient();
         try {
 
-            String patientdetailsSql="SELECT p.patient_pid,p.first_name,p.last_name,p.address1,p.address2,p.city,p.state,p.country,p.pincode,p.contact_no,p.mobile_no,p.email_id,p.sex,p.dob,p.mstatus,e.name,e.relation,e.address1 emr_address1,e.address2 emr_address2,e.city emr_city,e.state emr_state,e.country emr_country,e.pincode emr_pincode,e.contact_no emr_contact_no,e.mobile_no emr_mobile_no,e.email_id emr_email_id FROM patient_master p INNER JOIN emergency_master e ON p.patient_pid=e.patient_pid AND p.patient_id=:patient_id";
+            String patientdetailsSql="SELECT p.patient_pid,p.first_name,p.last_name,p.address1,p.address2,p.city,p.state,p.country,p.pincode,p.blood_group_code,p.contact_no,p.mobile_no,p.email_id,p.sex,p.dob,p.mstatus,e.name,e.relation,e.address1 emr_address1,e.address2 emr_address2,e.city emr_city,e.state emr_state,e.country emr_country,e.pincode emr_pincode,e.contact_no emr_contact_no,e.mobile_no emr_mobile_no,e.email_id emr_email_id FROM patient_master p INNER JOIN emergency_master e ON p.patient_pid=e.patient_pid AND p.patient_id=:patient_id";
             Map<String,Object> parameter=new HashMap<String, Object>();
             parameter.put("patient_id",patient_id);
              patient= (Patient) jdbcTemplate.queryForObject(patientdetailsSql,parameter,new PatientDetailMapper());
