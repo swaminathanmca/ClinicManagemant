@@ -1,4 +1,4 @@
-<%--
+  <%--
   Created by IntelliJ IDEA.
   User: Lissomsoft
   Date: 3/9/2017
@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html ng-app="myApp">
+<html ng-app="myApp" ng-controller="patientVisit">
 <head>
   <link href="<%=request.getContextPath()%>/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/css/custom.css" rel="stylesheet">
@@ -15,6 +15,7 @@
   <link href="<%=request.getContextPath()%>/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/css/bootstrap-formhelpers.min.css"
         rel="stylesheet">
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/static/vendor/jquery-ui/jquery-ui.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title></title>
 </head>
@@ -76,9 +77,7 @@
           </li>
 
 
-          <li>
-            <a href="PatientVisit"><i class="fa fa-user-md fa-fw"></i> Patient Visit </a>
-          </li>
+
 
 
         </ul>
@@ -95,7 +94,8 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-8">
         <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title"> Patient Visit</h3>
@@ -108,15 +108,88 @@
                   <fieldset>
 
                     <div class="form-group">
-                      <div class="col-lg-3">
+                      <div class="col-lg-6">
                         <div class="input-group">
                           <span class="input-group-addon">
                             Patient Id
                           </span>
-                        <input class="form-control" type="text" name="patient_id" ng-model="patient_id">
+                        <label class="form-control" type="text" name="patient_id" >{{data.patient_pid}}</label>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                             Name
+                          </span>
+                          <label class="form-control" type="text" name="name" >{{data.first_name}}&nbsp;{{data.last_name}}</label>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+
+                      <div class="col-lg-6">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            Practitioner
+                          </span>
+                          <select class="form-control" ng-options="s.profile_id as s.name for s in doctor" ng-model="profile_id"  name="doctor" required></select>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            Visit Type
+                          </span>
+                          <select class="form-control" ng-model="vtype" name="vtype" required>
+                            <option value="0">Normal </option>
+                            <option value="1">Urgent</option>
+                          </select>
+                        </div>
+
+                      </div>
+
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                        <span class="input-group-addon">Height</span>
+                        <input type="text" class="form-control" ng-model="height" name="height" ui-mask="999" required>
+                        </div>
+
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">Weight</span>
+                          <input type="text" class="form-control" ng-model="weight" name="weight" ui-mask="999" required>
+                        </div>
+                      </div>
+
+
+
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-6">
+                        <div class="input-group">
+                          <span class="input-group-addon">Referal Details</span>
+                          <textarea type="text" class="form-control" ng-model="rdetails" name="rdetails"  required></textarea>
                         </div>
                       </div>
                     </div>
+
+                    <div class="form-actions">
+                      <div class="row">
+                        <div class="col-lg-offset-4 col-lg-7">
+                          <button type="submit" class="btn btn-success"
+                                  ng-disabled="myform.$invalid " ng-click="submitted=true">Save
+                          </button>
+                          <button type="button" class="btn btn-inverse">Cancel</button>
+                        </div>
+                      </div>
+                    </div>
+
 
                     </fieldset>
                   </form>
@@ -147,11 +220,16 @@
 <script src="<%=request.getContextPath()%>/static/js/angular.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/multiple-select/multiple-select.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/js-custom-select/customSelect.js"></script>
+<script src="<%=request.getContextPath()%>/static/vendor/jquery-ui/jquery-ui.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/addClinic.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/patientVisit.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/angular-base64-upload.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/js/bootstrap-formhelpers.min.js"></script>
+<script>
+
+</script>
 </body>
 </html>
