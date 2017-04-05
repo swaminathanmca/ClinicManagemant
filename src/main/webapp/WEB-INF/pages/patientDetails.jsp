@@ -299,6 +299,15 @@
                      </div>
 
                    </div>
+                   <div class="form-group">
+                     <div class="col-lg-10">
+
+                     </div>
+                     <div class="col-lg-2">
+                       <input type="submit" value="Proceed " class="btn btn-primary">
+                     </div>
+                   </div>
+
                  </fieldset>
                  </form>
               </div>
