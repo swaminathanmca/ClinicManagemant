@@ -16,4 +16,5 @@ public interface PatientService {
     List<Patient> validatePatient(String contact_no);
     List<Patient> viewPatient(String branch_id);
     Patient patientdetails(Integer patient_id);
+    boolean editPatient(Patient patient);
 }

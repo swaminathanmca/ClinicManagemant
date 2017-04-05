@@ -40,4 +40,9 @@ public class PatientServiceImpl implements PatientService {
 
         return patientDao.patientdetails(patient_id);
     }
+
+    @Override
+    public boolean editPatient(Patient patient) {
+        return patientDao.editPatient(patient);
+    }
 }

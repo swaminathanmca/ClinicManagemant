@@ -196,4 +196,70 @@ public class PatientDaoImpl implements  PatientDao {
 
         return patient;
     }
+
+    @Override
+    public boolean editPatient(Patient patient) {
+
+       int result=0;
+        int result_emergency=0;
+        DefaultTransactionDefinition paramTransactionDefinition = new DefaultTransactionDefinition();
+        TransactionStatus status = platformTransactionManager.getTransaction(paramTransactionDefinition);
+        try{
+            String editPatient="UPDATE patient_master SET first_name=:first_name,last_name=:last_name,address1=:address1,address2=:address2,city=:city,state=:state,country=:country,pincode=:pincode,contact_no=:contact_no,mobile_no=:mobile_no,email_id=:email,dob=:dob,sex=:gender,mstatus=:mstatus,blood_group_code=:blood_group WHERE patient_master.patient_pid=:patient_pid";
+            Map<String,Object> parameter=new HashMap<String, Object>();
+            parameter.put("first_name",patient.getFullName());
+            parameter.put("last_name",patient.getLastName());
+            parameter.put("address1",patient.getAddress1());
+            parameter.put("address2",patient.getAddress2());
+            parameter.put("city",patient.getCity());
+            parameter.put("state",patient.getState());
+            parameter.put("country",patient.getCountry());
+            parameter.put("pincode",patient.getPincode());
+            parameter.put("contact_no",patient.getContact_no());
+            parameter.put("mobile_no",patient.getResidental_no());
+            parameter.put("email",patient.getEmail());
+            parameter.put("dob",patient.getDob());
+            parameter.put("mstatus",patient.getmStatus());
+            parameter.put("gender",patient.getGender());
+            parameter.put("blood_group",patient.getBloodGroup());
+            parameter.put("patient_pid",patient.getPatient_pId());
+
+
+            result=jdbcTemplate.update(editPatient,parameter);
+        }catch (Exception e){
+            e.printStackTrace();
+            platformTransactionManager.rollback(status);
+        }
+
+if((result >0 )? true :false){
+
+    try {
+
+        String editEmergencySql="UPDATE emergency_master SET name=:name,relation=:relation,address1=:address1,address2=:address2,city=:city,state=:state,country=:country,pincode=:pincode,contact_no=:contact_no,mobile_no=:mobile_no,email_id=:email WHERE emergency_master.patient_pid=:patient_pid";
+        Map<String ,Object> parameters=new HashMap<String, Object>();
+        parameters.put("name",patient.getEmergency_name());
+        parameters.put("relation",patient.getRelation());
+        parameters.put("address1",patient.getEmergency_address1());
+        parameters.put("address2",patient.getEmergency_address2());
+        parameters.put("city",patient.getEmergency_city());
+        parameters.put("state",patient.getEmergency_state());
+        parameters.put("country",patient.getEmergency_country());
+        parameters.put("pincode",patient.getEmergency_pincode());
+        parameters.put("contact_no",patient.getEmergency_contact_no());
+        parameters.put("mobile_no",patient.getEmergency_residental_no());
+        parameters.put("email",patient.getEmergency_email());
+        parameters.put("patient_pid",patient.getPatient_pId());
+        result_emergency=jdbcTemplate.update(editEmergencySql,parameters);
+
+    platformTransactionManager.commit(status);
+
+    }catch (Exception e){
+        e.printStackTrace();
+        platformTransactionManager.rollback(status);
+    }
+
+
+}
+        return result_emergency >0 ? true :false;
+    }
 }
