@@ -5,7 +5,13 @@ app.controller('Patient',function($scope,$http,$window){
     $scope.role=$window.sessionStorage.role_name;
     $scope.email= $window.sessionStorage.email;
 
-
+    $( function() {
+        $( "#datepicker" ).datepicker(
+            {
+                maxDate: '0',
+                dateFormat: 'dd-mm-yy'
+            });
+    } );
     $http.get("trackSessionBranch/" + $scope.email).
         then(function (response, status, headers, config) {
 
@@ -40,7 +46,7 @@ $scope.validate=function(){
             gender:$scope.gender,
             mStatus:$scope.maritalstatus,
             bloodGroup:$scope.blood_id,
-            dob:$('#dob').val(),
+            dob:$scope.dob,
             email:$scope.email_id,
             contact_no:$scope.mobile_no,
             residental_no:$scope.res_no,
@@ -65,7 +71,7 @@ $scope.validate=function(){
 
        $http.post('AddPatient/'+$scope.branch_id,patient).
            then(function (response,status,headers,config){
-
+                location.href="GetPatient";
            });
     }
 

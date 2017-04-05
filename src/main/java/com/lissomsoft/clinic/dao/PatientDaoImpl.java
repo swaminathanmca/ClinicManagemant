@@ -48,7 +48,7 @@ public class PatientDaoImpl implements  PatientDao {
             num1=num1.replaceAll("0","");
             Random generator=new Random();
             int randomno=generator.nextInt(90)+10;
-            String uId="OP"+patient.getLastName().substring((patient.getLastName().length()-1))+patient.getFullName().charAt(0)+num1+randomno;
+            String uId="OP"+patient.getFullName().charAt(0)+patient.getLastName().substring((patient.getLastName().length()-1))+num1+randomno;
             uId=uId.toUpperCase();
             patient.setPatient_pId(uId);
 

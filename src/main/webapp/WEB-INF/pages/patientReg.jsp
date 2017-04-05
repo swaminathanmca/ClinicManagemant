@@ -15,6 +15,7 @@
   <link href="<%=request.getContextPath()%>/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/css/bootstrap-formhelpers.min.css"
         rel="stylesheet">
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/static/vendor/jquery-ui/jquery-ui.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title></title>
 </head>
@@ -157,10 +158,15 @@
             </div>
             <div class="form-group">
               <div class="col-lg-3">
+<div class="input-group">
+  <span class="input-group-addon">Dob</span>
+  <input type="text" id="datepicker" class="form-control" name="dob" ng-model="dob" required>
+</div>
+                <span class="text-danger wrapper text-center ng-binding" ng-show="myform.dob.$invalid &&  myform.dob.$touched">Please Enter Dob</span>
 
-                <div class="bfh-datepicker" id="dob" data-max="today" placeholder="DOB"  >
+
                   </div>
-              </div>
+
               <div class="col-lg-3">
                 <div class="input-group">
                   <span class="input-group-addon">Email</span>
@@ -359,6 +365,7 @@
 <script src="<%=request.getContextPath()%>/static/js/angular.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/multiple-select/multiple-select.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/js-custom-select/customSelect.js"></script>
+<script src="<%=request.getContextPath()%>/static/vendor/jquery-ui/jquery-ui.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/addClinic.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/addPatient.js"></script>

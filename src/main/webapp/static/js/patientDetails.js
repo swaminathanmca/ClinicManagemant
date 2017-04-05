@@ -6,7 +6,14 @@ app.controller('patientDetails',function($scope,$window,$http){
 
 
 
+    $( function() {
+        $( "#datepicker" ).datepicker(
+            {
+                maxDate: '0',
+                dateFormat: 'dd-mm-yy'
 
+            });
+    } );
 
 $http.get("patientDetails/"+$window.sessionStorage.patient_id).
     then(function(response,status,headers,config){
@@ -44,6 +51,7 @@ $scope.editUser=function(){
         $scope.id=id;
         console.log(id);
         var patient={
+
 
 
         }

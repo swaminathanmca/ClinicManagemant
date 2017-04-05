@@ -21,3 +21,6 @@ hr{
 .txt-clr{
     color:#20A8D8;
 }
+.datepicker{
+    z-index:9999 !important;
+}

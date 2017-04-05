@@ -15,6 +15,7 @@
   <link href="<%=request.getContextPath()%>/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/css/bootstrap-formhelpers.min.css"
         rel="stylesheet">
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/static/vendor/jquery-ui/jquery-ui.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title></title>
 </head>
@@ -356,13 +357,19 @@
                         </select>
                       </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                       <div class="input-group">
-                        <span class="input-group-addon">Marital Status</span>
+                        <span class="input-group-addon">MStatus</span>
                         <select ng-model="x.mstatus" class="form-control">
                           <option value="1">Married</option>
                           <option value="0">UnMarried</option>
                         </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="input-group">
+                        <span class="input-group-addon">Dob</span>
+                        <input type="text" id="datepicker" class="form-control datepicker" name="dob" ng-model="x.dob" required>
                       </div>
                     </div>
                   </div>
@@ -544,6 +551,7 @@
 <script src="<%=request.getContextPath()%>/static/vendor/multiple-select/multiple-select.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/js-custom-select/customSelect.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/js/bootstrap-formhelpers.min.js"></script>
+<script src="<%=request.getContextPath()%>/static/vendor/jquery-ui/jquery-ui.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/addClinic.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/addPatient.js"></script>
