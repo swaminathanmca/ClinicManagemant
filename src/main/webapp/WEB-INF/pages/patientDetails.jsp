@@ -77,7 +77,9 @@
             </ul>
           </li>
 
-
+          <li>
+            <a href="PatientVisit"><i class="fa fa-user-md fa-fw"></i> Patient Visit </a>
+          </li>
 
         </ul>
       </div>
@@ -302,7 +304,7 @@
 
                      </div>
                      <div class="col-lg-2">
-                       <input type="submit" value="Proceed " class="btn btn-primary" ng-click="proceed()">
+                       <input type="submit" value="Proceed" class="btn btn-primary">
                      </div>
                    </div>
 
@@ -336,14 +338,18 @@
                     <div class="col-lg-6">
                       <div class="input-group">
                         <span class="input-group-addon">First Name</span>
-                        <input type="text" class="form-control" ng-model="x.first_name">
+                        <input type="text" class="form-control" ng-model="x.first_name" name="first_name" required>
                       </div>
+                       <span class="text-danger wrapper text-center ng-binding"
+                             ng-show="myform1.first_name.$invalid &&  myform1.first_name.$touched">Please First Name </span>
                     </div>
                     <div class="col-lg-6">
                       <div class="input-group">
                         <span class="input-group-addon">Last Name</span>
-                        <input type="text" class="form-control" ng-model="x.last_name">
+                        <input type="text" class="form-control" ng-model="x.last_name" name="last_name" required>
                       </div>
+                      <span class="text-danger wrapper text-center ng-binding"
+                            ng-show="myform1.last_name.$invalid &&  myform1.last_name.$touched">Please Last Name </span>
                     </div>
 
                   </div>
@@ -351,13 +357,12 @@
                     <div class="col-lg-3">
                       <div class="input-group">
                         <span class="input-group-addon">Blood</span>
-                        <select  ng-model="blood_iid" class="form-control"   ng-options="s.blood_id as s.blood_type for s in blood"   required></select>
+                        <select  ng-model="blood_iid" class="form-control"   ng-options="s.blood_id as s.blood_type for s in blood" required></select>
                       </div>
                     </div>
                     <div class="col-lg-3">
                       <div class="input-group">
                         <span class="input-group-addon">Gender</span>
-
                         <select ng-model="gender" class="form-control">
                           <option value="1">Male</option>
                           <option value="0">Female</option>
@@ -376,22 +381,28 @@
                     <div class="col-lg-3">
                       <div class="input-group">
                         <span class="input-group-addon">Dob</span>
-                        <input type="text" id="datepicker" class="form-control datepicker" name="dob" ng-model="x.dob" required>
+                        <input type="text" id="datepicker" class="form-control datepicker" name="dob" ng-model="x.dob" name="dob" required>
                       </div>
+                       <span class="text-danger wrapper text-center ng-binding"
+                             ng-show="myform1.dob.$invalid &&  myform1.dob.$touched">Please Enter Date </span>
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="col-lg-6">
                       <div class="input-group">
                         <span class="input-group-addon">Address1</span>
-                        <input type="text" class="form-control" ng-model="x.address1">
+                        <input type="text" class="form-control" ng-model="x.address1" name="address1" required>
                       </div>
+                      <span class="text-danger wrapper text-center ng-binding"
+                            ng-show="myform1.address1.$invalid &&  myform1.address1.$touched">Please Enter Address </span>
                     </div>
                     <div class="col-lg-6">
                       <div class="input-group">
                         <span class="input-group-addon">Address2</span>
-                        <input type="text" class="form-control" ng-model="x.address2">
+                        <input type="text" class="form-control" ng-model="x.address2" name="address2" required>
                       </div>
+                      <span class="text-danger wrapper text-center ng-binding"
+                            ng-show="myform1.address2.$invalid &&  myform1.address2.$touched">Please Enter Address</span>
                     </div>
                   </div>
 
@@ -402,26 +413,32 @@
                     <div class="col-lg-3">
                       <div class="input-group">
                         <span class="input-group-addon">City</span>
-                        <input type="text" class="form-control" ng-model="x.city">
+                        <input type="text" class="form-control" ng-model="x.city" name="city" required>
                       </div>
+                      <span class="text-danger wrapper text-center ng-binding"
+                            ng-show="myform1.city.$invalid &&  myform1.city.$touched">Please Enter City</span>
                     </div>
                     <div class="col-lg-3">
                       <div class="input-group">
                         <span class="input-group-addon">State</span>
-                        <input type="text" class="form-control" ng-model="x.state">
+                        <input type="text" class="form-control" ng-model="x.state" name="state" required>
                       </div>
+                      <span class="text-danger wrapper text-center ng-binding"
+                            ng-show="myform1.state.$invalid &&  myform1.state.$touched">Please Enter State </span>
                     </div>
                     <div class="col-lg-3">
                       <div class="input-group">
                         <span class="input-group-addon">Country</span>
                         <select id="countries3" class="input-medium form-control" name="country" ></select>
                       </div>
-                      </div>
+                    </div>
                     <div class="col-lg-3">
                       <div class="input-group">
                         <span class="input-group-addon">Pincode</span>
-                        <input type="text" class="form-control" ng-model="x.pincode">
+                        <input type="text" class="form-control" ng-model="x.pincode" name="pincode" required>
                       </div>
+                      <span class="text-danger wrapper text-center ng-binding"
+                            ng-show="myform1.pincode.$invalid &&  myform1.pincode.$touched">Please Enter Valid Pincode</span>
                     </div>
                   </div>
 
@@ -429,43 +446,55 @@
                     <div class="col-lg-4">
                       <div class="input-group">
                         <span class="input-group-addon">Contact No</span>
-                        <input type="text" class="form-control" ui-mask="9999-999-999" ng-model="x.contact_no">
+                        <input type="text" class="form-control" ui-mask="9999-999-999" ng-model="x.contact_no" name="contact_no" required>
                         </div>
+                      <span class="text-danger wrapper text-center ng-binding"
+                            ng-show="myform1.contact_no.$invalid &&  myform1.contact_no.$touched">Please Enter Contact No </span>
                       </div>
                     <div class="col-lg-4">
                       <div class="input-group">
                         <span class="input-group-addon">Res No</span>
-                        <input type="text" class="form-control" ui-mask="9999-999-999" ng-model="x.mobile_no">
+                        <input type="text" class="form-control" ui-mask="9999-999-999" ng-model="x.mobile_no" name="mobile_no" required>
                       </div>
+                      <span class="text-danger wrapper text-center ng-binding"
+                            ng-show="myform1.mobile_no.$invalid &&  myform1.mobile_no.$touched">Please Enter Res No </span>
                     </div>
                     <div class="col-lg-4">
                       <div class="input-group">
                         <span class="input-group-addon">Email</span>
-                        <input type="text" class="form-control" ng-model="x.email">
+                        <input type="text" class="form-control" ng-model="x.email" name="email" required>
                       </div>
+                      <span class="text-danger wrapper text-center ng-binding"
+                            ng-show="myform1.email.$invalid &&  myform1.email.$touched">Please Enter Email </span>
                     </div>
                     </div>
 
                   <hr>
                   <h4>Emergency  Contact Details</h4>
                   <div class="form-group">
-                    <div class="col-lg-6">
+                    <div class="col-lg-5">
                       <div class="input-group">
                       <span class="input-group-addon">Name</span>
-                      <input type="text" class="form-control" ng-model="x.name">
+                      <input type="text" class="form-control" ng-model="x.name" name="name" required>
                       </div>
+                      <span class="text-danger wrapper text-center ng-binding"
+                            ng-show="myform1.name.$invalid &&  myform1.name.$touched">Please Enter Name </span>
                       </div>
                     <div class="col-lg-3">
                       <div class="input-group">
                       <span class="input-group-addon">Relation</span>
-                      <input type="text" class="form-control" ng-model="x.relation">
+                      <input type="text" class="form-control" ng-model="x.relation" name="relation" required>
                       </div>
+                      <span class="text-danger wrapper text-center ng-binding"
+                            ng-show="myform1.relation.$invalid &&  myform1.relation.$touched">Please Enter Relation </span>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                       <div class="input-group">
                       <span class="input-group-addon">Contact No</span>
-                      <input type="text" class="form-control" ng-model="x.emr_contact_no">
+                      <input type="text" class="form-control" ui-mask="9999-999-999" ng-model="x.emr_contact_no" name="emr_contact_no" required>
                       </div>
+                      <span class="text-danger wrapper text-center ng-binding"
+                            ng-show="myform1.emr_contact_no.$invalid &&  myform1.emr_contact_no.$touched">Please Enter Contact No </span>
                     </div>
                     </div>
 
@@ -473,14 +502,18 @@
                     <div class="col-lg-6">
                       <div class="input-group">
                         <span class="input-group-addon">Address1</span>
-                        <input type="text" class="form-control" ng-model="x.emr_address1">
+                        <input type="text" class="form-control" ng-model="x.emr_address1" name="emr_address1" required>
                         </div>
+                      <span class="text-danger wrapper text-center ng-binding"
+                            ng-show="myform1.emr_address1.$invalid &&  myform1.emr_address1.$touched">Enter Emergency Address</span>
                       </div>
                     <div class="col-lg-6">
                       <div class="input-group">
                         <span class="input-group-addon">Address2</span>
-                        <input type="text" class="form-control" ng-model="x.emr_address2">
+                        <input type="text" class="form-control" ng-model="x.emr_address2" name="emr_address2" required>
                       </div>
+                      <span class="text-danger wrapper text-center ng-binding"
+                            ng-show="myform1.emr_address2.$invalid &&  myform1.emr_address2.$touched">Enter Emergency Address </span>
                     </div>
                     </div>
 
@@ -488,20 +521,26 @@
                     <div class="col-lg-4">
                       <div class="input-group">
                         <span class="input-group-addon">Res No</span>
-                        <input type="text" class="form-control" ng-model="x.emr_mobile_no">
+                        <input type="text" class="form-control" ui-mask="9999-999-999" ng-model="x.emr_mobile_no" name="emr_mobile_no" required>
                         </div>
+                      <span class="text-danger wrapper text-center ng-binding"
+                            ng-show="myform1.emr_mobile_no.$invalid &&  myform1.emr_mobile_no.$touched">Please Enter Res No </span>
                       </div>
                     <div class="col-lg-4">
                       <div class="input-group">
                         <span class="input-group-addon">Email</span>
-                        <input type="text" class="form-control" ng-model="x.email_id">
+                        <input type="text" class="form-control" ng-model="x.email_id" name="email_id" required>
                       </div>
+                      <span class="text-danger wrapper text-center ng-binding"
+                            ng-show="myform1.email_id.$invalid &&  myform1.email_id.$touched">Please Enter Email </span>
                     </div>
                     <div class="col-lg-4">
                       <div class="input-group">
                         <span class="input-group-addon">City</span>
-                        <input type="text" class="form-control" ng-model="x.emr_city">
+                        <input type="text" class="form-control" ng-model="x.emr_city" name="emr_city" required>
                       </div>
+                      <span class="text-danger wrapper text-center ng-binding"
+                            ng-show="myform1.emr_city.$invalid &&  myform1.emr_city.$touched">Please Enter City </span>
                     </div>
                     </div>
 
@@ -509,8 +548,10 @@
                     <div class="col-lg-4">
                       <div class="input-group">
                         <span class="input-group-addon">State</span>
-                        <input type="text" class="form-control" ng-model="x.emr_state">
+                        <input type="text" class="form-control" ng-model="x.emr_state" name="emr_state" required>
                         </div>
+                      <span class="text-danger wrapper text-center ng-binding"
+                            ng-show="myform1.emr_state.$invalid &&  myform1.emr_state.$touched">Please Enter State </span>
                       </div>
                     <div class="col-lg-4">
                       <div class="input-group">
@@ -521,15 +562,17 @@
                     <div class="col-lg-4">
                       <div class="input-group">
                         <span class="input-group-addon">Pincode</span>
-                        <input type="text" class="form-control" ng-model="x.emr_pincode">
+                        <input type="text" class="form-control" ng-model="x.emr_pincode" name="emr_pincode" required>
                       </div>
+                      <span class="text-danger wrapper text-center ng-binding"
+                            ng-show="myform1.emr_pincode.$invalid &&  myform1.emr_pincode.$touched">Please Enter Valid Pincode </span>
                     </div>
                     </div>
 
                   <div class="form-action">
                     <div class="row">
                       <div class="col-lg-offset-4 col-lg-7">
-                        <button type="submit" class="btn btn-success"  ng-disabled="myform.$invalid" ng-click="submitted=true">Save</button>
+                        <button type="submit" class="btn btn-success"  ng-disabled="myform1.$invalid" ng-click="submitted=true">Save</button>
                         <button  class="btn btn-inverse" data-dismiss="modal">Cancel</button>
                       </div>
                     </div>
