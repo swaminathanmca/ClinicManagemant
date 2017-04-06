@@ -15,6 +15,7 @@ app.controller('User',function($scope,$http,$window){
 
             $window.sessionStorage.clinic_id=response.data.clinic_id;
             $window.sessionStorage.branch_id=response.data.branch_id;
+            $window.sessionStorage.branch_name=response.data.branch_name;
 
             $scope.data = response.data;
         });
@@ -77,6 +78,15 @@ app.controller('User',function($scope,$http,$window){
             })
     }
     $scope.submit=function(){
+if($scope.selectedList==""){
+  var obj1={
+      branch_id:  $window.sessionStorage.branch_id,
+      branch_name: $window.sessionStorage.branch_name
+  }
+    $scope.selectedList.push(obj1)
+
+}
+
 
 
     var Doctor={
