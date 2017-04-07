@@ -436,7 +436,7 @@
                     <div class="col-lg-3">
                       <div class="input-group">
                         <span class="input-group-addon">Pincode</span>
-                        <input type="text" class="form-control" ng-model="x.pincode" name="pincode" required>
+                        <input type="text" class="form-control" ui-mask="999999" ng-model="x.pincode" name="pincode" required>
                       </div>
                       <span class="text-danger wrapper text-center ng-binding"
                             ng-show="myform1.pincode.$invalid &&  myform1.pincode.$touched">Please Enter Valid Pincode</span>
@@ -563,7 +563,7 @@
                     <div class="col-lg-4">
                       <div class="input-group">
                         <span class="input-group-addon">Pincode</span>
-                        <input type="text" class="form-control" ng-model="x.emr_pincode" name="emr_pincode" required>
+                        <input type="text" class="form-control" ui-mask="999999" ng-model="x.emr_pincode" name="emr_pincode" required>
                       </div>
                       <span class="text-danger wrapper text-center ng-binding"
                             ng-show="myform1.emr_pincode.$invalid &&  myform1.emr_pincode.$touched">Please Enter Valid Pincode </span>

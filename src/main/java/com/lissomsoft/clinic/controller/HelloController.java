@@ -139,6 +139,11 @@ public class HelloController {
         return "adminBranch";
     }
 
+    @RequestMapping(value = "/AddSpeciality")
+    public String addSpeciality(HttpServletRequest request) throws Exception {
+        return "speciality";
+    }
+
     @RequestMapping(value = "/FrontDeskDetail")
     public String frontDeskdetail(HttpServletRequest request) throws Exception {
         return "FrontDesk";
