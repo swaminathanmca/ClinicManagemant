@@ -2,6 +2,7 @@ package com.lissomsoft.clinic.dao;
 
 import com.lissomsoft.clinic.domain.Blood;
 import com.lissomsoft.clinic.domain.Patient;
+import com.lissomsoft.clinic.domain.PatientVisit;
 import com.lissomsoft.clinic.rowmapper.BloodMapper;
 import com.lissomsoft.clinic.rowmapper.PatientDetailMapper;
 import com.lissomsoft.clinic.rowmapper.PatientMapper;
@@ -261,5 +262,10 @@ if((result >0 )? true :false){
 
 }
         return result_emergency >0 ? true :false;
+    }
+
+    @Override
+    public boolean patientEntry(PatientVisit visit) {
+        return false;
     }
 }

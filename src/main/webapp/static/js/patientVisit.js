@@ -22,6 +22,27 @@ $scope.patient_pid=$window.sessionStorage.patient_id;
 
     $scope.submit=function(){
 
+        var visit={
+
+            patient_pid:$scope.patient_pid,
+            first_name:$scope.data.first_name,
+            last_name:$scope.data.last_name,
+            profile_id:$scope.profile_id,
+            type:$scope.vtype,
+            height:$scope.height,
+            weight:$scope.weight,
+            refereal_details:$scope.rdetails
+
+        }
+
+        $http.post("PatientVisit",visit).
+            then(function (response,status,headers,config){
+                $scope.x = response.data;
+                /*location.href="patientDetail";*/
+
+
+            });
+
 
     }
 });

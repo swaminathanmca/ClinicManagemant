@@ -156,15 +156,19 @@
                       <div class="col-lg-3">
                         <div class="input-group">
                         <span class="input-group-addon">Height</span>
-                        <input type="text" class="form-control" ng-model="height" name="height" ui-mask="999" required>
+                        <input type="text" class="form-control" ng-model="height" name="height" maxlength="3"  ng-pattern="/^[0-9]*$/" required>
                         </div>
+                         <span class="text-danger wrapper text-center ng-binding"
+                               ng-show="myform.height.$error.pattern">Please Enter Valid Height</span>
 
                       </div>
                       <div class="col-lg-3">
                         <div class="input-group">
                           <span class="input-group-addon">Weight</span>
-                          <input type="text" class="form-control" ng-model="weight" name="weight" ui-mask="999" required>
+                          <input type="text" class="form-control" ng-model="weight" name="weight" maxlength="3"  ng-pattern="/^[0-9]*$/" required>
                         </div>
+                         <span class="text-danger wrapper text-center ng-binding"
+                               ng-show="myform.weight.$error.pattern">Please Enter Valid Weight</span>
                       </div>
 
 
