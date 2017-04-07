@@ -19,4 +19,9 @@ $scope.patient_pid=$window.sessionStorage.patient_id;
             $scope.doctor = response.data.user;
         })
 
+
+    $scope.submit=function(){
+
+
+    }
 });

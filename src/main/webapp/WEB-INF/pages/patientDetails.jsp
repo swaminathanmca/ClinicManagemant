@@ -305,7 +305,7 @@
 
                      </div>
                      <div class="col-lg-2">
-                       <input type="submit" value="Proceed" class="btn btn-primary">
+                       <input type="submit" value="Proceed" class="btn btn-primary" ng-click="proceed()">
                      </div>
                    </div>
 
