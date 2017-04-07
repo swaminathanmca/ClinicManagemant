@@ -201,6 +201,20 @@ public class HelloController {
         return jsonObject.toString();
     }
 
+    @RequestMapping(value = "/PatientVisit",method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String patientVisit(@RequestBody PatientVisit visit,HttpServletRequest request)throws JSONException{
+
+        JSONObject jsonObject=new JSONObject();
+        boolean flag;
+        flag=patientService.patientEntry(visit);
+        jsonObject.put("status",flag);
+        return jsonObject.toString();
+    }
+
+
+
     @RequestMapping(value = "/AddPatient/{branch_id}",method = RequestMethod.POST)
     public
     @ResponseBody

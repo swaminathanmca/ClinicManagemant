@@ -3,6 +3,7 @@ package com.lissomsoft.clinic.service;
 import com.lissomsoft.clinic.dao.PatientDao;
 import com.lissomsoft.clinic.domain.Blood;
 import com.lissomsoft.clinic.domain.Patient;
+import com.lissomsoft.clinic.domain.PatientVisit;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -44,5 +45,10 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public boolean editPatient(Patient patient) {
         return patientDao.editPatient(patient);
+    }
+
+    @Override
+    public boolean patientEntry(PatientVisit visit) {
+        return patientDao.patientEntry(visit);
     }
 }

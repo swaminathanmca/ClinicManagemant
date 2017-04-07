@@ -2,6 +2,7 @@ package com.lissomsoft.clinic.dao;
 
 import com.lissomsoft.clinic.domain.Blood;
 import com.lissomsoft.clinic.domain.Patient;
+import com.lissomsoft.clinic.domain.PatientVisit;
 
 import java.util.List;
 
@@ -15,4 +16,5 @@ public interface PatientDao {
     List<Patient> viewPatient(String branch_id);
     Patient patientdetails(Integer patient_id);
     boolean editPatient(Patient patient);
+    boolean patientEntry(PatientVisit visit);
 }
