@@ -77,4 +77,18 @@ public class PatientVisit {
     public void setReferal_details(String referal_details) {
         this.referal_details = referal_details;
     }
+
+
+    public  String toString(){
+        return "PatientVisit {" +
+                "patient_pid ="+ patient_pid +
+                " first_name ="+ first_name +
+                " last_name ="+last_name +
+                " profile_id ="+profile_id+
+                " type ="+type+
+                " height ="+height+
+                " weight ="+weight+
+                "refereal_details ="+referal_details+
+                '}';
+    }
 }

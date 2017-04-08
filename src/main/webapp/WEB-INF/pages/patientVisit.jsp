@@ -33,10 +33,7 @@
       <a class="navbar-brand" href="#"><img src="../Clinic/static/img/logo.png" width="30" height="30"></a>
     </div>
     <!-- /.navbar-header -->
-
     <ul class="nav navbar-top-links navbar-right">
-
-
       <li class="dropdown ">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
           <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -52,11 +49,7 @@
         </ul>
 
       </li>
-
-
     </ul>
-
-
     <div class="navbar-default sidebar" role="navigation">
       <div class="sidebar-nav navbar-collapse">
         <ul class="nav" id="side-menu">
@@ -145,7 +138,7 @@
                           </span>
                           <select class="form-control" ng-model="vtype" name="vtype" required>
                             <option value="0">Normal </option>
-                            <option value="1">Urgent</option>
+                            <option value="1">Emergency</option>
                           </select>
                         </div>
 
@@ -175,7 +168,7 @@
 
                     </div>
                     <div class="form-group">
-                      <div class="col-lg-6">
+                      <div class="col-lg-12">
                         <div class="input-group">
                           <span class="input-group-addon">Referal Details</span>
                           <textarea type="text" class="form-control" ng-model="rdetails" name="rdetails"  required></textarea>
@@ -193,26 +186,15 @@
                         </div>
                       </div>
                     </div>
-
-
-                    </fieldset>
+                  </fieldset>
                   </form>
-
-
                 </div>
               </div>
             </div>
-
-
-          </div>
-
+        </div>
       </div>
     </div>
-
-
-
-
-    </div>
+  </div>
   </div>
 
 

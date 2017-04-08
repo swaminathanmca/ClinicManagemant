@@ -138,7 +138,7 @@
                       <div class="col-lg-12">
                         <div class="input-group">
                           <span class="input-group-addon">Description</span>
-                          <textarea type="text" class="form-control" ng-model="description" name="details" required></textarea>
+                          <textarea type="text" class="form-control" ng-model="description" name="details" ></textarea>
                         </div>
                       </div>
                     </div>

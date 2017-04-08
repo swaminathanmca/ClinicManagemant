@@ -1,5 +1,6 @@
 package com.lissomsoft.clinic.controller;
 
+import com.lissomsoft.clinic.domain.Speciality;
 import com.lissomsoft.clinic.service.*;
 import com.sun.deploy.panel.ITreeNode;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
@@ -42,6 +43,8 @@ public class HelloController {
     private DoctorService doctorService;
     @Autowired(required = false)
     private PatientService patientService;
+    @Autowired(required = false)
+    private SpecialityService specialityService;
 
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -227,15 +230,13 @@ public class HelloController {
     String addPatient(@RequestBody Patient patient,@PathVariable Integer  branch_id,HttpServletRequest request)throws JSONException{
         JSONObject jsonObject=new JSONObject();
         boolean flag;
-
         flag=patientService.addPatient(patient,branch_id);
-
-
-
         jsonObject.put("status",flag);
 
         return jsonObject.toString();
     }
+
+
 
     @RequestMapping(value = "/AddBranch", method = RequestMethod.POST)
     public
@@ -280,6 +281,19 @@ public class HelloController {
 
         return data.toString();
     }
+
+   @RequestMapping(value = "/AddSpeciality",method = RequestMethod.POST)
+   public
+   @ResponseBody
+   String addSpeciality(@RequestBody Speciality speciality,HttpServletRequest request)throws JSONException{
+
+       JSONObject data=new JSONObject();
+       boolean flag;
+
+        flag=specialityService.addSpeciality(speciality);
+       data.put("status",flag);
+       return data.toString();
+   }
 
     @RequestMapping(value = "/EditClinic", method = RequestMethod.POST)
     public

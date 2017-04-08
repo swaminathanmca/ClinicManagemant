@@ -10,13 +10,13 @@ app.controller('addSpeciality',function($scope,$http,$window)
 
     $scope.submit=function(){
         var speciality ={
-            name:$scope.name,
+            speciality_name:$scope.name,
             description:$scope.description
         }
 
         $http.post('AddSpeciality',speciality).
             then(function (response,status,headers,config){
-
+                    $scope.result=response.data;
             });
     }
 })

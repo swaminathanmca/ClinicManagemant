@@ -42,7 +42,5 @@ $scope.patient_pid=$window.sessionStorage.patient_id;
 
 
             });
-
-
     }
 });
