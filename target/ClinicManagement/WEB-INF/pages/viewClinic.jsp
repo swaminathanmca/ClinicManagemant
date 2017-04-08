@@ -77,7 +77,17 @@
                     <li>
                         <a href="AdminBranch"><i class="fa fa-table fa-fw"></i> Branch</a>
                     </li>
-
+                    <li>
+                        <a href="#"><i class="fa fa-child "></i>&nbsp;Speciality<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="AddSpeciality"> Add Speciality</a>
+                            </li>
+                            <li>
+                                <a href="ViewSpeciality">View Speciality</a>
+                            </li>
+                        </ul>
+                    </li>
 
 
                 </ul>
