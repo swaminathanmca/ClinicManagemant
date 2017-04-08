@@ -152,6 +152,10 @@ public class HelloController {
         return "FrontDesk";
     }
 
+    @RequestMapping(value = "/ViewSpeciality")
+    public String viewSpeciality(HttpServletRequest request) throws Exception{
+        return "viewSpeciality";
+    }
 
 
 

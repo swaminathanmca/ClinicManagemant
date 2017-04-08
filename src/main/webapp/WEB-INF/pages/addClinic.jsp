@@ -87,7 +87,7 @@
                                 <a href="AddSpeciality"> Add Speciality</a>
                             </li>
                             <li>
-                                <a href="#">View Speciality</a>
+                                <a href="ViewSpeciality">View Speciality</a>
                             </li>
                         </ul>
                     </li>
