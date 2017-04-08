@@ -16,4 +16,6 @@ public interface SpecialityService {
     List<Speciality> viewSpeciality();
 
     Speciality specialityDetails(Integer speciality_id);
+
+    boolean editSpeciality(Speciality speciality,Integer speciality_id);
 }

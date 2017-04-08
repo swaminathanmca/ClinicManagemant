@@ -77,4 +77,25 @@ public class SpecialityDaoImpl implements SpecialityDao {
         }
         return speciality;
     }
+
+    @Override
+    public boolean editSpeciality(Speciality speciality, Integer speciality_id) {
+
+       int result=0;
+        try{
+
+            String editSpecialitySql="UPDATE speciality SET speciality_name=:speciality_name,description=:description,updated_at=:updated_at WHERE speciality_id=:speciality_id";
+            Map<String ,Object>  parameter=new HashMap<String, Object>();
+            parameter.put("speciality_id",speciality_id);
+            parameter.put("speciality_name",speciality.getSpeciality_name());
+            parameter.put("description",speciality.getDescription());
+            parameter.put("updated_at",format.format(new Date()));
+            result=jdbcTemplate.update(editSpecialitySql,parameter);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return result>0 ? true : false;
+    }
 }

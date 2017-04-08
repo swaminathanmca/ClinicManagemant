@@ -785,6 +785,17 @@ public class HelloController {
         return jsonObject.toString();
     }
 
+    @RequestMapping(value = "/EditSpeciality/{speciality_id}",method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String editSpeciality(@RequestBody Speciality speciality,@PathVariable Integer speciality_id,HttpServletRequest request)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        boolean flag;
+        flag=specialityService.editSpeciality(speciality,speciality_id);
+        jsonObject.put("status",flag);
+
+        return jsonObject.toString();
+    }
 
     @RequestMapping(value = "/validate/{contact_no}", method = RequestMethod.GET)
     public

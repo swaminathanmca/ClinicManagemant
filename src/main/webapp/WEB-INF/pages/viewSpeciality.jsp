@@ -166,7 +166,7 @@
           <div class="modal-body">
             <div class="row">
               <div class="col-lg-12">
-                <form role="form" class="form-horizontal" name="myform"  ng-submit="submit(x.speciality_id)">
+                <form role="form" class="form-horizontal" name="myform"  ng-submit="submit(data.speciality_id)">
                   <fieldset>
                     <div class="form-group">
                       <div class="col-lg-12">
