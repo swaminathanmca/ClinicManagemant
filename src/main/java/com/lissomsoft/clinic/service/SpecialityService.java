@@ -14,4 +14,6 @@ public interface SpecialityService {
     boolean addSpeciality(Speciality speciality );
 
     List<Speciality> viewSpeciality();
+
+    Speciality specialityDetails(Integer speciality_id);
 }

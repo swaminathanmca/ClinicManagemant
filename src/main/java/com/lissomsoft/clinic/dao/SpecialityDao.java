@@ -11,5 +11,5 @@ public interface SpecialityDao {
 
     boolean addSpeciality(Speciality speciality);
     List<Speciality> viewSpeciality();
-    List<Speciality> specialityDetails(Integer speciality_id);
+    Speciality specialityDetails(Integer speciality_id);
 }

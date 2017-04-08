@@ -153,6 +153,8 @@ public class HelloController {
     }
 
 
+
+
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
     public
     @ResponseBody
@@ -437,6 +439,21 @@ public class HelloController {
 
 
         return data.toString();
+    }
+
+    @RequestMapping(value = "/SpecialityDetail/{speciality_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String specialityDetails(@PathVariable Integer speciality_id  ,HttpServletRequest request)throws JSONException{
+
+        JSONObject jsonObject=new JSONObject();
+        Speciality speciality;
+        speciality=specialityService.specialityDetails(speciality_id);
+        jsonObject.put("speciality_id",speciality.getSpeciallity_id());
+        jsonObject.put("speciality_name",speciality.getSpeciality_name());
+        jsonObject.put("description",speciality.getDescription());
+
+        return jsonObject.toString();
     }
 
     @RequestMapping(value = "/ViewClinic", method = RequestMethod.GET)

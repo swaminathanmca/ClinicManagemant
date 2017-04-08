@@ -23,4 +23,9 @@ public class SpecialityServiceImpl implements SpecialityService {
 
         return specialityDao.viewSpeciality();
     }
+
+    @Override
+    public Speciality specialityDetails(Integer speciality_id) {
+        return specialityDao.specialityDetails(speciality_id);
+    }
 }

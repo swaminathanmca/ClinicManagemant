@@ -2,6 +2,7 @@ package com.lissomsoft.clinic.dao;
 
 import com.lissomsoft.clinic.domain.Speciality;
 import com.lissomsoft.clinic.rowmapper.SpecialityMapper;
+import org.omg.IOP.ExceptionDetailMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,20 @@ public class SpecialityDaoImpl implements SpecialityDao {
     }
 
     @Override
-    public List<Speciality> specialityDetails(Integer speciality_id) {
-        return null;
+    public Speciality specialityDetails(Integer speciality_id) {
+
+        Speciality speciality=new Speciality();
+        try {
+
+            String specialitySql="SELECT * FROM speciality WHERE speciality_id=:speciality_id";
+            Map<String,Object> params=new HashMap<String, Object>();
+            params.put("speciality_id",speciality_id);
+            speciality= (Speciality) jdbcTemplate.queryForObject(specialitySql,params,new SpecialityMapper());
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return speciality;
     }
 }
