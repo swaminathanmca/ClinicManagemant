@@ -1,6 +1,7 @@
 package com.lissomsoft.clinic.dao;
 
 import com.lissomsoft.clinic.domain.Speciality;
+import com.lissomsoft.clinic.rowmapper.SpecialityMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -37,5 +39,28 @@ public class SpecialityDaoImpl implements SpecialityDao {
             e.printStackTrace();
         }
         return result >0 ? true :false;
+    }
+
+    @Override
+    public List<Speciality> viewSpeciality() {
+
+        List<Speciality> getSpecialityAll=null;
+
+        try {
+            String GetSpecialitySql="SELECT * FROM speciality";
+            getSpecialityAll=jdbcTemplate.query(GetSpecialitySql,new SpecialityMapper());
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return getSpecialityAll;
+    }
+
+    @Override
+    public List<Speciality> specialityDetails(Integer speciality_id) {
+        return null;
     }
 }

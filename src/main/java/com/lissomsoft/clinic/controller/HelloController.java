@@ -415,6 +415,29 @@ public class HelloController {
         return data.toString();
     }
 
+    @RequestMapping(value = "/GetSpeciality",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getSpeciality(HttpServletRequest request)throws  JSONException{
+
+        JSONArray jsonArray=new JSONArray();
+        JSONObject data=new JSONObject();
+        List<Speciality> getSpeciality;
+        getSpeciality=specialityService.viewSpeciality();
+        Iterator<Speciality> it=getSpeciality.iterator();
+        while (it.hasNext()){
+            JSONObject jsonObject=new JSONObject();
+            Speciality speciality=it.next();
+            jsonObject.put("speciality_id",speciality.getSpeciallity_id());
+            jsonObject.put("speciality_name",speciality.getSpeciality_name());
+            jsonObject.put("description",speciality.getDescription());
+            jsonArray.put(jsonObject);
+            data.put("speciality",jsonArray);
+        }
+
+
+        return data.toString();
+    }
 
     @RequestMapping(value = "/ViewClinic", method = RequestMethod.GET)
     public

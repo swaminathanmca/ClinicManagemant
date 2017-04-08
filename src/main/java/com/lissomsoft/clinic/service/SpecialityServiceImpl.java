@@ -19,7 +19,8 @@ public class SpecialityServiceImpl implements SpecialityService {
     }
 
     @Override
-    public List<SpecialityService> viewSpeciality() {
-        return null;
+    public List<Speciality> viewSpeciality() {
+
+        return specialityDao.viewSpeciality();
     }
 }

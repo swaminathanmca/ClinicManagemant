@@ -13,5 +13,5 @@ public interface SpecialityService {
 
     boolean addSpeciality(Speciality speciality );
 
-    List<SpecialityService> viewSpeciality();
+    List<Speciality> viewSpeciality();
 }
