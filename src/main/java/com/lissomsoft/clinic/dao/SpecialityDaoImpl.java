@@ -29,19 +29,13 @@ public class SpecialityDaoImpl implements SpecialityDao {
 
             String insertSql="INSERT INTO speciality (speciality_name,description,created_at,updated_at) VALUES (:speciality_name,:description,:created_at,:created_at)";
             Map<String, Object> parameters = new HashMap<String, Object>();
-
             parameters.put("speciality_name",speciality.getSpeciality_name());
             parameters.put("description",speciality.getDescription());
             parameters.put("created_at",format.format(new Date()));
             result=jdbcTemplate.update(insertSql,parameters);
-
-
         }catch (Exception e){
             e.printStackTrace();
         }
-
-
-
         return result >0 ? true :false;
     }
 }
