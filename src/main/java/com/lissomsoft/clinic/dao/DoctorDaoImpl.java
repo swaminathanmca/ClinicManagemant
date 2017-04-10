@@ -163,7 +163,9 @@ public class DoctorDaoImpl implements DoctorDao {
 
             try{
                 List<Speciality> specialities;
+
                 specialities=doctorUser.getSpecialization();
+
                 Iterator<Speciality>it=specialities.iterator();
                 while (it.hasNext()){
 

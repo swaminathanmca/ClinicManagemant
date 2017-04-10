@@ -8,8 +8,11 @@ app.controller('User',function($scope,$http,$window){
     $scope.chiefError="The Phone No Already Taken";
     $scope.chiefEmail="Taken";
     $scope.selectedList=[];
+    $scope.selectedlist=[];
     var obj;
+    var spec;
     $scope.branches=[];
+    $scope.speciality=[];
     $http.get("trackSession/" + $scope.email).
         then(function (response, status, headers, config) {
 
@@ -25,6 +28,11 @@ app.controller('User',function($scope,$http,$window){
             $scope.branchDetails=response.data.branch;
 
         });
+$http.get("GetSpeciality")
+    .then(function(response){
+        $scope.specialitydetails=response.data.speciality;
+    })
+
 
     $scope.onLoad = function (e, reader, file, fileList,fileObj ) {
 
@@ -47,6 +55,20 @@ app.controller('User',function($scope,$http,$window){
         $scope.selectedList.splice(index,1);
 
     }
+
+    $scope.afterselectItem = function(item){
+        spec = {
+            speciallity_id : item.speciality_id,
+            speciality_name: item.speciality_name
+        };
+        $scope.selectedlist.push(spec)
+    }
+
+    $scope.afterremoveItem = function(item){
+        var index1 = $scope.selectedlist.indexOf(item);
+        $scope.selectedlist.splice(index1,1);
+    }
+
 
 
     $scope.validatecontact=function(){
@@ -105,14 +127,14 @@ if($scope.selectedList==""){
         password:$scope.password,
         reg_no:$scope.reg_no,
         qualification:$scope.qualification,
-        specialization:$scope.specialization
+        specialization:$scope.selectedlist
     }
 
 
 
          $http.post('AddDoctor',Doctor).
         then(function (response,status,headers,config){
-            location.href="ViewDoctor";
+           /* location.href="ViewDoctor";*/
     });
 
 

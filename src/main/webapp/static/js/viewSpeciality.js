@@ -2,9 +2,6 @@ app.controller('viewSpeciality', function ($scope, $http, $window){
     $http.get("GetSpeciality")
         .then(function (response) {
             $scope.speciality = response.data.speciality;
-
-
-
         });
 
 

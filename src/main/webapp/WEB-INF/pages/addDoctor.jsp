@@ -178,13 +178,18 @@
                                              <span class="text-danger wrapper text-center ng-binding"
                                                    ng-show="myform.qualification.$invalid &&  myform.qualification.$touched">Please Enter The Qulaification</span>
                                          </div>
-                                         <div class="col-lg-6">
+                                         <div class="col-lg-6" >
                                              <div class="input-group">
-                                                 <span class="input-group-addon">Specializations</span>
-                                                 <input class="form-control"  type="text" name="specialization" id="specialization" ng-model="specialization" required>
+                                                 <span class="input-group-addon">Specialitization</span>
+                                                 <%-- <select class="form-control" ng-options="s.branch_id as s.branch_name for s in branchDetails" ng-model="data.branch_id"></select>--%>
+                                                 <multiple-autocomplete ng-model="selected "
+                                                                        object-property="speciality_name"
+                                                                        after-select-item="afterselectItem"
+                                                                        after-remove-item="afterremoveItem"
+                                                                        suggestions-arr="specialitydetails">
+                                                 </multiple-autocomplete>
                                              </div>
-                                              <span class="text-danger wrapper text-center ng-binding"
-                                                    ng-show="myform.specialization.$invalid &&  myform.specialization.$touched">Please Enter The specialization</span>
+
                                          </div>
 
                                      </div>
