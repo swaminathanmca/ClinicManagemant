@@ -1,6 +1,7 @@
 package com.lissomsoft.clinic.vo;
 
 import com.lissomsoft.clinic.domain.Branch;
+import com.lissomsoft.clinic.domain.Speciality;
 
 import java.util.List;
 
@@ -16,13 +17,14 @@ public class DoctorUser {
     private int clinic_id;
     private int branch_id;
     private List<Branch> branch;
+    private List<Speciality> specialization;
     private String firstname;
     private String reg_no;
     private String qualification;
-    private String specialization;
+    /*private String specialization;*/
     private int gender;
-    private  String address1;
-    private  String address2;
+    private String address1;
+    private String address2;
     private String city;
     private String state;
     private String country;
@@ -115,11 +117,19 @@ public class DoctorUser {
         this.qualification = qualification;
     }
 
-    public String getSpecialization() {
+ /*   public String getSpecialization() {
         return specialization;
     }
 
     public void setSpecialization(String specialization) {
+        this.specialization = specialization;
+    }*/
+
+    public List<Speciality> getSpecialization() {
+        return specialization;
+    }
+
+    public void setSpecialization(List<Speciality> specialization) {
         this.specialization = specialization;
     }
 

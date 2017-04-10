@@ -26,14 +26,13 @@ public class DoctorMapper implements RowMapper<DoctorUser> {
         user.setContact_no(resultSet.getString("phone"));
         user.setEmail_id(resultSet.getString("email"));
         user.setClinic_id(resultSet.getInt("clinic_id"));
-
         user.setProfile_id(resultSet.getInt("profile_id"));
         user.setClinic_name(resultSet.getString("clinic_name"));
        /* user.setBranch_id(resultSet.getInt("branch_id"));
         user.setBranch_name(resultSet.getString("branch_name"));*/
         user.setDoctor_id(resultSet.getInt("doctor_detail_id"));
         user.setQualification(resultSet.getString("qualification"));
-        user.setSpecialization(resultSet.getString("specialization"));
+       /* user.setSpecialization(resultSet.getString("specialization"));*/
         user.setReg_no(resultSet.getString("reg_id"));
         user.setPassword(resultSet.getString("password"));
 

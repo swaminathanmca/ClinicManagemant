@@ -88,13 +88,13 @@ public class DoctorDaoImpl implements DoctorDao {
         if((result_profile > 0)? true :false ){
 
             try {
-                String insertDoctorSql="INSERT INTO doctor_detail(user_id,clinic_id,branch_id,qualification,specialization,reg_id,type,created_at,updated_at)  VALUES ((SELECT u.user_id FROM user u WHERE u.email=:email),:clinic_id,:branch_id,:qualification,:specialization,:reg_id,1,:created_at,:created_at)";
+                String insertDoctorSql="INSERT INTO doctor_detail(user_id,clinic_id,branch_id,qualification,reg_id,type,created_at,updated_at)  VALUES ((SELECT u.user_id FROM user u WHERE u.email=:email),:clinic_id,:branch_id,:qualification,:reg_id,1,:created_at,:created_at)";
                 Map<String, Object> doctorParameter = new HashMap<String, Object>();
                 doctorParameter.put("email",doctorUser.getEmail_id());
                 doctorParameter.put("qualification",doctorUser.getQualification());
                 doctorParameter.put("clinic_id",doctorUser.getClinic_id());
                 doctorParameter.put("branch_id",doctorUser.getBranch_id());
-                doctorParameter.put("specialization",doctorUser.getSpecialization());
+                /*doctorParameter.put("specialization",doctorUser.getSpecialization());*/
                 doctorParameter.put("reg_id",doctorUser.getReg_no());
                 doctorParameter.put("created_at",format.format(new Date()));
                 result=jdbcTemplate.update(insertDoctorSql,doctorParameter);
@@ -327,9 +327,6 @@ public class DoctorDaoImpl implements DoctorDao {
             platformTransactionManager.rollback(status);
         }
     }
-
-
-
         return result_update >0 ? true :false;
     }
 
