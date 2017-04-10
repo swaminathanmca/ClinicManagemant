@@ -58,10 +58,12 @@ $http.get("GetSpeciality")
 
     $scope.afterselectItem = function(item){
         spec = {
-            speciallity_id : item.speciality_id,
-            speciality_name: item.speciality_name
+            speciallity_id : item.speciallity_id,
+            speciality_name: item.speciality_name,
+            description:item.description
         };
         $scope.selectedlist.push(spec)
+
     }
 
     $scope.afterremoveItem = function(item){
@@ -134,7 +136,7 @@ if($scope.selectedList==""){
 
          $http.post('AddDoctor',Doctor).
         then(function (response,status,headers,config){
-            location.href="ViewDoctor";
+         /*   location.href="ViewDoctor";*/
     });
 
 
