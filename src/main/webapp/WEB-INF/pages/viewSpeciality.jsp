@@ -130,7 +130,7 @@
                     <tr dir-paginate="x in speciality | filter:search | orderBy : clinicName | itemsPerPage :5" >
                     <td>{{x.speciality_name}}</td>
                       <td>{{x.description}}</td>
-                      <td><button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="Edit(x.speciality_id)"> Edit</button></td>
+                      <td><button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="Edit(x.speciallity_id)"> Edit</button></td>
 
 
 

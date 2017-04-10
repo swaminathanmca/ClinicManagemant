@@ -434,7 +434,7 @@ public class HelloController {
         while (it.hasNext()){
             JSONObject jsonObject=new JSONObject();
             Speciality speciality=it.next();
-            jsonObject.put("speciality_id",speciality.getSpeciallity_id());
+            jsonObject.put("speciallity_id",speciality.getSpeciallity_id());
             jsonObject.put("speciality_name",speciality.getSpeciality_name());
             jsonObject.put("description",speciality.getDescription());
             jsonArray.put(jsonObject);
@@ -634,6 +634,7 @@ public class HelloController {
 
         JSONObject data = new JSONObject();
         JSONArray jsonArray = new JSONArray();
+        JSONArray specalityArray=new JSONArray();
         List<DoctorUser> doctorDetails;
         DoctorUser doctorUser = doctorService.doctorDetails(profile_id);
         JSONObject jsonObject = new JSONObject();
@@ -669,6 +670,18 @@ public class HelloController {
             branchObject.put("description",branch.getDescripton());
             jsonArray.put(branchObject);
         }
+        List<Speciality> specialities=doctorUser.getSpecialization();
+        Iterator<Speciality> itr=specialities.iterator();
+        while (itr.hasNext()){
+            Speciality special=itr.next();
+            JSONObject specailityObject=new JSONObject();
+            specailityObject.put("speciallity_id",special.getSpeciallity_id());
+            specailityObject.put("speciality_name",special.getSpeciality_name());
+            specailityObject.put("description",special.getDescription());
+            specalityArray.put(specailityObject);
+        }
+
+        jsonObject.put("specialization",specalityArray);
         jsonObject.put("branches",jsonArray);
         data.put("branch",jsonObject);
 
@@ -780,6 +793,7 @@ public class HelloController {
 
         boolean flag;
         flag = doctorService.editDoctor(doctorUser);
+
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("status", flag);
         return jsonObject.toString();

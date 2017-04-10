@@ -128,7 +128,7 @@ public class ClinicDaoImpl implements ClinicDao {
                 member.put("email_id",clinic.getChief_email_id());
                 member.put("created_at", format.format(new Date()));
                 result_member = jdbcTemplate.update(insertMemberSql, member);
-                System.out.println("insertMemberSql," + result_member);
+
             } catch (Exception e) {
                 e.printStackTrace();
                 platformTransactionManager.rollback(status);
@@ -154,7 +154,7 @@ public class ClinicDaoImpl implements ClinicDao {
                 branch.put("created_at", format.format(new Date()));
                 branch.put("updated_at", format.format(new Date()));
                 result_branch = jdbcTemplate.update(insertBranchSql, branch);
-                System.out.println("insertBranchSql," + result_branch);
+
             } catch (Exception e) {
                 e.printStackTrace();
                 platformTransactionManager.rollback(status);
@@ -170,7 +170,7 @@ public class ClinicDaoImpl implements ClinicDao {
                 role.put("email_id", clinic.getEmail_id());
                 role.put("created_at", format.format(new Date()));
                 result_role = jdbcTemplate.update(insertRoleSql, role);
-                System.out.println("insertRoleSql," + result_role);
+
                 platformTransactionManager.commit(status);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -419,7 +419,7 @@ public class ClinicDaoImpl implements ClinicDao {
             Map<String,Object> tracking=new HashMap<String, Object>();
             tracking.put("email_id",email);
             getTrack_id=jdbcTemplate.query(trackSql,tracking,new TrackMapper());
-            System.out.println(getTrack_id);
+
 
 
         }catch (Exception e){

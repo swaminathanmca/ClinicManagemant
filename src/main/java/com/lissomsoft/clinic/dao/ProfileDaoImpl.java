@@ -51,7 +51,7 @@ public class ProfileDaoImpl implements ProfileDao {
             Map<String, Object> parameters1 = new HashMap<String, Object>();
             parameters1.put("email", email);
             profileEmail=jdbcTemplate.query(validateemail,parameters1,new ProfileMapper());
-            System.out.println(profileEmail);
+
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -17,6 +17,7 @@ app.controller('addSpeciality',function($scope,$http,$window)
         $http.post('AddSpeciality',speciality).
             then(function (response,status,headers,config){
                     $scope.result=response.data;
+                location.href="ViewSpeciality";
             });
     }
 })

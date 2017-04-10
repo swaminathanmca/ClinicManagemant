@@ -182,13 +182,15 @@
                                              <div class="input-group">
                                                  <span class="input-group-addon">Specialitization</span>
                                                  <%-- <select class="form-control" ng-options="s.branch_id as s.branch_name for s in branchDetails" ng-model="data.branch_id"></select>--%>
-                                                 <multiple-autocomplete ng-model="selected "
+                                                 <multiple-autocomplete ng-model="selected " name="multipleslect"  required="true"
                                                                         object-property="speciality_name"
                                                                         after-select-item="afterselectItem"
                                                                         after-remove-item="afterremoveItem"
                                                                         suggestions-arr="specialitydetails">
                                                  </multiple-autocomplete>
                                              </div>
+                                             <span class="text-danger wrapper text-center ng-binding"
+                                                   ng-show="myform.multipleslect.$invalid && myform.multipleslect.$touched">Please  Select Specialitization </span>
 
                                          </div>
 
@@ -305,7 +307,7 @@
                                                <div class="input-group">
                                                    <span class="input-group-addon">Branch Name</span>
                                                   <%-- <select class="form-control" ng-options="s.branch_id as s.branch_name for s in branchDetails" ng-model="data.branch_id"></select>--%>
-                                                   <multiple-autocomplete ng-model="selectedList "
+                                                   <multiple-autocomplete ng-model="selectedList "  name="multipleselect" required="true"
                                                                           object-property="branch_name"
                                                                           after-select-item="afterSelectItem"
                                                                           after-remove-item="afterRemoveItem"
@@ -313,6 +315,8 @@
                                                                           suggestions-arr="branchDetails">
                                                    </multiple-autocomplete>
                                                </div>
+                                             <span class="text-danger wrapper text-center ng-binding"
+                                                   ng-show="myform.multipleselect.$invalid && myform.multipleselect.$touched">Please  Select Branch </span>
 
                                          </div>
                                      </div>

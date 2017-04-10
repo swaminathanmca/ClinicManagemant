@@ -35,7 +35,7 @@ public class Speciality {
 
     public String toString(){
         return "Speciality {"+
-                "speciality_id="+speciallity_id+
+                "speciallity_id="+speciallity_id+
                 ",speciality_name="+speciality_name+
                 ", description ="+description+
                 '}';

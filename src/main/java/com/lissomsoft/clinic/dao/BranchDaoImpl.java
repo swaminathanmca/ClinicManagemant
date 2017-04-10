@@ -183,7 +183,7 @@ public class BranchDaoImpl implements BranchDao {
             Map<String,Object> parameter=new HashMap<String, Object>();
             parameter.put("branch_id",branch_id);
             getBranchDetails=jdbcTemplate.query(Branchdetails,parameter,new ClinicBranchMapper());
-            System.out.println(getBranchDetails);
+
 
 
         }catch (Exception e){

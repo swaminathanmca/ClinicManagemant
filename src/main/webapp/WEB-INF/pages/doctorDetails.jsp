@@ -195,18 +195,15 @@
                           <label class="form-control" type="text">{{data.qualification}}</label>
                         </div>
                       </div>
-                      <div class="col-lg-3">
+                      <div class="col-lg-6">
                         <div class="input-group">
                           <span class="input-group-addon">Specialization</span>
-                          <label class="form-control" type="text">{{data.specialization}}</label>
+                          <li  class="form-control">
+                            <span ng-repeat="specailitys in speciality"> {{specailitys.speciality_name}},</span>
+                          </li>
                         </div>
                       </div>
-                      <div class="col-lg-3">
-                        <div class="input-group">
-                          <span class="input-group-addon">Phone No</span>
-                          <label class="form-control" type="text">{{data.phone}}</label>
-                        </div>
-                      </div>
+
 
                     </div>
                     <div class="form-group">
@@ -216,7 +213,13 @@
                           <label class="form-control" type="text">{{data.email}}</label>
                         </div>
                       </div>
-                      <div class="col-lg-6">
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">Phone No</span>
+                          <label class="form-control" type="text">{{data.phone}}</label>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
                         <div class="input-group">
                           <span class="input-group-addon">Register Id</span>
                           <lablel class="form-control" type="text">{{data.reg_id}}</lablel>
@@ -310,7 +313,12 @@
                   <div class="col-lg-6">
                     <div class="input-group">
                       <span class="input-group-addon">Specialization</span>
-                      <input class="form-control" type="text" ng-model="x.specialization">
+                      <multiple-autocomplete ng-model="selectSpecialization" name="multipleSelect" required="true" object-property="speciality_name"
+                                             after-select-item="afterselectItem"
+                                             after-remove-item="afterremoveItem"
+                                             before-select-item="beforeselectItem"
+                                             suggestions-arr="specialitydetails">
+                      </multiple-autocomplete>
                     </div>
                   </div>
                 </div>
@@ -408,7 +416,7 @@
                                              suggestions-arr="branch">
                       </multiple-autocomplete>
                     </div>
- <span class="text-danger wrapper text-center ng-binding"
+        <span class="text-danger wrapper text-center ng-binding"
        ng-show="myform.multipleSelect.$invalid && myform.multipleSelect.$untouched">Please  Select Branch </span>
                   </div>
                 </div>

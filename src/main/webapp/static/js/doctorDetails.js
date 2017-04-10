@@ -6,6 +6,7 @@ app.controller('doctorDetails',function($scope,$window,$http){
     $scope.branch_name=[];
     $scope.branchList=[];
     var obj;
+    var spec;
     $scope.role=$window.sessionStorage.role_name;
     $scope.email= $window.sessionStorage.email;
     $scope.chiefEmail="Taken";
@@ -15,6 +16,8 @@ app.controller('doctorDetails',function($scope,$window,$http){
             $scope.data=response.data.branch;
             $('#countries1').bfhcountries({country: $scope.data.country})
             $scope.branches=$scope.data.branches;
+            $scope.speciality=$scope.data.specialization;
+
 
 
         })
@@ -25,6 +28,7 @@ app.controller('doctorDetails',function($scope,$window,$http){
             .then(function(response,status){
                 $scope.x=response.data.branch;
                 $scope.selectedList=$scope.x.branches;
+                $scope.selectSpecialization=$scope.x.specialization;
                 var result=$scope.selectedList;
 
                 $('#countries2').bfhcountries({country: $scope.data.country})
@@ -47,6 +51,12 @@ app.controller('doctorDetails',function($scope,$window,$http){
                             $scope.branch.splice(index,1);
                             console.log("dfsafdsa",$scope.branch);
                         }*/
+
+                    })
+
+                $http.get("GetSpeciality")
+                    .then(function(response){
+                        $scope.specialitydetails=response.data.speciality;
                     })
             })
     }
@@ -63,6 +73,8 @@ app.controller('doctorDetails',function($scope,$window,$http){
 
 
     }
+
+
     $scope.afterSelectItem = function(item){
 
         obj2 = {
@@ -76,6 +88,29 @@ app.controller('doctorDetails',function($scope,$window,$http){
         if ($scope.selectedList.indexOf(item) == -1) {
             $scope.selectedList.push(obj2);}
     }
+    $scope.afterremoveItem = function(item){
+        spec={
+            speciallity_id : item.speciality_id,
+            speciality_name: item.speciality_name,
+            description:item.description
+        };
+
+
+    }
+    $scope.afterselectItem=function(item){
+
+        spec={
+            speciallity_id : item.speciality_id,
+            speciality_name: item.speciality_name,
+            description:item.description
+        };
+
+        if($scope.selectSpecialization.indexOf(item)== -1){
+            $scope.selectSpecialization.push(spec);
+        }
+
+    }
+
 
     $scope.EditChiefContact=function(id,contact_no){
         $scope.chief_id=id;
@@ -114,7 +149,7 @@ app.controller('doctorDetails',function($scope,$window,$http){
            gender:$scope.x.gender,
            reg_no:$scope.x.reg_id,
            qualification:$scope.x.qualification,
-           specialization:$scope.x.specialization,
+           specialization:$scope.selectSpecialization,
            address1:$scope.x.address1,
            address2:$scope.x.address2,
            city:$scope.x.city,
