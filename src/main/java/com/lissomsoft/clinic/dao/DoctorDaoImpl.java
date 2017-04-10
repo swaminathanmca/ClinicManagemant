@@ -3,6 +3,7 @@ package com.lissomsoft.clinic.dao;
 import com.lissomsoft.clinic.domain.Branch;
 import com.lissomsoft.clinic.domain.Doctor;
 import com.lissomsoft.clinic.domain.Profile;
+import com.lissomsoft.clinic.domain.Speciality;
 import com.lissomsoft.clinic.rowmapper.*;
 import com.lissomsoft.clinic.vo.DoctorUser;
 import org.slf4j.Logger;
@@ -40,7 +41,7 @@ public class DoctorDaoImpl implements DoctorDao {
         int result_member = 0;
         int result_role = 0;
         int ressult_maper=0;
-
+        int result_speciality=0;
         DefaultTransactionDefinition paramTransactionDefinition = new DefaultTransactionDefinition();
         TransactionStatus status = platformTransactionManager.getTransaction(paramTransactionDefinition);
 
@@ -148,7 +149,7 @@ public class DoctorDaoImpl implements DoctorDao {
                     ressult_maper=jdbcTemplate.update(insertDoctorMapSql,DoctorMapperParameter);
 
                 }
-                platformTransactionManager.commit(status);
+
 
             }catch (Exception e){
                 e.printStackTrace();
@@ -157,7 +158,32 @@ public class DoctorDaoImpl implements DoctorDao {
 
         }
 
-        return ressult_maper > 0 ? true :false;
+        if((ressult_maper >0 ) ? true :false){
+
+
+            try{
+                List<Speciality> specialities;
+                specialities=doctorUser.getSpecialization();
+                Iterator<Speciality>it=specialities.iterator();
+                while (it.hasNext()){
+
+                    Speciality sp=it.next();
+                    String insertSpecailityMapSql="INSERT INTO  doctor_speciality_mapper (doctor_detail_id,speciality_id) VALUES ((SELECT d.doctor_detail_id FROM doctor_detail d INNER JOIN user u ON u.user_id=d.user_id AND email=:email),:speciality_id)";
+                    Map<String,Object> DoctorMapperParameter1=new HashMap<String, Object>();
+                    DoctorMapperParameter1.put("email",doctorUser.getEmail_id());
+                    DoctorMapperParameter1.put("speciality_id",sp.getSpeciallity_id());
+                    result_speciality=jdbcTemplate.update(insertSpecailityMapSql,DoctorMapperParameter1);
+                }
+                platformTransactionManager.commit(status);
+            }catch (Exception e){
+                e.printStackTrace();
+                platformTransactionManager.rollback(status);
+
+            }
+
+        }
+
+        return result_speciality > 0 ? true :false;
     }
 
     @Override
