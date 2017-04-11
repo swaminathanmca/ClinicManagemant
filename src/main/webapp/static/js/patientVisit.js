@@ -14,31 +14,45 @@ $scope.patient_pid=$window.sessionStorage.patient_id;
             $scope.data=response.data;
         });
 
-    $http.get("ViewDoctor/"+ $scope.branch_id +"/"+$scope.clinic_id)
+   /* $http.get("ViewDoctor/"+ $scope.branch_id +"/"+$scope.clinic_id)
         .then(function (response){
             $scope.doctor = response.data.user;
+        })*/
+
+
+    $http.get("GetSpeciality")
+        .then(function(response){
+            $scope.specialitydetails=response.data.speciality;
         })
 
+    $scope.doctor=function(id){
+
+        $http.get("Doctorname"+"/"+id+"/"+$scope.branch_id)
+            .then(function(response){
+                $scope.profile=response.data.profile;
+            })
+
+    }
 
     $scope.submit=function(){
 
         var visit={
 
             patient_pid:$scope.patient_pid,
-            first_name:$scope.data.first_name,
-            last_name:$scope.data.last_name,
-            profile_id:$scope.profile_id,
-            type:$scope.vtype,
+            branch_id:$scope.branch_id,
             height:$scope.height,
             weight:$scope.weight,
-            refereal_details:$scope.rdetails
+            type:$scope.vtype,
+            pressure:$scope.pressure,
+            doctor_id:$scope.doctor_id,
+            referal_details:$scope.rdetails
 
         }
 
         $http.post("PatientVisit",visit).
             then(function (response,status,headers,config){
                 $scope.x = response.data;
-                /*location.href="patientDetail";*/
+                location.href="patientDetail";
 
 
             });

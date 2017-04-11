@@ -27,7 +27,7 @@ var app = angular.module('myApp', ['ui.mask','angularUtils.directives.dirPaginat
 app.controller('myCtrl', function ($scope, $http, $window) {
 
 
-
+    $window.sessionStorage.clear();
 
     $scope.submit = function () {
 

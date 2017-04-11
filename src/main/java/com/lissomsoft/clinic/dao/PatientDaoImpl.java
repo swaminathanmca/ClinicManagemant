@@ -266,6 +266,30 @@ if((result >0 )? true :false){
 
     @Override
     public boolean patientEntry(PatientVisit visit) {
-        return false;
+
+        int result=0;
+
+        try{
+
+            String insertVistSql="INSERT INTO patient_visit(patient_id,branch_id,weight,height,pressure,visit_type,status,practitioner,refereal_details) VALUES(:patient_pid,:branch_id,:weight,:height,:pressure,:vtype,1,:doctor_id,:referal_details)";
+            Map<String ,Object> parameter=new HashMap<String, Object>();
+            parameter.put("patient_pid",visit.getPatient_pid());
+            parameter.put("branch_id",visit.getBranch_id());
+            parameter.put("height",visit.getHeight());
+            parameter.put("weight",visit.getWeight());
+            parameter.put("vtype",visit.getType());
+            parameter.put("pressure",visit.getPressure());
+            parameter.put("doctor_id",visit.getDoctor_id());
+            parameter.put("referal_details",visit.getReferal_details());
+            result=jdbcTemplate.update(insertVistSql,parameter);
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+        return result >0 ?true :false;
     }
 }

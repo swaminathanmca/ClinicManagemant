@@ -8,10 +8,13 @@ public class PatientVisit {
     private Integer patient_pid;
     private  String first_name;
     private String last_name;
-    private Integer profile_id;
+    private Integer doctor_id;
+    private Integer status;
     private Integer type;
     private Integer height;
     private Integer weight;
+    private Integer pressure;
+    private Integer branch_id;
     private String referal_details;
 
     public Integer getPatient_pid() {
@@ -39,11 +42,11 @@ public class PatientVisit {
     }
 
     public Integer getProfile_id() {
-        return profile_id;
+        return doctor_id;
     }
 
     public void setProfile_id(Integer profile_id) {
-        this.profile_id = profile_id;
+        this.doctor_id = doctor_id;
     }
 
     public Integer getType() {
@@ -78,17 +81,51 @@ public class PatientVisit {
         this.referal_details = referal_details;
     }
 
+    public Integer getDoctor_id() {
+        return doctor_id;
+    }
+
+    public void setDoctor_id(Integer doctor_id) {
+        this.doctor_id = doctor_id;
+    }
+
+    public Integer getBranch_id() {
+        return branch_id;
+    }
+
+    public void setBranch_id(Integer branch_id) {
+        this.branch_id = branch_id;
+    }
+
+    public Integer getPressure() {
+        return pressure;
+    }
+
+    public void setPressure(Integer pressure) {
+        this.pressure = pressure;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
     public  String toString(){
         return "PatientVisit {" +
                 "patient_pid ="+ patient_pid +
                 " first_name ="+ first_name +
-                " last_name ="+last_name +
-                " profile_id ="+profile_id+
-                " type ="+type+
-                " height ="+height+
-                " weight ="+weight+
-                "refereal_details ="+referal_details+
+                " last_name  ="+last_name +
+                " doctor_id  ="+doctor_id+
+                " type       ="+type+
+                " height     ="+height+
+                " weight     ="+weight+
+                " branch_id  ="+branch_id+
+                " status     ="+status+
+                " pressure   ="+pressure+
+                "referal_details ="+referal_details+
                 '}';
     }
 }

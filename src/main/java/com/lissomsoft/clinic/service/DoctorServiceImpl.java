@@ -71,4 +71,9 @@ import java.util.List;
 
         return doctorDao.frontdeskDetails(profile_id);
     }
+
+    @Override
+    public List<DoctorUser> doctorspecailities(String speciallity_id, String branch_id) {
+        return doctorDao.doctorspecailities(speciallity_id,branch_id);
+    }
 }

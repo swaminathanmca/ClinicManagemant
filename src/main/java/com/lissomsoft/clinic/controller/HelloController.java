@@ -799,6 +799,9 @@ public class HelloController {
         return jsonObject.toString();
     }
 
+
+
+
     @RequestMapping(value = "/EditSpeciality/{speciality_id}",method = RequestMethod.POST)
     public
     @ResponseBody
@@ -1136,7 +1139,6 @@ public class HelloController {
         return data.toString();
 
     }
-
     @RequestMapping(value = "/ValidatePatient/{contact_no}",method = RequestMethod.GET)
     public
     @ResponseBody
@@ -1152,5 +1154,28 @@ public class HelloController {
 
 
         return jsonObject.toString();
+    }
+
+    @RequestMapping(value = "/Doctorname/{speciallity_id}/{branch_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String doctordetails(@PathVariable String speciallity_id,@PathVariable String branch_id,HttpServletRequest request)throws JSONException{
+       JSONObject data=new JSONObject();
+        JSONArray jsonArray=new JSONArray();
+        List<DoctorUser> specialities;
+        specialities=doctorService.doctorspecailities(speciallity_id,branch_id);
+        Iterator<DoctorUser> it=specialities.iterator();
+        while (it.hasNext()){
+            DoctorUser profile=it.next();
+            JSONObject jsonObject=new JSONObject();
+            jsonObject.put("profile_id",profile.getProfile_id());
+            jsonObject.put("profile_name",profile.getFirstname());
+            jsonObject.put("doctor_id",profile.getDoctor_id());
+            jsonArray.put(jsonObject);
+        }
+        data.put("profile",jsonArray);
+
+
+      return data.toString();
     }
 }

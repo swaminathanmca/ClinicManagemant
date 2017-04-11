@@ -87,8 +87,8 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-2"></div>
-      <div class="col-lg-8">
+      <div class="col-lg-1"></div>
+      <div class="col-lg-10">
         <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title"> Patient Visit</h3>
@@ -121,51 +121,61 @@
                     </div>
 
                     <div class="form-group">
-
-
+                      <div class="col-lg-6">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            Speciality
+                          </span>
+                          <select class="form-control" ng-options="s.speciallity_id as s.speciality_name for s in specialitydetails" ng-model="speciallity_id" ng-change="doctor(speciallity_id)" name="speciality" required></select>
+                        </div>
+                      </div>
                       <div class="col-lg-6">
                         <div class="input-group">
                           <span class="input-group-addon">
                             Practitioner
                           </span>
-                          <select class="form-control" ng-options="s.profile_id as s.name for s in doctor" ng-model="profile_id"  name="doctor" required></select>
+                          <select class="form-control" ng-options="s.doctor_id as s.profile_name for s in profile" ng-model="doctor_id" name="doctor" required></select>
                         </div>
                       </div>
-                      <div class="col-lg-6">
-                        <div class="input-group">
-                          <span class="input-group-addon">
-                            Visit Type
-                          </span>
-                          <select class="form-control" ng-model="vtype" name="vtype" required>
-                            <option value="0">Normal </option>
-                            <option value="1">Emergency</option>
-                          </select>
-                        </div>
-
-                      </div>
-
                     </div>
                     <div class="form-group">
                       <div class="col-lg-3">
                         <div class="input-group">
                         <span class="input-group-addon">Height</span>
                         <input type="text" class="form-control" ng-model="height" name="height" maxlength="3"  ng-pattern="/^[0-9]*$/" required>
+                          <span class="input-group-addon">CM</span>
                         </div>
                          <span class="text-danger wrapper text-center ng-binding"
                                ng-show="myform.height.$error.pattern">Please Enter Valid Height</span>
-
                       </div>
                       <div class="col-lg-3">
                         <div class="input-group">
                           <span class="input-group-addon">Weight</span>
                           <input type="text" class="form-control" ng-model="weight" name="weight" maxlength="3"  ng-pattern="/^[0-9]*$/" required>
+                          <span class="input-group-addon">KG</span>
                         </div>
                          <span class="text-danger wrapper text-center ng-binding"
                                ng-show="myform.weight.$error.pattern">Please Enter Valid Weight</span>
                       </div>
-
-
-
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">Pressure</span>
+                          <input type="text" class="form-control" ng-model="pressure" name="pressure"  ng-pattern="/^[0-9]*$/" required>
+                        </div>
+                          <span class="text-danger wrapper text-center ng-binding"
+                                ng-show="myform.pressure.$error.pattern">Please Enter Valid Pressure</span>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                             Type
+                          </span>
+                          <select class="form-control" ng-model="vtype" name="vtype" required>
+                            <option value="0">Normal </option>
+                            <option value="1">Emergency</option>
+                          </select>
+                        </div>
+                      </div>
                     </div>
                     <div class="form-group">
                       <div class="col-lg-12">
