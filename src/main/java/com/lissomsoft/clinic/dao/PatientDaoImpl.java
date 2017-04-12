@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.swing.text.html.HTMLDocument;
 import java.text.DateFormat;
+import java.util.Calendar;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -28,6 +29,8 @@ public class PatientDaoImpl implements  PatientDao {
     private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
     DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     DateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
+    Calendar cal = Calendar.getInstance();
+    SimpleDateFormat sdf=new SimpleDateFormat("HH:mm a");
     @Autowired(required = false)
     private NamedParameterJdbcTemplate jdbcTemplate;
     @Autowired(required = false)
@@ -271,7 +274,7 @@ if((result >0 )? true :false){
 
         try{
 
-            String insertVistSql="INSERT INTO patient_visit(patient_id,branch_id,weight,height,pressure,visit_type,status,practitioner,refereal_details) VALUES(:patient_pid,:branch_id,:weight,:height,:pressure,:vtype,1,:doctor_id,:referal_details)";
+            String insertVistSql="INSERT INTO patient_visit(patient_id,branch_id,weight,height,pressure,visit_type,status,entry_time,doctor_detail_id,refereal_details,created_at,updated_at) VALUES(:patient_pid,:branch_id,:weight,:height,:pressure,:vtype,1,:entryTime,:doctor_id,:referal_details,:created_at,:created_at)";
             Map<String ,Object> parameter=new HashMap<String, Object>();
             parameter.put("patient_pid",visit.getPatient_pid());
             parameter.put("branch_id",visit.getBranch_id());
@@ -281,15 +284,13 @@ if((result >0 )? true :false){
             parameter.put("pressure",visit.getPressure());
             parameter.put("doctor_id",visit.getDoctor_id());
             parameter.put("referal_details",visit.getReferal_details());
+            parameter.put("created_at",format.format(new Date()));
+            parameter.put("entryTime",sdf.format(cal.getTime()));
+
             result=jdbcTemplate.update(insertVistSql,parameter);
-
-
         }catch (Exception e){
             e.printStackTrace();
         }
-
-
-
         return result >0 ?true :false;
     }
 }
