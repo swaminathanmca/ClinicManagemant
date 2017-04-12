@@ -1,12 +1,12 @@
 <%--
   Created by IntelliJ IDEA.
   User: Lissomsoft
-  Date: 3/9/2017
-  Time: 10:42 AM
+  Date: 12-Apr-17
+  Time: 11:42 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html ng-app="myApp" ng-controller="getPatient">
+<html ng-app="myApp" ng-controller="getVisit">
 <head>
   <link href="<%=request.getContextPath()%>/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/css/custom.css" rel="stylesheet">
@@ -75,10 +75,9 @@
               </li>
             </ul>
           </li>
-          <li>
-            <a href="ViewPatientVisit"><i class="fa fa-heartbeat"></i>&nbsp;PatientVisit </a>
-          </li>
-
+      <li>
+        <a href="ViewPatientVisit"><i class="fa fa-heartbeat"></i>&nbsp;PatientVisit </a>
+      </li>
 
 
         </ul>
@@ -99,12 +98,28 @@
       <div class="col-lg-12">
         <div class="panel panel-default">
           <div class="panel-heading">
-          <%--  <h3 class="panel-title"></h3>--%>
-            <button type="button" class="btn btn-primary" ng-click="addPatient()">Add Patient</button>
-            <label class="input-group pull-right" style="width: 180px">
-              <span class="input-group-addon glyphicon glyphicon-search" style="top:0px;"></span>
-              <input type="text" ng-model="search" class="input-group  form-control" placeholder="Search">
-            </label>
+            <div class="row">
+              <div class="col-lg-3">
+                <select ng-model="doctor_id" class="form-control" ng-options="s.doctor_id as s.profile_name for s in doctor"  ng-change="visit(doctor_id)" >
+
+                </select>
+              </div>
+
+              <div class="col-lg-6">
+
+              </div>
+              <div class="col-lg-3">
+
+                <label class="input-group pull-right" style="width: 180px">
+                  <span class="input-group-addon glyphicon glyphicon-search" style="top:0px;"></span>
+                  <input type="text" ng-model="search" class="input-group  form-control" placeholder="Search">
+                </label>
+              </div>
+            </div>
+
+            <%--  <h3 class="panel-title"></h3>--%>
+
+
           </div>
           <div class="panel-body">
             <div class="row">
@@ -117,18 +132,18 @@
                       <th>Patient Id</th>
                       <th>First Name</th>
                       <th>Last Name</th>
-                      <th>Email</th>
-                      <th>Contact No</th>
+                      <th>Time</th>
+                      <th>Complaint</th>
 
                     </tr>
                     </thead>
                     <tbody>
-                    <tr dir-paginate="x in data | filter:search | orderBy : first_name | itemsPerPage :5" ng-click="editPatient(x.patient_id)">
+                    <tr dir-paginate="x in data | filter: search | orderBy : first_name | itemsPerPage :5" >
                       <td>{{x.patient_pid}}</td>
                       <td>{{x.first_name}}</td>
                       <td>{{x.last_name}}</td>
-                      <td>{{x.email}}</td>
-                      <td>{{x.contact_no}}</td>
+                      <td>{{x.entry_time}}</td>
+                      <td>{{x.referal_details}}</td>
 
                     </tr>
 
@@ -165,9 +180,12 @@
 <script src="<%=request.getContextPath()%>/static/js/addClinic.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/addPatient.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/getPatient.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/getVisit.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/angular-base64-upload.js"></script>
+
 <script src="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/js/bootstrap-formhelpers.min.js"></script>
 </body>
 </html>
+

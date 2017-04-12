@@ -157,6 +157,10 @@ public class HelloController {
         return "viewSpeciality";
     }
 
+    @RequestMapping(value = "/ViewPatientVisit")
+    public String viewPatientVisit(HttpServletRequest request)throws Exception{
+        return "viewVisit";
+    }
 
 
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
@@ -1178,4 +1182,59 @@ public class HelloController {
 
       return data.toString();
     }
+
+
+    @RequestMapping(value = "/ViewPatientVisit/{branch_id}/{doctor_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String viewPatientVisit(@PathVariable String branch_id,@PathVariable String doctor_id,HttpServletRequest request)throws JSONException{
+        JSONObject data=new JSONObject();
+        JSONArray jsonArray=new JSONArray();
+        List<PatientVisit> PatientVisit;
+        if(doctor_id.equalsIgnoreCase("ALL")){
+
+            PatientVisit=patientService.patientEntryAll(branch_id);
+
+        }else{
+            PatientVisit = patientService.patientEntry(doctor_id,branch_id);
+        }
+
+        Iterator<PatientVisit> it=PatientVisit.iterator();
+        while (it.hasNext()){
+            PatientVisit visit=it.next();
+            JSONObject jsonObject=new JSONObject();
+            jsonObject.put("first_name",visit.getFirst_name());
+            jsonObject.put("last_name",visit.getLast_name());
+            jsonObject.put("patient_pid",visit.getPatient_pid());
+            jsonObject.put("entry_time",visit.getTime());
+            jsonObject.put("referal_details",visit.getReferal_details());
+            jsonArray.put(jsonObject);
+
+        }
+        data.put("patient",jsonArray);
+      return    data.toString();
+    }
+
+    @RequestMapping(value = "ViewDoctorBranch/{branch_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String viewDoctor(@PathVariable String branch_id,HttpServletRequest request)throws  JSONException{
+        JSONObject data=new JSONObject();
+        JSONArray jsonArray=new JSONArray();
+        List<DoctorUser> doctorUsers;
+        doctorUsers=doctorService.getDoctor(branch_id);
+        Iterator<DoctorUser> itr=doctorUsers.iterator();
+        while (itr.hasNext()){
+            DoctorUser doctorvisit=itr.next();
+            JSONObject jsonObject=new JSONObject();
+            jsonObject.put("profile_id",doctorvisit.getProfile_id());
+            jsonObject.put("profile_name",doctorvisit.getFirstname());
+            jsonObject.put("doctor_id",doctorvisit.getDoctor_id());
+            jsonArray.put(jsonObject);
+
+        }
+        data.put("user",jsonArray);
+        return data.toString();
+    }
+
 }

@@ -69,7 +69,9 @@
             </ul>
           </li>
 
-
+          <li>
+            <a href="ViewPatientVisit"><i class="fa fa-heartbeat"></i>&nbsp;PatientVisit </a>
+          </li>
 
 
 

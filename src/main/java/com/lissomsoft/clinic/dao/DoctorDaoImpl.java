@@ -608,5 +608,25 @@ public class DoctorDaoImpl implements DoctorDao {
         return getdoctordetails;
     }
 
+    @Override
+    public List<DoctorUser> getDoctor(String branch_id) {
+        List<DoctorUser> doctorUsers=null;
+
+        try{
+
+            String doctorspecalities="SELECT p.profile_id,p.name,d.doctor_detail_id FROM profile_master p INNER JOIN member_master m  ON m.profile_id=p.profile_id INNER JOIN user u ON u.user_id=m.user_id INNER JOIN doctor_detail d ON d.user_id=u.user_id INNER JOIN doctor_mapper dm ON dm.doctor_detail_id=d.doctor_detail_id INNER JOIN doctor_speciality_mapper ds ON ds.doctor_detail_id=d.doctor_detail_id INNER JOIN speciality s ON s.speciality_id=ds.speciality_id AND dm.branch_id=:branch_id  AND d.type=1";
+            Map<String,Object> parameter=new HashMap<String, Object>();
+            parameter.put("branch_id",branch_id);
+            doctorUsers=jdbcTemplate.query(doctorspecalities,parameter,new DoctorProfileMapper());
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }
+
+        return doctorUsers;
+    }
+
 
 }

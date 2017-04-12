@@ -76,4 +76,9 @@ import java.util.List;
     public List<DoctorUser> doctorspecailities(String speciallity_id, String branch_id) {
         return doctorDao.doctorspecailities(speciallity_id,branch_id);
     }
+
+    @Override
+    public List<DoctorUser> getDoctor(String branch_id) {
+        return doctorDao.getDoctor(branch_id);
+    }
 }

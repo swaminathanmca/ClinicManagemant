@@ -6,6 +6,7 @@ import com.lissomsoft.clinic.domain.PatientVisit;
 import com.lissomsoft.clinic.rowmapper.BloodMapper;
 import com.lissomsoft.clinic.rowmapper.PatientDetailMapper;
 import com.lissomsoft.clinic.rowmapper.PatientMapper;
+import com.lissomsoft.clinic.rowmapper.PatientVisitMapper;
 import org.codehaus.jettison.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +31,7 @@ public class PatientDaoImpl implements  PatientDao {
     DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     DateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
     Calendar cal = Calendar.getInstance();
-    SimpleDateFormat sdf=new SimpleDateFormat("HH:mm a");
+    SimpleDateFormat sdf=new SimpleDateFormat("hh:mm a");
     @Autowired(required = false)
     private NamedParameterJdbcTemplate jdbcTemplate;
     @Autowired(required = false)
@@ -292,5 +293,44 @@ if((result >0 )? true :false){
             e.printStackTrace();
         }
         return result >0 ?true :false;
+    }
+
+    @Override
+    public List<PatientVisit> patientEntryAll(String branch_id) {
+
+        List<PatientVisit> patientVisit=null;
+        try {
+            String getPatientVisitSql="SELECT p.first_name,p.last_name,pm.branch_id,p.patient_pid,pm.doctor_detail_id,pm.entry_time,pm.visit_type,pm.refereal_details FROM patient_master p INNER JOIN patient_visit pm ON p.patient_id=pm.patient_id AND pm.branch_id=:branch_id";
+            Map<String,Object> parameter=new HashMap<String, Object>();
+            parameter.put("branch_id",branch_id);
+            patientVisit=jdbcTemplate.query(getPatientVisitSql,parameter,new PatientVisitMapper());
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+        return patientVisit;
+    }
+
+    @Override
+    public List<PatientVisit> patientEntry(String doctor_id,String branch_id) {
+
+        List<PatientVisit> patientVisit=null;
+        try {
+            String getPatientVisitSql="SELECT p.first_name,p.last_name,pm.branch_id,p.patient_pid,pm.doctor_detail_id,pm.entry_time,pm.visit_type,pm.refereal_details FROM patient_master p INNER JOIN patient_visit pm ON p.patient_id=pm.patient_id AND pm.branch_id=:branch_id AND pm.doctor_detail_id=:doctor_id";
+            Map<String,Object> parameter=new HashMap<String, Object>();
+            parameter.put("doctor_id",doctor_id);
+            parameter.put("branch_id",branch_id);
+            patientVisit=jdbcTemplate.query(getPatientVisitSql,parameter,new PatientVisitMapper());
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+        return patientVisit;
     }
 }

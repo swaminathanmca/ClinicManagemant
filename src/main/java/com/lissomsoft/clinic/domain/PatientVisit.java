@@ -5,7 +5,7 @@ package com.lissomsoft.clinic.domain;
  */
 public class PatientVisit {
 
-    private Integer patient_pid;
+    private String patient_pid;
     private  String first_name;
     private String last_name;
     private Integer doctor_id;
@@ -15,13 +15,14 @@ public class PatientVisit {
     private Integer weight;
     private Integer pressure;
     private Integer branch_id;
+    private String time;
     private String referal_details;
 
-    public Integer getPatient_pid() {
+    public String getPatient_pid() {
         return patient_pid;
     }
 
-    public void setPatient_pid(Integer patient_pid) {
+    public void setPatient_pid(String patient_pid) {
         this.patient_pid = patient_pid;
     }
 
@@ -113,6 +114,14 @@ public class PatientVisit {
         this.status = status;
     }
 
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
     public  String toString(){
         return "PatientVisit {" +
                 "patient_pid ="+ patient_pid +
@@ -123,9 +132,10 @@ public class PatientVisit {
                 " height     ="+height+
                 " weight     ="+weight+
                 " branch_id  ="+branch_id+
+                " time       ="+time+
                 " status     ="+status+
                 " pressure   ="+pressure+
-                "referal_details ="+referal_details+
+                " referal_details ="+referal_details+
                 '}';
     }
 }

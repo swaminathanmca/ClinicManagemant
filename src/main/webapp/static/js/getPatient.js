@@ -20,9 +20,11 @@ app.controller('getPatient',function($scope,$http,$window){
     }
 
     $scope.editPatient=function(id){
+
         $scope.patient_id=id;
         $window.sessionStorage.patient_id=$scope.patient_id;
         location.href="patientDetail";
+
     }
 
 

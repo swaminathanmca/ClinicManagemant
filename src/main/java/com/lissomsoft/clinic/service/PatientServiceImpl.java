@@ -51,4 +51,15 @@ public class PatientServiceImpl implements PatientService {
     public boolean patientEntry(PatientVisit visit) {
         return patientDao.patientEntry(visit);
     }
+
+    @Override
+    public List<PatientVisit> patientEntryAll(String branch_id) {
+
+        return patientDao.patientEntryAll(branch_id);
+    }
+
+    @Override
+    public List<PatientVisit> patientEntry(String doctor_id,String branch_id) {
+        return patientDao.patientEntry(doctor_id,branch_id);
+    }
 }
