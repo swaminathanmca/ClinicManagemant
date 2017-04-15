@@ -57,6 +57,7 @@ app.controller('myCtrl', function ($scope, $http, $window) {
                             location.href="AddPatient";
                         }
 
+
                     } else {
                         $scope.message = response.data.message;
                     }

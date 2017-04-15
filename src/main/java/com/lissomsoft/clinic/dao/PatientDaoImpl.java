@@ -18,6 +18,9 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.swing.text.html.HTMLDocument;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
@@ -282,11 +285,13 @@ if((result >0 )? true :false){
             parameter.put("height",visit.getHeight());
             parameter.put("weight",visit.getWeight());
             parameter.put("vtype",visit.getType());
+            parameter.put("entryTime",visit.getTime());
             parameter.put("pressure",visit.getPressure());
             parameter.put("doctor_id",visit.getDoctor_id());
             parameter.put("referal_details",visit.getReferal_details());
             parameter.put("created_at",format.format(new Date()));
-            parameter.put("entryTime",sdf.format(cal.getTime()));
+
+
 
             result=jdbcTemplate.update(insertVistSql,parameter);
         }catch (Exception e){

@@ -33,7 +33,8 @@ $scope.patient_pid=$window.sessionStorage.patient_id;
             })
 
     }
-
+    var date = new Date();
+    $scope.time= date.toLocaleTimeString();
     $scope.submit=function(){
 
         var visit={
@@ -43,6 +44,7 @@ $scope.patient_pid=$window.sessionStorage.patient_id;
             height:$scope.height,
             weight:$scope.weight,
             type:$scope.vtype,
+            time:$scope.time,
             pressure:$scope.pressure,
             doctor_id:$scope.doctor_id,
             referal_details:$scope.rdetails

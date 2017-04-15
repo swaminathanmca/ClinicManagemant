@@ -56,6 +56,7 @@ app.controller('myCtrl', function ($scope, $http, $window) {
                         }else if($window.sessionStorage.role_name=="FrontDesk"){
                             location.href="AddPatient";
                         }
+                        
 
                     } else {
                         $scope.message = response.data.message;
