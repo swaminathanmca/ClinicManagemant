@@ -58,8 +58,6 @@ app.controller('myCtrl', function ($scope, $http, $window) {
                         }else if($window.sessionStorage.role_name=="Doctor"){
                             location.href="DoctorDashboard";
                         }
-
-
                     } else {
                         $scope.message = response.data.message;
                     }
