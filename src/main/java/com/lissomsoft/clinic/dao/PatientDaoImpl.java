@@ -310,13 +310,9 @@ if((result >0 )? true :false){
             parameter.put("branch_id",branch_id);
             parameter.put("date",format.format(new Date()));
             patientVisit=jdbcTemplate.query(getPatientVisitSql,parameter,new PatientVisitMapper());
-
-        }catch (Exception e){
+        }catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
         return patientVisit;
     }
 

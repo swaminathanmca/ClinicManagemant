@@ -17,6 +17,7 @@ public class UserTrackMapper implements RowMapper<Doctor> {
         Doctor doctor=new Doctor();
         doctor.setBranch_id(resultSet.getInt("branch_id"));
         doctor.setClinic_id(resultSet.getInt("clinic_id"));
+        doctor.setDoctor_id(resultSet.getInt("doctor_detail_id"));
 
         return doctor;
     }

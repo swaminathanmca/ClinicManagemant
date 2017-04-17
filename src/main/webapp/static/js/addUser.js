@@ -72,7 +72,6 @@ $http.get("GetSpeciality")
     }
 
 
-
     $scope.validatecontact=function(){
 
         $http.get("validateChief/"+$scope.phone_no).

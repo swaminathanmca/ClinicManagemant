@@ -70,6 +70,10 @@ public class HelloController {
         return "addBranch";
     }
 
+    @RequestMapping(value = "/DoctorDashboard")
+    public String doctordashboard(HttpServletRequest request) throws Exception{
+        return "doctorDashboard";
+    }
     @RequestMapping(value = "/GetBranch")
     public String getBranch(HttpServletRequest request) throws Exception {
         return "viewBranch";
@@ -1007,6 +1011,7 @@ public class HelloController {
             Doctor track=itr.next();
             jsonObject.put("clinic_id",track.getClinic_id());
             jsonObject.put("branch_id",track.getBranch_id());
+            jsonObject.put("doctor_id",track.getDoctor_id());
             jsonObject.put("status",true);
         }
 
@@ -1236,5 +1241,32 @@ public class HelloController {
         data.put("user",jsonArray);
         return data.toString();
     }
+
+    @RequestMapping(value="ShowPatient/{branch_id}/{doctor_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String showpatient(@PathVariable String branch_id,@PathVariable String doctor_id,HttpServletRequest request)throws JSONException{
+        JSONObject data = new JSONObject();
+        JSONArray jsonArray=new JSONArray();
+        List<PatientVisit> patientvisits;
+        patientvisits= patientService.patientEntry(doctor_id, branch_id);
+
+        Iterator<PatientVisit> it=patientvisits.iterator();
+        while (it.hasNext()){
+            PatientVisit visit=it.next();
+            JSONObject jsonObject=new JSONObject();
+            jsonObject.put("first_name",visit.getFirst_name());
+            jsonObject.put("last_name",visit.getLast_name());
+            jsonObject.put("patient_pid",visit.getPatient_pid());
+            jsonObject.put("entry_time",visit.getTime());
+            jsonObject.put("referal_details",visit.getReferal_details());
+            jsonArray.put(jsonObject);
+
+        }
+        data.put("patient",jsonArray);
+        return data.toString();
+    }
+
+
 
 }

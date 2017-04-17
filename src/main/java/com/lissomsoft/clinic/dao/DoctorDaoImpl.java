@@ -552,7 +552,7 @@ public class DoctorDaoImpl implements DoctorDao {
     public List<Doctor> trackSeason(String email) {
         List<Doctor> getTrackdetails=null;
         try{
-            String viewTrack="SELECT d.clinic_id,d.branch_id FROM clinic.doctor_detail  d INNER JOIN user u ON u.user_id=d.user_id  INNER JOIN member_master m ON m.user_id=u.user_id INNER JOIN  profile_master p ON p.profile_id=m.profile_id AND p.email=:email";
+            String viewTrack="SELECT d.clinic_id,d.branch_id,d.doctor_detail_id FROM clinic.doctor_detail  d INNER JOIN user u ON u.user_id=d.user_id  INNER JOIN member_master m ON m.user_id=u.user_id INNER JOIN  profile_master p ON p.profile_id=m.profile_id AND p.email=:email";
             Map<String,Object> parameter=new HashMap<String, Object>();
             parameter.put("email",email);
             getTrackdetails=jdbcTemplate.query(viewTrack,parameter,new UserTrackMapper());

@@ -55,6 +55,8 @@ app.controller('myCtrl', function ($scope, $http, $window) {
                             location.href="AddDoctor";
                         }else if($window.sessionStorage.role_name=="FrontDesk"){
                             location.href="AddPatient";
+                        }else if($window.sessionStorage.role_name=="Doctor"){
+                            location.href="DoctorDashboard";
                         }
 
 
