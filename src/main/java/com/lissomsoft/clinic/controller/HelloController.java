@@ -45,6 +45,8 @@ public class HelloController {
     private PatientService patientService;
     @Autowired(required = false)
     private SpecialityService specialityService;
+    @Autowired(required = false)
+    private ComplaintService complaintService;
 
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -130,6 +132,7 @@ public class HelloController {
         return "viewDoctor";
     }
 
+
     @RequestMapping(value = "/ViewFrontDesk")
     public String viewFrontdesk(HttpServletRequest request) throws Exception {
 
@@ -165,6 +168,14 @@ public class HelloController {
     public String viewPatientVisit(HttpServletRequest request)throws Exception{
         return "viewVisit";
     }
+    @RequestMapping(value="/Addcomplaint")
+    public String addComplaint(HttpServletRequest request)throws Exception{
+        return "addComplaint";
+    }
+@RequestMapping (value = "/ViewComplaint")
+public String viewComplaint(HttpServletRequest request)throws Exception{
+    return "viewComplaint";
+}
 
 
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
@@ -244,7 +255,7 @@ public class HelloController {
     String addPatient(@RequestBody Patient patient,@PathVariable Integer  branch_id,HttpServletRequest request)throws JSONException{
         JSONObject jsonObject=new JSONObject();
         boolean flag;
-        flag=patientService.addPatient(patient,branch_id);
+        flag=patientService.addPatient(patient, branch_id);
         jsonObject.put("status",flag);
 
         return jsonObject.toString();
@@ -308,6 +319,22 @@ public class HelloController {
        data.put("status",flag);
        return data.toString();
    }
+
+   @RequestMapping(value = "/AddComplaint",method = RequestMethod.POST)
+   public
+   @ResponseBody
+   String addComplaint(@RequestBody Complaint complaint,HttpServletRequest request)throws  JSONException{
+       JSONObject data=new JSONObject();
+       boolean flag;
+
+       flag=complaintService.addcomplaint(complaint);
+        data.put("status",flag);
+
+
+return data.toString();
+   }
+
+
 
     @RequestMapping(value = "/EditClinic", method = RequestMethod.POST)
     public

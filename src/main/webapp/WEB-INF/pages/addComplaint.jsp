@@ -1,12 +1,12 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Lissomsoft
-  Date: 3/9/2017
-  Time: 10:42 AM
+  User: Admin
+  Date: 4/17/2017
+  Time: 12:52 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html ng-app="myApp" ng-controller="showpatient">
+<html ng-app="myApp" ng-controller="Addcomplaint">
 <head>
   <link href="<%=request.getContextPath()%>/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/css/custom.css" rel="stylesheet">
@@ -19,7 +19,6 @@
   <title></title>
 </head>
 <body>
-
 <div id="wrapper" id="loader">
 
   <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -50,6 +49,7 @@
           <li><a href="/Clinic"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
           </li>
         </ul>
+
       </li>
 
 
@@ -64,13 +64,13 @@
             <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
           </li>
           <li>
-            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Complaint<span class="fa arrow"></span></a>
+            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Complaint<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <li>
                 <a href="Addcomplaint">Add Complaint</a>
               </li>
               <li>
-                <a href="#">View Complaint</a>
+                <a href="ViewComplaint">View Complaint</a>
               </li>
             </ul>
 
@@ -79,8 +79,8 @@
       </div>
 
     </div>
-  </nav>
 
+  </nav>
   <div id="page-wrapper">
     <br>
     <div class="row">
@@ -88,73 +88,71 @@
 
       </div>
     </div>
-
     <div class="row">
-      <div class="col-lg-12">
-        <div class="panel panel-default">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-8">
+        <div class="panel panel-primary">
           <div class="panel-heading">
-            <%--  <h3 class="panel-title"></h3>--%>
-              <div class="row">
-              <div class="col-lg-3">
-                <select ng-model="branch_iid" class="form-control" ng-options="s.branch_id as s.branch_name for s in branchDetails" ng-change="doctor(branch_iid)"  >
-
-                </select>
-              </div>
-                <div class="col-lg-6">
-                </div>
-                <div class="col-lg-3">
-              <label class="input-group pull-right" style="width: 180px">
-                <span class="input-group-addon glyphicon glyphicon-search" style="top:0px;"></span>
-                <input type="text" ng-model="search" class="input-group  form-control" placeholder="Search">
-              </label>
-                </div>
-            </div>
+            <h3 class="panel-title"> Patient Complaint</h3>
           </div>
           <div class="panel-body">
             <div class="row">
               <div class="col-lg-12">
-                <div class="table-responsive">
+                <form class="form-horizontal ng-invalid" role="form" name="myform" ng-submit="submit()"
+                      novalidate>
+                  <fieldset>
 
-                  <table class="table table-striped table-bordered table-hover " id="dataTables-example">
-                    <thead>
-                    <tr class="success">
-                      <th>Patient Id</th>
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>Time</th>
-                      <th>Complaint</th>
-                    </tr>
+                    <div class="form-group">
+                      <div class="col-lg-12">
+                        <div class="input-group">
+                          <span class="input-group-addon">Complaints</span>
+                          <input class="form-control" type="text" ng-model="name" name="name" required>
+                        </div>
+                        <span class="text-danger wrapper text-center ng-binding"
+                              ng-show="myform.name.$invalid &&  myform.name.$touched">Please Enter Complaint</span>
+                      </div>
+                    </div>
 
-                    </thead>
-                    <tbody>
-                    <tr dir-paginate="x in patientDetails | filter : search | orderBy : name | itemsPerPage :5">
-                      <td>{{x.patient_pid}}</td>
-                      <td>{{x.first_name}}</td>
-                      <td>{{x.last_name}}</td>
-                      <td>{{x.entry_time}}</td>
-                      <td>{{x.referal_details}}</td>
-                    </tr>
-                    </tbody>
+                    <div class="form-group">
+                      <div class="col-lg-12">
+                        <div class="input-group">
+                          <span class="input-group-addon">Description</span>
+                          <textarea type="text" class="form-control" ng-model="description" name="details" ></textarea>
+                        </div>
+                      </div>
+                    </div>
 
-                  </table>
-                  <p class=" text-center">
+                    <div class="form-actions">
+                      <div class="row">
+                        <div class="col-lg-offset-4 col-lg-7">
+                          <button type="submit" class="btn btn-success"
+                                  ng-disabled="myform.$invalid " ng-click="submitted=true">Save
+                          </button>
+                          <button type="button" class="btn btn-inverse">Cancel</button>
+                        </div>
+                      </div>
+                    </div>
 
-                  </p>
-                </div>
+
+                  </fieldset>
+                </form>
+
+
               </div>
-
             </div>
           </div>
+
+
         </div>
+
       </div>
     </div>
 
+
+
+
   </div>
-
 </div>
-
-
-
 
 
 
@@ -166,14 +164,11 @@
 <script src="<%=request.getContextPath()%>/static/vendor/multiple-select/multiple-select.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/js-custom-select/customSelect.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
-<script src="<%=request.getContextPath()%>/static/js/addClinic.js"></script>
-<script src="<%=request.getContextPath()%>/static/js/addPatient.js"></script>
-<script src="<%=request.getContextPath()%>/static/js/getPatient.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/addcomplaint.js"></script>
+
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/angular-base64-upload.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/js/bootstrap-formhelpers.min.js"></script>
-<script src="<%=request.getContextPath()%>/static/js/showPatient.js"></script>
-
 </body>
 </html>
