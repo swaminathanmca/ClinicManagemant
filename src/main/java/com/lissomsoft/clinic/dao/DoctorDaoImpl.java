@@ -14,6 +14,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.spec.DSAGenParameterSpec;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -50,7 +52,7 @@ public class DoctorDaoImpl implements DoctorDao {
             String insertUserSql="INSERT INTO user (username,password,email,status,created_at,updated_at) VALUES (:user_name,:password,:email,1,:created_at,:created_at)";
             Map<String, Object> parameters1 = new HashMap<String, Object>();
             parameters1.put("user_name",doctorUser.getFirstname());
-            parameters1.put("password",doctorUser.getPassword());
+            parameters1.put("password",encryptPassword(doctorUser.getPassword()));
             parameters1.put("email",doctorUser.getEmail_id());
             parameters1.put("created_at",format.format(new Date()));
 
@@ -427,7 +429,7 @@ public class DoctorDaoImpl implements DoctorDao {
             String insertUserSql="INSERT INTO user (username,password,email,status,created_at,updated_at) VALUES (:user_name,:password,:email,1,:created_at,:created_at)";
             Map<String, Object> parameters1 = new HashMap<String, Object>();
             parameters1.put("user_name",frontdesk.getFirstname());
-            parameters1.put("password",frontdesk.getPassword());
+            parameters1.put("password",encryptPassword(frontdesk.getPassword()));
             parameters1.put("email",frontdesk.getEmail_id());
             parameters1.put("created_at",format.format(new Date()));
 
@@ -629,4 +631,29 @@ public class DoctorDaoImpl implements DoctorDao {
     }
 
 
+    private String encryptPassword(String password) {
+        String passwordToHash = password;
+        String generatedPassword = null;
+        try {
+            // Create MessageDigest instance for MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            // Add password bytes to digest
+            md.update(passwordToHash.getBytes());
+            // Get the hash's bytes
+            byte[] bytes = md.digest();
+            // This bytes[] has bytes in decimal format;
+            // Convert it to hexadecimal format
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < bytes.length; i++) {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16)
+                        .substring(1));
+            }
+            // Get complete hashed password in hex format
+            generatedPassword = sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        return generatedPassword;
+    }
 }

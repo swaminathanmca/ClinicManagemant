@@ -1,5 +1,6 @@
 package com.lissomsoft.clinic.service;
 
+import com.lissomsoft.clinic.dao.ComplaintDao;
 import com.lissomsoft.clinic.dao.ComplaintDaoImpl;
 import com.lissomsoft.clinic.domain.Complaint;
 import org.springframework.beans.factory.annotation.Autowired;

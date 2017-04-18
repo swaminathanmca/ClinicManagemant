@@ -23,6 +23,8 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 
 import java.lang.ref.SoftReference;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -83,7 +85,7 @@ public class ClinicDaoImpl implements ClinicDao {
                 String insertUserSql = "INSERT INTO user (username,password,email,status,created_at,updated_at) VALUES (:user_name,:password,:email,1,:created_at,:created_at)";
                 Map<String, Object> parameters1 = new HashMap<String, Object>();
                 parameters1.put("user_name", clinic.getClinic_name());
-                parameters1.put("password", clinic.getPassword());
+                parameters1.put("password", encryptPassword(clinic.getPassword()));
                 parameters1.put("email", clinic.getEmail_id());
                 parameters1.put("created_at", format.format(new Date()));
                 parameters1.put("updated_at", format.format(new Date()));
@@ -431,5 +433,32 @@ public class ClinicDaoImpl implements ClinicDao {
 
 
         return getTrack_id;
+    }
+
+
+    private String encryptPassword(String password) {
+        String passwordToHash = password;
+        String generatedPassword = null;
+        try {
+            // Create MessageDigest instance for MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            // Add password bytes to digest
+            md.update(passwordToHash.getBytes());
+            // Get the hash's bytes
+            byte[] bytes = md.digest();
+            // This bytes[] has bytes in decimal format;
+            // Convert it to hexadecimal format
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < bytes.length; i++) {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16)
+                        .substring(1));
+            }
+            // Get complete hashed password in hex format
+            generatedPassword = sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        return generatedPassword;
     }
 }

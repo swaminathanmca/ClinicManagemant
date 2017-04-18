@@ -21,6 +21,8 @@ import com.lissomsoft.clinic.vo.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
@@ -174,7 +176,7 @@ public class HelloController {
         return "addComplaint";
     }
 @RequestMapping (value = "/ViewComplaint")
-public String viewComplaint(HttpServletRequest request)throws Exception{
+  public String viewComplaint(HttpServletRequest request)throws Exception{
     return "viewComplaint";
 }
 
@@ -192,7 +194,7 @@ public String viewComplaint(HttpServletRequest request)throws Exception{
         JSONObject data = new JSONObject();
         JSONObject status = new JSONObject();
 
-        userList = userService.authenticateUser(user.getEmail_id(), user.getPassword());
+        userList = userService.authenticateUser(user.getEmail_id(), encryptPassword(user.getPassword()));
 
         Iterator<User> it = userList.iterator();
 
@@ -275,6 +277,34 @@ public String viewComplaint(HttpServletRequest request)throws Exception{
         return jsonObject.toString();
     }
 
+
+
+
+    private String encryptPassword(String password) {
+        String passwordToHash = password;
+        String generatedPassword = null;
+        try {
+            // Create MessageDigest instance for MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            // Add password bytes to digest
+            md.update(passwordToHash.getBytes());
+            // Get the hash's bytes
+            byte[] bytes = md.digest();
+            // This bytes[] has bytes in decimal format;
+            // Convert it to hexadecimal format
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < bytes.length; i++) {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16)
+                        .substring(1));
+            }
+            // Get complete hashed password in hex format
+            generatedPassword = sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        System.out.println(generatedPassword);
+        return generatedPassword;
+    }
 
     @RequestMapping(value = "/AddDoctor", method = RequestMethod.POST)
     public

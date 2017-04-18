@@ -15,6 +15,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -53,7 +55,7 @@ public class BranchDaoImpl implements BranchDao {
             Map<String, Object> parameters = new HashMap<String, Object>();
             parameters.put("branch_name",branch.getBranch_name());
             parameters.put("email",branch.getEmail_id());
-            parameters.put("password",branch.getPassword());
+            parameters.put("password",encryptPassword(branch.getPassword()));
             parameters.put("created_at", format.format(new Date()));
             result_user = jdbcTemplate.update(insertUserSql, parameters);
 
@@ -283,5 +285,32 @@ public class BranchDaoImpl implements BranchDao {
 
 
         return (result_profile >0) ? true :false;
+    }
+
+
+    private String encryptPassword(String password) {
+        String passwordToHash = password;
+        String generatedPassword = null;
+        try {
+            // Create MessageDigest instance for MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            // Add password bytes to digest
+            md.update(passwordToHash.getBytes());
+            // Get the hash's bytes
+            byte[] bytes = md.digest();
+            // This bytes[] has bytes in decimal format;
+            // Convert it to hexadecimal format
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < bytes.length; i++) {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16)
+                        .substring(1));
+            }
+            // Get complete hashed password in hex format
+            generatedPassword = sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        return generatedPassword;
     }
 }
