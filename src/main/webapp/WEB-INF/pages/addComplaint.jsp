@@ -61,7 +61,7 @@
         <ul class="nav" id="side-menu">
 
           <li>
-            <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+            <a href="DoctorDashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
           </li>
           <li>
             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Complaint<span class="fa arrow"></span></a>

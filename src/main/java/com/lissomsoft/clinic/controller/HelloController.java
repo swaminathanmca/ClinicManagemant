@@ -178,7 +178,6 @@ public String viewComplaint(HttpServletRequest request)throws Exception{
     return "viewComplaint";
 }
 
-
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
     public
     @ResponseBody

@@ -61,16 +61,16 @@
         <ul class="nav" id="side-menu">
 
           <li>
-            <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+            <a href="DoctorDashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
           </li>
           <li>
             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Complaint<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <li>
-                <a href="Addcomplaint">Add Complaint</a>
+                <a href="AddComplaint">Add Complaint</a>
               </li>
               <li>
-                <a href="#">View Complaint</a>
+                <a href="ViewComplaint">View Complaint</a>
               </li>
             </ul>
 
