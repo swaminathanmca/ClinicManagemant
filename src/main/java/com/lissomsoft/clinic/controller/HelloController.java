@@ -5,6 +5,7 @@ import com.lissomsoft.clinic.service.*;
 import com.sun.deploy.panel.ITreeNode;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import com.sun.xml.internal.bind.v2.util.StackRecorder;
+import jdk.internal.org.objectweb.asm.tree.analysis.Value;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -168,7 +169,7 @@ public class HelloController {
     public String viewPatientVisit(HttpServletRequest request)throws Exception{
         return "viewVisit";
     }
-    @RequestMapping(value="/Addcomplaint")
+    @RequestMapping(value="/AddComplaint")
     public String addComplaint(HttpServletRequest request)throws Exception{
         return "addComplaint";
     }
@@ -329,9 +330,7 @@ public String viewComplaint(HttpServletRequest request)throws Exception{
 
        flag=complaintService.addcomplaint(complaint);
         data.put("status",flag);
-
-
-return data.toString();
+       return data.toString();
    }
 
 
@@ -493,6 +492,39 @@ return data.toString();
         jsonObject.put("description",speciality.getDescription());
 
         return jsonObject.toString();
+    }
+    @RequestMapping(value = "/GetComplaint",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getcomplaint(HttpServletRequest request)throws JSONException{
+        JSONArray jsonArray=new JSONArray();
+        JSONObject data=new JSONObject();
+        List<Complaint> getComplaint;
+        getComplaint=complaintService.ViewComplaint();
+        Iterator<Complaint>it=getComplaint.iterator();
+        while (it.hasNext()){
+            JSONObject jsonObject=new JSONObject();
+            Complaint complaint=it.next();
+            jsonObject.put("complaint_id",complaint.getComplaint_id());
+            jsonObject.put("complaint_name",complaint.getComplaint_name());
+            jsonObject.put("complaint_description",complaint.getComplaint_description());
+            jsonArray.put(jsonObject);
+            data.put("complaint",jsonArray);
+        }
+        return data.toString();
+
+    }
+    @RequestMapping(value = "/ComplaintDetail/{complaint_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String viewdeatil(@PathVariable Integer complaint_id ,HttpServletRequest request)throws JSONException{
+        JSONObject jsonobject=new JSONObject();
+        Complaint complaint;
+        complaint=complaintService.ComplaintDetail(complaint_id);
+        jsonobject.put("complaint_id",complaint.getComplaint_id());
+        jsonobject.put("complaint_name",complaint.getComplaint_name());
+        jsonobject.put("complaint_description",complaint.getComplaint_description());
+        return jsonobject.toString();
     }
 
     @RequestMapping(value = "/ViewClinic", method = RequestMethod.GET)
@@ -834,7 +866,19 @@ return data.toString();
         return jsonObject.toString();
     }
 
+@RequestMapping(value ="/EditComplaint/{complaint_id}",method = RequestMethod.POST)
+public
+@ResponseBody
+String editcomplaint(@RequestBody Complaint complaint,@PathVariable Integer complaint_id,HttpServletRequest request)throws JSONException{
+    JSONObject jsonObject=new JSONObject();
+    boolean flag;
+    flag=complaintService.editcomplaint(complaint,complaint_id);
 
+    jsonObject.put("status",flag);
+
+    return jsonObject.toString();
+
+}
 
 
     @RequestMapping(value = "/EditSpeciality/{speciality_id}",method = RequestMethod.POST)

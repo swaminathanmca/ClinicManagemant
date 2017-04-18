@@ -66,7 +66,7 @@
             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Complaint<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <li>
-                <a href="Addcomplaint">Add Complaint</a>
+                <a href="AddComplaint">Add Complaint</a>
               </li>
               <li>
                 <a href="ViewComplaint">View Complaint</a>
@@ -92,7 +92,7 @@
       <div class="col-lg-12">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <button type="button" class="btn btn-primary" ng-click="addSpeciality()">Add Complaint</button>
+            <button type="button" class="btn btn-primary" ng-click="addComplaint()">Add Complaint</button>
             <label class="input-group pull-right" style="width: 180px">
               <span class="input-group-addon glyphicon glyphicon-search" style="top:0px;"></span>
               <input type="text" ng-model="search" class="input-group  form-control" placeholder="Search">
@@ -113,10 +113,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr dir-paginate="x in speciality | filter:search | orderBy : clinicName | itemsPerPage :5" >
-                      <td>{{x.speciality_name}}</td>
-                      <td>{{x.description}}</td>
-                      <td><button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="Edit(x.speciallity_id)"> Edit</button></td>
+                    <tr dir-paginate="x in complaint | filter:search | orderBy : clinicName | itemsPerPage :5" >
+                      <td>{{x.complaint_name}}</td>
+                      <td>{{x.complaint_description}}</td>
+                      <td><button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="Edit(x.complaint_id)"> Edit</button></td>
 
 
 
@@ -147,21 +147,21 @@
         <div class="modal-content">
           <div class="modal-header panel-primary">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Edit Speciality</h4>
+            <h4 class="modal-title">Edit Complaint</h4>
           </div>
           <div class="modal-body">
             <div class="row">
               <div class="col-lg-12">
-                <form role="form" class="form-horizontal" name="myform"  ng-submit="submit(data.speciality_id)">
+                <form role="form" class="form-horizontal" name="myform"  ng-submit="submit(data.complaint_id)">
                   <fieldset>
                     <div class="form-group">
                       <div class="col-lg-12">
                         <div class="input-group">
-                          <span class="input-group-addon"> Speciality Name</span>
-                          <input type="text" class="form-control" ng-model="data.speciality_name" name="speciality_name" required>
+                          <span class="input-group-addon"> Complaint</span>
+                          <input type="text" class="form-control" ng-model="data.complaint_name" name="complaint_name" required>
                         </div>
                         <span class="text-danger wrapper text-center ng-binding"
-                              ng-show="myform.specialiy_name.$invalid && myform.speciality_name.$touched">Please Enter Speciality
+                              ng-show="myform.complaint_name.$invalid && myform.complaint_name.$touched">Please Enter Complaint
                         </span>
                       </div>
                     </div>
@@ -169,7 +169,7 @@
                       <div class="col-lg-12">
                         <div class="input-group">
                           <span class="input-group-addon">Description</span>
-                          <textarea type="textarea" class="form-control" ng-model="data.description" name="description">
+                          <textarea type="textarea" class="form-control" ng-model="data.complaint_description" name="description">
                           </textarea>
                         </div>
                       </div>

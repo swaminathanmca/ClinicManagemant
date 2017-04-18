@@ -1,6 +1,7 @@
 package com.lissomsoft.clinic.dao;
 
 import com.lissomsoft.clinic.domain.Complaint;
+import com.lissomsoft.clinic.rowmapper.ComplaintMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,11 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by Admin on 4/17/2017.
@@ -47,5 +50,52 @@ public class ComplaintDaoImpl implements ComplaintDao {
 
 
         return result > 0 ? true : false;
+    }
+
+    @Override
+    public List<Complaint> ViewComplaint() {
+        List<Complaint>getcomplaintAll=null;
+        try {
+            String GetComplaintSql="select*from complaint_master ";
+            getcomplaintAll=jdbcTemplate.query(GetComplaintSql,new ComplaintMapper());
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return getcomplaintAll;
+    }
+
+    @Override
+    public Complaint ComplaintDetail(Integer complaint_id) {
+        Complaint complaint=new Complaint();
+        try {
+            String complaintsql="select * from complaint_master where complaint_id=:complaint_id";
+            Map<String,Object>params=new HashMap<String, Object>();
+            params.put("complaint_id",complaint_id);
+            complaint=(Complaint)jdbcTemplate.queryForObject(complaintsql,params,new ComplaintMapper());
+
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return complaint;
+    }
+
+    @Override
+    public boolean editcomplaint(Complaint complaint, Integer complaint_id) {
+        int result=0;
+        try {
+            String editcomplaintSql="update complaint_master set complaint_name=:complaint_name , complaint_description=:complaint_description WHERE complaint_id=:complaint_id";
+            Map<String,Object>para=new HashMap<String, Object>();
+            para.put("complaint_id",complaint_id);
+            para.put("complaint_name",complaint.getComplaint_name());
+            para.put("complaint_description",complaint.getComplaint_description());
+            result=jdbcTemplate.update(editcomplaintSql,para);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result>0 ? true:false;
     }
 }

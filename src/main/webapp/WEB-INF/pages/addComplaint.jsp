@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html ng-app="myApp" ng-controller="Addcomplaint">
+<html ng-app="myApp" ng-controller="AddComplaint">
 <head>
   <link href="<%=request.getContextPath()%>/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/css/custom.css" rel="stylesheet">
@@ -15,7 +15,7 @@
   <link href="<%=request.getContextPath()%>/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/css/bootstrap-formhelpers.min.css"
         rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title></title>
 </head>
 <body>
@@ -67,7 +67,7 @@
             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Complaint<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <li>
-                <a href="Addcomplaint">Add Complaint</a>
+                <a href="AddComplaint">Add Complaint</a>
               </li>
               <li>
                 <a href="ViewComplaint">View Complaint</a>

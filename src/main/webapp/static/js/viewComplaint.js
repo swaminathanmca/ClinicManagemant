@@ -1,10 +1,8 @@
-/**
- * Created by Admin on 4/17/2017.
- */
 app.controller('ViewComplaint', function ($scope, $http, $window){
     $http.get("GetComplaint")
         .then(function (response) {
-            $scope.Complaint = response.data.Complaint;
+            $scope.complaint = response.data.complaint;
+
         });
 
 
@@ -15,16 +13,16 @@ app.controller('ViewComplaint', function ($scope, $http, $window){
             })
     }
 
-    $scope.addSpeciality=function(){
-        location.href="Addcomplaint";
+    $scope.addComplaint=function(){
+        location.href="AddComplaint";
     }
 
     $scope.submit=function(id){
-        var speciality={
-            Complaint:$scope.data.Complaint,
-            description:$scope.data.description
+        var complaint={
+            complaint_name:$scope.data.complaint_name,
+            complaint_description:$scope.data.complaint_description
         }
-        $http.post('EditComplaint/'+id,speciality)
+        $http.post('EditComplaint/'+id,complaint)
             .then(function(response,headers,config,status){
                 $scope.status=response.data.status;
                 location.href="ViewComplaint";
