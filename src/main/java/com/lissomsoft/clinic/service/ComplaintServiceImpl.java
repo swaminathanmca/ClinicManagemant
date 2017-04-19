@@ -3,6 +3,7 @@ package com.lissomsoft.clinic.service;
 import com.lissomsoft.clinic.dao.ComplaintDao;
 import com.lissomsoft.clinic.dao.ComplaintDaoImpl;
 import com.lissomsoft.clinic.domain.Complaint;
+import com.lissomsoft.clinic.vo.PatientComplaint;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -36,5 +37,10 @@ public class ComplaintServiceImpl implements ComplaintService {
     @Override
     public boolean editcomplaint(Complaint complaint, Integer complaint_id) {
         return complaintDao.editcomplaint(complaint,complaint_id);
+    }
+
+    @Override
+    public PatientComplaint patientcomplaint(String patient_pid) {
+        return complaintDao.patientcomplaint(patient_pid);
     }
 }

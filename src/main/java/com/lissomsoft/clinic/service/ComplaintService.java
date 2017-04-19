@@ -2,6 +2,7 @@ package com.lissomsoft.clinic.service;
 
 import com.lissomsoft.clinic.dao.ComplaintDaoImpl;
 import com.lissomsoft.clinic.domain.Complaint;
+import com.lissomsoft.clinic.vo.PatientComplaint;
 
 import java.util.List;
 
@@ -13,5 +14,6 @@ public interface ComplaintService {
     List<Complaint> ViewComplaint();
     Complaint ComplaintDetail(Integer complaint_id);
     boolean editcomplaint(Complaint complaint,Integer complaint_id);
+    PatientComplaint patientcomplaint(String patient_pid);
 
 }

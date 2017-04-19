@@ -179,6 +179,10 @@ public class HelloController {
   public String viewComplaint(HttpServletRequest request)throws Exception{
     return "viewComplaint";
 }
+    @RequestMapping (value = "/patientComplaints")
+    public String patientComplaints(HttpServletRequest request)throws Exception{
+        return "patientComplaints";
+    }
 
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
     public
@@ -362,8 +366,6 @@ public class HelloController {
        return data.toString();
    }
 
-
-
     @RequestMapping(value = "/EditClinic", method = RequestMethod.POST)
     public
     @ResponseBody
@@ -505,6 +507,42 @@ public class HelloController {
         }
 
 
+        return data.toString();
+    }
+
+
+    @RequestMapping(value = "/patientInfo",method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String PatientInfo(HttpServletRequest request)throws JSONException{
+
+        boolean flag;
+
+        JSONObject data=new JSONObject();
+
+
+        return data.toString();
+    }
+
+    @RequestMapping(value = "/GetComplaint/{patient_pid}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getComplaint(@PathVariable String  patient_pid,HttpServletRequest request)throws JSONException {
+
+        JSONObject jsonObject = new JSONObject();
+        JSONObject data=new JSONObject();
+        PatientComplaint patientcomplaint;
+        patientcomplaint=complaintService.patientcomplaint(patient_pid);
+
+        jsonObject.put("patient_pid",patient_pid);
+        jsonObject.put("patient_id",patientcomplaint.getPatient_id());
+        jsonObject.put("first_name",patientcomplaint.getFirst_name());
+        jsonObject.put("last_name",patientcomplaint.getLast_name());
+        jsonObject.put("weight",patientcomplaint.getWeight());
+        jsonObject.put("height",patientcomplaint.getHeight());
+        jsonObject.put("pressure",patientcomplaint.getPressure());
+        jsonObject.put("refereal_details",patientcomplaint.getComplaint_name());
+        data.put("patientcomplaint",jsonObject);
         return data.toString();
     }
 

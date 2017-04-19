@@ -59,7 +59,6 @@
     <div class="navbar-default sidebar" role="navigation">
       <div class="sidebar-nav navbar-collapse">
         <ul class="nav" id="side-menu">
-
           <li>
             <a href="DoctorDashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
           </li>
@@ -75,6 +74,7 @@
             </ul>
 
           </li>
+          
         </ul>
       </div>
 
@@ -127,7 +127,7 @@
 
                     </thead>
                     <tbody>
-                    <tr dir-paginate="x in patientDetails | filter : search | orderBy : name | itemsPerPage :5">
+                    <tr dir-paginate="x in patientDetails | filter : search | orderBy : name | itemsPerPage :5"  ng-click="editPatient(x.patient_pid)">
                       <td>{{x.patient_pid}}</td>
                       <td>{{x.first_name}}</td>
                       <td>{{x.last_name}}</td>

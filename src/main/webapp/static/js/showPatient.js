@@ -28,8 +28,15 @@ app.controller('showpatient',function($scope,$http,$window){
         $scope.branch_id=id;
         $http.get("ShowPatient/"+$scope.branch_id+"/"+$window.sessionStorage.doctor_id)
 
-            .then(function (response){
+            .then(function(response){
                 $scope.patientDetails=response.data.patient;
             })
     }
+
+    $scope.editPatient=function(id){
+
+        $window.sessionStorage.patient_pid=id;
+        location.href="patientComplaints";
+    }
+
 })

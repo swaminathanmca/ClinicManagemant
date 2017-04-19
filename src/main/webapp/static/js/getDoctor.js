@@ -11,8 +11,6 @@ app.controller('getDoctor',function($scope,$http,$window){
     $http.get("trackSession/" + $scope.email).
         then(function (response, status, headers, config) {
             $scope.branch_iid=response.data.branch_id;
-
-
         });
 
 
