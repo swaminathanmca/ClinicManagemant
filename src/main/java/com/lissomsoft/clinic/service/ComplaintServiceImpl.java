@@ -16,7 +16,6 @@ public class ComplaintServiceImpl implements ComplaintService {
     @Autowired(required = true)
     private ComplaintDaoImpl complaintDao;
 
-
     @Override
     public boolean addcomplaint(Complaint complaint) {
         return complaintDao.addcomplaint(complaint);
@@ -26,8 +25,6 @@ public class ComplaintServiceImpl implements ComplaintService {
     public List<Complaint> ViewComplaint() {
         return complaintDao.ViewComplaint();
     }
-
-
 
     @Override
     public Complaint ComplaintDetail(Integer complaint_id) {

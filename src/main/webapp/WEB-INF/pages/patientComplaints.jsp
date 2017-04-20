@@ -1,30 +1,28 @@
 <%--
   Created by IntelliJ IDEA.
   User: Admin
-  Date: 4/17/2017
-  Time: 1:12 PM
+  Date: 4/18/2017
+  Time: 3:48 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html ng-app="myApp" ng-controller="ViewComplaint">
+<html ng-app="myApp" ng-controller="patientComplaint">
 <head>
   <link href="<%=request.getContextPath()%>/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/css/custom.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/css/sb-admin-2.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/vendor/metisMenu/metisMenu.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/css/bootstrap-formhelpers.min.css" rel="stylesheet">
-
-
-
-
-
+  <link href="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/css/bootstrap-formhelpers.min.css"
+        rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title></title>
 </head>
 <body>
-<div id="wrapper">
-  <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0px">
+
+<div id="wrapper" id="loader">
+
+  <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
         <span class="sr-only">Toggle navigation</span>
@@ -35,7 +33,10 @@
       <a class="navbar-brand" href="#"><img src="../Clinic/static/img/logo.png" width="30" height="30"></a>
     </div>
     <!-- /.navbar-header -->
+
     <ul class="nav navbar-top-links navbar-right">
+
+
       <li class="dropdown ">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
           <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -52,6 +53,7 @@
 
       </li>
 
+
     </ul>
 
 
@@ -62,7 +64,7 @@
             <a href="DoctorDashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
           </li>
           <li>
-            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Complaint<span class="fa arrow"></span></a>
+            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Complaint<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <li>
                 <a href="AddComplaint">Add Complaint</a>
@@ -71,138 +73,125 @@
                 <a href="ViewComplaint">View Complaint</a>
               </li>
             </ul>
-          </li>
           <li>
             <a href="patientHistory"><i class="fa fa-history fa-fw"></i>Patient History</a>
+          </li>
           </li>
         </ul>
       </div>
 
     </div>
-
   </nav>
+
+
+
+
   <div id="page-wrapper">
+    <br>
     <div class="row">
-      <div class="col-lg-12">
-        <h4 class="page-header">Complaint Details</h4>
-      </div>
+      <p></p>
     </div>
     <div class="row">
-      <div class="col-lg-12">
-        <div class="panel panel-default">
+      <div class="col-lg-1"></div>
+      <div class="col-lg-10">
+        <div class="panel panel-primary">
           <div class="panel-heading">
-            <button type="button" class="btn btn-primary" ng-click="addComplaint()">Add Complaint</button>
-            <label class="input-group pull-right" style="width: 180px">
-              <span class="input-group-addon glyphicon glyphicon-search" style="top:0px;"></span>
-              <input type="text" ng-model="search" class="input-group  form-control" placeholder="Search">
-            </label>
+            <h3 class="panel-title">Patient Complaints</h3>
           </div>
-
           <div class="panel-body">
             <div class="row">
               <div class="col-lg-12">
-                <div class="table-responsive">
-                  <table class="table table-striped table-bordered table-hover " id="dataTables-example">
-                    <thead>
-                    <tr class="success">
-                      <th>Complaint </th>
-                      <th>Description</th>
-                      <th>Options</th>
-
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr dir-paginate="x in complaint | filter:search | orderBy : clinicName | itemsPerPage :5" >
-                      <td>{{x.complaint_name}}</td>
-                      <td>{{x.complaint_description}}</td>
-                      <td><button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="Edit(x.complaint_id)"> Edit</button></td>
-
-
-
-                    </tr>
-                    </tbody>
-
-                  </table>
-                  <p class=" text-center">
-                    <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" ></dir-pagination-controls>
-                  </p>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="modal fade" id="myModal" role="dialog">
-      <div class="modal-dialog">
-
-        <div class="modal-content">
-          <div class="modal-header panel-primary">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Edit Complaint</h4>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-lg-12">
-                <form role="form" class="form-horizontal" name="myform"  ng-submit="submit(data.complaint_id)">
+                <form class="form-horizontal ng-invalid" role="form" name="myform" ng-submit="submit()" novalidate>
                   <fieldset>
                     <div class="form-group">
-                      <div class="col-lg-12">
+                      <div class="col-lg-6">
                         <div class="input-group">
-                          <span class="input-group-addon"> Complaint</span>
-                          <input type="text" class="form-control" ng-model="data.complaint_name" name="complaint_name" required>
+                          <span class="input-group-addon">Patient Id</span>
+                          <label class="form-control" type="text">{{patientcomplaint.patient_pid}}</label>
                         </div>
-                        <span class="text-danger wrapper text-center ng-binding"
-                              ng-show="myform.complaint_name.$invalid && myform.complaint_name.$touched">Please Enter Complaint
-                        </span>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="input-group">
+                          <span class="input-group-addon">Patient Name</span>
+                          <label class="form-control" type="text">{{patientcomplaint.first_name}} {{patientcomplaint.last_name}} </label>
+                        </div>
                       </div>
                     </div>
                     <div class="form-group">
-                      <div class="col-lg-12">
+                      <div class="col-lg-3">
                         <div class="input-group">
-                          <span class="input-group-addon">Description</span>
-                          <textarea type="textarea" class="form-control" ng-model="data.complaint_description" name="description">
-                          </textarea>
+                          <span class="input-group-addon">Height</span>
+                          <label class="form-control" type="text">{{patientcomplaint.height}}</label>
+                          <span class="input-group-addon">CM</span>
                         </div>
                       </div>
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">Weight</span>
+                          <label class="form-control" type="text">{{patientcomplaint.weight}}</label>
+                          <span class="input-group-addon">KG</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">BP</span>
+                          <label class="form-control" type="text">{{patientcomplaint.pressure}}</label>
+                        </div>
+                      </div>
+
+                      </div>
+                    <div class="form-group">
+                      <div class="col-lg-6">
+                        <div class="input-group">
+                          <span class="input-group-addon">Refereal Details</span>
+                          <label class="form-control" type="text">{{patientcomplaint.refereal_details}}</label>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="input-group">
+                          <span class="input-group-addon">Complaint</span>
+                          <select class="form-control" ng-model="complaint_id" name="complaint"  ng-options="s.complaint_id as s.complaint_name for s in complaint" required ></select>
+                        </div>
+                        <span class="text-danger wrapper text-center ng-binding"
+                              ng-show="myform.complaint.$invalid &&  myform.complaint.$touched">Please Enter The Complaint</span>
+                      </div>
                     </div>
+                    <div class="form-group">
+                    <div class="col-lg-12">
+                      <div class="input-group">
+                        <span class="input-group-addon">Procedures</span>
+                        <textarea type="text" class="form-control" ng-model="procedures" name="procedures" required> </textarea>
+                      </div>
+                      <span class="text-danger wrapper text-center ng-binding"
+                            ng-show="myform.procedures.$invalid &&  myform.procedures.$touched">Please Enter The Procedures</span>
+                    </div>
+                    </div>
+
+
                     <div class="form-actions">
                       <div class="row">
                         <div class="col-lg-offset-4 col-lg-7">
                           <button type="submit" class="btn btn-success"
-                                  ng-disabled="myform.$invalid " ng-click="submitted=true">Save
+                                  ng-disabled="myform.$invalid"       ng-click="submitted=true">Save
                           </button>
-                          <button type="button" class="btn btn-inverse" data-dismiss="modal">Cancel</button>
-
+                          <button type="button" class="btn btn-inverse">Cancel</button>
                         </div>
                       </div>
                     </div>
-
-
-
 
                   </fieldset>
                 </form>
               </div>
             </div>
           </div>
-
-
-
         </div>
+
       </div>
+      <div class="col-lg-1"></div>
     </div>
 
   </div>
-
-</div>
+  </div>
 
 
 <script src="<%=request.getContextPath()%>/static/vendor/jquery/jquery.min.js"></script>
@@ -213,12 +202,13 @@
 <script src="<%=request.getContextPath()%>/static/vendor/multiple-select/multiple-select.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/js-custom-select/customSelect.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/patientComplaints.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
-<script src="<%=request.getContextPath()%>/static/js/viewComplaint.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>
-<script src="<%=request.getContextPath()%>/static/js/getClinic.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/angular-base64-upload.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/js/bootstrap-formhelpers.min.js"></script>
+
+
 
 </body>
 </html>

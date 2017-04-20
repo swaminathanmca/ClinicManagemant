@@ -73,7 +73,9 @@
                 <a href="ViewComplaint">View Complaint</a>
               </li>
             </ul>
-
+          <li>
+            <a href="patientHistory"><i class="fa fa-history fa-fw"></i>Patient History</a>
+          </li>
           </li>
         </ul>
       </div>

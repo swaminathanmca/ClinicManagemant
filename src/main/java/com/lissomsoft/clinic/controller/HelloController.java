@@ -2,15 +2,10 @@ package com.lissomsoft.clinic.controller;
 
 import com.lissomsoft.clinic.domain.Speciality;
 import com.lissomsoft.clinic.service.*;
-import com.sun.deploy.panel.ITreeNode;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-import com.sun.xml.internal.bind.v2.util.StackRecorder;
-import jdk.internal.org.objectweb.asm.tree.analysis.Value;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +14,6 @@ import com.lissomsoft.clinic.domain.*;
 import com.lissomsoft.clinic.vo.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -50,6 +44,8 @@ public class HelloController {
     private SpecialityService specialityService;
     @Autowired(required = false)
     private ComplaintService complaintService;
+    @Autowired(required = false)
+    private PatientInfoService patientInfoService;
 
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -182,6 +178,12 @@ public class HelloController {
     @RequestMapping (value = "/patientComplaints")
     public String patientComplaints(HttpServletRequest request)throws Exception{
         return "patientComplaints";
+    }
+
+    @RequestMapping (value = "/patientHistory")
+    public String patientHistory(HttpServletRequest request)throws Exception{
+
+        return "patientHistory";
     }
 
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
@@ -366,6 +368,21 @@ public class HelloController {
        return data.toString();
    }
 
+    @RequestMapping(value = "/patientInfo",method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String PatientInfo(@RequestBody PatientInfo patientInfo,HttpServletRequest request)throws JSONException{
+
+        boolean flag;
+        System.out.println(patientInfo);
+        flag= patientInfoService.addpatientinfo(patientInfo);
+
+        JSONObject data=new JSONObject();
+data.put("status",flag);
+
+        return data.toString();
+    }
+
     @RequestMapping(value = "/EditClinic", method = RequestMethod.POST)
     public
     @ResponseBody
@@ -389,6 +406,8 @@ public class HelloController {
         jsonObject.put("status", flag);
         return jsonObject.toString();
     }
+
+
 
 
     @RequestMapping(value = "/EditBranch", method = RequestMethod.POST)
@@ -511,18 +530,7 @@ public class HelloController {
     }
 
 
-    @RequestMapping(value = "/patientInfo",method = RequestMethod.POST)
-    public
-    @ResponseBody
-    String PatientInfo(HttpServletRequest request)throws JSONException{
 
-        boolean flag;
-
-        JSONObject data=new JSONObject();
-
-
-        return data.toString();
-    }
 
     @RequestMapping(value = "/GetComplaint/{patient_pid}",method = RequestMethod.GET)
     public

@@ -3,7 +3,6 @@ app.controller('showpatient',function($scope,$http,$window){
     $scope.email= $window.sessionStorage.email;
 
 
-
     $http.get("trackSessionBranch/" + $scope.email).
         then(function (response, status, headers, config,data) {
 
