@@ -24,8 +24,8 @@ app.controller('showpatient',function($scope,$http,$window){
 
 
     $scope.doctor=function(id){
-        $scope.branch_id=id;
-        $http.get("ShowPatient/"+$scope.branch_id+"/"+$window.sessionStorage.doctor_id)
+        $window.sessionStorage.branch_id=id;
+        $http.get("ShowPatient/"+ $window.sessionStorage.branch_id+"/"+$window.sessionStorage.doctor_id)
 
             .then(function(response){
                 $scope.patientDetails=response.data.patient;

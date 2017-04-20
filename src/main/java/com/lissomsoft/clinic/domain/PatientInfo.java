@@ -7,6 +7,8 @@ public class PatientInfo {
 
     private String patient_pid;
     private String first_name;
+    private Integer doctor_id;
+    private Integer branch_id;
     private String last_name;
     private Integer height;
     private Integer weight;
@@ -14,6 +16,7 @@ public class PatientInfo {
     private String refereal_details;
     private Integer complaint_id;
     private String procedures;
+    private String date;
 
     public String getPatient_pid() {
         return patient_pid;
@@ -87,16 +90,46 @@ public class PatientInfo {
         this.procedures = procedures;
     }
 
+
+    public Integer getDoctor_id() {
+        return doctor_id;
+    }
+
+    public void setDoctor_id(Integer doctor_id) {
+        this.doctor_id = doctor_id;
+    }
+
+    public Integer getBranch_id() {
+        return branch_id;
+    }
+
+    public void setBranch_id(Integer branch_id) {
+        this.branch_id = branch_id;
+    }
+
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public String toString(){
         return "patientInfo{"+
                 "patient_pid = "+ patient_pid +
                 "first_name = "+ first_name +
                 "last_name = "+ last_name +
+                "branch_id ="+ branch_id +
+                "doctor_id ="+ doctor_id +
                 "height = "+ height +
                 "weight = "+ weight +
                 "pressure = "+ pressure +
                 "refereal_details = "+ refereal_details +
                 "complaint_id = "+ complaint_id +
-                " procedures = "+ procedures + "}";
+                " procedures = "+ procedures +
+                "date = "+ date +
+                "}";
     }
 }

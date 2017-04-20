@@ -20,7 +20,7 @@ public class PatientInfoServiceImpl implements PatientInfoService {
     }
 
     @Override
-    public List<PatientInfo> addPatientInfo(String patient_pid) {
-        return null;
+    public List<PatientInfo> getPatientInfo(Integer doctor_id,Integer branch_id){
+        return patientDao.getPatientInfo(doctor_id,branch_id);
     }
 }

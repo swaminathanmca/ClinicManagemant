@@ -3,6 +3,8 @@
  */
 app.controller('patientComplaint',function($scope,$http,$window){
     $scope.pid=$window.sessionStorage.patient_pid;
+    $scope.branch_id= $window.sessionStorage.branch_id;
+    $scope.doctor_id=$window.sessionStorage.doctor_id;
     $http.get("GetComplaint")
         .then(function (response) {
             $scope.complaint = response.data.complaint;
@@ -19,6 +21,8 @@ app.controller('patientComplaint',function($scope,$http,$window){
     $scope.submit=function(){
         var PatientInfo={
             patient_pid:$scope.patientcomplaint.patient_pid,
+            branch_id:$scope.branch_id,
+            doctor_id:$scope.doctor_id,
             first_name:$scope.patientcomplaint.first_name,
             last_name:$scope.patientcomplaint.last_name,
             height:$scope.patientcomplaint.height,
@@ -26,7 +30,8 @@ app.controller('patientComplaint',function($scope,$http,$window){
             pressure:$scope.patientcomplaint.pressure,
             refereal_details:$scope.patientcomplaint.refereal_details,
             complaint_id:$scope.complaint_id,
-            procedures:$scope.procedures
+            procedures:$scope.procedures,
+
         }
     console.log(PatientInfo);
         $http.post('patientInfo',PatientInfo)

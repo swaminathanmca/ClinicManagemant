@@ -11,6 +11,6 @@ public interface PatientInfoService {
 
     boolean addpatientinfo(PatientInfo patientInfo);
 
-    List<PatientInfo> addPatientInfo(String patient_pid);
+    List<PatientInfo> getPatientInfo(Integer  doctor_id,Integer branch_id);
 
 }

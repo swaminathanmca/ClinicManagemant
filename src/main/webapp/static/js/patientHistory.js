@@ -3,15 +3,25 @@
  */
 app.controller('PatientHistory',function($scope,$http,$window){
 
-    $scope.patient_pid=$window.sessionStorage.patient_pid;
+   /* $scope.patient_pid=$window.sessionStorage.patient_pid;*/
+    $scope.clinic_id=$window.sessionStorage.clinic_id;
+    $scope.doctor_id=$window.sessionStorage.doctor_id;
+    $http.get("ViewBranch/"+ $scope.clinic_id)
+        .then(function (response){
+            $scope.branchDetails=response.data.branch;
+        });
 
-    $scope.patientHistory=function(id){
-        $scope.patient_pid=id;
-        $http.get("patientHistory/"+$scope.patient_pid+"/"+$window.sessionStorage.doctor_id)
+
+    $scope.doctor=function(id){
+        $scope.branch_id=id;
+        $http.get("patientHistory/"+$scope.doctor_id+"/"+$scope.branch_id)
 
             .then(function(response){
-                $scope.patienthistory=response.data;
+                $scope.patienthistory=response.data.patientinfo;
+
             })
     }
+
+
 
 })

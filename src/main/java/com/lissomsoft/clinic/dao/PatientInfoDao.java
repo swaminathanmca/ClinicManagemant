@@ -11,7 +11,7 @@ public interface PatientInfoDao {
 
     boolean addpatientinfo (PatientInfo patientInfo);
 
-    List<PatientInfo> addpatientinfo();
+    List<PatientInfo> getPatientInfo(Integer doctor_id,Integer branch_id);
 
     PatientInfo patientInfo(Integer patient_info_id);
 

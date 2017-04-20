@@ -94,12 +94,23 @@
       <div class="col-lg-12">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <div class="col-lg-1"></div>
+
             <div class="row">
-            <label class="input-group pull-left" style="width: 180px">
-              <span class="input-group-addon glyphicon glyphicon-search" style="top:0px;"></span>
-              <input type="text" ng-model="search" class="input-group  form-control" placeholder="Search">
-            </label>
+
+              <div class="col-lg-3">
+                <select ng-model="branch_iid" class="form-control" ng-options="s.branch_id as s.branch_name for s in branchDetails" ng-change="doctor(branch_iid)"  >
+                </select>
+              </div>
+              <div class="col-lg-6">
+
+              </div>
+              <div class="col-lg-3">
+                <label class="input-group pull-left" >
+                  <span class="input-group-addon glyphicon glyphicon-search" style="top:0px;"></span>
+                  <input type="text" ng-model="search" class="input-group  form-control" placeholder="Search">
+                </label>
+              </div>
+
           </div>
           </div>
 
@@ -118,10 +129,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr dir-paginate="x in patienthistory | filter : search | orderBy : name | itemsPerPage :5"  ng-click="patientHistory(x.patient_pid)">
+                    <tr dir-paginate="x in patienthistory | filter : search | orderBy : first_name | itemsPerPage :5">
                       <td>{{x.patient_pid}}</td>
                       <td>{{x.first_name}} {{x.last_name}}</td>
-                      <td></td>
+                      <td>{{x.date}}</td>
                       <td>{{x.referal_details}}</td>
 
                     </tr>
@@ -159,7 +170,7 @@
   <script src="<%=request.getContextPath()%>/static/vendor/multiple-select/multiple-select.js"></script>
   <script src="<%=request.getContextPath()%>/static/vendor/js-custom-select/customSelect.js"></script>
   <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
-  <script src="<%=request.getContextPath()%>/static/js/addcomplaint.js"></script>
+
 
   <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
   <script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>
