@@ -5,7 +5,7 @@ package com.lissomsoft.clinic.vo;
  */
 public class PatientComplaint {
 
-    private Integer patient_pid;
+    private String patient_pid;
     private Integer patient_id;
     private String first_name;
     private String last_name;
@@ -15,11 +15,11 @@ public class PatientComplaint {
     private String complaint_name;
 
 
-    public Integer getPatient_pid() {
+    public String getPatient_pid() {
         return patient_pid;
     }
 
-    public void setPatient_pid(Integer patient_pid) {
+    public void setPatient_pid(String patient_pid) {
         this.patient_pid = patient_pid;
     }
 

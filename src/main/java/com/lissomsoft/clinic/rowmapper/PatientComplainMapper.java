@@ -14,6 +14,7 @@ public class PatientComplainMapper implements RowMapper {
     public Object mapRow(ResultSet rs, int i) throws SQLException {
 
         PatientComplaint patientcomplaint=new PatientComplaint();
+        patientcomplaint.setPatient_pid(rs.getString("patient_pid"));
         patientcomplaint.setPatient_id(rs.getInt("patient_id"));
         patientcomplaint.setFirst_name(rs.getString("first_name"));
         patientcomplaint.setLast_name(rs.getString("last_name"));

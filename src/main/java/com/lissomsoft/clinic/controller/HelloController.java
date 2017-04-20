@@ -174,7 +174,8 @@ public class HelloController {
 @RequestMapping (value = "/ViewComplaint")
   public String viewComplaint(HttpServletRequest request)throws Exception{
     return "viewComplaint";
-}
+    }
+
     @RequestMapping (value = "/patientComplaints")
     public String patientComplaints(HttpServletRequest request)throws Exception{
         return "patientComplaints";
@@ -308,7 +309,7 @@ public class HelloController {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        System.out.println(generatedPassword);
+
         return generatedPassword;
     }
 
@@ -406,8 +407,6 @@ data.put("status",flag);
         jsonObject.put("status", flag);
         return jsonObject.toString();
     }
-
-
 
 
     @RequestMapping(value = "/EditBranch", method = RequestMethod.POST)
@@ -532,17 +531,17 @@ data.put("status",flag);
 
 
 
-    @RequestMapping(value = "/GetComplaint/{patient_pid}",method = RequestMethod.GET)
+    @RequestMapping(value = "/GetComplaint/{visit_id}",method = RequestMethod.GET)
     public
     @ResponseBody
-    String getComplaint(@PathVariable String  patient_pid,HttpServletRequest request)throws JSONException {
+    String getComplaint(@PathVariable String  visit_id,HttpServletRequest request)throws JSONException {
 
         JSONObject jsonObject = new JSONObject();
         JSONObject data=new JSONObject();
         PatientComplaint patientcomplaint;
-        patientcomplaint=complaintService.patientcomplaint(patient_pid);
+        patientcomplaint=complaintService.patientcomplaint(visit_id);
 
-        jsonObject.put("patient_pid",patient_pid);
+        jsonObject.put("patient_pid",patientcomplaint.getPatient_pid());
         jsonObject.put("patient_id",patientcomplaint.getPatient_id());
         jsonObject.put("first_name",patientcomplaint.getFirst_name());
         jsonObject.put("last_name",patientcomplaint.getLast_name());
@@ -557,7 +556,7 @@ data.put("status",flag);
     @RequestMapping(value = "/SpecialityDetail/{speciality_id}",method = RequestMethod.GET)
     public
     @ResponseBody
-    String specialityDetails(@PathVariable Integer speciality_id  ,HttpServletRequest request)throws JSONException{
+    String specialityDetails(@PathVariable Integer speciality_id  ,HttpServletRequest request)throws JSONException {
 
         JSONObject jsonObject=new JSONObject();
         Speciality speciality;
@@ -571,7 +570,7 @@ data.put("status",flag);
     @RequestMapping(value = "/GetComplaint",method = RequestMethod.GET)
     public
     @ResponseBody
-    String getcomplaint(HttpServletRequest request)throws JSONException{
+    String getcomplaint(HttpServletRequest request)throws JSONException {
         JSONArray jsonArray=new JSONArray();
         JSONObject data=new JSONObject();
         List<Complaint> getComplaint;
@@ -1428,6 +1427,7 @@ String editcomplaint(@RequestBody Complaint complaint,@PathVariable Integer comp
         while (it.hasNext()){
             PatientVisit visit=it.next();
             JSONObject jsonObject=new JSONObject();
+            jsonObject.put("visit_id",visit.getVisit_id());
             jsonObject.put("first_name",visit.getFirst_name());
             jsonObject.put("last_name",visit.getLast_name());
             jsonObject.put("patient_pid",visit.getPatient_pid());

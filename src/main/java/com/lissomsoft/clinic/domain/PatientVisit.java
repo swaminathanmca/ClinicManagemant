@@ -5,6 +5,7 @@ package com.lissomsoft.clinic.domain;
  */
 public class PatientVisit {
 
+    private Integer visit_id;
     private String patient_pid;
     private  String first_name;
     private String last_name;
@@ -122,8 +123,17 @@ public class PatientVisit {
         this.time = time;
     }
 
+    public Integer getVisit_id() {
+        return visit_id;
+    }
+
+    public void setVisit_id(Integer visit_id) {
+        this.visit_id = visit_id;
+    }
+
     public  String toString(){
         return "PatientVisit {" +
+                " visit_id ="+ visit_id +
                 "patient_pid ="+ patient_pid +
                 " first_name ="+ first_name +
                 " last_name  ="+last_name +

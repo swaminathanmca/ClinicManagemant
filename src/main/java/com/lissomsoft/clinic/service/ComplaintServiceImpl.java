@@ -37,7 +37,7 @@ public class ComplaintServiceImpl implements ComplaintService {
     }
 
     @Override
-    public PatientComplaint patientcomplaint(String patient_pid) {
-        return complaintDao.patientcomplaint(patient_pid);
+    public PatientComplaint patientcomplaint(String visit_id) {
+        return complaintDao.patientcomplaint(visit_id);
     }
 }

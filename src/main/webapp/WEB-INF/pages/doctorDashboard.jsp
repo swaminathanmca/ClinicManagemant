@@ -128,7 +128,7 @@
 
                     </thead>
                     <tbody>
-                    <tr dir-paginate="x in patientDetails | filter : search | orderBy : name | itemsPerPage :5"  ng-click="editPatient(x.patient_pid)">
+                    <tr dir-paginate="x in patientDetails | filter : search | orderBy : name | itemsPerPage :5"  ng-click="editPatient(x.visit_id)">
                       <td>{{x.patient_pid}}</td>
                       <td>{{x.first_name}}</td>
                       <td>{{x.last_name}}</td>

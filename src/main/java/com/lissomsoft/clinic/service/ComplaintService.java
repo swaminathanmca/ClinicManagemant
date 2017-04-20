@@ -14,6 +14,6 @@ public interface ComplaintService {
     List<Complaint> ViewComplaint();
     Complaint ComplaintDetail(Integer complaint_id);
     boolean editcomplaint(Complaint complaint,Integer complaint_id);
-    PatientComplaint patientcomplaint(String patient_pid);
+    PatientComplaint patientcomplaint(String visit_id);
 
 }

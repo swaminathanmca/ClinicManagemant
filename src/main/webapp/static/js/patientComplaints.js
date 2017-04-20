@@ -2,17 +2,18 @@
  * Created by Admin on 4/18/2017.
  */
 app.controller('patientComplaint',function($scope,$http,$window){
-    $scope.pid=$window.sessionStorage.patient_pid;
+    $scope.visit_id=$window.sessionStorage.visit_id;
     $scope.branch_id= $window.sessionStorage.branch_id;
     $scope.doctor_id=$window.sessionStorage.doctor_id;
+    console.log($scope.visit_id);
     $http.get("GetComplaint")
         .then(function (response) {
             $scope.complaint = response.data.complaint;
-            console.log($scope.complaint);
+
 
         });
 
-    $http.get("GetComplaint/"+$window.sessionStorage.patient_pid)
+    $http.get("GetComplaint/"+$scope.visit_id)
         .then(function (response){
             $scope.patientcomplaint = response.data.patientcomplaint;
 

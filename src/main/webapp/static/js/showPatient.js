@@ -34,7 +34,7 @@ app.controller('showpatient',function($scope,$http,$window){
 
     $scope.editPatient=function(id){
 
-        $window.sessionStorage.patient_pid=id;
+        $window.sessionStorage.visit_id=id;
         location.href="patientComplaints";
     }
 

@@ -97,18 +97,20 @@ public class ComplaintDaoImpl implements ComplaintDao {
 
         }catch (Exception e){
             e.printStackTrace();
+
         }
         return result>0 ? true:false;
+
     }
 
     @Override
-    public PatientComplaint patientcomplaint(String patient_pid) {
+    public PatientComplaint patientcomplaint(String visit_id) {
         PatientComplaint patientcomplaint=new PatientComplaint();
         try{
 
-            String patientcomplaintSql="select pm.patient_pid,pm.patient_id,pm.first_name,pm.last_name,pv.weight,pv.height,pv.pressure,pv.refereal_details from patient_master pm,patient_visit pv where pm.patient_id=pv.patient_id and pm.patient_pid=:patient_pid";
+            String patientcomplaintSql="select pm.patient_pid,pm.patient_id,pm.first_name,pm.last_name,pv.weight,pv.height,pv.pressure,pv.refereal_details from patient_master pm,patient_visit pv where pm.patient_id=pv.patient_id and pv.visit_id=:visit_id";
             Map<String,Object> pcomplaint=new HashMap<String, Object>();
-            pcomplaint.put("patient_pid",patient_pid);
+            pcomplaint.put("visit_id",visit_id);
             pcomplaint.put("patient_id",patientcomplaint.getPatient_id());
             pcomplaint.put("first_name",patientcomplaint.getFirst_name());
             pcomplaint.put("last_name",patientcomplaint.getLast_name());
@@ -120,8 +122,11 @@ public class ComplaintDaoImpl implements ComplaintDao {
             patientcomplaint=(PatientComplaint)jdbcTemplate.queryForObject(patientcomplaintSql,pcomplaint,new PatientComplainMapper());
 
         }catch(Exception e){
+
             e.printStackTrace();
+
         }
         return patientcomplaint;
+
     }
 }

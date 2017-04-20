@@ -14,6 +14,7 @@ public class PatientVisitMapper implements RowMapper {
     public Object mapRow(ResultSet resultSet, int i) throws SQLException {
 
         PatientVisit visit=new PatientVisit();
+        visit.setVisit_id(resultSet.getInt("visit_id"));
         visit.setFirst_name(resultSet.getString("first_name"));
         visit.setLast_name(resultSet.getString("last_name"));
         visit.setBranch_id(resultSet.getInt("branch_id"));
