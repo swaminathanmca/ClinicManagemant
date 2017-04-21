@@ -111,13 +111,7 @@ public class ComplaintDaoImpl implements ComplaintDao {
             String patientcomplaintSql="select pm.patient_pid,pm.patient_id,pm.first_name,pm.last_name,pv.weight,pv.height,pv.pressure,pv.refereal_details from patient_master pm,patient_visit pv where pm.patient_id=pv.patient_id and pv.visit_id=:visit_id";
             Map<String,Object> pcomplaint=new HashMap<String, Object>();
             pcomplaint.put("visit_id",visit_id);
-            pcomplaint.put("patient_id",patientcomplaint.getPatient_id());
-            pcomplaint.put("first_name",patientcomplaint.getFirst_name());
-            pcomplaint.put("last_name",patientcomplaint.getLast_name());
-            pcomplaint.put("weight",patientcomplaint.getWeight());
-            pcomplaint.put("height",patientcomplaint.getHeight());
-            pcomplaint.put("pressure",patientcomplaint.getPressure());
-            pcomplaint.put("complaint_name",patientcomplaint.getComplaint_name());
+
 
             patientcomplaint=(PatientComplaint)jdbcTemplate.queryForObject(patientcomplaintSql,pcomplaint,new PatientComplainMapper());
 
