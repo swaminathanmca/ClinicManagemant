@@ -40,7 +40,7 @@
         </a>
         <ul class="dropdown-menu dropdown-user">
           <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-          </li>
+        </li>
           <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
           </li>
           <li class="divider"></li>
@@ -226,8 +226,6 @@
 <script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/angular-base64-upload.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/js/bootstrap-formhelpers.min.js"></script>
-<script>
-
-</script>
+<script></script>
 </body>
 </html>
