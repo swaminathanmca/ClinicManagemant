@@ -73,7 +73,7 @@
             </ul>
           </li>
           <li>
-            <a href="patientHistory"><i class="fa fa-history fa-fw"></i>Patient History</a>
+            <a href="patientHistory"><i class="fa fa-history fa-fw"></i> Patient History</a>
           </li>
         </ul>
       </div>

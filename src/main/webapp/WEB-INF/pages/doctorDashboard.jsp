@@ -63,7 +63,7 @@
             <a href="DoctorDashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
           </li>
           <li>
-            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Complaint<span class="fa arrow"></span></a>
+            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Complaint<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <li>
                 <a href="AddComplaint">Add Complaint</a>
@@ -74,7 +74,7 @@
             </ul>
           </li>
           <li>
-            <a href="patientHistory"><i class="fa fa-history fa-fw"></i>Patient History</a>
+            <a href="patientHistory"><i class="fa fa-history fa-fw"></i> Patient History</a>
           </li>
         </ul>
       </div>

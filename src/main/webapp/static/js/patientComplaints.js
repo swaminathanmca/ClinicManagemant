@@ -32,13 +32,11 @@ app.controller('patientComplaint',function($scope,$http,$window){
             refereal_details:$scope.patientcomplaint.refereal_details,
             complaint_id:$scope.complaint_id,
             procedures:$scope.procedures,
-
         }
     console.log(PatientInfo);
         $http.post('patientInfo',PatientInfo)
             .then (function (response,status,headers,config) {
             $scope.result=response.data;
-
         });
     }
 
