@@ -305,7 +305,7 @@ if((result >0 )? true :false){
 
         List<PatientVisit> patientVisit=null;
         try {
-            String getPatientVisitSql="SELECT p.first_name,p.last_name,pm.branch_id,p.patient_pid,pm.doctor_detail_id,pm.entry_time,pm.visit_type,pm.refereal_details FROM patient_master p INNER JOIN patient_visit pm ON p.patient_id=pm.patient_id AND pm.status=1 AND pm.branch_id=:branch_id AND pm.created_at=:date";
+            String getPatientVisitSql="SELECT  pm.visit_id,p.first_name,p.last_name,pm.branch_id,p.patient_pid,pm.doctor_detail_id,pm.entry_time,pm.visit_type,pm.refereal_details FROM patient_master p INNER JOIN patient_visit pm ON p.patient_id=pm.patient_id AND pm.status=1 AND pm.branch_id=:branch_id AND pm.created_at=:date";
             Map<String,Object> parameter=new HashMap<String, Object>();
             parameter.put("branch_id",branch_id);
             parameter.put("date",format.format(new Date()));

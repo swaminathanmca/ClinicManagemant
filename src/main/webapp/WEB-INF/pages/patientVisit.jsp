@@ -161,7 +161,7 @@
                       </div>
                       <div class="col-lg-3">
                         <div class="input-group">
-                          <span class="input-group-addon">Pressure</span>
+                          <span class="input-group-addon">BP</span>
                           <input type="text" class="form-control" ng-model="pressure" name="pressure"  ng-pattern="/^[0-9]*$/" required>
                         </div>
                           <span class="text-danger wrapper text-center ng-binding"

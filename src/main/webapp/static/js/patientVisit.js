@@ -36,9 +36,7 @@ $scope.patient_pid=$window.sessionStorage.patient_id;
     var date = new Date();
     $scope.time= date.toLocaleTimeString();
     $scope.submit=function(){
-
         var visit={
-
             patient_pid:$scope.patient_pid,
             branch_id:$scope.branch_id,
             height:$scope.height,
@@ -48,15 +46,11 @@ $scope.patient_pid=$window.sessionStorage.patient_id;
             pressure:$scope.pressure,
             doctor_id:$scope.doctor_id,
             referal_details:$scope.rdetails
-
         }
-
         $http.post("PatientVisit",visit).
             then(function (response,status,headers,config){
                 $scope.x = response.data;
                 location.href="patientDetail";
-
-
             });
     }
 });
