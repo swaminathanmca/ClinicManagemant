@@ -105,4 +105,17 @@ public class Doctor {
     public void setUpdated_by(String updated_by) {
         this.updated_by = updated_by;
     }
+
+
+    public String toString(){
+        return "Doctor{"+
+                " doctor_id="+doctor_id+
+                " user_id="+user_id+
+                " clinic_id="+clinic_id+
+                " branch_id="+branch_id+
+                " reg_id="+reg_id+
+                " qualification="+qualification+
+                " specialization="+specialization+
+                "}";
+    }
 }

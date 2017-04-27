@@ -2,7 +2,7 @@
  * Created by Admin on 2/16/2017.
  */
 
-var app = angular.module('myApp', ['ui.mask','angularUtils.directives.dirPagination','naif.base64','AxelSoft', 'multipleSelect']);
+var app = angular.module('myApp', ['ui.mask','angularUtils.directives.dirPagination','naif.base64','AxelSoft', 'multipleSelect', 'ui.bootstrap']);
 
 app.controller('myCtrl', function ($scope, $http, $window) {
 

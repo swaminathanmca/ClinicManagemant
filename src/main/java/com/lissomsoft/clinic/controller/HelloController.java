@@ -171,6 +171,11 @@ public class HelloController {
     public String addComplaint(HttpServletRequest request)throws Exception{
         return "addComplaint";
     }
+    @RequestMapping(value = "/AddMedicine")
+    public String addMedicine(HttpServletRequest request)throws Exception{
+        return "Addmedicine";
+    }
+
 @RequestMapping (value = "/ViewComplaint")
   public String viewComplaint(HttpServletRequest request)throws Exception{
     return "viewComplaint";
