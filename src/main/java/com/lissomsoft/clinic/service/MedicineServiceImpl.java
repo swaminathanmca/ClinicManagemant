@@ -5,6 +5,8 @@ import com.lissomsoft.clinic.dao.MedicineDaoImpl;
 import com.lissomsoft.clinic.domain.Medicine;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 /**
  * Created by Lissomsoft on 04/27/17.
  */
@@ -16,5 +18,10 @@ public class MedicineServiceImpl implements MedicineService {
     public boolean addMedicine(Medicine medicine) {
 
         return medicineDao.addMedicine(medicine);
+    }
+
+    @Override
+    public List<Medicine> getMedicine() {
+        return medicineDao.getMedicine();
     }
 }

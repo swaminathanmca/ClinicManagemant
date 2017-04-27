@@ -46,6 +46,8 @@ public class HelloController {
     private ComplaintService complaintService;
     @Autowired(required = false)
     private PatientInfoService patientInfoService;
+    @Autowired(required = false)
+    private MedicineService medicineService;
 
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -192,6 +194,11 @@ public class HelloController {
         return "patientHistory";
     }
 
+    @RequestMapping(value = "/GetMedicine")
+    public String getMedicine(HttpServletRequest request)throws Exception{
+        return "viewMedicine";
+    }
+
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
     public
     @ResponseBody
@@ -248,6 +255,18 @@ public class HelloController {
         jsonObject.put("status", flag);
         return jsonObject.toString();
     }
+
+    @RequestMapping(value = "/AddMedicine",method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String addMedicine(@RequestBody Medicine medicine)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        boolean flag;
+        flag=medicineService.addMedicine(medicine);
+        jsonObject.put("status",flag);
+        return jsonObject.toString();
+    }
+
 
     @RequestMapping(value = "/PatientVisit",method = RequestMethod.POST)
     public
@@ -1298,6 +1317,33 @@ String editcomplaint(@RequestBody Complaint complaint,@PathVariable Integer comp
         return data.toString();
 
     }
+
+    @RequestMapping(value = "/ViewMedicine",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String viewMedicine()throws JSONException{
+        JSONArray jsonArray=new JSONArray();
+        JSONObject data=new JSONObject();
+        List<Medicine> medicineList;
+        medicineList=medicineService.getMedicine();
+        Iterator<Medicine> it=medicineList.iterator();
+        while (it.hasNext()){
+            Medicine getMedicine=it.next();
+            JSONObject jsonObject=new JSONObject();
+            jsonObject.put("medicine_id",getMedicine.getMedicine_id());
+            jsonObject.put("medicine_name",getMedicine.getMedicine_name());
+            jsonObject.put("mfg_date",getMedicine.getMfg_date());
+            jsonObject.put("exp_date",getMedicine.getExp_date());
+            jsonObject.put("type",getMedicine.getType());
+            jsonObject.put("vendor",getMedicine.getVendor());
+            jsonArray.put(jsonObject);
+        }
+
+        data.put("medicines",jsonArray);
+        return data.toString();
+    }
+
+
     @RequestMapping(value = "/ValidatePatient/{contact_no}",method = RequestMethod.GET)
     public
     @ResponseBody

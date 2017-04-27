@@ -84,6 +84,8 @@
     <bean id="complaintDao" class="com.lissomsoft.clinic.dao.ComplaintDaoImpl"/>
     <bean id="patientInfoService" class="com.lissomsoft.clinic.service.PatientInfoServiceImpl"/>
     <bean id="patientInfoDao" class="com.lissomsoft.clinic.dao.PatientInfoDaoImpl"/>
+    <bean id="medicineService" class="com.lissomsoft.clinic.service.MedicineServiceImpl"/>
+    <bean id="medicineDao" class="com.lissomsoft.clinic.dao.MedicineDaoImpl"/>
 
 
 </beans>

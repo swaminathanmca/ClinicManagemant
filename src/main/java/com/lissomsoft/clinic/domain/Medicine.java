@@ -9,6 +9,7 @@ public class Medicine {
     private String medicine_name;
     private String mfg_date;
     private String exp_date;
+    private Integer type;
     private String vendor;
     private String updated_at;
     private String created_at;
@@ -69,6 +70,13 @@ public class Medicine {
         this.medicine_name = medicine_name;
     }
 
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
 
     public String toString(){
 
@@ -77,6 +85,7 @@ public class Medicine {
                 " medicine_name="+medicine_name+
                 " mfg_date="+mfg_date+
                 " exp_date="+exp_date+
+                " type="+type+
                 " vendor="+vendor+ '}';
     }
 }

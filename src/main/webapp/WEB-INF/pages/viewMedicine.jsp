@@ -1,20 +1,19 @@
 <%--
   Created by IntelliJ IDEA.
   User: Lissomsoft
-  Date: 04/25/17
-  Time: 4:36 PM
+  Date: 04/27/17
+  Time: 12:28 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html ng-app="myApp" ng-controller="Medicine">
+<html ng-app="myApp" ng-controller="GetMedicine">
 <head>
   <link href="<%=request.getContextPath()%>/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/css/custom.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/css/sb-admin-2.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/vendor/metisMenu/metisMenu.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/css/bootstrap-formhelpers.min.css"
-        rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/css/bootstrap-formhelpers.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title></title>
 </head>
@@ -109,111 +108,141 @@
 
   </nav>
 
+
   <div id="page-wrapper">
-    <br>
     <div class="row">
-      <div class="col-lg-8">
+      <div class="col-lg-12">
+        <h4 class="page-header">Medicine Details</h4>
       </div>
     </div>
-
     <div class="row">
-      <div class="col-lg-2"></div>
-      <div class="col-lg-8">
-        <div class="panel panel-primary">
+      <div class="col-lg-12">
+        <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title">Add Medicine</h3>
+            <div class="row">
+              <div class="col-lg-3">
+                <button class="btn btn-primary" type="button" ng-click="addMedicine()" >Add Medicine</button>
+
+              </div>
+              <div class="col-lg-6">
+
+              </div>
+              <div class="col-lg-3">
+                <label class="input-group pull-right" style="width: 180px">
+                  <span class="input-group-addon glyphicon glyphicon-search" style="top:0px;"></span>
+                  <input type="text" ng-model="search" class="input-group  form-control" placeholder="Search">
+                </label>
+              </div>
+            </div>
+
+
           </div>
 
           <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="table-responsive">
+                  <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                    <thead>
+                    <tr class="success">
+                      <th>MEDICINE NAME</th>
+                      <th>MFG DATE</th>
+                      <th>EXP DATE</th>
+                      <th>VENDOR</th>
+                      <th>OPTIONS</th>
 
-            <div class="col-lg-12">
-              <form class="form-horizontal ng-invalid" role="form" name="myform" ng-submit="submit()"
-                    novalidate>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr dir-paginate="x in data | filter:search | orderBy : clinicName | itemsPerPage :5"  ng-click="editFrontDesk(x.profile_id)">
+                      <td>{{x.medicine_name}}</td>
+                      <td>{{x.mfg_date}}</td>
+                      <td>{{x.exp_date}}</td>
+                      <td>{{x.vendor}}</td>
+                      <td><button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="Edit(x.medicine_id)"> Edit</button></td>
+                    </tr>
+                    </tbody>
 
-                <fieldset>
-                  <div class="form-group">
-                    <div class="col-lg-6">
-                      <div class="input-group">
-                        <span class="input-group-addon">
-                          Medicine Name
-                        </span>
-                        <input class="form-control"  name="medicine_name" ng-model="medicine_name" type="text" required>
-
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="input-group">
-                        <span class="input-group-addon">MFG DATE</span>
-                        <input type="text" class="form-control" placeholder="mm-dd-yyyy" ng-click="open1($event)" datepicker-popup="{{format}}" ng-model="from_date" max-date="date"  is-open="opened1" datepicker-options="dateOptions" close-text="Close" style="height: 37px"  required/>
-                      <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open1($event)" style="height: 37px"><i class="glyphicon glyphicon-calendar"></i></button>
-                      </span>
-                        <%--<input type="text" class="form-control">--%>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-lg-6">
-                      <div class="input-group">
-                        <span class="input-group-addon">EXP DATE</span>
-                        <input type="text" class="form-control" placeholder="mm-dd-yyyy" ng-click="open2($event)" datepicker-popup="{{format}}" ng-model="to_date"  min-date="from_date"  is-open="opened2" datepicker-options="dateOptions" close-text="Close" style="height: 37px" required/>
-                      <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open2($event)" style="height: 37px"><i class="glyphicon glyphicon-calendar"></i></button>
-                      </span>
-                        <%--<input type="text" class="form-control">--%>
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="input-group">
-                        <span class="input-group-addon">TYPE</span>
-                        <SELECT class="form-control" name="type" ng-model="type" required>
-                          <option value="1">Tablet</option>
-                          <option value="1">Syrup</option>
-
-                        </SELECT>
-                      </div>
-                    </div>
-
-                  </div>
-                  <div class="form-group">
-                    <div class="col-lg-6">
-                      <div class="input-group">
-                        <span class="input-group-addon">Vendor</span>
-                        <input class="form-control" type="text" name="vendor" ng-model="vendor" required>
-                      </div>
-                    </div>
-                  </div>
-
-                <div class="form-actions">
-                  <div class="row">
-                    <div class="col-lg-offset-4 col-lg-7">
-                      <button type="submit" class="btn btn-success"
-                              ng-disabled="myform.$invalid"  ng-click="submitted=true">Save
-                      </button>
-                      <button type="button" class="btn btn-inverse">Cancel</button>
-                    </div>
-                  </div>
+                  </table>
+                  <p class=" text-center">
+                    <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" ></dir-pagination-controls>
+                  </p>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
 
 
 
-                </fieldset>
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-lg">
+
+        <div class="modal-content">
+          <div class="modal-header panel-primary">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Edit Speciality</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <form role="form" class="form-horizontal" name="myform"  ng-submit="submit(data.speciality_id)">
+                  <fieldset>
+                    <div class="form-group">
+                      <div class="col-lg-6">
+                        <div class="input-group">
+                          <span class="input-group-addon"> Medicine Name</span>
+                          <input type="text" class="form-control" ng-model="medicine.medicine_name" name="speciality_name" required>
+                        </div>
+                        <span class="text-danger wrapper text-center ng-binding"
+                              ng-show="myform.specialiy_name.$invalid && myform.speciality_name.$touched">Please Enter Speciality
+                        </span>
+                      </div>
+                      <div class="col-lg-12">
+                        <div class="input-group">
+                          <span class="input-group-addon">MFG DATE</span>
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+
+                    </div>
+                    <div class="form-actions">
+                      <div class="row">
+                        <div class="col-lg-offset-4 col-lg-7">
+                          <button type="submit" class="btn btn-success"
+                                  ng-disabled="myform.$invalid " ng-click="submitted=true">Save
+                          </button>
+                          <button type="button" class="btn btn-inverse" data-dismiss="modal">Cancel</button>
+
+                        </div>
+                      </div>
+                    </div>
 
 
 
 
-
+                  </fieldset>
                 </form>
+              </div>
             </div>
           </div>
 
+
+
         </div>
       </div>
-      <div class="col-lg-2"></div>
     </div>
   </div>
 
+
 </div>
+
 
 
 
@@ -224,17 +253,18 @@
 <script src="<%=request.getContextPath()%>/static/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/metisMenu/metisMenu.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/sb-admin-2.min.js"></script>
-
 <script src="<%=request.getContextPath()%>/static/js/angular.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/multiple-select/multiple-select.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/js-custom-select/customSelect.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
-<script src="<%=request.getContextPath()%>/static/js/addMedicine.js"></script>
-<script src="<%=request.getContextPath()%>/static/vendor/moment/moment.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/addUser.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/getDoctor.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/getMedicine.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>
-<script src="<%=request.getContextPath()%>/static/js/angular-base64-upload.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/js/bootstrap-formhelpers.min.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/angular-base64-upload.js"></script>
 </body>
 </html>
+
