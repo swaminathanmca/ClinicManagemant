@@ -190,27 +190,54 @@
           <div class="modal-body">
             <div class="row">
               <div class="col-lg-12">
-                <form role="form" class="form-horizontal" name="myform"  ng-submit="submit(data.speciality_id)">
+                <form role="form" class="form-horizontal" name="myform"  ng-submit="submit(medicine.medicine_id)">
                   <fieldset>
                     <div class="form-group">
                       <div class="col-lg-6">
                         <div class="input-group">
                           <span class="input-group-addon"> Medicine Name</span>
-                          <input type="text" class="form-control" ng-model="medicine.medicine_name" name="speciality_name" required>
+                          <input type="text" class="form-control" ng-model="medicine.medicine_name" name="medicine_name" required>
                         </div>
                         <span class="text-danger wrapper text-center ng-binding"
-                              ng-show="myform.specialiy_name.$invalid && myform.speciality_name.$touched">Please Enter Speciality
+                              ng-show="myform.medicine_name.$invalid && myform.medicine_name.$touched">Please Enter Medicine Name
                         </span>
                       </div>
-                      <div class="col-lg-12">
+                      <div class="col-lg-6">
                         <div class="input-group">
                           <span class="input-group-addon">MFG DATE</span>
-
+                          <input type="text" class="form-control" placeholder="mm-dd-yyyy" ng-click="open1($event)" datepicker-popup="{{format}}" ng-model="medicine.mfg_date" max-date="date"  is-open="opened1" datepicker-options="dateOptions" close-text="Close" style="height: 37px" disabled="disabled" required/>
+                      <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open1($event)" style="height: 37px"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
                         </div>
                       </div>
                     </div>
                     <div class="form-group">
-
+                      <div class="col-lg-6">
+                        <div class="input-group">
+                          <span class="input-group-addon">EXP DATE</span>
+                          <input type="text" class="form-control" placeholder="mm-dd-yyyy" ng-click="open2($event)" datepicker-popup="{{format}}" ng-model="medicine.exp_date"  min-date="medicine.mfg_date"  is-open="opened2" datepicker-options="dateOptions" close-text="Close" style="height: 37px" disabled="disabled" required/>
+                      <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open2($event)" style="height: 37px"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
+                          <%--<input type="text" class="form-control">--%>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">TYPE</span>
+                          <select ng-model="mtype" class="form-control" required>
+                            <option value="1">Tablet</option>
+                            <option value="2">Syrup</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">Vendor</span>
+                          <input type="text" class="form-control" ng-model="medicine.vendor" required>
+                        </div>
+                      </div>
                     </div>
                     <div class="form-actions">
                       <div class="row">

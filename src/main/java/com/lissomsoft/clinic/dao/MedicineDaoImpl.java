@@ -69,4 +69,46 @@ public class MedicineDaoImpl implements MedicineDao {
 
         return medicines;
     }
+
+    @Override
+    public Medicine medicineDetails(Integer medicine_id) {
+
+        Medicine medicine=new Medicine();
+        try {
+            String getMedicineSql="SELECT * FROM medicine_master WHERE medicine_id=:medicine_id ";
+            Map<String,Object> params=new HashMap<String, Object>();
+            params.put("medicine_id",medicine_id);
+            medicine= (Medicine) jdbcTemplate.queryForObject(getMedicineSql,params,new MedicineMapper());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+
+        return medicine;
+    }
+
+    @Override
+    public boolean editMedicine(Medicine medicine) {
+
+        int result=0;
+        try {
+
+            String editMedicineSql="UPDATE medicine_master SET medicine_name=:medicine_name,mfg_date=:mfg_date,exp_date=:exp_date,vendor=:vendor,type=:type,updated_at=:created_at WHERE medicine_id=:medicine_id";
+            Map<String,Object> params1=new HashMap<String, Object>();
+            params1.put("medicine_id",medicine.getMedicine_id());
+            params1.put("medicine_name",medicine.getMedicine_name());
+            params1.put("mfg_date",medicine.getMfg_date());
+            params1.put("exp_date",medicine.getExp_date());
+            params1.put("vendor",medicine.getVendor());
+            params1.put("type",medicine.getType());
+            params1.put("created_at",format.format(new Date()));
+            result=jdbcTemplate.update(editMedicineSql,params1);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result >0 ? true :false;
+    }
 }

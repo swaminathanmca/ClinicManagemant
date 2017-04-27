@@ -1384,6 +1384,33 @@ String editcomplaint(@RequestBody Complaint complaint,@PathVariable Integer comp
       return data.toString();
     }
 
+    @RequestMapping(value = "MedicineDetails/{medicine_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String medicineDetails(@PathVariable Integer medicine_id)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        Medicine medicineDetails=new Medicine();
+        medicineDetails=medicineService.medicineDetails(medicine_id);
+        jsonObject.put("medicine_id",medicineDetails.getMedicine_id());
+        jsonObject.put("medicine_name",medicineDetails.getMedicine_name());
+        jsonObject.put("mfg_date",medicineDetails.getMfg_date());
+        jsonObject.put("exp_date",medicineDetails.getExp_date());
+        jsonObject.put("type",medicineDetails.getType());
+        jsonObject.put("vendor",medicineDetails.getVendor());
+
+        return jsonObject.toString();
+    }
+
+    @RequestMapping(value = "/EditMedicine")
+    public
+    @ResponseBody
+    String editMedicine(@RequestBody Medicine medicine)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        boolean flag;
+        flag=medicineService.editMedicine(medicine);
+        jsonObject.put("status",flag);
+        return jsonObject.toString();
+    }
 
     @RequestMapping(value = "patientHistory/{doctor_id}/{branch_id}",method = RequestMethod.GET)
     public
