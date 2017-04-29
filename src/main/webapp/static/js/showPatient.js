@@ -10,8 +10,16 @@ app.controller('showpatient',function($scope,$http,$window){
             $window.sessionStorage.doctor_id=response.data.doctor_id;
             $scope.clinic_id=response.data.clinic_id;
             $scope.data = response.data;
-            console.log(response.status);
 
+            $scope.branch_id= $window.sessionStorage.branch_id;
+            $scope.branch_iid=parseInt($scope.branch_id);
+
+
+            $http.get("ShowPatient/"+ $scope.branch_id+"/"+$window.sessionStorage.doctor_id)
+
+                .then(function(response){
+                    $scope.patientDetails=response.data.patient;
+                })
             if(response.status=200){
                 $http.get("ViewBranch/"+ $window.sessionStorage.clinic_id)
                     .then(function (response){
@@ -19,6 +27,8 @@ app.controller('showpatient',function($scope,$http,$window){
                     });
             }
         });
+
+
 
 
 

@@ -13,4 +13,5 @@ public interface MedicineService {
     List<Medicine> getMedicine();
     Medicine medicineDetails(Integer medicine_id);
     boolean editMedicine(Medicine medicine);
+    List<Medicine> getMedicineType(Integer type);
 }

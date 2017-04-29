@@ -140,28 +140,34 @@
                         <input class="form-control"  name="medicine_name" ng-model="medicine_name" type="text" required>
 
                       </div>
+                       <span class="text-danger wrapper text-center ng-binding"
+                             ng-show="myform.medicine_name.$invalid &&  myform.medicine_name.$touched">Please Enter Medicine </span>
                     </div>
                     <div class="col-lg-6">
                       <div class="input-group">
                         <span class="input-group-addon">MFG DATE</span>
-                        <input type="text" class="form-control" placeholder="mm-dd-yyyy" ng-click="open1($event)" datepicker-popup="{{format}}" ng-model="from_date" max-date="date"  is-open="opened1" datepicker-options="dateOptions" close-text="Close" style="height: 37px"  required/>
+                        <input type="text" class="form-control" name="mfg_date" placeholder="mm-dd-yyyy" ng-click="open1($event)" datepicker-popup="{{format}}" ng-model="from_date" max-date="date"  is-open="opened1" datepicker-options="dateOptions" close-text="Close" style="height: 37px" disabled="disabled" required/>
                       <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="open1($event)" style="height: 37px"><i class="glyphicon glyphicon-calendar"></i></button>
                       </span>
                         <%--<input type="text" class="form-control">--%>
                       </div>
+                        <span class="text-danger wrapper text-center ng-binding"
+                              ng-show="myform.mfg_date.$invalid">Please Enter MFG Date </span>
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="col-lg-6">
                       <div class="input-group">
                         <span class="input-group-addon">EXP DATE</span>
-                        <input type="text" class="form-control" placeholder="mm-dd-yyyy" ng-click="open2($event)" datepicker-popup="{{format}}" ng-model="to_date"  min-date="from_date"  is-open="opened2" datepicker-options="dateOptions" close-text="Close" style="height: 37px" required/>
+                        <input type="text" class="form-control" name="exp_date" placeholder="mm-dd-yyyy" ng-click="open2($event)" datepicker-popup="{{format}}" ng-model="to_date"  min-date="from_date"  is-open="opened2" datepicker-options="dateOptions" close-text="Close" style="height: 37px" disabled="disabled" required/>
                       <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="open2($event)" style="height: 37px"><i class="glyphicon glyphicon-calendar"></i></button>
                       </span>
                         <%--<input type="text" class="form-control">--%>
                       </div>
+                       <span class="text-danger wrapper text-center ng-binding"
+                             ng-show="myform.exp_date.$invalid">Please Enter EXP Date </span>
                     </div>
                     <div class="col-lg-6">
                       <div class="input-group">
@@ -172,6 +178,8 @@
 
                         </SELECT>
                       </div>
+                      <span class="text-danger wrapper text-center ng-binding"
+                            ng-show="myform.type.$invalid &&  myform.type.$touched">Please Enter Type </span>
                     </div>
 
                   </div>
@@ -181,6 +189,8 @@
                         <span class="input-group-addon">Vendor</span>
                         <input class="form-control" type="text" name="vendor" ng-model="vendor" required>
                       </div>
+                       <span class="text-danger wrapper text-center ng-binding"
+                             ng-show="myform.vendor.$invalid &&  myform.vendor.$touched">Please Enter Vendor </span>
                     </div>
                   </div>
 

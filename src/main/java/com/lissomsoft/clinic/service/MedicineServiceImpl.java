@@ -34,4 +34,9 @@ public class MedicineServiceImpl implements MedicineService {
     public boolean editMedicine(Medicine medicine) {
         return medicineDao.editMedicine(medicine);
     }
+
+    @Override
+    public List<Medicine> getMedicineType(Integer type) {
+        return medicineDao.getMedicineType(type);
+    }
 }

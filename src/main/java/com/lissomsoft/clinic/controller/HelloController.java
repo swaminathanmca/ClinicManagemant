@@ -199,6 +199,11 @@ public class HelloController {
         return "viewMedicine";
     }
 
+    @RequestMapping(value = "/AddPrescription")
+    public String addPrescription(HttpServletRequest request)throws Exception{
+        return "addPrescription";
+    }
+
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
     public
     @ResponseBody
@@ -1491,6 +1496,29 @@ String editcomplaint(@RequestBody Complaint complaint,@PathVariable Integer comp
         data.put("user",jsonArray);
         return data.toString();
     }
+
+    @RequestMapping(value = "PrescriptionType/{type}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String prescriptionType(@PathVariable Integer type,HttpServletRequest request)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        JSONArray jsonArray=new JSONArray();
+        List<Medicine> medicinesTypes;
+        medicinesTypes=medicineService.getMedicineType(type);
+        Iterator<Medicine> it=medicinesTypes.iterator();
+        while (it.hasNext()){
+            Medicine medicine=it.next();
+            JSONObject data=new JSONObject();
+            data.put("medicine_id",medicine.getMedicine_id());
+            data.put("medicine_name",medicine.getMedicine_name());
+            jsonArray.put(data);
+        }
+        jsonObject.put("medicines",jsonArray);
+
+        return jsonObject.toString();
+    }
+
+
 
     @RequestMapping(value="ShowPatient/{branch_id}/{doctor_id}",method = RequestMethod.GET)
     public

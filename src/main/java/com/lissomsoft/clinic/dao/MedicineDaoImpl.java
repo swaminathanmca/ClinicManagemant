@@ -111,4 +111,24 @@ public class MedicineDaoImpl implements MedicineDao {
         }
         return result >0 ? true :false;
     }
+
+    @Override
+    public List<Medicine> getMedicineType(Integer type) {
+        List<Medicine> medicines=null;
+        try {
+
+            String medicinesSql="SELECT * FROM clinic.medicine_master WHERE medicine_master.type=:mtype";
+            Map<String,Object> parameter=new HashMap<String, Object>();
+            parameter.put("mtype",type);
+            medicines=jdbcTemplate.query(medicinesSql,parameter,new MedicineMapper());
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+        return medicines;
+    }
 }

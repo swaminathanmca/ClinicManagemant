@@ -5,12 +5,10 @@ app.controller('patientComplaint',function($scope,$http,$window){
     $scope.visit_id=$window.sessionStorage.visit_id;
     $scope.branch_id= $window.sessionStorage.branch_id;
     $scope.doctor_id=$window.sessionStorage.doctor_id;
-    console.log($scope.visit_id);
+
     $http.get("GetComplaint")
         .then(function (response) {
             $scope.complaint = response.data.complaint;
-
-
         });
 
     $http.get("GetComplaint/"+$scope.visit_id)
@@ -33,11 +31,14 @@ app.controller('patientComplaint',function($scope,$http,$window){
             complaint_id:$scope.complaint_id,
             procedures:$scope.procedures,
         }
-    console.log(PatientInfo);
-        $http.post('patientInfo',PatientInfo)
+
+       /* $http.post('patientInfo',PatientInfo)
             .then (function (response,status,headers,config) {
             $scope.result=response.data;
-        });
+
+            location.href="AddPrescription";
+        });*/
+        location.href="AddPrescription";
     }
 
 })
