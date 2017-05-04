@@ -111,12 +111,14 @@
 
   <div id="page-wrapper">
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-lg-1"></div>
+      <div class="col-lg-10">
         <h4 class="page-header">Medicine Details</h4>
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-lg-1"></div>
+      <div class="col-lg-10">
         <div class="panel panel-default">
           <div class="panel-heading">
             <div class="row">
@@ -146,8 +148,7 @@
                     <thead>
                     <tr class="success">
                       <th>MEDICINE NAME</th>
-                      <th>MFG DATE</th>
-                      <th>EXP DATE</th>
+                      <th>MG </th>
                       <th>VENDOR</th>
                       <th>OPTIONS</th>
 
@@ -156,8 +157,7 @@
                     <tbody>
                     <tr dir-paginate="x in data | filter:search | orderBy : clinicName | itemsPerPage :5"  ng-click="editFrontDesk(x.profile_id)">
                       <td>{{x.medicine_name}}</td>
-                      <td>{{x.mfg_date}}</td>
-                      <td>{{x.exp_date}}</td>
+                      <td>{{x.mg}}</td>
                       <td>{{x.vendor}}</td>
                       <td><button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="Edit(x.medicine_id)"> Edit</button></td>
                     </tr>
@@ -175,12 +175,13 @@
 
 
       </div>
+      <div class="col-lg-1"></div>
     </div>
 
 
 
     <div class="modal fade" id="myModal" role="dialog">
-      <div class="modal-dialog modal-lg">
+      <div class="modal-dialog ">
 
         <div class="modal-content">
           <div class="modal-header panel-primary">
@@ -204,26 +205,16 @@
                       </div>
                       <div class="col-lg-6">
                         <div class="input-group">
-                          <span class="input-group-addon">MFG DATE</span>
-                          <input type="text" class="form-control" placeholder="mm-dd-yyyy" ng-click="open1($event)" datepicker-popup="{{format}}" ng-model="medicine.mfg_date" max-date="date"  is-open="opened1" datepicker-options="dateOptions" close-text="Close" style="height: 37px" disabled="disabled" required/>
-                      <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open1($event)" style="height: 37px"><i class="glyphicon glyphicon-calendar"></i></button>
-                      </span>
+                          <span class="input-group-addon">MG </span>
+                         <input type="text" class="form-control" name="mg" ng-model="medicine.mg">
                         </div>
+                        <span class="text-danger wrapper text-center ng-binding"
+                              ng-show="myform.mg.$invalid && myform.mg.$touched">Please Enter MG</span>
                       </div>
                     </div>
                     <div class="form-group">
+
                       <div class="col-lg-6">
-                        <div class="input-group">
-                          <span class="input-group-addon">EXP DATE</span>
-                          <input type="text" class="form-control" placeholder="mm-dd-yyyy" ng-click="open2($event)" datepicker-popup="{{format}}" ng-model="medicine.exp_date"  min-date="medicine.mfg_date"  is-open="opened2" datepicker-options="dateOptions" close-text="Close" style="height: 37px" disabled="disabled" required/>
-                      <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open2($event)" style="height: 37px"><i class="glyphicon glyphicon-calendar"></i></button>
-                      </span>
-                          <%--<input type="text" class="form-control">--%>
-                        </div>
-                      </div>
-                      <div class="col-lg-3">
                         <div class="input-group">
                           <span class="input-group-addon">TYPE</span>
                           <select ng-model="mtype" class="form-control" required>
@@ -232,7 +223,7 @@
                           </select>
                         </div>
                       </div>
-                      <div class="col-lg-3">
+                      <div class="col-lg-6">
                         <div class="input-group">
                           <span class="input-group-addon">Vendor</span>
                           <input type="text" class="form-control" ng-model="medicine.vendor" required>

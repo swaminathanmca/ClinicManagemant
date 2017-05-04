@@ -1,5 +1,7 @@
 package com.lissomsoft.clinic.domain;
 
+import java.util.List;
+
 /**
  * Created by Admin on 4/19/2017.
  */
@@ -14,9 +16,11 @@ public class PatientInfo {
     private Integer weight;
     private Integer pressure;
     private String refereal_details;
-    private Integer complaint_id;
+    private List<Complaint> complaint;
     private String procedures;
+    private String diagnosis;
     private String date;
+
 
     public String getPatient_pid() {
         return patient_pid;
@@ -74,12 +78,13 @@ public class PatientInfo {
         this.refereal_details = refereal_details;
     }
 
-    public Integer getComplaint_id() {
-        return complaint_id;
+
+    public List<Complaint> getComplaint() {
+        return complaint;
     }
 
-    public void setComplaint_id(Integer complaint_id) {
-        this.complaint_id = complaint_id;
+    public void setComplaint(List<Complaint> complaint) {
+        this.complaint = complaint;
     }
 
     public String getProcedures() {
@@ -90,6 +95,13 @@ public class PatientInfo {
         this.procedures = procedures;
     }
 
+    public String getDiagnosis() {
+        return diagnosis;
+    }
+
+    public void setDiagnosis(String diagnosis) {
+        this.diagnosis = diagnosis;
+    }
 
     public Integer getDoctor_id() {
         return doctor_id;
@@ -118,18 +130,19 @@ public class PatientInfo {
 
     public String toString(){
         return "patientInfo{"+
-                "patient_pid = "+ patient_pid +
-                "first_name = "+ first_name +
-                "last_name = "+ last_name +
-                "branch_id ="+ branch_id +
-                "doctor_id ="+ doctor_id +
-                "height = "+ height +
-                "weight = "+ weight +
-                "pressure = "+ pressure +
-                "refereal_details = "+ refereal_details +
-                "complaint_id = "+ complaint_id +
+                " patient_pid = "+ patient_pid +
+                " first_name = "+ first_name +
+                " last_name = "+ last_name +
+                " branch_id ="+ branch_id +
+                " doctor_id ="+ doctor_id +
+                " height = "+ height +
+                " weight = "+ weight +
+                " pressure = "+ pressure +
+                " refereal_details = "+ refereal_details +
+                " complaint = "+ complaint +
                 " procedures = "+ procedures +
-                "date = "+ date +
+                " diagnosis ="+ diagnosis +
+                " date = "+ date +
                 "}";
     }
 }

@@ -90,7 +90,7 @@
     </div>
     <div class="row">
       <div class="col-lg-1"></div>
-      <div class="col-lg-10">
+      <div class="col-lg-12">
         <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title"> Patient Visit</h3>
@@ -143,12 +143,15 @@
                     <div class="form-group">
                       <div class="col-lg-3">
                         <div class="input-group">
-                        <span class="input-group-addon">Height</span>
-                        <input type="text" class="form-control" ng-model="height" name="height" maxlength="3"  ng-pattern="/^[0-9]*$/" required>
-                          <span class="input-group-addon">CM</span>
+                        <span class="input-group-addon">Visit Type</span>
+                          <select class="form-control" ng-model="type" name="type" required>
+                            <option value="0">New  </option>
+                            <option value="1">FollowUp</option>
+                          </select>
+
                         </div>
                          <span class="text-danger wrapper text-center ng-binding"
-                               ng-show="myform.height.$error.pattern">Please Enter Valid Height</span>
+                               ng-show="myform.type.$error.pattern">Please Select Valid Type</span>
                       </div>
                       <div class="col-lg-3">
                         <div class="input-group">
@@ -170,7 +173,7 @@
                       <div class="col-lg-3">
                         <div class="input-group">
                           <span class="input-group-addon">
-                             Type
+                             Category
                           </span>
                           <select class="form-control" ng-model="vtype" name="vtype" required>
                             <option value="0">Normal </option>

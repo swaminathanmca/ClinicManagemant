@@ -398,6 +398,16 @@ public class HelloController {
        return data.toString();
    }
 
+    @RequestMapping(value = "/AddPrescription",method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String addPrescription(@RequestBody List<Prescription> prescriptions)throws JSONException{
+        JSONObject data=new JSONObject();
+        System.out.println(prescriptions);
+        return data.toString();
+    }
+
+
     @RequestMapping(value = "/patientInfo",method = RequestMethod.POST)
     public
     @ResponseBody
@@ -1337,8 +1347,7 @@ String editcomplaint(@RequestBody Complaint complaint,@PathVariable Integer comp
             JSONObject jsonObject=new JSONObject();
             jsonObject.put("medicine_id",getMedicine.getMedicine_id());
             jsonObject.put("medicine_name",getMedicine.getMedicine_name());
-            jsonObject.put("mfg_date",getMedicine.getMfg_date());
-            jsonObject.put("exp_date",getMedicine.getExp_date());
+            jsonObject.put("mg",getMedicine.getMg());
             jsonObject.put("type",getMedicine.getType());
             jsonObject.put("vendor",getMedicine.getVendor());
             jsonArray.put(jsonObject);
@@ -1398,8 +1407,7 @@ String editcomplaint(@RequestBody Complaint complaint,@PathVariable Integer comp
         medicineDetails=medicineService.medicineDetails(medicine_id);
         jsonObject.put("medicine_id",medicineDetails.getMedicine_id());
         jsonObject.put("medicine_name",medicineDetails.getMedicine_name());
-        jsonObject.put("mfg_date",medicineDetails.getMfg_date());
-        jsonObject.put("exp_date",medicineDetails.getExp_date());
+        jsonObject.put("mg",medicineDetails.getMg());
         jsonObject.put("type",medicineDetails.getType());
         jsonObject.put("vendor",medicineDetails.getVendor());
 
@@ -1511,6 +1519,7 @@ String editcomplaint(@RequestBody Complaint complaint,@PathVariable Integer comp
             JSONObject data=new JSONObject();
             data.put("medicine_id",medicine.getMedicine_id());
             data.put("medicine_name",medicine.getMedicine_name());
+            data.put("mg",medicine.getMg());
             jsonArray.put(data);
         }
         jsonObject.put("medicines",jsonArray);

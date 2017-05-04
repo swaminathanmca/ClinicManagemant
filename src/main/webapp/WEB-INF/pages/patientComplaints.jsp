@@ -15,6 +15,7 @@
   <link href="<%=request.getContextPath()%>/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/css/bootstrap-formhelpers.min.css"
         rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/static/vendor/multiple-select/multiple-select.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title></title>
 </head>
@@ -120,9 +121,10 @@
                     <div class="form-group">
                       <div class="col-lg-3">
                         <div class="input-group">
-                          <span class="input-group-addon">Height</span>
-                          <label class="form-control" type="text">{{patientcomplaint.height}}</label>
-                          <span class="input-group-addon">CM</span>
+                          <span class="input-group-addon">Visit Type</span>
+                          <label class="form-control" type="text" ng-if="patientcomplaint.height==0" >New</label>
+                          <label class="form-control" type="text" ng-if="patientcomplaint.height==1" >FollowUp</label>
+
                         </div>
                       </div>
                       <div class="col-lg-3">
@@ -135,7 +137,7 @@
                       <div class="col-lg-3">
                         <div class="input-group">
                           <span class="input-group-addon">BP</span>
-                          <label class="form-control" type="text">{{patientcomplaint.pressure}}</label>
+                          <label class="form-control" type="text"  >{{patientcomplaint.pressure}}</label>
                         </div>
                       </div>
 
@@ -150,7 +152,14 @@
                       <div class="col-lg-6">
                         <div class="input-group">
                           <span class="input-group-addon">Complaint</span>
-                          <select class="form-control" ng-model="complaint_id" name="complaint"  ng-options="s.complaint_id as s.complaint_name for s in complaint" required ></select>
+                         <%-- <select class="form-control" ng-model="complaint_id" name="complaint"  ng-options="s.complaint_id as s.complaint_name for s in complaint" required ></select>--%>
+                          <multiple-autocomplete ng-model="selectedList "  name="multipleselect" required="true"
+                                                 object-property="complaint_name"
+                                                 after-select-item="afterSelectItem"
+                                                 after-remove-item="afterRemoveItem"
+
+                                                 suggestions-arr="complaint">
+                          </multiple-autocomplete>
                         </div>
                         <span class="text-danger wrapper text-center ng-binding"
                               ng-show="myform.complaint.$invalid &&  myform.complaint.$touched">Please Enter The Complaint</span>
@@ -166,7 +175,28 @@
                             ng-show="myform.procedures.$invalid &&  myform.procedures.$touched">Please Enter The Procedures</span>
                     </div>
                     </div>
+                    <div class="form-group">
+                      <div class="col-lg-12">
+                        <div class="input-group">
+                          <span class="input-group-addon">Diagnosis</span>
+                          <textarea type="text" class="form-control" ng-model="diagnosis" name="diagnosis" rows="4" required> </textarea>
+                        </div>
+                      <span class="text-danger wrapper text-center ng-binding"
+                            ng-show="myform.diagnosis.$invalid &&  myform.diagnosis.$touched">Please Enter The Diagnosis</span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-3">
 
+
+                          <div class="checkbox  fileRadioBox form-control">&nbsp;
+                            <label>
+                              <input type="checkbox"  ng-model="labassit"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" required/>&nbsp;Lab Test
+                            </label>
+                          </div>
+
+                      </div>
+                    </div>
 
                     <div class="form-actions">
                       <div class="row">

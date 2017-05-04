@@ -39,7 +39,7 @@ $scope.patient_pid=$window.sessionStorage.patient_id;
         var visit={
             patient_pid:$scope.patient_pid,
             branch_id:$scope.branch_id,
-            height:$scope.height,
+            height:$scope.type,
             weight:$scope.weight,
             type:$scope.vtype,
             time:$scope.time,

@@ -51,8 +51,7 @@ app.controller('Medicine',function($scope,$http,$window){
 
         var medicine={
             medicine_name:$scope.medicine_name,
-            mfg_date: satDate.getFullYear() + '-' + (satDate.getMonth() + 1) + '-' + satDate.getDate(),
-            exp_date:endDate.getFullYear() + '-' + (endDate.getMonth() + 1) + '-' + endDate.getDate(),
+            mg:$scope.mg,
             type:$scope.type,
             vendor:$scope.vendor
         }

@@ -31,11 +31,10 @@ public class MedicineDaoImpl implements MedicineDao {
         int result=0;
 
         try {
-            String insertMedicineSql="INSERT INTO medicine_master  (medicine_name,mfg_date,type,exp_date,vendor,created_at,updated_at) VALUES(:medicine_name,:mfg_date,:type,:exp_date,:vendor,:created_at,:created_at);";
+            String insertMedicineSql="INSERT INTO medicine_master  (medicine_name,type,mg,vendor,created_at,updated_at) VALUES(:medicine_name,:type,:mg,:vendor,:created_at,:created_at);";
             Map<String,Object> parameter=new HashMap<String, Object>();
             parameter.put("medicine_name",medicine.getMedicine_name());
-            parameter.put("mfg_date",medicine.getMfg_date());
-            parameter.put("exp_date",medicine.getExp_date());
+            parameter.put("mg",medicine.getMg());
             parameter.put("type",medicine.getType());
             parameter.put("vendor",medicine.getVendor());
             parameter.put("created_at",format.format(new Date()));
@@ -95,12 +94,11 @@ public class MedicineDaoImpl implements MedicineDao {
         int result=0;
         try {
 
-            String editMedicineSql="UPDATE medicine_master SET medicine_name=:medicine_name,mfg_date=:mfg_date,exp_date=:exp_date,vendor=:vendor,type=:type,updated_at=:created_at WHERE medicine_id=:medicine_id";
+            String editMedicineSql="UPDATE medicine_master SET medicine_name=:medicine_name,mg=:mg,vendor=:vendor,type=:type,updated_at=:created_at WHERE medicine_id=:medicine_id";
             Map<String,Object> params1=new HashMap<String, Object>();
             params1.put("medicine_id",medicine.getMedicine_id());
             params1.put("medicine_name",medicine.getMedicine_name());
-            params1.put("mfg_date",medicine.getMfg_date());
-            params1.put("exp_date",medicine.getExp_date());
+            params1.put("mg",medicine.getMg());
             params1.put("vendor",medicine.getVendor());
             params1.put("type",medicine.getType());
             params1.put("created_at",format.format(new Date()));
@@ -117,7 +115,7 @@ public class MedicineDaoImpl implements MedicineDao {
         List<Medicine> medicines=null;
         try {
 
-            String medicinesSql="SELECT * FROM clinic.medicine_master WHERE medicine_master.type=:mtype";
+            String medicinesSql="SELECT medicine_id,concat(medicine_name,' ',mg) as medicine_name,mg,type,vendor FROM clinic.medicine_master WHERE medicine_master.type=:mtype";
             Map<String,Object> parameter=new HashMap<String, Object>();
             parameter.put("mtype",type);
             medicines=jdbcTemplate.query(medicinesSql,parameter,new MedicineMapper());

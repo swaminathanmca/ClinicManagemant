@@ -7,8 +7,7 @@ public class Medicine {
 
     private Integer medicine_id;
     private String medicine_name;
-    private String mfg_date;
-    private String exp_date;
+    private Integer mg;
     private Integer type;
     private String vendor;
     private String updated_at;
@@ -46,24 +45,16 @@ public class Medicine {
         this.vendor = vendor;
     }
 
-    public String getExp_date() {
-        return exp_date;
-    }
-
-    public void setExp_date(String exp_date) {
-        this.exp_date = exp_date;
-    }
-
-    public String getMfg_date() {
-        return mfg_date;
-    }
-
-    public void setMfg_date(String mfg_date) {
-        this.mfg_date = mfg_date;
-    }
-
     public String getMedicine_name() {
         return medicine_name;
+    }
+
+    public Integer getMg() {
+        return mg;
+    }
+
+    public void setMg(Integer mg) {
+        this.mg = mg;
     }
 
     public void setMedicine_name(String medicine_name) {
@@ -83,8 +74,8 @@ public class Medicine {
         return "Medicine{"+
                 " medicine_id="+medicine_id+
                 " medicine_name="+medicine_name+
-                " mfg_date="+mfg_date+
-                " exp_date="+exp_date+
+                " mg="+ mg +
+
                 " type="+type+
                 " vendor="+vendor+ '}';
     }

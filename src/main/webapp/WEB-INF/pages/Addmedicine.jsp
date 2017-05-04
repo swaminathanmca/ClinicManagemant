@@ -143,20 +143,32 @@
                        <span class="text-danger wrapper text-center ng-binding"
                              ng-show="myform.medicine_name.$invalid &&  myform.medicine_name.$touched">Please Enter Medicine </span>
                     </div>
-                    <div class="col-lg-6">
+                   <%-- <div class="col-lg-6">
                       <div class="input-group">
                         <span class="input-group-addon">MFG DATE</span>
                         <input type="text" class="form-control" name="mfg_date" placeholder="mm-dd-yyyy" ng-click="open1($event)" datepicker-popup="{{format}}" ng-model="from_date" max-date="date"  is-open="opened1" datepicker-options="dateOptions" close-text="Close" style="height: 37px" disabled="disabled" required/>
                       <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="open1($event)" style="height: 37px"><i class="glyphicon glyphicon-calendar"></i></button>
                       </span>
-                        <%--<input type="text" class="form-control">--%>
+                        &lt;%&ndash;<input type="text" class="form-control">&ndash;%&gt;
                       </div>
                         <span class="text-danger wrapper text-center ng-binding"
                               ng-show="myform.mfg_date.$invalid">Please Enter MFG Date </span>
+                    </div>--%>
+                    <div class="col-lg-6">
+                      <div class="input-group">
+                        <span class="input-group-addon">TYPE</span>
+                        <SELECT class="form-control" name="type" ng-model="type" required>
+                          <option value="1">Tablet</option>
+                          <option value="2">Syrup</option>
+                          <option value="3">Injection</option>
+                        </SELECT>
+                      </div>
+                      <span class="text-danger wrapper text-center ng-binding"
+                            ng-show="myform.type.$invalid &&  myform.type.$touched">Please Enter Type </span>
                     </div>
                   </div>
-                  <div class="form-group">
+               <%--   <div class="form-group">
                     <div class="col-lg-6">
                       <div class="input-group">
                         <span class="input-group-addon">EXP DATE</span>
@@ -164,7 +176,7 @@
                       <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="open2($event)" style="height: 37px"><i class="glyphicon glyphicon-calendar"></i></button>
                       </span>
-                        <%--<input type="text" class="form-control">--%>
+                        &lt;%&ndash;<input type="text" class="form-control">&ndash;%&gt;
                       </div>
                        <span class="text-danger wrapper text-center ng-binding"
                              ng-show="myform.exp_date.$invalid">Please Enter EXP Date </span>
@@ -182,7 +194,7 @@
                             ng-show="myform.type.$invalid &&  myform.type.$touched">Please Enter Type </span>
                     </div>
 
-                  </div>
+                  </div>--%>
                   <div class="form-group">
                     <div class="col-lg-6">
                       <div class="input-group">
@@ -191,6 +203,17 @@
                       </div>
                        <span class="text-danger wrapper text-center ng-binding"
                              ng-show="myform.vendor.$invalid &&  myform.vendor.$touched">Please Enter Vendor </span>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          MG
+                        </span>
+                        <input class="form-control" type="text" name="mg" ng-model="mg" required>
+
+                      </div>
+                      <span class="text-danger wrapper text-center ng-binding"
+                            ng-show="myform.mg.$invalid &&  myform.mg.$touched" >Please Enter MG </span>
                     </div>
                   </div>
 

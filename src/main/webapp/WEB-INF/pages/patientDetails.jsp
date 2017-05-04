@@ -147,7 +147,7 @@
                      <div class="input-group">
                        <span class="input-group-addon">Gender</span>
                        <label class="form-control" type="text" ng-if="data.gender==1">Male</label>
-                       <label class="form-control" type="text" ng-if="data.gender==0">FeMale</label>
+                       <label class="form-control" type="text" ng-if="data.gender==0">Female</label>
                      </div>
                    </div>
                      <div class="col-lg-3">

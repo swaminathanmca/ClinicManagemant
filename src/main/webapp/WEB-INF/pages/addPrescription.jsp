@@ -98,7 +98,7 @@
           <div class="panel-body">
             <div class="row">
               <div class="col-lg-12">
-                <form class="form-horizontal ng-invalid" role="form" name="myform" ng-submit="submit()"
+                <form class="form-horizontal ng-invalid" role="form" name="myform1" ng-submit="submit()"
                       novalidate>
 
                   <fieldset>
@@ -123,9 +123,10 @@
                           <span class="input-group-addon">
                             TYPE
                           </span>
-                         <SELECT class="form-control" ng-model="type" ng-change="typepres(type)" required>
+                         <SELECT class="form-control" ng-model="myform.type" ng-change="typepres(myform.type)" required>
                            <option value="1">Tablet</option>
                            <option value="2">Syrup</option>
+                           <option value="3">Injection</option>
                          </SELECT>
                         </div>
                       </div>
@@ -135,7 +136,7 @@
                          <%-- <SELECT class="form-control" ng-model="pres" ng-options="s.medicine_id as s.medicine_name for s in medicines">
 
                           </SELECT>--%>
-                          <div   name="medicine_id"  custom-select="s.medicine_id as s.medicine_name for s in medicines | filter: { medicine_name: $searchTerm }"   ng-model="medicine_id" required>
+                          <div   name="myform.medicine_id"  custom-select="s.medicine_id as s.medicine_name for s in medicines | filter: { medicine_name: $searchTerm }"   ng-model="medicine_id" required>
 
                           </div>
                         </div>
@@ -144,7 +145,7 @@
                 <div class="col-lg-3">
                   <div class="input-group">
                     <span class="input-group-addon">Fasting</span>
-                    <SELECT class="form-control" name="frequebcy" required>
+                    <SELECT class="form-control" name="frequency" ng-model="myform.frequency" required>
                       <option value="0">Before</option>
                       <option value="1">After</option>
                     </SELECT>
@@ -152,8 +153,8 @@
                 </div>
           <div class="col-lg-2">
             <div class="input-group">
-              <span class="input-group-addon" name="days">Days</span>
-              <input class="form-control" type="text" name="days" required>
+              <span class="input-group-addon" >Days</span>
+              <input name="dayscount" class="form-control" type="text"  ng-model="myform.dayscount" required>
             </div>
           </div>
 
@@ -166,17 +167,18 @@
                           </span>
       <div class="checkbox  fileRadioBox form-control">&nbsp;
         <label>
-          <input type="checkbox"  ng-model="x.gender"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked"/>&nbsp;Morning
+          <input type="checkbox" ng-checked="selected=='1'"  ng-true-value="'1'"  ng-false-value="' '"  ng-model="myform.mrng"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" />&nbsp;Morning
         </label>
         <label>
-          <input type="checkbox"  ng-model="x.gender1"  class="ng-pristine ng-untouched ng-valid ng-valid-required">&nbsp;AfterNoon
+          <input type="checkbox"  ng-checked="selected=='1'" ng-true-value="'1'" ng-false-value="' '"  ng-model="myform.aftn"  class="ng-pristine ng-untouched ng-valid ng-valid-required" >&nbsp;AfterNoon
         </label>
         <label>
-          <input type="checkbox"  ng-model="x.gender2"  class="ng-pristine ng-untouched ng-valid ng-valid-required">&nbsp;Night
+          <input type="checkbox" ng-checked="selected=='1'"  ng-true-value="'1'" ng-false-value="' '" ng-model="myform.nght"  class="ng-pristine ng-untouched ng-valid ng-valid-required" >&nbsp;Night
         </label>
       </div>
 
     </div>
+
   </div>
 </div>
 
@@ -196,12 +198,79 @@
                     </fieldset>
                   </form>
 
+
+
+              </div>
+            </div>
+
+            <div class="row" ng-if=" day == 0 ">
+              <div class="col-lg-12">
+                <div class="table-responsive">
+
+                  <table class="table table-striped table-bordered table-hover " id="dataTables-example">
+                    <thead>
+                    <tr class="success">
+                      <th>Medicine_name</th>
+                      <th>Mg</th>
+                      <th>Frequency</th>
+                      <th>Morning</th>
+                      <th>AfterNoon</th>
+                      <th>Night</th>
+                      <th>Days</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr dir-paginate="x in selected | filter:search | orderBy : first_name | itemsPerPage :5" ng-click="editPatient(x.patient_id)">
+                      <td>{{x.medicine_name}}</td>
+                      <td>{{x.mg}}</td>
+                      <td ><p ng-if="x.frequency==0">Before Fasting</p>
+                        <p ng-if="x.frequency==1">After  Fasting</p></td>
+                      <td>{{x.morning}}</td>
+                      <td>{{x.aftn}}</td>
+                      <td>{{x.nght}}</td>
+                      <td>{{x.days}}</td>
+                    </tr>
+
+
+                    </tbody>
+
+                  </table>
+                  <p class=" text-center">
+                    <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" ></dir-pagination-controls>
+                  </p>
+
+
+                  </div>
+                <div class="form-action">
+                  <div class="row">
+                    <div class="col-lg-offset-4 col-lg-7">
+                      <button type="submit" class="btn btn-success"
+                              ng-click="prescriptionAdd()">Proceed
+                      </button>
+
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+  <%--  <div class="row">
+      <div class="col-lg-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Prescription</h3>
+          </div>
+          <div class="panel-body">
+
+
+          </div>
+        </div>
+      </div>
+    </div>--%>
 
   </div>
 </div>

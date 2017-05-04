@@ -17,8 +17,7 @@ public class MedicineMapper implements RowMapper{
         Medicine medicine=new Medicine();
         medicine.setMedicine_id(rs.getInt("medicine_id"));
         medicine.setMedicine_name(rs.getString("medicine_name"));
-        medicine.setMfg_date(rs.getString("mfg_date"));
-        medicine.setExp_date(rs.getString("exp_date"));
+        medicine.setMg(rs.getInt("mg"));
         medicine.setType(rs.getInt("type"));
         medicine.setVendor(rs.getString("vendor"));
         return medicine;

@@ -8,13 +8,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Admin on 4/19/2017.
@@ -25,20 +25,27 @@ public class PatientInfoDaoImpl implements PatientInfoDao {
     DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     @Autowired(required = false)
     private NamedParameterJdbcTemplate jdbcTemplate;
+    @Autowired(required = false)
+    private PlatformTransactionManager platformTransactionManager;
 
 
     @Override
     public boolean addpatientinfo(PatientInfo patientInfo) {
         int result=0;
+        int result_complaint=0;
+        DefaultTransactionDefinition paramTransactionDefinition = new DefaultTransactionDefinition();
+        TransactionStatus status = platformTransactionManager.getTransaction(paramTransactionDefinition);
+
         try{
-            String addpatientInfo="insert into patient_info_master(patient_pid,weight,bp,referal_details,complaint_id,procedures,doctor_detail_id,branch_id,created_at,updated_at) values(:patient_pid,:weight,:bp,:referal_details,:complaint_id,:procedures,:doctor_id,:branch_id,:created_at,:created_at)";
+            String addpatientInfo="insert into patient_info_master(patient_pid,weight,type,bp,referal_details,procedures,diagnosis,doctor_detail_id,branch_id,created_at,updated_at) values(:patient_pid,:weight,:vtype,:bp,:referal_details,:procedures,:diagnosis,:doctor_id,:branch_id,:created_at,:created_at)";
             Map<String,Object> parameter=new HashMap<String, Object>();
             parameter.put("patient_pid",patientInfo.getPatient_pid());
             parameter.put("weight",patientInfo.getWeight());
+            parameter.put("vtype",patientInfo.getHeight());
             parameter.put("bp",patientInfo.getPressure());
             parameter.put("referal_details",patientInfo.getRefereal_details());
-            parameter.put("complaint_id",patientInfo.getComplaint_id());
             parameter.put("procedures",patientInfo.getProcedures());
+            parameter.put("diagnosis",patientInfo.getDiagnosis());
             parameter.put("doctor_id",patientInfo.getDoctor_id());
             parameter.put("branch_id",patientInfo.getBranch_id());
             parameter.put("created_at",format.format(new Date()));
@@ -47,7 +54,33 @@ public class PatientInfoDaoImpl implements PatientInfoDao {
 
         }catch(Exception e){
             e.printStackTrace();
+            platformTransactionManager.rollback(status);
         }
+
+        if((result>0)? true :false){
+
+            try {
+                List<Complaint> complaints;
+                complaints=patientInfo.getComplaint();
+                Iterator<Complaint>it=complaints.iterator();
+                while (it.hasNext()){
+                    Complaint cp=it.next();
+                    String insertComplaintSql="INSERT INTO patient_complaints(patient_info_id,patient_complaints,created_at,updated_at) VALUES ((SELECT p.patient_info_id FROM patient_info_master p WHERE created_at=:created_at),:complaint_id,:created_at,:created_at)";
+                    Map<String,Object> params=new HashMap<String, Object>();
+                    params.put("complaint_id",cp.getComplaint_id());
+                    params.put("created_at",format.format(new Date()));
+                    result_complaint=jdbcTemplate.update(insertComplaintSql,params);
+
+                }
+
+                 platformTransactionManager.commit(status);
+            }catch (Exception e){
+                e.printStackTrace();
+                platformTransactionManager.rollback(status);
+            }
+        }
+
+
 
         return result > 0 ? true:false;
     }
