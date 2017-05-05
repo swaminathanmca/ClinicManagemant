@@ -15,4 +15,5 @@ public interface PatientInfoDao {
 
     PatientInfo patientInfo(Integer patient_info_id);
 
+    PatientInfo getPatientInfoId(String patient_pid,String created_at);
 }

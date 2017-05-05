@@ -7,6 +7,7 @@ import java.util.List;
  */
 public class PatientInfo {
 
+    private Integer patient_info_id;
     private String patient_pid;
     private String first_name;
     private Integer doctor_id;
@@ -21,6 +22,14 @@ public class PatientInfo {
     private String diagnosis;
     private String date;
 
+
+    public Integer getPatient_info_id() {
+        return patient_info_id;
+    }
+
+    public void setPatient_info_id(Integer patient_info_id) {
+        this.patient_info_id = patient_info_id;
+    }
 
     public String getPatient_pid() {
         return patient_pid;
@@ -130,6 +139,7 @@ public class PatientInfo {
 
     public String toString(){
         return "patientInfo{"+
+                " patient_info_id ="+ patient_info_id +
                 " patient_pid = "+ patient_pid +
                 " first_name = "+ first_name +
                 " last_name = "+ last_name +

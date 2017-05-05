@@ -4,6 +4,7 @@ import com.lissomsoft.clinic.domain.Complaint;
 import com.lissomsoft.clinic.domain.PatientInfo;
 import com.lissomsoft.clinic.rowmapper.ComplaintMapper;
 import com.lissomsoft.clinic.rowmapper.PatientInfoMapper;
+import com.lissomsoft.clinic.rowmapper.PatinetInfoIdMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,6 +104,24 @@ public class PatientInfoDaoImpl implements PatientInfoDao {
     @Override
     public PatientInfo patientInfo(Integer patient_info_id) {
         return null;
+    }
+
+    @Override
+    public PatientInfo getPatientInfoId(String patient_pid,String created_at) {
+        PatientInfo patientInfos=new PatientInfo();
+        try {
+            String getPatientInfo="SELECT patient_info_id,patient_pid FROM clinic.patient_info_master pi WHERE pi.patient_pid=:patient_pid and created_at=:created_at";
+            Map<String,Object> paramInfo=new HashMap<String, Object>();
+            paramInfo.put("patient_pid",patient_pid);
+            paramInfo.put("created_at",created_at);
+            patientInfos= (PatientInfo) jdbcTemplate.queryForObject(getPatientInfo, paramInfo, new PatinetInfoIdMapper());
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return patientInfos;
     }
 
 

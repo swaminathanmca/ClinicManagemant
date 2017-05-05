@@ -23,4 +23,9 @@ public class PatientInfoServiceImpl implements PatientInfoService {
     public List<PatientInfo> getPatientInfo(Integer doctor_id,Integer branch_id){
         return patientDao.getPatientInfo(doctor_id,branch_id);
     }
+
+    @Override
+    public PatientInfo getPatientInfoId(String patient_pid,String created_at) {
+        return patientDao.getPatientInfoId(patient_pid,created_at);
+    }
 }

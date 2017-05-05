@@ -13,6 +13,7 @@ public class PatientComplaint {
     private Integer height;
     private Integer pressure;
     private String complaint_name;
+    private String created_at;
 
 
     public String getPatient_pid() {
@@ -79,7 +80,13 @@ public class PatientComplaint {
         this.complaint_name = complaint_name;
     }
 
+    public String getCreated_at() {
+        return created_at;
+    }
 
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
+    }
 
     public String toString(){
 
@@ -92,6 +99,7 @@ public class PatientComplaint {
                 "height ="+ height +
                 "pressure ="+ pressure +
                 "complaint_name ="+ complaint_name +
+                "created_at ="+ created_at +
                 "}";
 
 

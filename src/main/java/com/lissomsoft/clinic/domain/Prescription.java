@@ -1,12 +1,17 @@
 package com.lissomsoft.clinic.domain;
 
+import org.omg.CORBA.PRIVATE_MEMBER;
+
+import java.util.List;
+
 /**
  * Created by Lissomsoft on 05/04/17.
  */
 public class Prescription {
 
     private Integer prescription_id;
-    private Integer patient_info_id;
+    private String patient_info_id;
+    private List<Prescripe> prescriptions;
     private Integer medicine_id;
     private Integer total_quantity;
     private Integer mrg_qty;
@@ -23,11 +28,11 @@ public class Prescription {
         this.prescription_id = prescription_id;
     }
 
-    public Integer getPatient_info_id() {
+    public String getPatient_info_id() {
         return patient_info_id;
     }
 
-    public void setPatient_info_id(Integer patient_info_id) {
+    public void setPatient_info_id(String patient_info_id) {
         this.patient_info_id = patient_info_id;
     }
 
@@ -85,5 +90,30 @@ public class Prescription {
 
     public void setFrequency(Integer frequency) {
         this.frequency = frequency;
+    }
+
+
+    public List<Prescripe> getPrescriptions() {
+        return prescriptions;
+    }
+
+    public void setPrescriptions(List<Prescripe> prescriptions) {
+        this.prescriptions = prescriptions;
+    }
+
+    public String toString(){
+
+        return "Prescription {"+
+                " prescription_id ="+prescription_id+
+                " patient_info_id ="+patient_info_id+
+                " medicine_id ="+medicine_id+
+                " prescriptions ="+prescriptions+
+                " total_quantity ="+total_quantity+
+                " mrg_qty ="+mrg_qty+
+                " aft_qty ="+aft_qty+
+                " nig_qty ="+nig_qty+
+                " days ="+days+
+                " frequency ="+frequency+
+                '}';
     }
 }

@@ -48,6 +48,8 @@ public class HelloController {
     private PatientInfoService patientInfoService;
     @Autowired(required = false)
     private MedicineService medicineService;
+    @Autowired(required = false)
+    private PrescriptionService prescriptionService;
 
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -202,6 +204,11 @@ public class HelloController {
     @RequestMapping(value = "/AddPrescription")
     public String addPrescription(HttpServletRequest request)throws Exception{
         return "addPrescription";
+    }
+
+    @RequestMapping(value = "/AddInvestigation")
+    public String addInvestigation(HttpServletRequest request)throws Exception{
+        return "investigation";
     }
 
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
@@ -398,12 +405,15 @@ public class HelloController {
        return data.toString();
    }
 
-    @RequestMapping(value = "/AddPrescription",method = RequestMethod.POST)
+    @RequestMapping(value = "/AddPatientPrescription",method = RequestMethod.POST)
     public
     @ResponseBody
-    String addPrescription(@RequestBody List<Prescription> prescriptions)throws JSONException{
+    String AddPatientPrescription(@RequestBody Prescripe prescriptions,HttpServletRequest request)throws JSONException{
         JSONObject data=new JSONObject();
-        System.out.println(prescriptions);
+        boolean flag;
+        flag=prescriptionService.addPrescription(prescriptions);
+        data.put("status",flag);
+
         return data.toString();
     }
 
@@ -412,14 +422,11 @@ public class HelloController {
     public
     @ResponseBody
     String PatientInfo(@RequestBody PatientInfo patientInfo,HttpServletRequest request)throws JSONException{
-
         boolean flag;
-        System.out.println(patientInfo);
+
         flag= patientInfoService.addpatientinfo(patientInfo);
-
         JSONObject data=new JSONObject();
-data.put("status",flag);
-
+        data.put("status",flag);
         return data.toString();
     }
 
@@ -434,6 +441,20 @@ data.put("status",flag);
         jsonObject.put("status", flag);
         return jsonObject.toString();
     }
+
+
+    @RequestMapping(value = "/GetInfoId/{patient_pid}/{created_at}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getInfoId(@PathVariable String patient_pid,@PathVariable String created_at)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        PatientInfo patientInfo;
+        patientInfo=patientInfoService.getPatientInfoId(patient_pid,created_at);
+        jsonObject.put("patient_info_id",patientInfo.getPatient_info_id());
+
+        return jsonObject.toString();
+    }
+
 
     @RequestMapping(value = "/EditPatient",method = RequestMethod.POST)
     public
@@ -588,6 +609,7 @@ data.put("status",flag);
         jsonObject.put("height",patientcomplaint.getHeight());
         jsonObject.put("pressure",patientcomplaint.getPressure());
         jsonObject.put("refereal_details",patientcomplaint.getComplaint_name());
+        jsonObject.put("created_at",patientcomplaint.getCreated_at());
         data.put("patientcomplaint",jsonObject);
         return data.toString();
     }
