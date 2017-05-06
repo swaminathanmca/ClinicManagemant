@@ -30,4 +30,9 @@ public class ServicesServiceImpl implements ServicesService {
         return serviceDao.editService(service);
     }
 
+    @Override
+    public Service serviceDetails(Integer service_id) {
+        return serviceDao.serviceDetails(service_id);
+    }
+
 }

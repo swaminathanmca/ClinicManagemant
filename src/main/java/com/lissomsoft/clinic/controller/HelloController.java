@@ -219,6 +219,10 @@ public class HelloController {
         return "addService";
     }
 
+    @RequestMapping(value = "/ViewService")
+    public String viewService(HttpServletRequest request)throws Exception {
+        return "viewServices";
+    }
 
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
     public
@@ -1593,4 +1597,54 @@ String editcomplaint(@RequestBody Complaint complaint,@PathVariable Integer comp
 
 
 
+    @RequestMapping(value = "/GetServices",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getServices(HttpServletRequest request)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        JSONArray jsonArray=new JSONArray();
+        List<Service> services;
+        services=servicesService.getServices();
+        Iterator<Service> it=services.iterator();
+        while (it.hasNext()){
+            Service ser=it.next();
+            JSONObject data=new JSONObject();
+            data.put("service_id",ser.getService_id());
+            data.put("service_name",ser.getService_name());
+            data.put("description",ser.getDescription());
+            data.put("charges",ser.getCharges());
+            jsonArray.put(data);
+        }
+        jsonObject.put("services",jsonArray);
+        return jsonObject.toString();
+    }
+
+    @RequestMapping(value = "/ServiceDetails/{service_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String serviceDetails(@PathVariable Integer service_id,HttpServletRequest request)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        Service service;
+        service=servicesService.serviceDetails(service_id);
+        jsonObject.put("service_name",service.getService_name());
+        jsonObject.put("service_id",service.getService_id());
+        jsonObject.put("description",service.getDescription());
+        jsonObject.put("charges",service.getCharges());
+        jsonObject.put("status",true);
+
+        return jsonObject.toString();
+    }
+
+    @RequestMapping(value = "/EditService",method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String editService(@RequestBody Service service,HttpServletRequest request)throws JSONException{
+
+        JSONObject jsonObject=new JSONObject();
+        boolean flag;
+        flag=servicesService.editService(service);
+        jsonObject.put("status",flag);
+        return jsonObject.toString();
+
+    }
 }

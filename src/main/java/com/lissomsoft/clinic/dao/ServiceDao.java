@@ -12,4 +12,5 @@ public interface ServiceDao {
     boolean addService(Service service);
     List<Service> getServices();
     boolean editService(Service service);
+    Service serviceDetails(Integer service_id);
 }

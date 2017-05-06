@@ -109,7 +109,7 @@
                 <a href="AddService"> Add Service</a>
               </li>
               <li>
-                <a href="#">View Service</a>
+                <a href="ViewService">View Service</a>
               </li>
             </ul>
           </li>

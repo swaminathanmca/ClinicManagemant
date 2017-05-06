@@ -95,6 +95,17 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="#"><i class="fa fa-ambulance"></i>&nbsp;Services<span class="fa arrow"></span> </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="AddService"> Add Service</a>
+                            </li>
+                            <li>
+                                <a href="ViewService">View Service</a>
+                            </li>
+                        </ul>
+                    </li>
 
 
                 </ul>

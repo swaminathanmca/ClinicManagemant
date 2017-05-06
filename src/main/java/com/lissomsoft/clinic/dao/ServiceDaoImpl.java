@@ -75,13 +75,14 @@ public class ServiceDaoImpl implements  ServiceDao {
         int result=0;
         try {
 
-            String editServiceSql="UPDATE services SET service_name=:service_name,description=:description,created_at=:created_at WHERE service_id=:service_id";
+            String editServiceSql="UPDATE services SET service_name=:service_name,description=:description,charges=:charges,updated_at=:created_at WHERE service_id=:service_id";
             Map<String,Object> paramsserives=new HashMap<String, Object>();
             paramsserives.put("service_id",service.getService_id());
             paramsserives.put("service_name",service.getService_name());
+            paramsserives.put("charges",service.getCharges());
             paramsserives.put("description",service.getDescription());
             paramsserives.put("created_at",format.format(new Date()));
-
+            result=jdbcTemplate.update(editServiceSql,paramsserives);
 
         }catch (Exception e){
             e.printStackTrace();
@@ -89,5 +90,20 @@ public class ServiceDaoImpl implements  ServiceDao {
 
 
         return result >0 ?true:false;
+    }
+
+    @Override
+    public Service serviceDetails(Integer service_id) {
+
+        Service service=new Service();
+        try {
+            String selectServiceSql="SELECT * FROM services WHERE service_id=:service_id";
+            Map<String,Object> servicedet=new HashMap<String, Object>();
+            servicedet.put("service_id",service_id);
+            service= (Service) jdbcTemplate.queryForObject(selectServiceSql, servicedet, new ServiceMapper());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return service;
     }
 }
