@@ -50,6 +50,8 @@ public class HelloController {
     private MedicineService medicineService;
     @Autowired(required = false)
     private PrescriptionService prescriptionService;
+    @Autowired(required = false)
+    private ServicesService servicesService;
 
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -211,6 +213,13 @@ public class HelloController {
         return "investigation";
     }
 
+
+    @RequestMapping(value = "/AddService")
+    public String addService(HttpServletRequest request)throws Exception{
+        return "addService";
+    }
+
+
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
     public
     @ResponseBody
@@ -355,14 +364,19 @@ public class HelloController {
     String addDoctor(@RequestBody DoctorUser doctor, HttpServletRequest request) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         boolean flag;
-
-
-
         flag = doctorService.addDoctor(doctor);
-
-
         jsonObject.put("status", flag);
+        return jsonObject.toString();
+    }
 
+    @RequestMapping(value = "/AddService",method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String addService(@RequestBody Service service,HttpServletRequest request)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        boolean flag;
+        flag=servicesService.addService(service);
+        jsonObject.put("status",flag);
         return jsonObject.toString();
     }
 

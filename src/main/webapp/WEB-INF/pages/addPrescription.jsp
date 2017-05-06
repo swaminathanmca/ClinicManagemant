@@ -217,6 +217,7 @@
                       <th>AfterNoon</th>
                       <th>Night</th>
                       <th>Days</th>
+                      <td>Options</td>
                     </tr>
                     </thead>
                     <tbody>
@@ -225,10 +226,11 @@
                       <td>{{x.mg}}</td>
                       <td ><p ng-if="x.frequency==0">Before Fasting</p>
                         <p ng-if="x.frequency==1">After  Fasting</p></td>
-                      <td>{{x.morning}}</td>
-                      <td>{{x.aftn}}</td>
-                      <td>{{x.nght}}</td>
+                      <td><p ng-if="x.morning==1"><i class="fa fa-check"></i> </p></td>
+                      <td><p ng-if="x.aftn==1"><i class="fa fa-check"></i> </p></td>
+                      <td><p ng-if="x.nght==1"><i class="fa fa-check"></i> </p></td>
                       <td>{{x.days}}</td>
+                      <td><button class="btn btn-primary">Edit</button><i class="fa fa-trash"></i> </td>
                     </tr>
 
 

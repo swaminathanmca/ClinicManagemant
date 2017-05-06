@@ -1,12 +1,12 @@
 <%--
   Created by IntelliJ IDEA.
   User: Lissomsoft
-  Date: 3/9/2017
-  Time: 2:14 PM
+  Date: 05/06/17
+  Time: 11:40 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html ng-app="myApp" ng-controller="addSpeciality">
+<html ng-app="myApp" ng-controller="services">
 <head>
   <link href="<%=request.getContextPath()%>/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/css/custom.css" rel="stylesheet">
@@ -102,7 +102,17 @@
               </li>
             </ul>
           </li>
-
+          <li>
+            <a href="#"><i class="fa fa-ambulance"></i>&nbsp;Services<span class="fa arrow"></span> </a>
+            <ul class="nav nav-second-level">
+              <li>
+                <a href="AddService"> Add Service</a>
+              </li>
+              <li>
+                <a href="#">View Service</a>
+              </li>
+            </ul>
+          </li>
 
 
 
@@ -125,7 +135,7 @@
       <div class="col-lg-8">
         <div class="panel panel-primary">
           <div class="panel-heading">
-            <h3 class="panel-title"> Add Speciality</h3>
+            <h3 class="panel-title"> Add Services</h3>
           </div>
           <div class="panel-body">
             <div class="row">
@@ -135,13 +145,21 @@
                   <fieldset>
 
                     <div class="form-group">
-                      <div class="col-lg-12">
+                      <div class="col-lg-6">
                         <div class="input-group">
-                          <span class="input-group-addon">Speciality Name</span>
+                          <span class="input-group-addon">Service Name</span>
                           <input class="form-control" type="text" ng-model="name" name="name" required>
                         </div>
                         <span class="text-danger wrapper text-center ng-binding"
-                              ng-show="myform.name.$invalid &&  myform.name.$touched">Please Enter Speciality name</span>
+                              ng-show="myform.name.$invalid &&  myform.name.$touched">Please Enter Service name</span>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="input-group">
+                          <span class="input-group-addon">Service Charges</span>
+                          <input class="form-control" type="text" ng-model="charage" name="charage" required>
+                        </div>
+                        <span class="text-danger wrapper text-center ng-binding"
+                              ng-show="myform.charage.$invalid &&  myform.charage.$touched">Please Enter Service name</span>
                       </div>
                     </div>
 
@@ -198,7 +216,7 @@
 <script src="<%=request.getContextPath()%>/static/vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/addClinic.js"></script>
-<script src="<%=request.getContextPath()%>/static/js/addSpeciality.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/addService.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/angular-base64-upload.js"></script>
