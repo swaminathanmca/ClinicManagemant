@@ -487,6 +487,18 @@ public class HelloController {
     }
 
 
+    @RequestMapping(value = "/EditPrescription",method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String editPrescription(@RequestBody Prescription prescription,HttpServletRequest request)throws JSONException{
+        JSONObject jsonObject = new JSONObject();
+        boolean flag;
+
+        flag = prescriptionService.editPrescription(prescription);
+        jsonObject.put("status", flag);
+        return jsonObject.toString();
+    }
+
     @RequestMapping(value = "/EditBranch", method = RequestMethod.POST)
     public
     @ResponseBody
@@ -1691,5 +1703,26 @@ String editcomplaint(@RequestBody Complaint complaint,@PathVariable Integer comp
         return jsonObject.toString();
     }
 
+    @RequestMapping(value = "/GetPrescriptionbyId/{prescription_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getprescriptionById(@PathVariable Integer prescription_id,HttpServletRequest request)throws  JSONException{
+
+        JSONObject jsonObject=new JSONObject();
+        Prescription prescription;
+        prescription=prescriptionService.getPrescriptionById(prescription_id);
+        jsonObject.put("medicine_name",prescription.getMedicine_name());
+        jsonObject.put("medicine_id",prescription.getMedicine_id());
+        jsonObject.put("prescription_id",prescription.getPrescription_id());
+        jsonObject.put("mrg_qty",prescription.getMrg_qty());
+        jsonObject.put("aft_qty",prescription.getAft_qty());
+        jsonObject.put("ngt_qty",prescription.getNig_qty());
+        jsonObject.put("days",prescription.getDays());
+        jsonObject.put("frequency",prescription.getFrequency());
+
+
+
+        return jsonObject.toString();
+    }
 
 }

@@ -64,11 +64,9 @@ app.controller('Prescription',function($scope,$http,$window){
 
                 })
 
-
-
             };
 
-              $scope.edit=function(id){
+            $scope.edit=function(id){
                   if ($('.check:checked').length<=1) {
                      $('#sub').removeAttr('disabled');
                     } else {
@@ -86,11 +84,13 @@ app.controller('Prescription',function($scope,$http,$window){
                         $scope.prescription_id=selected.prescription_id;
                     }
                 });
-                console.log($scope.prescription_id);
+                $http.get("GetPrescriptionbyId/"+ $scope.prescription_id)
+                    .then (function(response) {
+                    $scope.x=response.data.prescription_id;
 
-
-
+                });
             }
+
 
         })
 

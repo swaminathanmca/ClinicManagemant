@@ -100,5 +100,43 @@ public class PrescriptionDaoImpl implements PrescriptionDao {
         return result >0 ? true:false;
     }
 
+    @Override
+    public boolean editPrescription(Prescription prescription) {
+
+        int result=0;
+        try{
+
+            String editprescriptionSql="";
+            Map<String,Object> paramsprescription=new HashMap<String, Object>();
+            paramsprescription.put("",prescription.getPrescription_id());
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return false;
+    }
+
+    @Override
+    public Prescription getPrescriptionById(Integer prescription_id) {
+
+        Prescription prescription=new Prescription();
+        try {
+
+            String getPrescriptionSql="SELECT * FROM  prescription_master WHERE  prescription_id=:prescription_id";
+            Map<String,Object> parameter=new HashMap<String, Object>();
+            parameter.put("prescription_id",prescription_id);
+            prescription= (Prescription) jdbcTemplate.queryForObject(getPrescriptionSql, parameter, new PrescriptionMapper());
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return prescription;
+    }
+
 
 }

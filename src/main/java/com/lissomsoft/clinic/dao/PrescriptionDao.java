@@ -13,4 +13,8 @@ public interface PrescriptionDao {
     boolean addPrescription(Prescripe prescriptions);
     List<Prescription> getPrescription(Integer patient_info_id);
     boolean removeprescription(Prescripe prescripe);
+
+    boolean editPrescription(Prescription prescription);
+
+    Prescription getPrescriptionById(Integer prescription_id);
 }

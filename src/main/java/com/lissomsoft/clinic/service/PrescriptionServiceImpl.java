@@ -1,5 +1,6 @@
 package com.lissomsoft.clinic.service;
 
+import com.lissomsoft.clinic.dao.PrescriptionDao;
 import com.lissomsoft.clinic.dao.PrescriptionDaoImpl;
 import com.lissomsoft.clinic.domain.Prescripe;
 import com.lissomsoft.clinic.domain.Prescription;
@@ -28,5 +29,17 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     @Override
     public boolean removeprescription(Prescripe prescripe) {
         return prescriptionDao.removeprescription(prescripe);
+    }
+
+    @Override
+    public boolean editPrescription(Prescription prescription) {
+        return prescriptionDao.editPrescription(prescription);
+    }
+
+    @Override
+    public Prescription getPrescriptionById(Integer prescription_id) {
+
+
+        return prescriptionDao.getPrescriptionById(prescription_id);
     }
 }
