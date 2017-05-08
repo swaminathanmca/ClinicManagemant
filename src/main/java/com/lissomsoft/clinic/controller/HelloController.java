@@ -1647,4 +1647,49 @@ String editcomplaint(@RequestBody Complaint complaint,@PathVariable Integer comp
         return jsonObject.toString();
 
     }
+
+    @RequestMapping(value = "/GetPrescription/{patient_info_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getPrescription(@PathVariable Integer patient_info_id,HttpServletRequest request )throws JSONException{
+
+        JSONObject jsonObject=new JSONObject();
+        JSONArray jsonArray=new JSONArray();
+        List<Prescription> prescriptions;
+        prescriptions=prescriptionService.getPrescription(patient_info_id);
+        Iterator<Prescription> it=prescriptions.iterator();
+        while (it.hasNext()){
+            Prescription pres=it.next();
+            JSONObject data=new JSONObject();
+            data.put("prescription_id",pres.getPrescription_id());
+            data.put("medicine_id",pres.getMedicine_id());
+            data.put("medicine_name",pres.getMedicine_name());
+            data.put("mg",pres.getMg());
+            data.put("patient_info_id",pres.getPatient_info_id());
+            data.put("frequency",pres.getFrequency());
+            data.put("mrg_qty",pres.getMrg_qty());
+            data.put("aft_qty",pres.getAft_qty());
+            data.put("ngt_qty",pres.getNig_qty());
+            data.put("days",pres.getDays());
+            jsonArray.put(data);
+        }
+
+        jsonObject.put("prescription",jsonArray);
+        return jsonObject.toString();
+    }
+
+    @RequestMapping(value = "/RemovePrescription",method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String removePrescription(@RequestBody Prescripe Prescription,HttpServletRequest request)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+
+        boolean flag;
+        flag=prescriptionService.removeprescription(Prescription);
+        jsonObject.put("status",flag);
+
+        return jsonObject.toString();
+    }
+
+
 }

@@ -19,6 +19,8 @@ public class Prescription {
     private Integer nig_qty;
     private Integer days;
     private Integer frequency;
+    private String medicine_name;
+    private Integer mg;
 
     public Integer getPrescription_id() {
         return prescription_id;
@@ -101,6 +103,22 @@ public class Prescription {
         this.prescriptions = prescriptions;
     }
 
+    public String getMedicine_name() {
+        return medicine_name;
+    }
+
+    public void setMedicine_name(String medicine_name) {
+        this.medicine_name = medicine_name;
+    }
+
+    public Integer getMg() {
+        return mg;
+    }
+
+    public void setMg(Integer mg) {
+        this.mg = mg;
+    }
+
     public String toString(){
 
         return "Prescription {"+
@@ -109,6 +127,8 @@ public class Prescription {
                 " medicine_id ="+medicine_id+
                 " prescriptions ="+prescriptions+
                 " total_quantity ="+total_quantity+
+                " medicine_name ="+medicine_name+
+                " mg            ="+mg+
                 " mrg_qty ="+mrg_qty+
                 " aft_qty ="+aft_qty+
                 " nig_qty ="+nig_qty+

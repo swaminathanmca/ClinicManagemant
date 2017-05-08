@@ -203,13 +203,14 @@
               </div>
             </div>
 
-            <div class="row" ng-if=" day == 0 ">
+            <div class="row" ng-if="selectedmaster.length ">
               <div class="col-lg-12">
                 <div class="table-responsive">
 
                   <table class="table table-striped table-bordered table-hover " id="dataTables-example">
                     <thead>
                     <tr class="success">
+                      <th><input type="checkbox" ng-model="selectedAll" ng-click="checkAll()"  /></th>
                       <th>Medicine_name</th>
                       <th>Mg</th>
                       <th>Frequency</th>
@@ -217,20 +218,21 @@
                       <th>AfterNoon</th>
                       <th>Night</th>
                       <th>Days</th>
-                      <td>Options</td>
+
                     </tr>
                     </thead>
                     <tbody>
-                    <tr dir-paginate="x in selected | filter:search | orderBy : first_name | itemsPerPage :5" ng-click="editPatient(x.patient_id)">
+                    <tr dir-paginate="x in selectedmaster | filter:search | orderBy : first_name | itemsPerPage :5" ng-click="editPatient(x.patient_id)">
+                      <td><input type="checkbox" ng-model="x.selected" class="check"  ng-click="edit($index)"/></td>
                       <td>{{x.medicine_name}}</td>
                       <td>{{x.mg}}</td>
                       <td ><p ng-if="x.frequency==0">Before Fasting</p>
                         <p ng-if="x.frequency==1">After  Fasting</p></td>
-                      <td><p ng-if="x.morning==1"><i class="fa fa-check"></i> </p></td>
-                      <td><p ng-if="x.aftn==1"><i class="fa fa-check"></i> </p></td>
-                      <td><p ng-if="x.nght==1"><i class="fa fa-check"></i> </p></td>
+                      <td><p ng-if="x.mrg_qty==1"><i class="fa fa-check"></i> </p></td>
+                      <td><p ng-if="x.aft_qty==1"><i class="fa fa-check"></i> </p></td>
+                      <td><p ng-if="x.ngt_qty==1"><i class="fa fa-check"></i> </p></td>
                       <td>{{x.days}}</td>
-                      <td><button class="btn btn-primary">Edit</button><i class="fa fa-trash"></i> </td>
+
                     </tr>
 
 
@@ -249,6 +251,8 @@
                       <button type="submit" class="btn btn-success"
                               ng-click="prescriptionAdd()">Proceed
                       </button>
+                      <button  type="submit" class="btn btn-danger " ng-click="remove()" >Remove</button>
+                      <button  type="submit" class="btn btn-danger" id="sub" ng-click="editPres()" disabled='disabled'>Modify</button>
 
                     </div>
                   </div>
@@ -259,6 +263,59 @@
         </div>
       </div>
     </div>
+
+<%--    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog ">
+
+        <div class="modal-content">
+          <div class="modal-header panel-primary">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Edit Speciality</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <form role="form" class="form-horizontal" name="myform"  ng-submit="submit()">
+                  <fieldset>
+
+                    <div class="form-group">
+                      <div class="col-lg-6">
+                        <span class="input-group-addon">Patient Id</span>
+                        <input class="form-control" type="text" ng-model="">
+                      </div>
+                    </div>
+
+
+
+
+
+
+                    <div class="form-actions">
+                      <div class="row">
+                        <div class="col-lg-offset-4 col-lg-7">
+                          <button type="submit" class="btn btn-success"
+                                  ng-disabled="myform.$invalid " ng-click="submitted=true">Save
+                          </button>
+                          <button type="button" class="btn btn-inverse" data-dismiss="modal">Cancel</button>
+
+                        </div>
+                      </div>
+                    </div>
+
+
+
+
+                  </fieldset>
+                </form>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>--%>
 
   <%--  <div class="row">
       <div class="col-lg-12">
