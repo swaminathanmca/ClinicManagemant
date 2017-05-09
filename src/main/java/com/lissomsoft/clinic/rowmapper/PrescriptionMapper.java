@@ -22,6 +22,7 @@ public class PrescriptionMapper implements RowMapper {
         prescription.setMrg_qty(resultSet.getInt("mrg_qty"));
         prescription.setAft_qty(resultSet.getInt("aft_qty"));
         prescription.setNig_qty(resultSet.getInt("nig_qty"));
+        prescription.setType(resultSet.getInt("type"));
         prescription.setMg(resultSet.getInt("mg"));
 
 

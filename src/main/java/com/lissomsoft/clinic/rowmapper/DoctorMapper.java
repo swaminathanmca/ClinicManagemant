@@ -35,6 +35,7 @@ public class DoctorMapper implements RowMapper<DoctorUser> {
        /* user.setSpecialization(resultSet.getString("specialization"));*/
         user.setReg_no(resultSet.getString("reg_id"));
         user.setPassword(resultSet.getString("password"));
+        user.setCharge(resultSet.getInt("charge"));
 
         return user;
     }

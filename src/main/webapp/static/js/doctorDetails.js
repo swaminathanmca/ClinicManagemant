@@ -163,7 +163,8 @@ app.controller('doctorDetails',function($scope,$window,$http){
            profile_id:$scope.x.profile_id,
            branch_id:$scope.x.branch_id,
            branch:$scope.selectedList,
-           doctor_id:$scope.x.doctor_id
+           doctor_id:$scope.x.doctor_id,
+           charge:$scope.x.charges
        }
         $http.post("EditDoctor",doctor).
             then(function(response,status,header,config){

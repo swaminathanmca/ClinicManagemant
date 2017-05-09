@@ -319,6 +319,14 @@
                                                    ng-show="myform.multipleselect.$invalid && myform.multipleselect.$touched">Please  Select Branch </span>
 
                                          </div>
+                                         <div class="col-lg-3">
+                                             <div class="input-group">
+                                                 <span class="input-group-addon">Consulting Fee</span>
+                                                 <input class="form-control" ng-model="fees" name="fees" required>
+                                             </div>
+                                              <span class="text-danger wrapper text-center ng-binding"
+                                                    ng-show="myform.fees.$invalid &&  myform.fees.$touched">Please Enter The Consulting Fees</span>
+                                         </div>
                                      </div>
 
 

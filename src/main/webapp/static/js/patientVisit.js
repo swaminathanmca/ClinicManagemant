@@ -48,9 +48,16 @@ $scope.patient_pid=$window.sessionStorage.patient_id;
             referal_details:$scope.rdetails
         }
         $http.post("PatientVisit",visit).
-            then(function (response,status,headers,config){
+            then(function (response,status,headers,config)
+            {
                 $scope.x = response.data;
-                location.href="patientDetail";
+                location.href="ViewPatientVisit";
             });
     }
+
+
+
+
+
+
 });

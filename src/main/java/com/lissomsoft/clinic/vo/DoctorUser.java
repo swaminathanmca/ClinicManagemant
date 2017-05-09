@@ -34,6 +34,7 @@ public class DoctorUser {
     private String email_id;
     private String contact_no;
     private String password;
+    private Integer charge;
 
 
     public int getDoctor_id() {
@@ -229,6 +230,13 @@ public class DoctorUser {
         this.password = password;
     }
 
+    public Integer getCharge() {
+        return charge;
+    }
+
+    public void setCharge(Integer charge) {
+        this.charge = charge;
+    }
 
     public String toString(){
         return "Doctor{"+
@@ -255,6 +263,7 @@ public class DoctorUser {
                 ", email_id="+email_id+
                 ", contact_no="+contact_no+
                 ", password="+password+
+                ", charge="    +charge+
                 '}';
     }
 }

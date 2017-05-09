@@ -32,7 +32,7 @@ public class PrescriptionDaoImpl implements PrescriptionDao {
             while (it.hasNext()){
                 Prescription pr=it.next();
 
-                String insertPrescriptionSql="INSERT INTO prescription_master (patient_info_id,medicine_id,medicine_name,mg,mrg_qty,aft_qty,nig_qty,no_of_days,fasting,created_at) VALUES (:patient_info_id,:medicine_id,:medicine_name,:mg,:mrg_qty,:aft_qty,:nig_qty,:days,:frequency,:created_at)";
+                String insertPrescriptionSql="INSERT INTO prescription_master (patient_info_id,medicine_id,medicine_name,mg,mrg_qty,aft_qty,nig_qty,type,no_of_days,fasting,created_at) VALUES (:patient_info_id,:medicine_id,:medicine_name,:mg,:mrg_qty,:aft_qty,:nig_qty,:type,:days,:frequency,:created_at)";
                 Map<String,Object> parameter=new HashMap<String, Object>();
                 parameter.put("patient_info_id",pr.getPatient_info_id());
                 parameter.put("medicine_id",pr.getMedicine_id());
@@ -40,6 +40,7 @@ public class PrescriptionDaoImpl implements PrescriptionDao {
                 parameter.put("mrg_qty",pr.getMrg_qty());
                 parameter.put("aft_qty",pr.getAft_qty());
                 parameter.put("nig_qty",pr.getNig_qty());
+                parameter.put("type",pr.getType());
                 parameter.put("frequency",pr.getFrequency());
                 parameter.put("medicine_name",pr.getMedicine_name());
                 parameter.put("mg",pr.getMg());
@@ -104,18 +105,30 @@ public class PrescriptionDaoImpl implements PrescriptionDao {
     public boolean editPrescription(Prescription prescription) {
 
         int result=0;
-        try{
+        try
+        {
 
-            String editprescriptionSql="";
+            String editprescriptionSql="UPDATE prescription_master SET medicine_id=:medicine_id,medicine_name=:medicine_name,mg=:mg,mrg_qty=:mrg_qty,aft_qty=:aft_qty,nig_qty=:nig_qty,no_of_days=:days,fasting=:frequency,type=:types WHERE prescription_id=:prescription_id";
             Map<String,Object> paramsprescription=new HashMap<String, Object>();
-            paramsprescription.put("",prescription.getPrescription_id());
-
-        }catch (Exception e){
+            paramsprescription.put("prescription_id",prescription.getPrescription_id());
+            paramsprescription.put("medicine_id",prescription.getMedicine_id());
+            paramsprescription.put("medicine_name",prescription.getMedicine_name());
+            paramsprescription.put("mg",prescription.getMg());
+            paramsprescription.put("mrg_qty",prescription.getMrg_qty());
+            paramsprescription.put("aft_qty",prescription.getAft_qty());
+            paramsprescription.put("nig_qty",prescription.getNig_qty());
+            paramsprescription.put("days",prescription.getDays());
+            paramsprescription.put("frequency",prescription.getFrequency());
+            paramsprescription.put("types",prescription.getType());
+            result=jdbcTemplate.update(editprescriptionSql,paramsprescription);
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
 
 
-        return false;
+        return result >0 ?true:false;
     }
 
     @Override

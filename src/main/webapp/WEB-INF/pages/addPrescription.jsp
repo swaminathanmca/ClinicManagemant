@@ -252,7 +252,7 @@
                               ng-click="prescriptionAdd()">Proceed
                       </button>
                       <button  type="submit" class="btn btn-danger " ng-click="remove()" >Remove</button>
-                      <button  type="submit" class="btn btn-danger" id="sub" ng-click="editPres()" disabled='disabled' data-target="#myform1" data-toggle="modal">Modify</button>
+                      <button  type="submit" class="btn btn-primary" id="sub" ng-click="editPres()" disabled='disabled' data-target="#myform1" data-toggle="modal">Modify</button>
 
                     </div>
                   </div>
@@ -277,21 +277,66 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-lg-12">
-              <form role="form" class="form-horizontal" name="myform1"  ng-submit="submit(id)">
+              <form role="form" class="form-horizontal" name="myform1"  ng-submit="editsubmit(x.prescription_id)">
                 <fieldset>
 
 
                   <div class="form-group">
+                    <div class="col-lg-3">
+                      <div class="input-group">
+                        <span class="input-group-addon">Type</span>
+                        <SELECT class="form-control" ng-model="types" ng-change="typepres(types)" required>
+                          <option value="1">Tablet</option>
+                          <option value="2">Syrup</option>
+                          <option value="3">Injection</option>
+                        </SELECT>
+                      </div>
+                    </div>
+                    <div class="col-lg-5">
+                      <div class="input-group">
+                        <span class="input-group-addon">Prescription</span>
+                        <div   name="medicine_id"  custom-select="s.medicine_id as s.medicine_name for s in medicines | filter: { medicine_name: $searchTerm }"   ng-model="x.medicine_id" required>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="input-group">
+                        <span class="input-group-addon">Fasting</span>
+                        <SELECT class="form-control" name="frequency" ng-model="frequencys" required>
+                          <option value="0">Before</option>
+                          <option value="1">After</option>
+                        </SELECT>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-lg-3">
+                      <div class="input-group">
+                        <span class="input-group-addon">Days</span>
+                        <input type="text" class="form-control" ng-model="x.days" required>
+                      </div>
+                    </div>
+
                     <div class="col-lg-6">
                       <div class="input-group">
-                        <span class="input-group-addon">Patient Id</span>
-
+                          <span class="input-group-addon">
+                            Frequency
+                          </span>
+                        <div class="checkbox  fileRadioBox form-control">&nbsp;
+                          <label>
+                            <input type="checkbox" ng-checked="x.mrg_qty=='1'"  ng-true-value="'1'"  ng-false-value="' '"  ng-model="x.mrg_qty"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" />&nbsp;Morning
+                          </label>
+                          <label>
+                            <input type="checkbox"  ng-checked="x.aft_qty=='1'" ng-true-value="'1'" ng-false-value="' '"  ng-model="x.aft_qty"  class="ng-pristine ng-untouched ng-valid ng-valid-required" >&nbsp;AfterNoon
+                          </label>
+                          <label>
+                            <input type="checkbox" ng-checked="x.ngt_qty=='1'"  ng-true-value="'1'" ng-false-value="' '" ng-model="x.ngt_qty"  class="ng-pristine ng-untouched ng-valid ng-valid-required" >&nbsp;Night
+                          </label>
+                        </div>
 
                       </div>
 
                     </div>
-
-
                   </div>
 
 
@@ -300,7 +345,7 @@
                     <div class="row">
                       <div class="col-lg-offset-4 col-lg-7">
                         <button type="submit" class="btn btn-success"
-                                ng-disabled="myform1.$invalid || !authError || !authErrorEmail"
+                                ng-disabled="myform1.$invalid "
                                 ng-click="submitted=true">Save
                         </button>
                         <button type="button" class="btn btn-inverse" data-dismiss="modal">Cancel</button>

@@ -230,10 +230,16 @@
 
                     </div>
      <div class="form-group">
-       <div class="col-lg-6 ">
+       <div class="col-lg-3 ">
          <div class="input-group">
            <span class="input-group-addon">Clinic Name</span>
            <label class="form-control">{{data.clinic_name}}</label>
+         </div>
+       </div>
+       <div class="col-lg-3">
+         <div class="input-group">
+           <span class="input-group-addon">Consulting Fees</span>
+           <label class="form-control">{{data.charges}}</label>
          </div>
        </div>
   <div class="col-lg-6">
@@ -419,6 +425,14 @@
         <span class="text-danger wrapper text-center ng-binding"
        ng-show="myform.multipleSelect.$invalid && myform.multipleSelect.$untouched">Please  Select Branch </span>
                   </div>
+                  <div class="col-lg-3">
+                    <div class="input-group">
+                      <span class="input-group-addon">Consulting Fee</span>
+                      <input type="text" class="form-control" ng-model="x.charges" required>
+                    </div>
+                  </div>
+
+
                 </div>
                 <div class="form-action">
                   <div class="row">

@@ -21,6 +21,7 @@ public class Prescription {
     private Integer frequency;
     private String medicine_name;
     private Integer mg;
+    private Integer type;
 
     public Integer getPrescription_id() {
         return prescription_id;
@@ -119,6 +120,14 @@ public class Prescription {
         this.mg = mg;
     }
 
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
     public String toString(){
 
         return "Prescription {"+
@@ -134,6 +143,7 @@ public class Prescription {
                 " nig_qty ="+nig_qty+
                 " days ="+days+
                 " frequency ="+frequency+
+                " type ="+type+
                 '}';
     }
 }

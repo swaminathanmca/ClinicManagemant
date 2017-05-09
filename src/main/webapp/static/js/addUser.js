@@ -128,7 +128,8 @@ if($scope.selectedList==""){
         password:$scope.password,
         reg_no:$scope.reg_no,
         qualification:$scope.qualification,
-        specialization:$scope.selectedlist
+        specialization:$scope.selectedlist,
+        charge:$scope.fees
     }
 
 

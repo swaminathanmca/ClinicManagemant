@@ -64,6 +64,8 @@ app.controller('Prescription',function($scope,$http,$window){
 
                 })
 
+
+
             };
 
             $scope.edit=function(id){
@@ -86,8 +88,14 @@ app.controller('Prescription',function($scope,$http,$window){
                 });
                 $http.get("GetPrescriptionbyId/"+ $scope.prescription_id)
                     .then (function(response) {
-                    $scope.x=response.data.prescription_id;
+                    $scope.x=response.data;
+                    $scope.types=$scope.x.type.toString();
+                    $scope.frequencys=$scope.x.frequency.toString();
 
+                    $http.get("PrescriptionType/"+$scope.types).
+                        then(function (response, status, headers, config) {
+                            $scope.medicines=response.data.medicines;
+                        })
                 });
             }
 
@@ -152,7 +160,34 @@ app.controller('Prescription',function($scope,$http,$window){
     }
 
 
+$scope.editsubmit=function(id){
+    $http.get("MedicineDetails/"+$scope.x.medicine_id).
+        then(function(response,status,headers,config){
+            $scope.medicine=response.data;
+            $scope.medicine_name= $scope.medicine.medicine_name;
+            $scope.mg=$scope.medicine.mg;
+            var prescripe={
+        prescription_id:id,
+        type:$scope.types,
+        medicine_id:$scope.x.medicine_id,
+        frequency:$scope.frequencys,
+        days:$scope.x.days,
+        medicine_name:$scope.medicine_name,
+        mg:$scope.mg,
+        mrg_qty:$scope.x.mrg_qty,
+        aft_qty:$scope.x.aft_qty,
+        nig_qty:$scope.x.ngt_qty
+    }
 
+        $http.post("EditPrescription",prescripe).
+            then(function(response){
+                $scope.editstatus=response.data.status;
+                location.href="AddPrescription";
+            })
+
+
+        });
+}
 
 
 

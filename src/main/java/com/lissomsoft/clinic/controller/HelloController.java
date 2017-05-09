@@ -884,6 +884,7 @@ public class HelloController {
         jsonObject.put("clinic_name", doctorUser.getClinic_name());
         jsonObject.put("qualification", doctorUser.getQualification());
         jsonObject.put("specialization", doctorUser.getSpecialization());
+        jsonObject.put("charges",doctorUser.getCharge());
         jsonObject.put("reg_id", doctorUser.getReg_no());
         jsonObject.put("password", doctorUser.getPassword());
         jsonObject.put("profile_id", doctorUser.getProfile_id());
@@ -1031,15 +1032,15 @@ public class HelloController {
         return jsonObject.toString();
     }
 
-@RequestMapping(value ="/EditComplaint/{complaint_id}",method = RequestMethod.POST)
-public
-@ResponseBody
-String editcomplaint(@RequestBody Complaint complaint,@PathVariable Integer complaint_id,HttpServletRequest request)throws JSONException{
-    JSONObject jsonObject=new JSONObject();
-    boolean flag;
-    flag=complaintService.editcomplaint(complaint,complaint_id);
+        @RequestMapping(value ="/EditComplaint/{complaint_id}",method = RequestMethod.POST)
+        public
+        @ResponseBody
+        String editcomplaint(@RequestBody Complaint complaint,@PathVariable Integer complaint_id,HttpServletRequest request)throws JSONException{
+         JSONObject jsonObject=new JSONObject();
+            boolean flag;
+            flag=complaintService.editcomplaint(complaint,complaint_id);
 
-    jsonObject.put("status",flag);
+        jsonObject.put("status",flag);
 
     return jsonObject.toString();
 
@@ -1719,6 +1720,7 @@ String editcomplaint(@RequestBody Complaint complaint,@PathVariable Integer comp
         jsonObject.put("ngt_qty",prescription.getNig_qty());
         jsonObject.put("days",prescription.getDays());
         jsonObject.put("frequency",prescription.getFrequency());
+        jsonObject.put("type",prescription.getType());
 
 
 
