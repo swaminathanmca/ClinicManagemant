@@ -81,4 +81,9 @@ import java.util.List;
     public List<DoctorUser> getDoctor(String branch_id) {
         return doctorDao.getDoctor(branch_id);
     }
+
+    @Override
+    public DoctorUser getDoctorCharges(Integer doctor_id) {
+        return doctorDao.getDoctorCharges(doctor_id);
+    }
 }

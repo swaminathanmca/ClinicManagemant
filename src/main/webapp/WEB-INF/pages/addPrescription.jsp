@@ -98,7 +98,7 @@
           <div class="panel-body">
             <div class="row">
               <div class="col-lg-12">
-                <form class="form-horizontal ng-invalid" role="form" name="myform1" ng-submit="submit(info.patient_info_id)"
+                <form class="form-horizontal ng-invalid" role="form" name="myform" ng-submit="submit(info.patient_info_id)"
                       novalidate>
 
                   <fieldset>
@@ -154,8 +154,12 @@
           <div class="col-lg-2">
             <div class="input-group">
               <span class="input-group-addon" >Days</span>
-              <input name="dayscount" class="form-control" type="text"  ng-model="myform.dayscount" required>
+              <input name="dayscount" class="form-control" type="text"  ng-model="myform.count" ng-pattern="/^[0-9]*$/" required>
             </div>
+             <span class="text-danger wrapper text-center ng-binding"
+                   ng-show="myform.dayscount.$error.pattern">Please Enter Valid Days</span>
+                                                <span class="text-danger wrapper text-center ng-binding"
+                                                      ng-show="myform.dayscount.$invalid &&  myform.dayscount.$touched">Please Enter Days</span>
           </div>
 
                     </div>
@@ -186,7 +190,7 @@
                       <div class="row">
                         <div class="col-lg-offset-4 col-lg-7">
                           <button type="submit" class="btn btn-success"
-                                  ng-disabled="myform.$invalid   " ng-click="submitted=true">Add
+                                  ng-disabled="myform.$invalid" ng-click="submitted=true">Add
                           </button>
                           <button type="button" class="btn btn-inverse" data-dismiss="modal">
                             Cancel
@@ -223,7 +227,7 @@
                     </thead>
                     <tbody>
                     <tr dir-paginate="x in selectedmaster | filter:search | orderBy : first_name | itemsPerPage :5" ng-click="editPatient(x.patient_id)">
-                      <td><input type="checkbox" ng-model="x.selected" class="check"  ng-click="edit($index)"/></td>
+                      <td><input type="checkbox" ng-model="x.selected" class="check"   ng-click="edit(x.selected)"/></td>
                       <td>{{x.medicine_name}}</td>
                       <td>{{x.mg}}</td>
                       <td ><p ng-if="x.frequency==0">Before Fasting</p>
@@ -248,9 +252,7 @@
                 <div class="form-action">
                   <div class="row">
                     <div class="col-lg-offset-4 col-lg-7">
-                      <button type="submit" class="btn btn-success"
-                              ng-click="prescriptionAdd()">Proceed
-                      </button>
+                      <button type="submit" class="btn btn-success" ng-click="prescriptionAdd()">Proceed</button>
                       <button  type="submit" class="btn btn-danger " ng-click="remove()" >Remove</button>
                       <button  type="submit" class="btn btn-primary" id="sub" ng-click="editPres()" disabled='disabled' data-target="#myform1" data-toggle="modal">Modify</button>
 

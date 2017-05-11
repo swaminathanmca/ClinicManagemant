@@ -16,6 +16,7 @@
   <link href="<%=request.getContextPath()%>/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/css/bootstrap-formhelpers.min.css"
         rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/static/vendor/multiple-select/multiple-select.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title></title>
 </head>
@@ -86,39 +87,141 @@
     <br>
     <div class="row">
 
-      <div class="col-lg-10">
+      <div class="col-lg-10 col-sm-10">
 
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-1"></div>
-      <div class="col-lg-10">
+      <div class="col-sm-1  col-lg-1"></div>
+      <div class="col-sm-10 col-lg-10 ">
         <div class="panel panel-primary">
           <div class="panel-heading">
-            <h3 class="panel-title">Add Prescription</h3>
+            <h3 class="panel-title">Investigation</h3>
           </div>
           <div class="panel-body">
             <div class="row">
-              <div class="col-lg-12">
+              <div class="col-lg-12 col-sm-12">
                 <form class="form-horizontal ng-invalid" role="form" name="myform1" ng-submit="submit(info.patient_info_id)"
                       novalidate>
                   <fieldset>
                   <div class="form-group">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-sm-6">
                       <div class="input-group">
                         <span class="input-group-addon">Patient Id</span>
                         <label type="text" class="form-control" >{{patientcomplaint.patient_pid}} </label>
                       </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-sm-6">
                       <div class="input-group">
                         <span class="input-group-addon">Patient Name</span>
                         <label type="text" class="form-control" >{{patientcomplaint.first_name}}&nbsp;{{patientcomplaint.last_name}} </label>
                       </div>
                     </div>
                   </div>
+                    <div class="form-group">
+                     <%-- <div class="col-lg-6">
+                        <div class="input-group">
+                          <span class="input-group-addon"> Consulting Charges </span>
+                          <label class="form-control" type="text" >{{charges}}</label>
+                        </div>
+                      </div>--%>
+                      <div class="col-lg-6 col-sm-6">
+                        <div class="input-group">
+                          <span class="input-group-addon">Services</span>
+                          <multiple-autocomplete ng-model="selectedlist"  name="multipleselect" required="true"
+                                                 object-property="service_name"
+                                                 after-select-item="afterSelectItem"
+                                                 after-remove-item="afterRemoveItem"
+
+                                                 suggestions-arr="services">
+                          </multiple-autocomplete>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-3 col-sm-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">ServiceName</span>
+                          <label class="form-control" type="text">Consulting</label>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-sm-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">Charges</span>
+                          <label class="form-control" type="text">{{charges}}</label>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-sm-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">Discount</span>
+                          <input type="text" class="form-control" ng-model="cdiscount" ng-blur="cpercentage(cdiscount)" maxlength="2">
+                          <span class="input-group-addon">%</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-sm-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">Rs</span>
+
+                          <label class="form-control" type="text">{{camount}}</label>
+
+                        </div>
+                      </div>
+                    </div>
 
 
+                    <div class="form-group" ng-repeat="x in selectedList" ng-if="selectedList.length">
+                      <div class="col-lg-3 col-sm-3">
+                  <div class="input-group">
+                    <span class="input-group-addon">ServiceName</span>
+                    <label class="form-control" type="text">{{x.service_name}}</label>
+                  </div>
+                      </div>
+                      <div class="col-lg-3 col-sm-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">Charges</span>
+                          <label class="form-control" type="text">{{x.charges}}</label>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-sm-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">Discount</span>
+                          <input type="text" class="form-control" ng-model="discount" ng-blur="percentage(x,discount,$index)" maxlength="2">
+                          <span class="input-group-addon">%</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-sm-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">Rs</span>
+
+                          <label class="form-control" type="text">{{x.amount}}</label>
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-9 col-sm-9"></div>
+
+                      <div class="col-lg-3 col-sm-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">Total </span>
+                          <label type="text" class="form-control">{{totamt}}</label>
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-action">
+                      <div class="row">
+                        <div class="col-lg-offset-4 col-lg-7">
+                          <button type="submit" class="btn btn-success"
+                                  ng-disabled="myform.$invalid   " ng-click="submitted=true">Add
+                          </button>
+                          <button type="button" class="btn btn-inverse" data-dismiss="modal">
+                            Cancel
+                          </button>
+                        </div>
+                      </div>
+                    </div>
 
 
                     </fieldset>

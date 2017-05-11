@@ -631,6 +631,25 @@ public class DoctorDaoImpl implements DoctorDao {
         return doctorUsers;
     }
 
+    @Override
+    public DoctorUser getDoctorCharges(Integer doctor_id) {
+        DoctorUser doctorUser=new DoctorUser();
+
+        try{
+            String getChargesSql="SELECT charge FROM clinic.doctor_detail WHERE doctor_detail_id=:doctor_id";
+            Map<String,Object> paramater=new HashMap<String, Object>();
+            paramater.put("doctor_id",doctor_id);
+            doctorUser= (DoctorUser) jdbcTemplate.queryForObject(getChargesSql,paramater,new DoctorChargeMapper());
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+        return doctorUser;
+    }
+
 
     private String encryptPassword(String password) {
         String passwordToHash = password;

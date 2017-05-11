@@ -1727,4 +1727,19 @@ public class HelloController {
         return jsonObject.toString();
     }
 
+
+    @RequestMapping(value = "/DoctorDetailCharges/{doctor_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String doctorDetailCharges(@PathVariable Integer doctor_id,HttpServletRequest request)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        DoctorUser doctorUser;
+        doctorUser=doctorService.getDoctorCharges(doctor_id);
+        jsonObject.put("charges",doctorUser.getCharge());
+
+        return jsonObject.toString();
+    }
+
+
+
 }

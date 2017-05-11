@@ -1,7 +1,7 @@
 /**
  * Created by Lissomsoft on 04/28/17.
  */
-app.controller('Prescription',function($scope,$http,$window){
+app.controller('Prescription',function($scope,$http,$window,$timeout){
 
     $scope.visit_id=$window.sessionStorage.visit_id;
     $scope.branch_id= $window.sessionStorage.branch_id;
@@ -14,7 +14,7 @@ app.controller('Prescription',function($scope,$http,$window){
     $http.get("GetComplaint/"+$scope.visit_id)
         .then(function (response){
             $scope.patientcomplaint = response.data.patientcomplaint;
-            console.log($scope.patientcomplaint.patient_pid);
+
             $http.get("GetInfoId/"+$scope.patientcomplaint.patient_pid+"/"+$scope.patientcomplaint.created_at)
                 .then(function(response){
                     $scope.info=response.data;
@@ -36,10 +36,13 @@ app.controller('Prescription',function($scope,$http,$window){
                 angular.forEach($scope.selectedmaster, function(x) {
                     x.selected = $scope.selectedAll;
                 });
-                 if ($('.check:checked').length<1) {
+
+                if ($('.check:checked').length<0) {
                  $('#sub').removeAttr('disabled');
-                 } else {
+
+                } else {
                  $('#sub').attr('disabled', 'disabled');
+
                  }
             };
 
@@ -58,23 +61,46 @@ app.controller('Prescription',function($scope,$http,$window){
                             $http.get("GetPrescription/"+$window.sessionStorage.patient_info_id)
                                 .then(function(response){
                                     $scope.selectedmaster=response.data.prescription;
+
                                 })
                         }
 
 
                 })
 
+                if ($('.check:checked').length<1) {
+                    $('#sub').removeAttr('disabled');
+                } else {
+                    $('#sub').attr('disabled', 'disabled');
+                }
 
 
             };
 
             $scope.edit=function(id){
-                  if ($('.check:checked').length<=1) {
-                     $('#sub').removeAttr('disabled');
-                    } else {
-                      $('#sub').attr('disabled', 'disabled');
-                    }
+                   if(id){
+
+                       if ($('.check:checked').length<=1) {
+
+                           $('#sub').removeAttr('disabled');
+                       } else {
+                           $('#sub').attr('disabled', 'disabled');
+                       }
+                   }else{
+
+                           if($('.check:checked').length==1){
+                               $('#sub').removeAttr('disabled');
+                           }else{
+                               $('#sub').attr('disabled', 'disabled');
+                           }
+
+
+                   }
+
              }
+
+
+
 
 
             $scope.editPres=function(){
@@ -131,22 +157,12 @@ app.controller('Prescription',function($scope,$http,$window){
                     mg:$scope.mg,
                     medicine_name:$scope.medicine_name,
                     frequency:$scope.myform.frequency,
-                    days:$scope.myform.dayscount,
+                    days:$scope.myform.count,
                     mrg_qty:$scope.myform.mrng,
                     aft_qty:$scope.myform.aftn,
                     nig_qty:$scope.myform.nght
                 }
 
-               /* var seprescription={
-                    patient_info_id:id,
-                    medicine_id:$scope.medicine_id,
-                    frequency:$scope.myform.frequency,
-                    days:$scope.myform.dayscount,
-                    mrg_qty:$scope.myform.mrng,
-                    aft_qty:$scope.myform.aftn,
-                    nig_qty:$scope.myform.nght
-                }
-                $scope.selectedmaster.push(prescription);*/
                 $scope.addprescriptions.push(prescription);
                 $http.post("AddPatientPrescription",{prescriptions:$scope.addprescriptions}).
                     then(function(response,config,status){
@@ -189,6 +205,12 @@ $scope.editsubmit=function(id){
         });
 }
 
+$scope.prescriptionAdd=function(){
+
+    location.href="AddInvestigation";
+}
+
+
 
 
 });
@@ -203,50 +225,7 @@ $scope.editsubmit=function(id){
 
 
 
-              /*  $scope.edit=function(){
 
-                    if ($('.check:checked').length<=1) {
-                        $('#sub').removeAttr('disabled');
-                    } else {
-                        $('#sub').attr('disabled', 'disabled');
-                    }
-                }*/
-
-
-
-
-
-
-
-              /*  $scope.day =  $scope.selectedmaster.length>0 ? 0 :1;
-                if($scope.day == 0) {
-                    $scope.myform=angular.copy($scope.master);
-                }*/
-
-               /* $scope.editPres=function(){
-                    var newDataList=[];
-                    $scope.selectedAll = false;
-
-                    angular.forEach($scope.selectedmaster, function(selected,index){
-                        if(!selected.selected){
-                            newDataList.push(selected);
-                        }
-                        console.log(selected.patient_id);
-
-                    });
-                }*/
-
-
-
-
-   /*$scope.prescriptionAdd=function(){
-   $http.post("AddPatientPrescription",{prescriptions:$scope.addprescriptions}).
-       then(function(response,config,status){
-           $scope.status=response.data;
-           location.href="AddInvestigation";
-       })
-
-}*/
 
 
 
