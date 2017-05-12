@@ -224,6 +224,12 @@ public class HelloController {
         return "viewServices";
     }
 
+    @RequestMapping(value = "/AddLaboratory")
+    public String addLaboratory(HttpServletRequest request)throws Exception{
+        return "addLaboratory";
+    }
+
+
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
     public
     @ResponseBody

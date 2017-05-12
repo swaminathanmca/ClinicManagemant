@@ -4,16 +4,47 @@
 
 app.controller('patientDetails',function($scope,$window,$http){
 
+    $scope.date = new Date();
+    $scope.clear = function () {
+        $scope.dt = null;
+    };
 
+    $scope.toggleMin = function() {
+        $scope.minDate = $scope.minDate ? null : new Date();
+    };
+    $scope.toggleMin();
+    $scope.open1 = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.opened1 = true;
+        $scope.opened2 = false;
+    };
+    $scope.dateOptions = {
+        formatYear: 'yy',
+        startingDay: 6,
+        showWeeks:'false',
+        class: 'datepicker'
+    };
+    $scope.toChange= function(){
+    }
+    $scope.initDate = new Date('2016-15-20');
+    $scope.formats = ['MM/dd/yyyy','MMMM-dd-yyyy','yyyy-MMMM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+    $scope.format = $scope.formats[0];
 
-    $( function() {
+  /*  $scope.dob = moment().format("MM-DD-YYYY");*/
+
+    $scope.my_date = moment();
+
+    $scope.to_date = moment().add(7, 'days').format("MM-DD-YYYY");
+
+   /* $( function() {
         $( "#datepicker" ).datepicker(
             {
                 maxDate: '0',
                 dateFormat: 'dd-mm-yy'
 
             });
-    } );
+    } );*/
 
 $http.get("patientDetails/"+$window.sessionStorage.patient_id).
     then(function(response,status,headers,config){
@@ -35,7 +66,7 @@ $scope.editUser=function(){
             $('#countries4').bfhcountries({country: $scope.x.country});
             $scope.blood_iid=response.data.blood_group;
             $scope.gender=response.data.gender.toString();
-
+              $scope.dob =$scope.x.dob;
 
         });
     $http.get("BloodGroup")
@@ -50,7 +81,7 @@ $scope.editUser=function(){
         $scope.id=id;
         $scope.country=$('#countries3').val();
         $scope.chief_country=$('#countries4').val();
-        console.log(id);
+        var satDate = new Date($scope.dob);
         var patient={
             fullName:$scope.x.first_name,
             lastName:$scope.x.last_name,
@@ -58,7 +89,7 @@ $scope.editUser=function(){
             gender:$scope.gender,
             mStatus:$scope.x.mstatus,
             bloodGroup:$scope.blood_iid,
-            dob:$scope.x.dob,
+            dob:satDate.getDate() + '-' + (satDate.getMonth() + 1) + '-' + satDate.getFullYear(),
             email:$scope.x.email,
             contact_no:$scope.x.contact_no,
             residental_no:$scope.x.mobile_no,

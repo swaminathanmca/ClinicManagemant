@@ -382,7 +382,10 @@
                     <div class="col-lg-3">
                       <div class="input-group">
                         <span class="input-group-addon">Dob</span>
-                        <input type="text" id="datepicker" class="form-control datepicker" name="dob" ng-model="x.dob" name="dob" required>
+                        <input type="text" class="form-control" name="dob" placeholder="mm-dd-yyyy" ng-click="open1($event)" datepicker-popup="{{format}}" ng-model="dob" max-date="date"  is-open="opened1" datepicker-options="dateOptions" close-text="Close" style="height: 37px" disabled="disabled" required/>
+                      <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open1($event)" style="height: 37px"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
                       </div>
                        <span class="text-danger wrapper text-center ng-binding"
                              ng-show="myform1.dob.$invalid &&  myform1.dob.$touched">Please Enter Date </span>
@@ -604,6 +607,7 @@
 <script src="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/js/bootstrap-formhelpers.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/jquery-ui/jquery-ui.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="<%=request.getContextPath()%>/static/vendor/moment/moment.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/addClinic.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/addPatient.js"></script>

@@ -158,15 +158,27 @@
 
             </div>
             <div class="form-group">
-              <div class="col-lg-3">
-<div class="input-group">
-  <span class="input-group-addon">Dob</span>
-  <input type="text" id="datepicker" class="form-control" name="dob" ng-model="dob" required>
-</div>
+            <%--  <div class="col-lg-3">
+        <div class="input-group">
+            <span class="input-group-addon">Dob</span>
+              <input type="text" id="datepicker" class="form-control" name="dob" ng-model="dob" required>
+                      </div>
                 <span class="text-danger wrapper text-center ng-binding" ng-show="myform.dob.$invalid &&  myform.dob.$touched">Please Enter Dob</span>
 
 
-                  </div>
+                  </div>--%>
+              <div class="col-lg-3">
+                <div class="input-group">
+                  <span class="input-group-addon">Dob</span>
+                  <input type="text" class="form-control" name="mfg_date" placeholder="mm-dd-yyyy" ng-click="open1($event)" datepicker-popup="{{format}}" ng-model="dob" max-date="date"  is-open="opened1" datepicker-options="dateOptions" close-text="Close" style="height: 37px" disabled="disabled" required/>
+                      <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open1($event)" style="height: 37px"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
+
+                </div>
+                        <span class="text-danger wrapper text-center ng-binding"
+                              ng-show="myform.mfg_date.$invalid">Please Enter Dob  </span>
+              </div>
 
               <div class="col-lg-3">
                 <div class="input-group">
@@ -260,7 +272,17 @@
                 </div>
                 <span class="text-danger wrapper text-center ng-binding" ng-show="myform.relation.$invalid &&  myform.relation.$touched">Please Enter Relation</span>
               </div>
+            </div>
+            <div class="form-group">
+              <div class="col-lg-3">
 
+                  <div class="checkbox  fileRadioBox ">&nbsp;
+                    <label>
+                      <input type="checkbox"  ng-model="caddress" ng-click="cadd(caddress)"  class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" />&nbsp;Copy To Above Address
+                    </label>
+                  </div>
+
+              </div>
             </div>
             <div class="form-group">
               <div class="col-lg-6">
@@ -298,7 +320,7 @@
               <div class="col-lg-3">
                 <div class="input-group">
                   <span class="input-group-addon">Country</span>
-                  <select class="form-control bfh-countries"   ng-model="country" name="emr_country" required></select>
+                  <select class="input-medium form-control" id="countries3"    name="emr_country" required></select>
 
                 </div>
                 <span class="text-danger wrapper text-center ng-binding" ng-show="myform.emr_country.$invalid &&  myform.emr_country.$touched">Please Enter Country</span>
@@ -368,6 +390,7 @@
 <script src="<%=request.getContextPath()%>/static/vendor/js-custom-select/customSelect.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/jquery-ui/jquery-ui.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="<%=request.getContextPath()%>/static/vendor/moment/moment.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/addClinic.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/addPatient.js"></script>

@@ -109,7 +109,20 @@
                                 <a href="AddService"> Add Service</a>
                             </li>
                             <li>
-                                <a href="#">View Service</a>
+                                <a href="ViewService">View Service</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                       <a href="#">
+                           <i class="fa fa-thermometer-full"></i>&nbsp;Laboratory<span class="fa arrow"></span>
+                       </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="AddLaboratory">Add Laboratory</a>
+                            </li>
+                            <li>
+                                <a href="#">View Laboratory</a>
                             </li>
                         </ul>
                     </li>

@@ -191,7 +191,7 @@
 
                           <div class="checkbox  fileRadioBox form-control">&nbsp;
                             <label>
-                              <input type="checkbox"  ng-model="labassit"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" required/>&nbsp;Lab Test
+                              <input type="checkbox"  ng-model="labassit"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" />&nbsp;Lab Test
                             </label>
                           </div>
 
