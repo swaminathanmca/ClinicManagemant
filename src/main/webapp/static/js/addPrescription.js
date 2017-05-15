@@ -19,6 +19,7 @@ app.controller('Prescription',function($scope,$http,$window,$timeout){
                 .then(function(response){
                     $scope.info=response.data;
                     $window.sessionStorage.patient_info_id=$scope.info.patient_info_id;
+
                 })
 
             $http.get("GetPrescription/"+$window.sessionStorage.patient_info_id)

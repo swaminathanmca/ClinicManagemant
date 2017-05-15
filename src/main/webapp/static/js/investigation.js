@@ -48,9 +48,11 @@ app.controller('Investigation',function($scope,$http,$window){
             service_id: item.service_id,
             service_name:item.service_name,
             charges:item.charges,
-            amount:item.amount
+            amount:item.amount,
+            discount:''
         };
         $scope.selectedList.push(obj);
+        console.log($scope.selectedList);
         $scope.totamt=$scope.totamt+item.charges;
     }
     $scope.afterRemoveItem = function(item){
@@ -104,6 +106,7 @@ app.controller('Investigation',function($scope,$http,$window){
            var amtdis=($scope.dis/100)*$scope.crg;
            $scope.amnt=$scope.crg-amtdis;
            $scope.selectedList[index].amount=$scope.amnt;
+           $scope.selectedList[index].discount= $scope.dis;
            var sr=$scope.selectedList;
            for(var j in sr){
                $scope.n1=$scope.camount+sr[j].amount+$scope.n2;
@@ -120,9 +123,8 @@ app.controller('Investigation',function($scope,$http,$window){
            }
            $scope.totamt=$scope.n1;
        }
-
-
     }
+
     $scope.cpercentage=function(value){
         $scope.cdis=value;
         $scope.totamt=0;
@@ -157,6 +159,29 @@ app.controller('Investigation',function($scope,$http,$window){
         }
 
     }
+
+
+   $scope.submit=function(){
+       var investigation={
+                        visit_id:$scope.visit_id,
+                        patient_pid:$scope.patientcomplaint.patient_pid,
+                        total_amount:$scope.totamt,
+                        service_name:'consulting',
+                        discount:$scope.cdiscount,
+                        charges:$scope.charges,
+                        investServices:$scope.selectedList
+                    }
+
+            $http.post("AddInvestigation",investigation).
+                then(function (response,status,headers,config){
+                    $scope.status=response.data.status;
+                    if($scope.status){
+                        location.href="Invoice";
+                    }
+                })
+
+
+     }
 
 
 

@@ -86,4 +86,9 @@ import java.util.List;
     public DoctorUser getDoctorCharges(Integer doctor_id) {
         return doctorDao.getDoctorCharges(doctor_id);
     }
+
+    @Override
+    public Profile getDoctorprofile(Integer doctor_id) {
+        return doctorDao.getDoctorProfile(doctor_id);
+    }
 }

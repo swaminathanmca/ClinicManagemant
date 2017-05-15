@@ -101,7 +101,7 @@
           <div class="panel-body">
             <div class="row">
               <div class="col-lg-12 col-sm-12">
-                <form class="form-horizontal ng-invalid" role="form" name="myform1" ng-submit="submit(info.patient_info_id)"
+                <form class="form-horizontal ng-invalid" role="form" name="myform1" ng-submit="submit()"
                       novalidate>
                   <fieldset>
                   <div class="form-group">

@@ -66,9 +66,10 @@ public class PatientInfoDaoImpl implements PatientInfoDao {
                 Iterator<Complaint>it=complaints.iterator();
                 while (it.hasNext()){
                     Complaint cp=it.next();
-                    String insertComplaintSql="INSERT INTO patient_complaints(patient_info_id,patient_complaints,created_at,updated_at) VALUES ((SELECT p.patient_info_id FROM patient_info_master p WHERE created_at=:created_at),:complaint_id,:created_at,:created_at)";
+                    String insertComplaintSql="INSERT INTO patient_complaints(patient_info_id,patient_complaints,created_at,updated_at) VALUES ((SELECT p.patient_info_id FROM patient_info_master p WHERE created_at=:created_at AND patient_pid=:patient_pid),:complaint_id,:created_at,:created_at)";
                     Map<String,Object> params=new HashMap<String, Object>();
                     params.put("complaint_id",cp.getComplaint_id());
+                    params.put("patient_pid",patientInfo.getPatient_pid());
                     params.put("created_at",format.format(new Date()));
                     result_complaint=jdbcTemplate.update(insertComplaintSql,params);
 

@@ -52,6 +52,8 @@ public class HelloController {
     private PrescriptionService prescriptionService;
     @Autowired(required = false)
     private ServicesService servicesService;
+    @Autowired(required = false)
+    private InvestigationService investigationService;
 
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -229,6 +231,10 @@ public class HelloController {
         return "addLaboratory";
     }
 
+    @RequestMapping(value = "/Invoice")
+    public String invoice(HttpServletRequest request)throws Exception{
+        return "invoice";
+    }
 
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
     public
@@ -1747,5 +1753,29 @@ public class HelloController {
     }
 
 
+    @RequestMapping(value = "/AddInvestigation",method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String addInvestigation(@RequestBody Investigation investigation,HttpServletRequest request)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        boolean flag;
+        flag=investigationService.addInvestigation(investigation);
+        jsonObject.put("status",flag);
+        return jsonObject.toString();
+    }
+
+    @RequestMapping(value = "/GetDoctorProfile/{doctor_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getDoctorProfile(@PathVariable Integer doctor_id,HttpServletRequest request)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        Profile profile;
+        profile=doctorService.getDoctorprofile(doctor_id);
+        jsonObject.put("name",profile.getName());
+        jsonObject.put("address1",profile.getAddress1());
+        jsonObject.put("email",profile.getEmail());
+
+        return jsonObject.toString();
+    }
 
 }
