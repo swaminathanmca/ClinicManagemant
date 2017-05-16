@@ -144,7 +144,7 @@
                       <div class="col-lg-3">
                         <div class="input-group">
                         <span class="input-group-addon">Visit Type</span>
-                          <select class="form-control" ng-model="type" name="type" required>
+                          <select class="form-control" ng-model="type" ng-blur="entryNew(type)" name="type" required>
                             <option value="0">New  </option>
                             <option value="1">FollowUp</option>
                           </select>
@@ -152,6 +152,7 @@
                         </div>
                          <span class="text-danger wrapper text-center ng-binding"
                                ng-show="myform.type.$error.pattern">Please Select Valid Type</span>
+                        <span class="text-danger wrapper text-center ng-binding" ng-show="entry==false">Already Registered Today</span>
                       </div>
                       <div class="col-lg-3">
                         <div class="input-group">
@@ -195,7 +196,7 @@
                       <div class="row">
                         <div class="col-lg-offset-4 col-lg-7">
                           <button type="submit" class="btn btn-success"
-                                  ng-disabled="myform.$invalid " ng-click="submitted=true">Save
+                                  ng-disabled="myform.$invalid  || !chiefError " ng-click="submitted=true">Save
                           </button>
                           <button type="button" class="btn btn-inverse">Cancel</button>
                         </div>

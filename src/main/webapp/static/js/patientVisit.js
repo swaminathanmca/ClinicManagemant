@@ -4,9 +4,10 @@
 
 app.controller('patientVisit',function($scope,$window,$http){
 
-$scope.patient_pid=$window.sessionStorage.patient_id;
+    $scope.patient_pid=$window.sessionStorage.patient_id;
     $scope.branch_id= $window.sessionStorage.branch_id;
     $scope.clinic_id=$window.sessionStorage.clinic_id;
+    $scope.chiefError="The Phone No Already Taken";
 
 
     $http.get("patientDetails/"+$scope.patient_pid).
@@ -35,6 +36,20 @@ $scope.patient_pid=$window.sessionStorage.patient_id;
     }
     var date = new Date();
     $scope.time= date.toLocaleTimeString();
+
+    $scope.entryNew=function(type){
+        $scope.type=type;
+        $http.get("GetEntryNew/"+$scope.patient_pid+"/"+$scope.type).
+            then(function(response){
+                $scope.entry=response.data.status;
+                if($scope.entry==false){
+                    $scope.chiefError="";
+                }else{
+                    $scope.chiefError="Already Taken";
+                }
+            })
+    }
+
     $scope.submit=function(){
         var visit={
             patient_pid:$scope.patient_pid,

@@ -19,4 +19,5 @@ public interface PatientDao {
     boolean patientEntry(PatientVisit visit);
     List<PatientVisit> patientEntryAll(String branch_id);
     List<PatientVisit> patientEntry(String doctor_id,String branch_id);
+    List<PatientVisit> getEntryNew(String patient_pid,Integer type);
 }

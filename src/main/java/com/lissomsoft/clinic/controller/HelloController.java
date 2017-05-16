@@ -1807,4 +1807,23 @@ public class HelloController {
         return jsonObject.toString();
     }
 
+    @RequestMapping(value = "/GetEntryNew/{patient_pid}/{type}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getEntryNew(@PathVariable String patient_pid,@PathVariable Integer type,HttpServletRequest request)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        List<PatientVisit> patientVisit;
+        boolean flag;
+        patientVisit=patientService.getEntryNew(patient_pid,type);
+        if(patientVisit.isEmpty()){
+            jsonObject.put("status",true);
+        }else{
+            jsonObject.put("status",false);
+        }
+
+
+
+        return jsonObject.toString();
+    }
+
 }

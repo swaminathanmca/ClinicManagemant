@@ -60,11 +60,11 @@ hr{
     z-index: 0;
     height: 100%;
 }
-.btn-inverse {
+/*.btn-inverse {
     color: #fff;
     background-color: #555;
     border-color: #3c3c3c;
-}
+}*/
 .widget-invoice>header+.widget-body {
     margin-top: 70px;
 }

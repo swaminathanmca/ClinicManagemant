@@ -3,10 +3,7 @@ package com.lissomsoft.clinic.dao;
 import com.lissomsoft.clinic.domain.Blood;
 import com.lissomsoft.clinic.domain.Patient;
 import com.lissomsoft.clinic.domain.PatientVisit;
-import com.lissomsoft.clinic.rowmapper.BloodMapper;
-import com.lissomsoft.clinic.rowmapper.PatientDetailMapper;
-import com.lissomsoft.clinic.rowmapper.PatientMapper;
-import com.lissomsoft.clinic.rowmapper.PatientVisitMapper;
+import com.lissomsoft.clinic.rowmapper.*;
 import org.codehaus.jettison.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -334,6 +331,26 @@ if((result >0 )? true :false){
         }
 
 
+
+        return patientVisit;
+    }
+
+    @Override
+    public List<PatientVisit> getEntryNew(String patient_pid, Integer type) {
+
+       List<PatientVisit> patientVisit=null;
+        try {
+
+            String visitentrySql="SELECT patient_id patient_pid  FROM patient_visit p  WHERE p.patient_id=:patient_id AND p.type=:type  AND p.created_at=:created_at ";
+            Map<String,Object> params=new HashMap<String, Object>();
+            params.put("patient_id",patient_pid);
+            params.put("type",type);
+            params.put("created_at",format.format(new Date()));
+            patientVisit= jdbcTemplate.query(visitentrySql, params, new PatientVisitEntryMapper());
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         return patientVisit;
     }

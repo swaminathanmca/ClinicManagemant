@@ -62,4 +62,9 @@ public class PatientServiceImpl implements PatientService {
     public List<PatientVisit> patientEntry(String doctor_id,String branch_id) {
         return patientDao.patientEntry(doctor_id,branch_id);
     }
+
+    @Override
+    public List<PatientVisit> getEntryNew(String patient_pid, Integer type) {
+        return patientDao.getEntryNew(patient_pid,type);
+    }
 }
