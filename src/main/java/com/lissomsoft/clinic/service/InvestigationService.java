@@ -7,4 +7,5 @@ import com.lissomsoft.clinic.domain.Investigation;
  */
 public interface InvestigationService {
     boolean addInvestigation(Investigation investigation);
+    Investigation getCharges(Integer visit_id);
 }

@@ -20,4 +20,9 @@ public class InvestigationServiceImpl implements InvestigationService {
     public boolean addInvestigation(Investigation investigation) {
         return investigationDao.addInvestigation(investigation);
     }
+
+    @Override
+    public Investigation getCharges(Integer visit_id) {
+        return investigationDao.getCharges(visit_id);
+    }
 }

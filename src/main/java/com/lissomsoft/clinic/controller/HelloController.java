@@ -1778,4 +1778,33 @@ public class HelloController {
         return jsonObject.toString();
     }
 
+
+    @RequestMapping(value = "/GetInvestigation/{visit_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getInvestigation(@PathVariable Integer visit_id,HttpServletRequest request)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        JSONArray jsonArray=new JSONArray();
+        Investigation investigation;
+        List<InvestServices> investServices;
+        investigation=investigationService.getCharges(visit_id);
+        jsonObject.put("total_amount",investigation.getTotal_amount());
+        jsonObject.put("status",true);
+        investServices=investigation.getInvestServices();
+        Iterator<InvestServices> it=investServices.iterator();
+        while (it.hasNext()){
+            InvestServices investServices1=it.next();
+            JSONObject data=new JSONObject();
+            data.put("charges",investServices1.getCharges());
+            data.put("discount",investServices1.getDiscount());
+            data.put("service_name",investServices1.getService_name());
+            jsonArray.put(data);
+        }
+
+        jsonObject.put("services",jsonArray);
+
+
+        return jsonObject.toString();
+    }
+
 }

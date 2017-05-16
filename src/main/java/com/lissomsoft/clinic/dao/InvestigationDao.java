@@ -8,4 +8,5 @@ import com.lissomsoft.clinic.domain.Investigation;
 public interface InvestigationDao {
 
     boolean addInvestigation(Investigation investigation);
+    Investigation getCharges(Integer visit_id);
 }

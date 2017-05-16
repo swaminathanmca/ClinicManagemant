@@ -2,6 +2,8 @@ package com.lissomsoft.clinic.dao;
 
 import com.lissomsoft.clinic.domain.InvestServices;
 import com.lissomsoft.clinic.domain.Investigation;
+import com.lissomsoft.clinic.rowmapper.InvestigationMapper;
+import com.lissomsoft.clinic.rowmapper.InvestigationServiceMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,5 +119,29 @@ public class InvestigationDaoImpl implements InvestigationDao{
         }
 
         return result_update>0 ?true:false;
+    }
+
+    @Override
+    public Investigation getCharges(Integer visit_id) {
+            Investigation investigation=new Investigation();
+            List<InvestServices> investServices=investigation.getInvestServices();
+
+        try {
+
+            String getInvestigationSql="SELECT ins.service_name,ins.charges,ins.discount FROM clinic.investigation_services ins WHERE ins.investigation_id=(select im.investigation_id FROM clinic.investigation_master im WHERE im.visit_id=:visit_id)";
+            String getInvesSql="SELECT visit_id,total_amount FROM investigation_master WHERE visit_id=:visit_id";
+            Map<String,Object> parameters=new HashMap<String, Object>();
+            parameters.put("visit_id",visit_id);
+            investServices=jdbcTemplate.query(getInvestigationSql,parameters,new InvestigationServiceMapper());
+            investigation= (Investigation) jdbcTemplate.queryForObject(getInvesSql,parameters,new InvestigationMapper());
+            investigation.setInvestServices(investServices);
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return investigation;
     }
 }

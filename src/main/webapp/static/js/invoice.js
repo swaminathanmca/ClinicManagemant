@@ -6,6 +6,7 @@ app.controller('Invoice',function($scope,$http,$window,$timeout){
     $scope.visit_id=$window.sessionStorage.visit_id;
     $scope.branch_id= $window.sessionStorage.branch_id;
     $scope.doctor_id=$window.sessionStorage.doctor_id;
+    $scope.selectedList=[];
 
     $http.get("BranchDetails/"+$scope.branch_id).
         then(function(response,status,headers,config){
@@ -47,5 +48,28 @@ app.controller('Invoice',function($scope,$http,$window,$timeout){
 
         });
 
+$http.get("GetInvestigation/"+$scope.visit_id)
+    .then(function(response){
+        $scope.invest=response.data;
+        var sr=$scope.invest.services;
+
+        for(var j in sr){
+            $scope.damount=(sr[j].discount/100)*sr[j].charges;
+            $scope.tamount=sr[j].charges-$scope.damount;
+           var obj={
+               service_name:sr[j].service_name,
+               charges:sr[j].charges,
+               discount:sr[j].discount,
+               tamount:$scope.tamount
+           }
+            $scope.selectedList.push(obj);
+        }
+
+
+    })
+
+    $scope.submit=function(){
+        window.print();
+    }
 
 });

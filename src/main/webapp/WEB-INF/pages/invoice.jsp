@@ -85,7 +85,7 @@
 
   <div id="page-wrapper">
     <br>
-    <div class="row">
+    <div class="row ">
 
       <div class="col-lg-12 col-sm-12">
         <main id="content" class="content bg-clr" role="main">
@@ -93,22 +93,23 @@
 
           <div class="widget-body">
             <div class="row mb-lg">
-              <section class="col-sm-8 col-print-8">
+              <div class=" col-sm-6 col-print-6">
 
                 <h3 class="company-name">
-                 {{details.clinic_name}}
+                  {{details.clinic_name}}
                 </h3>
                 <address>
                   <strong>{{details.branch_name}} Branch</strong><br>
-                 {{branch.address1}}<br>
+                  {{branch.address1}}<br>
                   {{branch.address2}},{{branch.city}},{{branch.pin_code}}<br>
                   {{branch.state}},{{branch.country}}<br>
                   <abbr title="Work email">e-mail:</abbr>{{email}}<br>
                   <abbr title="Work Phone">phone:</abbr> {{branch.contact_no}}<br>
 
                 </address>
-              </section>
-              <section class="col-sm-4 col-print-4 text-align-right">
+              </div>
+              <div class=" col-sm-2 col-print-2 text-align-right"></div>
+              <div class=" col-sm-4 col-print-4 text-align-right">
                 <h4 class="text-muted no-margin">Patient Information</h4>
                 <h3 class="client-name">
                   {{patientcomplaint.first_name}} {{patientcomplaint.last_name}}
@@ -121,7 +122,7 @@
 
 
                 </address>
-              </section>
+              </div>
             </div>
             <table class="table table-striped" >
               <thead>
@@ -153,7 +154,7 @@
               </tbody>
             </table>
             <div class="row">
-              <div class="col-sm-8 col-print-6">
+              <div class="col-sm-12 col-print-12">
                <table class="table table-striped">
                  <thead>
                  <tr>
@@ -167,41 +168,37 @@
                  </tr>
                  </thead>
                  <tbody>
-                 <tr>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
+                 <tr ng-repeat="xs in selectedList">
+                   <td>{{ $index + 1}}</td>
+                   <td>{{ xs.service_name}}</td>
+                   <td>{{ xs.charges }}  </td>
+                   <td> {{ xs.discount}}% </td>
+                   <td class="text-align-right">{{ xs.tamount }} </td>
                  </tr>
 
                  </tbody>
                </table>
               </div>
-          <%--    <div class="col-sm-4 col-print-6">
+
+            </div>
+            <div class="row">
+              <div class="col-sm-6 col-print-6"></div>
+              <div class="col-sm-6 col-print-6">
                 <div class="row text-align-right">
-                  <div class="col-xs-6"></div> <!-- instead of offset -->
+                  <div class="col-xs-4"></div>
                   <div class="col-xs-3">
-                    <p>Subtotal</p>
-                    <p>Tax(10%)</p>
+
                     <p class="no-margin"><strong>Total</strong></p>
                   </div>
                   <div class="col-xs-3">
-                    <p>1,598.88</p>
-                    <p>159.89</p>
-                    <p class="no-margin"><strong>1,758.77</strong></p>
+                    <p class="no-margin"><strong>{{invest.total_amount}}</strong></p>
                   </div>
                 </div>
-              </div>--%>
+              </div>
             </div>
-            <p class="text-align-right mt-lg mb-xs">
-              Marketing Consultant
-            </p>
-            <p class="text-align-right">
-              <span class="fw-semi-bold">Bob Smith</span>
-            </p>
+
             <div class="btn-toolbar mt-lg text-align-right hidden-print">
-              <button id="print" class="btn btn-inverse">
+              <button id="print" class="btn btn-inverse" ng-click="submit()">
                 <i class="fa fa-print"></i>
                 &nbsp;&nbsp;
                 Print
