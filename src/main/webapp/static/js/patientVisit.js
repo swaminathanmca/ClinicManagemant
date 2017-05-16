@@ -39,7 +39,7 @@ app.controller('patientVisit',function($scope,$window,$http){
 
     $scope.entryNew=function(type){
         $scope.type=type;
-        $http.get("GetEntryNew/"+$scope.patient_pid+"/"+$scope.type).
+        $http.get("GetEntryNew/"+$scope.patient_pid+"/"+$scope.type+"/"+$scope.doctor_id).
             then(function(response){
                 $scope.entry=response.data.status;
                 if($scope.entry==false){
@@ -51,6 +51,16 @@ app.controller('patientVisit',function($scope,$window,$http){
     }
 
     $scope.submit=function(){
+
+        $http.get("GetEntryNew/"+$scope.patient_pid+"/"+$scope.type+"/"+$scope.doctor_id).
+            then(function(response){
+                $scope.entry=response.data.status;
+                if($scope.entry==false){
+                    $scope.chiefError="";
+                }else{
+                    $scope.chiefError="Already Taken";
+                }
+            })
         var visit={
             patient_pid:$scope.patient_pid,
             branch_id:$scope.branch_id,
@@ -62,12 +72,17 @@ app.controller('patientVisit',function($scope,$window,$http){
             doctor_id:$scope.doctor_id,
             referal_details:$scope.rdetails
         }
-        $http.post("PatientVisit",visit).
-            then(function (response,status,headers,config)
-            {
-                $scope.x = response.data;
-                location.href="ViewPatientVisit";
-            });
+
+        if(!$scope.entry){
+            $http.post("PatientVisit",visit).
+                then(function (response,status,headers,config)
+                {
+                    $scope.x = response.data;
+                    location.href="ViewPatientVisit";
+                });
+        }
+
+
     }
 
 

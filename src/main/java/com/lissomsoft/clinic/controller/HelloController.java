@@ -1807,14 +1807,14 @@ public class HelloController {
         return jsonObject.toString();
     }
 
-    @RequestMapping(value = "/GetEntryNew/{patient_pid}/{type}",method = RequestMethod.GET)
+    @RequestMapping(value = "/GetEntryNew/{patient_pid}/{type}/{doctor_id}",method = RequestMethod.GET)
     public
     @ResponseBody
-    String getEntryNew(@PathVariable String patient_pid,@PathVariable Integer type,HttpServletRequest request)throws JSONException{
+    String getEntryNew(@PathVariable String patient_pid,@PathVariable Integer type,@PathVariable Integer doctor_id,HttpServletRequest request)throws JSONException{
         JSONObject jsonObject=new JSONObject();
         List<PatientVisit> patientVisit;
         boolean flag;
-        patientVisit=patientService.getEntryNew(patient_pid,type);
+        patientVisit=patientService.getEntryNew(patient_pid,type,doctor_id);
         if(patientVisit.isEmpty()){
             jsonObject.put("status",true);
         }else{

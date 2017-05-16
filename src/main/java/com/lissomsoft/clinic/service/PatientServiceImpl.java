@@ -2,6 +2,7 @@ package com.lissomsoft.clinic.service;
 
 import com.lissomsoft.clinic.dao.PatientDao;
 import com.lissomsoft.clinic.domain.Blood;
+import com.lissomsoft.clinic.domain.InvestServices;
 import com.lissomsoft.clinic.domain.Patient;
 import com.lissomsoft.clinic.domain.PatientVisit;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +65,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public List<PatientVisit> getEntryNew(String patient_pid, Integer type) {
-        return patientDao.getEntryNew(patient_pid,type);
+    public List<PatientVisit> getEntryNew(String patient_pid, Integer type,Integer doctor_id) {
+        return patientDao.getEntryNew(patient_pid,type,doctor_id);
     }
 }

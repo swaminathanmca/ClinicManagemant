@@ -336,16 +336,17 @@ if((result >0 )? true :false){
     }
 
     @Override
-    public List<PatientVisit> getEntryNew(String patient_pid, Integer type) {
+    public List<PatientVisit> getEntryNew(String patient_pid, Integer type,Integer doctor_id) {
 
        List<PatientVisit> patientVisit=null;
         try {
 
-            String visitentrySql="SELECT patient_id patient_pid  FROM patient_visit p  WHERE p.patient_id=:patient_id AND p.type=:type  AND p.created_at=:created_at ";
+            String visitentrySql="SELECT patient_id patient_pid  FROM patient_visit p  WHERE p.patient_id=:patient_id AND p.type=:type  AND p.created_at=:created_at AND p.doctor_detail_id=:doctor_id";
             Map<String,Object> params=new HashMap<String, Object>();
             params.put("patient_id",patient_pid);
             params.put("type",type);
             params.put("created_at",format.format(new Date()));
+            params.put("doctor_id",doctor_id);
             patientVisit= jdbcTemplate.query(visitentrySql, params, new PatientVisitEntryMapper());
 
         }catch (Exception e){
