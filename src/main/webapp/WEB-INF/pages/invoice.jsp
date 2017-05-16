@@ -123,60 +123,62 @@
                 </address>
               </section>
             </div>
-            <table class="table table-striped">
+            <table class="table table-striped" >
               <thead>
               <tr>
                 <th>#</th>
-                <th>Item</th>
-                <th class="hidden-xs">Description</th>
-                <th>Quantity</th>
-                <th class="hidden-xs">Price per Unit</th>
-                <th>Total</th>
+                <th>Medicine Name</th>
+                <th>MG</th>
+                <th>Frequency</th>
+                <th>Morning</th>
+                <th>AfterNoon</th>
+                <th>Night</th>
+                <th>Days</th>
+
               </tr>
               </thead>
               <tbody>
-              <tr>
-                <td>1</td>
-                <td>Brand-new 27' monitor</td>
-                <td class="hidden-xs">2,560x1,440-pixel (WQHD) resolution supported!</td>
-                <td>2</td>
-                <td class="hidden-xs">700</td>
-                <td>1,400.00</td>
+              <tr ng-repeat=" x in selectedmaster">
+                <td>{{$index + 1}}</td>
+                <td>{{x.medicine_name}}</td>
+                <td>{{x.mg}}</td>
+                <td><p ng-if="x.frequency==0">Before Fasting</p>
+                  <p ng-if="x.frequency==1">After  Fasting</p></td>
+                <td><p ng-if="x.mrg_qty==1"><i class="fa fa-check"></i> </p></td>
+                <td><p ng-if="x.aft_qty==1"><i class="fa fa-check"></i> </p></td>
+                <td><p ng-if="x.ngt_qty==1"><i class="fa fa-check"></i> </p></td>
+                <td>{{x.days}}</td>
               </tr>
-              <tr>
-                <td>2</td>
-                <td>Domain: okendoken.com</td>
-                <td class="hidden-xs">6-month registration</td>
-                <td>1</td>
-                <td class="hidden-xs">10.99</td>
-                <td>21.88</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Atlas Shrugged</td>
-                <td class="hidden-xs">Novel by Ayn Rand, first published in 1957 in the US</td>
-                <td>5</td>
-                <td class="hidden-xs">35</td>
-                <td>175.00</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>New Song by Dr. Pre</td>
-                <td class="hidden-xs">Lyrics: praesent blandit augue non sapien ornare imperdiet</td>
-                <td>1</td>
-                <td class="hidden-xs">2</td>
-                <td>2.00</td>
-              </tr>
+
               </tbody>
             </table>
             <div class="row">
               <div class="col-sm-8 col-print-6">
-                <p>
-                  <strong>Note:</strong>
-                  Thank you for your business. Keep in mind, sometimes bad things happen. But it's just sometimes.
-                </p>
+               <table class="table table-striped">
+                 <thead>
+                 <tr>
+                   <th>#</th>
+                   <th>Service Name</th>
+                   <th>Charges</th>
+                   <th>Discount</th>
+                   <th>Amount</th>
+
+
+                 </tr>
+                 </thead>
+                 <tbody>
+                 <tr>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                 </tr>
+
+                 </tbody>
+               </table>
               </div>
-              <div class="col-sm-4 col-print-6">
+          <%--    <div class="col-sm-4 col-print-6">
                 <div class="row text-align-right">
                   <div class="col-xs-6"></div> <!-- instead of offset -->
                   <div class="col-xs-3">
@@ -190,7 +192,7 @@
                     <p class="no-margin"><strong>1,758.77</strong></p>
                   </div>
                 </div>
-              </div>
+              </div>--%>
             </div>
             <p class="text-align-right mt-lg mb-xs">
               Marketing Consultant
