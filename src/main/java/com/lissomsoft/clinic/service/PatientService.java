@@ -22,4 +22,5 @@ public interface PatientService {
     List<PatientVisit> patientEntryAll(String branch_id);
     List<PatientVisit> patientEntry(String doctor_id,String branch_id);
     List<PatientVisit> getEntryNew(String patient_pid,Integer type,Integer doctor_id);
+    List<PatientVisit> getEntryFollowup(String patient_pid,Integer doctor_id,Integer type);
 }

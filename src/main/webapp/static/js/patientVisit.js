@@ -8,7 +8,9 @@ app.controller('patientVisit',function($scope,$window,$http){
     $scope.branch_id= $window.sessionStorage.branch_id;
     $scope.clinic_id=$window.sessionStorage.clinic_id;
     $scope.chiefError="The Phone No Already Taken";
-
+    $scope.cfollow="The Value";
+    $scope.entry=true;
+    $scope.followup=true;
 
     $http.get("patientDetails/"+$scope.patient_pid).
         then(function(response,status,headers,config){
@@ -37,17 +39,40 @@ app.controller('patientVisit',function($scope,$window,$http){
     var date = new Date();
     $scope.time= date.toLocaleTimeString();
 
+    $scope.change=function(){
+        $scope.type="";
+    }
+
     $scope.entryNew=function(type){
         $scope.type=type;
-        $http.get("GetEntryNew/"+$scope.patient_pid+"/"+$scope.type+"/"+$scope.doctor_id).
-            then(function(response){
-                $scope.entry=response.data.status;
-                if($scope.entry==false){
-                    $scope.chiefError="";
-                }else{
+        if($scope.type==0){
+            $http.get("GetEntryNew/"+$scope.patient_pid+"/"+$scope.type+"/"+$scope.doctor_id).
+                then(function(response){
+                    $scope.entry=response.data.status;
+                    $scope.followup=true;
+                    $scope.cfollow="Already Taken";
+                    if($scope.entry==false){
+                        $scope.chiefError="";
+                    }else{
+                        $scope.chiefError="Already Taken";
+                    }
+                })
+        }else{
+            $http.get("GetFollowUp/"+$scope.patient_pid+"/"+$scope.branch_id+"/"+$scope.doctor_id).
+                then(function(response){
+                    $scope.followup=response.data.status;
+                    $scope.entry=true;
                     $scope.chiefError="Already Taken";
-                }
-            })
+                    if($scope.followup==false){
+                        $scope.cfollow="";
+                    }else{
+                        $scope.cfollow="Already Taken";
+                    }
+
+                })
+
+        }
+
     }
 
     $scope.submit=function(){
@@ -62,28 +87,14 @@ app.controller('patientVisit',function($scope,$window,$http){
             doctor_id:$scope.doctor_id,
             referal_details:$scope.rdetails
         }
-        $http.get("GetEntryNew/"+$scope.patient_pid+"/"+$scope.type+"/"+$scope.doctor_id).
-            then(function(response){
-                $scope.entry=response.data.status;
-                $scope.en=response.data.status;
-                if($scope.entry==false){
-                    $scope.chiefError="";
-                }else{
-                    $scope.chiefError="Already Taken";
-                }
-
-                if($scope.en){
-
-                    $http.post("PatientVisit",visit).
-                        then(function (response,status,headers,config)
-                        {
-                            $scope.x = response.data;
-                            location.href="ViewPatientVisit";
-                        });
-                }
-            })
 
 
+        $http.post("PatientVisit",visit).
+            then(function (response,status,headers,config)
+            {
+                $scope.x = response.data;
+                location.href="ViewPatientVisit";
+            });
 
 
 

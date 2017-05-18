@@ -1862,15 +1862,32 @@ public class HelloController {
     @RequestMapping(value = "/EditPatientInfo",method = RequestMethod.POST)
     public
     @ResponseBody
-    String editPatientInfo(@RequestBody PatientInfo patientInfo,HttpServletRequest request)throws JSONException{
+    String editPatientInfo(@RequestBody PatientInfo patientInfo,HttpServletRequest request)throws JSONException
+    {
         JSONObject jsonObject=new JSONObject();
         boolean flag;
         flag=patientInfoService.editPatientInfo(patientInfo);
         jsonObject.put("status",flag);
+        return jsonObject.toString();
+    }
+
+
+    @RequestMapping(value = "/GetFollowUp/{patient_pid}/{doctor_id}/{type}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getFollowUp(@PathVariable String patient_pid,@PathVariable Integer doctor_id,@PathVariable Integer type,HttpServletRequest request)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        boolean flag;
+        List<PatientVisit> patientVisits;
+        patientVisits=patientService.getEntryFollowup(patient_pid,doctor_id,type);
+        if(patientVisits.isEmpty()){
+            jsonObject.put("status",false);
+        }else{
+            jsonObject.put("status",true);
+        }
 
 
         return jsonObject.toString();
     }
-
 
 }

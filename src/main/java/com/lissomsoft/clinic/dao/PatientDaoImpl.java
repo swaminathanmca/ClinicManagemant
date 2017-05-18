@@ -341,7 +341,7 @@ if((result >0 )? true :false){
        List<PatientVisit> patientVisit=null;
         try {
 
-            String visitentrySql="SELECT patient_id patient_pid  FROM patient_visit p  WHERE p.patient_id=:patient_id AND p.type=:type  AND p.created_at=:created_at AND p.doctor_detail_id=:doctor_id";
+            String visitentrySql="SELECT p.patient_id patient_pid   FROM patient_visit p  WHERE p.patient_id=:patient_id AND p.type=:type  AND p.created_at=:created_at AND p.doctor_detail_id=:doctor_id";
             Map<String,Object> params=new HashMap<String, Object>();
             params.put("patient_id",patient_pid);
             params.put("type",type);
@@ -354,5 +354,24 @@ if((result >0 )? true :false){
         }
 
         return patientVisit;
+    }
+
+    @Override
+    public List<PatientVisit> getEntryFollowup(String patient_pid, Integer type, Integer doctor_id) {
+
+        List<PatientVisit> patientVisits=null;
+        try {
+            String visitSql="SELECT  p.patient_id  patient_pid FROM patient_visit p  WHERE p.patient_id=:patient_id AND p.type=0  AND p.created_at=:created_at AND p.doctor_detail_id=:doctor_id";
+            Map<String,Object> paramater=new HashMap<String, Object>();
+            paramater.put("doctor_id",doctor_id);
+            paramater.put("type",type);
+            paramater.put("patient_id",patient_pid);
+            paramater.put("created_at",format.format(new Date()));
+            patientVisits=jdbcTemplate.query(visitSql,paramater,new PatientVisitEntryMapper());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return patientVisits;
     }
 }

@@ -136,7 +136,7 @@
                           <span class="input-group-addon">
                             Practitioner
                           </span>
-                          <select class="form-control" ng-options="s.doctor_id as s.profile_name for s in profile" ng-model="doctor_id" name="doctor" required></select>
+                          <select class="form-control" ng-options="s.doctor_id as s.profile_name for s in profile" ng-model="doctor_id" name="doctor" ng-blur="change()" required></select>
                         </div>
                       </div>
                     </div>
@@ -153,6 +153,7 @@
                          <span class="text-danger wrapper text-center ng-binding"
                                ng-show="myform.type.$error.pattern">Please Select Valid Type</span>
                         <span class="text-danger wrapper text-center ng-binding" ng-show="entry==false">Already Registered Today</span>
+                        <span class="text-danger wrapper text-center ng-binding" ng-show="followup==false">Date Expreies</span>
                       </div>
                       <div class="col-lg-3">
                         <div class="input-group">
@@ -196,7 +197,7 @@
                       <div class="row">
                         <div class="col-lg-offset-4 col-lg-7">
                           <button type="submit" class="btn btn-success"
-                                  ng-disabled="myform.$invalid  || !chiefError " ng-click="submitted=true">Save
+                                  ng-disabled="myform.$invalid  || !chiefError || !cfollow " ng-click="submitted=true">Save
                           </button>
                           <button type="button" class="btn btn-inverse">Cancel</button>
                         </div>
