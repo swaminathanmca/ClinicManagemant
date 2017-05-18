@@ -236,6 +236,11 @@ public class HelloController {
         return "invoice";
     }
 
+    @RequestMapping(value = "/PatientFollowup")
+    public String patientFollowup(HttpServletRequest request)throws Exception{
+        return "patientFollowup";
+    }
+
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
     public
     @ResponseBody
@@ -1613,6 +1618,7 @@ public class HelloController {
             jsonObject.put("patient_pid",visit.getPatient_pid());
             jsonObject.put("entry_time",visit.getTime());
             jsonObject.put("referal_details",visit.getReferal_details());
+            jsonObject.put("type",visit.getHeight());
             jsonArray.put(jsonObject);
 
         }
@@ -1825,5 +1831,46 @@ public class HelloController {
 
         return jsonObject.toString();
     }
+
+    @RequestMapping(value = "/GetPatientInfo/{patient_pid}/{doctor_id}/{branch_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getpatientInfo(@PathVariable String patient_pid,@PathVariable Integer doctor_id,@PathVariable Integer branch_id,HttpServletRequest request)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        JSONArray jsonArray=new JSONArray();
+        PatientInfo patientInfo;
+        List<Complaint> complaints;
+        patientInfo=patientInfoService.getPatientFollow(patient_pid,doctor_id,branch_id);
+        jsonObject.put("procedures",patientInfo.getProcedures());
+        jsonObject.put("diagonics",patientInfo.getDiagnosis());
+        jsonObject.put("patient_info_id",patientInfo.getPatient_info_id());
+        complaints=patientInfo.getComplaint();
+        Iterator<Complaint> itr=complaints.iterator();
+        while (itr.hasNext()){
+            Complaint complaint= itr.next();
+            JSONObject data=new JSONObject();
+            data.put("complaint_name",complaint.getComplaint_name());
+            data.put("complaint_description",complaint.getComplaint_description());
+            data.put("complaint_id",complaint.getComplaint_id());
+            jsonArray.put(data);
+        }
+        jsonObject.put("complaints",jsonArray);
+
+        return jsonObject.toString();
+    }
+
+    @RequestMapping(value = "/EditPatientInfo",method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String editPatientInfo(@RequestBody PatientInfo patientInfo,HttpServletRequest request)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        boolean flag;
+        flag=patientInfoService.editPatientInfo(patientInfo);
+        jsonObject.put("status",flag);
+
+
+        return jsonObject.toString();
+    }
+
 
 }

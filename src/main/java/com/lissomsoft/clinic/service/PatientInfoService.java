@@ -15,4 +15,8 @@ public interface PatientInfoService {
 
     PatientInfo getPatientInfoId(String patient_pid,String created_at);
 
+    PatientInfo getPatientFollow(String patient_pid,Integer doctor_id,Integer branch_id);
+
+    Boolean editPatientInfo(PatientInfo patientInfo);
+
 }

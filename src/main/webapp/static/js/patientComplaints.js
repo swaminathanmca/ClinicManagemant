@@ -58,10 +58,9 @@ app.controller('patientComplaint',function($scope,$http,$window){
         $http.post('patientInfo',PatientInfo)
             .then (function (response,status,headers,config) {
             $scope.result=response.data;
-
             location.href="AddPrescription";
         });
-        location.href="AddPrescription";
+
     }
 
 })

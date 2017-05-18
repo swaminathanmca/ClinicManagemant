@@ -42,10 +42,17 @@ app.controller('showpatient',function($scope,$http,$window){
             })
     }
 
-    $scope.editPatient=function(id){
-
+    $scope.editPatient=function(id,type){
+        $scope.type=type;
         $window.sessionStorage.visit_id=id;
-        location.href="patientComplaints";
+        if($scope.type==0){
+            location.href="patientComplaints";
+        }else{
+            location.href="PatientFollowup";
+        }
+
+
+
     }
 
 })

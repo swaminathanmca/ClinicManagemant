@@ -52,32 +52,8 @@ public class InvestigationDaoImpl implements InvestigationDao{
             e.printStackTrace();
             platformTransactionManager.rollback(status);
         }
-        if((result_user >0) ? true :false){
-            try {
 
-                List<InvestServices> investServices;
-                investServices=investigation.getInvestServices();
-                Iterator<InvestServices> it=investServices.iterator();
-                while (it.hasNext()){
-                    InvestServices is=it.next();
-                    String insertServices="INSERT INTO investigation_services(investigation_id,service_name,discount,charges,created_at,updated_at) VALUES((SELECT im.investigation_id FROM investigation_master im WHERE visit_id=:visit_id),:service_name,:discount,:charges,:created_at,:created_at)";
-                    Map<String,Object> params=new HashMap<String, Object>();
-                    params.put("service_name",is.getService_name());
-                    params.put("visit_id",investigation.getVisit_id());
-                    params.put("charges",is.getCharges());
-                    params.put("discount",is.getDiscount());
-                    params.put("created_at",format.format(new Date()));
-                    result=jdbcTemplate.update(insertServices,params);
-                }
-
-
-            }catch (Exception e){
-                e.printStackTrace();
-                platformTransactionManager.rollback(status);
-            }
-        }
-
-        if((result > 0) ? true:false){
+        if((result_user > 0) ? true:false){
             try {
 
                 String insertinvest="INSERT INTO investigation_services(investigation_id,service_name,discount,charges,created_at,updated_at) VALUES((SELECT im.investigation_id FROM investigation_master im WHERE visit_id=:visit_id),:service_name,:discount,:charges,:created_at,:created_at)";
@@ -101,7 +77,42 @@ public class InvestigationDaoImpl implements InvestigationDao{
 
         }
 
-        if((result_service >0) ? true:false){
+
+        if((result_service >0) ? true :false){
+
+
+                List<InvestServices> investServices;
+                investServices=investigation.getInvestServices();
+                if(!investServices.isEmpty()){
+                    try {
+                    Iterator<InvestServices> it=investServices.iterator();
+                    while (it.hasNext()){
+                        InvestServices is=it.next();
+                        String insertServices="INSERT INTO investigation_services(investigation_id,service_name,discount,charges,created_at,updated_at) VALUES((SELECT im.investigation_id FROM investigation_master im WHERE visit_id=:visit_id),:service_name,:discount,:charges,:created_at,:created_at)";
+                        Map<String,Object> params=new HashMap<String, Object>();
+                        params.put("service_name",is.getService_name());
+                        params.put("visit_id",investigation.getVisit_id());
+                        params.put("charges",is.getCharges());
+                        params.put("discount",is.getDiscount());
+                        params.put("created_at",format.format(new Date()));
+                        result=jdbcTemplate.update(insertServices,params);
+                    }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                        platformTransactionManager.rollback(status);
+                    }
+                }else{
+                    result=1;
+                }
+
+
+
+
+        }
+
+
+
+        if((result >0) ? true:false){
             try {
                 String updateVisit=" UPDATE patient_visit SET status=:status WHERE visit_id=:visit_id";
                 Map<String,Object> upparams=new HashMap<String, Object>();

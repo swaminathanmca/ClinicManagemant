@@ -22,6 +22,7 @@ public class PatientVisitMapper implements RowMapper {
         visit.setDoctor_id(resultSet.getInt("doctor_detail_id"));
         visit.setTime(resultSet.getString("entry_time"));
         visit.setType(resultSet.getInt("visit_type"));
+        visit.setHeight(resultSet.getInt("type"));
         visit.setReferal_details(resultSet.getString("refereal_details"));
 
         return visit;

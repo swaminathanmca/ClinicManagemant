@@ -69,7 +69,7 @@ app.controller('Prescription',function($scope,$http,$window,$timeout){
 
                 })
 
-                if ($('.check:checked').length<1) {
+                if ($('.check:checked').length<0) {
                     $('#sub').removeAttr('disabled');
                 } else {
                     $('#sub').attr('disabled', 'disabled');

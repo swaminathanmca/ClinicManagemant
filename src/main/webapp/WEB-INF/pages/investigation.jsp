@@ -101,7 +101,7 @@
           <div class="panel-body">
             <div class="row">
               <div class="col-lg-12 col-sm-12">
-                <form class="form-horizontal ng-invalid" role="form" name="myform1" ng-submit="submit()"
+                <form class="form-horizontal ng-invalid" role="form" name="myform" ng-submit="submit()"
                       novalidate>
                   <fieldset>
                   <div class="form-group">
@@ -128,7 +128,7 @@
                       <div class="col-lg-6 col-sm-6">
                         <div class="input-group">
                           <span class="input-group-addon">Services</span>
-                          <multiple-autocomplete ng-model="selectedlist"  name="multipleselect" required="true"
+                          <multiple-autocomplete ng-model="selectedlist"  name="multipleselect"
                                                  object-property="service_name"
                                                  after-select-item="afterSelectItem"
                                                  after-remove-item="afterRemoveItem"
@@ -152,14 +152,17 @@
                           <label class="form-control" type="text">{{charges}}</label>
                         </div>
                       </div>
-                      <div class="col-lg-3 col-sm-3">
+                      <div class="col-lg-4 col-sm-4">
                         <div class="input-group">
                           <span class="input-group-addon">Discount</span>
-                          <input type="text" class="form-control" ng-model="cdiscount" ng-blur="cpercentage(cdiscount)" maxlength="2">
+                          <input type="number" class="form-control" name="discount"  min="0"  max="100" ng-model="cdiscount" ng-blur="cpercentage(cdiscount)" ng-pattern="/^[0-9]*$/" maxlength="3" />
                           <span class="input-group-addon">%</span>
                         </div>
+
+                        <span class="text-danger wrapper text-center ng-binding ng-hide" ng-show="myform.discount.$error.max || myform.discount.$error.min">Please Enter Valid No </span>
+
                       </div>
-                      <div class="col-lg-3 col-sm-3">
+                      <div class="col-lg-2 col-sm-2">
                         <div class="input-group">
                           <span class="input-group-addon">Rs</span>
 
@@ -183,14 +186,16 @@
                           <label class="form-control" type="text">{{x.charges}}</label>
                         </div>
                       </div>
-                      <div class="col-lg-3 col-sm-3">
+                      <div class="col-lg-4 col-sm-4">
                         <div class="input-group">
                           <span class="input-group-addon">Discount</span>
-                          <input type="text" class="form-control" ng-model="discount" ng-blur="percentage(x,discount,$index)" maxlength="2">
+                          <input type="number" class="form-control" name="cdis" ng-model="discount" min="0"  max="100" ng-blur="percentage(x,discount,$index)" maxlength="3">
                           <span class="input-group-addon">%</span>
                         </div>
+                        <span class="text-danger wrapper text-center ng-binding" ng-show=" myform.cdis.$error.min || myform.cdis.$error.max" >Please Enter Valid No</span>
+
                       </div>
-                      <div class="col-lg-3 col-sm-3">
+                      <div class="col-lg-2 col-sm-2">
                         <div class="input-group">
                           <span class="input-group-addon">Rs</span>
 
