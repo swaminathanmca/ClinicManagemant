@@ -241,6 +241,11 @@ public class HelloController {
         return "patientFollowup";
     }
 
+    @RequestMapping(value = "/PatientReport")
+    public String patientReport(HttpServletRequest request)throws Exception{
+        return "patientReport";
+    }
+
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
     public
     @ResponseBody
@@ -1885,6 +1890,56 @@ public class HelloController {
         }else{
             jsonObject.put("status",true);
         }
+
+
+        return jsonObject.toString();
+    }
+
+    @RequestMapping(value = "/GetPatientInfoReport/{patient_pid}/{from_date}/{to_date}/{doctor_id}/{branch_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getPatientReport(@PathVariable String patient_pid,@PathVariable String from_date,@PathVariable String to_date,@PathVariable Integer doctor_id,@PathVariable Integer branch_id,HttpServletRequest request)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        JSONArray jsonArray=new JSONArray();
+        List<PatientReport> patientInfos;
+        patientInfos=patientInfoService.getPatientReport(patient_pid,from_date,to_date,doctor_id,branch_id);
+        Iterator<PatientReport> it=patientInfos.iterator();
+        while (it.hasNext()){
+            PatientReport patientReport=it.next();
+            JSONObject data=new JSONObject();
+            data.put("first_name",patientReport.getFirst_name());
+            data.put("last_name",patientReport.getLast_name());
+            data.put("pateint_info_id",patientReport.getPatient_info_id());
+            data.put("referal_details",patientReport.getReferal_details());
+            data.put("created_at",patientReport.getDate());
+            data.put("patient_pid",patientReport.getPatient_pid());
+            jsonArray.put(data);
+        }
+        jsonObject.put("report",jsonArray);
+        return jsonObject.toString();
+    }
+
+    @RequestMapping(value = "/GetPatientReportByMonths/{patient_pid}/{date}/{doctor_id}/{branch_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getpatientReportByMonths(@PathVariable String patient_pid,@PathVariable String date,@PathVariable Integer doctor_id,@PathVariable Integer branch_id,HttpServletRequest request)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        JSONArray jsonArray=new JSONArray();
+        List<PatientReport> patientInfos;
+        patientInfos=patientInfoService.getPatientReportByMonths(patient_pid, date, doctor_id, branch_id);
+        Iterator<PatientReport> it=patientInfos.iterator();
+        while (it.hasNext()){
+            PatientReport patientReport=it.next();
+            JSONObject data=new JSONObject();
+            data.put("first_name",patientReport.getFirst_name());
+            data.put("last_name",patientReport.getLast_name());
+            data.put("pateint_info_id",patientReport.getPatient_info_id());
+            data.put("referal_details",patientReport.getReferal_details());
+            data.put("created_at",patientReport.getDate());
+            data.put("patient_pid",patientReport.getPatient_pid());
+            jsonArray.put(data);
+        }
+        jsonObject.put("report",jsonArray);
 
 
         return jsonObject.toString();

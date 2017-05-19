@@ -12,6 +12,7 @@ app.controller('patientFollowup',function($scope,$http,$window){
     $http.get("GetComplaint/"+$scope.visit_id)
         .then(function (response){
             $scope.patientcomplaint = response.data.patientcomplaint;
+            $window.sessionStorage.type=$scope.patientcomplaint.height;
 
             $http.get("GetPatientInfo/"+$scope.patientcomplaint.patient_pid+"/"+$scope.doctor_id+"/"+$scope.branch_id)
                 .then(function(response){

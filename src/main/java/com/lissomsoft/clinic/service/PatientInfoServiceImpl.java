@@ -2,6 +2,7 @@ package com.lissomsoft.clinic.service;
 
 import com.lissomsoft.clinic.dao.PatientInfoDao;
 import com.lissomsoft.clinic.domain.PatientInfo;
+import com.lissomsoft.clinic.vo.PatientReport;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -37,5 +38,15 @@ public class PatientInfoServiceImpl implements PatientInfoService {
     @Override
     public Boolean editPatientInfo(PatientInfo patientInfo) {
         return patientDao.editPatientInfo(patientInfo);
+    }
+
+    @Override
+    public List<PatientReport> getPatientReport(String patient_pid, String from_date, String to_date,Integer doctor_id,Integer branch_id) {
+        return patientDao.getPatientReport(patient_pid,from_date,to_date,doctor_id,branch_id);
+    }
+
+    @Override
+    public List<PatientReport> getPatientReportByMonths(String patient_pid, String date, Integer doctor_id, Integer branch_id) {
+        return patientDao.getPatientReportByMonths(patient_pid,date,doctor_id,branch_id);
     }
 }

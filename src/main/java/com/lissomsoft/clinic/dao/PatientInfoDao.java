@@ -1,6 +1,7 @@
 package com.lissomsoft.clinic.dao;
 
 import com.lissomsoft.clinic.domain.PatientInfo;
+import com.lissomsoft.clinic.vo.PatientReport;
 
 import java.util.List;
 
@@ -20,4 +21,8 @@ public interface PatientInfoDao {
     PatientInfo getPatientFollow(String patient_pid,Integer doctor_id,Integer branch_id);
 
     Boolean editPatientInfo(PatientInfo patientInfo);
+
+    List<PatientReport> getPatientReport(String patient_pid,String from_date,String to_date,Integer doctor_id,Integer branch_id);
+
+    List<PatientReport> getPatientReportByMonths(String patient_pid, String date, Integer doctor_id, Integer branch_id);
 }

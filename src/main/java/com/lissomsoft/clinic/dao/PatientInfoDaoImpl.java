@@ -2,10 +2,8 @@ package com.lissomsoft.clinic.dao;
 
 import com.lissomsoft.clinic.domain.Complaint;
 import com.lissomsoft.clinic.domain.PatientInfo;
-import com.lissomsoft.clinic.rowmapper.ComplaintMapper;
-import com.lissomsoft.clinic.rowmapper.PatientInfoFollowMapper;
-import com.lissomsoft.clinic.rowmapper.PatientInfoMapper;
-import com.lissomsoft.clinic.rowmapper.PatinetInfoIdMapper;
+import com.lissomsoft.clinic.rowmapper.*;
+import com.lissomsoft.clinic.vo.PatientReport;
 import jdk.nashorn.internal.runtime.ECMAException;
 import org.omg.DynamicAny._DynAnyFactoryStub;
 import org.slf4j.Logger;
@@ -215,6 +213,54 @@ public class PatientInfoDaoImpl implements PatientInfoDao {
 
 
         return result_complaint>0?true:false;
+    }
+
+    @Override
+    public List<PatientReport> getPatientReport(String patient_pid, String from_date, String to_date,Integer doctor_id,Integer branch_id) {
+        List<PatientReport> patientReports=null;
+
+        try {
+
+            String GetReportSql="Select m.first_name,m.last_name,i.created_at,i.referal_details,i.patient_pid,i.patient_info_id from clinic.patient_master m inner join clinic.patient_info_master i on m.patient_pid=i.patient_pid and i.doctor_detail_id=:doctor_id and i.branch_id=:branch_id and i.patient_pid=:patient_pid and i.created_at between :from_date and :to_date";
+            Map<String,Object> parameter=new HashMap<String, Object>();
+            parameter.put("patient_pid",patient_pid);
+            parameter.put("from_date",from_date);
+            parameter.put("to_date",to_date);
+            parameter.put("doctor_id",doctor_id);
+            parameter.put("branch_id",branch_id);
+            patientReports=jdbcTemplate.query(GetReportSql,parameter,new PatientReportMapper());
+
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }
+
+
+        return patientReports;
+    }
+
+    @Override
+    public List<PatientReport> getPatientReportByMonths(String patient_pid, String date, Integer doctor_id, Integer branch_id) {
+        List<PatientReport> patientReports=null;
+
+        try {
+
+            String GetReportSql="Select m.first_name,m.last_name,i.created_at,i.referal_details,i.patient_pid,i.patient_info_id from clinic.patient_master m inner join clinic.patient_info_master i on m.patient_pid=i.patient_pid and i.doctor_detail_id=:doctor_id and i.branch_id=:branch_id and i.patient_pid=:patient_pid and i.created_at >= :date ";
+            Map<String,Object> parameter=new HashMap<String, Object>();
+            parameter.put("patient_pid",patient_pid);
+            parameter.put("date",date);
+            parameter.put("doctor_id",doctor_id);
+            parameter.put("branch_id",branch_id);
+            patientReports=jdbcTemplate.query(GetReportSql,parameter,new PatientReportMapper());
+
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }
+
+
+
+        return patientReports;
     }
 
 }

@@ -12,6 +12,9 @@ $scope.addComplaint=function(){
 location.href="AddComplaint";
 }
 
+    $scope.patientReport=function(){
+        location.href="PatientReport";
+    }
 
     $http.get("GetComplaint")
         .then(function (response) {
@@ -21,6 +24,9 @@ location.href="AddComplaint";
     $http.get("GetComplaint/"+$scope.visit_id)
         .then(function (response){
             $scope.patientcomplaint = response.data.patientcomplaint;
+            $window.sessionStorage.patient_pid=$scope.patientcomplaint.patient_pid;
+            $window.sessionStorage.type=$scope.patientcomplaint.height;
+
 
         })
 

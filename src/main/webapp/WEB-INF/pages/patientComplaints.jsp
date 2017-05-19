@@ -94,12 +94,21 @@
         <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title">Patient Complaints</h3>
+
           </div>
           <div class="panel-body">
             <div class="row">
               <div class="col-lg-12">
                 <form class="form-horizontal ng-invalid" role="form" name="myform" ng-submit="submit()" novalidate>
                   <fieldset>
+                    <div class="form-group">
+                      <div class="col-lg-2">
+                        <input type="button" class="btn btn-primary" value="AddComplaint" ng-click="addComplaint()" style="background-color: #ffffff;color: #333">
+                      </div>
+                      <div class="col-lg-2">
+                        <input type="button" class="btn btn-primary" value="PatientReport" ng-click="patientReport()" style="background-color: #ffffff;color: #333">
+                      </div>
+                    </div>
                     <div class="form-group">
                       <div class="col-lg-6">
                         <div class="input-group">
@@ -137,15 +146,16 @@
                         </div>
                       </div>
 
+
                       </div>
                     <div class="form-group">
-                      <div class="col-lg-5">
+                      <div class="col-lg-6">
                         <div class="input-group">
                           <span class="input-group-addon">Refereal Details</span>
                           <label class="form-control" type="text">{{patientcomplaint.refereal_details}}</label>
                         </div>
                       </div>
-                      <div class="col-lg-5">
+                      <div class="col-lg-6">
                         <div class="input-group">
                           <span class="input-group-addon">Complaint</span>
                          <%-- <select class="form-control" ng-model="complaint_id" name="complaint"  ng-options="s.complaint_id as s.complaint_name for s in complaint" required ></select>--%>
@@ -160,9 +170,7 @@
                         <span class="text-danger wrapper text-center ng-binding"
                               ng-show="myform.complaint.$invalid &&  myform.complaint.$touched">Please Enter The Complaint</span>
                       </div>
-                      <div class="col-lg-2">
-                        <input type="button" class="btn btn-default" value="Add Complaint" ng-click="addComplaint()">
-                      </div>
+
                     </div>
                     <div class="form-group">
                     <div class="col-lg-12">
