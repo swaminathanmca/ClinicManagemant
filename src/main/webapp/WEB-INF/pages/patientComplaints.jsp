@@ -83,10 +83,6 @@
 
     </div>
   </nav>
-
-
-
-
   <div id="page-wrapper">
     <br>
     <div class="row">
@@ -224,6 +220,7 @@
     </div>
 
   </div>
+
   </div>
 
 
