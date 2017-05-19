@@ -8,6 +8,11 @@ app.controller('patientComplaint',function($scope,$http,$window){
     $scope.selectedlist=[];
     var obj;
 
+$scope.addComplaint=function(){
+location.href="AddComplaint";
+}
+
+
     $http.get("GetComplaint")
         .then(function (response) {
             $scope.complaint = response.data.complaint;
