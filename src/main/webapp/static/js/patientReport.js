@@ -95,6 +95,12 @@ app.controller('patientReport',function($scope,$http,$window){
             })
     }
 
+$scope.editInfo=function(id){
+    $window.sessionStorage.patient_info_id=id;
+    location.href="DetailsReport";
+
+}
+
 
 
 });

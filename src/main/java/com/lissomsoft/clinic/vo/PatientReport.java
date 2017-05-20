@@ -14,6 +14,8 @@ public class PatientReport {
     private String date;
     private Integer branch_id;
     private Integer doctor_id;
+    private String procedures;
+    private String diagonics;
 
     public Integer getPatient_info_id() {
         return patient_info_id;
@@ -87,6 +89,22 @@ public class PatientReport {
         this.doctor_id = doctor_id;
     }
 
+    public String getProcedures() {
+        return procedures;
+    }
+
+    public void setProcedures(String procedures) {
+        this.procedures = procedures;
+    }
+
+    public String getDiagonics() {
+        return diagonics;
+    }
+
+    public void setDiagonics(String diagonics) {
+        this.diagonics = diagonics;
+    }
+
     public String toString(){
         return "PatientReport ="+
                 "patient_info_id ="+patient_info_id+
@@ -96,6 +114,9 @@ public class PatientReport {
                 "last_name ="+last_name+
                 "referal_details ="+referal_details+
                 "date ="+date+
+                "procedures ="+procedures+
+                "diagonics ="+diagonics+
+
                 "}";
     }
 }

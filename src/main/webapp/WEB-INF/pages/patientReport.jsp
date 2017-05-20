@@ -167,7 +167,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr dir-paginate="x in report | filter:search | orderBy : first_name | itemsPerPage :5">
+                            <tr dir-paginate="x in report | filter:search | orderBy : first_name | itemsPerPage :5" ng-click="editInfo(x.pateint_info_id)">
                               <td>{{x.patient_pid}}</td>
                               <td>{{x.first_name}}&nbsp;{{x.last_name}}</td>
                               <td>{{x.created_at}}</td>

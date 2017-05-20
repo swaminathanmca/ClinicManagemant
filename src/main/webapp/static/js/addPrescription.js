@@ -10,6 +10,8 @@ app.controller('Prescription',function($scope,$http,$window,$timeout){
     $scope.master={};
     $scope.addprescriptions=[];
     $scope.day=1;
+    $scope.patient_info="";
+
 
     $http.get("GetComplaint/"+$scope.visit_id)
         .then(function (response){
@@ -18,11 +20,11 @@ app.controller('Prescription',function($scope,$http,$window,$timeout){
             $http.get("GetInfoId/"+$scope.patientcomplaint.patient_pid+"/"+$scope.patientcomplaint.created_at)
                 .then(function(response){
                     $scope.info=response.data;
-                    $window.sessionStorage.patient_info_id=$scope.info.patient_info_id;
+                    $window.sessionStorage.patient_info=$scope.info.patient_info_id;
 
                 })
-
-            $http.get("GetPrescription/"+$window.sessionStorage.patient_info_id)
+            console.log($scope.patient_info);
+            $http.get("GetPrescription/"+$window.sessionStorage.patient_info)
                 .then(function(response){
                     $scope.selectedmaster=response.data.prescription;
                 })
@@ -59,7 +61,7 @@ app.controller('Prescription',function($scope,$http,$window,$timeout){
                     then(function(response,status,config){
                     $scope.status=response.data.status;
                         if($scope.status){
-                            $http.get("GetPrescription/"+$window.sessionStorage.patient_info_id)
+                            $http.get("GetPrescription/"+$window.sessionStorage.patient_info)
                                 .then(function(response){
                                     $scope.selectedmaster=response.data.prescription;
 

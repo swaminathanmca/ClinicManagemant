@@ -246,6 +246,11 @@ public class HelloController {
         return "patientReport";
     }
 
+    @RequestMapping(value = "/DetailsReport")
+    public String detailsReport(HttpServletRequest request)throws Exception{
+        return "detailsReport";
+    }
+
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
     public
     @ResponseBody
@@ -1944,5 +1949,25 @@ public class HelloController {
 
         return jsonObject.toString();
     }
+
+    @RequestMapping(value = "/GetInfoDetails/{patient_info_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getInfoDetails(@PathVariable Integer patient_info_id,HttpServletRequest request)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        PatientReport patientReport;
+        patientReport=patientInfoService.getInfoDetails(patient_info_id);
+
+        jsonObject.put("first_name",patientReport.getFirst_name());
+        jsonObject.put("last_name",patientReport.getLast_name());
+        jsonObject.put("diagonics",patientReport.getDiagonics());
+        jsonObject.put("procedures",patientReport.getProcedures());
+        jsonObject.put("patient_pid",patientReport.getPatient_pid());
+
+
+        return  jsonObject.toString();
+    }
+
+
 
 }

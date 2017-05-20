@@ -49,4 +49,8 @@ public class PatientInfoServiceImpl implements PatientInfoService {
     public List<PatientReport> getPatientReportByMonths(String patient_pid, String date, Integer doctor_id, Integer branch_id) {
         return patientDao.getPatientReportByMonths(patient_pid,date,doctor_id,branch_id);
     }
+    @Override
+    public PatientReport getInfoDetails(Integer patient_info_id) {
+        return patientDao.getInfoDetails(patient_info_id);
+    }
 }

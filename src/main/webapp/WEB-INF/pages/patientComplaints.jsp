@@ -103,10 +103,10 @@
                   <fieldset>
                     <div class="form-group">
                       <div class="col-lg-2">
-                        <input type="button" class="btn btn-primary" value="AddComplaint" ng-click="addComplaint()" style="background-color: #ffffff;color: #333">
+                        <input type="button" class="btn btn-primary" value="Add Complaint" ng-click="addComplaint()" style="background-color: #ffffff;color: #333">
                       </div>
                       <div class="col-lg-2">
-                        <input type="button" class="btn btn-primary" value="PatientReport" ng-click="patientReport()" style="background-color: #ffffff;color: #333">
+                        <input type="button" class="btn btn-primary" value="Patient Report" ng-click="patientReport()" style="background-color: #ffffff;color: #333">
                       </div>
                     </div>
                     <div class="form-group">

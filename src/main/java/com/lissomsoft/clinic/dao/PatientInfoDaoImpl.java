@@ -263,4 +263,20 @@ public class PatientInfoDaoImpl implements PatientInfoDao {
         return patientReports;
     }
 
+    @Override
+    public PatientReport getInfoDetails(Integer patient_info_id) {
+       PatientReport patientReport=new PatientReport();
+
+        try {
+            String InfoDetailsSql="SELECT i.patient_pid,i.procedures,i.diagnosis,p.first_name,p.last_name FROM clinic.patient_info_master i INNER JOIN patient_master p ON p.patient_pid=i.patient_pid AND i.patient_info_id=:patient_info_id";
+            Map<String,Object> params=new HashMap<String, Object>();
+            params.put("patient_info_id",patient_info_id);
+            patientReport= (PatientReport) jdbcTemplate.queryForObject(InfoDetailsSql,params,new InfoDetailsMapper());
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return patientReport;
+    }
+
 }

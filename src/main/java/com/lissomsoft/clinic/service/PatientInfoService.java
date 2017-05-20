@@ -21,6 +21,10 @@ public interface PatientInfoService {
     Boolean editPatientInfo(PatientInfo patientInfo);
 
     List<PatientReport> getPatientReport(String patient_pid,String from_date,String to_date,Integer doctor_id,Integer branch_id);
+
     List<PatientReport> getPatientReportByMonths(String patient_pid,String date,Integer doctor_id,Integer branch_id);
+
+
+    PatientReport getInfoDetails(Integer patient_info_id);
 
 }
