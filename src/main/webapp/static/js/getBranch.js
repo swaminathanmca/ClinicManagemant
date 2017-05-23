@@ -10,7 +10,7 @@ app.controller('getBranch',function($scope,$window,$http){
     $http.get("trackSession/" + $scope.email)
         .then(function (response, status, headers, config) {
             $scope.data = response.data;
-          console.log($window.sessionStorage.clinic_id);
+
             $scope.clinic_name=$scope.data.clinic_name;
 
 

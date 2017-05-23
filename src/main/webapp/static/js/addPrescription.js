@@ -23,7 +23,7 @@ app.controller('Prescription',function($scope,$http,$window,$timeout){
                     $window.sessionStorage.patient_info=$scope.info.patient_info_id;
 
                 })
-            console.log($scope.patient_info);
+
             $http.get("GetPrescription/"+$window.sessionStorage.patient_info)
                 .then(function(response){
                     $scope.selectedmaster=response.data.prescription;
@@ -163,14 +163,23 @@ app.controller('Prescription',function($scope,$http,$window,$timeout){
                     days:$scope.myform.count,
                     mrg_qty:$scope.myform.mrng,
                     aft_qty:$scope.myform.aftn,
-                    nig_qty:$scope.myform.nght
+                    nig_qty:$scope.myform.nght,
+                    remarks:$scope.myform.remarks,
+                    days1:$scope.myform.day1,
+                    days2:$scope.myform.day2,
+                    days3:$scope.myform.day3,
+                    days4:$scope.myform.day4,
+                    days5:$scope.myform.day5,
+                    days6:$scope.myform.day6,
+                    days7:$scope.myform.day7
                 }
-
+                console.log(prescription);
                 $scope.addprescriptions.push(prescription);
                 $http.post("AddPatientPrescription",{prescriptions:$scope.addprescriptions}).
                     then(function(response,config,status){
                         $scope.status=response.data;
                         location.href="AddPrescription";
+
                     })
 
 
@@ -186,17 +195,25 @@ $scope.editsubmit=function(id){
             $scope.medicine_name= $scope.medicine.medicine_name;
             $scope.mg=$scope.medicine.mg;
             var prescripe={
-        prescription_id:id,
-        type:$scope.types,
-        medicine_id:$scope.x.medicine_id,
-        frequency:$scope.frequencys,
-        days:$scope.x.days,
-        medicine_name:$scope.medicine_name,
-        mg:$scope.mg,
-        mrg_qty:$scope.x.mrg_qty,
-        aft_qty:$scope.x.aft_qty,
-        nig_qty:$scope.x.ngt_qty
-    }
+                prescription_id:id,
+                type:$scope.types,
+                medicine_id:$scope.x.medicine_id,
+                frequency:$scope.frequencys,
+                days:$scope.x.days,
+                medicine_name:$scope.medicine_name,
+                mg:$scope.mg,
+                mrg_qty:$scope.x.mrg_qty,
+                aft_qty:$scope.x.aft_qty,
+                nig_qty:$scope.x.ngt_qty,
+                days1:$scope.x.day1,
+                days2:$scope.x.day2,
+                days3:$scope.x.day3,
+                days4:$scope.x.day4,
+                days5:$scope.x.day5,
+                days6:$scope.x.day6,
+                days7:$scope.x.day7,
+                remarks:$scope.x.remarks
+            }
 
         $http.post("EditPrescription",prescripe).
             then(function(response){

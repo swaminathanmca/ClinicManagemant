@@ -1712,6 +1712,14 @@ public class HelloController {
             data.put("aft_qty",pres.getAft_qty());
             data.put("ngt_qty",pres.getNig_qty());
             data.put("days",pres.getDays());
+            data.put("remarks",pres.getRemarks());
+            data.put("day1",pres.getDays1());
+            data.put("day2",pres.getDays2());
+            data.put("day3",pres.getDays3());
+            data.put("day4",pres.getDays4());
+            data.put("day5",pres.getDays5());
+            data.put("day6",pres.getDays6());
+            data.put("day7",pres.getDays7());
             jsonArray.put(data);
         }
 
@@ -1748,10 +1756,15 @@ public class HelloController {
         jsonObject.put("ngt_qty",prescription.getNig_qty());
         jsonObject.put("days",prescription.getDays());
         jsonObject.put("frequency",prescription.getFrequency());
+        jsonObject.put("remarks",prescription.getRemarks());
         jsonObject.put("type",prescription.getType());
-
-
-
+        jsonObject.put("day1",prescription.getDays1());
+        jsonObject.put("day2",prescription.getDays2());
+        jsonObject.put("day3",prescription.getDays3());
+        jsonObject.put("day4",prescription.getDays4());
+        jsonObject.put("day5",prescription.getDays5());
+        jsonObject.put("day6",prescription.getDays6());
+        jsonObject.put("day7",prescription.getDays7());
         return jsonObject.toString();
     }
 

@@ -24,8 +24,14 @@ public class PrescriptionMapper implements RowMapper {
         prescription.setNig_qty(resultSet.getInt("nig_qty"));
         prescription.setType(resultSet.getInt("type"));
         prescription.setMg(resultSet.getInt("mg"));
-
-
+        prescription.setRemarks(resultSet.getString("remarks"));
+        prescription.setDays1(resultSet.getInt("day1"));
+        prescription.setDays2(resultSet.getInt("day2"));
+        prescription.setDays3(resultSet.getInt("day3"));
+        prescription.setDays4(resultSet.getInt("day4"));
+        prescription.setDays5(resultSet.getInt("day5"));
+        prescription.setDays6(resultSet.getInt("day6"));
+        prescription.setDays7(resultSet.getInt("day7"));
         return prescription;
     }
 }

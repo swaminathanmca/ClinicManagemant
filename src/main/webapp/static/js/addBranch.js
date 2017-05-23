@@ -15,6 +15,8 @@ app.controller('branchController',function($scope,$http,$window){
             $window.sessionStorage.clinic_id=$scope.data.clinic_id;
             $scope.clinic_id=$window.sessionStorage.clinic_id;
             $window.sessionStorage.branch_id=$scope.data.branch_id;
+            $window.sessionStorage.clinic_name=$scope.data.clinic_name;
+
         });
 
 

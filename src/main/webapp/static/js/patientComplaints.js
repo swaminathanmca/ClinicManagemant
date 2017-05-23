@@ -66,6 +66,7 @@ location.href="AddComplaint";
             diagnosis:$scope.diagnosis
         }
 
+
         $http.post('patientInfo',PatientInfo)
             .then (function (response,status,headers,config) {
             $scope.result=response.data;

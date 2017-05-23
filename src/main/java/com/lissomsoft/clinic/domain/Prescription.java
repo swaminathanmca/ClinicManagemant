@@ -21,8 +21,15 @@ public class Prescription {
     private Integer frequency;
     private String medicine_name;
     private Integer mg;
+    private String remarks;
     private Integer type;
-
+    private Integer days1;
+    private Integer days2;
+    private Integer days3;
+    private Integer days4;
+    private Integer days5;
+    private Integer days6;
+    private Integer days7;
     public Integer getPrescription_id() {
         return prescription_id;
     }
@@ -128,6 +135,70 @@ public class Prescription {
         this.type = type;
     }
 
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public Integer getDays1() {
+        return days1;
+    }
+
+    public void setDays1(Integer days1) {
+        this.days1 = days1;
+    }
+
+    public Integer getDays2() {
+        return days2;
+    }
+
+    public void setDays2(Integer days2) {
+        this.days2 = days2;
+    }
+
+    public Integer getDays3() {
+        return days3;
+    }
+
+    public void setDays3(Integer days3) {
+        this.days3 = days3;
+    }
+
+    public Integer getDays4() {
+        return days4;
+    }
+
+    public void setDays4(Integer days4) {
+        this.days4 = days4;
+    }
+
+    public Integer getDays5() {
+        return days5;
+    }
+
+    public void setDays5(Integer days5) {
+        this.days5 = days5;
+    }
+
+    public Integer getDays6() {
+        return days6;
+    }
+
+    public void setDays6(Integer days6) {
+        this.days6 = days6;
+    }
+
+    public Integer getDays7() {
+        return days7;
+    }
+
+    public void setDays7(Integer days7) {
+        this.days7 = days7;
+    }
+
     public String toString(){
 
         return "Prescription {"+
@@ -144,6 +215,14 @@ public class Prescription {
                 " days ="+days+
                 " frequency ="+frequency+
                 " type ="+type+
+                " remarks="+remarks+
+                " days1="+days1+
+                " days2="+days2+
+                "days3 ="+days3+
+                "days4 ="+days4+
+                "days5 ="+days5+
+                "days6 ="+days6+
+                "days7 ="+days6+
                 '}';
     }
 }

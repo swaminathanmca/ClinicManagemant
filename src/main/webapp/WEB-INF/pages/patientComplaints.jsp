@@ -193,15 +193,36 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <div class="col-lg-3">
-
-
-                          <div class="checkbox  fileRadioBox form-control">&nbsp;
+                     <%-- <div class="col-lg-3">
+                        <div class="checkbox  fileRadioBox form-control">&nbsp;
                             <label>
                               <input type="checkbox"  ng-model="labassit"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" />&nbsp;Lab Test
                             </label>
                           </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="checkbox  fileRadioBox form-control">&nbsp;
+                          <label>
+                            <input type="checkbox"  ng-model="prescrip"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" />&nbsp;Prescription
+                          </label>
+                        </div>
+                      </div>--%>
+                      <div class="col-lg-4">
+                        <div class="input-group m-b">
+                          <span class="input-group-addon"></span>
+                          <div class="checkbox pb10 fileRadioBox">
+                            <label>
+                              <input type="radio" name="sex"  value="1"   ng-model="nanny.gender">
+                              Lab
+                            </label>
 
+                            <label>
+                              <input type="radio" name="sex" value="0"  ng-model="nanny.gender">
+                              Prescription
+                            </label>
+                          </div>
+
+                        </div>
                       </div>
                     </div>
 
