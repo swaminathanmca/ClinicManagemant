@@ -78,7 +78,17 @@
       <li>
         <a href="ViewPatientVisit"><i class="fa fa-heartbeat"></i>&nbsp;PatientVisit </a>
       </li>
-
+          <li>
+            <a href="#"><i class="fa fa-medkit"></i>&nbsp;Medicine<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+              <li>
+                <a href="AddMedicine"> Add Medicine</a>
+              </li>
+              <li>
+                <a href="GetMedicine">View Medicine</a>
+              </li>
+            </ul>
+          </li>
 
         </ul>
       </div>

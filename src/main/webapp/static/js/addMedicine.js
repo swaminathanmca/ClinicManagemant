@@ -3,6 +3,7 @@
  */
 app.controller('Medicine',function($scope,$http,$window){
     $scope.date = new Date();
+    $scope.role=$window.sessionStorage.role_name;
     $scope.clear = function () {
         $scope.dt = null;
     };

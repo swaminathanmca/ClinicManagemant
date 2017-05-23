@@ -62,7 +62,7 @@
           <li>
             <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
           </li>
-          <li>
+          <li  ng-show="role=='SuperAdmin'">
             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Clinic<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <li>
@@ -74,12 +74,12 @@
             </ul>
 
           </li>
-          <li>
+          <li  ng-show="role=='SuperAdmin'">
             <a href="AdminBranch"><i class="fa fa-table fa-fw"></i>  Branch</a>
           </li>
 
 
-          <li>
+          <li  ng-show="role=='SuperAdmin'">
             <a href="#"><i class="fa fa-child "></i>&nbsp;Speciality<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <li>
@@ -90,6 +90,21 @@
               </li>
             </ul>
           </li>
+          <li ng-show="role=='FrontDesk'">
+            <a href="#"><i class="fa fa-table fa-fw"></i><span class="fa arrow"></span> Patient </a>
+            <ul class="nav nav-second-level">
+              <li>
+                <a href="AddPatient">Add Patient</a>
+              </li>
+              <li>
+                <a href="GetPatient">View Patient</a>
+              </li>
+            </ul>
+          </li>
+          <li ng-show="role=='FrontDesk'">
+            <a href="ViewPatientVisit"><i class="fa fa-heartbeat"></i>&nbsp;PatientVisit </a>
+          </li>
+
           <li>
             <a href="#"><i class="fa fa-medkit"></i>&nbsp;Medicine<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
@@ -101,7 +116,7 @@
               </li>
             </ul>
           </li>
-          <li>
+          <li  ng-show="role=='SuperAdmin'">
             <a href="#"><i class="fa fa-ambulance"></i>&nbsp;Services<span class="fa arrow"></span> </a>
             <ul class="nav nav-second-level">
               <li>

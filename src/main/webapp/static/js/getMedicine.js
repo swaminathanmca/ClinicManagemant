@@ -4,7 +4,7 @@
 
 
 app.controller('GetMedicine',function($scope,$http,$window){
-
+    $scope.role=$window.sessionStorage.role_name;
     $scope.date = new Date();
     $scope.clear = function () {
         $scope.dt = null;

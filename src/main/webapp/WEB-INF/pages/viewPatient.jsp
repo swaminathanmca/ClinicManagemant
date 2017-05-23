@@ -78,7 +78,17 @@
           <li>
             <a href="ViewPatientVisit"><i class="fa fa-heartbeat"></i>&nbsp;PatientVisit </a>
           </li>
-
+          <li>
+            <a href="#"><i class="fa fa-medkit"></i>&nbsp;Medicine<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+              <li>
+                <a href="AddMedicine"> Add Medicine</a>
+              </li>
+              <li>
+                <a href="GetMedicine">View Medicine</a>
+              </li>
+            </ul>
+          </li>
 
 
         </ul>
@@ -123,8 +133,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr dir-paginate="x in data | filter:search | orderBy : first_name | itemsPerPage :5" ng-click="editPatient(x.patient_id)">
-                      <td>{{x.patient_pid}}</td>
+                    <tr dir-paginate="x in data | filter:search | orderBy : first_name | itemsPerPage :5" >
+                      <td ><a ng-click="editPatient(x.patient_id)" class="und_ref">{{x.patient_pid}}</a></td>
                       <td>{{x.first_name}}</td>
                       <td>{{x.last_name}}</td>
                       <td>{{x.email}}</td>
