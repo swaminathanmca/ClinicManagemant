@@ -45,6 +45,11 @@ hr{
     padding: 90px 40px 40px;
     background-color: #eee
 }
+.content1{
+    min-height: 100%;
+    padding: 20px 40px 40px;
+    background-color: #eee
+}
 .widget-invoice {
     padding: 40px;
 }
@@ -119,8 +124,7 @@ hr{
 }
 
 .col-print-8 {
-    width: 66.6666666667%;
-}
+    width: 66.6666666667%;  }
 
 .col-print-9 {
     width: 75%;

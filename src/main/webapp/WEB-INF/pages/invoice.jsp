@@ -100,6 +100,7 @@
                 </h3>
                 <address>
                   <strong>{{details.branch_name}} Branch</strong><br>
+                  <strong>  Dr.{{doctors.name}},{{doctors.qualification}}</strong><br>
                   {{branch.address1}}<br>
                   {{branch.address2}},{{branch.city}},{{branch.pin_code}}<br>
                   {{branch.state}},{{branch.country}}<br>
@@ -115,10 +116,9 @@
                   {{patientcomplaint.first_name}} {{patientcomplaint.last_name}}
                 </h3>
                 <address>
-                  <strong>Consultant</strong> at
-                  {{doctors.name}}<br>
-                  <abbr title="Work email">e-mail:</abbr> {{pdetails.email}}<br>
-                  <abbr title="Work Phone">phone:</abbr> {{pdetails.contact_no}}<br>
+
+                  <abbr title=" email">e-mail:</abbr> {{pdetails.email}}<br>
+                  <abbr title=" Phone">phone:</abbr> {{pdetails.contact_no}}<br>
 
 
                 </address>
@@ -131,11 +131,12 @@
                 <th>Medicine Name</th>
                 <th>MG</th>
                 <th>Frequency</th>
-                <th>Morning</th>
-                <th>AfterNoon</th>
-                <th>Night</th>
+                <th>M</th>
+                <th>A</th>
+                <th>N</th>
+                <th>DF</th>
                 <th>Days</th>
-
+                <th>Remarks</th>
               </tr>
               </thead>
               <tbody>
@@ -148,12 +149,26 @@
                 <td><p ng-if="x.mrg_qty==1"><i class="fa fa-check"></i> </p></td>
                 <td><p ng-if="x.aft_qty==1"><i class="fa fa-check"></i> </p></td>
                 <td><p ng-if="x.ngt_qty==1"><i class="fa fa-check"></i> </p></td>
+                <td><P>
+                  <span ng-if="x.day1==1">M,</span>
+                  <span ng-if="x.day2==1">T,</span>
+                  <span ng-if="x.day3==1">W,</span>
+                  <span ng-if="x.day4==1">TH,</span>
+                  <span ng-if="x.day5==1">F,</span>
+                  <span ng-if="x.day6==1">SA,</span>
+                  <span ng-if="x.day7==1">SU.</span>
+                </P></td>
                 <td>{{x.days}}</td>
+                <td>{{x.remarks}}</td>
               </tr>
 
               </tbody>
             </table>
-            <div class="row">
+            <p><SPAN>M-Morning</SPAN>,<SPAN>A-After Noon</SPAN>,<SPAN>N-Night</SPAN></p>
+            <P><SPAN>DF-Day Frequency</SPAN></P>
+            <p><span>M-Monday,T-Tuesday,W-Wednesday,TH-Thursday,F-Friday,SA-Saturday,SU-Sunday</span></p>
+
+           <%-- <div class="row">
               <div class="col-sm-12 col-print-12">
                <table class="table table-striped">
                  <thead>
@@ -195,21 +210,116 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div>--%>
 
-            <div class="btn-toolbar mt-lg text-align-right hidden-print">
+           <%-- <div class="btn-toolbar mt-lg text-align-right hidden-print">
               <button id="print" class="btn btn-inverse" ng-click="submit()">
                 <i class="fa fa-print"></i>
                 &nbsp;&nbsp;
                 Print
               </button>
 
-            </div>
+            </div>--%>
+
+
+
           </div>
         </section>
 
 </main>
+        <main id="content1" class="content1 bg-clr" role="main">
+          <section class="widget widget-invoice">
 
+            <div class="widget-body">
+              <div class="row mb-lg">
+                <div class=" col-sm-6 col-print-6">
+
+                  <h3 class="company-name">
+                    {{details.clinic_name}}
+                  </h3>
+                  <address>
+                    <strong>{{details.branch_name}} Branch</strong><br>
+                    <strong>  Dr.{{doctors.name}},{{doctors.qualification}}</strong><br>
+                    {{branch.address1}}<br>
+                    {{branch.address2}},{{branch.city}},{{branch.pin_code}}<br>
+                    {{branch.state}},{{branch.country}}<br>
+                    <abbr title="Work email">e-mail:</abbr>{{email}}<br>
+                    <abbr title="Work Phone">phone:</abbr> {{branch.contact_no}}<br>
+
+                  </address>
+                </div>
+                <div class=" col-sm-2 col-print-2 text-align-right"></div>
+                <div class=" col-sm-4 col-print-4 text-align-right">
+                  <h4 class="text-muted no-margin">Patient Information</h4>
+                  <h3 class="client-name">
+                    {{patientcomplaint.first_name}} {{patientcomplaint.last_name}}
+                  </h3>
+                  <address>
+
+                    <abbr title="Work ">e-mail:</abbr> {{pdetails.email}}<br>
+                    <abbr title="Work ">phone:</abbr> {{pdetails.contact_no}}<br>
+
+
+                  </address>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-12 col-print-12">
+                  <table class="table table-striped">
+                    <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Service Name</th>
+                      <th>Charges</th>
+                      <th>Discount</th>
+                      <th>Amount</th>
+
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="xs in selectedList">
+                      <td>{{ $index + 1}}</td>
+                      <td>{{ xs.service_name}}</td>
+                      <td>{{ xs.charges }}  </td>
+                      <td> {{ xs.discount}}% </td>
+                      <td class="text-align-right">{{ xs.tamount }} </td>
+                    </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-sm-6 col-print-6"></div>
+                <div class="col-sm-6 col-print-6">
+                  <div class="row text-align-right">
+                    <div class="col-xs-4"></div>
+                    <div class="col-xs-3">
+
+                      <p class="no-margin"><strong>Total</strong></p>
+                    </div>
+                    <div class="col-xs-3">
+                      <p class="no-margin"><strong>{{invest.total_amount}}</strong></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="btn-toolbar mt-lg text-align-right hidden-print">
+                <button id="printer" class="btn btn-inverse" ng-click="submited()">
+                  <i class="fa fa-print"></i>
+                  &nbsp;&nbsp;
+                  Print
+                </button>
+
+              </div>
+            </div>
+          </section>
+
+        </main>
       </div>
     </div>
 

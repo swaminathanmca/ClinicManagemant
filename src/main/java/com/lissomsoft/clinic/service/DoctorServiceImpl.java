@@ -88,7 +88,7 @@ import java.util.List;
     }
 
     @Override
-    public Profile getDoctorprofile(Integer doctor_id) {
+    public DoctorUser getDoctorprofile(Integer doctor_id) {
         return doctorDao.getDoctorProfile(doctor_id);
     }
 }

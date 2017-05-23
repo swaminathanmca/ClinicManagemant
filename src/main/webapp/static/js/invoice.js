@@ -71,5 +71,8 @@ $http.get("GetInvestigation/"+$scope.visit_id)
     $scope.submit=function(){
         window.print();
     }
+    $scope.submited=function(){
+        window.print();
+    }
 
 });

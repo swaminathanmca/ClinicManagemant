@@ -23,5 +23,5 @@ public interface DoctorDao {
     List<DoctorUser> doctorspecailities(String speciallity_id,String branch_id);
     List<DoctorUser> getDoctor(String branch_id);
     DoctorUser getDoctorCharges(Integer doctor_id);
-    Profile getDoctorProfile(Integer doctor_id);
+    DoctorUser getDoctorProfile(Integer doctor_id);
 }

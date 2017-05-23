@@ -651,14 +651,14 @@ public class DoctorDaoImpl implements DoctorDao {
     }
 
     @Override
-    public Profile getDoctorProfile(Integer doctor_id) {
-        Profile profile=new Profile();
+    public DoctorUser getDoctorProfile(Integer doctor_id) {
+        DoctorUser profile=new DoctorUser();
 
         try{
-            String getDoctorProfile="SELECT p.profile_id,p.name,p.email,p.address1,p.address2,p.phone FROM profile_master p INNER JOIN member_master m  ON p.profile_id=m.profile_id INNER JOIN doctor_detail d ON m.user_id=d.user_id AND d.doctor_detail_id=:doctor_id";
+            String getDoctorProfile="SELECT p.profile_id,p.name,p.email,p.address1,p.address2,p.phone,d.qualification FROM profile_master p INNER JOIN member_master m  ON p.profile_id=m.profile_id INNER JOIN doctor_detail d ON m.user_id=d.user_id AND d.doctor_detail_id=:doctor_id";
             Map<String,Object> doctorParams=new HashMap<String, Object>();
             doctorParams.put("doctor_id",doctor_id);
-            profile= (Profile) jdbcTemplate.queryForObject(getDoctorProfile,doctorParams,new ProfileMapper());
+            profile= (DoctorUser) jdbcTemplate.queryForObject(getDoctorProfile,doctorParams,new DoctorMapperProfile());
 
         }catch (Exception e){
             e.printStackTrace();

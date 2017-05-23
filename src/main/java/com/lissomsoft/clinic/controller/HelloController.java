@@ -1798,11 +1798,13 @@ public class HelloController {
     @ResponseBody
     String getDoctorProfile(@PathVariable Integer doctor_id,HttpServletRequest request)throws JSONException{
         JSONObject jsonObject=new JSONObject();
-        Profile profile;
+        DoctorUser profile;
         profile=doctorService.getDoctorprofile(doctor_id);
-        jsonObject.put("name",profile.getName());
+        jsonObject.put("name",profile.getFirstname());
         jsonObject.put("address1",profile.getAddress1());
-        jsonObject.put("email",profile.getEmail());
+        jsonObject.put("email",profile.getEmail_id());
+        jsonObject.put("qualification",profile.getQualification());
+
 
         return jsonObject.toString();
     }

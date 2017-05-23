@@ -25,6 +25,6 @@ public interface DoctorService {
     List<DoctorUser> doctorspecailities(String speciallity_id,String branch_id );
     List<DoctorUser> getDoctor(String branch_id);
     DoctorUser getDoctorCharges(Integer doctor_id);
-    Profile getDoctorprofile(Integer doctor_id);
+    DoctorUser getDoctorprofile(Integer doctor_id);
 
 }
