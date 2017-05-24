@@ -54,6 +54,8 @@ public class HelloController {
     private ServicesService servicesService;
     @Autowired(required = false)
     private InvestigationService investigationService;
+    @Autowired(required = false)
+    private LaboratoryService laboratoryService;
 
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -249,6 +251,11 @@ public class HelloController {
     @RequestMapping(value = "/DetailsReport")
     public String detailsReport(HttpServletRequest request)throws Exception{
         return "detailsReport";
+    }
+
+    @RequestMapping(value = "/ViewLaboratory")
+    public String viewLaboratory(HttpServletRequest request)throws Exception{
+        return "viewLaboratory";
     }
 
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
@@ -1041,6 +1048,9 @@ public class HelloController {
         jsonObject.put("emr_contact_no",patient.getEmergency_contact_no());
         jsonObject.put("emr_mobile_no",patient.getEmergency_residental_no());
         jsonObject.put("email_id",patient.getEmergency_email());
+        jsonObject.put("referred_by",patient.getReferred_by());
+        jsonObject.put("allergy_food",patient.getAllergy_food());
+        jsonObject.put("allergy_others",patient.getAllergy_others());
         jsonObject.put("status",true);
 
         return jsonObject.toString();
@@ -1984,5 +1994,38 @@ public class HelloController {
     }
 
 
+    @RequestMapping(value = "/AddLaboratory",method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String addLaboratory(@RequestBody Laboratory laboratory)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        boolean flag;
+        flag=laboratoryService.addLaboratory(laboratory);
+        jsonObject.put("status",flag);
+
+        return jsonObject.toString();
+    }
+
+    @RequestMapping(value = "/GetLaboratory",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getLaboratory(HttpServletRequest request)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        JSONArray jsonArray=new JSONArray();
+        List<Laboratory> laboratories;
+        laboratories=laboratoryService.getLaboratory();
+        Iterator<Laboratory> it=laboratories.iterator();
+        while (it.hasNext()){
+            Laboratory laboratory=it.next();
+            JSONObject data=new JSONObject();
+            data.put("test_id",laboratory.getTest_id());
+            data.put("test_type",laboratory.getTest_type());
+            data.put("test_name",laboratory.getTest_name());
+            data.put("description",laboratory.getDescription());
+            jsonArray.put(data);
+        }
+        jsonObject.put("laboratory",jsonArray);
+        return jsonObject.toString();
+    }
 
 }

@@ -164,6 +164,12 @@
                 </div>
                 <span class="text-danger wrapper text-center ng-binding" ng-show="myform.blood_id.$invalid &&  myform.blood_id.$touched">Please Select Blood Group</span>
               </div>
+              <div class="col-lg-3">
+                <div class="input-group">
+                  <span class="input-group-addon">Referred By</span>
+                  <input type="text" class="form-control" name="referred" ng-model="referred">
+                </div>
+              </div>
 
 
             </div>
@@ -231,7 +237,6 @@
               </div>
 
             </div>
-
             <div class="form-group">
               <div class="col-lg-3">
                 <div class="input-group">
@@ -263,6 +268,22 @@
                 <span class="text-danger wrapper text-center ng-binding" ng-show="myform.pin_code.$invalid &&  myform.pin_code.$touched">Please Enter Country</span>
               </div>
 
+            </div>
+            <hr>
+            <p>Allergy Medicine</p>
+            <div class="form-group">
+             <div class="col-lg-6">
+               <div class="input-group">
+                 <span class="input-group-addon" >Food Item</span>
+                 <input class="form-control" type="text" ng-model="allergy_food" >
+               </div>
+             </div>
+              <div class="col-lg-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Others</span>
+                  <input class="form-control" type="text" ng-model="allergy_others">
+                </div>
+              </div>
             </div>
 
             <hr>

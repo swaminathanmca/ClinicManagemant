@@ -115,7 +115,10 @@ $scope.validate=function(){
             emergency_pincode:$scope.emr_pincode,
             emergency_contact_no:$scope.emr_mobile_no,
             emergency_residental_no:$scope.emr_res_no,
-            emergency_email:$scope.emr_email
+            emergency_email:$scope.emr_email,
+            referred_by:$scope.referred,
+            allergy_food:$scope.allergy_food,
+            allergy_others:$scope.allergy_others
         }
 
        $http.post('AddPatient/'+$scope.branch_id,patient).

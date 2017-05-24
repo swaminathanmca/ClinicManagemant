@@ -92,5 +92,6 @@
     <bean id="serviceService" class="com.lissomsoft.clinic.service.ServicesServiceImpl"/>
     <bean id="investigationDao" class="com.lissomsoft.clinic.dao.InvestigationDaoImpl"/>
     <bean id="investigationService" class="com.lissomsoft.clinic.service.InvestigationServiceImpl"/>
-
+    <bean id="laboratoryService" class="com.lissomsoft.clinic.service.LaboratoryServiceImpl"/>
+    <bean id="laboratoryDao" class="com.lissomsoft.clinic.dao.LaboratoryDaoImpl"/>
 </beans>

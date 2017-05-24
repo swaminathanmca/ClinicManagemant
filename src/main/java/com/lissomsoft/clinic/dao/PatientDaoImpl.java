@@ -57,7 +57,7 @@ public class PatientDaoImpl implements  PatientDao {
             uId=uId.toUpperCase();
             patient.setPatient_pId(uId);
 
-            String insertPateientSql="INSERT INTO patient_master(clinic_id,branch_id,patient_pid,first_name,last_name,dob,mstatus,sex,blood_group_code,address1,address2,city,state,country,pincode,contact_no,mobile_no,email_id,created_at,updated_at) VALUES ((SELECT  b.clinic_id FROM branch_master b where b.branch_id=:branch_id),:branch_id,:patient_pid,:first_name,:last_name,:dob,:mstatus,:gender,:blood_group,:address1,:address2,:city,:state,:country,:pincode,:contact_no,:mobile_no,:email_id,:created_at,:created_at)";
+            String insertPateientSql="INSERT INTO patient_master(clinic_id,branch_id,patient_pid,first_name,last_name,dob,mstatus,sex,blood_group_code,address1,address2,city,state,country,pincode,contact_no,mobile_no,email_id,refered_by,allergy_food,allergy_others,created_at,updated_at) VALUES ((SELECT  b.clinic_id FROM branch_master b where b.branch_id=:branch_id),:branch_id,:patient_pid,:first_name,:last_name,:dob,:mstatus,:gender,:blood_group,:address1,:address2,:city,:state,:country,:pincode,:contact_no,:mobile_no,:email_id,:referred,:allergy_food,:allergy_others,:created_at,:created_at)";
             Map<String,Object> parameter=new HashMap<String, Object>();
             parameter.put("branch_id",clinic_id);
             parameter.put("first_name",patient.getFullName());
@@ -76,6 +76,9 @@ public class PatientDaoImpl implements  PatientDao {
             parameter.put("contact_no",patient.getContact_no());
             parameter.put("mobile_no",patient.getResidental_no());
             parameter.put("email_id",patient.getEmail());
+            parameter.put("referred",patient.getReferred_by());
+            parameter.put("allergy_food",patient.getAllergy_food());
+            parameter.put("allergy_others",patient.getAllergy_others());
             parameter.put("created_at",format.format(new Date()));
             result=jdbcTemplate.update(insertPateientSql,parameter);
 
@@ -189,7 +192,7 @@ public class PatientDaoImpl implements  PatientDao {
         Patient patient=new Patient();
         try {
 
-            String patientdetailsSql="SELECT p.patient_pid,p.first_name,p.last_name,p.address1,p.address2,p.city,p.state,p.country,p.pincode,p.blood_group_code,p.contact_no,p.mobile_no,p.email_id,p.sex,p.dob,p.mstatus,e.name,e.relation,e.address1 emr_address1,e.address2 emr_address2,e.city emr_city,e.state emr_state,e.country emr_country,e.pincode emr_pincode,e.contact_no emr_contact_no,e.mobile_no emr_mobile_no,e.email_id emr_email_id FROM patient_master p INNER JOIN emergency_master e ON p.patient_pid=e.patient_pid AND p.patient_id=:patient_id";
+            String patientdetailsSql="SELECT p.patient_pid,p.first_name,p.last_name,p.address1,p.address2,p.city,p.state,p.country,p.pincode,p.blood_group_code,p.contact_no,p.mobile_no,p.email_id,p.sex,p.dob,p.mstatus,p.refered_by,p.allergy_food,p.allergy_others,e.name,e.relation,e.address1 emr_address1,e.address2 emr_address2,e.city emr_city,e.state emr_state,e.country emr_country,e.pincode emr_pincode,e.contact_no emr_contact_no,e.mobile_no emr_mobile_no,e.email_id emr_email_id FROM patient_master p INNER JOIN emergency_master e ON p.patient_pid=e.patient_pid AND p.patient_id=:patient_id";
             Map<String,Object> parameter=new HashMap<String, Object>();
             parameter.put("patient_id",patient_id);
              patient= (Patient) jdbcTemplate.queryForObject(patientdetailsSql,parameter,new PatientDetailMapper());

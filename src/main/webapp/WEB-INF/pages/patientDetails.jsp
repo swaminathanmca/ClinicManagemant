@@ -233,10 +233,30 @@
                        </div>
                      </div>
                    </div>
+                   <div class="form-group">
+                     <div class="col-lg-4" ng-if="data.allergy_food">
+                       <div class="input-group">
+                         <span class="input-group-addon" >Allergy Food </span>
+                         <label class="form-control" type="text" >{{data.allergy_food}}</label>
+                       </div>
+                     </div>
+                     <div class="col-lg-4">
+                       <div class="input-group" ng-if="data.allergy_others">
+                         <span class="input-group-addon">Allergy Others</span>
+                         <label class="form-control" type="text" >{{data.allergy_others}}</label>
+                       </div>
+                     </div>
+                     <div class="col-lg-4">
+                       <div class="input-group" ng-if="data.referred_by">
+                         <span class="input-group-addon">Referred By</span>
+                         <label class="form-control" type="text" >{{data.referred_by}}</label>
+                       </div>
+                     </div>
+                   </div>
                    <hr>
                    <h4>Emergency  Contact Details</h4>
                    <div class="form-group">
-                   <div class="col-lg-6">
+                   <div class="col-lg-5">
                      <div class="input-group">
                        <span class="input-group-addon"> Name</span>
                        <label class="form-control" type="text"> {{data.name}}</label>
@@ -256,7 +276,7 @@
                      </div>
                    </div>
                    <div class="form-group">
-                   <div class="col-lg-6">
+                   <div class="col-lg-5">
                      <div class="input-group">
                        <span class="input-group-addon">Address</span>
                        <label class="form-control" type="text" >{{data.emr_address1}},{{data.emr_address2}}</label>
@@ -268,7 +288,7 @@
                          <label class="form-control" type="text">{{data.emr_mobile_no}}</label>
                        </div>
                      </div>
-                     <div class="col-lg-3">
+                     <div class="col-lg-4">
                        <div class="input-group">
                          <span class="input-group-addon">Email</span>
                          <label class="form-control" type="text">{{data.email_id}}</label>
@@ -482,6 +502,29 @@
                             ng-show="myform1.email.$invalid &&  myform1.email.$touched">Please Enter Email </span>
                     </div>
                     </div>
+                  <hr>
+                  <p>Allergy Medicine</p>
+                  <div class="form-group">
+                    <div class="col-lg-4">
+                      <div class="input-group">
+                        <span class="input-group-addon" >Food Item</span>
+                        <input class="form-control" type="text" ng-model="x.allergy_food" >
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="input-group">
+                        <span class="input-group-addon">Others</span>
+                        <input class="form-control" type="text" ng-model="x.allergy_others">
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="input-group">
+                        <span class="input-group-addon">Referred By</span>
+                        <input class="form-control" type="text" ng-model="x.referred_by">
+                      </div>
+                    </div>
+                  </div>
+
 
                   <hr>
                   <h4>Emergency  Contact Details</h4>

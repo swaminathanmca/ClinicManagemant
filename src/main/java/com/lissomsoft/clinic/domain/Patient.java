@@ -70,6 +70,11 @@ public class Patient {
 
     private String emergency_email;
 
+    private String referred_by;
+
+    private String allergy_food;
+
+    private String allergy_others;
 
 
 
@@ -317,6 +322,30 @@ public class Patient {
         this.patient_pId = patient_pId;
     }
 
+    public String getReferred_by() {
+        return referred_by;
+    }
+
+    public void setReferred_by(String referred_by) {
+        this.referred_by = referred_by;
+    }
+
+    public String getAllergy_food() {
+        return allergy_food;
+    }
+
+    public void setAllergy_food(String allergy_food) {
+        this.allergy_food = allergy_food;
+    }
+
+    public String getAllergy_others() {
+        return allergy_others;
+    }
+
+    public void setAllergy_others(String allergy_others) {
+        this.allergy_others = allergy_others;
+    }
+
     @Override
  public String toString(){
 
@@ -352,6 +381,9 @@ public class Patient {
                 ",emergency_contact_no='"+emergency_contact_no+ '\'' +
                 ",emergency_residental_no='"+emergency_residental_no+ '\'' +
                 ",emergency_email='"+emergency_email+'\'' +
+                ",referred_by="+referred_by+
+                ",allergy_food="+allergy_food+
+                ",allergy_others="+allergy_others+
                 '}';
 
  }

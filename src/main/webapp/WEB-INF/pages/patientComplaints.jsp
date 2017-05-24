@@ -155,10 +155,22 @@
                           <label class="form-control" type="text">{{patientcomplaint.refereal_details}}</label>
                         </div>
                       </div>
+
                       <div class="col-lg-6">
                         <div class="input-group">
+                          <span class="input-group-addon">Diagnosis</span>
+                          <textarea type="text" class="form-control" ng-model="diagnosis" name="diagnosis" rows="2" required> </textarea>
+                        </div>
+                      <span class="text-danger wrapper text-center ng-binding"
+                            ng-show="myform.diagnosis.$invalid &&  myform.diagnosis.$touched">Please Enter The Diagnosis</span>
+                      </div>
+
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-12">
+                        <div class="input-group">
                           <span class="input-group-addon">Complaint</span>
-                         <%-- <select class="form-control" ng-model="complaint_id" name="complaint"  ng-options="s.complaint_id as s.complaint_name for s in complaint" required ></select>--%>
+                          <%-- <select class="form-control" ng-model="complaint_id" name="complaint"  ng-options="s.complaint_id as s.complaint_name for s in complaint" required ></select>--%>
                           <multiple-autocomplete ng-model="selectedList "  name="multipleselect" required="true"
                                                  object-property="complaint_name"
                                                  after-select-item="afterSelectItem"
@@ -173,23 +185,13 @@
 
                     </div>
                     <div class="form-group">
-                    <div class="col-lg-12">
-                      <div class="input-group">
-                        <span class="input-group-addon">Procedures</span>
-                        <textarea type="text" class="form-control" ng-model="procedures" name="procedures" required> </textarea>
-                      </div>
-                      <span class="text-danger wrapper text-center ng-binding"
-                            ng-show="myform.procedures.$invalid &&  myform.procedures.$touched">Please Enter The Procedures</span>
-                    </div>
-                    </div>
-                    <div class="form-group">
                       <div class="col-lg-12">
                         <div class="input-group">
-                          <span class="input-group-addon">Diagnosis</span>
-                          <textarea type="text" class="form-control" ng-model="diagnosis" name="diagnosis" rows="4" required> </textarea>
+                          <span class="input-group-addon">Procedures</span>
+                          <textarea type="text" class="form-control" ng-model="procedures" name="procedures" rows="4" required> </textarea>
                         </div>
                       <span class="text-danger wrapper text-center ng-binding"
-                            ng-show="myform.diagnosis.$invalid &&  myform.diagnosis.$touched">Please Enter The Diagnosis</span>
+                            ng-show="myform.procedures.$invalid &&  myform.procedures.$touched">Please Enter The Procedures</span>
                       </div>
                     </div>
                  <%--   <div class="form-group">

@@ -40,6 +40,9 @@ public class PatientDetailMapper implements RowMapper {
         patient.setEmergency_contact_no(resultSet.getString("emr_contact_no"));
         patient.setEmergency_residental_no(resultSet.getString("emr_mobile_no"));
         patient.setEmergency_email(resultSet.getString("emr_email_id"));
+        patient.setAllergy_food(resultSet.getString("allergy_food"));
+        patient.setAllergy_others(resultSet.getString("allergy_others"));
+        patient.setReferred_by(resultSet.getString("refered_by"));
 
         return patient;
     }

@@ -1,12 +1,12 @@
 <%--
   Created by IntelliJ IDEA.
   User: Lissomsoft
-  Date: 05/12/17
-  Time: 10:40 AM
+  Date: 05/24/17
+  Time: 5:29 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html ng-app="myApp" ng-controller="AddLaboratoryType">
+<html ng-app="myApp" ng-controller="getLaboratory">
 <head>
   <link href="<%=request.getContextPath()%>/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/css/custom.css" rel="stylesheet">
@@ -19,8 +19,8 @@
   <title></title>
 </head>
 <body>
+<div id="wrapper" id="loader">
 
-<div id="wrapper">
   <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -127,6 +127,9 @@
             </ul>
           </li>
 
+
+
+
         </ul>
       </div>
 
@@ -134,80 +137,136 @@
 
   </nav>
   <div id="page-wrapper">
-    <br>
     <div class="row">
       <div class="col-lg-12">
+        <h4 class="page-header">Service Details</h4>
       </div>
     </div>
-
     <div class="row">
-      <div class="col-lg-1"></div>
-      <div class="col-lg-10">
-        <div class="panel panel-primary">
+      <div class="col-lg-12">
+        <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title">Add Laboratory</h3>
+            <button type="button" class="btn btn-primary" ng-click="addlab()">Add Laboratory</button>
+            <label class="input-group pull-right" style="width: 180px">
+              <span class="input-group-addon glyphicon glyphicon-search" style="top:0px;"></span>
+              <input type="text" ng-model="search" class="input-group  form-control" placeholder="Search">
+            </label>
           </div>
+
           <div class="panel-body">
-            <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="table-responsive">
+                  <table class="table table-striped table-bordered table-hover " id="dataTables-example">
+                    <thead>
+                    <tr class="success">
+                      <th>Test Name</th>
+                      <th>Test Type</th>
+                      <th>Description</th>
+                      <th>Options</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr dir-paginate="x in laboratory | filter:search | orderBy  | itemsPerPage :5" >
+                      <td>{{x.test_name}}</td>
+                      <td>{{x.test_type}}</td>
+                      <td>{{x.description}}</td>
+                      <td><button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="Edit(x.test_id)"> Edit</button></td>
 
-              <form class="form-horizontal ng-invalid" role="form" name="myform" ng-submit="submit()"
-                    novalidate>
-                <fieldset>
+
+
+                    </tr>
+                    </tbody>
+
+                  </table>
+                  <p class=" text-center">
+                    <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" ></dir-pagination-controls>
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+
+        <div class="modal-content">
+          <div class="modal-header panel-primary">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Edit Speciality</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <form role="form" class="form-horizontal" name="myform"  ng-submit="submit(data.service_id)">
+                  <fieldset>
                     <div class="form-group">
-                    <div class="col-lg-6">
-                      <div class="input-group">
-                        <span class="input-group-addon">Test Type</span>
-                        <input type="text" class="form-control" ng-model="test_type" required>
-                      </div>
-
-                    </div>
                       <div class="col-lg-6">
                         <div class="input-group">
-                          <span class="input-group-addon">Test Name</span>
-                          <input type="text" class="form-control" ng-model="test_name" required>
+                          <span class="input-group-addon"> Service Name</span>
+                          <input type="text" class="form-control" ng-model="data.service_name" name="service_name" required>
+                        </div>
+                        <span class="text-danger wrapper text-center ng-binding"
+                              ng-show="myform.service_name.$invalid && myform.service_name.$touched">Please Enter Service
+                        </span>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="input-group">
+                          <span class="input-group-addon"> Service Charges</span>
+                          <input type="text" class="form-control" ng-model="data.charges" name="charges" required>
+                        </div>
+                        <span class="text-danger wrapper text-center ng-binding"
+                              ng-show="myform.charges.$invalid && myform.charges.$touched">Please Enter charges
+                        </span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-12">
+                        <div class="input-group">
+                          <span class="input-group-addon">Description</span>
+                          <textarea type="textarea" class="form-control" ng-model="data.description" name="description">
+                          </textarea>
                         </div>
                       </div>
-
-
                     </div>
-                  <div class="form-group">
-                    <div class="col-lg-12">
-                      <div class="input-group">
-                        <span class="input-group-addon">Description</span>
-                        <textarea type="text" class="form-control" ng-model="description" required></textarea>
+                    <div class="form-actions">
+                      <div class="row">
+                        <div class="col-lg-offset-4 col-lg-7">
+                          <button type="submit" class="btn btn-success"
+                                  ng-disabled="myform.$invalid " ng-click="submitted=true">Save
+                          </button>
+                          <button type="button" class="btn btn-inverse" data-dismiss="modal">Cancel</button>
+
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div class="form-actions">
-                    <div class="row">
-                      <div class="col-lg-offset-4 col-lg-7">
-                        <button type="submit" class="btn btn-success"
-                                ng-disabled="myform.$invalid "    ng-click="submitted=true">Save
-                        </button>
-                        <button type="button" class="btn btn-inverse">Cancel</button>
-                      </div>
-                    </div>
-                  </div>
+
 
 
                   </fieldset>
-
-
                 </form>
               </div>
+            </div>
           </div>
+
+
 
         </div>
       </div>
-
-
     </div>
-    </div>
+
+  </div>
 </div>
-
-
-
 
 
 
@@ -220,7 +279,8 @@
 <script src="<%=request.getContextPath()%>/static/vendor/js-custom-select/customSelect.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
-<script src="<%=request.getContextPath()%>/static/js/addLaboratoryType.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/addClinic.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/getLaboratory.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/angular-base64-upload.js"></script>
