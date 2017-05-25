@@ -64,4 +64,22 @@ public class LaboratoryDaoImpl implements LaboratoryDao {
 
         return laboratories;
     }
+
+    @Override
+    public Laboratory getLaboratoryId(Integer test_id) {
+
+        Laboratory laboratory=new Laboratory();
+        try {
+
+            String getLabIdSql="SELECT * FROM laboratory_test_master WHERE test_id=:test_id";
+
+            Map<String,Object> getparams=new HashMap<String, Object>();
+            getparams.put("test_id",test_id);
+            laboratory= (Laboratory) jdbcTemplate.queryForObject(getLabIdSql, getparams, new LaboratoryMapper());
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return laboratory;
+    }
 }

@@ -13,4 +13,5 @@ public interface LaboratoryService {
 
     boolean addLaboratory(Laboratory laboratory);
     List<Laboratory> getLaboratory();
+    Laboratory getLaboratoryId(Integer test_id);
 }

@@ -2028,4 +2028,19 @@ public class HelloController {
         return jsonObject.toString();
     }
 
+    @RequestMapping(value = "/GetLaboratoryId/{test_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getLaboratoryId(@PathVariable Integer test_id,HttpServletRequest request)throws Exception{
+
+        JSONObject jsonObject=new JSONObject();
+        Laboratory laboratory=new Laboratory();
+        laboratory=laboratoryService.getLaboratoryId(test_id);
+        jsonObject.put("test_id",laboratory.getTest_id());
+        jsonObject.put("test_type",laboratory.getTest_type());
+        jsonObject.put("test_name",laboratory.getTest_name());
+        jsonObject.put("description",laboratory.getDescription());
+        return  jsonObject.toString();
+    }
+
 }

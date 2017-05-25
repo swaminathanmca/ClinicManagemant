@@ -11,4 +11,11 @@ app.controller('getLaboratory',function($scope,$window,$http){
     $scope.addlab=function(){
         location.href="AddLaboratory";
     }
+    $scope.Edit=function(id){
+        $scope.test_id=id;
+        $http.get("GetLaboratoryId/"+$scope.test_id)
+            .then(function(response){
+                $scope.data=response.data;
+            })
+    }
 });

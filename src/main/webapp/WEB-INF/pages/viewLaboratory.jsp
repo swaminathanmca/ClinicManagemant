@@ -212,8 +212,8 @@
                     <div class="form-group">
                       <div class="col-lg-6">
                         <div class="input-group">
-                          <span class="input-group-addon"> Service Name</span>
-                          <input type="text" class="form-control" ng-model="data.service_name" name="service_name" required>
+                          <span class="input-group-addon"> Test Name</span>
+                          <input type="text" class="form-control" ng-model="data.test_name" name="service_name" required>
                         </div>
                         <span class="text-danger wrapper text-center ng-binding"
                               ng-show="myform.service_name.$invalid && myform.service_name.$touched">Please Enter Service
@@ -221,8 +221,8 @@
                       </div>
                       <div class="col-lg-6">
                         <div class="input-group">
-                          <span class="input-group-addon"> Service Charges</span>
-                          <input type="text" class="form-control" ng-model="data.charges" name="charges" required>
+                          <span class="input-group-addon"> Test Type</span>
+                          <input type="text" class="form-control" ng-model="data.test_type" name="charges" required>
                         </div>
                         <span class="text-danger wrapper text-center ng-binding"
                               ng-show="myform.charges.$invalid && myform.charges.$touched">Please Enter charges
