@@ -15,4 +15,5 @@ public interface LaboratoryService {
     List<Laboratory> getLaboratory();
     Laboratory getLaboratoryId(Integer test_id);
     boolean editLaboratory(Laboratory laboratory);
+    List<Laboratory> getLaboratoryType(String test_type);
 }

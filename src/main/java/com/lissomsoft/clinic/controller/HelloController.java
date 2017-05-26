@@ -22,6 +22,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.List;
+import java.util.jar.JarEntry;
 
 
 @Controller
@@ -57,6 +58,8 @@ public class HelloController {
     private InvestigationService investigationService;
     @Autowired(required = false)
     private LaboratoryService laboratoryService;
+    @Autowired(required = false)
+    private LabInvestigationService labInvestigationService;
 
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -258,6 +261,12 @@ public class HelloController {
     public String viewLaboratory(HttpServletRequest request)throws Exception{
         return "viewLaboratory";
     }
+
+    @RequestMapping(value = "/PatientTest")
+    public String addTest(HttpServletRequest request)throws Exception{
+        return "addTest";
+    }
+
 
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
     public
@@ -2032,7 +2041,7 @@ public class HelloController {
     @RequestMapping(value = "/GetLaboratoryId/{test_id}",method = RequestMethod.GET)
     public
     @ResponseBody
-    String getLaboratoryId(@PathVariable Integer test_id,HttpServletRequest request)throws Exception{
+    String getLaboratoryId(@PathVariable Integer test_id,HttpServletRequest request)throws JSONException{
 
         JSONObject jsonObject=new JSONObject();
         Laboratory laboratory=new Laboratory();
@@ -2053,6 +2062,86 @@ public class HelloController {
         jsonObject.put("status",flag);
         return jsonObject.toString();
 
+    }
+
+    @RequestMapping(value = "/LabType",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getLabtype(HttpServletRequest request)throws JSONException{
+        JSONArray jsonArray=new JSONArray();
+        JSONObject jsonObject=new JSONObject();
+        List<Laboratory> laboratories;
+        laboratories=laboratoryService.getLaboratory();
+        Iterator<Laboratory> it=laboratories.iterator();
+        while (it.hasNext()){
+            Laboratory laboratory=it.next();
+            JSONObject data=new JSONObject();
+            data.put("test_type",laboratory.getTest_type());
+            data.put("test_id",laboratory.getTest_id());
+            jsonArray.put(data);
+        }
+        jsonObject.put("laboratory",jsonArray);
+
+
+        return jsonObject.toString();
+
+    }
+
+    @RequestMapping(value = "/LaboratoryType/{test_type}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String laboratoryType(@PathVariable String test_type)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        JSONArray jsonArray=new JSONArray();
+        List<Laboratory> laboratoryList;
+        laboratoryList=laboratoryService.getLaboratoryType(test_type);
+        Iterator<Laboratory> it=laboratoryList.iterator();
+        while (it.hasNext()){
+            Laboratory laboratory=it.next();
+            JSONObject data=new JSONObject();
+            data.put("test_id",laboratory.getTest_id());
+            data.put("test_name",laboratory.getTest_name());
+            jsonArray.put(data);
+        }
+        jsonObject.put("laboratory",jsonArray);
+
+
+        return  jsonObject.toString();
+
+
+    }
+    @RequestMapping(value = "/AddLabReferences",method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String addLabreferences(@RequestBody LabInvestigation labInvestigation)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        boolean flag;
+        flag=labInvestigationService.addLabInvestigation(labInvestigation);
+        jsonObject.put("status",flag);
+
+        return  jsonObject.toString();
+
+    }
+    @RequestMapping(value = "/GetLabInvest/{patient_info_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getLabInvest(@PathVariable Integer patient_info_id,HttpServletRequest request)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        JSONArray jsonArray=new JSONArray();
+        List<LabInvestigation> labInvestigationList;
+        labInvestigationList=labInvestigationService.getInvestigation(patient_info_id);
+        Iterator<LabInvestigation> it=labInvestigationList.iterator();
+        while (it.hasNext()){
+            LabInvestigation labInvestigation=it.next();
+            JSONObject data=new JSONObject();
+            data.put("test_name",labInvestigation.getTest_name());
+            data.put("remarks",labInvestigation.getRemarks());
+            data.put("investigation_id",labInvestigation.getLabinvestigation_id());
+            jsonArray.put(data);
+        }
+        jsonObject.put("labinvest",jsonArray);
+
+        return  jsonObject.toString();
     }
 
 }

@@ -119,20 +119,24 @@
                   <table class="table table-striped table-bordered table-hover " id="dataTables-example">
                     <thead>
                     <tr class="success">
-                      <th>Patient Id</th>
-                      <th>First Name</th>
-                      <th>Last Name</th>
+                      <th>Token </th>
                       <th>Time</th>
+
+                      <th>First Name</th>
+
+
                       <th>Complaint</th>
                     </tr>
 
                     </thead>
                     <tbody>
                     <tr dir-paginate="x in patientDetails | filter : search | orderBy : name | itemsPerPage :5"  ng-click="editPatient(x.visit_id,x.type)">
-                      <td>{{x.patient_pid}}</td>
-                      <td>{{x.first_name}}</td>
-                      <td>{{x.last_name}}</td>
+                      <td>{{$index+1}}</td>
                       <td>{{x.entry_time}}</td>
+
+                      <td>{{x.first_name}}&nbsp;{{x.last_name}}</td>
+
+
                       <td>{{x.referal_details}}</td>
                     </tr>
                     </tbody>

@@ -194,8 +194,8 @@
                             ng-show="myform.procedures.$invalid &&  myform.procedures.$touched">Please Enter The Procedures</span>
                       </div>
                     </div>
-                 <%--   <div class="form-group">
-                     &lt;%&ndash; <div class="col-lg-3">
+                    <div class="form-group">
+                     <%-- <div class="col-lg-3">
                         <div class="checkbox  fileRadioBox form-control">&nbsp;
                             <label>
                               <input type="checkbox"  ng-model="labassit"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" />&nbsp;Lab Test
@@ -208,25 +208,26 @@
                             <input type="checkbox"  ng-model="prescrip"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" />&nbsp;Prescription
                           </label>
                         </div>
-                      </div>&ndash;%&gt;
+                      </div>--%>
                       <div class="col-lg-4">
                         <div class="input-group m-b">
                           <span class="input-group-addon"></span>
                           <div class="checkbox pb10 fileRadioBox">
+                            &nbsp;
                             <label>
-                              <input type="radio" name="sex"  value="1"   ng-model="nanny.gender">
+                              <input type="checkbox"    ng-true-value="'true'"  ng-false-value="''"  ng-model="lab">
                               Lab
                             </label>
 
                             <label>
-                              <input type="radio" name="sex" value="0"  ng-model="nanny.gender">
+                              <input type="checkbox"    ng-true-value="'true'"  ng-false-value="''"  ng-model="prescripe">
                               Prescription
                             </label>
                           </div>
 
                         </div>
                       </div>
-                    </div>--%>
+                    </div>
 
                     <div class="form-actions">
                       <div class="row">

@@ -106,4 +106,20 @@ public class LaboratoryDaoImpl implements LaboratoryDao {
 
         return result>0?true:false;
     }
+
+    @Override
+    public List<Laboratory> getLaboratoryType(String test_type) {
+        List<Laboratory> laboratories=null;
+        try {
+
+            String labTypeSql="SELECT * FROM laboratory_test_master WHERE test_type=:test_type";
+            Map<String,Object> params=new HashMap<String, Object>();
+            params.put("test_type",test_type);
+            laboratories=jdbcTemplate.query(labTypeSql,params,new LaboratoryMapper());
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return laboratories;
+    }
 }

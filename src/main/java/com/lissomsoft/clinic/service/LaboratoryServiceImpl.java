@@ -33,4 +33,9 @@ public class LaboratoryServiceImpl implements LaboratoryService {
     public boolean editLaboratory(Laboratory laboratory) {
         return laboratoryDao.editLaboratory(laboratory);
     }
+
+    @Override
+    public List<Laboratory> getLaboratoryType(String test_type) {
+        return laboratoryDao.getLaboratoryType(test_type);
+    }
 }

@@ -1,0 +1,64 @@
+package com.lissomsoft.clinic.dao;
+
+import com.lissomsoft.clinic.domain.LabInvestigation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import com.lissomsoft.clinic.rowmapper.LabInvestigationMapper;
+
+/**
+ * Created by Lissomsoft on 05/26/17.
+ */
+public class LabInvestigationDaoImpl implements LabInvestigationDao{
+    private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
+    DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    @Autowired(required = false)
+    private NamedParameterJdbcTemplate jdbcTemplate;
+
+
+    @Override
+    public Boolean addLabInvestigation(LabInvestigation labInvestigation) {
+
+        int result=0;
+        try{
+            String insertInvesSql="INSERT INTO lab_investigation (patient_info_id,test_name,remarks,created_at,updated_at) VALUES (:patient_info_id,:test_name,:remarks,:created_at,:created_at)";
+            Map<String,Object> parameter=new HashMap<String, Object>();
+            parameter.put("patient_info_id",labInvestigation.getPatient_info_id());
+            parameter.put("test_name",labInvestigation.getTest_name());
+            parameter.put("remarks",labInvestigation.getRemarks());
+            parameter.put("created_at",format.format(new Date()));
+            result=jdbcTemplate.update(insertInvesSql,parameter);
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result>0?true:false;
+    }
+
+    @Override
+    public List<LabInvestigation> getLabInvestigation(Integer patient_info_id) {
+        List<LabInvestigation> labInvestigations=null;
+        try {
+
+            String getLabSql="SELECT * FROM lab_investigation WHERE patient_info_id=:patient_info_id";
+            Map<String,Object> paramater=new HashMap<String, Object>();
+            paramater.put("patient_info_id",patient_info_id);
+            labInvestigations=jdbcTemplate.query(getLabSql, paramater, new LabInvestigationMapper());
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return labInvestigations;
+    }
+}

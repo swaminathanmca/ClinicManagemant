@@ -51,6 +51,9 @@ location.href="AddComplaint";
     }
 
     $scope.submit=function(){
+
+
+
         var PatientInfo={
             patient_pid:$scope.patientcomplaint.patient_pid,
             branch_id:$scope.branch_id,
@@ -67,10 +70,18 @@ location.href="AddComplaint";
         }
 
 
+
         $http.post('patientInfo',PatientInfo)
             .then (function (response,status,headers,config) {
             $scope.result=response.data;
-            location.href="AddPrescription";
+            if($scope.lab && $scope.prescripe){
+                console.log("Double");
+            }else if($scope.lab){
+                location.href="PatientTest";
+            }else if($scope.prescripe){
+                location.href="AddPrescription";
+            }
+
         });
 
     }

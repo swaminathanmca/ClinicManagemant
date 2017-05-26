@@ -94,4 +94,6 @@
     <bean id="investigationService" class="com.lissomsoft.clinic.service.InvestigationServiceImpl"/>
     <bean id="laboratoryService" class="com.lissomsoft.clinic.service.LaboratoryServiceImpl"/>
     <bean id="laboratoryDao" class="com.lissomsoft.clinic.dao.LaboratoryDaoImpl"/>
+    <bean id="labInvestigationDao" class="com.lissomsoft.clinic.dao.LabInvestigationDaoImpl"/>
+    <bean id="labInvestigationService" class="com.lissomsoft.clinic.service.LabInvestigationServiceImpl"/>
 </beans>
