@@ -5,6 +5,7 @@ import com.lissomsoft.clinic.service.*;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
+import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -2041,6 +2042,17 @@ public class HelloController {
         jsonObject.put("test_name",laboratory.getTest_name());
         jsonObject.put("description",laboratory.getDescription());
         return  jsonObject.toString();
+    }
+    @RequestMapping(value = "/EditLaboratoryId",method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String  editLaboratoryId(@RequestBody Laboratory laboratory,HttpServletRequest request)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        boolean flag;
+        flag=laboratoryService.editLaboratory(laboratory);
+        jsonObject.put("status",flag);
+        return jsonObject.toString();
+
     }
 
 }

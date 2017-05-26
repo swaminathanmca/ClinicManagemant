@@ -11,4 +11,5 @@ public interface LaboratoryDao {
     boolean addLaboratory(Laboratory laboratory);
     List<Laboratory> getLaboratory();
     Laboratory getLaboratoryId(Integer test_id);
+    boolean editLaboratory(Laboratory laboratory);
 }

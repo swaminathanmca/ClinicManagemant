@@ -28,4 +28,9 @@ public class LaboratoryServiceImpl implements LaboratoryService {
     public Laboratory getLaboratoryId(Integer test_id) {
         return laboratoryDao.getLaboratoryId(test_id);
     }
+
+    @Override
+    public boolean editLaboratory(Laboratory laboratory) {
+        return laboratoryDao.editLaboratory(laboratory);
+    }
 }

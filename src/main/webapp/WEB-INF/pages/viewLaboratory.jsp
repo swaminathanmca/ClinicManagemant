@@ -207,25 +207,25 @@
           <div class="modal-body">
             <div class="row">
               <div class="col-lg-12">
-                <form role="form" class="form-horizontal" name="myform"  ng-submit="submit(data.service_id)">
+                <form role="form" class="form-horizontal" name="myform"  ng-submit="submit(data.test_id)">
                   <fieldset>
                     <div class="form-group">
                       <div class="col-lg-6">
                         <div class="input-group">
                           <span class="input-group-addon"> Test Name</span>
-                          <input type="text" class="form-control" ng-model="data.test_name" name="service_name" required>
+                          <input type="text" class="form-control" ng-model="data.test_name" name="test_name" required>
                         </div>
                         <span class="text-danger wrapper text-center ng-binding"
-                              ng-show="myform.service_name.$invalid && myform.service_name.$touched">Please Enter Service
+                              ng-show="myform.test_name.$invalid && myform.test_name.$touched">Please Enter Test
                         </span>
                       </div>
                       <div class="col-lg-6">
                         <div class="input-group">
                           <span class="input-group-addon"> Test Type</span>
-                          <input type="text" class="form-control" ng-model="data.test_type" name="charges" required>
+                          <input type="text" class="form-control" ng-model="data.test_type" name="test_type" required>
                         </div>
                         <span class="text-danger wrapper text-center ng-binding"
-                              ng-show="myform.charges.$invalid && myform.charges.$touched">Please Enter charges
+                              ng-show="myform.test_type.$invalid && myform.test_type.$touched">Please Enter Type
                         </span>
                       </div>
                     </div>

@@ -30,7 +30,7 @@ public class LaboratoryDaoImpl implements LaboratoryDao {
 
         try {
 
-            String insertLabSql="INSERT INTO laboratory_test_master(test_type,test_name,description,created_at,updated_at) VALUES(:test_type,:test_name,:description,:created_at,:created_at        )";
+            String insertLabSql="INSERT INTO laboratory_test_master(test_type,test_name,description,created_at,updated_at) VALUES(:test_type,:test_name,:description,:created_at,:created_at)";
             Map<String,Object> parameter=new HashMap<String, Object>();
             parameter.put("test_type",laboratory.getTest_type());
             parameter.put("test_name",laboratory.getTest_name());
@@ -81,5 +81,29 @@ public class LaboratoryDaoImpl implements LaboratoryDao {
             e.printStackTrace();
         }
         return laboratory;
+    }
+
+    @Override
+    public boolean editLaboratory(Laboratory laboratory) {
+
+        int result=0;
+
+        try {
+            String editLabSql="UPDATE laboratory_test_master SET test_name=:test_name,test_type=:test_type,description=:description,updated_at=:updated_at WHERE test_id=:test_id";
+            Map<String ,Object> paramater=new HashMap<String, Object>();
+            paramater.put("test_id",laboratory.getTest_id());
+            paramater.put("test_name",laboratory.getTest_name());
+            paramater.put("test_type",laboratory.getTest_type());
+            paramater.put("description",laboratory.getDescription());
+            paramater.put("updated_at",format.format(new Date()));
+            result=jdbcTemplate.update(editLabSql,paramater);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+        return result>0?true:false;
     }
 }
