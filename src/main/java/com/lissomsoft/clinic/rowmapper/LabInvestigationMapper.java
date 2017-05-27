@@ -16,6 +16,7 @@ public class LabInvestigationMapper  implements RowMapper {
 
         LabInvestigation labInvestigation=new LabInvestigation();
         labInvestigation.setLabinvestigation_id(resultSet.getInt("labinvestigation_id"));
+        labInvestigation.setTest_type(resultSet.getString("test_type"));
         labInvestigation.setTest_name(resultSet.getString("test_name"));
         labInvestigation.setPatient_info_id(resultSet.getInt("patient_info_id"));
         labInvestigation.setRemarks(resultSet.getString("remarks"));

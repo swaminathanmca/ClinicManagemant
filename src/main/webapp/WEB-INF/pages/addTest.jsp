@@ -204,6 +204,65 @@
 
 </div>
 
+  <div class="modal fade" id="myform1" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header panel-primary">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit LabInvestigation</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-12">
+
+              <form role="form" class="form-horizontal" name="myform1"  ng-submit="editsubmit(investId)">
+                <fieldset>
+
+                  <div class="form-group">
+                    <div class="col-lg-3">
+                      <div class="input-group">
+                        <span class="input-group-addon">Test Type</span>
+                        <SELECT class="form-control" ng-options="xs.test_type as xs.test_type for xs in invtype" ng-model="data.test_type" ng-change="typelabModel(data.test_type)" required></SELECT>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="input-group">
+                        <span class="input-group-addon">Test Name</span>
+                        <SELECT class="form-control" ng-options="st.test_name as st.test_name for  st in labinst" ng-model="data.test_name" required></SELECT>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="input-group">
+                        <span class="input-group-addon">Remarks</span>
+                        <input type="text" class="form-control" ng-model="data.remarks">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-action">
+                    <div class="row">
+                      <div class="col-lg-offset-4 col-lg-7">
+                        <button type="submit" class="btn btn-success"
+                                ng-disabled="myform1.$invalid "
+                                ng-click="submitted=true">Save
+                        </button>
+                        <button type="button" class="btn btn-inverse" data-dismiss="modal">Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                </form>
+
+          </div>
+
+
+
+        </div>
+    </div>
+        </div>
+      </div>
+    </div>
+
 
 </div>
 

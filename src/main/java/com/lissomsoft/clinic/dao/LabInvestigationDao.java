@@ -10,6 +10,7 @@ import java.util.List;
 public interface LabInvestigationDao {
 
     Boolean addLabInvestigation(LabInvestigation labInvestigation);
-    List<LabInvestigation> getLabInvestigation(Integer patient_info_id);
+    List<LabInvestigation> getInvestigation(Integer patient_info_id);
     Boolean removeLabInvestigation(Integer investigation_id);
+    LabInvestigation getLabInvestigation(Integer investigation_id);
 }

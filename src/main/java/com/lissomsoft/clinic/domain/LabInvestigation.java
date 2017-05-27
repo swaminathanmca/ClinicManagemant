@@ -10,6 +10,8 @@ public class LabInvestigation {
 
     private Integer patient_info_id;
 
+    private String test_type;
+
     private String test_name;
 
     private String remarks;
@@ -47,12 +49,21 @@ public class LabInvestigation {
         this.remarks = remarks;
     }
 
+    public String getTest_type() {
+        return test_type;
+    }
+
+    public void setTest_type(String test_type) {
+        this.test_type = test_type;
+    }
+
     public String toString(){
 
         return "LabInvestigation{"+
                 " labinvestigation_id="+labinvestigation_id+
                 " patient_info_id="+patient_info_id+
                 " test_name="+test_name+
+                " test_type ="+test_type+
                 " remarks="+remarks+
                 '}';
     }

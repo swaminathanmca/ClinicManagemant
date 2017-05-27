@@ -142,7 +142,8 @@
                       <div class="col-lg-3">
                         <div class="input-group">
                           <span class="input-group-addon">BP</span>
-                          <label class="form-control" type="text"  >{{patientcomplaint.pressure}}</label>
+
+                          <input type="text" class="form-control" ng-model="patientcomplaint.pressure">
                         </div>
                       </div>
 

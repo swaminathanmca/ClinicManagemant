@@ -173,7 +173,7 @@ app.controller('Prescription',function($scope,$http,$window,$timeout){
                     days6:$scope.myform.day6,
                     days7:$scope.myform.day7
                 }
-                console.log(prescription);
+
                 $scope.addprescriptions.push(prescription);
                 $http.post("AddPatientPrescription",{prescriptions:$scope.addprescriptions}).
                     then(function(response,config,status){

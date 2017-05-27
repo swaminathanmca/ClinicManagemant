@@ -1,7 +1,9 @@
 package com.lissomsoft.clinic.dao;
 
 import com.lissomsoft.clinic.domain.Laboratory;
+import com.lissomsoft.clinic.rowmapper.LabTypeMapper;
 import com.lissomsoft.clinic.rowmapper.LaboratoryMapper;
+import org.apache.poi.sl.draw.binding.STTextShapeType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -122,4 +124,42 @@ public class LaboratoryDaoImpl implements LaboratoryDao {
         }
         return laboratories;
     }
+
+    @Override
+    public Laboratory getLabType(String test_name) {
+        Laboratory laboratory=new Laboratory();
+        try {
+            String labGetSql="SELECT * FROM clinic.laboratory_test_master WHERE test_name=:test_name";
+            Map<String,Object> params=new HashMap<String, Object>();
+            params.put("test_name",test_name);
+            laboratory=(Laboratory)jdbcTemplate.queryForObject(labGetSql,params,new LaboratoryMapper());
+
+
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+        return laboratory;
+    }
+
+    @Override
+    public List<Laboratory> TypeLab() {
+
+        List<Laboratory> laboratoryList=null;
+        try {
+            String GetSql="SELECT DISTINCT test_type FROM laboratory_test_master";
+            Map<String,Object> ptype=new HashMap<String, Object>();
+            laboratoryList=jdbcTemplate.query(GetSql,ptype,new LabTypeMapper());
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return laboratoryList;
+    }
+
+
 }

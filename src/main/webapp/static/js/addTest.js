@@ -23,11 +23,34 @@ app.controller('LaboratoryTest',function($scope,$http,$window,$timeout) {
                     $scope.selectedmaster=response.data.labinvest;
                 })
 
+
+            $scope.checkAll = function () {
+
+                if (!$scope.selectedAll) {
+                    $scope.selectedAll = true;
+                } else {
+                    $scope.selectedAll = false;
+                }
+                angular.forEach($scope.selectedmaster, function(x) {
+                    x.selected = $scope.selectedAll;
+                });
+
+                if ($('.check:checked').length<0) {
+                    $('#sub').removeAttr('disabled');
+
+                } else {
+                    $('#sub').attr('disabled', 'disabled');
+
+                }
+            };
+
         });
     $http.get("LabType")
         .then(function(response){
             $scope.type=response.data.laboratory;
             })
+
+
 
 $scope.typelab=function(test_type){
     $scope.test_type=test_type;
@@ -38,25 +61,7 @@ $scope.typelab=function(test_type){
      })
 }
 
-    $scope.checkAll = function () {
 
-        if (!$scope.selectedAll) {
-            $scope.selectedAll = true;
-        } else {
-            $scope.selectedAll = false;
-        }
-        angular.forEach($scope.selectedmaster, function(x) {
-            x.selected = $scope.selectedAll;
-        });
-
-        if ($('.check:checked').length<0) {
-            $('#sub').removeAttr('disabled');
-
-        } else {
-            $('#sub').attr('disabled', 'disabled');
-
-        }
-    };
 
     $scope.remove = function(){
         var removeDataList=[];
@@ -82,7 +87,34 @@ $scope.typelab=function(test_type){
                 })
         }
 
+        if ($('.check:checked').length<0) {
+            $('#sub').removeAttr('disabled');
+        } else {
+            $('#sub').attr('disabled', 'disabled');
+        }
 
+
+    };
+
+    $scope.edit=function(id){
+        if(id){
+
+            if ($('.check:checked').length<=1) {
+
+                $('#sub').removeAttr('disabled');
+            } else {
+                $('#sub').attr('disabled', 'disabled');
+            }
+        }else{
+
+            if($('.check:checked').length==1){
+                $('#sub').removeAttr('disabled');
+            }else{
+                $('#sub').attr('disabled', 'disabled');
+            }
+
+
+        }
     }
 
 
@@ -91,10 +123,11 @@ $scope.typelab=function(test_type){
 
         var labInvestigation={
             patient_info_id:id,
+            test_type:$scope.x.test_type,
             test_name:$scope.test_name,
             remarks:$scope.remarks
         }
-        console.log($scope.test_name);
+
         $http.post("AddLabReferences",labInvestigation).
             then(function(response){
                 $scope.status=response.data.status;
@@ -102,12 +135,61 @@ $scope.typelab=function(test_type){
                     $http.get("GetLabInvest/"+ $window.sessionStorage.patient_info).
                         then(function(response){
                             $scope.selectedmaster=response.data.labinvest;
+                            $scope.x.test_type="";
+                            $scope.test_name="";
+                            $scope.remarks="";
                         })
                 }
             })
     }
 
 
+
+
+    $scope.editPres=function(){
+
+        $scope.prescription_id="";
+        $scope.selectedAll = false;
+        angular.forEach($scope.selectedmaster, function(selected){
+            if(selected.selected){
+              $scope.investigation_id=selected.investigation_id;
+            }
+        });
+
+        $http.get("LabType")
+            .then(function(response){
+                $scope.invtype=response.data.laboratory;
+            })
+        $http.get("GetLabInvestigationId/"+ $scope.investigation_id)
+            .then (function(response) {
+               $scope.data=response.data;
+
+            $http.get("LaboratoryType/"+$scope.data.test_type).
+                then(function(response){
+                    $scope.labinst=response.data.laboratory;
+                })
+
+        });
+    }
+
+    $scope.typelabModel=function(test_type){
+        $http.get("LaboratoryType/"+test_type).
+            then(function(response){
+                $scope.labinst=response.data.laboratory;
+            })
+    }
+
+
+    $scope.editsubmit=function(id){
+        var labInvestigation={
+            test_type:$scope.data.test_type,
+            test_name:$scope.data.test_name,
+            remarks:$scope.data.remarks
+        }
+
+
+
+    }
 
 
 });

@@ -2071,13 +2071,12 @@ public class HelloController {
         JSONArray jsonArray=new JSONArray();
         JSONObject jsonObject=new JSONObject();
         List<Laboratory> laboratories;
-        laboratories=laboratoryService.getLaboratory();
+        laboratories=laboratoryService.TypeLab();
         Iterator<Laboratory> it=laboratories.iterator();
         while (it.hasNext()){
             Laboratory laboratory=it.next();
             JSONObject data=new JSONObject();
             data.put("test_type",laboratory.getTest_type());
-            data.put("test_id",laboratory.getTest_id());
             jsonArray.put(data);
         }
         jsonObject.put("laboratory",jsonArray);
@@ -2134,6 +2133,7 @@ public class HelloController {
         while (it.hasNext()){
             LabInvestigation labInvestigation=it.next();
             JSONObject data=new JSONObject();
+            data.put("test_type",labInvestigation.getTest_type());
             data.put("test_name",labInvestigation.getTest_name());
             data.put("remarks",labInvestigation.getRemarks());
             data.put("investigation_id",labInvestigation.getLabinvestigation_id());
@@ -2156,4 +2156,35 @@ public class HelloController {
         return  jsonObject.toString();
     }
 
+
+    @RequestMapping(value = "/GetLabInvestigationId/{investigation_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getLabInvestigationId(@PathVariable Integer investigation_id,HttpServletRequest request)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        LabInvestigation labInvestigation=new LabInvestigation();
+        labInvestigation=labInvestigationService.getLabInvestigation(investigation_id);
+        jsonObject.put("labinvestigation_id",labInvestigation.getLabinvestigation_id());
+        jsonObject.put("test_type",labInvestigation.getTest_type());
+        jsonObject.put("test_name",labInvestigation.getTest_name());
+        jsonObject.put("remarks",labInvestigation.getRemarks());
+
+
+
+        return  jsonObject.toString();
+    }
+
+    @RequestMapping(value = "/GetLabtype/{test_name}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getLabTypes(@PathVariable String test_name,HttpServletRequest request)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        Laboratory laboratory=new Laboratory();
+        laboratory=laboratoryService.getLabType(test_name);
+        jsonObject.put("test_type",laboratory.getTest_type());
+        jsonObject.put("test_id",laboratory.getTest_id());
+        jsonObject.put("desc",laboratory.getDescription());
+
+        return  jsonObject.toString();
+    }
 }

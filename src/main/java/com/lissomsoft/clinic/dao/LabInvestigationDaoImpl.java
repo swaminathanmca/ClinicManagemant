@@ -1,6 +1,7 @@
 package com.lissomsoft.clinic.dao;
 
 import com.lissomsoft.clinic.domain.LabInvestigation;
+import com.lissomsoft.clinic.domain.Laboratory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +30,10 @@ public class LabInvestigationDaoImpl implements LabInvestigationDao{
 
         int result=0;
         try{
-            String insertInvesSql="INSERT INTO lab_investigation (patient_info_id,test_name,remarks,created_at,updated_at) VALUES (:patient_info_id,:test_name,:remarks,:created_at,:created_at)";
+            String insertInvesSql="INSERT INTO lab_investigation (patient_info_id,test_type,test_name,remarks,created_at,updated_at) VALUES (:patient_info_id,:test_type,:test_name,:remarks,:created_at,:created_at)";
             Map<String,Object> parameter=new HashMap<String, Object>();
             parameter.put("patient_info_id",labInvestigation.getPatient_info_id());
+            parameter.put("test_type",labInvestigation.getTest_type());
             parameter.put("test_name",labInvestigation.getTest_name());
             parameter.put("remarks",labInvestigation.getRemarks());
             parameter.put("created_at",format.format(new Date()));
@@ -45,7 +47,7 @@ public class LabInvestigationDaoImpl implements LabInvestigationDao{
     }
 
     @Override
-    public List<LabInvestigation> getLabInvestigation(Integer patient_info_id) {
+    public List<LabInvestigation> getInvestigation(Integer patient_info_id) {
         List<LabInvestigation> labInvestigations=null;
         try {
 
@@ -78,4 +80,27 @@ public class LabInvestigationDaoImpl implements LabInvestigationDao{
 
         return result>0?true:false;
     }
+
+    @Override
+    public LabInvestigation getLabInvestigation(Integer investigation_id) {
+
+        LabInvestigation labInvestigation=new LabInvestigation();
+        try {
+
+            String getinvestSql="SELECT * FROM lab_investigation WHERE labinvestigation_id=:investigation_id";
+            Map<String,Object> paras=new HashMap<String, Object>();
+            paras.put("investigation_id",investigation_id);
+            labInvestigation=(LabInvestigation) jdbcTemplate.queryForObject(getinvestSql,paras,new LabInvestigationMapper());
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return labInvestigation;
+    }
+
+
+
 }

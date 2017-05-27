@@ -38,4 +38,14 @@ public class LaboratoryServiceImpl implements LaboratoryService {
     public List<Laboratory> getLaboratoryType(String test_type) {
         return laboratoryDao.getLaboratoryType(test_type);
     }
+
+    @Override
+    public Laboratory getLabType(String test_name) {
+        return laboratoryDao.getLabType(test_name);
+    }
+
+    @Override
+    public List<Laboratory> TypeLab() {
+        return laboratoryDao.TypeLab();
+    }
 }
