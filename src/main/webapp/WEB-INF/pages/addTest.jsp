@@ -166,6 +166,7 @@
                     <th><input type="checkbox" ng-model="selectedAll" ng-click="checkAll()"  /></th>
                     <th>Test Name</th>
                     <th>Remarks</th>
+
                   </tr>
                   </thead>
                   <tbody>
@@ -173,10 +174,21 @@
                     <td><input type="checkbox" ng-model="x.selected" class="check"   ng-click="edit(x.selected)"/></td>
                     <td>{{x.test_name}}</td>
                     <td>{{x.remarks}}</td>
+
                   </tr>
                   </tbody>
                   </table>
                 </div>
+              <div class="form-action">
+                <div class="row">
+                  <div class="col-lg-offset-4 col-lg-7">
+                    <button type="submit" class="btn btn-success" ng-click="prescriptionAdd()">Proceed</button>
+                    <button  type="submit" class="btn btn-danger " ng-click="remove()" >Remove</button>
+                    <button  type="submit" class="btn btn-primary" id="sub" ng-click="editPres()" disabled='disabled' data-target="#myform1" data-toggle="modal">Modify</button>
+
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="col-lg-2"></div>
           </div>

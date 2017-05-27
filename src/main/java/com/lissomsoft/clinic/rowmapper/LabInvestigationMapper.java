@@ -15,6 +15,7 @@ public class LabInvestigationMapper  implements RowMapper {
     public Object mapRow(ResultSet resultSet, int i) throws SQLException {
 
         LabInvestigation labInvestigation=new LabInvestigation();
+        labInvestigation.setLabinvestigation_id(resultSet.getInt("labinvestigation_id"));
         labInvestigation.setTest_name(resultSet.getString("test_name"));
         labInvestigation.setPatient_info_id(resultSet.getInt("patient_info_id"));
         labInvestigation.setRemarks(resultSet.getString("remarks"));

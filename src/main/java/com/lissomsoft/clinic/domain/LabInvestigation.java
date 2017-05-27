@@ -47,12 +47,13 @@ public class LabInvestigation {
         this.remarks = remarks;
     }
 
-    public String toStrng(){
+    public String toString(){
+
         return "LabInvestigation{"+
-                "labinvestigation_id="+labinvestigation_id+
-                "patient_info_id="+patient_info_id+
-                "test_name="+test_name+
-                "remarks="+remarks+
+                " labinvestigation_id="+labinvestigation_id+
+                " patient_info_id="+patient_info_id+
+                " test_name="+test_name+
+                " remarks="+remarks+
                 '}';
     }
 }

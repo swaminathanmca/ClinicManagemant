@@ -2144,4 +2144,16 @@ public class HelloController {
         return  jsonObject.toString();
     }
 
+    @RequestMapping(value = "/RemoveLabInvest/{investigation_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String removeLabInvest(@PathVariable Integer investigation_id,HttpServletRequest request)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        boolean flag;
+
+        flag=labInvestigationService.removeLabInvestigation(investigation_id);
+        jsonObject.put("status",flag);
+        return  jsonObject.toString();
+    }
+
 }

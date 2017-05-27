@@ -23,4 +23,9 @@ public class LabInvestigationServiceImpl implements LabInvestigationService {
     public List<LabInvestigation> getInvestigation(Integer patient_info_id) {
         return labInvestigationDao.getLabInvestigation(patient_info_id);
     }
+
+    @Override
+    public Boolean removeLabInvestigation(Integer investigation_id) {
+        return labInvestigationDao.removeLabInvestigation(investigation_id);
+    }
 }

@@ -61,4 +61,21 @@ public class LabInvestigationDaoImpl implements LabInvestigationDao{
 
         return labInvestigations;
     }
+
+    @Override
+    public Boolean removeLabInvestigation(Integer investigation_id) {
+        int result=0;
+        try {
+            String removeSql="DELETE FROM lab_investigation WHERE labinvestigation_id=:labinvestigation_id";
+            Map<String,Object> pars=new HashMap<String, Object>();
+            pars.put("labinvestigation_id",investigation_id);
+            result=jdbcTemplate.update(removeSql,pars);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return result>0?true:false;
+    }
 }

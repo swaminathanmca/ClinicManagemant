@@ -38,6 +38,52 @@ $scope.typelab=function(test_type){
      })
 }
 
+    $scope.checkAll = function () {
+
+        if (!$scope.selectedAll) {
+            $scope.selectedAll = true;
+        } else {
+            $scope.selectedAll = false;
+        }
+        angular.forEach($scope.selectedmaster, function(x) {
+            x.selected = $scope.selectedAll;
+        });
+
+        if ($('.check:checked').length<0) {
+            $('#sub').removeAttr('disabled');
+
+        } else {
+            $('#sub').attr('disabled', 'disabled');
+
+        }
+    };
+
+    $scope.remove = function(){
+        var removeDataList=[];
+        $scope.selectedAll = false;
+        angular.forEach($scope.selectedmaster, function(selected){
+            if(selected.selected){
+                removeDataList.push(selected);
+            }
+        });
+
+        for(var j in removeDataList){
+            $scope.investigation_id=removeDataList[j].investigation_id;
+            console.log($scope.investigation_id);
+            $http.get("RemoveLabInvest/"+$scope.investigation_id).
+                then(function(response){
+                    $scope.status=response.data.status;
+                    if($scope.status){
+                        $http.get("GetLabInvest/"+ $window.sessionStorage.patient_info).
+                            then(function(response){
+                                $scope.selectedmaster=response.data.labinvest;
+                            })
+                    }
+                })
+        }
+
+
+    }
 
 
 
