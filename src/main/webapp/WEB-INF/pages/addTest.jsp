@@ -156,8 +156,8 @@
             </div>
           </div>
           <div  class="row" ng-if="selectedmaster.length ">
-            <div class="col-lg-2"></div>
-            <div class="col-lg-8">
+
+            <div class="col-lg-12">
               <div class="table-responsive">
 
                 <table class="table table-striped table-bordered table-hover " id="dataTables-example">
@@ -190,7 +190,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-2"></div>
+
           </div>
 
 
@@ -215,7 +215,7 @@
           <div class="row">
             <div class="col-lg-12">
 
-              <form role="form" class="form-horizontal" name="myform1"  ng-submit="editsubmit(investId)">
+              <form role="form" class="form-horizontal" name="myform1"  ng-submit="editsubmit(data.labinvestigation_id)">
                 <fieldset>
 
                   <div class="form-group">

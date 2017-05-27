@@ -13,4 +13,5 @@ public interface LabInvestigationDao {
     List<LabInvestigation> getInvestigation(Integer patient_info_id);
     Boolean removeLabInvestigation(Integer investigation_id);
     LabInvestigation getLabInvestigation(Integer investigation_id);
+    Boolean editlabInvestigation(LabInvestigation labInvestigation);
 }

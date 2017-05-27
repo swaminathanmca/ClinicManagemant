@@ -2187,4 +2187,15 @@ public class HelloController {
 
         return  jsonObject.toString();
     }
+    @RequestMapping(value = "/EditLabInvestigation",method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String editLabInvestigation(@RequestBody LabInvestigation labInvestigation)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        Boolean flag;
+        flag=labInvestigationService.editlabInvestigation(labInvestigation);
+        jsonObject.put("status",flag);
+
+        return jsonObject.toString();
+    }
 }

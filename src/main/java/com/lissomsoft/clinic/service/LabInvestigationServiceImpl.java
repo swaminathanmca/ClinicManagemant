@@ -33,4 +33,9 @@ public class LabInvestigationServiceImpl implements LabInvestigationService {
     public LabInvestigation getLabInvestigation(Integer investigation_id) {
         return labInvestigationDao.getLabInvestigation(investigation_id);
     }
+
+    @Override
+    public Boolean editlabInvestigation(LabInvestigation labInvestigation) {
+        return labInvestigationDao.editlabInvestigation(labInvestigation);
+    }
 }

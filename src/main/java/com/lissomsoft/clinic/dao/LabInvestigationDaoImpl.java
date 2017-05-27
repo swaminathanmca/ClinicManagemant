@@ -101,6 +101,28 @@ public class LabInvestigationDaoImpl implements LabInvestigationDao{
         return labInvestigation;
     }
 
+    @Override
+    public Boolean editlabInvestigation(LabInvestigation labInvestigation) {
+
+        int result=0;
+        try {
+
+            String editLabSql="UPDATE lab_investigation SET test_type=:test_type,test_name=:test_name,remarks=:remarks WHERE labinvestigation_id=:id ";
+            Map<String,Object> parals=new HashMap<String, Object>();
+            parals.put("id",labInvestigation.getLabinvestigation_id());
+            parals.put("test_type",labInvestigation.getTest_type());
+            parals.put("test_name",labInvestigation.getTest_name());
+            parals.put("remarks",labInvestigation.getRemarks());
+            result=jdbcTemplate.update(editLabSql,parals);
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return result>0?true :false;
+    }
 
 
 }

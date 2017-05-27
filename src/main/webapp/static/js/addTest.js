@@ -182,13 +182,22 @@ $scope.typelab=function(test_type){
 
     $scope.editsubmit=function(id){
         var labInvestigation={
+            labinvestigation_id:id,
             test_type:$scope.data.test_type,
             test_name:$scope.data.test_name,
             remarks:$scope.data.remarks
         }
 
+        $http.post("EditLabInvestigation",labInvestigation).
+            then(function(response){
+                $scope.st=response.data.status;
+                location.href="PatientTest";
+            })
 
 
+    }
+    $scope.prescriptionAdd=function(){
+        location.href="AddPrescription";
     }
 
 
