@@ -13,6 +13,24 @@ app.controller('Prescription',function($scope,$http,$window,$timeout){
     $scope.patient_info="";
 
 
+
+    $scope.freAll=function(all){
+    $scope.stm=all;
+
+        if($scope.stm==1){
+            $scope.myform.mrng=1;
+            $scope.myform.aftn=1;
+            $scope.myform.nght=1;
+
+        }else{
+            $scope.myform.mrng=0;
+            $scope.myform.aftn=0;
+            $scope.myform.nght=0;
+
+
+        }
+    }
+
     $http.get("GetComplaint/"+$scope.visit_id)
         .then(function (response){
             $scope.patientcomplaint = response.data.patientcomplaint;
@@ -136,6 +154,7 @@ app.controller('Prescription',function($scope,$http,$window,$timeout){
 
     $scope.typepres=function(id){
         $scope.type=id;
+        $scope.medicine_id="";
       $http.get("PrescriptionType/"+$scope.type).
           then(function (response, status, headers, config) {
               $scope.medicines=response.data.medicines;

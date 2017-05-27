@@ -118,16 +118,30 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <div class="col-lg-3">
+                      <div class="col-lg-5">
                         <div class="input-group">
                           <span class="input-group-addon">
                             TYPE
                           </span>
-                         <SELECT class="form-control" ng-model="myform.type" ng-change="typepres(myform.type)" required>
+                        <%-- <SELECT class="form-control" ng-model="myform.type" ng-change="typepres(myform.type)" required>
                            <option value="1">Tablet</option>
                            <option value="2">Syrup</option>
                            <option value="3">Injection</option>
-                         </SELECT>
+                         </SELECT>--%>
+                          <div class="checkbox  fileRadioBox form-control">
+                            <label>
+                              <input type="radio" name="frequency"  value="1"   ng-model="myform.type" ng-click="typepres(myform.type)">&nbsp;Tablet
+                            </label>
+
+                            <label>
+                              <input type="radio" name="frequency" value="2"  ng-model="myform.type" ng-click="typepres(myform.type)">&nbsp;Syrup
+
+                            </label>
+                            <label>
+                              <input type="radio" name="frequency" value="3"  ng-model="myform.type" ng-click="typepres(myform.type)">&nbsp;Injection
+
+                            </label>
+                          </div>
                         </div>
                       </div>
                       <div class="col-lg-4">
@@ -145,22 +159,20 @@
                 <div class="col-lg-3">
                   <div class="input-group">
                     <span class="input-group-addon">Fasting</span>
-                    <SELECT class="form-control" name="frequency" ng-model="myform.frequency" required>
-                      <option value="0">Before</option>
-                      <option value="1">After</option>
-                    </SELECT>
+                    <div class="checkbox  fileRadioBox form-control">
+                      <label>
+                        <input type="radio" name="frequency"  value="0"   ng-model="myform.frequency">Before
+                      </label>
+
+                      <label>
+                        <input type="radio" name="frequency" value="1"  ng-model="myform.frequency" checked="checked">
+                        After
+                      </label>
+                    </div>
+
                   </div>
                 </div>
-          <div class="col-lg-2">
-            <div class="input-group">
-              <span class="input-group-addon" >Days</span>
-              <input name="dayscount" class="form-control" type="text"  ng-model="myform.count" ng-pattern="/^[0-9]*$/" required>
-            </div>
-             <span class="text-danger wrapper text-center ng-binding"
-                   ng-show="myform.dayscount.$error.pattern">Please Enter Valid Days</span>
-            <span class="text-danger wrapper text-center ng-binding"
-                  ng-show="myform.dayscount.$invalid &&  myform.dayscount.$touched">Please Enter Days</span>
-          </div>
+
                     </div>
 <div class="form-group">
   <div class="col-lg-5">
@@ -168,13 +180,16 @@
       <span class="input-group-addon">Frequency</span>
       <div class="checkbox  fileRadioBox form-control">&nbsp;
         <label>
-          <input type="checkbox" ng-checked="selected=='1'"  ng-true-value="'1'"  ng-false-value="' '"  ng-model="myform.mrng"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" />&nbsp;Morning
+          <input type="checkbox" ng-checked="myform.mrng=='1'"  ng-true-value="'1'"  ng-false-value="' '"  ng-model="myform.mrng"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" />&nbsp;Morning
         </label>
         <label>
-          <input type="checkbox"  ng-checked="selected=='1'" ng-true-value="'1'" ng-false-value="' '"  ng-model="myform.aftn"  class="ng-pristine ng-untouched ng-valid ng-valid-required" >&nbsp;AfterNoon
+          <input type="checkbox"  ng-checked="myform.aftn=='1'" ng-true-value="'1'" ng-false-value="' '"  ng-model="myform.aftn"  class="ng-pristine ng-untouched ng-valid ng-valid-required" >&nbsp;AfterNoon
         </label>
         <label>
-          <input type="checkbox" ng-checked="selected=='1'"  ng-true-value="'1'" ng-false-value="' '" ng-model="myform.nght"  class="ng-pristine ng-untouched ng-valid ng-valid-required" >&nbsp;Night
+          <input type="checkbox" ng-checked="myform.nght=='1'"  ng-true-value="'1'" ng-false-value="' '" ng-model="myform.nght"  class="ng-pristine ng-untouched ng-valid ng-valid-required" >&nbsp;Night
+        </label>
+        <label>
+          <input type="checkbox" ng-true-value="'1'" ng-false-value="'0'" ng-model="myform.all" ng-click="freAll(myform.all)" class="ng-pristine ng-untouched ng-valid ng-valid-required" >&nbsp;All</label>
         </label>
       </div>
     </div>
@@ -211,6 +226,17 @@
 </div>
 
                     <div class="form-group">
+
+                      <div class="col-lg-2">
+                        <div class="input-group">
+                          <span class="input-group-addon" >Days</span>
+                          <input name="dayscount" class="form-control" type="text"  ng-model="myform.count" ng-pattern="/^[0-9]*$/" required>
+                        </div>
+             <span class="text-danger wrapper text-center ng-binding"
+                   ng-show="myform.dayscount.$error.pattern">Please Enter Valid Days</span>
+            <span class="text-danger wrapper text-center ng-binding"
+                  ng-show="myform.dayscount.$invalid &&  myform.dayscount.$touched">Please Enter Days</span>
+                      </div>
                       <div class="col-lg-6">
                         <div class="input-group">
                           <span class="input-group-addon">Remarks</span>
@@ -261,8 +287,8 @@
                       <td><input type="checkbox" ng-model="x.selected" class="check"   ng-click="edit(x.selected)"/></td>
                       <td>{{x.medicine_name}}</td>
                       <td>{{x.mg}}</td>
-                      <td ><p ng-if="x.frequency==0">Before Fasting</p>
-                        <p ng-if="x.frequency==1">After  Fasting</p></td>
+                      <td ><p ng-if="x.frequency==0">BF</p>
+                        <p ng-if="x.frequency==1">AF</p></td>
                       <td><p ng-if="x.mrg_qty==1"><i class="fa fa-check"></i> </p></td>
                       <td><p ng-if="x.aft_qty==1"><i class="fa fa-check"></i> </p></td>
                       <td><p ng-if="x.ngt_qty==1"><i class="fa fa-check"></i> </p></td>
@@ -286,6 +312,8 @@
                   </table>
                   <p><SPAN>M-Morning</SPAN>,<SPAN>A-After Noon</SPAN>,<SPAN>N-Night</SPAN></p>
                   <P><SPAN>DF-Day Frequency</SPAN></P>
+                  <p><span>BF-Before Food</span></p>
+                  <p><span>AF-After Food</span></p>
                  <%-- <p class=" text-center">
                     <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" ></dir-pagination-controls>
                   </p>--%>
@@ -327,14 +355,28 @@
 
 
                   <div class="form-group">
-                    <div class="col-lg-3">
+                    <div class="col-lg-7">
                       <div class="input-group">
                         <span class="input-group-addon">Type</span>
-                        <SELECT class="form-control" ng-model="types" ng-change="typepres(types)" required>
+                   <%--     <SELECT class="form-control" ng-model="types" ng-change="typepres(types)" required>
                           <option value="1">Tablet</option>
                           <option value="2">Syrup</option>
                           <option value="3">Injection</option>
-                        </SELECT>
+                        </SELECT>--%>
+                        <div class="checkbox pb10 fileRadioBox form-control">
+                          <label>
+                            <input type="radio" name="types"  value="1"   ng-model="types" ng-click="typepres(types)">&nbsp;Tablet
+                          </label>
+
+                          <label>
+                            <input type="radio" name="types" value="2"  ng-model="types" ng-click="typepres(types)">&nbsp;Syrup
+
+                          </label>
+                          <label>
+                            <input type="radio" name="types" value="3"  ng-model="types" ng-click="typepres(types)">&nbsp;Injection
+
+                          </label>
+                        </div>
                       </div>
                     </div>
                     <div class="col-lg-5">
@@ -344,24 +386,28 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-3">
-                      <div class="input-group">
-                        <span class="input-group-addon">Fasting</span>
-                        <SELECT class="form-control" name="frequency" ng-model="frequencys" required>
-                          <option value="0">Before</option>
-                          <option value="1">After</option>
-                        </SELECT>
-                      </div>
-                    </div>
+
                   </div>
                   <div class="form-group">
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                       <div class="input-group">
-                        <span class="input-group-addon">Days</span>
-                        <input type="text" class="form-control" ng-model="x.days" required>
+                        <span class="input-group-addon">Fasting</span>
+                        <%--  <SELECT class="form-control" name="frequency" ng-model="frequencys" required>
+                            <option value="0">Before</option>
+                            <option value="1">After</option>
+                          </SELECT>--%>
+                        <div class="checkbox pb10 fileRadioBox form-control">
+                          <label>
+                            <input type="radio" name="frequency"  value="0"   ng-model="frequencys">Before
+                          </label>
+
+                          <label>
+                            <input type="radio" name="frequency" value="1"  ng-model="frequencys">
+                            After
+                          </label>
+                        </div>
                       </div>
                     </div>
-
                     <div class="col-lg-6">
                       <div class="input-group">
                           <span class="input-group-addon">
@@ -384,6 +430,12 @@
                     </div>
                   </div>
                   <div class="form-group">
+                    <div class="col-lg-3">
+                      <div class="input-group">
+                        <span class="input-group-addon">Days</span>
+                        <input type="text" class="form-control" ng-model="x.days" required>
+                      </div>
+                    </div>
                     <div class="col-lg-8">
                       <div class="input-group">
                         <span class="input-group-addon">Day Frequency</span>
@@ -412,6 +464,11 @@
                         </div>
                       </div>
                     </div>
+
+
+                  </div>
+                  <div class="form-group">
+
                     <div class="col-lg-4">
                       <div class="input-group">
                         <span class="input-group-addon">Remarks</span>
