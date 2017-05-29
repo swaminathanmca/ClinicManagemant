@@ -124,6 +124,7 @@
                 </address>
               </div>
             </div>
+            <div ng-if="selectedmaster.length">
             <table class="table table-striped" >
               <thead>
               <tr>
@@ -167,7 +168,7 @@
             <p><SPAN>M-Morning</SPAN>,<SPAN>A-After Noon</SPAN>,<SPAN>N-Night</SPAN></p>
             <P><SPAN>DF-Day Frequency</SPAN></P>
             <p><span>M-Monday,T-Tuesday,W-Wednesday,TH-Thursday,F-Friday,SA-Saturday,SU-Sunday</span></p>
-
+            </div>
            <%-- <div class="row">
               <div class="col-sm-12 col-print-12">
                <table class="table table-striped">
@@ -220,7 +221,23 @@
               </button>
 
             </div>--%>
+          <table class="table table-striped" ng-if="lab_investigation.length">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>Test Type</th>
+              <th>Test Name</th>
+              <th>Remarks</th>
+            </tr>
+            </thead>
+            <tr ng-repeat="lx in lab_investigation">
+              <td>{{$index+1}}</td>
+              <td>{{lx.test_type}}</td>
+              <td>{{lx.test_name}}</td>
+              <td>{{lx.remarks}}</td>
+            </tr>
 
+          </table>
 
 
           </div>

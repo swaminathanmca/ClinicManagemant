@@ -77,7 +77,7 @@ location.href="AddComplaint";
             .then (function (response,status,headers,config) {
             $scope.result=response.data;
 
-            if($scope.ltype==0){
+            if($scope.ltype==1){
                 location.href="PatientTest";
             }else {
                 location.href="AddPrescription";

@@ -7,6 +7,8 @@ app.controller('Invoice',function($scope,$http,$window,$timeout){
     $scope.branch_id= $window.sessionStorage.branch_id;
     $scope.doctor_id=$window.sessionStorage.doctor_id;
     $scope.selectedList=[];
+    $scope.lab_investigation=[];
+    $scope.selectedmaster=[];
 
     $http.get("BranchDetails/"+$scope.branch_id).
         then(function(response,status,headers,config){
@@ -41,6 +43,13 @@ app.controller('Invoice',function($scope,$http,$window,$timeout){
                                     .then(function(response){
                                         $scope.selectedmaster=response.data.prescription;
                                     })
+
+                                $http.get("GetLabInvest/"+$window.sessionStorage.patient_info_id)
+                                    .then(function(response){
+                                        $scope.lab_investigation=response.data.labinvest;
+                                    })
+
+
                             })
 
 
