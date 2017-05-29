@@ -37,12 +37,13 @@ app.controller('Invoice',function($scope,$http,$window,$timeout){
                                 $scope.info=response.data;
                                 $window.sessionStorage.patient_info_id=$scope.info.patient_info_id;
 
+                                $http.get("GetPrescription/"+$window.sessionStorage.patient_info_id)
+                                    .then(function(response){
+                                        $scope.selectedmaster=response.data.prescription;
+                                    })
                             })
 
-                        $http.get("GetPrescription/"+$window.sessionStorage.patient_info_id)
-                            .then(function(response){
-                                $scope.selectedmaster=response.data.prescription;
-                            })
+
                     })
 
 

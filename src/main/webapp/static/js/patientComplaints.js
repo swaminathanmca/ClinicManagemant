@@ -66,7 +66,9 @@ location.href="AddComplaint";
             refereal_details:$scope.patientcomplaint.refereal_details,
             complaint:$scope.selectedlist,
             procedures:$scope.procedures,
-            diagnosis:$scope.diagnosis
+            diagnosis:$scope.diagnosis,
+            observation:$scope.observation,
+            investigation:$scope.investigation
         }
 
 

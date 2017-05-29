@@ -39,7 +39,7 @@ public class PatientInfoDaoImpl implements PatientInfoDao {
         TransactionStatus status = platformTransactionManager.getTransaction(paramTransactionDefinition);
 
         try{
-            String addpatientInfo="insert into patient_info_master(patient_pid,weight,type,bp,referal_details,procedures,diagnosis,doctor_detail_id,branch_id,created_at,updated_at) values(:patient_pid,:weight,:vtype,:bp,:referal_details,:procedures,:diagnosis,:doctor_id,:branch_id,:created_at,:created_at)";
+            String addpatientInfo="insert into patient_info_master(patient_pid,weight,type,bp,referal_details,procedures,diagnosis,observation,investigation,doctor_detail_id,branch_id,created_at,updated_at) values(:patient_pid,:weight,:vtype,:bp,:referal_details,:procedures,:diagnosis,:observation,:investigation,:doctor_id,:branch_id,:created_at,:created_at)";
             Map<String,Object> parameter=new HashMap<String, Object>();
             parameter.put("patient_pid",patientInfo.getPatient_pid());
             parameter.put("weight",patientInfo.getWeight());
@@ -48,6 +48,8 @@ public class PatientInfoDaoImpl implements PatientInfoDao {
             parameter.put("referal_details",patientInfo.getRefereal_details());
             parameter.put("procedures",patientInfo.getProcedures());
             parameter.put("diagnosis",patientInfo.getDiagnosis());
+            parameter.put("observation",patientInfo.getObservation());
+            parameter.put("investigation",patientInfo.getInvestigation());
             parameter.put("doctor_id",patientInfo.getDoctor_id());
             parameter.put("branch_id",patientInfo.getBranch_id());
             parameter.put("created_at",format.format(new Date()));

@@ -188,6 +188,22 @@
                     <div class="form-group">
                       <div class="col-lg-12">
                         <div class="input-group">
+                          <span class="input-group-addon">Observations</span>
+                          <textarea type="text" class="form-control" ng-model="observation" name="observation" row="2" ></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-12">
+                        <div class="input-group">
+                          <span class="input-group-addon">Observations</span>
+                          <textarea type="text" class="form-control" ng-model="investigation" name="investigation" row="2" ></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-12">
+                        <div class="input-group">
                           <span class="input-group-addon">Procedures</span>
                           <textarea type="text" class="form-control" ng-model="procedures" name="procedures" rows="4" required> </textarea>
                         </div>

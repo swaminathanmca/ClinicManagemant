@@ -20,6 +20,8 @@ public class PatientInfo {
     private List<Complaint> complaint;
     private String procedures;
     private String diagnosis;
+    private String investigation;
+    private String observation;
     private String date;
 
 
@@ -128,6 +130,21 @@ public class PatientInfo {
         this.branch_id = branch_id;
     }
 
+    public String getInvestigation() {
+        return investigation;
+    }
+
+    public void setInvestigation(String investigation) {
+        this.investigation = investigation;
+    }
+
+    public String getObservation() {
+        return observation;
+    }
+
+    public void setObservation(String observation) {
+        this.observation = observation;
+    }
 
     public String getDate() {
         return date;
@@ -152,6 +169,8 @@ public class PatientInfo {
                 " complaint = "+ complaint +
                 " procedures = "+ procedures +
                 " diagnosis ="+ diagnosis +
+                " investigation ="+investigation+
+                " observation ="+observation+
                 " date = "+ date +
                 "}";
     }
