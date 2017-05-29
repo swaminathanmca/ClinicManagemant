@@ -84,10 +84,10 @@
   <br>
   <div class="row">
     <div class="col-lg-12">
-
+      <h4 class="txtrns"> <a> <i class="fa fa-user"></i></a>&nbsp;&nbsp; {{patientcomplaint.first_name}}&nbsp;{{patientcomplaint.last_name}}&nbsp;&nbsp;&nbsp;&nbsp; <span ng-if="patientcomplaint.gender==1">Male</span> <span ng-if="patientcomplaint.gender==0">Female</span>,{{patientcomplaint.age}} &nbsp;&nbsp;<span>(ID:{{patientcomplaint.patient_pid}})</span> </h4>
     </div>
   </div>
-
+<br>
   <div class="row">
     <div class="col-lg-12">
       <div class="panel panel-primary">
@@ -100,7 +100,7 @@
               <form class="form-horizontal ng-invalid" role="form" name="myform" ng-submit="submit(info.patient_info_id)"
                     novalidate>
                 <fieldset>
-                  <div class="form-group">
+<%--                  <div class="form-group">
                     <div class="col-lg-6">
                       <div class="input-group">
                         <span class="input-group-addon">Patient Id</span>
@@ -113,7 +113,7 @@
                         <label class="form-control" type="text">{{patientcomplaint.first_name}} &nbsp; {{patientcomplaint.last_name}}</label>
                       </div>
                     </div>
-                  </div>
+                  </div>--%>
                   <div class="form-group">
                     <div class="col-lg-3">
                       <div class="input-group">

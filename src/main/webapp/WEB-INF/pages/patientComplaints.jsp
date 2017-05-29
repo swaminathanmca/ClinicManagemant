@@ -86,7 +86,8 @@
   <div id="page-wrapper">
     <br>
     <div class="row">
-     <div class="col-lg-12">
+      <div class="col-lg-1"></div>
+     <div class="col-lg-10">
        <h4 class="txtrns"> <a> <i class="fa fa-user"></i></a>&nbsp;&nbsp; {{patientcomplaint.first_name}}&nbsp;{{patientcomplaint.last_name}}&nbsp;&nbsp;&nbsp;&nbsp; <span ng-if="patientcomplaint.gender==1">Male</span> <span ng-if="patientcomplaint.gender==0">Female</span>,{{patientcomplaint.age}} &nbsp;&nbsp;<span>(ID:{{patientcomplaint.patient_pid}})</span> </h4>
      </div>
     </div>
@@ -146,8 +147,10 @@
                         <div class="input-group">
                           <span class="input-group-addon">BP</span>
 
-                          <input type="text" class="form-control" ng-model="patientcomplaint.pressure">
+                          <input type="text" class="form-control" name="bpressure" ng-model="patientcomplaint.pressure" required>
                         </div>
+                         <span class="text-danger wrapper text-center ng-binding"
+                               ng-show="myform.bpressure.$invalid &&  myform.bpressure.$touched">Please Enter Blood Pressure</span>
                       </div>
 
 
@@ -199,7 +202,7 @@
                     <div class="form-group">
                       <div class="col-lg-12">
                         <div class="input-group">
-                          <span class="input-group-addon">Observations</span>
+                          <span class="input-group-addon">Investigation</span>
                           <textarea type="text" class="form-control" ng-model="investigation" name="investigation" row="2" ></textarea>
                         </div>
                       </div>
@@ -214,8 +217,8 @@
                             ng-show="myform.procedures.$invalid &&  myform.procedures.$touched">Please Enter The Procedures</span>
                       </div>
                     </div>
-                    <div class="form-group">
-                     <%-- <div class="col-lg-3">
+                   <%-- <div class="form-group">
+                     &lt;%&ndash; <div class="col-lg-3">
                         <div class="checkbox  fileRadioBox form-control">&nbsp;
                             <label>
                               <input type="checkbox"  ng-model="labassit"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" />&nbsp;Lab Test
@@ -228,25 +231,52 @@
                             <input type="checkbox"  ng-model="prescrip"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" />&nbsp;Prescription
                           </label>
                         </div>
-                      </div>--%>
+                      </div>&ndash;%&gt;
                       <div class="col-lg-4">
-                        <div class="input-group m-b">
-                          <span class="input-group-addon"></span>
-                          <div class="checkbox pb10 fileRadioBox">
+                        <div class="input-group">
+                          <span class="input-group-addon">Type</span>
+                          <div class="checkbox  fileRadioBox form-control">
                             &nbsp;
                             <label>
-                              <input type="checkbox"    ng-true-value="'true'"  ng-false-value="''"  ng-model="lab">
+                              <input type="radio"  value="0"  name="lab"  ng-model="lab" checked="checked">
                               Lab
                             </label>
 
                             <label>
-                              <input type="checkbox"    ng-true-value="'true'"  ng-false-value="''"  ng-model="prescripe">
+                              <input type="radio" value="1"  name="prescripe"  ng-model="prescripe">
                               Prescription
                             </label>
                           </div>
 
                         </div>
                       </div>
+                    </div>--%>
+                    <div class="form-group">
+                      <div class="col-lg-5">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            TYPE
+                          </span>
+                          <%-- <SELECT class="form-control" ng-model="myform.type" ng-change="typepres(myform.type)" required>
+                             <option value="1">Tablet</option>
+                             <option value="2">Syrup</option>
+                             <option value="3">Injection</option>
+                           </SELECT>--%>
+                          <div class="checkbox  fileRadioBox form-control">
+                            <label>
+                              <input type="radio" name="ltype"  value="1"   ng-model="ltype" required="required">&nbsp;Lab
+                            </label>
+
+                            <label>
+                              <input type="radio" name="ltype" value="2"  ng-model="ltype" required="required">&nbsp;Prescription
+
+                            </label>
+
+                          </div>
+                        </div>
+                      </div>
+
+
                     </div>
 
                     <div class="form-actions">

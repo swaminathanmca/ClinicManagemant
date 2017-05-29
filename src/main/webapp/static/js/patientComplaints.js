@@ -76,11 +76,10 @@ location.href="AddComplaint";
         $http.post('patientInfo',PatientInfo)
             .then (function (response,status,headers,config) {
             $scope.result=response.data;
-            if($scope.lab && $scope.prescripe){
-                console.log("Double");
-            }else if($scope.lab){
+
+            if($scope.ltype==0){
                 location.href="PatientTest";
-            }else if($scope.prescripe){
+            }else {
                 location.href="AddPrescription";
             }
 
