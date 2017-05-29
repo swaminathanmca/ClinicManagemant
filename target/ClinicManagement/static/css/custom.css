@@ -155,3 +155,6 @@ hr{
     text-decoration: underline;
     cursor: hand;
 }
+.txtrns{
+    text-transform: capitalize;
+}

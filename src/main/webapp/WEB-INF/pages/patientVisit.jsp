@@ -79,15 +79,15 @@
       </div>
 
     </div>
-
   </nav>
   <div id="page-wrapper">
-    <br>
     <div class="row">
       <div class="col-lg-12">
+        <h4> <a> <i class="fa fa-user"></i></a>&nbsp;&nbsp; {{data.first_name}}&nbsp;{{data.last_name}}&nbsp;&nbsp; &nbsp;&nbsp;  <span ng-if="data.gender==1">Male</span> <span ng-if="data.gender==0">Female</span>,{{data.age}} &nbsp;&nbsp;<span>(ID:{{data.patient_pid}})</span> </h4>
 
       </div>
     </div>
+    <br>
     <div class="row">
       <div class="col-lg-1"></div>
       <div class="col-lg-12">
@@ -102,7 +102,7 @@
                       novalidate>
                   <fieldset>
 
-                    <div class="form-group">
+                   <%-- <div class="form-group">
                       <div class="col-lg-6">
                         <div class="input-group">
                           <span class="input-group-addon">
@@ -120,7 +120,7 @@
                         </div>
                       </div>
 
-                    </div>
+                    </div>--%>
 
                     <div class="form-group">
                       <div class="col-lg-6">
@@ -167,10 +167,9 @@
                       <div class="col-lg-3">
                         <div class="input-group">
                           <span class="input-group-addon">BP</span>
-                          <input type="text" class="form-control" ng-model="pressure" name="pressure"  ng-pattern="/^[0-9]*$/" required>
+                          <input type="text" class="form-control" ng-model="pressure" name="pressure"  ng-pattern="/^[0-9]*$/" >
                         </div>
-                          <span class="text-danger wrapper text-center ng-binding"
-                                ng-show="myform.pressure.$error.pattern">Please Enter Valid Pressure</span>
+
                       </div>
                       <div class="col-lg-3">
                         <div class="input-group">

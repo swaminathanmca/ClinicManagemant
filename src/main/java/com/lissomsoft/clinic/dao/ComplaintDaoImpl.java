@@ -108,7 +108,7 @@ public class ComplaintDaoImpl implements ComplaintDao {
         PatientComplaint patientcomplaint=new PatientComplaint();
         try{
 
-            String patientcomplaintSql="select pm.patient_pid,pm.patient_id,pm.first_name,pm.last_name,pv.weight,pv.type,pv.pressure,pv.refereal_details,pv.created_at from patient_master pm,patient_visit pv where pm.patient_id=pv.patient_id and pv.visit_id=:visit_id";
+            String patientcomplaintSql="select pm.patient_pid,pm.dob,pm.sex,pm.patient_id,pm.first_name,pm.last_name,pv.weight,pv.type,pv.pressure,pv.refereal_details,pv.created_at from patient_master pm,patient_visit pv where pm.patient_id=pv.patient_id and pv.visit_id=:visit_id";
             Map<String,Object> pcomplaint=new HashMap<String, Object>();
             pcomplaint.put("visit_id",visit_id);
 

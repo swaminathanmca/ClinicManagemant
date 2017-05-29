@@ -15,6 +15,8 @@ app.controller('patientVisit',function($scope,$window,$http){
     $http.get("patientDetails/"+$scope.patient_pid).
         then(function(response,status,headers,config){
             $scope.data=response.data;
+            $scope.dob=$scope.data.dob;
+
         });
 
    /* $http.get("ViewDoctor/"+ $scope.branch_id +"/"+$scope.clinic_id)
@@ -76,6 +78,8 @@ app.controller('patientVisit',function($scope,$window,$http){
     }
 
     $scope.submit=function(){
+
+
         var visit={
             patient_pid:$scope.patient_pid,
             branch_id:$scope.branch_id,

@@ -20,6 +20,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Iterator;
 import java.util.List;
 import java.util.jar.JarEntry;
@@ -674,11 +676,26 @@ public class HelloController {
         JSONObject data=new JSONObject();
         PatientComplaint patientcomplaint;
         patientcomplaint=complaintService.patientcomplaint(visit_id);
+        String dob[]=patientcomplaint.getDob().split("-");
+        Integer dyear=Integer.parseInt(dob[2]);
+        Integer dmonth=Integer.parseInt(dob[0]);
+        Integer ddyas=Integer.parseInt(dob[1]);
+
+        LocalDate birthday=LocalDate.of(dyear,dmonth,ddyas);
+        LocalDate now=LocalDate.now();
+        Period p=Period.between(birthday,now);
+
+        if(p.getYears()>=1){
+            jsonObject.put("age",p.getYears()+"  Years");
+        }else{
+            jsonObject.put("age",p.getMonths()+"  Months"+p.getDays()+"  Days");
+        }
 
         jsonObject.put("patient_pid",patientcomplaint.getPatient_pid());
         jsonObject.put("patient_id",patientcomplaint.getPatient_id());
         jsonObject.put("first_name",patientcomplaint.getFirst_name());
         jsonObject.put("last_name",patientcomplaint.getLast_name());
+        jsonObject.put("gender",patientcomplaint.getGender());
         jsonObject.put("weight",patientcomplaint.getWeight());
         jsonObject.put("height",patientcomplaint.getHeight());
         jsonObject.put("pressure",patientcomplaint.getPressure());
@@ -1030,6 +1047,18 @@ public class HelloController {
         JSONObject jsonObject=new JSONObject();
         JSONObject data=new JSONObject();
         Patient patient=patientService.patientdetails(patient_id);
+        String dob[]=patient.getDob().split("-");
+        Integer dyear=Integer.parseInt(dob[2]);
+        Integer dmonth=Integer.parseInt(dob[0]);
+        Integer ddyas=Integer.parseInt(dob[1]);
+        LocalDate birthday=LocalDate.of(dyear,dmonth,ddyas);
+        LocalDate now=LocalDate.now();
+        Period p=Period.between(birthday,now);
+        if(p.getYears()>=1){
+            jsonObject.put("age",p.getYears()+"  Years");
+        }else{
+            jsonObject.put("age",p.getMonths()+"  Months"+p.getDays()+"  Days");
+        }
         jsonObject.put("first_name",patient.getFullName());
         jsonObject.put("last_name",patient.getLastName());
         jsonObject.put("address1",patient.getAddress1());

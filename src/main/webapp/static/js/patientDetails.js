@@ -81,7 +81,7 @@ $scope.editUser=function(){
         $scope.id=id;
         $scope.country=$('#countries3').val();
         $scope.chief_country=$('#countries4').val();
-        var satDate = new Date($scope.dob);
+        $scope.dob=moment($scope.dob).format("MM-DD-YYYY");
         var patient={
             fullName:$scope.x.first_name,
             lastName:$scope.x.last_name,
@@ -89,7 +89,7 @@ $scope.editUser=function(){
             gender:$scope.gender,
             mStatus:$scope.x.mstatus,
             bloodGroup:$scope.blood_iid,
-            dob:satDate.getDate() + '-' + (satDate.getMonth() + 1) + '-' + satDate.getFullYear(),
+            dob:$scope.dob,
             email:$scope.x.email,
             contact_no:$scope.x.contact_no,
             residental_no:$scope.x.mobile_no,

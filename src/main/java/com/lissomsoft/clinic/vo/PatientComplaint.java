@@ -9,6 +9,8 @@ public class PatientComplaint {
     private Integer patient_id;
     private String first_name;
     private String last_name;
+    private String dob;
+    private String gender;
     private Integer weight;
     private Integer height;
     private Integer pressure;
@@ -42,6 +44,23 @@ public class PatientComplaint {
 
     public String getLast_name() {
         return last_name;
+    }
+
+
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public void setLast_name(String last_name) {
@@ -95,6 +114,8 @@ public class PatientComplaint {
                 "patient_id ="+ patient_id +
                 "first_name ="+ first_name +
                 "last_name ="+ last_name +
+                "dob ="+dob+
+                "gender="+gender+
                 "weight ="+ weight +
                 "height ="+ height +
                 "pressure ="+ pressure +
