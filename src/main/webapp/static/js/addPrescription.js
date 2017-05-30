@@ -249,7 +249,9 @@ $scope.prescriptionAdd=function(){
     location.href="AddInvestigation";
 }
 
-
+$scope.back=function(){
+    location.href="EditpatientComplaint";
+}
 
 
 });

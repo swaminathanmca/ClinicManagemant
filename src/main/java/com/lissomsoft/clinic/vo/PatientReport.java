@@ -1,5 +1,9 @@
 package com.lissomsoft.clinic.vo;
 
+import com.lissomsoft.clinic.domain.Complaint;
+
+import java.util.List;
+
 /**
  * Created by Lissomsoft on 05/19/17.
  */
@@ -16,6 +20,11 @@ public class PatientReport {
     private Integer doctor_id;
     private String procedures;
     private String diagonics;
+    private String investigation;
+    private String observation;
+    private Integer type;
+    private Integer bp;
+    private List<Complaint> complaints;
 
     public Integer getPatient_info_id() {
         return patient_info_id;
@@ -105,6 +114,46 @@ public class PatientReport {
         this.diagonics = diagonics;
     }
 
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public String getInvestigation() {
+        return investigation;
+    }
+
+    public void setInvestigation(String investigation) {
+        this.investigation = investigation;
+    }
+
+    public String getObservation() {
+        return observation;
+    }
+
+    public void setObservation(String observation) {
+        this.observation = observation;
+    }
+
+    public List<Complaint> getComplaints() {
+        return complaints;
+    }
+
+    public void setComplaints(List<Complaint> complaints) {
+        this.complaints = complaints;
+    }
+
+    public Integer getBp() {
+        return bp;
+    }
+
+    public void setBp(Integer bp) {
+        this.bp = bp;
+    }
+
     public String toString(){
         return "PatientReport ="+
                 "patient_info_id ="+patient_info_id+
@@ -116,7 +165,11 @@ public class PatientReport {
                 "date ="+date+
                 "procedures ="+procedures+
                 "diagonics ="+diagonics+
-
+                "investigation ="+investigation+
+                "observation ="+observation+
+                "type ="+type+
+                "bp ="+bp+
+                "complaints="+complaints+
                 "}";
     }
 }

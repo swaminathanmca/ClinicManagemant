@@ -269,6 +269,10 @@ public class HelloController {
         return "addTest";
     }
 
+    @RequestMapping(value = "/EditpatientComplaint")
+    public String editPatientComplaint(HttpServletRequest request)throws Exception{
+        return "EditPatientComplaint";
+    }
 
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
     public
@@ -1940,6 +1944,7 @@ public class HelloController {
     {
         JSONObject jsonObject=new JSONObject();
         boolean flag;
+
         flag=patientInfoService.editPatientInfo(patientInfo);
         jsonObject.put("status",flag);
         return jsonObject.toString();
@@ -2019,7 +2024,9 @@ public class HelloController {
     @ResponseBody
     String getInfoDetails(@PathVariable Integer patient_info_id,HttpServletRequest request)throws JSONException{
         JSONObject jsonObject=new JSONObject();
+        JSONArray jsonArray=new JSONArray();
         PatientReport patientReport;
+        List<Complaint>complaints;
         patientReport=patientInfoService.getInfoDetails(patient_info_id);
 
         jsonObject.put("first_name",patientReport.getFirst_name());
@@ -2027,8 +2034,21 @@ public class HelloController {
         jsonObject.put("diagonics",patientReport.getDiagonics());
         jsonObject.put("procedures",patientReport.getProcedures());
         jsonObject.put("patient_pid",patientReport.getPatient_pid());
-
-
+        jsonObject.put("observation",patientReport.getObservation());
+        jsonObject.put("investigation",patientReport.getInvestigation());
+        jsonObject.put("type",patientReport.getType());
+        jsonObject.put("bp",patientReport.getBp());
+        complaints=patientReport.getComplaints();
+        Iterator<Complaint> itr=complaints.iterator();
+        while (itr.hasNext()){
+            Complaint complaint=itr.next();
+            JSONObject data=new JSONObject();
+            data.put("complaint_id",complaint.getComplaint_id());
+            data.put("complaint_name",complaint.getComplaint_name());
+            data.put("complaint_description",complaint.getComplaint_description());
+            jsonArray.put(data);
+        }
+        jsonObject.put("complaints",jsonArray);
         return  jsonObject.toString();
     }
 

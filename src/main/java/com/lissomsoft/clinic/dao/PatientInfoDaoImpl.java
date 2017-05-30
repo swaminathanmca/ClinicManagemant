@@ -169,6 +169,9 @@ public class PatientInfoDaoImpl implements PatientInfoDao {
             parameter.put("patient_info_id",patientInfo.getPatient_info_id());
             parameter.put("diagonics",patientInfo.getDiagnosis());
             parameter.put("procedures",patientInfo.getProcedures());
+            parameter.put("investigation",patientInfo.getInvestigation());
+            parameter.put("observation",patientInfo.getObservation());
+            parameter.put("bp",patientInfo.getPressure());
             parameter.put("created_at",format.format(new Date()));
             result=jdbcTemplate.update(editPatientSql,parameter);
 
@@ -268,13 +271,17 @@ public class PatientInfoDaoImpl implements PatientInfoDao {
     @Override
     public PatientReport getInfoDetails(Integer patient_info_id) {
        PatientReport patientReport=new PatientReport();
+        List<Complaint> complaints=patientReport.getComplaints();
 
         try {
-            String InfoDetailsSql="SELECT i.patient_pid,i.procedures,i.diagnosis,p.first_name,p.last_name FROM clinic.patient_info_master i INNER JOIN patient_master p ON p.patient_pid=i.patient_pid AND i.patient_info_id=:patient_info_id";
+            String InfoDetailsSql="SELECT i.patient_pid,i.procedures,i.diagnosis,i.observation,i.investigation,i.bp,i.type,i.bp,p.first_name,p.last_name FROM clinic.patient_info_master i INNER JOIN patient_master p ON p.patient_pid=i.patient_pid AND i.patient_info_id=:patient_info_id";
+            String InfoComplaintSql="SELECT c.complaint_name,c.complaint_id,c.complaint_description FROM clinic.patient_complaints p INNER JOIN complaint_master c ON p.patient_complaints=c.complaint_id AND p.patient_info_id=:patient_info_id";
             Map<String,Object> params=new HashMap<String, Object>();
             params.put("patient_info_id",patient_info_id);
-            patientReport= (PatientReport) jdbcTemplate.queryForObject(InfoDetailsSql,params,new InfoDetailsMapper());
 
+            patientReport= (PatientReport) jdbcTemplate.queryForObject(InfoDetailsSql,params,new InfoDetailsMapper());
+            complaints=jdbcTemplate.query(InfoComplaintSql,params,new ComplaintMapper());
+            patientReport.setComplaints(complaints);
         }catch (Exception e){
             e.printStackTrace();
         }

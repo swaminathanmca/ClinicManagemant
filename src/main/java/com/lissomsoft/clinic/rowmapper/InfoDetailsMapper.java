@@ -19,6 +19,10 @@ public class InfoDetailsMapper implements RowMapper{
         patientReport.setPatient_pid(resultSet.getString("patient_pid"));
         patientReport.setProcedures(resultSet.getString("procedures"));
         patientReport.setDiagonics(resultSet.getString("diagnosis"));
+        patientReport.setInvestigation(resultSet.getString("investigation"));
+        patientReport.setObservation(resultSet.getString("observation"));
+        patientReport.setType(resultSet.getInt("type"));
+        patientReport.setBp(resultSet.getInt("bp"));
 
 
         return patientReport;

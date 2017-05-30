@@ -93,7 +93,16 @@
       <div class="col-lg-12">
         <div class="panel panel-primary">
           <div class="panel-heading">
-            <h3 class="panel-title">Add Prescription</h3>
+
+            <div class="row">
+              <div class="col-lg-2">
+                <p class="panel-title">Add Prescription</p>
+              </div>
+              <div class="col-lg-9"></div>
+              <div class="col-lg-1">
+                <button type="button" class="btn btn-primary" ng-click="back()">Back</button>
+              </div>
+            </div>
           </div>
           <div class="panel-body">
             <div class="row">

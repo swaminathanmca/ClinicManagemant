@@ -133,7 +133,6 @@
                           <span class="input-group-addon">Visit Type</span>
                           <label class="form-control" type="text" ng-if="patientcomplaint.height==0" >New</label>
                           <label class="form-control" type="text" ng-if="patientcomplaint.height==1" >FollowUp</label>
-
                         </div>
                       </div>
                       <div class="col-lg-3">
@@ -152,9 +151,7 @@
                          <span class="text-danger wrapper text-center ng-binding"
                                ng-show="myform.bpressure.$invalid &&  myform.bpressure.$touched">Please Enter Blood Pressure</span>
                       </div>
-
-
-                      </div>
+                    </div>
                     <div class="form-group">
                       <div class="col-lg-6">
                         <div class="input-group">
