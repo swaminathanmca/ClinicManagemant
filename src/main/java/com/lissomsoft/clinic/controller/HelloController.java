@@ -1921,6 +1921,8 @@ public class HelloController {
         patientInfo=patientInfoService.getPatientFollow(patient_pid,doctor_id,branch_id);
         jsonObject.put("procedures",patientInfo.getProcedures());
         jsonObject.put("diagonics",patientInfo.getDiagnosis());
+        jsonObject.put("observation",patientInfo.getObservation());
+        jsonObject.put("investigation",patientInfo.getInvestigation());
         jsonObject.put("patient_info_id",patientInfo.getPatient_info_id());
         complaints=patientInfo.getComplaint();
         Iterator<Complaint> itr=complaints.iterator();

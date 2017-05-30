@@ -17,6 +17,8 @@ public class PatientInfoFollowMapper implements RowMapper {
         patientInfo.setProcedures(rs.getString("procedures"));
         patientInfo.setDiagnosis(rs.getString("diagnosis"));
         patientInfo.setPatient_info_id(rs.getInt("patient_info_id"));
+        patientInfo.setObservation(rs.getString("observation"));
+        patientInfo.setInvestigation(rs.getString("investigation"));
 
         return patientInfo;
     }

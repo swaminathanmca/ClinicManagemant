@@ -48,6 +48,11 @@ app.controller('Invoice',function($scope,$http,$window,$timeout){
                                     .then(function(response){
                                         $scope.lab_investigation=response.data.labinvest;
                                     })
+                                $http.get("GetInfoDetails/"+$window.sessionStorage.patient_info_id)
+                                    .then(function(response){
+                                        $scope.detailsInfo=response.data;
+
+                                    })
 
 
                             })

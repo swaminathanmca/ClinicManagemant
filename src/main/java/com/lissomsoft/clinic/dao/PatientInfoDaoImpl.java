@@ -164,7 +164,7 @@ public class PatientInfoDaoImpl implements PatientInfoDao {
 
         try {
 
-            String editPatientSql="UPDATE patient_info_master SET procedures=:procedures,diagnosis=:diagonics,updated_at=:created_at WHERE patient_info_id=:patient_info_id";
+            String editPatientSql="UPDATE patient_info_master SET procedures=:procedures,diagnosis=:diagonics,investigation=:investigation,observation=:observation,updated_at=:created_at WHERE patient_info_id=:patient_info_id";
             Map<String,Object> parameter=new HashMap<String, Object>();
             parameter.put("patient_info_id",patientInfo.getPatient_info_id());
             parameter.put("diagonics",patientInfo.getDiagnosis());

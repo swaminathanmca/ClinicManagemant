@@ -30,7 +30,10 @@ app.controller('Prescription',function($scope,$http,$window,$timeout){
 
         }
     }
-
+    $http.get("GetPrescription/"+$window.sessionStorage.patient_info)
+        .then(function(response){
+            $scope.selectedmaster=response.data.prescription;
+        })
     $http.get("GetComplaint/"+$scope.visit_id)
         .then(function (response){
             $scope.patientcomplaint = response.data.patientcomplaint;
@@ -42,10 +45,7 @@ app.controller('Prescription',function($scope,$http,$window,$timeout){
 
                 })
 
-            $http.get("GetPrescription/"+$window.sessionStorage.patient_info)
-                .then(function(response){
-                    $scope.selectedmaster=response.data.prescription;
-                })
+
 
             $scope.checkAll = function () {
 

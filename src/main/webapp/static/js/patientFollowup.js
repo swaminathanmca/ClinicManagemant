@@ -18,7 +18,7 @@ app.controller('patientFollowup',function($scope,$http,$window){
                 .then(function(response){
                     $scope.info=response.data;
                     $scope.selectSpecialization= $scope.info.complaints;
-
+                    $window.sessionStorage.patient_info_id=$scope.info.patient_info_id;
                     $http.get("GetComplaint")
                         .then(function (response) {
                             $scope.complaint = response.data.complaint;
@@ -49,12 +49,19 @@ $scope.submit=function(){
         complaint:$scope.selectSpecialization,
         procedures:$scope.info.procedures,
         diagnosis:$scope.info.diagonics,
+        investigation:$scope.info.investigation,
+        observation:$scope.info.observation,
         patient_info_id:$scope.info.patient_info_id
     }
     $http.post('EditPatientInfo',PatientInfo)
         .then (function (response,status,headers,config) {
         $scope.result=response.data;
-        location.href="AddPrescription";
+        if($scope.ltype==1){
+            location.href="PatientTest";
+        }else {
+            location.href="AddPrescription";
+        }
+
     });
 
 }

@@ -151,6 +151,17 @@
                       </div>
                       <div class="col-lg-6">
                         <div class="input-group">
+                          <span class="input-group-addon">Diagnosis</span>
+                          <textarea type="text" class="form-control" ng-model="info.diagonics" name="diagnosis"  required> </textarea>
+                        </div>
+                      <span class="text-danger wrapper text-center ng-binding"
+                            ng-show="myform.diagnosis.$invalid &&  myform.diagnosis.$touched">Please Enter The Diagnosis</span>
+                      </div>
+
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-12">
+                        <div class="input-group">
                           <span class="input-group-addon">Complaint</span>
                           <%-- <select class="form-control" ng-model="complaint_id" name="complaint"  ng-options="s.complaint_id as s.complaint_name for s in complaint" required ></select>--%>
                           <multiple-autocomplete ng-model="selectSpecialization"  name="multipleselect" required="true"
@@ -168,6 +179,24 @@
                     <div class="form-group">
                       <div class="col-lg-12">
                         <div class="input-group">
+                          <span class="input-group-addon">Observation</span>
+                          <textarea type="text" class="form-control" ng-model="info.observation" name="observation" rows="4" required> </textarea>
+                        </div>
+                      <span class="text-danger wrapper text-center ng-binding"
+                            ng-show="myform.observation.$invalid &&  myform.observation.$touched">Please Enter The Diagnosis</span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-12">
+                        <div class="input-group">
+                          <span class="input-group-addon">Investigation</span>
+                          <textarea type="text" class="form-control" ng-model="info.investigation" name="investigation" rows="4" required> </textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-12">
+                        <div class="input-group">
                           <span class="input-group-addon">Procedures</span>
                           <textarea type="text" class="form-control" ng-model="info.procedures" name="procedures" required> </textarea>
                         </div>
@@ -175,17 +204,8 @@
                             ng-show="myform.procedures.$invalid &&  myform.procedures.$touched">Please Enter The Procedures</span>
                       </div>
                     </div>
-                    <div class="form-group">
-                      <div class="col-lg-12">
-                        <div class="input-group">
-                          <span class="input-group-addon">Diagnosis</span>
-                          <textarea type="text" class="form-control" ng-model="info.diagonics" name="diagnosis" rows="4" required> </textarea>
-                        </div>
-                      <span class="text-danger wrapper text-center ng-binding"
-                            ng-show="myform.diagnosis.$invalid &&  myform.diagnosis.$touched">Please Enter The Diagnosis</span>
-                      </div>
-                    </div>
-                    <div class="form-group">
+
+                  <%--  <div class="form-group">
                       <div class="col-lg-3">
 
 
@@ -196,6 +216,33 @@
                         </div>
 
                       </div>
+                    </div>--%>
+                    <div class="form-group">
+                      <div class="col-lg-5">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            TYPE
+                          </span>
+                          <%-- <SELECT class="form-control" ng-model="myform.type" ng-change="typepres(myform.type)" required>
+                             <option value="1">Tablet</option>
+                             <option value="2">Syrup</option>
+                             <option value="3">Injection</option>
+                           </SELECT>--%>
+                          <div class="checkbox  fileRadioBox form-control">
+                            <label>
+                              <input type="radio" name="ltype"  value="1"   ng-model="ltype" required="required">&nbsp;Lab
+                            </label>
+
+                            <label>
+                              <input type="radio" name="ltype" value="2"  ng-model="ltype" required="required">&nbsp;Prescription
+
+                            </label>
+
+                          </div>
+                        </div>
+                      </div>
+
+
                     </div>
 
                     <div class="form-actions">

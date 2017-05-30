@@ -90,11 +90,9 @@
       <div class="col-lg-12 col-sm-12">
         <main id="content" class="content bg-clr" role="main">
         <section class="widget widget-invoice">
-
           <div class="widget-body">
             <div class="row mb-lg">
               <div class=" col-sm-6 col-print-6">
-
                 <h3 class="company-name">
                   {{details.clinic_name}}
                 </h3>
@@ -112,18 +110,32 @@
               <div class=" col-sm-2 col-print-2 text-align-right"></div>
               <div class=" col-sm-4 col-print-4 text-align-right">
                 <h4 class="text-muted no-margin">Patient Information</h4>
-                <h3 class="client-name">
+                <h3 class="client-name txtrns">
                   {{patientcomplaint.first_name}} {{patientcomplaint.last_name}}
                 </h3>
                 <address>
-
                   <abbr title=" email">e-mail:</abbr> {{pdetails.email}}<br>
                   <abbr title=" Phone">phone:</abbr> {{pdetails.contact_no}}<br>
-
-
                 </address>
               </div>
             </div>
+
+            <div class="row">
+              <div class="form-group">
+                <div class="col-lg-10">
+                  <h4>Diagonics</h4>
+                  <p>{{detailsInfo.diagonics}}</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-lg-10">
+                  <h4>Procedures</h4>
+                  <p>{{detailsInfo.procedures}}</p>
+                </div>
+              </div>
+
+            </div>
+
             <div ng-if="selectedmaster.length">
             <table class="table table-striped" >
               <thead>
@@ -240,6 +252,7 @@
           </table>
 
 
+
           </div>
         </section>
 
@@ -268,7 +281,7 @@
                 <div class=" col-sm-2 col-print-2 text-align-right"></div>
                 <div class=" col-sm-4 col-print-4 text-align-right">
                   <h4 class="text-muted no-margin">Patient Information</h4>
-                  <h3 class="client-name">
+                  <h3 class="client-name txtrns">
                     {{patientcomplaint.first_name}} {{patientcomplaint.last_name}}
                   </h3>
                   <address>
