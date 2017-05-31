@@ -127,7 +127,6 @@ app.controller('clinicDetails',function($scope,$window,$http){
             contact_no:$scope.x.contact_no,
             email_id:$scope.x.email_id,
             register_no:$scope.x.reg_no,
-            password:$scope.x.password,
             description:$scope.x.description,
             chief_name:$scope.x.Chief,
             chief_address1:$scope.x.Chief_address1,

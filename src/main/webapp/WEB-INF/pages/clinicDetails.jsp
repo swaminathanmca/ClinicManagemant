@@ -421,14 +421,14 @@
                                                            </span>
 
                                         </div>
-                                        <div class="col-lg-4">
+                                      <%--  <div class="col-lg-4">
                                             <div class="input-group">
                                                 <span class="input-group-addon">Password</span>
                                                 <input type="text" ng-model="x.password" class="form-control" name="password" required/>
                                             </div>
                                             <span class="text-danger wrapper text-center ng-binding"
                                                   ng-show="myform.password.$invalid &&  myform.password.$touched">Please Enter Password</span>
-                                        </div>
+                                        </div>--%>
 
                                     </div>
                                     <div class="form-group">

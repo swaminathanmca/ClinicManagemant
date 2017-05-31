@@ -82,7 +82,7 @@
   </nav>
   <div id="page-wrapper">
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
         <h4> <a> <i class="fa fa-user"></i></a>&nbsp;&nbsp; {{data.first_name}}&nbsp;{{data.last_name}}&nbsp;&nbsp; &nbsp;&nbsp;  <span ng-if="data.gender==1">Male</span> <span ng-if="data.gender==0">Female</span>,{{data.age}} &nbsp;&nbsp;<span>(ID:{{data.patient_pid}})</span> </h4>
 
       </div>
@@ -90,14 +90,14 @@
     <br>
     <div class="row">
       <div class="col-lg-1"></div>
-      <div class="col-lg-12">
+      <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
         <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title"> Patient Visit</h3>
           </div>
           <div class="panel-body">
             <div class="row">
-              <div class="col-lg-12">
+              <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                 <form class="form-horizontal ng-invalid" role="form" name="myform" ng-submit="submit()"
                       novalidate>
                   <fieldset>
@@ -123,7 +123,7 @@
                     </div>--%>
 
                     <div class="form-group">
-                      <div class="col-lg-6">
+                      <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
                         <div class="input-group">
                           <span class="input-group-addon">
                             Speciality
@@ -131,7 +131,7 @@
                           <select class="form-control" ng-options="s.speciallity_id as s.speciality_name for s in specialitydetails" ng-model="speciallity_id" ng-change="doctor(speciallity_id)" name="speciality" required></select>
                         </div>
                       </div>
-                      <div class="col-lg-6">
+                      <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
                         <div class="input-group">
                           <span class="input-group-addon">
                             Practitioner
@@ -141,13 +141,23 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <div class="col-lg-3">
+                      <div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
                         <div class="input-group">
                         <span class="input-group-addon">Visit Type</span>
-                          <select class="form-control" ng-model="type" ng-blur="entryNew(type)" name="type" required>
+                        <%--  <select class="form-control" ng-model="type" ng-blur="entryNew(type)" name="type" required>
                             <option value="0">New  </option>
                             <option value="1">FollowUp</option>
-                          </select>
+                          </select>--%>
+                          <div class="checkbox pb10 fileRadioBox form-control">
+                            <label>
+                              <input type="radio" name="type"  value="0"   ng-model="type" ng-click="entryNew(type)" required>New
+                            </label>
+
+                            <label>
+                              <input type="radio" name="type" value="1"  ng-model="type" ng-click="entryNew(type)" required>
+                              FollowUp
+                            </label>
+                          </div>
 
                         </div>
                          <span class="text-danger wrapper text-center ng-binding"
@@ -155,31 +165,41 @@
                         <span class="text-danger wrapper text-center ng-binding" ng-show="entry==false">Already Registered Today</span>
                         <span class="text-danger wrapper text-center ng-binding" ng-show="followup==false">Date Expreies</span>
                       </div>
-                      <div class="col-lg-3">
+                      <div class="col-lg-2 col-sm-2 col-md-2 col-xs-2">
                         <div class="input-group">
                           <span class="input-group-addon">Weight</span>
                           <input type="text" class="form-control" ng-model="weight" name="weight" maxlength="3"  ng-pattern="/^[0-9]*$/" required>
-                          <span class="input-group-addon">KG</span>
+                          <%--<span class="input-group-addon">KG</span>--%>
                         </div>
                          <span class="text-danger wrapper text-center ng-binding"
                                ng-show="myform.weight.$error.pattern">Please Enter Valid Weight</span>
                       </div>
-                      <div class="col-lg-3">
+                      <div class="col-lg-2 col-sm-2 col-md-2 col-xs-2">
                         <div class="input-group">
                           <span class="input-group-addon">BP</span>
                           <input type="text" class="form-control" ng-model="pressure" name="pressure"  ng-pattern="/^[0-9]*$/" >
                         </div>
 
                       </div>
-                      <div class="col-lg-3">
+                      <div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
                         <div class="input-group">
                           <span class="input-group-addon">
                              Category
                           </span>
-                          <select class="form-control" ng-model="vtype" name="vtype" required>
+                         <%-- <select class="form-control" ng-model="vtype" name="vtype" required>
                             <option value="0">Normal </option>
                             <option value="1">Emergency</option>
-                          </select>
+                          </select>--%>
+                          <div class="checkbox pb10 fileRadioBox form-control">
+                            <label>
+                              <input type="radio" name="vtype"  value="0"   ng-model="vtype" required>Normal
+                            </label>
+
+                            <label>
+                              <input type="radio" name="vtype" value="1"  ng-model="vtype"  required>
+                              Emergency
+                            </label>
+                          </div>
                         </div>
                       </div>
                     </div>

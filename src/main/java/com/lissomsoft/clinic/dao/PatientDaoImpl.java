@@ -349,6 +349,11 @@ if((result >0 )? true :false){
             params.put("patient_id",patient_pid);
             params.put("type",type);
             params.put("created_at",format.format(new Date()));
+            Calendar c = Calendar.getInstance();
+            c.add(Calendar.DATE, 7);
+            params.put("datebetween",format.format(c.getTime()));
+
+
             params.put("doctor_id",doctor_id);
             patientVisit= jdbcTemplate.query(visitentrySql, params, new PatientVisitEntryMapper());
 

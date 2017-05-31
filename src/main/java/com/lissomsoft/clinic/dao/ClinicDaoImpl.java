@@ -245,11 +245,11 @@ public class ClinicDaoImpl implements ClinicDao {
         if((result_branch>0) ? true :false){
             try
             {
-            String edituserSql="UPDATE user SET username=:username,email=:email,password=:password,updated_at=:updated_at WHERE user_id=(SELECT member_master.user_id FROM member_master where member_master.profile_id=:profile_id)";
+            String edituserSql="UPDATE user SET username=:username,email=:email,updated_at=:updated_at WHERE user_id=(SELECT member_master.user_id FROM member_master where member_master.profile_id=:profile_id)";
                 Map<String, Object> user = new HashMap<String, Object>();
                 user.put("username",clinicUser.getClinic_name());
                 user.put("email",clinicUser.getEmail_id());
-                user.put("password",clinicUser.getPassword());
+               /* user.put("password",clinicUser.getPassword());*/
 
 
                 user.put("profile_id",clinicUser.getChief_id());
