@@ -151,7 +151,7 @@
                   <span class="input-group-addon">Marital Status</span>
                   <select class="form-control" ng-model="maritalstatus" name="mstatus" required>
                     <option value="1">Married</option>
-                    <option value="0">Single</option>
+                    <option value="0">Unmarried</option>
                   </select>
                 </div>
                 <span class="text-danger wrapper text-center ng-binding" ng-show="myform.mstatus.$invalid &&  myform.mstatus.$touched">Please Select Status</span>
