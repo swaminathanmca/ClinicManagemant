@@ -87,6 +87,8 @@ $scope.validate=function(){
     $scope.submit=function(id){
        $scope.branch_id=id;
         var satDate = new Date($scope.dob);
+        $scope.to_date = moment(satDate).format("MM-DD-YYYY");
+
         $scope.ecountry=$('#countries3').val();
         var patient={
 
@@ -95,7 +97,7 @@ $scope.validate=function(){
             gender:$scope.gender,
             mStatus:$scope.maritalstatus,
             bloodGroup:$scope.blood_id,
-            dob:satDate.getDate() + '-' + (satDate.getMonth() + 1) + '-' + satDate.getFullYear() ,
+            dob:$scope.to_date ,
             email:$scope.email_id,
             contact_no:$scope.mobile_no,
             residental_no:$scope.res_no,
@@ -122,9 +124,9 @@ $scope.validate=function(){
         }
 
        $http.post('AddPatient/'+$scope.branch_id,patient).
-           then(function (response,status,headers,config){
-                location.href="GetPatient";
-           });
-    }
+     then(function (response,status,headers,config){
+     location.href="GetPatient";
+     });
+}
 
 })

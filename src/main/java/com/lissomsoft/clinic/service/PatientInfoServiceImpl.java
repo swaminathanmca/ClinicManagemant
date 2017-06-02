@@ -26,8 +26,8 @@ public class PatientInfoServiceImpl implements PatientInfoService {
     }
 
     @Override
-    public PatientInfo getPatientInfoId(String patient_pid,String created_at) {
-        return patientDao.getPatientInfoId(patient_pid,created_at);
+    public PatientInfo getPatientInfoId(String patient_pid,String created_at,String type) {
+        return patientDao.getPatientInfoId(patient_pid,created_at,type);
     }
 
     @Override
