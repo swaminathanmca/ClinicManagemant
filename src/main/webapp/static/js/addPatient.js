@@ -19,6 +19,7 @@ app.controller('Patient',function($scope,$http,$window){
         $scope.opened1 = true;
         $scope.opened2 = false;
     };
+
     $scope.dateOptions = {
         formatYear: 'yy',
         startingDay: 6,
