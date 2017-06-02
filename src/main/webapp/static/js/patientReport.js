@@ -53,12 +53,12 @@ app.controller('patientReport',function($scope,$http,$window){
 
     $scope.to_date = moment().add(7, 'days').format("MM-DD-YYYY");
     $scope.back=function(){
-        if($scope.type==0){
+        /*if($scope.type==0){
             location.href="patientComplaints";
         }else{
             location.href="PatientFollowup";
-        }
-
+        }*/
+        location.href="patientComplaints";
     }
 
 

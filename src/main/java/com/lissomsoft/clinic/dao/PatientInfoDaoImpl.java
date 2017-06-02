@@ -24,7 +24,7 @@ import java.util.*;
 public class PatientInfoDaoImpl implements PatientInfoDao {
 
     private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
-    DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    DateFormat format = new SimpleDateFormat("yyyy-MMM-dd");
     @Autowired(required = false)
     private NamedParameterJdbcTemplate jdbcTemplate;
     @Autowired(required = false)
@@ -69,10 +69,11 @@ public class PatientInfoDaoImpl implements PatientInfoDao {
                 Iterator<Complaint>it=complaints.iterator();
                 while (it.hasNext()){
                     Complaint cp=it.next();
-                    String insertComplaintSql="INSERT INTO patient_complaints(patient_info_id,patient_complaints,created_at,updated_at) VALUES ((SELECT p.patient_info_id FROM patient_info_master p WHERE created_at=:created_at AND patient_pid=:patient_pid),:complaint_id,:created_at,:created_at)";
+                    String insertComplaintSql="INSERT INTO patient_complaints(patient_info_id,patient_complaints,created_at,updated_at) VALUES ((SELECT p.patient_info_id FROM patient_info_master p WHERE created_at=:created_at AND patient_pid=:patient_pid AND type=:vtype),:complaint_id,:created_at,:created_at)";
                     Map<String,Object> params=new HashMap<String, Object>();
                     params.put("complaint_id",cp.getComplaint_id());
                     params.put("patient_pid",patientInfo.getPatient_pid());
+                    params.put("vtype",patientInfo.getHeight());
                     params.put("created_at",format.format(new Date()));
                     result_complaint=jdbcTemplate.update(insertComplaintSql,params);
 
@@ -111,13 +112,14 @@ public class PatientInfoDaoImpl implements PatientInfoDao {
     }
 
     @Override
-    public PatientInfo getPatientInfoId(String patient_pid,String created_at) {
+    public PatientInfo getPatientInfoId(String patient_pid,String created_at,String type) {
         PatientInfo patientInfos=new PatientInfo();
         try {
-            String getPatientInfo="SELECT patient_info_id,patient_pid FROM clinic.patient_info_master pi WHERE pi.patient_pid=:patient_pid and created_at=:created_at";
+            String getPatientInfo="SELECT patient_info_id,patient_pid FROM clinic.patient_info_master pi WHERE pi.patient_pid=:patient_pid AND created_at=:created_at AND type=:type";
             Map<String,Object> paramInfo=new HashMap<String, Object>();
             paramInfo.put("patient_pid",patient_pid);
             paramInfo.put("created_at",created_at);
+            paramInfo.put("type",type);
             patientInfos= (PatientInfo) jdbcTemplate.queryForObject(getPatientInfo, paramInfo, new PatinetInfoIdMapper());
 
         }

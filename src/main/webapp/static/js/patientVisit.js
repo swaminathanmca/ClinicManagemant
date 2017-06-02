@@ -60,7 +60,7 @@ app.controller('patientVisit',function($scope,$window,$http){
                     }
                 })
         }else{
-            $http.get("GetFollowUp/"+$scope.patient_pid+"/"+$scope.branch_id+"/"+$scope.doctor_id).
+            $http.get("GetFollowUp/"+$scope.patient_pid+"/"+$scope.type+"/"+$scope.doctor_id).
                 then(function(response){
                     $scope.followup=response.data.status;
                     $scope.entry=true;

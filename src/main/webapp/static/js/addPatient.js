@@ -125,9 +125,9 @@ $scope.validate=function(){
         }
 
        $http.post('AddPatient/'+$scope.branch_id,patient).
-     then(function (response,status,headers,config){
-     location.href="GetPatient";
-     });
+               then(function (response,status,headers,config){
+               location.href="GetPatient";
+         });
 }
 
 })

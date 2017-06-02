@@ -34,7 +34,7 @@ app.controller('Invoice',function($scope,$http,$window,$timeout){
                 $http.get("patientDetails/"+$scope.patientcomplaint.patient_id)
                     .then(function(response){
                         $scope.pdetails=response.data;
-                        $http.get("GetInfoId/"+$scope.patientcomplaint.patient_pid+"/"+$scope.patientcomplaint.created_at)
+                        $http.get("GetInfoId/"+$scope.patientcomplaint.patient_pid+"/"+$scope.patientcomplaint.created_at+"/"+ $scope.patientcomplaint.height)
                             .then(function(response){
                                 $scope.info=response.data;
                                 $window.sessionStorage.patient_info_id=$scope.info.patient_info_id;

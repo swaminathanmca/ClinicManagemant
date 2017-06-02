@@ -30,6 +30,7 @@ public class PatientDaoImpl implements  PatientDao {
     private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
     DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     DateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
+    DateFormat dateFormat=new SimpleDateFormat("YYYY-MMM-dd");
     Calendar cal = Calendar.getInstance();
     SimpleDateFormat sdf=new SimpleDateFormat("hh:mm a");
     @Autowired(required = false)
@@ -289,7 +290,7 @@ if((result >0 )? true :false){
             parameter.put("pressure",visit.getPressure());
             parameter.put("doctor_id",visit.getDoctor_id());
             parameter.put("referal_details",visit.getReferal_details());
-            parameter.put("created_at",format.format(new Date()));
+            parameter.put("created_at",dateFormat.format(new Date()));
 
 
 
@@ -369,13 +370,14 @@ if((result >0 )? true :false){
 
         List<PatientVisit> patientVisits=null;
         try {
-            String visitSql="SELECT  p.patient_id  patient_pid FROM patient_visit p  WHERE p.patient_id=:patient_id AND p.type=0  AND p.created_at=:created_at AND p.doctor_detail_id=:doctor_id";
+            String visitSql="SELECT  p.patient_id  patient_pid FROM patient_visit p  WHERE p.patient_id=:patient_id AND p.type=:type  AND p.created_at=:created_at AND p.doctor_detail_id=:doctor_id";
             Map<String,Object> paramater=new HashMap<String, Object>();
             paramater.put("doctor_id",doctor_id);
             paramater.put("type",type);
             paramater.put("patient_id",patient_pid);
             paramater.put("created_at",format.format(new Date()));
             patientVisits=jdbcTemplate.query(visitSql,paramater,new PatientVisitEntryMapper());
+
         }catch (Exception e){
             e.printStackTrace();
         }

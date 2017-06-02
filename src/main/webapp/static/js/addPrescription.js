@@ -38,7 +38,7 @@ app.controller('Prescription',function($scope,$http,$window,$timeout){
         .then(function (response){
             $scope.patientcomplaint = response.data.patientcomplaint;
 
-            $http.get("GetInfoId/"+$scope.patientcomplaint.patient_pid+"/"+$scope.patientcomplaint.created_at)
+            $http.get("GetInfoId/"+$scope.patientcomplaint.patient_pid+"/"+$scope.patientcomplaint.created_at+"/"+$scope.patientcomplaint.height)
                 .then(function(response){
                     $scope.info=response.data;
                     $window.sessionStorage.patient_info=$scope.info.patient_info_id;
