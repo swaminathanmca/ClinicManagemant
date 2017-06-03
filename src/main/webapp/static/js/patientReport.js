@@ -78,20 +78,21 @@ app.controller('patientReport',function($scope,$http,$window){
         if(pmonths==1){
             $scope.date1 = new Date();
             $scope.date1.setMonth($scope.date1.getMonth()-3);
-            $scope.date1=moment($scope.date1).format("YYYY-MMM-DD");
+            $scope.date1=moment($scope.date1).format("YYYY-MM-DD");
         }else if(pmonths==2){
             $scope.date1 = new Date();
             $scope.date1.setMonth($scope.date1.getMonth()-6);
-            $scope.date1=moment($scope.date1).format("YYYY-MMM-DD");
+            $scope.date1=moment($scope.date1).format("YYYY-MM-DD");
         }else if(pmonths==3){
             $scope.date1 = new Date();
             $scope.date1.setMonth($scope.date1.getMonth()-12);
-            $scope.date1=moment($scope.date1).format("YYYY-MMM-DD");
+            $scope.date1=moment($scope.date1).format("YYYY-MM-DD");
         }
 
         $http.get("GetPatientReportByMonths/"+$scope.patient_pid+"/"+$scope.date1+"/"+$scope.doctor_id+"/"+$scope.branch_id)
             .then(function(response){
                 $scope.report=response.data.report;
+
             })
     }
 
