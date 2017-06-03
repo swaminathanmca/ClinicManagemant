@@ -85,21 +85,26 @@
 <div id="page-wrapper">
   <br>
   <div class="row">
-    <p></p>
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
+      <h4 class="txtrns"> <a> <i class="fa fa-user"></i></a>&nbsp;&nbsp; {{details.first_name}}&nbsp;{{details.last_name}}&nbsp;&nbsp;<span>(ID:{{details.patient_pid}})</span> &nbsp;&nbsp;<span>( Visit Date:{{date}})</span> </h4>
+    </div>
   </div>
+  <br>
   <div class="row">
     <div class="col-lg-1"></div>
     <div class="col-lg-10">
       <div class="panel panel-primary">
         <div class="panel-heading">
           <div class="row">
-            <div class="col-lg-2">
+            <div class="col-lg-3">
               <p class="panel-title">Patient Reports</p>
             </div>
-            <div class="col-lg-9"></div>
-            <div class="col-lg-1">
+            <div class="col-lg-7"></div>
+            <div class="col-lg-2">
               <button type="button" class="btn btn-primary" ng-click="back()">Back</button>
             </div>
+
           </div>
         </div>
           <div class="panel-body">
@@ -107,20 +112,7 @@
               <div class="col-lg-12">
                 <form class="form-horizontal ng-invalid" role="form" name="myform"  novalidate>
                   <fieldset>
-                    <div class="form-group">
-                      <div class="col-lg-6">
-                        <div class="input-group">
-                          <span class="input-group-addon">Patient Name</span>
-                          <label class="form-control" type="text">{{details.first_name}} &nbsp; {{details.last_name}}</label>
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="input-group">
-                          <span class="input-group-addon">Patient Id</span>
-                          <label class="form-control" type="text">{{details.patient_pid}}</label>
-                        </div>
-                      </div>
-                    </div>
+
                     <div class="form-group">
                       <div class="col-lg-12">
                         <div class="input-group">
@@ -134,6 +126,22 @@
                         <div class="input-group">
                           <span class="input-group-addon">Diagnosis</span>
                           <textarea type="text" class="form-control"  name="diagonics" ng-model="details.diagonics" disabled> </textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-12">
+                        <div class="input-group">
+                          <span class="input-group-addon">Diagnosis</span>
+                          <textarea type="text" class="form-control"  name="diagonics" ng-model="details.observation" disabled> </textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-12">
+                        <div class="input-group">
+                          <span class="input-group-addon">Diagnosis</span>
+                          <textarea type="text" class="form-control"  name="diagonics" ng-model="details.investigation" disabled> </textarea>
                         </div>
                       </div>
                     </div>

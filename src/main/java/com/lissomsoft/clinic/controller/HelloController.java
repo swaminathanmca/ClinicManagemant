@@ -2040,6 +2040,7 @@ public class HelloController {
         jsonObject.put("investigation",patientReport.getInvestigation());
         jsonObject.put("type",patientReport.getType());
         jsonObject.put("bp",patientReport.getBp());
+        jsonObject.put("created_at",patientReport.getDate());
         complaints=patientReport.getComplaints();
         Iterator<Complaint> itr=complaints.iterator();
         while (itr.hasNext()){

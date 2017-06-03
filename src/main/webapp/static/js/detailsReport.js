@@ -9,6 +9,8 @@ app.controller('DetailsReport',function($scope,$http,$window,$timeout){
     $http.get("GetInfoDetails/"+$scope.patient_info_id)
         .then(function(response){
             $scope.details=response.data;
+            $scope.date=moment($scope.details.created_at).format("DD-MMM-YYYY");
+            console.log( $scope.date);
         })
 
 

@@ -23,6 +23,7 @@ public class InfoDetailsMapper implements RowMapper{
         patientReport.setObservation(resultSet.getString("observation"));
         patientReport.setType(resultSet.getInt("type"));
         patientReport.setBp(resultSet.getInt("bp"));
+        patientReport.setDate(resultSet.getString("created_at"));
 
 
         return patientReport;

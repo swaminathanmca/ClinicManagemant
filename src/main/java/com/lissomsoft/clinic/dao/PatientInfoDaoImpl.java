@@ -276,7 +276,7 @@ public class PatientInfoDaoImpl implements PatientInfoDao {
         List<Complaint> complaints=patientReport.getComplaints();
 
         try {
-            String InfoDetailsSql="SELECT i.patient_pid,i.procedures,i.diagnosis,i.observation,i.investigation,i.bp,i.type,i.bp,p.first_name,p.last_name FROM clinic.patient_info_master i INNER JOIN patient_master p ON p.patient_pid=i.patient_pid AND i.patient_info_id=:patient_info_id";
+            String InfoDetailsSql="SELECT i.patient_pid,i.procedures,i.diagnosis,i.observation,i.investigation,i.bp,i.type,i.bp,p.first_name,p.last_name,i.created_at FROM clinic.patient_info_master i INNER JOIN patient_master p ON p.patient_pid=i.patient_pid AND i.patient_info_id=:patient_info_id";
             String InfoComplaintSql="SELECT c.complaint_name,c.complaint_id,c.complaint_description FROM clinic.patient_complaints p INNER JOIN complaint_master c ON p.patient_complaints=c.complaint_id AND p.patient_info_id=:patient_info_id";
             Map<String,Object> params=new HashMap<String, Object>();
             params.put("patient_info_id",patient_info_id);
