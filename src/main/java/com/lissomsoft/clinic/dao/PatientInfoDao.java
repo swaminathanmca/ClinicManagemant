@@ -16,7 +16,7 @@ public interface PatientInfoDao {
 
     PatientInfo patientInfo(Integer patient_info_id);
 
-    PatientInfo getPatientInfoId(String patient_pid,String created_at,String type);
+    PatientInfo getPatientInfoId(String patient_pid,String created_at,String type,Integer doctor_id);
 
     PatientInfo getPatientFollow(String patient_pid,Integer doctor_id,Integer branch_id);
 

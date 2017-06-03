@@ -14,7 +14,7 @@ public interface PatientInfoService {
 
     List<PatientInfo> getPatientInfo(Integer  doctor_id,Integer branch_id);
 
-    PatientInfo getPatientInfoId(String patient_pid,String created_at,String type);
+    PatientInfo getPatientInfoId(String patient_pid,String created_at,String type,Integer doctor_id);
 
     PatientInfo getPatientFollow(String patient_pid,Integer doctor_id,Integer branch_id);
 

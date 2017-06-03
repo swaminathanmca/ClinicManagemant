@@ -60,7 +60,7 @@ location.href="AddComplaint";
             doctor_id:$scope.doctor_id,
             first_name:$scope.patientcomplaint.first_name,
             last_name:$scope.patientcomplaint.last_name,
-            height:$scope.patientcomplaint.height,
+            height:$scope.patientcomplaint.type,
             weight:$scope.patientcomplaint.weight,
             pressure:$scope.patientcomplaint.pressure,
             refereal_details:$scope.patientcomplaint.refereal_details,

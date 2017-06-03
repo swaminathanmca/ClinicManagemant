@@ -112,12 +112,13 @@ public class PatientInfoDaoImpl implements PatientInfoDao {
     }
 
     @Override
-    public PatientInfo getPatientInfoId(String patient_pid,String created_at,String type) {
+    public PatientInfo getPatientInfoId(String patient_pid,String created_at,String type,Integer doctor_id) {
         PatientInfo patientInfos=new PatientInfo();
         try {
-            String getPatientInfo="SELECT patient_info_id,patient_pid FROM clinic.patient_info_master pi WHERE pi.patient_pid=:patient_pid AND created_at=:created_at AND type=:type";
+            String getPatientInfo="SELECT patient_info_id,patient_pid FROM clinic.patient_info_master pi WHERE pi.patient_pid=:patient_pid AND created_at=:created_at AND type=:type AND doctor_detail_id=:doctor_id ";
             Map<String,Object> paramInfo=new HashMap<String, Object>();
             paramInfo.put("patient_pid",patient_pid);
+            paramInfo.put("doctor_id",doctor_id);
             paramInfo.put("created_at",created_at);
             paramInfo.put("type",type);
             patientInfos= (PatientInfo) jdbcTemplate.queryForObject(getPatientInfo, paramInfo, new PatinetInfoIdMapper());

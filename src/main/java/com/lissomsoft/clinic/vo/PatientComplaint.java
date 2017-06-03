@@ -15,6 +15,7 @@ public class PatientComplaint {
     private Integer height;
     private Integer pressure;
     private String complaint_name;
+    private Integer doctor_detail_id;
     private String created_at;
 
 
@@ -107,6 +108,14 @@ public class PatientComplaint {
         this.created_at = created_at;
     }
 
+    public Integer getDoctor_detail_id() {
+        return doctor_detail_id;
+    }
+
+    public void setDoctor_detail_id(Integer doctor_detail_id) {
+        this.doctor_detail_id = doctor_detail_id;
+    }
+
     public String toString(){
 
         return "PatientComplaint =" +
@@ -120,6 +129,7 @@ public class PatientComplaint {
                 "height ="+ height +
                 "pressure ="+ pressure +
                 "complaint_name ="+ complaint_name +
+                "doctor_detail_id ="+doctor_detail_id+
                 "created_at ="+ created_at +
                 "}";
 

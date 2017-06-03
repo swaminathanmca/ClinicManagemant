@@ -12,13 +12,13 @@ app.controller('LaboratoryTest',function($scope,$http,$window,$timeout) {
         .then(function (response) {
             $scope.patientcomplaint = response.data.patientcomplaint;
 
-            $http.get("GetInfoId/" + $scope.patientcomplaint.patient_pid + "/" + $scope.patientcomplaint.created_at+ "/"+$scope.patientcomplaint.height)
+            $http.get("GetInfoId/" + $scope.patientcomplaint.patient_pid + "/" + $scope.patientcomplaint.created_at+ "/"+$scope.patientcomplaint.type+"/"+$scope.patientcomplaint.doctor_id)
                 .then(function (response) {
                     $scope.info = response.data;
-                    $window.sessionStorage.patient_info = $scope.info.patient_info_id;
-
+                    /*$window.sessionStorage.patient_info = $scope.info.patient_info_id;*/
+                    location.href="AddPrescription";
                 })
-            $http.get("GetLabInvest/"+ $window.sessionStorage.patient_info).
+            $http.get("GetLabInvest/"+ $scope.info.patient_info_id).
                 then(function(response){
                     $scope.selectedmaster=response.data.labinvest;
                 })
@@ -79,10 +79,7 @@ $scope.typelab=function(test_type){
                 then(function(response){
                     $scope.status=response.data.status;
                     if($scope.status){
-                        $http.get("GetLabInvest/"+ $window.sessionStorage.patient_info).
-                            then(function(response){
-                                $scope.selectedmaster=response.data.labinvest;
-                            })
+                        location.href="AddPrescription";
                     }
                 })
         }

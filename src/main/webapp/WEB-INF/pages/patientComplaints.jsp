@@ -131,8 +131,8 @@
                       <div class="col-lg-3">
                         <div class="input-group">
                           <span class="input-group-addon">Visit Type</span>
-                          <label class="form-control" type="text" ng-if="patientcomplaint.height==0" >New</label>
-                          <label class="form-control" type="text" ng-if="patientcomplaint.height==1" >FollowUp</label>
+                          <label class="form-control" type="text" ng-if="patientcomplaint.type==0" >New</label>
+                          <label class="form-control" type="text" ng-if="patientcomplaint.type==1" >FollowUp</label>
                         </div>
                       </div>
                       <div class="col-lg-3">

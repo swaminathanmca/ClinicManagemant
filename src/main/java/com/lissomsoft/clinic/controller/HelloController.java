@@ -511,13 +511,13 @@ public class HelloController {
     }
 
 
-    @RequestMapping(value = "/GetInfoId/{patient_pid}/{created_at}/{type}",method = RequestMethod.GET)
+    @RequestMapping(value = "/GetInfoId/{patient_pid}/{created_at}/{type}/{doctor_id}",method = RequestMethod.GET)
     public
     @ResponseBody
-    String getInfoId(@PathVariable String patient_pid,@PathVariable String created_at,@PathVariable String type)throws JSONException{
+    String getInfoId(@PathVariable String patient_pid,@PathVariable String created_at,@PathVariable String type,@PathVariable Integer doctor_id)throws JSONException{
         JSONObject jsonObject=new JSONObject();
         PatientInfo patientInfo;
-        patientInfo=patientInfoService.getPatientInfoId(patient_pid,created_at,type);
+        patientInfo=patientInfoService.getPatientInfoId(patient_pid,created_at,type,doctor_id);
         jsonObject.put("patient_info_id",patientInfo.getPatient_info_id());
 
         return jsonObject.toString();
@@ -701,10 +701,11 @@ public class HelloController {
         jsonObject.put("last_name",patientcomplaint.getLast_name());
         jsonObject.put("gender",patientcomplaint.getGender());
         jsonObject.put("weight",patientcomplaint.getWeight());
-        jsonObject.put("height",patientcomplaint.getHeight());
+        jsonObject.put("type",patientcomplaint.getHeight());
         jsonObject.put("pressure",patientcomplaint.getPressure());
         jsonObject.put("refereal_details",patientcomplaint.getComplaint_name());
         jsonObject.put("created_at",patientcomplaint.getCreated_at());
+        jsonObject.put("doctor_id",patientcomplaint.getDoctor_detail_id());
         data.put("patientcomplaint",jsonObject);
         return data.toString();
     }
