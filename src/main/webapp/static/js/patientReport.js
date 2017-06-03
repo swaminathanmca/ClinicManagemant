@@ -63,8 +63,8 @@ app.controller('patientReport',function($scope,$http,$window){
 
 
     $scope.fromSubmit=function(){
-        $scope.from_date = moment($scope.from_date).format("YYYY-MM-DD");
-        $scope.to_date = moment($scope.to_date).format("YYYY-MM-DD");
+        $scope.from_date = moment($scope.from_date).format("YYYY-MMM-DD");
+        $scope.to_date = moment($scope.to_date).format("YYYY-MMM-DD");
 
 
         $http.get("GetPatientInfoReport/"+$scope.patient_pid+"/"+$scope.from_date+"/"+$scope.to_date+"/"+$scope.doctor_id+"/"+$scope.branch_id)
@@ -78,15 +78,15 @@ app.controller('patientReport',function($scope,$http,$window){
         if(pmonths==1){
             $scope.date1 = new Date();
             $scope.date1.setMonth($scope.date1.getMonth()-3);
-            $scope.date1=moment($scope.date1).format("YYYY-MM-DD");
+            $scope.date1=moment($scope.date1).format("YYYY-MMM-DD");
         }else if(pmonths==2){
             $scope.date1 = new Date();
             $scope.date1.setMonth($scope.date1.getMonth()-6);
-            $scope.date1=moment($scope.date1).format("YYYY-MM-DD");
+            $scope.date1=moment($scope.date1).format("YYYY-MMM-DD");
         }else if(pmonths==3){
             $scope.date1 = new Date();
             $scope.date1.setMonth($scope.date1.getMonth()-12);
-            $scope.date1=moment($scope.date1).format("YYYY-MM-DD");
+            $scope.date1=moment($scope.date1).format("YYYY-MMM-DD");
         }
 
         $http.get("GetPatientReportByMonths/"+$scope.patient_pid+"/"+$scope.date1+"/"+$scope.doctor_id+"/"+$scope.branch_id)
