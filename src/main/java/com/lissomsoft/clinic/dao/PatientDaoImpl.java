@@ -349,7 +349,7 @@ if((result >0 )? true :false){
             Map<String,Object> params=new HashMap<String, Object>();
             params.put("patient_id",patient_pid);
             params.put("type",type);
-            params.put("created_at",format.format(new Date()));
+            params.put("created_at",dateFormat.format(new Date()));
             Calendar c = Calendar.getInstance();
             c.add(Calendar.DATE, 7);
             params.put("datebetween",format.format(c.getTime()));
