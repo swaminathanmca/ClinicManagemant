@@ -9,6 +9,7 @@ app.controller('patientVisit',function($scope,$window,$http){
     $scope.clinic_id=$window.sessionStorage.clinic_id;
     $scope.chiefError="The Phone No Already Taken";
     $scope.cfollow="The Value";
+    $scope.wfollow="The value";
     $scope.entry=true;
     $scope.followup=true;
 
@@ -52,7 +53,9 @@ app.controller('patientVisit',function($scope,$window,$http){
                 then(function(response){
                     $scope.entry=response.data.status;
                     $scope.followup=true;
+                    $scope.followWeek=true;
                     $scope.cfollow="Already Taken";
+                    $scope.wfollow="Already Taken";
                     if($scope.entry==false){
                         $scope.chiefError="";
                     }else{
@@ -72,6 +75,21 @@ app.controller('patientVisit',function($scope,$window,$http){
                     }
 
                 })
+
+            $scope.date1 = new Date();
+            $scope.date1.setDate($scope.date1.getDate()-8);
+            $scope.date1=moment($scope.date1).format("YYYY-MM-DD");
+            $http.get("GetFollowUpWeek/"+$scope.patient_pid+"/"+$scope.type+"/"+$scope.doctor_id+"/"+$scope.date1).
+                then(function(response){
+                    $scope.followWeek=response.data.status;
+                    if($scope.followWeek==false){
+                        $scope.wfollow="";
+                    }else{
+                        $scope.wfollow="Already Taken";
+
+                    }
+                })
+
 
         }
 

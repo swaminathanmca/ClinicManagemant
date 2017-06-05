@@ -384,4 +384,23 @@ if((result >0 )? true :false){
 
         return patientVisits;
     }
+
+    @Override
+    public List<PatientVisit> getFollowUp(String patient_pid, Integer type, Integer doctor_id, String date) {
+
+        List<PatientVisit> patientVisitList=null;
+        try {
+
+            String followupSql="SELECT  p.patient_id  patient_pid FROM patient_visit p  WHERE p.patient_id=:patient_pid   AND p.created_at>:date AND p.doctor_detail_id=:doctor_id";
+            Map<String,Object> parameter=new HashMap<String, Object>();
+            parameter.put("doctor_id",doctor_id);
+            parameter.put("type",type);
+            parameter.put("patient_pid",patient_pid);
+            parameter.put("date",date);
+            patientVisitList=jdbcTemplate.query(followupSql,parameter,new PatientVisitEntryMapper());
+           }catch (Exception e){
+               e.printStackTrace();
+           }
+        return patientVisitList;
+    }
 }

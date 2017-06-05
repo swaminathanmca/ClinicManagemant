@@ -2251,4 +2251,20 @@ public class HelloController {
 
         return jsonObject.toString();
     }
+
+    @RequestMapping(value = "/GetFollowUpWeek/{patient_pid}/{type}/{doctor_id}/{date}")
+    public
+    @ResponseBody
+    String getFollowupWeek(@PathVariable String patient_pid,@PathVariable Integer type,@PathVariable Integer doctor_id,@PathVariable String date)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+       List<PatientVisit> patientVisits;
+        patientVisits=patientService.getFollowUp(patient_pid,type,doctor_id,date);
+        if(patientVisits.isEmpty()){
+            jsonObject.put("status",false);
+        }else{
+            jsonObject.put("status",true);
+        }
+
+        return jsonObject.toString();
+    }
 }

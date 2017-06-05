@@ -165,7 +165,7 @@
                          <span class="text-danger wrapper text-center ng-binding"
                                ng-show="myform.type.$error.pattern">Please Select Valid Type</span>
                         <span class="text-danger wrapper text-center ng-binding" ng-show="entry==false">Already Registered Today</span>
-                        <span class="text-danger wrapper text-center ng-binding" ng-show="followup==false">Date Expreies</span>
+                        <span class="text-danger wrapper text-center ng-binding" ng-show="followup==false || followWeek==false">Date Expreies</span>
                       </div>
                       <div class="col-lg-2 col-sm-2 col-md-2 col-xs-2">
                         <div class="input-group">
@@ -218,7 +218,7 @@
                       <div class="row">
                         <div class="col-lg-offset-4 col-lg-7">
                           <button type="submit" class="btn btn-success"
-                                  ng-disabled="myform.$invalid  || !chiefError || !cfollow " ng-click="submitted=true">Save
+                                  ng-disabled="myform.$invalid  || !chiefError || !cfollow || !wfollow " ng-click="submitted=true">Save
                           </button>
                           <button type="button" class="btn btn-inverse">Cancel</button>
                         </div>
@@ -250,6 +250,7 @@
 <script src="<%=request.getContextPath()%>/static/js/addClinic.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/patientVisit.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
+<script src="<%=request.getContextPath()%>/static/vendor/moment/moment.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/angular-base64-upload.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/js/bootstrap-formhelpers.min.js"></script>
