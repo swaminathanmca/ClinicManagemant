@@ -359,7 +359,7 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-lg-12">
-              <form role="form" class="form-horizontal" name="myform1"  ng-submit="editsubmit(x.prescription_id)">
+              <form role="form" class="form-horizontal" name="myform1"  ng-submit="editsubmit(xt.prescription_id)">
                 <fieldset>
 
 
@@ -391,7 +391,7 @@
                     <div class="col-lg-5">
                       <div class="input-group">
                         <span class="input-group-addon">Prescription</span>
-                        <div   name="medicine_id"  custom-select="s.medicine_id as s.medicine_name for s in medicines | filter: { medicine_name: $searchTerm }"   ng-model="x.medicine_id" required>
+                        <div   name="medicine_id"  custom-select="s.medicine_id as s.medicine_name for s in medicines | filter: { medicine_name: $searchTerm }"   ng-model="xt.medicine_id" required>
                         </div>
                       </div>
                     </div>
@@ -424,13 +424,13 @@
                           </span>
                         <div class="checkbox  fileRadioBox form-control">&nbsp;
                           <label>
-                            <input type="checkbox" ng-checked="x.mrg_qty=='1'"  ng-true-value="'1'"  ng-false-value="' '"  ng-model="x.mrg_qty"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" />&nbsp;Morning
+                            <input type="checkbox" ng-checked="xt.mrg_qty==1"  ng-true-value="1"  ng-false-value="0"  ng-model="xt.mrg_qty"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" />&nbsp;Morning
                           </label>
                           <label>
-                            <input type="checkbox"  ng-checked="x.aft_qty=='1'" ng-true-value="'1'" ng-false-value="' '"  ng-model="x.aft_qty"  class="ng-pristine ng-untouched ng-valid ng-valid-required" >&nbsp;AfterNoon
+                            <input type="checkbox"  ng-checked="xt.aft_qty==1" ng-true-value="1" ng-false-value="0"  ng-model="xt.aft_qty"  class="ng-pristine ng-untouched ng-valid ng-valid-required" >&nbsp;AfterNoon
                           </label>
                           <label>
-                            <input type="checkbox" ng-checked="x.ngt_qty=='1'"  ng-true-value="'1'" ng-false-value="' '" ng-model="x.ngt_qty"  class="ng-pristine ng-untouched ng-valid ng-valid-required" >&nbsp;Night
+                            <input type="checkbox" ng-checked="xt.ngt_qty==1"  ng-true-value="1" ng-false-value="0" ng-model="xt.ngt_qty"  class="ng-pristine ng-untouched ng-valid ng-valid-required" >&nbsp;Night
                           </label>
                         </div>
 
@@ -442,7 +442,7 @@
                     <div class="col-lg-3">
                       <div class="input-group">
                         <span class="input-group-addon">Days</span>
-                        <input type="text" class="form-control" ng-model="x.days" required>
+                        <input type="text" class="form-control" ng-model="xt.days" required>
                       </div>
                     </div>
                     <div class="col-lg-8">
@@ -450,25 +450,25 @@
                         <span class="input-group-addon">Day Frequency</span>
                         <div class="checkbox fileRadioBox form-control">&nbsp;
                           <label>
-                            <input type="checkbox" ng-checked="x.day1=='1'"  ng-true-value="'1'"  ng-false-value="' '"  ng-model="x.day1"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" />MON
+                            <input type="checkbox" ng-checked="xt.day1==1"  ng-true-value="1"  ng-false-value="0"  ng-model="xt.day1"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" />MON
                           </label>
                           <label>
-                            <input type="checkbox" ng-checked="x.day2=='1'"  ng-true-value="'1'"  ng-false-value="' '"  ng-model="x.day2"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" />TUE
+                            <input type="checkbox" ng-checked="xt.day2==1"  ng-true-value="1"  ng-false-value="0"  ng-model="xt.day2"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" />TUE
                           </label>
                           <label>
-                            <input type="checkbox" ng-checked="x.day3=='1'"  ng-true-value="'1'"  ng-false-value="' '"  ng-model="x.day3"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" />WED
+                            <input type="checkbox" ng-checked="xt.day3==1"  ng-true-value="1"  ng-false-value="0"  ng-model="xt.day3"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" />WED
                           </label>
                           <label>
-                            <input type="checkbox" ng-checked="x.day4=='1'"  ng-true-value="'1'"  ng-false-value="' '"  ng-model="x.day4"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" />THU
+                            <input type="checkbox" ng-checked="xt.day4==1"  ng-true-value="1"  ng-false-value="0"  ng-model="xt.day4"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" />THU
                           </label>
                           <label>
-                            <input type="checkbox" ng-checked="x.day5=='1'"  ng-true-value="'1'"  ng-false-value="' '"  ng-model="x.day5"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" />FRI
+                            <input type="checkbox" ng-checked="xt.day5==1"  ng-true-value="1"  ng-false-value="0"  ng-model="xt.day5"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" />FRI
                           </label>
                           <label>
-                            <input type="checkbox" ng-checked="x.day6=='1'"  ng-true-value="'1'"  ng-false-value="' '"  ng-model="x.day6"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" />SAT
+                            <input type="checkbox" ng-checked="xt.day6==1"  ng-true-value="1"  ng-false-value="0"  ng-model="xt.day6"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" />SAT
                           </label>
                           <label>
-                            <input type="checkbox" ng-checked="x.day7=='1'"  ng-true-value="'1'"  ng-false-value="' '"  ng-model="x.day7"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" />SUN
+                            <input type="checkbox" ng-checked="xt.day7==1"  ng-true-value="1"  ng-false-value="0"  ng-model="xt.day7"   class="ng-pristine ng-untouched ng-valid ng-valid-required" checked="checked" />SUN
                           </label>
                         </div>
                       </div>
@@ -481,7 +481,7 @@
                     <div class="col-lg-4">
                       <div class="input-group">
                         <span class="input-group-addon">Remarks</span>
-                        <input type="text" class="form-control" ng-model="x.remarks">
+                        <input type="text" class="form-control" ng-model="xt.remarks">
                       </div>
 
                     </div>

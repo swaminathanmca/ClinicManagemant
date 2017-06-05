@@ -10,7 +10,7 @@ app.controller('Prescription',function($scope,$http,$window,$timeout){
     $scope.master={};
     $scope.addprescriptions=[];
     $scope.day=1;
-    $scope.patient_info="";
+    $scope.patient_info_id="";
 
 
 
@@ -38,7 +38,7 @@ app.controller('Prescription',function($scope,$http,$window,$timeout){
             $http.get("GetInfoId/"+$scope.patientcomplaint.patient_pid+"/"+$scope.patientcomplaint.created_at+"/"+$scope.patientcomplaint.type+"/"+$scope.patientcomplaint.doctor_id)
                 .then(function(response){
                     $scope.info=response.data;
-
+                    $scope.patient_info_id=$scope.info.patient_info_id;
                     $http.get("GetPrescription/"+$scope.info.patient_info_id)
                         .then(function(response){
                             $scope.selectedmaster=response.data.prescription;
@@ -85,7 +85,10 @@ app.controller('Prescription',function($scope,$http,$window,$timeout){
                                     $scope.selectedmaster=response.data.prescription;
 
                                 })*/
-                            location.href="AddPrescription";
+                            $http.get("GetPrescription/"+$scope.patient_info_id)
+                                .then(function(response){
+                                    $scope.selectedmaster=response.data.prescription;
+                                })
                         }
 
 
@@ -137,9 +140,9 @@ app.controller('Prescription',function($scope,$http,$window,$timeout){
                 });
                 $http.get("GetPrescriptionbyId/"+ $scope.prescription_id)
                     .then (function(response) {
-                    $scope.x=response.data;
-                    $scope.types=$scope.x.type.toString();
-                    $scope.frequencys=$scope.x.frequency.toString();
+                    $scope.xt=response.data;
+                    $scope.types=$scope.xt.type.toString();
+                    $scope.frequencys=$scope.xt.frequency.toString();
 
                     $http.get("PrescriptionType/"+$scope.types).
                         then(function (response, status, headers, config) {
@@ -210,7 +213,7 @@ app.controller('Prescription',function($scope,$http,$window,$timeout){
 
 
 $scope.editsubmit=function(id){
-    $http.get("MedicineDetails/"+$scope.x.medicine_id).
+    $http.get("MedicineDetails/"+$scope.xt.medicine_id).
         then(function(response,status,headers,config){
             $scope.medicine=response.data;
             $scope.medicine_name= $scope.medicine.medicine_name;
@@ -218,28 +221,31 @@ $scope.editsubmit=function(id){
             var prescripe={
                 prescription_id:id,
                 type:$scope.types,
-                medicine_id:$scope.x.medicine_id,
+                medicine_id:$scope.xt.medicine_id,
                 frequency:$scope.frequencys,
-                days:$scope.x.days,
+                days:$scope.xt.days,
                 medicine_name:$scope.medicine_name,
                 mg:$scope.mg,
-                mrg_qty:$scope.x.mrg_qty,
-                aft_qty:$scope.x.aft_qty,
-                nig_qty:$scope.x.ngt_qty,
-                days1:$scope.x.day1,
-                days2:$scope.x.day2,
-                days3:$scope.x.day3,
-                days4:$scope.x.day4,
-                days5:$scope.x.day5,
-                days6:$scope.x.day6,
-                days7:$scope.x.day7,
-                remarks:$scope.x.remarks
+                mrg_qty:$scope.xt.mrg_qty,
+                aft_qty:$scope.xt.aft_qty,
+                nig_qty:$scope.xt.ngt_qty,
+                days1:$scope.xt.day1,
+                days2:$scope.xt.day2,
+                days3:$scope.xt.day3,
+                days4:$scope.xt.day4,
+                days5:$scope.xt.day5,
+                days6:$scope.xt.day6,
+                days7:$scope.xt.day7,
+                remarks:$scope.xt.remarks
             }
 
         $http.post("EditPrescription",prescripe).
             then(function(response){
                 $scope.editstatus=response.data.status;
-                location.href="AddPrescription";
+                if($scope.editstatus){
+                    location.href="AddPrescription";
+                }
+
             })
 
 
