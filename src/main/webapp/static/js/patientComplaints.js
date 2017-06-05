@@ -79,7 +79,7 @@ location.href="AddComplaint";
 
             if($scope.ltype==1){
                 location.href="PatientTest";
-            }else {
+            }else if($scope.ltype==2) {
                 location.href="AddPrescription";
             }
 

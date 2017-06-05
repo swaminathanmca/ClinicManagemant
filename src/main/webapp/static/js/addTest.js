@@ -7,6 +7,7 @@ app.controller('LaboratoryTest',function($scope,$http,$window,$timeout) {
     $scope.branch_id = $window.sessionStorage.branch_id;
     $scope.doctor_id = $window.sessionStorage.doctor_id;
     $scope.selectedmaster=[];
+    $scope.patient_info_id="";
 
     $http.get("GetComplaint/"+$scope.visit_id)
         .then(function (response) {
@@ -16,12 +17,13 @@ app.controller('LaboratoryTest',function($scope,$http,$window,$timeout) {
                 .then(function (response) {
                     $scope.info = response.data;
                     /*$window.sessionStorage.patient_info = $scope.info.patient_info_id;*/
-                    location.href="AddPrescription";
+                    $scope.patient_info_id=$scope.info.patient_info_id;
+                    $http.get("GetLabInvest/"+ $scope.info.patient_info_id).
+                        then(function(response){
+                            $scope.selectedmaster=response.data.labinvest;
+                        })
                 })
-            $http.get("GetLabInvest/"+ $scope.info.patient_info_id).
-                then(function(response){
-                    $scope.selectedmaster=response.data.labinvest;
-                })
+
 
 
             $scope.checkAll = function () {
@@ -79,7 +81,10 @@ $scope.typelab=function(test_type){
                 then(function(response){
                     $scope.status=response.data.status;
                     if($scope.status){
-                        location.href="AddPrescription";
+                        $http.get("GetLabInvest/"+ $scope.info.patient_info_id).
+                            then(function(response) {
+                                $scope.selectedmaster = response.data.labinvest;
+                            })
                     }
                 })
         }
@@ -129,7 +134,8 @@ $scope.typelab=function(test_type){
             then(function(response){
                 $scope.status=response.data.status;
                 if($scope.status){
-                    $http.get("GetLabInvest/"+ $window.sessionStorage.patient_info).
+                    console.log($scope.info.patient_info_id);
+                    $http.get("GetLabInvest/"+ $scope.info.patient_info_id).
                         then(function(response){
                             $scope.selectedmaster=response.data.labinvest;
                             $scope.x.test_type="";

@@ -14,6 +14,8 @@ app.controller('AddLaboratoryType',function($scope,$http,$window,$timeout){
         $http.post("AddLaboratory",laboratory).
             then(function(response,status,headers,config){
                 $scope.data = response.data;
+                console.log(status);
+                location.href="ViewLaboratory";
             })
     }
 
