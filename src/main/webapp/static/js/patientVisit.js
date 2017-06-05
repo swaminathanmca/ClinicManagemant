@@ -12,6 +12,10 @@ app.controller('patientVisit',function($scope,$window,$http){
     $scope.wfollow="The value";
     $scope.entry=true;
     $scope.followup=true;
+    $scope.date1 = new Date();
+    $scope.date1.setDate($scope.date1.getDate()-8);
+    $scope.date1=moment($scope.date1).format("YYYY-MM-DD");
+
 
     $http.get("patientDetails/"+$scope.patient_pid).
         then(function(response,status,headers,config){
@@ -76,9 +80,7 @@ app.controller('patientVisit',function($scope,$window,$http){
 
                 })
 
-            $scope.date1 = new Date();
-            $scope.date1.setDate($scope.date1.getDate()-8);
-            $scope.date1=moment($scope.date1).format("YYYY-MM-DD");
+
             $http.get("GetFollowUpWeek/"+$scope.patient_pid+"/"+$scope.type+"/"+$scope.doctor_id+"/"+$scope.date1).
                 then(function(response){
                     $scope.followWeek=response.data.status;

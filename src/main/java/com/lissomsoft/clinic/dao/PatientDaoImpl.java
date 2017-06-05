@@ -371,12 +371,15 @@ if((result >0 )? true :false){
         List<PatientVisit> patientVisits=null;
         try {
             String visitSql="SELECT  p.patient_id  patient_pid FROM patient_visit p  WHERE p.patient_id=:patient_id AND p.type=:type  AND p.created_at=:created_at AND p.doctor_detail_id=:doctor_id";
+
             Map<String,Object> paramater=new HashMap<String, Object>();
             paramater.put("doctor_id",doctor_id);
             paramater.put("type",type);
             paramater.put("patient_id",patient_pid);
-            paramater.put("created_at",format.format(new Date()));
+            paramater.put("created_at",dateFormat.format(new Date()));
             patientVisits=jdbcTemplate.query(visitSql,paramater,new PatientVisitEntryMapper());
+
+
 
         }catch (Exception e){
             e.printStackTrace();
