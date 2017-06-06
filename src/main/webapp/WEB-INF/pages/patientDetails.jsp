@@ -171,7 +171,7 @@
                   <div class="col-lg-6">
                     <div class="input-group">
                       <span class="input-group-addon">Address</span>
-                      <label class="form-control" type="text" >{{data.address1}},{{data.address2}}</label>
+                      <textarea class="form-control" type="text" disabled>{{data.address1}},{{data.address2}}</textarea>
                     </div>
                   </div>
                    </div>
@@ -282,7 +282,7 @@
                    <div class="col-lg-5">
                      <div class="input-group">
                        <span class="input-group-addon">Address</span>
-                       <label class="form-control" type="text" >{{data.emr_address1}},{{data.emr_address2}}</label>
+                       <textarea class="form-control" type="text" disabled>{{data.emr_address1}},{{data.emr_address2}}</textarea>
                      </div>
                    </div>
                      <div class="col-lg-3">

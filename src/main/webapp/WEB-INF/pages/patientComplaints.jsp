@@ -151,6 +151,13 @@
                          <span class="text-danger wrapper text-center ng-binding"
                                ng-show="myform.bpressure.$invalid &&  myform.bpressure.$touched">Please Enter Blood Pressure</span>
                       </div>
+                      <div class="col-lg-3" ng-if="patientcomplaint.height">
+                        <div class="input-group">
+                          <span class="input-group-addon">Height</span>
+                          <label type="text" class="form-control" name="height">{{patientcomplaint.height}}</label>
+                          <span class="input-group-addon">CM</span>
+                        </div>
+                      </div>
                     </div>
                     <div class="form-group">
                       <div class="col-lg-6">

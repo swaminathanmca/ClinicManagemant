@@ -701,7 +701,8 @@ public class HelloController {
         jsonObject.put("last_name",patientcomplaint.getLast_name());
         jsonObject.put("gender",patientcomplaint.getGender());
         jsonObject.put("weight",patientcomplaint.getWeight());
-        jsonObject.put("type",patientcomplaint.getHeight());
+        jsonObject.put("type",patientcomplaint.getType());
+        jsonObject.put("height",patientcomplaint.getHeight());
         jsonObject.put("pressure",patientcomplaint.getPressure());
         jsonObject.put("refereal_details",patientcomplaint.getComplaint_name());
         jsonObject.put("created_at",patientcomplaint.getCreated_at());

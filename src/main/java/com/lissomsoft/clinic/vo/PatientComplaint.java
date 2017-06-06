@@ -13,6 +13,7 @@ public class PatientComplaint {
     private String gender;
     private Integer weight;
     private Integer height;
+    private Integer type;
     private Integer pressure;
     private String complaint_name;
     private Integer doctor_detail_id;
@@ -112,6 +113,14 @@ public class PatientComplaint {
         return doctor_detail_id;
     }
 
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
     public void setDoctor_detail_id(Integer doctor_detail_id) {
         this.doctor_detail_id = doctor_detail_id;
     }
@@ -127,6 +136,7 @@ public class PatientComplaint {
                 "gender="+gender+
                 "weight ="+ weight +
                 "height ="+ height +
+                "type ="+type+
                 "pressure ="+ pressure +
                 "complaint_name ="+ complaint_name +
                 "doctor_detail_id ="+doctor_detail_id+

@@ -224,14 +224,14 @@
               <div class="col-lg-6">
                 <div class="input-group">
                   <span class="input-group-addon">Address1</span>
-                  <input type="text" class="form-control" ng-model="address1" name="address1"  required>
+                  <input type="text" class="form-control" ng-model="address1" name="address1"  maxlength="35" required>
                 </div>
                 <span class="text-danger wrapper text-center ng-binding" ng-show="myform.address1.$invalid &&  myform.address1.$touched">Please Enter Address</span>
               </div>
               <div class="col-lg-6">
                 <div class="input-group">
                   <span class="input-group-addon">Address2</span>
-                  <input type="text" class="form-control" ng-model="address2" name="pat_address"  required>
+                  <input type="text" class="form-control" ng-model="address2" name="pat_address" maxlength="35" required>
                 </div>
                 <span class="text-danger wrapper text-center ng-binding" ng-show="myform.pat_address.$invalid &&  myform.pat_address.$touched">Please Enter Address</span>
               </div>

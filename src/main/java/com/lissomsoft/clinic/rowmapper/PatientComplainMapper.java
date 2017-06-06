@@ -21,8 +21,9 @@ public class PatientComplainMapper implements RowMapper {
         patientcomplaint.setDob(rs.getString("dob"));
         patientcomplaint.setGender(rs.getString("sex"));
         patientcomplaint.setWeight(rs.getInt("weight"));
-        patientcomplaint.setHeight(rs.getInt("type"));
+        patientcomplaint.setType(rs.getInt("type"));
         patientcomplaint.setPressure(rs.getInt("pressure"));
+        patientcomplaint.setHeight(rs.getInt("height"));
         patientcomplaint.setComplaint_name(rs.getString("refereal_details"));
         patientcomplaint.setCreated_at(rs.getString("created_at"));
         patientcomplaint.setDoctor_detail_id(rs.getInt("doctor_detail_id"));
