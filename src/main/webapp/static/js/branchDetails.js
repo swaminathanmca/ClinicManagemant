@@ -70,7 +70,7 @@ $http.get("BranchDetails/"+$window.sessionStorage.branch_id).
         $http.get("EditChiefEmail/"+$scope.chief_id+"/"+$scope.email_id).
             then(function(response,status,error){
                 $scope.err_chief_email=response.data.status;
-                console.log($scope.err_chief_email);
+
                 if($scope.err_chief_email==false){
                     $scope.chiefEmail="";
                 }else{

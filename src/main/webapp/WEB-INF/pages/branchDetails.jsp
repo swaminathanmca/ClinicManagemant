@@ -187,7 +187,7 @@
                                             <div class="col-lg-6">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">Branch Address</span>
-                                                    <label class="form-control" type="text">{{branch.address1}},{{branch.address2}}</label>
+                                                    <textarea class="form-control" type="text" disabled>{{branch.address1}},{{branch.address2}}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -262,7 +262,7 @@
                                                     <span class="input-group-addon">
                                                          Address
                                                     </span>
-                                                    <label class="form-control" type="text">{{branch.Chief_address1}},{{branch.Chief_address2}}</label>
+                                                    <textarea class="form-control" type="text" disabled>{{branch.Chief_address1}},{{branch.Chief_address2}}</textarea>
                                                 </div>
                                             </div>
                                         </div>
