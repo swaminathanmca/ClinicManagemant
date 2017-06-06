@@ -214,7 +214,7 @@ public class PatientDaoImpl implements  PatientDao {
         DefaultTransactionDefinition paramTransactionDefinition = new DefaultTransactionDefinition();
         TransactionStatus status = platformTransactionManager.getTransaction(paramTransactionDefinition);
         try{
-            String editPatient="UPDATE patient_master SET first_name=:first_name,last_name=:last_name,address1=:address1,address2=:address2,city=:city,state=:state,country=:country,pincode=:pincode,contact_no=:contact_no,mobile_no=:mobile_no,email_id=:email,dob=:dob,sex=:gender,mstatus=:mstatus,blood_group_code=:blood_group WHERE patient_master.patient_pid=:patient_pid";
+            String editPatient="UPDATE patient_master SET first_name=:first_name,last_name=:last_name,address1=:address1,address2=:address2,city=:city,state=:state,country=:country,pincode=:pincode,contact_no=:contact_no,mobile_no=:mobile_no,email_id=:email,dob=:dob,sex=:gender,mstatus=:mstatus,blood_group_code=:blood_group,refered_by=:referred_by,allergy_food=:allergy_food,allergy_others=:allergy_others WHERE patient_master.patient_pid=:patient_pid";
             Map<String,Object> parameter=new HashMap<String, Object>();
             parameter.put("first_name",patient.getFullName());
             parameter.put("last_name",patient.getLastName());
@@ -232,6 +232,9 @@ public class PatientDaoImpl implements  PatientDao {
             parameter.put("gender",patient.getGender());
             parameter.put("blood_group",patient.getBloodGroup());
             parameter.put("patient_pid",patient.getPatient_pId());
+            parameter.put("allergy_food",patient.getAllergy_food());
+            parameter.put("allergy_others",patient.getAllergy_others());
+            parameter.put("referred_by",patient.getReferred_by());
 
 
             result=jdbcTemplate.update(editPatient,parameter);

@@ -109,7 +109,10 @@ $scope.editUser=function(){
             emergency_pincode:$scope.x.emr_pincode,
             emergency_contact_no:$scope.x.emr_contact_no,
             emergency_residental_no:$scope.x.emr_mobile_no,
-            emergency_email:$scope.x.email_id
+            emergency_email:$scope.x.email_id,
+            allergy_food: $scope.x.allergy_food,
+            allergy_others:$scope.x.allergy_others,
+            referred_by:$scope.x.referred_by
         }
 
         $http.post("EditPatient",patient).
