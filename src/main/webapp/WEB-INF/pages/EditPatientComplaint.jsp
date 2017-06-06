@@ -101,7 +101,7 @@
           <div class="panel-body">
             <div class="row">
               <div class="col-lg-12">
-                <form class="form-horizontal ng-invalid" role="form" name="myform" ng-submit="submit()" novalidate>
+                <form class="form-horizontal ng-invalid" role="form" name="myform" ng-submit="submited()" novalidate>
                   <fieldset>
                     <div class="col-xs-3">
                     </div>
@@ -126,7 +126,7 @@
                       <div class="col-lg-6">
                         <div class="input-group">
                           <span class="input-group-addon">Diagonics</span>
-                          <input type="text" class="form-control" name="diagonics" ng-model="details.diagonics" disabled/>
+                          <label type="text" class="form-control" name="diagonics"  >{{details.diagonics}}</label>
                         </div>
                       </div>
 

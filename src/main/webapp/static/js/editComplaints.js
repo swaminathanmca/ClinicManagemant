@@ -6,6 +6,7 @@ app.controller('editComplaints',function($scope,$window,$http){
     $scope.visit_id=$window.sessionStorage.visit_id;
     $scope.branch_id= $window.sessionStorage.branch_id;
     $scope.doctor_id=$window.sessionStorage.doctor_id;
+    $scope.patient_info_id="";
     var obj;
 
     $http.get("GetComplaint/"+$scope.visit_id)
@@ -15,9 +16,13 @@ app.controller('editComplaints',function($scope,$window,$http){
             $http.get("GetInfoId/" + $scope.patientcomplaint.patient_pid + "/" + $scope.patientcomplaint.created_at+"/"+$scope.patientcomplaint.type+"/"+$scope.doctor_id)
                 .then(function (response) {
                     $scope.info = response.data;
+                    $scope.patient_info_id = $scope.info.patient_info_id;
 
-                    $window.sessionStorage.patient_info = $scope.info.patient_info_id;
+                    $http.get("GetInfoDetails/"+$scope.patient_info_id)
+                        .then(function(response){
+                            $scope.details=response.data;
 
+                        })
                 })
         });
 
@@ -26,15 +31,11 @@ app.controller('editComplaints',function($scope,$window,$http){
             $scope.complaint = response.data.complaint;
 
         });
-    $http.get("GetInfoDetails/"+$window.sessionStorage.patient_info)
-        .then(function(response){
-            $scope.details=response.data;
 
-        })
 
 
    $scope.editInfo=function(){
-       $http.get("GetInfoDetails/"+$window.sessionStorage.patient_info)
+       $http.get("GetInfoDetails/"+$scope.patient_info_id)
            .then(function(response){
                $scope.detailsInfo=response.data;
                $scope.selectSpecialization=$scope.detailsInfo.complaints;
@@ -83,7 +84,7 @@ app.controller('editComplaints',function($scope,$window,$http){
                 location.href="EditpatientComplaint";
             })
     }
-    $scope.submit=function(){
+    $scope.submited=function(){
         location.href="AddPrescription";
     }
 
