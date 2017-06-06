@@ -279,13 +279,14 @@ if((result >0 )? true :false){
 
         try{
 
-            String insertVistSql="INSERT INTO patient_visit(patient_id,branch_id,weight,type,pressure,visit_type,status,entry_time,doctor_detail_id,refereal_details,created_at,updated_at) VALUES(:patient_pid,:branch_id,:weight,:type,:pressure,:vtype,1,:entryTime,:doctor_id,:referal_details,:created_at,:created_at)";
+            String insertVistSql="INSERT INTO patient_visit(patient_id,branch_id,weight,height,type,pressure,visit_type,status,entry_time,doctor_detail_id,refereal_details,created_at,updated_at) VALUES(:patient_pid,:branch_id,:weight,:height,:type,:pressure,:vist_type,1,:entryTime,:doctor_id,:referal_details,:created_at,:created_at)";
             Map<String ,Object> parameter=new HashMap<String, Object>();
             parameter.put("patient_pid",visit.getPatient_pid());
             parameter.put("branch_id",visit.getBranch_id());
-            parameter.put("type",visit.getHeight());
+            parameter.put("height",visit.getHeight());
             parameter.put("weight",visit.getWeight());
-            parameter.put("vtype",visit.getType());
+            parameter.put("type",visit.getType());
+            parameter.put("vist_type",visit.getVisit_type());
             parameter.put("entryTime",visit.getTime());
             parameter.put("pressure",visit.getPressure());
             parameter.put("doctor_id",visit.getDoctor_id());

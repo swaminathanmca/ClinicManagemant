@@ -234,20 +234,23 @@
                      </div>
                    </div>
                    <div class="form-group">
-                     <div class="col-lg-4" ng-if="data.allergy_food">
+                     <div class="col-lg-6" ng-if="data.allergy_food">
                        <div class="input-group">
                          <span class="input-group-addon" >Allergy Food </span>
                          <label class="form-control" type="text" >{{data.allergy_food}}</label>
                        </div>
                      </div>
-                     <div class="col-lg-4">
+                     <div class="col-lg-6">
                        <div class="input-group" ng-if="data.allergy_others">
                          <span class="input-group-addon">Allergy Others</span>
                          <label class="form-control" type="text" >{{data.allergy_others}}</label>
                        </div>
                      </div>
-                     <div class="col-lg-4">
-                       <div class="input-group" ng-if="data.referred_by">
+
+                   </div>
+                   <div class="form-group" ng-if="data.referred_by">
+                     <div class="col-lg-6">
+                       <div class="input-group" >
                          <span class="input-group-addon">Referred By</span>
                          <label class="form-control" type="text" >{{data.referred_by}}</label>
                        </div>

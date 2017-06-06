@@ -181,30 +181,37 @@
                           <span class="input-group-addon">BP</span>
                           <input type="text" class="form-control" ng-model="pressure" name="pressure"  ng-pattern="/^[0-9]*$/" >
                         </div>
-
                       </div>
-                      <div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+                      <div class="col-lg-2 col-sm-2 col-md-2 col-xs-2">
                         <div class="input-group">
-                          <span class="input-group-addon">
-                             Category
-                          </span>
-                         <%-- <select class="form-control" ng-model="vtype" name="vtype" required>
-                            <option value="0">Normal </option>
-                            <option value="1">Emergency</option>
-                          </select>--%>
-                          <div class="checkbox pb10 fileRadioBox form-control">
-                            <label>
-                              <input type="radio" name="vtype"  value="0"   ng-model="vtype" required>Normal
-                            </label>
-
-                            <label>
-                              <input type="radio" name="vtype" value="1"  ng-model="vtype"  required>
-                              Emergency
-                            </label>
-                          </div>
+                          <span class="input-group-addon">Height</span>
+                          <input type="text" class="form-control" ng-model="height" name="height" ng-pattern="/^[0-9]*$/">
                         </div>
                       </div>
                     </div>
+                     <div class="form-group">
+                       <div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+                         <div class="input-group">
+                          <span class="input-group-addon">
+                             Category
+                          </span>
+                           <%-- <select class="form-control" ng-model="vtype" name="vtype" required>
+                              <option value="0">Normal </option>
+                              <option value="1">Emergency</option>
+                            </select>--%>
+                           <div class="checkbox pb10 fileRadioBox form-control">
+                             <label>
+                               <input type="radio" name="vtype"  value="0"   ng-model="vtype" required>Normal
+                             </label>
+
+                             <label>
+                               <input type="radio" name="vtype" value="1"  ng-model="vtype"  required>
+                               Emergency
+                             </label>
+                           </div>
+                         </div>
+                       </div>
+                     </div>
                     <div class="form-group">
                       <div class="col-lg-12">
                         <div class="input-group">

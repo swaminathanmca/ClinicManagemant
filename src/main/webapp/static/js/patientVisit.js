@@ -103,9 +103,10 @@ app.controller('patientVisit',function($scope,$window,$http){
         var visit={
             patient_pid:$scope.patient_pid,
             branch_id:$scope.branch_id,
-            height:$scope.type,
+            type:$scope.type,
             weight:$scope.weight,
-            type:$scope.vtype,
+            height:$scope.height,
+            visit_type:$scope.vtype,
             time:$scope.time,
             pressure:$scope.pressure,
             doctor_id:$scope.doctor_id,

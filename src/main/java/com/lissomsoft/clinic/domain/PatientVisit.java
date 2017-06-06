@@ -17,6 +17,7 @@ public class PatientVisit {
     private Integer pressure;
     private Integer branch_id;
     private String time;
+    private Integer visit_type;
     private String referal_details;
 
     public String getPatient_pid() {
@@ -131,6 +132,14 @@ public class PatientVisit {
         this.visit_id = visit_id;
     }
 
+    public Integer getVisit_type() {
+        return visit_type;
+    }
+
+    public void setVisit_type(Integer visit_type) {
+        this.visit_type = visit_type;
+    }
+
     public  String toString(){
         return "PatientVisit {" +
                 " visit_id ="+ visit_id +
@@ -145,6 +154,7 @@ public class PatientVisit {
                 " time       ="+time+
                 " status     ="+status+
                 " pressure   ="+pressure+
+                " visit_type ="+visit_type+
                 " referal_details ="+referal_details+
                 '}';
     }
