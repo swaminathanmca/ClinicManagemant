@@ -110,7 +110,8 @@
               <div class=" col-sm-2 col-print-2 text-align-right"></div>
               <div class=" col-sm-4 col-print-4 text-align-right">
                 <h4 class="text-muted no-margin">Patient Information</h4>
-                <h3>{{patientcomplaint.patient_pid}}</h3>
+                <%--<h3>{{patientcomplaint.patient_pid}}</h3>--%>
+                <h6><svg id="barcode"></svg></h6>
                 <h3 class="client-name txtrns">
                   {{patientcomplaint.first_name}} {{patientcomplaint.last_name}}
                 </h3>
@@ -282,7 +283,7 @@
                 <div class=" col-sm-2 col-print-2 text-align-right"></div>
                 <div class=" col-sm-4 col-print-4 text-align-right">
                   <h4 class="text-muted no-margin">Patient Information</h4>
-                  <h3>{{patientcomplaint.patient_pid}}</h3>
+                  <h6><svg id="barcode"></svg></h6>
                   <h3 class="client-name txtrns">
                     {{patientcomplaint.first_name}} {{patientcomplaint.last_name}}
                   </h3>
@@ -371,6 +372,7 @@
 <script src="<%=request.getContextPath()%>/static/vendor/js-custom-select/customSelect.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/JsBarcode.all.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/invoice.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/moment/moment.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>

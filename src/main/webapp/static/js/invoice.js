@@ -30,6 +30,10 @@ app.controller('Invoice',function($scope,$http,$window,$timeout){
     $http.get("GetComplaint/"+$scope.visit_id)
         .then(function (response) {
             $scope.patientcomplaint = response.data.patientcomplaint;
+            JsBarcode("#barcode",$scope.patientcomplaint.patient_pid,{
+                width: 1,
+                height:30
+            });
 
                 $http.get("patientDetails/"+$scope.patientcomplaint.patient_id)
                     .then(function(response){
