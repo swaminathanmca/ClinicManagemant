@@ -79,6 +79,9 @@ location.href="AddComplaint";
                 location.href="AddPrescription";
 
             }
+            else if($scope.ltype==3){
+                location.href="AddInvestigation";
+            }
 
         });
 

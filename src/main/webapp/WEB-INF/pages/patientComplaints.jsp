@@ -256,7 +256,7 @@
                       </div>
                     </div>--%>
                     <div class="form-group">
-                      <div class="col-lg-5">
+                      <div class="col-lg-8">
                         <div class="input-group">
                           <span class="input-group-addon">
                             TYPE
@@ -268,14 +268,17 @@
                            </SELECT>--%>
                           <div class="checkbox  fileRadioBox form-control">
                             <label>
-                              <input type="radio" name="ltype"  value="1"   ng-model="ltype" required="required">&nbsp;Lab
+                              <input type="radio" name="ltype"  value="1"   ng-model="ltype" required="required">&nbsp;Lab & Prescription
                             </label>
 
                             <label>
                               <input type="radio" name="ltype" value="2"  ng-model="ltype" required="required">&nbsp;Prescription
 
                             </label>
+                            <label>
+                              <input type="radio" name="ltype" value="3"  ng-model="ltype" required="required">&nbsp;None
 
+                            </label>
                           </div>
                         </div>
                       </div>

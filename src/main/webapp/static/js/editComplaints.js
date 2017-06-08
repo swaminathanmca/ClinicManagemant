@@ -93,6 +93,9 @@ app.controller('editComplaints',function($scope,$window,$http){
             location.href="AddPrescription";
 
         }
+        else if($scope.ltype==3){
+            location.href="AddInvestigation";
+        }
     }
 
 })
