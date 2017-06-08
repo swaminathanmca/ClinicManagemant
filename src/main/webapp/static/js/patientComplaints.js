@@ -51,6 +51,22 @@ location.href="AddComplaint";
     }
 
     $scope.submit=function(){
+
+        if($scope.ltype==3){
+
+            $("#myModal").modal();
+        }else{
+            $scope.add();
+        }
+
+    }
+
+    $scope.submitModel=function(){
+        console.log("alert");
+        $scope.add();
+    }
+
+    $scope.add=function(){
         var PatientInfo={
             patient_pid:$scope.patientcomplaint.patient_pid,
             branch_id:$scope.branch_id,
@@ -84,7 +100,9 @@ location.href="AddComplaint";
             }
 
         });
-
+    }
+    $scope.cancel=function(){
+        location.href="DoctorDashboard";
     }
 
 })

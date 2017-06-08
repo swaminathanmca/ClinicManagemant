@@ -442,10 +442,6 @@
                             ng-show="myform1.address2.$invalid &&  myform1.address2.$touched">Please Enter Address</span>
                     </div>
                   </div>
-
-
-
-
                   <div class="form-group">
                     <div class="col-lg-3">
                       <div class="input-group">

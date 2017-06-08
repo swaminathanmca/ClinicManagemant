@@ -292,7 +292,7 @@
                           <button type="submit" class="btn btn-success"
                                   ng-disabled="myform.$invalid"       ng-click="submitted=true">Save
                           </button>
-                          <button type="button" class="btn btn-inverse">Cancel</button>
+                          <button type="button" class="btn btn-inverse" ng-click="cancel()">Cancel</button>
                         </div>
                       </div>
                     </div>
@@ -310,6 +310,40 @@
 
   </div>
 
+  </div>
+
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <form role="form" class="form-horizontal" name="myform1"  ng-submit="submitModel()">
+              <fieldset>
+                <p>Are you sure you want to proceed with None.</p>
+
+                <div class="form-action">
+                  <div class="row">
+                    <div class="col-lg-offset-4 col-lg-7">
+                      <button type="submit" class="btn btn-success"  ng-click="submitted=true">Save</button>
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    </div>
+
+                  </div>
+                </div>
+                </fieldset>
+              </form>
+          </div>
+        </div>
+
+
+    </div>
+
+  </div>
+</div>
   </div>
 
 
