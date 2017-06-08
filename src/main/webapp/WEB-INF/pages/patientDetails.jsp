@@ -428,7 +428,7 @@
                     <div class="col-lg-6">
                       <div class="input-group">
                         <span class="input-group-addon">Address1</span>
-                        <input type="text" class="form-control" ng-model="x.address1" name="address1" required>
+                        <input type="text" class="form-control" ng-model="x.address1" maxlength="35" name="address1" required>
                       </div>
                       <span class="text-danger wrapper text-center ng-binding"
                             ng-show="myform1.address1.$invalid &&  myform1.address1.$touched">Please Enter Address </span>
@@ -436,7 +436,7 @@
                     <div class="col-lg-6">
                       <div class="input-group">
                         <span class="input-group-addon">Address2</span>
-                        <input type="text" class="form-control" ng-model="x.address2" name="address2" required>
+                        <input type="text" class="form-control" ng-model="x.address2" maxlength="35" name="address2" required>
                       </div>
                       <span class="text-danger wrapper text-center ng-binding"
                             ng-show="myform1.address2.$invalid &&  myform1.address2.$touched">Please Enter Address</span>
@@ -562,7 +562,7 @@
                     <div class="col-lg-6">
                       <div class="input-group">
                         <span class="input-group-addon">Address1</span>
-                        <input type="text" class="form-control" ng-model="x.emr_address1" name="emr_address1" required>
+                        <input type="text" class="form-control" ng-model="x.emr_address1" name="emr_address1" maxlength="35" required>
                         </div>
                       <span class="text-danger wrapper text-center ng-binding"
                             ng-show="myform1.emr_address1.$invalid &&  myform1.emr_address1.$touched">Enter Emergency Address</span>
@@ -570,7 +570,7 @@
                     <div class="col-lg-6">
                       <div class="input-group">
                         <span class="input-group-addon">Address2</span>
-                        <input type="text" class="form-control" ng-model="x.emr_address2" name="emr_address2" required>
+                        <input type="text" class="form-control" ng-model="x.emr_address2" name="emr_address2" maxlength="35" required>
                       </div>
                       <span class="text-danger wrapper text-center ng-binding"
                             ng-show="myform1.emr_address2.$invalid &&  myform1.emr_address2.$touched">Enter Emergency Address </span>

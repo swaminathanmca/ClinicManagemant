@@ -130,4 +130,8 @@ $scope.validate=function(){
          });
 }
 
+    $scope.cancel=function(){
+        location.href="GetPatient";
+    }
+
 })

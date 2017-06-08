@@ -31,13 +31,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#"><img src="../Clinic/static/img/logo.png" width="30" height="30"></a>
+      <a class="navbar-brand" href="#"><img src="../Clinic/static/img/logo.png" width="50" height="30"></a>
+
     </div>
     <!-- /.navbar-header -->
 
+
     <ul class="nav navbar-top-links navbar-right">
-
-
       <li class="dropdown ">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
           <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -51,10 +51,7 @@
           <li><a href="/Clinic"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
           </li>
         </ul>
-
       </li>
-
-
     </ul>
 
 
@@ -319,14 +316,14 @@
               <div class="col-lg-6">
                 <div class="input-group">
                   <span class="input-group-addon">Address1</span>
-                  <input type="text" class="form-control" name="emr_address1" ng-model="emr_address1" required>
+                  <input type="text" class="form-control" name="emr_address1" ng-model="emr_address1" maxlength="35" required>
                 </div>
                 <span class="text-danger wrapper text-center ng-binding" ng-show="myform.emr_address1.$invalid &&  myform.emr_address1.$touched">Please Enter Address</span>
               </div>
               <div class="col-lg-6">
                 <div class="input-group">
                   <span class="input-group-addon">Address2</span>
-                  <input type="text" class="form-control" name="address2" ng-model="emr_address2" required>
+                  <input type="text" class="form-control" name="address2" ng-model="emr_address2" maxlength="35" required>
                 </div>
                 <span class="text-danger wrapper text-center ng-binding" ng-show="myform.address2.$invalid &&  myform.address2.$touched">Please Enter Address</span>
               </div>
@@ -393,7 +390,7 @@
                   <button type="submit" class="btn btn-success"
                           ng-disabled="myform.$invalid " ng-click="submitted=true">Save
                   </button>
-                  <button type="button" class="btn btn-inverse">Cancel</button>
+                  <button type="button" class="btn btn-inverse" ng-click="cancel()">Cancel</button>
                 </div>
               </div>
             </div>

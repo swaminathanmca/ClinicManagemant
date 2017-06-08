@@ -72,7 +72,17 @@
           <li>
             <a href="ViewPatientVisit"><i class="fa fa-heartbeat"></i>&nbsp;PatientVisit </a>
           </li>
-
+          <li>
+            <a href="#"><i class="fa fa-medkit"></i>&nbsp;Medicine<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+              <li>
+                <a href="AddMedicine"> Add Medicine</a>
+              </li>
+              <li>
+                <a href="GetMedicine">View Medicine</a>
+              </li>
+            </ul>
+          </li>
 
 
         </ul>
@@ -170,7 +180,7 @@
                       <div class="col-lg-2 col-sm-2 col-md-2 col-xs-2">
                         <div class="input-group">
                           <span class="input-group-addon">Weight</span>
-                          <input type="text" class="form-control" ng-model="weight" name="weight" maxlength="3"  ng-pattern="/^[0-9]*$/" required>
+                          <input type="text" class="form-control" ng-model="weight" name="weight" maxlength="3"  ng-pattern="/^[0-9]*$/" >
                           <%--<span class="input-group-addon">KG</span>--%>
                         </div>
                          <span class="text-danger wrapper text-center ng-binding"
@@ -181,12 +191,16 @@
                           <span class="input-group-addon">BP</span>
                           <input type="text" class="form-control" ng-model="pressure" name="pressure"  ng-pattern="/^[0-9]*$/" >
                         </div>
+                         <span class="text-danger wrapper text-center ng-binding"
+                               ng-show="myform.pressure.$error.pattern">Please Enter Valid Pressure</span>
                       </div>
                       <div class="col-lg-2 col-sm-2 col-md-2 col-xs-2">
                         <div class="input-group">
                           <span class="input-group-addon">Height</span>
                           <input type="text" class="form-control" ng-model="height" name="height" ng-pattern="/^[0-9]*$/">
                         </div>
+                        <span class="text-danger wrapper text-center ng-binding"
+                              ng-show="myform.height.$error.pattern">Please Enter Valid Height</span>
                       </div>
                     </div>
                      <div class="form-group">
@@ -227,7 +241,7 @@
                           <button type="submit" class="btn btn-success"
                                   ng-disabled="myform.$invalid  || !chiefError || !cfollow || !wfollow " ng-click="submitted=true">Save
                           </button>
-                          <button type="button" class="btn btn-inverse">Cancel</button>
+                          <button type="button" class="btn btn-inverse" ng-click="cancel()">Cancel</button>
                         </div>
                       </div>
                     </div>

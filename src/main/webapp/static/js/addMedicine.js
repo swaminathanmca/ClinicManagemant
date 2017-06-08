@@ -63,7 +63,9 @@ app.controller('Medicine',function($scope,$http,$window){
             });
 
     }
-
+$scope.cancel=function(){
+    location.href="GetMedicine";
+}
 
 
 

@@ -125,8 +125,7 @@
                     <thead>
                     <tr class="success">
                       <th>Patient Id</th>
-                      <th>First Name</th>
-                      <th>Last Name</th>
+                      <th> Name</th>
                       <th>Email</th>
                       <th>Contact No</th>
 
@@ -135,8 +134,7 @@
                     <tbody>
                     <tr dir-paginate="x in data | filter:search | orderBy : first_name | itemsPerPage :5" >
                       <td ><a ng-click="editPatient(x.patient_id)" class="und_ref">{{x.patient_pid}}</a></td>
-                      <td>{{x.first_name}}</td>
-                      <td>{{x.last_name}}</td>
+                      <td>{{x.first_name}} &nbsp {{x.last_name}}</td>
                       <td>{{x.email}}</td>
                       <td>{{x.contact_no}}</td>
 

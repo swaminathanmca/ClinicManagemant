@@ -126,7 +126,9 @@ app.controller('patientVisit',function($scope,$window,$http){
     }
 
 
-
+$scope.cancel=function(){
+    location.href="patientDetail";
+}
 
 
 

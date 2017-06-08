@@ -16,4 +16,9 @@ app.controller('AddComplaint',function($scope,$http,$window) {
                 location.href="ViewComplaint";
             });
     }
+
+
+    $scope.cancel=function(){
+        location.href="ViewComplaint";
+    }
 })
