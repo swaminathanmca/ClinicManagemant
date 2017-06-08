@@ -193,7 +193,9 @@
 
 
 
+
                                         </div>
+
 
                                         <div class="form-group">
 
@@ -261,8 +263,32 @@
 
                                         </div>
                                         <div class="form-group">
-
-                                            <div class="col-lg-3">
+                                            <div class="col-lg-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Email</span>
+                                                    <input class="form-control" type="email" name="email_id"
+                                                           ng-model="email_id" placeholder="" ng-blur="validateEmail()" required/>
+                                                </div>
+                                              <span class="text-danger wrapper text-center ng-binding"
+                                                    ng-show="myform.email_id.$invalid &&  myform.email_id.$touched">Please Enter The Email</span>
+                                             <span class="text-danger wrapper text-center ng-binding" ng-show="err_chief_email==false">
+                                                       The Email Already Taken
+                                                           </span>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="input-group">
+                                                 <span class="input-group-addon">Phone No
+                                                 </span>
+                                                    <input type="text" class="form-control" ui-mask="999-999-9999"
+                                                           name="phone_no" ng-model="phone_no" ng-blur="validatecontact()" required/>
+                                                </div>
+                                              <span class="text-danger wrapper text-center ng-binding"
+                                                    ng-show="myform.phone_no.$invalid &&  myform.phone_no.$touched">Please Enter The Phone No</span>
+                                             <span class="text-danger wrapper text-center ng-binding" ng-show="err==false">
+                                                       The Mobile Number Already Taken
+                                                           </span>
+                                            </div>
+                                            <div class="col-lg-4">
                                                 <div class="input-group">
                                                  <span class="input-group-addon">
                                                      Password
@@ -274,6 +300,7 @@
                                                     ng-show="myform.password.$invalid &&  myform.password.$touched">Please Enter The Password</span>
                                             </div>
                                         </div>
+
 
 
                                         <%-- <input type="file" ng-model="file" name="file" base-sixty-four-input required onload="onLoad" maxsize="500" accept="image/*">--%>
