@@ -62,7 +62,7 @@ location.href="AddComplaint";
     }
 
     $scope.submitModel=function(){
-        console.log("alert");
+
         $scope.add();
     }
 

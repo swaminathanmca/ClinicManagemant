@@ -318,22 +318,25 @@
     <!-- Modal content-->
     <div class="modal-content">
 
-      <div class="modal-body">
+      <div class="modal-header">
         <div class="row">
           <div class="col-lg-12">
             <form role="form" class="form-horizontal" name="myform1"  ng-submit="submitModel()">
               <fieldset>
-                <p>Are you sure you want to proceed with None.</p>
+                <h4>Are you sure you want to proceed with none?</h4>
 
-                <div class="form-action">
-                  <div class="row">
-                    <div class="col-lg-offset-4 col-lg-7">
-                      <button type="submit" class="btn btn-success"  ng-click="submitted=true">Save</button>
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <div class="modal-body">
+                  <div class="form-action">
+                    <div class="row">
+                      <div class="col-lg-offset-4 col-lg-7">
+                        <button type="submit" class="btn btn-success"  ng-click="submitted=true">Yes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                      </div>
+
                     </div>
-
                   </div>
                 </div>
+
                 </fieldset>
               </form>
           </div>

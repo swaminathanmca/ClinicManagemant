@@ -94,8 +94,14 @@ app.controller('editComplaints',function($scope,$window,$http){
 
         }
         else if($scope.ltype==3){
-            location.href="AddInvestigation";
+            $("#myModal1").modal();
         }
     }
+
+    $scope.submitModel=function(){
+
+     location.href="AddInvestigation";
+    }
+
 
 })
