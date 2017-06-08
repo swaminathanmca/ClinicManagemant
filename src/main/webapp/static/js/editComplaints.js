@@ -85,7 +85,14 @@ app.controller('editComplaints',function($scope,$window,$http){
             })
     }
     $scope.submited=function(){
-        location.href="AddPrescription";
+
+        if($scope.ltype==1){
+            location.href="PatientTest";
+        }
+        else if($scope.ltype==2) {
+            location.href="AddPrescription";
+
+        }
     }
 
 })

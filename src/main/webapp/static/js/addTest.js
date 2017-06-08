@@ -203,5 +203,8 @@ $scope.typelab=function(test_type){
         location.href="AddPrescription";
     }
 
+    $scope.back=function(){
+        location.href="EditpatientComplaint";
+    }
 
 });

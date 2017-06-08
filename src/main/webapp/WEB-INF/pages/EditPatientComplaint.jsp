@@ -167,6 +167,21 @@
                         </div>
                       </div>
                     </div>
+                    <div class="form-group">
+                      <div class="col-lg-4">
+                        <div class="input-group">
+                          <span class="input-group-addon">Type</span>
+                          <div class="checkbox  fileRadioBox form-control">
+                            <label>
+                              <input type="radio" name="ltype"  value="1"   ng-model="ltype" required="required">&nbsp;Lab
+                            </label>
+                            <label>
+                              <input type="radio" name="ltype" value="2"  ng-model="ltype" required="required">&nbsp;Prescription
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     <div class="form-action">
                       <div class="row">
                         <div class="col-lg-offset-4 col-lg-7">
