@@ -434,7 +434,7 @@
                                                 <div class="col-lg-offset-4 col-lg-7">
                                                     <button type="submit" class="btn btn-success" ng-disabled="myform.$invalid || !authError || !authErrorEmail || !chiefError || !chiefEmail " ng-click="submitted=true">Save
                                                     </button>
-                                                    <button type="button" class="btn btn-inverse">Cancel</button>
+                                                    <button type="button" class="btn btn-inverse" ng-click="cancel()">Cancel</button>
                                                 </div>
                                             </div>
                                         </div>

@@ -83,7 +83,9 @@ app.controller('Frontdesk',function($scope,$http,$window){
 
 
     }
-
+$scope.cancel=function(){
+    location.href="ViewFrontDesk";
+}
 
 
 })

@@ -20,4 +20,9 @@ app.controller('addSpeciality',function($scope,$http,$window)
                 location.href="ViewSpeciality";
             });
     }
+
+    $scope.cancel=function(){
+        location.href="ViewSpeciality";
+    }
+
 })

@@ -125,7 +125,9 @@ $scope.valName=function(){
                 }
 
 
-
+    $scope.cancel=function(){
+        location.href="GetClinic";
+    }
 
 
 });

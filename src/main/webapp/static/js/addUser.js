@@ -144,5 +144,8 @@ if($scope.selectedList==""){
 
 }
 
+    $scope.cancel=function(){
+        location.href="ViewDoctor";
+    }
 
 })

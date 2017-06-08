@@ -23,6 +23,8 @@ $scope.submit=function(){
         });
 }
 
-
+$scope.cancel=function(){
+    location.href="ViewService";
+}
 
 })

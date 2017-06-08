@@ -440,7 +440,7 @@
                                                             ng-disabled="myform.$invalid || !authError || !authErrorEmail || !chiefError || !chiefEmail || !name"
                                                             ng-click="submitted=true">Save
                                                     </button>
-                                                    <button type="button" class="btn btn-inverse">Cancel</button>
+                                                    <button type="button" class="btn btn-inverse" ng-click="cancel()">Cancel</button>
                                                 </div>
                                             </div>
                                         </div>

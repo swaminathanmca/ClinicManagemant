@@ -119,5 +119,7 @@ app.controller('branchController',function($scope,$http,$window){
 
      }
 
-
+    $scope.cancel=function(){
+        location.href="GetBranch";
+    }
 })
