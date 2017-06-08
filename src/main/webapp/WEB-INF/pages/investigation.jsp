@@ -229,7 +229,7 @@
                           <button type="submit" class="btn btn-success"
                                   ng-disabled="myform.$invalid   " ng-click="submitted=true">Add
                           </button>
-                          <button type="button" class="btn btn-inverse" data-dismiss="modal">
+                          <button type="button" class="btn btn-inverse" data-dismiss="modal" ng-click="back()">
                             Cancel
                           </button>
                         </div>
