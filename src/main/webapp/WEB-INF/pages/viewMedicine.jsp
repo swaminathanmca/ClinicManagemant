@@ -246,6 +246,7 @@
                           <select ng-model="mtype" class="form-control" required>
                             <option value="1">Tablet</option>
                             <option value="2">Syrup</option>
+                            <option value="3">Injection</option>
                           </select>
                         </div>
                       </div>

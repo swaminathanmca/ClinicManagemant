@@ -910,6 +910,7 @@ public class HelloController {
             jsonObject.put("Chief_address2", branch.getChief_address2());
             jsonObject.put("Chief_city", branch.getChief_city());
             jsonObject.put("Chief_state", branch.getChief_state());
+            jsonObject.put("clinic_name",branch.getClinic_name());
             jsonObject.put("chief_country", branch.getChief_country());
             jsonObject.put("Chief_conatct_no", branch.getChief_contact_no());
             jsonObject.put("Chief_email_id", branch.getChief_email_id());

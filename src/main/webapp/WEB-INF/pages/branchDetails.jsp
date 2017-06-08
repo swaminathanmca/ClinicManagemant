@@ -161,7 +161,7 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <%--<button type="button" class="btn btn-primary" ng-click="addClinic()">Add Clinic</button>--%>
-                        <B>{{clinic_name}}</B>
+                        <B>{{branch.clinic_name}}</B>
                     </div>
                     <div class="panel-body">
                         <div class="row">

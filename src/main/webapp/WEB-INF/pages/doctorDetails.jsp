@@ -230,7 +230,7 @@
 
                     </div>
      <div class="form-group">
-       <div class="col-lg-3 ">
+       <div class="col-lg-6 ">
          <div class="input-group">
            <span class="input-group-addon">Clinic Name</span>
            <label class="form-control">{{data.clinic_name}}</label>
@@ -242,16 +242,19 @@
            <label class="form-control">{{data.charges}}</label>
          </div>
        </div>
-  <div class="col-lg-6">
-    <div class="input-group">
-      <span class="input-group-addon" id="branch_name">Branch</span>
-      <li  class="form-control">
-       <span ng-repeat="branch in branches"> {{branch.branch_name}},</span>
-      </li>
-    <%--  <label class="form-control" type="text">{{branch_name}}</label>--%>
-    </div>
-  </div>
+
      </div>
+                    <div class="form-group">
+                      <div class="col-lg-6">
+                        <div class="input-group">
+                          <span class="input-group-addon" id="branch_name">Branch</span>
+                          <li  class="form-control">
+                            <span ng-repeat="branch in branches"> {{branch.branch_name}},</span>
+                          </li>
+                          <%--  <label class="form-control" type="text">{{branch_name}}</label>--%>
+                        </div>
+                      </div>
+                    </div>
 
                   </fieldset>
                 </form>

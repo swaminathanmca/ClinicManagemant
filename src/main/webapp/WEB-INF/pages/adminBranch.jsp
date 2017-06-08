@@ -119,28 +119,22 @@
             <div class="col-lg-12">
                 <h4 class="page-header">Branch Details</h4>
             </div>
-
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-lg-3">
-                                    <select class="form-control" ng-options="s.clinicId as s.clinicName for s in clinic" ng-model="s.clinicId" ng-change="branch(s.clinicId)" ></select>
+                                    <select class="form-control" ng-options="s.clinicId as s.clinicName for s in clinic" ng-model="s.clinicId" ng-change="branch(s.clinicId,s.clinicName)" ></select>
                                 </div>
-                                <div class="col-lg-6">
-
-                                </div>
+                                <div class="col-lg-6"></div>
                                 <div class="col-lg-3">
-                                    <label class="input-group pull-right" >
+                                    <label class="input-group pull-right">
                                         <span class="input-group-addon glyphicon glyphicon-search" style="top:0px;"></span>
                                         <input type="text" ng-model="search" class="input-group  form-control" placeholder="Search">
                                     </label>
                                 </div>
-
                             </div>
-
-
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -175,17 +169,13 @@
                                             <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" ></dir-pagination-controls>
                                         </p>
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 
 

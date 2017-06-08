@@ -102,22 +102,22 @@
                   {{branch.address1}}<br>
                   {{branch.address2}},{{branch.city}},{{branch.pin_code}}<br>
                   {{branch.state}},{{branch.country}}<br>
-                  <abbr title="Work email">e-mail:</abbr>{{email}}<br>
-                  <abbr title="Work Phone">phone:</abbr> {{branch.contact_no}}<br>
+                  <abbr title="Work email">E-mail:</abbr>{{email}}<br>
+                  <abbr title="Work Phone">Phone:</abbr> {{branch.contact_no}}<br>
 
                 </address>
               </div>
               <div class=" col-sm-2 col-print-2 text-align-right"></div>
               <div class=" col-sm-4 col-print-4 text-align-right">
-                <h4 class="text-muted no-margin">Patient Information</h4>
+               <h3> Patient Information</h3>
                 <%--<h3>{{patientcomplaint.patient_pid}}</h3>--%>
                 <h6><svg id="barcode"></svg></h6>
                 <h3 class="client-name txtrns">
                   {{patientcomplaint.first_name}} {{patientcomplaint.last_name}}
                 </h3>
                 <address>
-                  <abbr title=" email">e-mail:</abbr> {{pdetails.email}}<br>
-                  <abbr title=" Phone">phone:</abbr> {{pdetails.contact_no}}<br>
+                  <abbr title=" email">E-mail:</abbr> {{pdetails.email}}<br>
+                  <abbr title=" Phone">Phone:</abbr> {{pdetails.contact_no}}<br>
                 </address>
               </div>
             </div>
@@ -275,22 +275,22 @@
                     {{branch.address1}}<br>
                     {{branch.address2}},{{branch.city}},{{branch.pin_code}}<br>
                     {{branch.state}},{{branch.country}}<br>
-                    <abbr title="Work email">e-mail:</abbr>{{email}}<br>
-                    <abbr title="Work Phone">phone:</abbr> {{branch.contact_no}}<br>
+                    <abbr title="Work email">E-mail:</abbr>{{email}}<br>
+                    <abbr title="Work Phone">Phone:</abbr> {{branch.contact_no}}<br>
 
                   </address>
                 </div>
                 <div class=" col-sm-2 col-print-2 text-align-right"></div>
                 <div class=" col-sm-4 col-print-4 text-align-right">
-                  <h4 class="text-muted no-margin">Patient Information</h4>
+                  <h3> Patient Information</h3>
                   <h6><svg id="barcode"></svg></h6>
                   <h3 class="client-name txtrns">
                     {{patientcomplaint.first_name}} {{patientcomplaint.last_name}}
                   </h3>
                   <address>
 
-                    <abbr title="Work ">e-mail:</abbr> {{pdetails.email}}<br>
-                    <abbr title="Work ">phone:</abbr> {{pdetails.contact_no}}<br>
+                    <abbr title="Work ">E-mail:</abbr> {{pdetails.email}}<br>
+                    <abbr title="Work ">Phone:</abbr> {{pdetails.contact_no}}<br>
 
 
                   </address>

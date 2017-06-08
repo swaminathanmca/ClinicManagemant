@@ -18,6 +18,7 @@ $scope.submit=function(){
     $http.post("AddService",service).
         then(function (response,status,headers,config){
             $scope.data = response.data;
+            location.href="ViewService";
 
         });
 }

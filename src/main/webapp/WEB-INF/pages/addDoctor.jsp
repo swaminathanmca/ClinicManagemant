@@ -255,7 +255,7 @@
 
                                      </div>
                                      <div class="form-group">
-                                         <div class="col-lg-3">
+                                         <div class="col-lg-6">
                                              <div class="input-group">
                                                  <span class="input-group-addon">Clinic Name</span>
                                                  <label class="form-control" type="text" >{{data.clinic_name}}</label>
@@ -291,16 +291,7 @@
                                                        The Mobile Number Already Taken
                                                            </span>
                                          </div>
-                                         <div class="col-lg-3">
-                                             <div class="input-group">
-                                                 <span class="input-group-addon">
-                                                     Password
-                                                 </span>
-                                                 <input type="text" ng-model="password" name="password" class="form-control" required>
-                                             </div>
-                                              <span class="text-danger wrapper text-center ng-binding"
-                                                    ng-show="myform.password.$invalid &&  myform.password.$touched">Please Enter The Password</span>
-                                         </div>
+
                                      </div>
                                      <div class="form-group" >
                                          <div class="col-lg-6" ng-if="role=='Admin'">
@@ -326,6 +317,16 @@
                                              </div>
                                               <span class="text-danger wrapper text-center ng-binding"
                                                     ng-show="myform.fees.$invalid &&  myform.fees.$touched">Please Enter The Consulting Fees</span>
+                                         </div>
+                                         <div class="col-lg-3">
+                                             <div class="input-group">
+                                                 <span class="input-group-addon">
+                                                     Password
+                                                 </span>
+                                                 <input type="text" ng-model="password" name="password" class="form-control" required>
+                                             </div>
+                                              <span class="text-danger wrapper text-center ng-binding"
+                                                    ng-show="myform.password.$invalid &&  myform.password.$touched">Please Enter The Password</span>
                                          </div>
                                      </div>
 
