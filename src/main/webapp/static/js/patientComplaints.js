@@ -87,7 +87,7 @@ location.href="AddComplaint";
         $http.post('patientInfo',PatientInfo)
             .then (function (response,status,headers,config) {
             $scope.result=response.data;
-
+            $window.sessionStorage.type=$scope.ltype;
             if($scope.ltype==1){
                 location.href="PatientTest";
             }

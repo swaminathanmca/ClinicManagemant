@@ -96,14 +96,21 @@
       <div class="col-sm-10 col-lg-10 ">
         <div class="panel panel-primary">
           <div class="panel-heading">
-            <h3 class="panel-title">Investigation</h3>
+            <div class="row">
+              <div class="col-lg-2">
+                <p class="panel-title">Investigation</p>
+              </div>
+              <div class="col-lg-9"></div>
+              <div class="col-lg-1">
+                <button type="button" class="btn btn-primary" ng-click="back()">Back</button>
+              </div>
+            </div>
           </div>
           <br>
           <div class="panel-body">
             <div class="row">
               <div class="col-lg-12 col-sm-12">
-                <form class="form-horizontal ng-invalid" role="form" name="myform" ng-submit="submit()"
-                      novalidate>
+                <form class="form-horizontal ng-invalid" role="form" name="myform" ng-submit="submit()" novalidate>
                   <fieldset>
 <%--                  <div class="form-group">
                     <div class="col-lg-6 col-sm-6">
@@ -140,7 +147,7 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <div class="col-lg-3 col-sm-3">
+                      <div class="col-lg-4 col-sm-4">
                         <div class="input-group">
                           <span class="input-group-addon">ServiceName</span>
                           <label class="form-control" type="text">Consulting</label>
@@ -153,7 +160,7 @@
                           <label class="form-control" type="text">{{charges}}</label>
                         </div>
                       </div>
-                      <div class="col-lg-4 col-sm-4">
+                      <div class="col-lg-3 col-sm-3">
                         <div class="input-group">
                           <span class="input-group-addon">Discount</span>
                           <input type="number" class="form-control" name="discount"  min="0"  max="100" ng-model="cdiscount" ng-blur="cpercentage(cdiscount)" ng-pattern="/^[0-9]*$/" maxlength="3" />
@@ -175,7 +182,7 @@
 
 
                     <div class="form-group" ng-repeat="x in selectedList" ng-if="selectedList.length">
-                      <div class="col-lg-3 col-sm-3">
+                      <div class="col-lg-4 col-sm-4">
                   <div class="input-group">
                     <span class="input-group-addon">ServiceName</span>
                     <label class="form-control" type="text">{{x.service_name}}</label>
@@ -187,7 +194,7 @@
                           <label class="form-control" type="text">{{x.charges}}</label>
                         </div>
                       </div>
-                      <div class="col-lg-4 col-sm-4">
+                      <div class="col-lg-3 col-sm-3">
                         <div class="input-group">
                           <span class="input-group-addon">Discount</span>
                           <input type="number" class="form-control" name="cdis" ng-model="discount" min="0"  max="100" ng-blur="percentage(x,discount,$index)" maxlength="3">
