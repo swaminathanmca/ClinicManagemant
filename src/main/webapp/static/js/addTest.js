@@ -8,6 +8,9 @@ app.controller('LaboratoryTest',function($scope,$http,$window,$timeout) {
     $scope.doctor_id = $window.sessionStorage.doctor_id;
     $scope.selectedmaster=[];
     $scope.patient_info_id="";
+    $scope.laboratory= $window.sessionStorage.lab;
+    $scope.prescription= $window.sessionStorage.prescription;
+    $scope.none = $window.sessionStorage.none;
 
     $http.get("GetComplaint/"+$scope.visit_id)
         .then(function (response) {
@@ -200,7 +203,12 @@ $scope.typelab=function(test_type){
 
     }
     $scope.prescriptionAdd=function(){
-        location.href="AddPrescription";
+
+        if($scope.prescription==1){
+            location.href="AddPrescription";
+        }else{
+            location.href="AddInvestigation";
+        }
     }
 
     $scope.back=function(){

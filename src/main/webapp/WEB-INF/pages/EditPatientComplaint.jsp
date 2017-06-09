@@ -173,13 +173,16 @@
                           <span class="input-group-addon">Type</span>
                           <div class="checkbox  fileRadioBox form-control">
                             <label>
-                              <input type="radio" name="ltype"  value="1"   ng-model="ltype" required="required">&nbsp;Lab & Prescription
+                              <input type="checkbox" name="laboratory"  ng-checked="laboratory==1"  ng-true-value="1"  ng-false-value="0"  ng-model="laboratory" ng-disabled="difoff==false"  ng-click="checked()">&nbsp;&nbsp;Lab
+                            </label>
+
+                            <label>
+                              <input type="checkbox" name="prescription"  ng-checked="prescription==1"   ng-true-value="1"  ng-false-value="0"  ng-model="prescription"  ng-disabled="difoff==false" ng-click="checked()">&nbsp;Prescription
+
                             </label>
                             <label>
-                              <input type="radio" name="ltype" value="2"  ng-model="ltype" required="required">&nbsp;Prescription
-                            </label>
-                            <label>
-                              <input type="radio" name="ltype" value="3"  ng-model="ltype" required="required">&nbsp;None
+                              <input type="checkbox" name="none"   ng-checked="none==1"  ng-true-value="1"  ng-false-value="0"  ng-model="none"  ng-disabled="dis==false" ng-click="checkedoff()">&nbsp;None
+
                             </label>
                           </div>
                         </div>

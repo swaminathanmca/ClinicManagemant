@@ -6,6 +6,8 @@ app.controller('patientComplaint',function($scope,$http,$window){
     $scope.branch_id= $window.sessionStorage.branch_id;
     $scope.doctor_id=$window.sessionStorage.doctor_id;
     $scope.selectedlist=[];
+    $scope.dis=true;
+    $scope.difoff=true;
     var obj;
 
 $scope.addComplaint=function(){
@@ -50,13 +52,42 @@ location.href="AddComplaint";
 
     }
 
+   $scope.checked=function(){
+       console.log($scope.laboratory,$scope.prescription);
+       if($scope.laboratory==1){
+           $scope.dis=false;
+           $scope.none=0;
+       }else if($scope.prescription==1) {
+           $scope.dis = false;
+           $scope.none=0;
+       }else{
+           $scope.dis=true;
+       }
+   }
+
+    $scope.checkedoff=function(){
+        if($scope.none==1){
+            $scope.laboratory=0;
+            $scope.prescription=0;
+            $scope.difoff=false;
+        }else{
+            $scope.difoff=true;
+        }
+    }
+
+
     $scope.submit=function(){
 
-        if($scope.ltype==3){
+        if($scope.none==1){
 
             $("#myModal").modal();
-        }else{
+        }else if($scope.prescription==1){
             $scope.add();
+        }else if($scope.laboratory==1){
+            $scope.add();
+        }
+        else{
+            $("#myModal").modal();
         }
 
     }
@@ -87,22 +118,32 @@ location.href="AddComplaint";
         $http.post('patientInfo',PatientInfo)
             .then (function (response,status,headers,config) {
             $scope.result=response.data;
-            $window.sessionStorage.type=$scope.ltype;
-            if($scope.ltype==1){
+            $window.sessionStorage.lab=$scope.laboratory;
+            $window.sessionStorage.prescription=$scope.prescription;
+            $window.sessionStorage.none=$scope.none;
+
+            if($scope.laboratory==1 && $scope.prescription==1){
                 location.href="PatientTest";
             }
-            else if($scope.ltype==2) {
+            else if($scope.prescription==1) {
                 location.href="AddPrescription";
 
             }
-            else if($scope.ltype==3){
+            else if($scope.laboratory==1){
+                location.href="PatientTest";
+            }
+            else if($scope.none==1){
                 location.href="AddInvestigation";
             }
+
 
         });
     }
     $scope.cancel=function(){
         location.href="DoctorDashboard";
     }
+
+
+
 
 })
