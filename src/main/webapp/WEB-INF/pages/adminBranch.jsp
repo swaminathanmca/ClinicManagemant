@@ -106,6 +106,19 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-thermometer-full"></i>&nbsp;Laboratory<span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="AddLaboratory">Add Laboratory</a>
+                            </li>
+                            <li>
+                                <a href="ViewLaboratory">View Laboratory</a>
+                            </li>
+                        </ul>
+                    </li>
 
 
                 </ul>

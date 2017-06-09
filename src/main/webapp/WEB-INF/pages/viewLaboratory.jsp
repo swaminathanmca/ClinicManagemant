@@ -126,10 +126,6 @@
               </li>
             </ul>
           </li>
-
-
-
-
         </ul>
       </div>
 
@@ -139,7 +135,7 @@
   <div id="page-wrapper">
     <div class="row">
       <div class="col-lg-12">
-        <h4 class="page-header">Service Details</h4>
+        <h4 class="page-header">Laboratory Details</h4>
       </div>
     </div>
     <div class="row">

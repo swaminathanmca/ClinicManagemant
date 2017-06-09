@@ -122,7 +122,7 @@
                                 <a href="AddLaboratory">Add Laboratory</a>
                             </li>
                             <li>
-                                <a href="#">View Laboratory</a>
+                                <a href="ViewLaboratory">View Laboratory</a>
                             </li>
                         </ul>
                     </li>
