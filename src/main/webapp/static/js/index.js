@@ -5,19 +5,7 @@
 var app = angular.module('myApp', ['ui.mask','angularUtils.directives.dirPagination','naif.base64','AxelSoft', 'multipleSelect', 'ui.bootstrap']);
 
 
-app.config(['$httpProvider', function($httpProvider) {
-    $httpProvider.interceptors.push('noCacheInterceptor');
-}]).factory('noCacheInterceptor', function () {
-    return {
-        request: function (config) {
-            if(config.method=='GET'){
-                var separator = config.url.indexOf('?') === -1 ? '?' : '&';
-                config.url = config.url+separator+'noCache=' + new Date().getTime();
-            }
-            return config;
-        }
-    };
-});
+
 
 
 app.controller('myCtrl', function ($scope, $http, $window) {
