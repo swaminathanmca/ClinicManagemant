@@ -8,7 +8,10 @@ app.controller('Investigation',function($scope,$http,$window){
     $scope.branch_id= $window.sessionStorage.branch_id;
     $scope.doctor_id=$window.sessionStorage.doctor_id;
     $scope.info_id=$window.sessionStorage.patient_info_id;
-    $scope.type=$window.sessionStorage.type;
+
+    $scope.laboratory= $window.sessionStorage.lab;
+    $scope.prescription= $window.sessionStorage.prescription;
+    $scope.none = $window.sessionStorage.none;
     $scope.selectedList=[];
     $scope.services=[];
     $scope.totamt="";
@@ -185,14 +188,14 @@ app.controller('Investigation',function($scope,$http,$window){
      }
 
     $scope.back=function(){
-        if($scope.type==1){
-            location.href="PatientTest";
-        }else if($scope.type==2){
+
+        if($scope.laboratory==1){
             location.href="AddPrescription";
-        }else if($scope.type==3){
+        }else if($scope.prescription==1){
+            location.href="AddPrescription";
+        }else{
             location.href="EditpatientComplaint";
         }
-
     }
 
 

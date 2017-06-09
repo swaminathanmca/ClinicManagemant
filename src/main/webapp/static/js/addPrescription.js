@@ -11,7 +11,9 @@ app.controller('Prescription',function($scope,$http,$window,$timeout){
     $scope.addprescriptions=[];
     $scope.day=1;
     $scope.patient_info_id="";
-
+    $scope.laboratory= $window.sessionStorage.lab;
+    $scope.prescription= $window.sessionStorage.prescription;
+    $scope.none = $window.sessionStorage.none;
 
 
     $scope.freAll=function(all){
@@ -258,7 +260,12 @@ $scope.prescriptionAdd=function(){
 }
 
 $scope.back=function(){
-    location.href="EditpatientComplaint";
+   if($scope.laboratory==1){
+       location.href="PatientTest";
+   }else{
+       location.href="EditpatientComplaint";
+   }
+
 }
 
 

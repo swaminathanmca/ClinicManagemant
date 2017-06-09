@@ -120,8 +120,8 @@
                       </span>
 
                   </div>
-                        <span class="text-danger wrapper text-center ng-binding"
-                              ng-show="myform.mfg_date.$invalid">Please Enter MFG Date </span>
+                       <%-- <span class="text-danger wrapper text-center ng-binding"
+                              ng-show="myform.mfg_date.$invalid">Please Enter MFG Date </span>--%>
                 </div>
                 <div class="col-lg-3">
                   <div class="input-group">
@@ -132,8 +132,8 @@
                       </span>
 
                   </div>
-                       <span class="text-danger wrapper text-center ng-binding"
-                             ng-show="myform.exp_date.$invalid">Please Enter EXP Date </span>
+                     <%--  <span class="text-danger wrapper text-center ng-binding"
+                             ng-show="myform.exp_date.$invalid">Please Enter EXP Date </span>--%>
                 </div>
                 <div class="col-lg-1">
                   <img ng-click="fromSubmit()"  src="<%=request.getContextPath()%>/static/img/search.png" style="width: 20px;height: 20px;margin-left: 11px; margin-top: 10px;" class="ng-pristine ng-untouched ng-valid">

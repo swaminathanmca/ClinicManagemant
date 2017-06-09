@@ -187,11 +187,12 @@
                                                  after-select-item="afterSelectItem"
                                                  after-remove-item="afterRemoveItem"
 
-                                                 suggestions-arr="complaint">
+                                                 suggestions-arr="complaint" >
                           </multiple-autocomplete>
                         </div>
                         <span class="text-danger wrapper text-center ng-binding"
-                              ng-show="myform.complaint.$invalid &&  myform.complaint.$touched">Please Enter The Complaint</span>
+                              ng-show="myform.multipleselect.$invalid &&  myform.multipleselect.$touched">Please Enter The Complaint</span>
+
                       </div>
 
                     </div>
@@ -268,15 +269,15 @@
                            </SELECT>--%>
                           <div class="checkbox  fileRadioBox form-control">
                             <label>
-                              <input type="radio" name="ltype"  value="1"   ng-model="ltype" required="required">&nbsp;Lab & Prescription
+                              <input type="checkbox" name="laboratory"  ng-checked="laboratory==1"  ng-true-value="1"  ng-false-value="0"  ng-model="laboratory" ng-disabled="difoff==false"  ng-click="checked()">&nbsp;&nbsp;Lab
                             </label>
 
                             <label>
-                              <input type="radio" name="ltype" value="2"  ng-model="ltype" required="required">&nbsp;Prescription
+                              <input type="checkbox" name="prescription"  ng-checked="prescription==1"   ng-true-value="1"  ng-false-value="0"  ng-model="prescription"  ng-disabled="difoff==false" ng-click="checked()">&nbsp;Prescription
 
                             </label>
                             <label>
-                              <input type="radio" name="ltype" value="3"  ng-model="ltype" required="required">&nbsp;None
+                              <input type="checkbox" name="none"   ng-checked="none==1"  ng-true-value="1"  ng-false-value="0"  ng-model="none"  ng-disabled="dis==false" ng-click="checkedoff()">&nbsp;None
 
                             </label>
                           </div>
@@ -323,13 +324,14 @@
           <div class="col-lg-12">
             <form role="form" class="form-horizontal" name="myform1"  ng-submit="submitModel()">
               <fieldset>
-                <h4>Are you sure you want to proceed with none?</h4>
+
+                <h4 class="text-center text-info"><i class="fa fa-warning"></i> Are you sure you want to proceed with none?</h4>
 
                 <div class="modal-body">
                   <div class="form-action">
                     <div class="row">
                       <div class="col-lg-offset-4 col-lg-7">
-                        <button type="submit" class="btn btn-success"  ng-click="submitted=true">Yes</button>
+                        <button type="submit" class="btn btn-info"  ng-click="submitted=true">Yes</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                       </div>
 

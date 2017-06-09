@@ -86,14 +86,24 @@ app.controller('editComplaints',function($scope,$window,$http){
     }
     $scope.submited=function(){
 
-        if($scope.ltype==1){
+        $window.sessionStorage.lab=$scope.laboratory;
+        $window.sessionStorage.prescription=$scope.prescription;
+        $window.sessionStorage.none=$scope.none;
+
+
+        if($scope.laboratory==1 && $scope.prescription==1){
             location.href="PatientTest";
         }
-        else if($scope.ltype==2) {
+        else if($scope.prescription==1) {
             location.href="AddPrescription";
 
         }
-        else if($scope.ltype==3){
+        else if($scope.laboratory==1){
+            location.href="PatientTest";
+        }
+        else if($scope.none==1){
+            $("#myModal1").modal();
+        }else{
             $("#myModal1").modal();
         }
     }
@@ -102,6 +112,33 @@ app.controller('editComplaints',function($scope,$window,$http){
 
      location.href="AddInvestigation";
     }
+
+    $scope.checked=function(){
+        console.log($scope.laboratory,$scope.prescription);
+        if($scope.laboratory==1){
+            $scope.dis=false;
+            $scope.none=0;
+        }else if($scope.prescription==1) {
+            $scope.dis = false;
+            $scope.none=0;
+        }else{
+            $scope.dis=true;
+        }
+    }
+
+    $scope.checkedoff=function(){
+        if($scope.none==1){
+            $scope.laboratory=0;
+            $scope.prescription=0;
+            $scope.difoff=false;
+        }else{
+            $scope.difoff=true;
+        }
+    }
+
+
+
+
 
 
 })
