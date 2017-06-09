@@ -22,4 +22,5 @@ public interface PatientDao {
     List<PatientVisit> getEntryNew(String patient_pid,Integer type,Integer doctor_id);
     List<PatientVisit> getEntryFollowup(String patient_pid,Integer branch_id,Integer type);
     List<PatientVisit> getFollowUp(String patient_pid, Integer type, Integer doctor_id, String date);
+    List<PatientVisit> getAllEntry(String patient_pid,Integer doctor_id);
 }

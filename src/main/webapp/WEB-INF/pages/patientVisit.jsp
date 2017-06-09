@@ -148,7 +148,7 @@
                           <span class="input-group-addon">
                             Practitioner
                           </span>
-                          <select class="form-control" ng-options="s.doctor_id as s.profile_name for s in profile" ng-model="doctor_id" name="doctor" ng-blur="change()" required></select>
+                          <select class="form-control" ng-options="s.doctor_id as s.profile_name for s in profile" ng-model="doctor_id" name="doctor" ng-blur="change(doctor_id)" required></select>
                         </div>
                       </div>
                     </div>
@@ -166,7 +166,7 @@
                             </label>
 
                             <label>
-                              <input type="radio" name="type" value="1"  ng-model="type" ng-click="entryNew(type)" required>
+                              <input type="radio" name="type" value="1"  ng-model="type" ng-click="entryNew(type)" ng-disabled="entryall==false" required>
                               FollowUp
                             </label>
                           </div>
@@ -175,7 +175,7 @@
                          <span class="text-danger wrapper text-center ng-binding"
                                ng-show="myform.type.$error.pattern">Please Select Valid Type</span>
                         <span class="text-danger wrapper text-center ng-binding" ng-show="entry==false">Already Registered Today</span>
-                        <span class="text-danger wrapper text-center ng-binding" ng-show="followup==false || followWeek==false">Date Expreies</span>
+                        <span class="text-danger wrapper text-center ng-binding" ng-show="followup==false || followWeek==false">Date Expired</span>
                       </div>
                       <div class="col-lg-2 col-sm-2 col-md-2 col-xs-2">
                         <div class="input-group">

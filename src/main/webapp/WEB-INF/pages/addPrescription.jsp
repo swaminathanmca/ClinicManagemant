@@ -327,8 +327,6 @@
                     <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" ></dir-pagination-controls>
                   </p>--%>
 
-
-                  </div>
                 <div class="form-action">
                   <div class="row">
                     <div class="col-lg-offset-4 col-lg-7">
