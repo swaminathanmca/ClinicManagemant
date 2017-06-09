@@ -290,13 +290,13 @@ if((result >0 )? true :false){
             parameter.put("weight",visit.getWeight());
             parameter.put("type",visit.getType());
             parameter.put("vist_type",visit.getVisit_type());
-            parameter.put("entryTime",visit.getTime());
+            parameter.put("entryTime",new SimpleDateFormat("hh:mm a").format(new Date()));
             parameter.put("pressure",visit.getPressure());
             parameter.put("doctor_id",visit.getDoctor_id());
             parameter.put("referal_details",visit.getReferal_details());
             parameter.put("created_at",dateFormat.format(new Date()));
 
-
+            /*System.out.println(new SimpleDateFormat("hh:mm a").format(new Date()));*/
 
             result=jdbcTemplate.update(insertVistSql,parameter);
         }catch (Exception e){
