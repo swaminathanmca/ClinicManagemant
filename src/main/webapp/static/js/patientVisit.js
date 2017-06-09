@@ -46,8 +46,13 @@ app.controller('patientVisit',function($scope,$window,$http){
     var date = new Date();
     $scope.time= date.toLocaleTimeString();
 
-    $scope.change=function(){
+    $scope.change=function(id){
         $scope.type="";
+        $http.get("GetAllEntry/"+$scope.patient_pid+"/"+$scope.doctor_id).
+            then(function(response){
+                $scope.entryall=response.data.status;
+            })
+
     }
 
     $scope.entryNew=function(type){

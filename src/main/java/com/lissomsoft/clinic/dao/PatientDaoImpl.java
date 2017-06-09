@@ -410,4 +410,23 @@ if((result >0 )? true :false){
            }
         return patientVisitList;
     }
+
+    @Override
+    public List<PatientVisit> getAllEntry(String patient_pid, Integer doctor_id) {
+        List<PatientVisit> patientVisits=null;
+        try {
+
+            String EntrySql="SELECT patient_id patient_pid FROM clinic.patient_visit where patient_id=:patient_pid AND doctor_detail_id=:doctor_id";
+            Map<String,Object> parameter=new HashMap<String, Object>();
+            parameter.put("patient_pid",patient_pid);
+            parameter.put("doctor_id",doctor_id);
+            patientVisits=jdbcTemplate.query(EntrySql,parameter,new PatientVisitEntryMapper());
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return patientVisits;
+    }
 }

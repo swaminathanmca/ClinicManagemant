@@ -2254,7 +2254,7 @@ public class HelloController {
         return jsonObject.toString();
     }
 
-    @RequestMapping(value = "/GetFollowUpWeek/{patient_pid}/{type}/{doctor_id}/{date}")
+    @RequestMapping(value = "/GetFollowUpWeek/{patient_pid}/{type}/{doctor_id}/{date}",method = RequestMethod.GET)
     public
     @ResponseBody
     String getFollowupWeek(@PathVariable String patient_pid,@PathVariable Integer type,@PathVariable Integer doctor_id,@PathVariable String date)throws JSONException{
@@ -2269,4 +2269,22 @@ public class HelloController {
 
         return jsonObject.toString();
     }
+
+    @RequestMapping(value = "/GetAllEntry/{patient_pid}/{doctor_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getAllEntry(@PathVariable String patient_pid,@PathVariable Integer doctor_id)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        List<PatientVisit> patientVisits;
+        patientVisits=patientService.getAllEntry(patient_pid,doctor_id);
+        if(patientVisits.isEmpty()){
+            jsonObject.put("status",false);
+        }else{
+            jsonObject.put("status",true);
+        }
+
+
+        return jsonObject.toString();
+    }
+
 }
