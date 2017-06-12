@@ -680,7 +680,7 @@ public class HelloController {
         JSONObject data=new JSONObject();
         PatientComplaint patientcomplaint;
         patientcomplaint=complaintService.patientcomplaint(visit_id);
-        String dob[]=patientcomplaint.getDob().split("-");
+        String dob[]=patientcomplaint.getDob().split("/");
         Integer dyear=Integer.parseInt(dob[2]);
         Integer dmonth=Integer.parseInt(dob[0]);
         Integer ddyas=Integer.parseInt(dob[1]);
