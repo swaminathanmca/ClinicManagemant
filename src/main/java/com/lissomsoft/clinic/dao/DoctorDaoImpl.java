@@ -286,11 +286,11 @@ public class DoctorDaoImpl implements DoctorDao {
 
         try {
 
-            String editUserSql="UPDATE user SET username=:username,password=:password,email=:email,updated_at=:updated_at WHERE user_id=(SELECT d.user_id FROM doctor_detail d WHERE d.doctor_detail_id=:doctor_id)";
+            String editUserSql="UPDATE user SET username=:username,email=:email,updated_at=:updated_at WHERE user_id=(SELECT d.user_id FROM doctor_detail d WHERE d.doctor_detail_id=:doctor_id)";
             Map<String,Object> userParameter=new HashMap<String, Object>();
             userParameter.put("doctor_id",doctorUser.getDoctor_id());
             userParameter.put("email",doctorUser.getEmail_id());
-            userParameter.put("password",doctorUser.getPassword());
+            /*userParameter.put("password",doctorUser.getPassword());*/
             userParameter.put("username",doctorUser.getFirstname());
             userParameter.put("updated_at",format.format(new Date()));
             result_user=jdbcTemplate.update(editUserSql,userParameter);
@@ -693,5 +693,79 @@ public class DoctorDaoImpl implements DoctorDao {
         }
 
         return generatedPassword;
+    }
+
+
+    public boolean editFrontDesk(DoctorUser doctorUser) {
+
+        int result_doctor = 0;
+        int result_user = 0;
+        int result_profile = 0;
+
+
+        DefaultTransactionDefinition paramTransactionDefinition = new DefaultTransactionDefinition();
+        TransactionStatus status = platformTransactionManager.getTransaction(paramTransactionDefinition);
+        try {
+            String editDoctorSql = "UPDATE doctor_detail SET qualification=:qualification,reg_id=:reg_id,branch_id=:branch_id,charge=:charge,updated_at=:updated_at WHERE doctor_detail_id=:doctor_id";
+            Map<String, Object> parameter = new HashMap<String, Object>();
+            parameter.put("doctor_id", doctorUser.getDoctor_id());
+            parameter.put("branch_id",doctorUser.getBranch_id());
+            parameter.put("qualification", doctorUser.getQualification());
+            parameter.put("charge", doctorUser.getCharge());
+            parameter.put("reg_id", doctorUser.getReg_no());
+            parameter.put("updated_at", format.format(new Date()));
+
+            result_doctor = jdbcTemplate.update(editDoctorSql, parameter);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            platformTransactionManager.rollback(status);
+        }
+        if ((result_doctor > 0) ? true : false) {
+
+            try {
+
+                String editUserSql = "UPDATE user SET username=:username,email=:email,updated_at=:updated_at WHERE user_id=(SELECT d.user_id FROM doctor_detail d WHERE d.doctor_detail_id=:doctor_id)";
+                Map<String, Object> userParameter = new HashMap<String, Object>();
+                userParameter.put("doctor_id", doctorUser.getDoctor_id());
+                userParameter.put("email", doctorUser.getEmail_id());
+            /*userParameter.put("password",doctorUser.getPassword());*/
+                userParameter.put("username", doctorUser.getFirstname());
+                userParameter.put("updated_at", format.format(new Date()));
+                result_user = jdbcTemplate.update(editUserSql, userParameter);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                platformTransactionManager.rollback(status);
+            }
+
+        }
+        if ((result_user > 0) ? true : false) {
+            try {
+                String editProfileSql = "UPDATE profile_master SET name=:name,address1=:address1,address2=:address2,city=:city,state=:state,country=:country,phone=:phone,email=:email,pincode=:pincode,gender=:gender,updated_at=:updated_at WHERE profile_id=:profile_id";
+                Map<String, Object> profileParameter = new HashMap<String, Object>();
+                profileParameter.put("name", doctorUser.getFirstname());
+                profileParameter.put("address1", doctorUser.getAddress1());
+                profileParameter.put("address2", doctorUser.getAddress2());
+                profileParameter.put("city", doctorUser.getCity());
+                profileParameter.put("state", doctorUser.getState());
+                profileParameter.put("country", doctorUser.getCountry());
+                profileParameter.put("phone", doctorUser.getContact_no());
+                profileParameter.put("email", doctorUser.getEmail_id());
+                profileParameter.put("pincode", doctorUser.getPincode());
+                profileParameter.put("gender", doctorUser.getGender());
+                profileParameter.put("profile_id", doctorUser.getProfile_id());
+                profileParameter.put("updated_at", format.format(new Date()));
+                result_profile = jdbcTemplate.update(editProfileSql, profileParameter);
+                platformTransactionManager.commit(status);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                platformTransactionManager.rollback(status);
+
+            }
+        }
+
+        return result_profile >0 ?true:false;
     }
 }

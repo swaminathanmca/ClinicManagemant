@@ -26,5 +26,6 @@ public interface DoctorService {
     List<DoctorUser> getDoctor(String branch_id);
     DoctorUser getDoctorCharges(Integer doctor_id);
     DoctorUser getDoctorprofile(Integer doctor_id);
+    boolean editFrontDesk(DoctorUser doctorUser);
 
 }

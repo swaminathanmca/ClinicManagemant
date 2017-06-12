@@ -1109,7 +1109,7 @@ public class HelloController {
     String editDoctor(@RequestBody DoctorUser doctorUser, HttpServletRequest request) throws JSONException {
 
         boolean flag;
-        flag = doctorService.editDoctor(doctorUser);
+        flag = doctorService.editFrontDesk(doctorUser);
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("status", flag);

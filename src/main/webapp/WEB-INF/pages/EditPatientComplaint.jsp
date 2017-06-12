@@ -313,7 +313,7 @@
           <div class="col-lg-12">
             <form role="form" class="form-horizontal" name="myform1"  ng-submit="submitModel()">
               <fieldset>
-                <h4 class="text-center text-info"><i class="fa fa-warning"></i> Are you sure you want to proceed with none?</h4>
+                <h4 class="text-center"><a style="color: #FFFF00;"><i class="fa fa-warning"></i></a> Are you sure you want to proceed with none?</h4>
 
                 <div class="modal-body">
                   <div class="form-action">

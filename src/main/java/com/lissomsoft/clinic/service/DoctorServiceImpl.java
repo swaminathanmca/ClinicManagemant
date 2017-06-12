@@ -91,4 +91,9 @@ import java.util.List;
     public DoctorUser getDoctorprofile(Integer doctor_id) {
         return doctorDao.getDoctorProfile(doctor_id);
     }
+
+    @Override
+    public boolean editFrontDesk(DoctorUser doctorUser) {
+        return doctorDao.editFrontDesk(doctorUser);
+    }
 }

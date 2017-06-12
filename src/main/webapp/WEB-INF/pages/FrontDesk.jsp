@@ -194,7 +194,7 @@
                         <div class="input-group">
                           <span class="input-group-addon">Gender</span>
                           <label class="form-control" type="text" ng-if="data.gender==1">Male</label>
-                          <label class="form-control" type="text" ng-if="data.gender==0">FeMale</label>
+                          <label class="form-control" type="text" ng-if="data.gender==0">Female</label>
                         </div>
                       </div>
                       <div class="col-lg-3">
@@ -245,7 +245,7 @@
       <div class="modal-content">
         <div class="modal-header panel-primary">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Edit Doctor</h4>
+          <h4 class="modal-title">Edit FrontDesk</h4>
         </div>
         <div class="modal-body">
           <div class="row">

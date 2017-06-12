@@ -24,4 +24,5 @@ public interface DoctorDao {
     List<DoctorUser> getDoctor(String branch_id);
     DoctorUser getDoctorCharges(Integer doctor_id);
     DoctorUser getDoctorProfile(Integer doctor_id);
+    boolean editFrontDesk(DoctorUser doctorUser);
 }
