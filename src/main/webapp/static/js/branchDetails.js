@@ -138,7 +138,7 @@ $http.get("BranchDetails/"+$window.sessionStorage.branch_id).
     }
 
     $scope.back=function(){
-        location.href="AdminBranch";
+        location.href="GetBranch";
     }
 
 });
