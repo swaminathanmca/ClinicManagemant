@@ -65,11 +65,23 @@ app.controller('patientReport',function($scope,$http,$window){
     $scope.fromSubmit=function(){
         $scope.from_date = moment($scope.from_date).format("YYYY-MMM-DD");
         $scope.to_date = moment($scope.to_date).format("YYYY-MMM-DD");
-
+        $scope.report=[];
 
         $http.get("GetPatientInfoReport/"+$scope.patient_pid+"/"+$scope.from_date+"/"+$scope.to_date+"/"+$scope.doctor_id+"/"+$scope.branch_id)
             .then(function(response){
-                $scope.report=response.data.report;
+                $scope.selctmaster=response.data.report;
+                var sr=$scope.selctmaster;
+                for (var j in sr) {
+                    var obj={
+                        first_name :sr[j].first_name,
+                        last_name : sr[j].last_name,
+                        created_at:moment(sr[j].created_at).format("DD-MMM-YYYY"),
+                        referal_details:sr[j].referal_details,
+                        pateint_info_id:sr[j].pateint_info_id,
+                        patient_pid:sr[j].patient_pid
+                    }
+                    $scope.report.push(obj);
+                }
             })
 
     }
@@ -91,7 +103,20 @@ app.controller('patientReport',function($scope,$http,$window){
 
         $http.get("GetPatientReportByMonths/"+$scope.patient_pid+"/"+$scope.date1+"/"+$scope.doctor_id+"/"+$scope.branch_id)
             .then(function(response){
-                $scope.report=response.data.report;
+                $scope.selctmaster=response.data.report;
+                $scope.report=[];
+                var sr=$scope.selctmaster;
+                for (var j in sr) {
+                    var obj={
+                        first_name :sr[j].first_name,
+                        last_name : sr[j].last_name,
+                        created_at:moment(sr[j].created_at).format("DD-MMM-YYYY"),
+                        referal_details:sr[j].referal_details,
+                        pateint_info_id:sr[j].pateint_info_id,
+                        patient_pid:sr[j].patient_pid
+                    }
+                    $scope.report.push(obj);
+                }
 
             })
     }
