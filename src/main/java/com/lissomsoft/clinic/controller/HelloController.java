@@ -711,6 +711,7 @@ public class HelloController {
         return data.toString();
     }
 
+
     @RequestMapping(value = "/SpecialityDetail/{speciality_id}",method = RequestMethod.GET)
     public
     @ResponseBody
