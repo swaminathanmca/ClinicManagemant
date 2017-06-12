@@ -127,7 +127,7 @@
               </li>
             </ul>
           </li>
-          <li>
+          <%--<li>
             <a href="#">
               <i class="fa fa-thermometer-full"></i>&nbsp;Laboratory<span class="fa arrow"></span>
             </a>
@@ -139,7 +139,7 @@
                 <a href="ViewLaboratory">View Laboratory</a>
               </li>
             </ul>
-          </li>
+          </li>--%>
         </ul>
       </div>
 

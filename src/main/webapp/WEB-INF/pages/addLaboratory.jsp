@@ -185,7 +185,7 @@
                         <button type="submit" class="btn btn-success"
                                 ng-disabled="myform.$invalid "    ng-click="submitted=true">Save
                         </button>
-                        <button type="button" class="btn btn-inverse">Cancel</button>
+                        <button type="button" class="btn btn-inverse" ng-click="back()">Cancel</button>
                       </div>
                     </div>
                   </div>

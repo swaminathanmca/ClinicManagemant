@@ -20,4 +20,7 @@ app.controller('AddLaboratoryType',function($scope,$http,$window,$timeout){
     }
 
 
+    $scope.back=function(){
+        location.href="ViewLaboratory";
+    }
 });
