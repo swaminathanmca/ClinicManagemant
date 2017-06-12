@@ -171,9 +171,9 @@
                       <div class="col-lg-8">
                         <div class="input-group">
                           <span class="input-group-addon">Type</span>
-                          <div class="checkbox  fileRadioBox form-control">
+                          <div class="checkbox  fileRadioBox form-control">&nbsp;&nbsp;
                             <label>
-                              <input type="checkbox" name="laboratory"  ng-checked="laboratory==1"  ng-true-value="1"  ng-false-value="0"  ng-model="laboratory" ng-disabled="difoff==false"  ng-click="checked()">&nbsp;&nbsp;Lab
+                              <input type="checkbox" name="laboratory"  ng-checked="laboratory==1"  ng-true-value="1"  ng-false-value="0"  ng-model="laboratory" ng-disabled="difoff==false"  ng-click="checked()">&nbsp;Lab
                             </label>
 
                             <label>
@@ -313,7 +313,7 @@
           <div class="col-lg-12">
             <form role="form" class="form-horizontal" name="myform1"  ng-submit="submitModel()">
               <fieldset>
-                <h4>Are you sure you want to proceed with none?</h4>
+                <h4 class="text-center text-info"><i class="fa fa-warning"></i> Are you sure you want to proceed with none?</h4>
 
                 <div class="modal-body">
                   <div class="form-action">

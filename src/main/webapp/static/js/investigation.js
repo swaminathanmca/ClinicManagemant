@@ -190,7 +190,7 @@ app.controller('Investigation',function($scope,$http,$window){
     $scope.back=function(){
 
         if($scope.laboratory==1){
-            location.href="AddPrescription";
+            location.href="PatientTest";
         }else if($scope.prescription==1){
             location.href="AddPrescription";
         }else{

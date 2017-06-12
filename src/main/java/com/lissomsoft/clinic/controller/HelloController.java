@@ -1054,7 +1054,7 @@ public class HelloController {
         JSONObject jsonObject=new JSONObject();
         JSONObject data=new JSONObject();
         Patient patient=patientService.patientdetails(patient_id);
-        String dob[]=patient.getDob().split("-");
+        String dob[]=patient.getDob().split("/");
         Integer dyear=Integer.parseInt(dob[2]);
         Integer dmonth=Integer.parseInt(dob[0]);
         Integer ddyas=Integer.parseInt(dob[1]);

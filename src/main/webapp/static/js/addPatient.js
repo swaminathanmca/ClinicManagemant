@@ -32,7 +32,7 @@ app.controller('Patient',function($scope,$http,$window){
     $scope.formats = ['MM/dd/yyyy','MMMM-dd-yyyy','yyyy-MMMM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
     $scope.format = $scope.formats[0];
 
-    $scope.dob = moment().format("MM-DD-YYYY");
+    $scope.dob = moment().format("MM/DD/YYYY");
 
     $scope.my_date = moment();
 
@@ -88,7 +88,7 @@ $scope.validate=function(){
     $scope.submit=function(id){
        $scope.branch_id=id;
         var satDate = new Date($scope.dob);
-        $scope.to_date = moment(satDate).format("MM-DD-YYYY");
+        $scope.to_date = moment(satDate).format("MM/DD/YYYY");
 
         $scope.ecountry=$('#countries3').val();
         var patient={

@@ -81,7 +81,7 @@ $scope.editUser=function(){
         $scope.id=id;
         $scope.country=$('#countries3').val();
         $scope.chief_country=$('#countries4').val();
-        $scope.dob=moment($scope.dob).format("MM-DD-YYYY");
+        $scope.dob=moment($scope.dob).format("MM/DD/YYYY");
         var patient={
             fullName:$scope.x.first_name,
             lastName:$scope.x.last_name,
