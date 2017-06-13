@@ -9,6 +9,7 @@ public class Service {
     private String service_name;
     private Integer charges;
     private String description;
+    private Integer branch_id;
 
     public Integer getService_id() {
         return service_id;
@@ -42,12 +43,21 @@ public class Service {
         this.charges = charges;
     }
 
+    public Integer getBranch_id() {
+        return branch_id;
+    }
+
+    public void setBranch_id(Integer branch_id) {
+        this.branch_id = branch_id;
+    }
+
     public String toString(){
         return "Service {"+
                 ", service_id   ="+service_id+
                 ", service_name ="+service_name+
                 ", description  ="+description+
                 ", charges      ="+charges+
+                ", branch_id    ="+branch_id+
                 '}';
     }
 }

@@ -16,18 +16,18 @@ public class ServicesServiceImpl implements ServicesService {
     private ServiceDaoImpl serviceDao;
 
     @Override
-    public boolean addService(Service service) {
-        return serviceDao.addService(service);
+    public boolean addService(Service service,Integer branch_id) {
+        return serviceDao.addService(service,branch_id);
     }
 
     @Override
-    public List<Service> getServices() {
-        return serviceDao.getServices();
+    public List<Service> getServices(Integer branch_id) {
+        return serviceDao.getServices(branch_id);
     }
 
     @Override
-    public boolean editService(Service service) {
-        return serviceDao.editService(service);
+    public boolean editService(Service service,Integer branch_id) {
+        return serviceDao.editService(service,branch_id);
     }
 
     @Override

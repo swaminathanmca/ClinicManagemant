@@ -131,7 +131,18 @@
                             </li>
                         </ul>
                     </li>
-                    <li ng-show="role=='SuperAdmin'">
+                <%--    <li ng-show="role=='SuperAdmin'">
+                        <a href="#"><i class="fa fa-ambulance"></i>&nbsp;Services<span class="fa arrow"></span> </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="AddService"> Add Service</a>
+                            </li>
+                            <li>
+                                <a href="ViewService">View Service</a>
+                            </li>
+                        </ul>
+                    </li>--%>
+                    <li ng-show="role=='BranchAdmin' || role=='Admin'">
                         <a href="#"><i class="fa fa-ambulance"></i>&nbsp;Services<span class="fa arrow"></span> </a>
                         <ul class="nav nav-second-level">
                             <li>

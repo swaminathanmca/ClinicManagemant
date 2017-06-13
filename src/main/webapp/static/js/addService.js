@@ -5,7 +5,7 @@
 app.controller('services',function($scope, $http, $window){
     $scope.email= $window.sessionStorage.email;
     $scope.role=$window.sessionStorage.role_name;
-
+    $scope.branch_id=$window.sessionStorage.branch_id;
 
 $scope.submit=function(){
 
@@ -15,16 +15,14 @@ $scope.submit=function(){
         charges:$scope.charage
     }
 
-    $http.post("AddService",service).
+    $http.post("AddService/"+$scope.branch_id,service).
         then(function (response,status,headers,config){
             $scope.data = response.data;
             location.href="ViewService";
-
         });
 }
-
-$scope.cancel=function(){
-    location.href="ViewService";
-}
+    $scope.cancel=function(){
+         location.href="ViewService";
+    }
 
 })

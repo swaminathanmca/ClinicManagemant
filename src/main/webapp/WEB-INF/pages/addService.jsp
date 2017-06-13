@@ -64,45 +64,45 @@
             <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
           </li>
           <li>
-            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Clinic<span class="fa arrow"></span></a>
+            <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+          </li>
+          <li ng-show="role=='Admin'">
+            <a href="#"><i class="fa fa-table fa-fw"></i> Branch<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <li>
-                <a href="Dashboard">Add Clinic</a>
+                <a href="AddBranch">Add Branch</a>
               </li>
               <li>
-                <a href="GetClinic">View Clinic</a>
+                <a href="GetBranch">View Branch</a>
+              </li>
+            </ul>
+          </li>
+          <li ng-hide="role=='SuperAdmin'">
+            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Doctor<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+              <li>
+                <a href="AddDoctor">Add Doctor</a>
+              </li>
+              <li>
+                <a href="ViewDoctor">View Doctor</a>
               </li>
             </ul>
 
           </li>
-          <li>
-            <a href="AdminBranch"><i class="fa fa-table fa-fw"></i>  Branch</a>
-          </li>
 
-
-          <li>
-            <a href="#"><i class="fa fa-child "></i>&nbsp;Speciality<span class="fa arrow"></span></a>
+          <li ng-show="role=='BranchAdmin' || role=='Admin'">
+            <a href="#"><i class="fa fa-user-o"></i> FrontDesk<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <li>
-                <a href="AddSpeciality"> Add Speciality</a>
+                <a href="AddFrontDesk">Add FrontDesk</a>
               </li>
               <li>
-                <a href="ViewSpeciality">View Speciality</a>
+                <a href="ViewFrontDesk">View FrontDesk</a>
               </li>
             </ul>
+            <!-- /.nav-second-level -->
           </li>
-          <li>
-            <a href="#"><i class="fa fa-medkit"></i>&nbsp;Medicine<span class="fa arrow"></span></a>
-            <ul class="nav nav-second-level">
-              <li>
-                <a href="AddMedicine"> Add Medicine</a>
-              </li>
-              <li>
-                <a href="GetMedicine">View Medicine</a>
-              </li>
-            </ul>
-          </li>
-          <li>
+          <li ng-show="role=='BranchAdmin' || role=='Admin'">
             <a href="#"><i class="fa fa-ambulance"></i>&nbsp;Services<span class="fa arrow"></span> </a>
             <ul class="nav nav-second-level">
               <li>
@@ -110,19 +110,6 @@
               </li>
               <li>
                 <a href="ViewService">View Service</a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a href="#">
-              <i class="fa fa-thermometer-full"></i>&nbsp;Laboratory<span class="fa arrow"></span>
-            </a>
-            <ul class="nav nav-second-level">
-              <li>
-                <a href="AddLaboratory">Add Laboratory</a>
-              </li>
-              <li>
-                <a href="ViewLaboratory">View Laboratory</a>
               </li>
             </ul>
           </li>

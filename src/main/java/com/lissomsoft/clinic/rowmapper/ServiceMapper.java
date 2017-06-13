@@ -18,6 +18,7 @@ public class ServiceMapper implements RowMapper {
         service.setService_name(resultSet.getString("service_name"));
         service.setDescription(resultSet.getString("description"));
         service.setCharges(resultSet.getInt("charges"));
+        service.setBranch_id(resultSet.getInt("branch_id"));
 
 
         return service;

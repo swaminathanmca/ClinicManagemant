@@ -25,16 +25,17 @@ public class ServiceDaoImpl implements  ServiceDao {
 
 
     @Override
-    public boolean addService(Service service) {
+    public boolean addService(Service service,Integer branch_id) {
 
         int result=0;
      try{
 
-    String insertServiceSql="INSERT INTO services (service_name,description,charges,created_at,updated_at) VALUES (:service_name,:description,:charges,:created_at,:created_at)";
+    String insertServiceSql="INSERT INTO services (service_name,description,charges,branch_id,created_at,updated_at) VALUES (:service_name,:description,:charges,:branch_id,:created_at,:created_at)";
     Map<String,Object> parameter=new HashMap<String, Object>();
     parameter.put("service_name",service.getService_name());
     parameter.put("description",service.getDescription());
     parameter.put("charges",service.getCharges());
+         parameter.put("branch_id",branch_id);
     parameter.put("created_at",format.format(new Date()));
     result=jdbcTemplate.update(insertServiceSql,parameter);
 
@@ -52,13 +53,15 @@ public class ServiceDaoImpl implements  ServiceDao {
     }
 
     @Override
-    public List<Service> getServices() {
+    public List<Service> getServices(Integer branch_id) {
 
        List<Service> services=null;
        try {
-           String selectServiceSql="SELECT * FROM services";
+           String selectServiceSql="SELECT * FROM services WHERE branch_id=:branch_id";
+           Map<String,Object> params=new HashMap<String, Object>();
+           params.put("branch_id",branch_id);
+            services=jdbcTemplate.query(selectServiceSql,params,new ServiceMapper());
 
-            services=jdbcTemplate.query(selectServiceSql,new ServiceMapper());
 
        }catch (Exception e){
            e.printStackTrace();
@@ -70,17 +73,18 @@ public class ServiceDaoImpl implements  ServiceDao {
     }
 
     @Override
-    public boolean editService(Service service) {
+    public boolean editService(Service service,Integer branch_id) {
 
         int result=0;
         try {
 
-            String editServiceSql="UPDATE services SET service_name=:service_name,description=:description,charges=:charges,updated_at=:created_at WHERE service_id=:service_id";
+            String editServiceSql="UPDATE services SET service_name=:service_name,description=:description,charges=:charges,updated_at=:created_at WHERE service_id=:service_id ";
             Map<String,Object> paramsserives=new HashMap<String, Object>();
             paramsserives.put("service_id",service.getService_id());
             paramsserives.put("service_name",service.getService_name());
             paramsserives.put("charges",service.getCharges());
             paramsserives.put("description",service.getDescription());
+            paramsserives.put("branch_id",branch_id);
             paramsserives.put("created_at",format.format(new Date()));
             result=jdbcTemplate.update(editServiceSql,paramsserives);
 

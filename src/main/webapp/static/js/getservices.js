@@ -6,8 +6,9 @@ app.controller('getServices',function($scope,$http,$window){
 
     $scope.email= $window.sessionStorage.email;
     $scope.role=$window.sessionStorage.role_name;
+    $scope.branch_id=$window.sessionStorage.branch_id;
 
-    $http.get("GetServices").
+    $http.get("GetServices/"+$scope.branch_id).
         then(function (response,status,headers,config){
 
             $scope.services=response.data.services;
@@ -37,7 +38,7 @@ app.controller('getServices',function($scope,$http,$window){
             charges:$scope.data.charges
         }
 
-        $http.post("EditService",service).
+        $http.post("EditService/"+$scope.branch_id,service).
             then(function (response,status,headers,config){
                 $scope.status = response.data.status;
 

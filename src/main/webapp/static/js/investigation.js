@@ -29,7 +29,7 @@ app.controller('Investigation',function($scope,$http,$window){
             $scope.totamt=$scope.camount;
         })
 
-    $http.get("GetServices").
+    $http.get("GetServices/"+$scope.branch_id).
         then(function (response,status,headers,config){
             var s=response.data.services;
             for(var i in s){

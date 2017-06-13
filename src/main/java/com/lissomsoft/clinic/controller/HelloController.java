@@ -423,13 +423,13 @@ public class HelloController {
         return jsonObject.toString();
     }
 
-    @RequestMapping(value = "/AddService",method = RequestMethod.POST)
+    @RequestMapping(value = "/AddService/{branch_id}",method = RequestMethod.POST)
     public
     @ResponseBody
-    String addService(@RequestBody Service service,HttpServletRequest request)throws JSONException{
+    String addService(@RequestBody Service service,HttpServletRequest request,@PathVariable Integer branch_id)throws JSONException{
         JSONObject jsonObject=new JSONObject();
         boolean flag;
-        flag=servicesService.addService(service);
+        flag=servicesService.addService(service,branch_id);
         jsonObject.put("status",flag);
         return jsonObject.toString();
     }
@@ -1695,14 +1695,14 @@ public class HelloController {
 
 
 
-    @RequestMapping(value = "/GetServices",method = RequestMethod.GET)
+    @RequestMapping(value = "/GetServices/{branch_id}",method = RequestMethod.GET)
     public
     @ResponseBody
-    String getServices(HttpServletRequest request)throws JSONException{
+    String getServices(HttpServletRequest request,@PathVariable Integer branch_id)throws JSONException{
         JSONObject jsonObject=new JSONObject();
         JSONArray jsonArray=new JSONArray();
         List<Service> services;
-        services=servicesService.getServices();
+        services=servicesService.getServices(branch_id);
         Iterator<Service> it=services.iterator();
         while (it.hasNext()){
             Service ser=it.next();
@@ -1733,14 +1733,14 @@ public class HelloController {
         return jsonObject.toString();
     }
 
-    @RequestMapping(value = "/EditService",method = RequestMethod.POST)
+    @RequestMapping(value = "/EditService/{branch_id}",method = RequestMethod.POST)
     public
     @ResponseBody
-    String editService(@RequestBody Service service,HttpServletRequest request)throws JSONException{
+    String editService(@RequestBody Service service,HttpServletRequest request,@PathVariable Integer branch_id)throws JSONException{
 
         JSONObject jsonObject=new JSONObject();
         boolean flag;
-        flag=servicesService.editService(service);
+        flag=servicesService.editService(service,branch_id);
         jsonObject.put("status",flag);
         return jsonObject.toString();
 
