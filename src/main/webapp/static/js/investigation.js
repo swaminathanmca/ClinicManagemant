@@ -56,7 +56,7 @@ app.controller('Investigation',function($scope,$http,$window){
             discount:''
         };
         $scope.selectedList.push(obj);
-        console.log($scope.selectedList);
+
         $scope.totamt=$scope.totamt+item.charges;
     }
     $scope.afterRemoveItem = function(item){

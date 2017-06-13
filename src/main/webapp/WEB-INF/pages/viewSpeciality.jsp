@@ -100,7 +100,7 @@
               </li>
             </ul>
           </li>
-          <li>
+       <%--   <li>
             <a href="#"><i class="fa fa-ambulance"></i>&nbsp;Services<span class="fa arrow"></span> </a>
             <ul class="nav nav-second-level">
               <li>
@@ -110,7 +110,7 @@
                 <a href="ViewService">View Service</a>
               </li>
             </ul>
-          </li>
+          </li>--%>
           <li>
             <a href="#">
               <i class="fa fa-thermometer-full"></i>&nbsp;Laboratory<span class="fa arrow"></span>

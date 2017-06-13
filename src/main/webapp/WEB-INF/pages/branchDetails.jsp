@@ -153,7 +153,19 @@
                             </li>
                         </ul>
                     </li>
-
+                    <li ng-show="role=='SuperAdmin'">
+                        <a href="#">
+                            <i class="fa fa-thermometer-full"></i>&nbsp;Laboratory<span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="AddLaboratory">Add Laboratory</a>
+                            </li>
+                            <li>
+                                <a href="ViewLaboratory">View Laboratory</a>
+                            </li>
+                        </ul>
+                    </li>
 
 
                 </ul>
@@ -511,7 +523,7 @@
 
 
                                         </div>
-                                        <div class="col-lg-4">
+                                       <%-- <div class="col-lg-4">
                                             <div class="input-group">
                                                 <span class="input-group-addon">Password</span>
                                                 <input type="text" ng-model="x.password" class="form-control"
@@ -519,7 +531,7 @@
                                             </div>
                                             <span class="text-danger wrapper text-center ng-binding"
                                                   ng-show="myform.password.$invalid &&  myform.password.$touched">Please Enter Password</span>
-                                        </div>
+                                        </div>--%>
 
                                     </div>
                                     <div class="form-group">
