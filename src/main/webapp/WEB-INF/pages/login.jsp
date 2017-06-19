@@ -49,7 +49,7 @@
                         </div>
                         <div class="col-lg-2"></div>
                         <div class="col-lg-6">
-                            <a href="" class="txt-clr">Forgot Password ?</a>
+                            <a href="<%=request.getContextPath()%>/ForgotPassword" class="txt-clr"  >Forgot Password ?</a>
                         </div>
                     </div>
                             <!-- Change this to a button or input when using this as a form -->

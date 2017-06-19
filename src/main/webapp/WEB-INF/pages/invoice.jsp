@@ -107,8 +107,8 @@
 
                 </address>
               </div>
-              <div class=" col-sm-2 col-print-2 text-align-right"></div>
-              <div class=" col-sm-4 col-print-4 text-align-right">
+              <%--<div class=" col-sm-2 col-print-2 text-align-right"></div>--%>
+              <div class=" col-sm-5 col-print-5 text-align-right col-lg-offset-1">
                <h3> Patient Information</h3>
                 <%--<h3>{{patientcomplaint.patient_pid}}</h3>--%>
                 <h6><svg id="barcode"></svg></h6>
@@ -307,8 +307,6 @@
                       <th>Charges</th>
                       <th>Discount</th>
                       <th>Amount</th>
-
-
                     </tr>
                     </thead>
                     <tbody>
@@ -319,24 +317,22 @@
                       <td> {{ xs.discount}}% </td>
                       <td class="text-align-right">{{ xs.tamount }} </td>
                     </tr>
-
                     </tbody>
                   </table>
                 </div>
-
               </div>
-              <div class="row">
+              <div class="row" >
                 <div class="col-sm-6 col-print-6"></div>
                 <div class="col-sm-6 col-print-6">
                   <div class="row text-align-right">
-                    <div class="col-xs-4"></div>
-                    <div class="col-xs-3">
+                    <div class="col-xs-5"></div>
+                    <div class="col-xs-5" style="border-top: 0.5px groove #DDDDDD;border-bottom: 0.5px groove #DDDDDD">
+                      <p class="no-margin"><strong>Total &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span >{{invest.total_amount}}</span></strong></p>
 
-                      <p class="no-margin"><strong>Total</strong></p>
                     </div>
-                    <div class="col-xs-3">
-                      <p class="no-margin"><strong>{{invest.total_amount}}</strong></p>
-                    </div>
+                   <%-- <div class="col-xs-3">
+
+                    </div>--%>
                   </div>
                 </div>
               </div>

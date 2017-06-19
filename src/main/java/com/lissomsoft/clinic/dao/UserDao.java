@@ -1,6 +1,7 @@
 package com.lissomsoft.clinic.dao;
 import com.lissomsoft.clinic.domain.*;
 
+import javax.mail.MessagingException;
 import java.util.List;
 
 /**
@@ -9,4 +10,8 @@ import java.util.List;
 public interface UserDao {
 
     List<User> authenticateUser(String email_id,String password);
+    Boolean getPassword(String email_id) throws MessagingException;
+    List<User> validateEmail(String email_id);
+    Boolean resetPassword(String token,String password);
+    List<User> validateToken(String  token);
 }

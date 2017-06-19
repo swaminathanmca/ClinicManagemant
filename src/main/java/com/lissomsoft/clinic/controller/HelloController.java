@@ -1,6 +1,7 @@
 package com.lissomsoft.clinic.controller;
 
 import com.lissomsoft.clinic.domain.Speciality;
+import com.lissomsoft.clinic.rowmapper.UserLogin;
 import com.lissomsoft.clinic.service.*;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
@@ -272,6 +273,11 @@ public class HelloController {
     @RequestMapping(value = "/EditpatientComplaint")
     public String editPatientComplaint(HttpServletRequest request)throws Exception{
         return "EditPatientComplaint";
+    }
+
+    @RequestMapping(value = "/ForgotPassword")
+    public String forgotPassword(HttpServletRequest request)throws Exception{
+        return "forgotpassword";
     }
 
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
@@ -2284,6 +2290,49 @@ public class HelloController {
             jsonObject.put("status",true);
         }
 
+
+        return jsonObject.toString();
+    }
+    @RequestMapping(value = "/fPassword/{email_id:.+}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String fPassword(@PathVariable String email_id)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        boolean flag;
+        List<User> users;
+        users=userService.validateEmail(email_id);
+        if(users.isEmpty()){
+            jsonObject.put("status",false);
+        }else{
+            flag=userService.getPassword(email_id);
+            jsonObject.put("status",flag);
+        }
+        return jsonObject.toString();
+    }
+
+    @RequestMapping(value = "/cpassword",method = RequestMethod.GET)
+    public String cPassword(@RequestParam String token)throws JSONException{
+        List<User> user;
+        user=userService.validateToken(token);
+        if(user.isEmpty()){
+            return "resetPassword";
+        }else{
+            return "login";
+        }
+
+
+    }
+
+    @RequestMapping(value = "/ResetPassword/{token}/{password}",method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String resetPassword(@PathVariable String token,@PathVariable String password,HttpServletRequest request)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        Boolean flag;
+        flag=userService.resetPassword(token,encryptPassword(password));
+
+
+        jsonObject.put("status",flag);
 
         return jsonObject.toString();
     }

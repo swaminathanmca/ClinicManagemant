@@ -75,7 +75,6 @@ public class Medicine {
                 " medicine_id="+medicine_id+
                 " medicine_name="+medicine_name+
                 " mg="+ mg +
-
                 " type="+type+
                 " vendor="+vendor+ '}';
     }

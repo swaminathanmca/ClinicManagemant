@@ -19,4 +19,24 @@ public class UserServiceImpl implements UserService {
 
         return userDao.authenticateUser(email_id,password);
     }
+
+    @Override
+    public Boolean getPassword(String email_id) {
+        return userDao.getPassword(email_id);
+    }
+
+    @Override
+    public List<User> validateEmail(String email_id) {
+        return userDao.validateEmail(email_id);
+    }
+
+    @Override
+    public Boolean resetPassword(String token, String password) {
+        return userDao.resetPassword(token,password);
+    }
+
+    @Override
+    public List<User> validateToken(String token) {
+        return userDao.validateToken(token);
+    }
 }
