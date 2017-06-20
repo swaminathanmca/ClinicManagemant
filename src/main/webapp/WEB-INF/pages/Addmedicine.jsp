@@ -116,6 +116,18 @@
               </li>
             </ul>
           </li>
+
+          <li>
+            <a href="#"><i class="fa fa-phone"></i>&nbsp; Appointment<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+              <li>
+                <a href="AddAppointment"> Add Appointment</a>
+              </li>
+              <li>
+                <a href="ViewAppointment"> View Appointment</a>
+              </li>
+            </ul>
+          </li>
 <%--          <li  ng-show="role=='SuperAdmin'">
             <a href="#"><i class="fa fa-ambulance"></i>&nbsp;Services<span class="fa arrow"></span> </a>
             <ul class="nav nav-second-level">
@@ -265,16 +277,8 @@
                     </div>
                   </div>
                 </div>
-
-
-
                 </fieldset>
-
-
-
-
-
-                </form>
+              </form>
             </div>
           </div>
 
@@ -295,7 +299,6 @@
 <script src="<%=request.getContextPath()%>/static/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/metisMenu/metisMenu.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/sb-admin-2.min.js"></script>
-
 <script src="<%=request.getContextPath()%>/static/js/angular.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/multiple-select/multiple-select.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/js-custom-select/customSelect.js"></script>

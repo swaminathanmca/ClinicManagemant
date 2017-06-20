@@ -18,8 +18,6 @@ app.controller('doctorDetails',function($scope,$window,$http){
             $scope.branches=$scope.data.branches;
             $scope.speciality=$scope.data.specialization;
 
-
-
         })
 
     $scope.editUser=function(id){

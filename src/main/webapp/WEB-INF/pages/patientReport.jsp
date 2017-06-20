@@ -102,8 +102,6 @@
                 <button type="button" class="btn btn-primary" ng-click="back()">Back</button>
               </div>
             </div>
-
-
           </div>
           <div class="panel-body">
             <div class="row">

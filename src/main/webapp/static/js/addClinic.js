@@ -53,8 +53,6 @@ app.controller('dashboard', function ($scope, $http, $window) {
                 }else{
                     $scope.authErrorEmail="The Email Already Take";
                 }
-
-
             });
     }
 

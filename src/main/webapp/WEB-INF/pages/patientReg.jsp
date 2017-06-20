@@ -87,8 +87,17 @@
               </li>
             </ul>
           </li>
-
-
+          <li>
+            <a href="#"><i class="fa fa-phone"></i>&nbsp; Appointment<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+              <li>
+                <a href="AddAppointment"> Add Appointment</a>
+              </li>
+              <li>
+                <a href="ViewAppointment"> View Appointment</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </div>
 
@@ -109,6 +118,8 @@
           <div class="panel-heading">
             <h3 class="panel-title">Patient Registration</h3>
           </div>
+
+
           <div class="panel-body">
             <div class="row">
               <div class="col-lg-12">
@@ -262,7 +273,7 @@
                   <span class="input-group-addon">Pin Code</span>
                   <input type="text" class="form-control" ui-mask="999999" ng-model="pincode"  name="pin_code" required>
                 </div>
-                <span class="text-danger wrapper text-center ng-binding" ng-show="myform.pin_code.$invalid &&  myform.pin_code.$touched">Please Enter Country</span>
+                <span class="text-danger wrapper text-center ng-binding" ng-show="myform.pin_code.$invalid &&  myform.pin_code.$touched">Enter Valid Pin Code</span>
               </div>
 
             </div>
@@ -399,6 +410,10 @@
                 </div>
               </div>
             </div>
+
+
+
+
           </div>
       </div>
     </div>

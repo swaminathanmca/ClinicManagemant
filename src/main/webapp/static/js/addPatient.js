@@ -87,6 +87,7 @@ $scope.validate=function(){
 
     $scope.submit=function(id){
        $scope.branch_id=id;
+
         var satDate = new Date($scope.dob);
         $scope.to_date = moment(satDate).format("MM/DD/YYYY");
 

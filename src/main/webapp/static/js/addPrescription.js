@@ -11,8 +11,8 @@ app.controller('Prescription',function($scope,$http,$window,$timeout){
     $scope.addprescriptions=[];
     $scope.day=1;
     $scope.patient_info_id="";
-    $scope.laboratory= $window.sessionStorage.lab;
-    $scope.prescription= $window.sessionStorage.prescription;
+    $scope.laboratory = $window.sessionStorage.lab;
+    $scope.prescription = $window.sessionStorage.prescription;
     $scope.none = $window.sessionStorage.none;
 
 
@@ -127,10 +127,6 @@ app.controller('Prescription',function($scope,$http,$window,$timeout){
 
              }
 
-
-
-
-
             $scope.editPres=function(){
 
                 $scope.prescription_id="";
@@ -152,8 +148,6 @@ app.controller('Prescription',function($scope,$http,$window,$timeout){
                         })
                 });
             }
-
-
         })
 
 
@@ -169,10 +163,7 @@ app.controller('Prescription',function($scope,$http,$window,$timeout){
 
     }
 
-
-
     $scope.submit=function(id){
-
         $http.get("MedicineDetails/"+$scope.medicine_id).
             then(function(response,status,headers,config){
                 $scope.medicine=response.data;
@@ -205,11 +196,7 @@ app.controller('Prescription',function($scope,$http,$window,$timeout){
                     then(function(response,config,status){
                         $scope.status=response.data;
                         location.href="AddPrescription";
-
                     })
-
-
-
             });
     }
 

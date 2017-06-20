@@ -71,7 +71,6 @@ public class MedicineDaoImpl implements MedicineDao {
 
     @Override
     public Medicine medicineDetails(Integer medicine_id) {
-
         Medicine medicine=new Medicine();
         try {
             String getMedicineSql="SELECT * FROM medicine_master WHERE medicine_id=:medicine_id ";

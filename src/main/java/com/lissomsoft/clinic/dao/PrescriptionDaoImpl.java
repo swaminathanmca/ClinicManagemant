@@ -158,7 +158,6 @@ public class PrescriptionDaoImpl implements PrescriptionDao {
             parameter.put("prescription_id",prescription_id);
             prescription= (Prescription) jdbcTemplate.queryForObject(getPrescriptionSql, parameter, new PrescriptionMapper());
 
-
         }catch (Exception e){
             e.printStackTrace();
         }

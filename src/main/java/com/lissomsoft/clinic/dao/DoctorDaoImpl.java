@@ -145,7 +145,7 @@ public class DoctorDaoImpl implements DoctorDao {
                 while (it.hasNext()) {
                     Branch br=it.next();
 
-                    String insertDoctorMapSql="INSERT INTO  doctor_mapper (doctor_detail_id,branch_id) VALUES ((SELECT d.doctor_detail_id FROM doctor_detail d INNER JOIN user u ON u.user_id=d.user_id AND email=:email),:branch_id)";
+                    String insertDoctorMapSql="INSERT INTO role_mapper(user_id,role_id,created_at,updated_at) VALUES((SELECT user.user_id FROM user WHERE email=:email),4,:created_at,:created_at)";
                     Map<String,Object> DoctorMapperParameter=new HashMap<String, Object>();
                     DoctorMapperParameter.put("email",doctorUser.getEmail_id());
                     DoctorMapperParameter.put("branch_id",br.getBranch_id());

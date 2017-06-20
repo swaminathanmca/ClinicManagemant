@@ -160,11 +160,10 @@
 
                           </SELECT>--%>
                           <div   name="myform.medicine_id"  custom-select="s.medicine_id as s.medicine_name for s in medicines | filter: { medicine_name: $searchTerm }"   ng-model="medicine_id" required>
-
                           </div>
                         </div>
-
                       </div>
+
                 <div class="col-lg-3">
                   <div class="input-group">
                     <span class="input-group-addon">Fasting</span>
@@ -360,7 +359,6 @@
               <form role="form" class="form-horizontal" name="myform1"  ng-submit="editsubmit(xt.prescription_id)">
                 <fieldset>
 
-
                   <div class="form-group">
                     <div class="col-lg-7">
                       <div class="input-group">
@@ -389,7 +387,7 @@
                     <div class="col-lg-5">
                       <div class="input-group">
                         <span class="input-group-addon">Prescription</span>
-                        <div   name="medicine_id"  custom-select="s.medicine_id as s.medicine_name for s in medicines | filter: { medicine_name: $searchTerm }"   ng-model="xt.medicine_id" required>
+                        <div name="medicine_id"  custom-select="s.medicine_id as s.medicine_name for s in medicines | filter: { medicine_name: $searchTerm }"   ng-model="xt.medicine_id" required>
                         </div>
                       </div>
                     </div>

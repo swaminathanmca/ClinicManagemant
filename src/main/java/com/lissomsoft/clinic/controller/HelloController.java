@@ -63,6 +63,8 @@ public class HelloController {
     private LaboratoryService laboratoryService;
     @Autowired(required = false)
     private LabInvestigationService labInvestigationService;
+    @Autowired(required = false)
+    private AppointmentService appointmentService;
 
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -275,9 +277,14 @@ public class HelloController {
         return "EditPatientComplaint";
     }
 
-    @RequestMapping(value = "/ForgotPassword")
-    public String forgotPassword(HttpServletRequest request)throws Exception{
-        return "forgotpassword";
+    @RequestMapping(value = "/AddAppointment")
+    public String addAppointment(HttpServletRequest request)throws Exception{
+        return "appointment";
+    }
+
+    @RequestMapping(value = "/ViewAppointment")
+    public String viewAppointment(HttpServletRequest request)throws Exception{
+        return "viewAppointment";
     }
 
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
@@ -512,6 +519,18 @@ public class HelloController {
         boolean flag;
 
         flag = clinicService.editClinic(clinicUser);
+        jsonObject.put("status", flag);
+        return jsonObject.toString();
+    }
+
+    @RequestMapping(value = "/AddAppointment", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String addAppointment (@RequestBody Appointment appointment,HttpServletRequest request) throws JSONException{
+        JSONObject jsonObject = new JSONObject();
+        boolean flag;
+
+        flag = appointmentService.addAppointment(appointment);
         jsonObject.put("status", flag);
         return jsonObject.toString();
     }
