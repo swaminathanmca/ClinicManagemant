@@ -1,6 +1,8 @@
 package com.lissomsoft.clinic.dao;
 
 import com.lissomsoft.clinic.domain.NewAppointment;
+import com.lissomsoft.clinic.rowmapper.AppointmentMapper;
+import com.lissomsoft.clinic.rowmapper.NewAppoinmentProfile;
 import com.lissomsoft.clinic.rowmapper.NewAppointmentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -10,6 +12,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -78,5 +81,45 @@ public class NewAppointmentDaoImpl implements NewAppointmentDao {
         }
 
         return addnewappinfo;
+    }
+
+    @Override
+    public List<NewAppointment> appoinmentInfo(Integer branch_id, String dob, String contact_no) {
+
+
+        List<NewAppointment> newAppointments=null;
+        try {
+            String appInoSql="SELECT first_name,last_name,address1,address2,new_appointment_pid ,new_appointment_id,mobile_no FROM new_appointment where branch_id=:branch_id AND dob=:dob OR mobile_no=:contact_no";
+            Map<String,Object> para = new HashMap<String, Object>();
+            para.put("branch_id",branch_id);
+            para.put("dob",dob);
+            para.put("contact_no",contact_no);
+            newAppointments= jdbcTemplate.query(appInoSql,para,new NewAppoinmentProfile());
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return newAppointments;
+    }
+
+    @Override
+    public NewAppointment patientdetailsById(String patient_pid) {
+
+        NewAppointment newAppointment=new NewAppointment();
+        try {
+            String appInoSql="SELECT first_name,last_name,address1,address2,new_appointment_pid ,new_appointment_id,mobile_no FROM new_appointment where new_appointment_pid=:patient_pid";
+            Map<String,Object> params= new HashMap<String, Object>();
+            params.put("patient_pid",patient_pid);
+            newAppointment= (NewAppointment) jdbcTemplate.queryForObject(appInoSql,params,new NewAppoinmentProfile());
+
+        }catch (EmptyResultDataAccessException e){
+            return null;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return newAppointment;
     }
 }

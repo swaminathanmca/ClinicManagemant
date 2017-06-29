@@ -44,6 +44,11 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
+    public Patient patientdetailsById(String patient_pid) {
+        return patientDao.patientdetailsById(patient_pid);
+    }
+
+    @Override
     public boolean editPatient(Patient patient) {
         return patientDao.editPatient(patient);
     }

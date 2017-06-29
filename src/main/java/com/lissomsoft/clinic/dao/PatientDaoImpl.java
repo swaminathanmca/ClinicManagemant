@@ -8,6 +8,7 @@ import org.codehaus.jettison.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
@@ -198,6 +199,27 @@ public class PatientDaoImpl implements  PatientDao {
             parameter.put("patient_id",patient_id);
              patient= (Patient) jdbcTemplate.queryForObject(patientdetailsSql,parameter,new PatientDetailMapper());
 
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return patient;
+    }
+
+    @Override
+    public Patient patientdetailsById(String patient_pid) {
+
+        Patient patient=new Patient();
+        try {
+
+            String patientdetailsSql="SELECT p.patient_pid,p.first_name,p.last_name,p.address1,p.address2,p.city,p.state,p.country,p.pincode,p.blood_group_code,p.contact_no,p.mobile_no,p.email_id,p.sex,p.dob,p.mstatus,p.refered_by,p.allergy_food,p.allergy_others,e.name,e.relation,e.address1 emr_address1,e.address2 emr_address2,e.city emr_city,e.state emr_state,e.country emr_country,e.pincode emr_pincode,e.contact_no emr_contact_no,e.mobile_no emr_mobile_no,e.email_id emr_email_id FROM patient_master p INNER JOIN emergency_master e ON p.patient_pid=e.patient_pid AND p.patient_pid=:patient_pid";
+            Map<String,Object> parameter=new HashMap<String, Object>();
+            parameter.put("patient_pid",patient_pid);
+            patient= (Patient) jdbcTemplate.queryForObject(patientdetailsSql,parameter,new PatientDetailMapper());
+
+        }catch (EmptyResultDataAccessException e){
+           return null;
         }catch (Exception e){
             e.printStackTrace();
         }

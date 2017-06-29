@@ -82,7 +82,7 @@ app.controller('appointment',function($scope,$window,$http){
 
     $scope.addAppointment=function(id){
         $scope.patient_pid=id;
-$http.get("patientDetails/"+$scope.patient_pid)
+        $http.get("patientDetailsById/"+$scope.patient_pid)
     .then(function (response) {
         $scope.y=response.data;
 

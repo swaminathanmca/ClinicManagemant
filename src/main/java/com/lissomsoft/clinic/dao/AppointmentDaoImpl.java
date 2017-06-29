@@ -53,7 +53,7 @@ public class AppointmentDaoImpl implements AppointmentDao {
         List<Patient> patientappinfo=null;
 
         try{
-            String patientInfo="SELECT first_name,last_name,address1,address2,patient_pid,patient_id FROM patient_master where branch_id=:branch_id AND dob=:dob OR mobile_no=:contact_no ";
+            String patientInfo="SELECT first_name,last_name,address1,address2,patient_pid,patient_id,mobile_no FROM patient_master where branch_id=:branch_id AND dob=:dob OR mobile_no=:contact_no ";
             Map<String,Object> para = new HashMap<String, Object>();
             para.put("branch_id",branch_id);
             para.put("dob",dob);

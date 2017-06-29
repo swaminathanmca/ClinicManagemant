@@ -60,6 +60,7 @@ app.controller('Schedule',function($scope, $http, $window){
 
     $scope.timeValidation = function ()
     {
+        $scope.con_status="";
         var now = new Date();
         var startTime = (now.getMonth()+1) + "/" + now.getDate() + "/" + now.getFullYear() + " " + $scope.start_time;
         var toTime = (now.getMonth()+1) + "/" + now.getDate() + "/" + now.getFullYear() + " " + $scope.end_time;

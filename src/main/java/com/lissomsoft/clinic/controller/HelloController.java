@@ -599,21 +599,47 @@ public class HelloController {
         JSONObject data = new JSONObject();
         JSONArray jsonArray = new JSONArray();
         List<Patient> appointmentInfos;
+        List<NewAppointment> newAppointments;
         String date = dob.replace("-", "/");
         appointmentInfos = appointmentService.appoinmentInfo(branch_id, date, contact_no);
-        Iterator<Patient> it = appointmentInfos.iterator();
-        while (it.hasNext()) {
-            JSONObject jsonObject1 = new JSONObject();
-            Patient patient = it.next();
-            jsonObject1.put("first_name", patient.getFullName());
-            jsonObject1.put("last_name", patient.getLastName());
-            jsonObject1.put("address1", patient.getAddress1());
-            jsonObject1.put("address2", patient.getAddress2());
-            jsonObject1.put("patient_pId", patient.getPatient_pId());
-            jsonObject1.put("patient_id", patient.getPatientId());
-            jsonArray.put(jsonObject1);
-            data.put("patient", jsonArray);
+
+        if(appointmentInfos.isEmpty()){
+            newAppointments=newAppointmentService.appoinmentInfo(branch_id,dob,contact_no);
+
+            Iterator<NewAppointment> itr=newAppointments.iterator();
+            while (itr.hasNext()){
+                JSONObject jsonObject=new JSONObject();
+                NewAppointment newAppointment=itr.next();
+                jsonObject.put("first_name", newAppointment.getFirst_name());
+                jsonObject.put("last_name", newAppointment.getLast_name());
+                jsonObject.put("address1", newAppointment.getAddress1());
+                jsonObject.put("address2", newAppointment.getAddress2());
+                jsonObject.put("contact_no",newAppointment.getMobile_no());
+                jsonObject.put("patient_pId", newAppointment.getNew_appointment_pid());
+                jsonObject.put("patient_id", newAppointment.getNew_appointment_id());
+                jsonArray.put(jsonObject);
+                data.put("patient", jsonArray);
+            }
+
+
+
+        }else{
+            Iterator<Patient> it = appointmentInfos.iterator();
+            while (it.hasNext()) {
+                JSONObject jsonObject1 = new JSONObject();
+                Patient patient = it.next();
+                jsonObject1.put("first_name", patient.getFullName());
+                jsonObject1.put("last_name", patient.getLastName());
+                jsonObject1.put("address1", patient.getAddress1());
+                jsonObject1.put("address2", patient.getAddress2());
+                jsonObject1.put("contact_no",patient.getContact_no());
+                jsonObject1.put("patient_pId", patient.getPatient_pId());
+                jsonObject1.put("patient_id", patient.getPatientId());
+                jsonArray.put(jsonObject1);
+                data.put("patient", jsonArray);
+            }
         }
+
         return data.toString();
     }
 
@@ -2635,6 +2661,51 @@ public class HelloController {
 
         return dateRange;
     }
+
+    @RequestMapping(value = "/patientDetailsById/{patient_pid}", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String patientDetailsById(@PathVariable String patient_pid) throws Exception {
+        JSONObject jsonObject = new JSONObject();
+        JSONObject data = new JSONObject();
+        Patient patient = patientService.patientdetailsById(patient_pid);
+        if(patient==null){
+            NewAppointment appointment=newAppointmentService.patientdetailsById(patient_pid);
+            jsonObject.put("first_name",appointment.getFirst_name());
+            jsonObject.put("last_name",appointment.getLast_name());
+            jsonObject.put("address1",appointment.getAddress1());
+            jsonObject.put("address2",appointment.getAddress2());
+            jsonObject.put("contact_no",appointment.getMobile_no());
+            jsonObject.put("patient_pid",appointment.getNew_appointment_pid());
+            jsonObject.put("status",true);
+
+        }else{
+            jsonObject.put("first_name", patient.getFullName());
+            jsonObject.put("last_name", patient.getLastName());
+            jsonObject.put("address1", patient.getAddress1());
+            jsonObject.put("address2", patient.getAddress2());
+            jsonObject.put("dob", patient.getDob());
+            jsonObject.put("city", patient.getCity());
+            jsonObject.put("state", patient.getState());
+            jsonObject.put("country", patient.getCountry());
+            jsonObject.put("pincode", patient.getPincode());
+            jsonObject.put("contact_no", patient.getContact_no());
+            jsonObject.put("mobile_no", patient.getResidental_no());
+            jsonObject.put("gender", patient.getGender());
+            jsonObject.put("blood_group", patient.getBloodGroup());
+            jsonObject.put("mstatus", patient.getmStatus());
+            jsonObject.put("email", patient.getEmail());
+            jsonObject.put("patient_pid", patient.getPatient_pId());
+            jsonObject.put("patient_id", patient.getPatientId());
+            jsonObject.put("status",true);
+        }
+
+
+
+        return jsonObject.toString();
+    }
+
+
 
 
 }

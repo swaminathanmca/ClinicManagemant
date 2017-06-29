@@ -22,6 +22,7 @@ public class AppointmentMapper implements RowMapper {
         patient.setAddress2(resultSet.getString("address2"));
         patient.setPatient_pId(resultSet.getString("patient_pId"));
         patient.setPatientId(resultSet.getInt("patient_id"));
+        patient.setContact_no(resultSet.getString("mobile_no"));
 
         return patient;
     }

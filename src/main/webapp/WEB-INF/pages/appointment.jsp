@@ -182,7 +182,7 @@
                                                         <tr ng-repeat="x in data | filter:search | orderBy : first_name">
 
                                                             <td>{{$index+1}}</td>
-                                                            <td class="und_ref"><a ng-click="addAppointment(x.patient_id)">{{x.first_name}}&nbsp;{{x.last_name}}</a>
+                                                            <td class="und_ref"><a ng-click="addAppointment(x.patient_pId)">{{x.first_name}}&nbsp;{{x.last_name}}</a>
                                                             </td>
                                                             <td>{{x.address1}},{{x.address2}}</td>
 
