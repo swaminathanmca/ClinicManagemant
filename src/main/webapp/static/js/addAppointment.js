@@ -18,6 +18,13 @@ app.controller('appointment',function($scope,$window,$http){
     };
     $scope.toggleMin();
 
+    $scope.open1 = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.opened1 = true;
+        $scope.opened2 = false;
+    };
+
     $scope.open2 = function($event) {
         $event.preventDefault();
         $event.stopPropagation();
@@ -42,31 +49,72 @@ app.controller('appointment',function($scope,$window,$http){
 
     $scope.to_date = moment().add(7, 'days').format("MM-DD-YYYY");
 
-
-    $('#timepicker1').timepicker({
-        minuteStep: 1,
-        showInputs: false,
-        disableFocus: true
-    });
-
     $http.get("ViewDoctorBranch/" + $scope.branch_id)
         .then(function(respone){
             $scope.doctors=respone.data.user;
         });
 
+    $scope.fromSubmit=function(){
+        $scope.dob = moment($scope.dob).format("MM-DD-YYYY");
+
+        $http.get("PatientAppointmentInfo/"+$scope.dob+"/"+$scope.contact_no+"/"+$scope.branch_id)
+            .then(function (response){
+                $scope.data=response.data.patient;
+            });
+    };
+
     $scope.submit=function() {
 
-        $scope.to_date = moment($scope.exp_date).format("MM/DD/YYYY");
+        $scope.app_date = moment($scope.app_date).format("MM/DD/YYYY");
 
-       var appointment = {
-            name:$scope.name,
+        var appointment = {
+            name:$scope.y.first_name,
+            branch_id:$scope.branch_id,
             doctor_id:$scope.doctor_id,
-           dov:$scope.to_date
-       }
+            dov:$scope.app_date
+        };
 
         $http.post('AddAppointment',appointment).
             then(function (response, status, headers, config) {
                 $scope.data = response.data;
             });
-    }
+    };
+
+    $scope.addAppointment=function(id){
+        $scope.patient_pid=id;
+$http.get("patientDetails/"+$scope.patient_pid)
+    .then(function (response) {
+        $scope.y=response.data;
+
+    })
+    };
+
+    $scope.submitt=function(){
+        $scope.datee = moment($scope.datee).format("MM/DD/YYYY");
+
+        var newappointment = {
+            new_appointment_pid:$scope.new_appointment_pid,
+            branch_id:$scope.branch_id,
+            first_name:$scope.first_name,
+            last_name:$scope.last_name,
+            doctor_id:$scope.doctor_id,
+            dob:$scope.datee,
+            mobile_no:$scope.mobile_no,
+            res_no:$scope.res_no,
+            email:$scope.email,
+            address1:$scope.address1,
+            address2:$scope.address2,
+            city:$scope.city,
+            state:$scope.state,
+            country:$scope.country,
+            pin_code:$scope.pin_code
+        };
+
+        $http.post("AddNewAppointment",newappointment).
+            then(function (response,status,header){
+                $scope.data=response.data;
+            });
+    };
+
+
 });

@@ -277,7 +277,7 @@
                   <table class="table table-striped table-bordered table-hover " id="dataTables-example">
                     <thead>
                     <tr class="success">
-                      <th><input type="checkbox" ng-model="selectedAll" ng-click="checkAll()"  /></th>
+                      <th><input type="checkbox" ng-model="selectedAll" ng-click="checkAll()"/></th>
                       <th>Medicine_name</th>
                       <th>Mg</th>
                       <th>Frequency</th>

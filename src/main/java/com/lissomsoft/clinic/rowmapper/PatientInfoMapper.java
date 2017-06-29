@@ -20,7 +20,6 @@ public class PatientInfoMapper implements RowMapper {
         patientinfo.setDate(resultSet.getString("created_at"));
         patientinfo.setRefereal_details(resultSet.getString("referal_details"));
 
-
         return patientinfo;
     }
 }

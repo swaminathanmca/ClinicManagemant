@@ -3,6 +3,7 @@ package com.lissomsoft.clinic.controller;
 import com.lissomsoft.clinic.domain.Speciality;
 import com.lissomsoft.clinic.rowmapper.UserLogin;
 import com.lissomsoft.clinic.service.*;
+import jdk.nashorn.api.scripting.JSObject;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -23,6 +24,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.jar.JarEntry;
@@ -65,6 +67,8 @@ public class HelloController {
     private LabInvestigationService labInvestigationService;
     @Autowired(required = false)
     private AppointmentService appointmentService;
+    @Autowired(required = false)
+    private NewAppointmentService newAppointmentService;
 
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -277,15 +281,11 @@ public class HelloController {
         return "EditPatientComplaint";
     }
 
-    @RequestMapping(value = "/AddAppointment")
-    public String addAppointment(HttpServletRequest request)throws Exception{
+    @RequestMapping(value="/AddAppointment")
+    public  String addAppointment(HttpServletRequest request)throws Exception{
         return "appointment";
     }
 
-    @RequestMapping(value = "/ViewAppointment")
-    public String viewAppointment(HttpServletRequest request)throws Exception{
-        return "viewAppointment";
-    }
 
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
     public
@@ -535,6 +535,52 @@ public class HelloController {
         return jsonObject.toString();
     }
 
+    @RequestMapping(value = "/AddNewAppointment", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String addnewappoinment (@RequestBody NewAppointment newAppointment,HttpServletRequest request) throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        boolean flag;
+
+        NewAppointment newAppointmentpid;
+        newAppointmentpid = newAppointmentService.newapp();
+        String preuId="";
+        String lastdigit="";
+
+        String cur_date,num1,date,year,uId;
+        int nextVal;
+
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        cur_date = format.format(new Date());
+        num1 = cur_date.replaceAll("/", "");
+        date=num1.substring(0,4);
+        String nozero = num1.substring(4);
+        year = nozero.replaceAll("0", "");
+        String todate=num1.substring(0,2);
+        String fname=(newAppointment.getFirst_name().substring(0,1)).toUpperCase();
+        String lname=(newAppointment.getLast_name().substring(newAppointment.getLast_name().length()-1)).toUpperCase();
+
+        if(newAppointmentpid == null){
+            uId = "TP"+ lname + fname + date + year + 1;
+        }
+        else {
+            preuId = (newAppointmentpid.getNew_appointment_pid()).substring(4, 6);
+            lastdigit = (newAppointmentpid.getNew_appointment_pid()).substring(11);
+            int x=Integer.parseInt(lastdigit);
+
+            if (todate.equals(preuId)){
+                nextVal = x + 1;
+            } else {
+                nextVal = 1;
+            }
+            uId = "TP" + lname + fname + date + year + nextVal;
+        }
+
+        flag = newAppointmentService.addnewappointment(newAppointment, uId);
+            jsonObject.put("status",flag);
+
+        return jsonObject.toString();
+    }
 
     @RequestMapping(value = "/GetInfoId/{patient_pid}/{created_at}/{type}/{doctor_id}",method = RequestMethod.GET)
     public
@@ -548,6 +594,30 @@ public class HelloController {
         return jsonObject.toString();
     }
 
+    @RequestMapping(value = "/PatientAppointmentInfo/{dob}/{contact_no}/{branch_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getPatientInfo(@PathVariable String dob,@PathVariable String contact_no,@PathVariable Integer branch_id) throws JSONException{
+        JSONObject data = new JSONObject();
+        JSONArray jsonArray=new JSONArray();
+        List<Patient> appointmentInfos;
+        String date=dob.replace("-","/");
+        appointmentInfos = appointmentService.appoinmentInfo(branch_id,date, contact_no);
+        Iterator<Patient> it = appointmentInfos.iterator();
+        while (it.hasNext()) {
+            JSONObject jsonObject1=new JSONObject();
+            Patient patient=it.next();
+            jsonObject1.put("first_name",patient.getFullName());
+            jsonObject1.put("last_name",patient.getLastName());
+            jsonObject1.put("address1",patient.getAddress1());
+            jsonObject1.put("address2",patient.getAddress2());
+            jsonObject1.put("patient_pId",patient.getPatient_pId());
+            jsonObject1.put("patient_id",patient.getPatientId());
+            jsonArray.put(jsonObject1);
+            data.put("patient",jsonArray);
+        }
+        return data.toString();
+    }
 
     @RequestMapping(value = "/EditPatient",method = RequestMethod.POST)
     public
@@ -1038,7 +1108,6 @@ public class HelloController {
             jsonObject.put("email",patient.getEmail());
             jsonArray.put(jsonObject);
             data.put("patient",jsonArray);
-
         }
 
         return data.toString();

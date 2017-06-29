@@ -98,5 +98,7 @@
     <bean id="labInvestigationService" class="com.lissomsoft.clinic.service.LabInvestigationServiceImpl"/>
     <bean id="appointmentDao" class="com.lissomsoft.clinic.dao.AppointmentDaoImpl"/>
     <bean id="appointmentService" class="com.lissomsoft.clinic.service.AppointmentServiceImpl"/>
+    <bean id="newappointmentDao" class="com.lissomsoft.clinic.dao.NewAppointmentDaoImpl"/>
+    <bean id="newappointmentService" class="com.lissomsoft.clinic.service.NewAppointmentServiceImpl"/>
 
 </beans>

@@ -151,8 +151,6 @@ app.controller('Prescription',function($scope,$http,$window,$timeout){
         })
 
 
-
-
     $scope.typepres=function(id){
         $scope.type=id;
         $scope.medicine_id="";
@@ -234,15 +232,11 @@ $scope.editsubmit=function(id){
                 if($scope.editstatus){
                     location.href="AddPrescription";
                 }
-
             })
-
-
         });
 }
 
 $scope.prescriptionAdd=function(){
-
     location.href="AddInvestigation";
 }
 
@@ -254,7 +248,6 @@ $scope.back=function(){
    }
 
 }
-
 
 });
 
