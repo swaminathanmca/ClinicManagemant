@@ -604,7 +604,7 @@ public class HelloController {
         appointmentInfos = appointmentService.appoinmentInfo(branch_id, date, contact_no);
 
         if(appointmentInfos.isEmpty()){
-            newAppointments=newAppointmentService.appoinmentInfo(branch_id,dob,contact_no);
+            newAppointments=newAppointmentService.appoinmentInfo(branch_id,date,contact_no);
 
             Iterator<NewAppointment> itr=newAppointments.iterator();
             while (itr.hasNext()){
