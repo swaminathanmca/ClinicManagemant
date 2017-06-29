@@ -7,9 +7,18 @@ package com.lissomsoft.clinic.domain;
 public class Appointment {
 
     private Integer appointment_id;
+    private Integer branch_id;
     private String name;
     private Integer doctor_id;
     private String dov;
+
+    public Integer getBranch_id() {
+        return branch_id;
+    }
+
+    public void setBranch_id(Integer branch_id) {
+        this.branch_id = branch_id;
+    }
 
     public String getDov() {
         return dov;
@@ -47,6 +56,7 @@ public class Appointment {
     return "Appointment {" +
             "appointment_id = "+ appointment_id +
             ",name = "+ name +
+            "branch_id ="+ branch_id +
             ",doctor_id = "+ doctor_id +
             "'dov = "+ dov +
             "}";

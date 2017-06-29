@@ -117,17 +117,7 @@
             </ul>
           </li>
 
-          <li>
-            <a href="#"><i class="fa fa-phone"></i>&nbsp; Appointment<span class="fa arrow"></span></a>
-            <ul class="nav nav-second-level">
-              <li>
-                <a href="AddAppointment"> Add Appointment</a>
-              </li>
-              <li>
-                <a href="ViewAppointment"> View Appointment</a>
-              </li>
-            </ul>
-          </li>
+
         <%--  <li  ng-show="role=='SuperAdmin'">
             <a href="#"><i class="fa fa-ambulance"></i>&nbsp;Services<span class="fa arrow"></span> </a>
             <ul class="nav nav-second-level">

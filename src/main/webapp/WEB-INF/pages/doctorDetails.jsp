@@ -236,10 +236,9 @@
                           <lablel class="form-control" type="text">{{data.reg_id}}</lablel>
                         </div>
                       </div>
-
-
-
                     </div>
+
+
      <div class="form-group">
        <div class="col-lg-6 ">
          <div class="input-group">
