@@ -12,6 +12,7 @@
   <link href="<%=request.getContextPath()%>/static/css/custom.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/css/sb-admin-2.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/vendor/metisMenu/metisMenu.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/static/vendor/js-custom-select/style.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/css/bootstrap-formhelpers.min.css"
         rel="stylesheet">
@@ -92,7 +93,8 @@
   </nav>
   <div id="page-wrapper">
     <div class="row">
-      <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+      <div class="col-lg-1"></div>
+      <div class="col-lg-10 col-sm-10 col-md-10 col-xs-10">
         <h4 class="txtrns"> <a> <i class="fa fa-user"></i></a>&nbsp;&nbsp; {{data.first_name}}&nbsp;{{data.last_name}}&nbsp;&nbsp; &nbsp;&nbsp;  <span ng-if="data.gender==1">Male</span> <span ng-if="data.gender==0">Female</span>,{{data.age}} &nbsp;&nbsp;<span>(ID:{{data.patient_pid}})</span> </h4>
 
       </div>
@@ -100,7 +102,7 @@
     <br>
     <div class="row">
       <div class="col-lg-1"></div>
-      <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+      <div class="col-lg-10 col-sm-10 col-md-10 col-xs-10">
         <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title"> Patient Visit</h3>
@@ -111,8 +113,7 @@
                 <form class="form-horizontal ng-invalid" role="form" name="myform" ng-submit="submit()"
                       novalidate>
                   <fieldset>
-
-                   <%-- <div class="form-group">
+                    <%-- <div class="form-group">
                       <div class="col-lg-6">
                         <div class="input-group">
                           <span class="input-group-addon">
@@ -133,59 +134,61 @@
                     </div>--%>
 
 
+
                     <div class="form-group">
-                      <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                     <%-- <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
                         <div class="input-group">
                           <span class="input-group-addon">
                             Speciality
                           </span>
                           <select class="form-control" ng-options="s.speciallity_id as s.speciality_name for s in specialitydetails" ng-model="speciallity_id" ng-change="doctor(speciallity_id)" name="speciality" required></select>
                         </div>
-                      </div>
-                      <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                      </div>--%>
+                      <div class="col-lg-5 col-sm-5 col-md-5 col-xs-5">
                         <div class="input-group">
-                          <span class="input-group-addon">
-                            Practitioner
-                          </span>
-                          <select class="form-control" ng-options="s.doctor_id as s.profile_name for s in profile" ng-model="doctor_id" name="doctor" ng-blur="change(doctor_id)" required></select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
-                        <div class="input-group">
-                        <span class="input-group-addon">Visit Type</span>
-                        <%--  <select class="form-control" ng-model="type" ng-blur="entryNew(type)" name="type" required>
-                            <option value="0">New  </option>
-                            <option value="1">FollowUp</option>
-                          </select>--%>
-                          <div class="checkbox pb10 fileRadioBox form-control">
-                            <label>
-                              <input type="radio" name="type"  value="0"   ng-model="type" ng-click="entryNew(type)" required>New
-                            </label>
+                          <span class="input-group-addon">Practitioner</span>
+                          <%--<select class="form-control" ng-options="s.doctor_id as s.profile_name for s in profile" ng-model="doctor_id" name="doctor" ng-blur="change(doctor_id)" required></select>--%>
+                          <div name="doctor"  custom-select="s.doctor_id as s.profile_name for s in profile | filter: { profile_name : $searchTerm }"   ng-model="doctor_id" ng-change="change(doctor_id)" required>
 
-                            <label>
-                              <input type="radio" name="type" value="1"  ng-model="type" ng-click="entryNew(type)" ng-disabled="entryall==false" required>
-                              FollowUp
-                            </label>
                           </div>
-
                         </div>
+                      </div>
+                       <div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+                         <div class="input-group">
+                           <span class="input-group-addon">Visit Type</span>
+                           <%--  <select class="form-control" ng-model="type" ng-blur="entryNew(type)" name="type" required>
+                               <option value="0">New  </option>
+                               <option value="1">FollowUp</option>
+                             </select>--%>
+                           <div class="checkbox pb10 fileRadioBox form-control">
+                             <label>
+                               <input type="radio" name="type"  value="0"   ng-model="type" ng-click="entryNew(type)" required>New
+                             </label>
+
+                             <label>
+                               <input type="radio" name="type" value="1"  ng-model="type" ng-click="entryNew(type)" ng-disabled="entryall==false" required>
+                               FollowUp
+                             </label>
+                           </div>
+
+                         </div>
                          <span class="text-danger wrapper text-center ng-binding"
                                ng-show="myform.type.$error.pattern">Please Select Valid Type</span>
-                        <span class="text-danger wrapper text-center ng-binding" ng-show="entry==false">Already Registered Today</span>
-                        <span class="text-danger wrapper text-center ng-binding" ng-show="followup==false || followWeek==false">Date Expired</span>
-                      </div>
-                      <div class="col-lg-2 col-sm-2 col-md-2 col-xs-2">
-                        <div class="input-group">
-                          <span class="input-group-addon">Weight</span>
-                          <input type="text" class="form-control" ng-model="weight" name="weight" maxlength="3"  ng-pattern="/^[0-9]*$/" >
-                          <%--<span class="input-group-addon">KG</span>--%>
-                        </div>
+                         <span class="text-danger wrapper text-center ng-binding" ng-show="entry==false">Already Registered Today</span>
+                         <span class="text-danger wrapper text-center ng-binding" ng-show="followup==false || followWeek==false">Date Expired</span>
+                       </div>
+                       <div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
+                         <div class="input-group">
+                           <span class="input-group-addon">Weight</span>
+                           <input type="text" class="form-control" ng-model="weight" name="weight" maxlength="3"  ng-pattern="/^[0-9]*$/" >
+                           <%--<span class="input-group-addon">KG</span>--%>
+                         </div>
                          <span class="text-danger wrapper text-center ng-binding"
                                ng-show="myform.weight.$error.pattern">Please Enter Valid Weight</span>
-                      </div>
-                      <div class="col-lg-2 col-sm-2 col-md-2 col-xs-2">
+                       </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
                         <div class="input-group">
                           <span class="input-group-addon">BP</span>
                           <input type="text" class="form-control" ng-model="pressure" name="pressure"  ng-pattern="/^[0-9]*$/" >
@@ -193,7 +196,7 @@
                          <span class="text-danger wrapper text-center ng-binding"
                                ng-show="myform.pressure.$error.pattern">Please Enter Valid Pressure</span>
                       </div>
-                      <div class="col-lg-2 col-sm-2 col-md-2 col-xs-2">
+                      <div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
                         <div class="input-group">
                           <span class="input-group-addon">Height</span>
                           <input type="text" class="form-control" ng-model="height" name="height" ng-pattern="/^[0-9]*$/">
@@ -201,29 +204,30 @@
                         <span class="text-danger wrapper text-center ng-binding"
                               ng-show="myform.height.$error.pattern">Please Enter Valid Height</span>
                       </div>
-                    </div>
-                     <div class="form-group">
-                       <div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
-                         <div class="input-group">
+                      <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                        <div class="input-group">
                           <span class="input-group-addon">
                              Category
                           </span>
-                           <%-- <select class="form-control" ng-model="vtype" name="vtype" required>
-                              <option value="0">Normal </option>
-                              <option value="1">Emergency</option>
-                            </select>--%>
-                           <div class="checkbox pb10 fileRadioBox form-control">
-                             <label>
-                               <input type="radio" name="vtype"  value="0"   ng-model="vtype" required>Normal
-                             </label>
+                          <%-- <select class="form-control" ng-model="vtype" name="vtype" required>
+                             <option value="0">Normal </option>
+                             <option value="1">Emergency</option>
+                           </select>--%>
+                          <div class="checkbox pb10 fileRadioBox form-control">
+                            <label>
+                              <input type="radio" name="vtype"  value="0"   ng-model="vtype" required>Normal
+                            </label>
 
-                             <label>
-                               <input type="radio" name="vtype" value="1"  ng-model="vtype"  required>
-                               Emergency
-                             </label>
-                           </div>
-                         </div>
-                       </div>
+                            <label>
+                              <input type="radio" name="vtype" value="1"  ng-model="vtype"  required>
+                              Emergency
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                     <div class="form-group">
+
                      </div>
                     <div class="form-group">
                       <div class="col-lg-12">
@@ -274,6 +278,6 @@
 <script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/angular-base64-upload.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/js/bootstrap-formhelpers.min.js"></script>
-<script></script>
+
 </body>
 </html>

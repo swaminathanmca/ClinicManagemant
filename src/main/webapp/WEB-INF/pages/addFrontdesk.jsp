@@ -201,13 +201,7 @@
                                                     <select class="form-control" ng-options= " s.branch_id as s.branch_name for s in branchDetails" ng-model="data.branch_id"></select>
                                                 </div>
                                             </div>
-
-
-
-
                                         </div>
-
-
                                         <div class="form-group">
 
                                             <div class="col-lg-6">

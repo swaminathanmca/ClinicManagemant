@@ -25,4 +25,4 @@ $scope.submit=function(){
          location.href="ViewService";
     }
 
-})
+});

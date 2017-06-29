@@ -30,7 +30,7 @@ app.controller('patientVisit',function($scope,$window,$http){
         })*/
 
 
-    $http.get("GetSpeciality")
+   /* $http.get("GetSpeciality")
         .then(function(response){
             $scope.specialitydetails=response.data.speciality;
         })
@@ -42,11 +42,22 @@ app.controller('patientVisit',function($scope,$window,$http){
                 $scope.profile=response.data.profile;
             })
 
-    }
+    }*/
+
+    $http.get("ViewDoctorBranch/"+$scope.branch_id)
+        .then(function(response){
+            $scope.profile=response.data.user;
+        })
+
+
     var date = new Date();
     $scope.time= date.toLocaleTimeString();
 
+
+
     $scope.change=function(id){
+        $scope.doctor_id=id;
+
         $scope.type="";
         $http.get("GetAllEntry/"+$scope.patient_pid+"/"+$scope.doctor_id).
             then(function(response){

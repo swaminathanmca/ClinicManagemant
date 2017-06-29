@@ -168,7 +168,7 @@
             <div class="col-lg-12">
               <div class="table-responsive">
 
-                <table class="table table-striped table-bordered table-hover " id="dataTables-example">
+                <table class="table table-striped table-bordered table-hover " >
                   <thead>
                   <tr class="success">
                     <th><input type="checkbox" ng-model="selectedAll" ng-click="checkAll()"  /></th>

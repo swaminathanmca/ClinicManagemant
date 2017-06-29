@@ -58,6 +58,7 @@
         <property name="username" value="root" />
         <property name="password" value="root" />
     </bean>
+
     <bean id="NamedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
         <constructor-arg type="javax.sql.DataSource" ref="mysqlDataSource"/>
         <!--<property name="dataSource" ref="dataSource"></property>-->
@@ -98,5 +99,7 @@
     <bean id="labInvestigationService" class="com.lissomsoft.clinic.service.LabInvestigationServiceImpl"/>
     <bean id="appointmentDao" class="com.lissomsoft.clinic.dao.AppointmentDaoImpl"/>
     <bean id="appointmentService" class="com.lissomsoft.clinic.service.AppointmentServiceImpl"/>
+    <bean id="scheduleDao" class="com.lissomsoft.clinic.dao.ScheduleDaoImpl"/>
+    <bean id="scheduleService" class="com.lissomsoft.clinic.service.ScheduleServiceImpl"/>
 
 </beans>
