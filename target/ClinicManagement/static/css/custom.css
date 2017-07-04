@@ -21,22 +21,40 @@ hr{
 .txt-clr{
     color:#20A8D8;
 }
-.datepicker {
-    margin: 0 5px;
-}
 
-.datepicker .btn-default {
-    border-width: 0;
-    box-shadow: none;
-}
 
 .datepicker .btn[disabled] {
-    opacity: 0.4;
+    font-size: 14px;
+    font-weight: normal;
+    color: gray;
+}
+.datepicker .btn:disabled>.text-muted  {
+    font-size: 14px;
+    font-weight: normal;
+    color: gray;
+}
+.datepicker .text-muted  {
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
+}
+.datepicker .btn-info  {
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #39b3d7;
+}
+.datepicker .text-info{
+    font-size: 14px;
+    color: black;
 }
 
-.datepicker .btn-info .text-info {
-    color: #fff !important;
+.datepicker .btn:enabled  {
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
+
 }
+
 
 
 
@@ -162,4 +180,22 @@ hr{
     width: 20px;
     height: 20px;
     margin-right: 20px;
+}
+.tag{
+    display: inline-block;
+}
+.tag1{
+    display: block;
+}
+.Highlighted a{
+    background-color : #337AB7 !important;
+    background-image :none !important;
+    color: White !important;
+    font-weight:bold !important;
+    font-size: 12pt;
+}
+.ui-datepicker {
+    background: #333;
+    border: 1px solid #555;
+    color: #EEE;
 }

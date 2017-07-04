@@ -11,6 +11,9 @@ public class Appointment {
     private String name;
     private Integer doctor_id;
     private String dov;
+    private String patient_pid;
+    private String time;
+    private String contact_no;
 
     public Integer getBranch_id() {
         return branch_id;
@@ -52,13 +55,40 @@ public class Appointment {
         this.doctor_id = doctor_id;
     }
 
+    public String getPatient_pid() {
+        return patient_pid;
+    }
+
+    public void setPatient_pid(String patient_pid) {
+        this.patient_pid = patient_pid;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getContact_no() {
+        return contact_no;
+    }
+
+    public void setContact_no(String contact_no) {
+        this.contact_no = contact_no;
+    }
+
     public String toString(){
     return "Appointment {" +
-            "appointment_id = "+ appointment_id +
-            ",name = "+ name +
-            "branch_id ="+ branch_id +
-            ",doctor_id = "+ doctor_id +
-            "'dov = "+ dov +
+            "  appointment_id = "+ appointment_id +
+            ", name = "+ name +
+            ", branch_id ="+ branch_id +
+            ", doctor_id = "+ doctor_id +
+            ", dov = "+ dov +
+            ", time ="+time+
+            ", patient_pid="+patient_pid+
+            ", contact_no="+contact_no+
             "}";
 }
 }

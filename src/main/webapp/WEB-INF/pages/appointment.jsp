@@ -1,16 +1,18 @@
 <html ng-app="myApp" ng-controller="appointment">
 <head>
     <link href="<%=request.getContextPath()%>/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/static/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.css" rel="stylesheet">
     <link href="<%=request.getContextPath()%>/static/css/custom.css" rel="stylesheet">
     <link href="<%=request.getContextPath()%>/static/css/sb-admin-2.css" rel="stylesheet">
     <link href="<%=request.getContextPath()%>/static/vendor/metisMenu/metisMenu.css" rel="stylesheet">
     <link href="<%=request.getContextPath()%>/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/css/bootstrap-formhelpers.min.css"
           rel="stylesheet">
-    <link href="<%=request.getContextPath()%>/static/vendor/bootstrap-timepicker/css/timepicker.less" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/static/vendor/jquery-ui/jquery-ui.css" rel="stylesheet">
+
     <link href="<%=request.getContextPath()%>/static/vendor/js-custom-select/style.css" rel="stylesheet">
 
-    <%-- <link href="<%=request.getContextPath()%>/static/vendor/bootstrap-timepicker/assets/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">--%>
+
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
@@ -91,6 +93,9 @@
                             <li>
                                 <a href="AddAppointment"> Add Appointment</a>
                             </li>
+                            <li>
+                                <a href="#">View Appoinment</a>
+                            </li>
 
                         </ul>
                     </li>
@@ -131,16 +136,16 @@
                                       novalidate>
                                     <fieldset>
 
-                                        <div class="form-group">
+                                      <%--  <div class="form-group">
 
                                             <div class="col-lg-4">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon">Date</span>
+                                                    <span class="input-group-addon">Dob</span>
                                                     <input type="text" class="form-control" name="dob"
                                                            placeholder="mm-dd-yyyy" ng-click="open1($event)"
                                                            datepicker-popup="{{format}}" ng-model="dob"
                                                            is-open="opened1" datepicker-options="dateOptions"
-                                                           close-text="Close" style="height: 37px" disabled="disabled"/>
+                                                           close-text="Close" style="height: 37px" max-date="date" disabled="disabled"/>
                       <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="open1($event)" style="height: 37px"><i
                         class="glyphicon glyphicon-calendar"></i></button>
@@ -165,9 +170,9 @@
                                                        style="background-color: #ffffff;color: #333">
                                             </div>
 
-                                        </div>
+                                        </div>--%>
 
-                                        <div class="row" ng-if="data.length">
+                                       <%-- <div class="row" ng-if="data.length">
                                             <div class="col-lg-12">
                                                 <div class="table-responsive">
                                                     <table class="table table-striped table-bordered">
@@ -192,48 +197,58 @@
                                                     </table>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div>--%>
 
-                                        <div ng-show="y.status">
+                                        <div >
                                             <div class="form-group">
-                                                <div class="col-lg-6">
+                                                <%--<div class="col-lg-6">
                                                     <div class="input-group">
                                                         <span class="input-group-addon">Name</span>
                                                         <label class="form-control" type="text">{{y.first_name}}</label>
                                                     </div>
-                                                </div>
+                                                </div>--%>
                                                 <div class="col-lg-6">
                                                     <div class="input-group">
                                                         <span class="input-group-addon">Doctor</span>
 
                                                         <div name="doctor_id"
                                                              custom-select="d.doctor_id as d.profile_name for d in doctors | filter: { profile_name: $searchTerm }"
-                                                             ng-model="doctor_id" required>
+                                                             ng-model="doctor_id" ng-change="doctorschedule(doctor_id); disabled(date, mode);" required>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="input-group">
+                                                        <span class="input-group-addon">Date</span>
+                                                            <%--<input type="text" class="form-control" name="exp_date" placeholder="mm-dd-yyyy"  datepicker-popup="{{format}}" ng-model="dt" min-date="date" max-date="dtmax" is-open="opened2" datepicker-options="{ formatYear: 'yy',startingDay: 6,showWeeks:'false',class: 'datepicker'}" datepicker-options="{dateOptions}" close-text="Close" style="height: 37px" date-disabled="disabled(date, mode)" readonly="true"
+                                                                   ng-change="select(dt)" required/>
+                                                        <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click= "open2($event)"  style="height: 37px"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>--%><input type="text" id="datepicker" class="form-control">
+
+                                                           </div>
+
+                                                    </div>
                                             </div>
 
                                             <div class="form-group">
-                                                <div class="col-lg-4">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">Date</span>
-                                                        <input type="text" class="form-control" name="exp_date"
-                                                               placeholder="mm-dd-yyyy" ng-click="open2($event)"
-                                                               datepicker-popup="{{format}}" ng-model="app_date"
-                                                               min-date="date" is-open="opened2"
-                                                               datepicker-options="dateOptions" close-text="Close"
-                                                               style="height: 37px" disabled="disabled" required/>
-                             <span class="input-group-btn">
-                               <button type="button" class="btn btn-default" ng-click="open2($event)"
-                                       style="height: 37px"><i class="glyphicon glyphicon-calendar"></i></button>
-                             </span>
-                                                    </div>
-                                                </div>
+
                                             </div>
+                                            <div class="form-group">
+                                                    <div class="col-lg-12" >
+                                                        <span ng-repeat="time in times" class="tag">&nbsp;&nbsp;
+                                                        <span ng-if="!($index%8)"> <br/> &nbsp;&nbsp;</span>
+                                                        <button type="button"   class="{{(time.booked==true) ? 'btn btn-info':'btn btn-danger'}}" ng-click="schedule(time.interval,time.booked)">{{time.interval}}</button>  </span>
 
 
-                                            <div class="form-actions">
+
+                                                    </div>
+
+
+                                                </div>
+
+
+                                           <%-- <div class="form-actions">
                                                 <div class="row">
                                                     <div class="col-lg-offset-4 col-lg-7">
                                                         <button type="submit" class="btn btn-success"
@@ -243,7 +258,7 @@
                                                         <button type="button" class="btn btn-inverse">Cancel</button>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>--%>
 
                                         </div>
 
@@ -267,12 +282,58 @@
                     <h4 class="modal-title">New Patient Appointment</h4>
                 </div>
                 <div class="modal-body">
-
-
                     <form role="form" class="form-horizontal" name="myform1" ng-submit="submitt()">
                         <fieldset>
                             <div class="form-group">
+                                <div class="col-lg-4">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Appoinment Date</span>
+                                        <label class="form-control">{{dt_date}}</label>
+                                    </div>
+                            </div>
+                                <div class="col-lg-3">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"> Time</span>
+                                        <label class="form-control">{{time}}</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <input class="form-control" name="search" placeholder="search" ng-model="contact_no">
+                                </div>
+                                    <div class="col-lg-1">
+                                        <img ng-click="fromSubmit()"  src="<%=request.getContextPath()%>/static/img/search.png" style="width: 20px;height: 20px;margin-left: 11px; margin-top: 10px;" class="ng-pristine ng-untouched ng-valid">
+                                    </div>
 
+
+                                </div>
+                            <div class="form-group" ng-if="inform.length > 0">
+                                <div class="col-lg-12" >
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                            <thead>
+                                            <tr class="success">
+                                                <th>Patient Pid</th>
+                                                <th>Patient Name </th>
+                                                <th>Contact No</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="x in inform">
+                                                <td ><a ng-click="valueGetId(x.patient_pId,x.first_name,x.last_name,x.contact_no)" class="und_ref"> {{x.patient_pId}}</a></td>
+                                                <td>{{x.first_name}}&nbsp;{{x.last_name}}</td>
+                                                <td>{{x.contact_no}}</td>
+
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <div class="col-lg-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">First Name</span>
@@ -282,7 +343,6 @@
                                     <span class="text-danger wrapper text-center ng-binding"
                                           ng-show="myform1.first_name.$invalid &&  myform1.first_name.$touched">Please Enter First Name</span>
                                 </div>
-
                                 <div class="col-lg-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">Last Name</span>
@@ -292,109 +352,19 @@
                                     <span class="text-danger wrapper text-center ng-binding"
                                           ng-show="myform1.last_name.$invalid &&  myform1.last_name.$touched">Please Enter Last Name</span>
                                 </div>
-
                             </div>
-
-                            <div class="form-group">
-                                <div class="col-lg-4">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">Doctor</span>
-
-                                        <div name="doctor_id"
-                                             custom-select="d.doctor_id as d.profile_name for d in doctors | filter: { profile_name: $searchTerm }"
-                                             ng-model="doctor_id" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">Dob</span>
-                                        <input type="text" class="form-control" name="dob" placeholder="mm-dd-yyyy"
-                                               ng-click="open1($event)" datepicker-popup="{{format}}" ng-model="datee"
-                                               is-open="opened1" datepicker-options="dateOptions" close-text="Close"
-                                               style="height: 37px" disabled="disabled"/>
-                      <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open1($event)" style="height: 37px"><i
-                        class="glyphicon glyphicon-calendar"></i></button>
-                      </span>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="form-group">
                                 <div class="col-lg-4">
                                     <div class="input-group">
                                         <span class="input-group-addon">Mobile No</span>
                                         <input class="form-control" placeholder="Mobile No" name="mobile_no" type="text"
-                                               ng-model="mobile_no">
+                                               ng-model="mobile_no" required>
                                     </div>
                                     <span class="text-danger wrapper text-center ng-binding"
                                           ng-show="myform1.mobile_no.$invalid &&  myform1.mobile_no.$touched">Please Enter Mobile No</span>
                                 </div>
-                                <div class="col-lg-4">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">Res No</span>
-                                        <input class="form-control" placeholder="Res No" name="res_no" type="text"
-                                               ng-model="res_no">
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">Email</span>
-                                        <input class="form-control" placeholder="Email" name="email" type="text"
-                                               ng-model="email">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-lg-6">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">Address1</span>
-                                        <input class="form-control" name="address1" type="text" ng-model="address1">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">Address2</span>
-                                        <input class="form-control" name="address2" type="text" ng-model="address2">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-lg-3">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">City</span>
-                                        <input class="form-control" name="city" type="text" ng-model="city">
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">State</span>
-                                        <input class="form-control" name="state" type="text" ng-model="state">
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">Country</span>
-                                        <select class="form-control bfh-countries"   ng-model="country" name="country" ></select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">Pin code</span>
-                                        <input class="form-control" name="pin_code" type="text" ng-model="pin_code"
-                                               maxlength="6"
-                                               ng-pattern="/^[0-9]*$/">
-                                    </div>
-                                </div>
 
                             </div>
-
-
-                            <div class="form-group"></div>
-
                             <div class="form-actions">
                                 <div class="row">
                                     <div class="col-lg-offset-4 col-lg-7">
@@ -406,13 +376,33 @@
                                     </div>
                                 </div>
                             </div>
-
                         </fieldset>
                     </form>
-
                 </div>
             </div>
+        </div>
+    </div>
 
+
+
+    <div class="modal fade" id="myModal1" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+               <%-- <div class="modal-header">
+
+                 &lt;%&ndash;   <h4 class="modal-title">Modal Header</h4>&ndash;%&gt;
+                </div>--%>
+
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4>Schedule Already Booked.</h4>
+
+                </div>
+
+                <%--<div class="modal-footer">
+
+                </div>--%>
+            </div>
         </div>
     </div>
 
@@ -424,6 +414,9 @@
 
 <script src="<%=request.getContextPath()%>/static/vendor/jquery/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="<%=request.getContextPath()%>/static/vendor/moment/moment.js"></script>
+<script src="<%=request.getContextPath()%>/static/vendor/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script src="<%=request.getContextPath()%>/static/vendor/jquery-ui/jquery-ui.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/metisMenu/metisMenu.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/sb-admin-2.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/angular.min.js"></script>
@@ -436,7 +429,8 @@
 <script src="<%=request.getContextPath()%>/static/js/angular-base64-upload.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/js/bootstrap-formhelpers.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/addAppointment.js"></script>
-<script src="<%=request.getContextPath()%>/static/vendor/moment/moment.js"></script>
+
+
 <script src="<%=request.getContextPath()%>/static/vendor/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
 
 

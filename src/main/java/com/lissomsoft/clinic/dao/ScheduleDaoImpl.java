@@ -61,21 +61,62 @@ public class ScheduleDaoImpl implements ScheduleDao {
     }
 
     @Override
-    public List<Schedule> getSchedule(int doctor_id,String start_date) {
+    public List<Schedule> getSchedule(int doctor_id,String start_date,Integer branch_id) {
 
         List<Schedule> scheduleList=null;
         try {
 
-            String getScheduleSql="SELECT * FROM clinic.doctor_schedule where doctor_id=:doctor_id";
+            String getScheduleSql="SELECT * FROM doctor_schedule where doctor_id=:doctor_id AND branch_id=:branch_id";
             Map<String,Object> parameter=new HashMap<String, Object>();
             parameter.put("doctor_id",doctor_id);
             parameter.put("start_date",start_date);
+            parameter.put("branch_id",branch_id);
             scheduleList=jdbcTemplate.query(getScheduleSql,parameter,new ScheduleMapper());
 
         }catch (Exception e){
             e.printStackTrace();
         }
 
+
+        return scheduleList;
+    }
+
+    @Override
+    public List<Schedule> getScheduleTime(Integer doctor_id, Integer branch_id) {
+
+        List<Schedule> scheduleList=null;
+
+        try{
+            String getTimeSql = "SELECT * FROM doctor_schedule where doctor_id=:doctor_id and branch_id=:branch_id";
+            Map<String,Object> parameters=new HashMap<String, Object>();
+            parameters.put("doctor_id",doctor_id);
+            parameters.put("branch_id",branch_id);
+            scheduleList=jdbcTemplate.query(getTimeSql,parameters,new ScheduleMapper());
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return scheduleList;
+    }
+
+    @Override
+    public List<Schedule> getScheduleDoctor(Integer doctor_id, String start_date) {
+        List<Schedule> scheduleList=null;
+        try {
+
+            String getScheduleSql="SELECT * FROM doctor_schedule where doctor_id=:doctor_id ";
+            Map<String,Object> parameter=new HashMap<String, Object>();
+            parameter.put("doctor_id",doctor_id);
+            parameter.put("start_date",start_date);
+
+            scheduleList=jdbcTemplate.query(getScheduleSql,parameter,new ScheduleMapper());
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         return scheduleList;
     }

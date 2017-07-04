@@ -20,6 +20,7 @@ public class ScheduleMapper implements RowMapper{
         schedule.setStart_time(resultSet.getString("start_time"));
         schedule.setEnd_time(resultSet.getString("end_time"));
         schedule.setDay_flags(resultSet.getString("day_flag"));
+        schedule.setTime(resultSet.getInt("time"));
 
 
         return schedule;

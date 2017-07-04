@@ -25,4 +25,9 @@ public class AppointmentServiceImpl implements AppointmentService{
         return appointmentDao.appInfo(branch_id,dob,contact_no);
     }
 
+    @Override
+    public List<Appointment> appoinmentDetails(Integer doctor_id, Integer branch_id,String date) {
+        return appointmentDao.appoinmentDetails(doctor_id,branch_id,date);
+    }
+
 }

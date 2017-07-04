@@ -17,4 +17,6 @@ public interface AppointmentDao {
 
     List<NewAppointment> newappInfo(Integer branch_id,String dob,String mobile_no);
 
+    List<Appointment> appoinmentDetails(Integer doctor_id,Integer branch_id,String date);
+
 }

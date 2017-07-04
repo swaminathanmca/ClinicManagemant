@@ -12,6 +12,8 @@ public interface AppointmentService {
 
     boolean addAppointment(Appointment appointment);
 
-   List<Patient> appoinmentInfo(Integer branch_id,String dob,String contact_no);
+     List<Patient> appoinmentInfo(Integer branch_id,String dob,String contact_no);
+
+     List<Appointment> appoinmentDetails(Integer doctor_id,Integer branch_id,String date);
 
 }
