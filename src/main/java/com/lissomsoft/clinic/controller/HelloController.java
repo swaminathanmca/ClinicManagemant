@@ -2877,7 +2877,6 @@ public class HelloController {
             jsonObject.put("status",true);
         return  jsonObject.toString();
     }
-
     @RequestMapping(value = "GetAppoinment/{doctor_id}/{branch_id}/{date}",method = RequestMethod.GET)
     public
     @ResponseBody
@@ -2887,7 +2886,6 @@ public class HelloController {
         List<Appointment> appointments;
         date=date.replace("-","/");
         appointments=appointmentService.appoinmentDetails(doctor_id,branch_id,date);
-
         Iterator<Appointment> it=appointments.iterator();
         while (it.hasNext()){
             JSONObject data=new JSONObject();
@@ -2895,12 +2893,48 @@ public class HelloController {
             data.put("stime",appointment.getTime());
             jsonArray.put(data);
         }
-
-
         jsonObject.put("schedule_shift",jsonArray);
+        return jsonObject.toString();}
+
+    @RequestMapping(value = "ViewAppoinment/{branch_id}/{date}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String viewAppoinment(@PathVariable Integer branch_id,@PathVariable String date)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        JSONArray jsonArray=new JSONArray();
+        date=date.replace("-","/");
+        List<Appointment> appointments;
+        appointments=appointmentService.viewAppoinment(branch_id,date);
+        Iterator<Appointment> itr=appointments.iterator();
+        while (itr.hasNext()){
+            JSONObject data=new JSONObject();
+            Appointment appointment= itr.next();
+            data.put("appoinment_id",appointment.getAppointment_id());
+            data.put("patient_pid",appointment.getPatient_pid());
+            data.put("doctor_name",appointment.getDoctor_name());
+            data.put("name",appointment.getName());
+            data.put("time",appointment.getTime());
+            data.put("flag",appointment.getStatus());
+            data.put("contact_no",appointment.getContact_no());
+            data.put("date",appointment.getDov());
+            data.put("status",true);
+            jsonArray.put(data);
+        }
+        jsonObject.put("appoinments",jsonArray);
 
         return jsonObject.toString();
     }
 
+
+    @RequestMapping(value = "UpdateScheduleStatus/{status}/{appoinment_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String updateScheduleStatus(@PathVariable Integer status,@PathVariable Integer appoinment_id)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        boolean flag;
+        flag=appointmentService.updateAppoinment(status,appoinment_id);
+        jsonObject.put("status",flag);
+        return  jsonObject.toString();
+    }
 
 }

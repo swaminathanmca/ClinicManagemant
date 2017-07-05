@@ -31,7 +31,7 @@ public class AppointmentDaoImpl implements AppointmentDao {
         int result=0;
         try{
 
-            String insertSql="INSERT INTO appointment(patient_pid,name,branch_id,doctor_id,schedule_time,dov,phone_no,created_at,updated_at) values(:patient_pid,:name,:branch_id,:doctor_id,:time,:dov,:contact_no,:created_at,:created_at)";
+            String insertSql="INSERT INTO appointment(patient_pid,name,branch_id,doctor_id,schedule_time,dov,phone_no,status,created_at,updated_at) values(:patient_pid,:name,:branch_id,:doctor_id,:time,:dov,:contact_no,0,:created_at,:created_at)";
             Map<String,Object> parameters =new HashMap<String, Object>();
             parameters.put("patient_pid",appointment.getPatient_pid());
             parameters.put("name",appointment.getName());
@@ -45,7 +45,9 @@ public class AppointmentDaoImpl implements AppointmentDao {
             result = jdbcTemplate.update(insertSql,parameters);
 
         }catch (Exception e){
+
             e.printStackTrace();
+
         }
 
         return result >0 ? true :false;
@@ -116,6 +118,44 @@ public class AppointmentDaoImpl implements AppointmentDao {
 
 
         return appointments;
+    }
+
+    @Override
+    public List<Appointment> viewAppoinment(Integer branch_id, String date) {
+
+            List<Appointment> appointments=null;
+        try {
+            String appoinmentInfo="SELECT a.schedule_time,a.appointment_id,a.name,a.phone_no,a.dov,p.name created_at,a.doctor_id,a.branch_id,a.patient_pid,a.status FROM appointment a  INNER JOIN doctor_detail d ON a.doctor_id=d.doctor_detail_id INNER JOIN member_master m ON m.user_id=d.user_id INNER JOIN profile_master p ON m.profile_id=p.profile_id AND a.branch_id=:branch_id AND a.dov=:date";
+            Map<String,Object> parameter=new HashMap<String, Object>();
+            parameter.put("branch_id",branch_id);
+            parameter.put("date",date);
+            appointments=jdbcTemplate.query(appoinmentInfo,parameter,new AppoinmentDetMapper());
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return appointments;
+    }
+
+    @Override
+    public Boolean updateAppoinment(Integer status,Integer appoinment_id) {
+
+        int result=0;
+        try {
+
+            String update="UPDATE appointment SET status=:status WHERE appointment_id=:appoinment_id";
+            Map<String,Object> parameter=new HashMap<String, Object>();
+            parameter.put("status",status);
+            parameter.put("appoinment_id",appoinment_id);
+            result=jdbcTemplate.update(update,parameter);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return result>0 ?true:false;
     }
 
 }

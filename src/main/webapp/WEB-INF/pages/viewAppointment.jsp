@@ -5,7 +5,7 @@
   Time: 11:13 AM
   To change this template use File | Settings | File Templates.
 --%>
-<html ng-app="myApp">
+<html ng-app="myApp" ng-controller="getAppoinment">
 <head>
   <link href="<%=request.getContextPath()%>/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/css/custom.css" rel="stylesheet">
@@ -126,34 +126,39 @@
                 <form class="form-horizontal ng-invalid" role="form" name="myform" novalidate>
                   <fieldset>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                   <%-- <div class="form-actions">
+                    <div class="alert alert-success" role="alert" dir-paginate="x in details | orderBy : time | itemsPerPage :3">
                       <div class="row">
-                        <div class="col-lg-offset-4 col-lg-7">
-                          <button type="submit" class="btn btn-success"
-                                  ng-disabled="myform.$invalid " ng-click="submitted=true">Save
-                          </button>
-                          <button type="button" class="btn btn-inverse">Cancel</button>
+                        <div class="col-lg-3">
+                          <a href="#" class="alert-link">{{x.name}}<br>{{x.contact_no}} </a>
                         </div>
+
+                        <div class="col-lg-3">
+                          <h6>APPOINMENTS</h6>
+                          <p>{{x.date}}</p>
+                          <p>{{x.time}}</p>
+                        </div>
+                        <div class="col-lg-3">
+                          <h6>CARE PROVIDER</h6>
+                          <p>DR.{{x.doctor_name}}</p>
+                        </div>
+                        <div class="col-lg-3" ng-if="x.flag==0">
+                             <button type="button" class="btn btn-info" ng-click="showarrival(x.appoinment_id,x.patient_pid)">Mark Arrival</button>
+                            <button type="button" class="btn btn-black" ng-click="deletearrival(x.appoinment_id,x.patient_pid)">Cancel</button>
+                        </div>
+                        <div class="col-lg-3" ng-if="x.flag==1">
+                          <span class="label label-default">Cancelled</span>
+                        </div>
+                        <div class="col-lg-3" ng-if="x.flag==2">
+                          <span class="label label-success">Arrival</span>
+                        </div>
+
                       </div>
-                    </div>--%>
+
+
+                    </div>
+                    <p class=" text-center">
+                      <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" ></dir-pagination-controls>
+                    </p>
 
                   </fieldset>
                 </form>
@@ -185,6 +190,7 @@
 <script src="<%=request.getContextPath()%>/static/vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/getAppoinment.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/angular-base64-upload.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/js/bootstrap-formhelpers.min.js"></script>

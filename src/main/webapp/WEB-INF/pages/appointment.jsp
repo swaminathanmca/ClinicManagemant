@@ -94,7 +94,7 @@
                                 <a href="AddAppointment"> Add Appointment</a>
                             </li>
                             <li>
-                                <a href="#">View Appoinment</a>
+                                <a href="ViewAppointment">View Appoinment</a>
                             </li>
 
                         </ul>

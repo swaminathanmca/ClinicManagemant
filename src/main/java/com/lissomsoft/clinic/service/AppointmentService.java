@@ -16,4 +16,8 @@ public interface AppointmentService {
 
      List<Appointment> appoinmentDetails(Integer doctor_id,Integer branch_id,String date);
 
+     List<Appointment> viewAppoinment(Integer branch_id,String date);
+
+    Boolean updateAppoinment(Integer status,Integer appoinment_id);
+
 }
