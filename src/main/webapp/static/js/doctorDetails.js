@@ -157,6 +157,7 @@ app.controller('doctorDetails',function($scope,$window,$http){
            reg_no:$scope.x.reg_id,
            qualification:$scope.x.qualification,
            specialization:$scope.selectSpecialization,
+
            address1:$scope.x.address1,
            address2:$scope.x.address2,
            city:$scope.x.city,
