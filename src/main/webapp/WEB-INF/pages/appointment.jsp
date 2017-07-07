@@ -199,7 +199,7 @@
                                             </div>
                                         </div>--%>
 
-                                        <div >
+
                                             <div class="form-group">
                                                 <%--<div class="col-lg-6">
                                                     <div class="input-group">
@@ -224,9 +224,9 @@
                                                                    ng-change="select(dt)" required/>
                                                         <span class="input-group-btn">
                                         <button type="button" class="btn btn-default" ng-click= "open2($event)"  style="height: 37px"><i class="glyphicon glyphicon-calendar"></i></button>
-                                        </span>--%><input type="text" id="datepicker" class="form-control">
-
-                                                           </div>
+                                        </span>--%>
+                                                            <input type="text" id="datepicker" class="form-control">
+                                                        </div>
 
                                                     </div>
                                             </div>
@@ -238,14 +238,11 @@
                                                     <div class="col-lg-12" >
                                                         <span ng-repeat="time in times" class="tag">&nbsp;&nbsp;
                                                         <span ng-if="!($index%8)"> <br/> &nbsp;&nbsp;</span>
-                                                        <button type="button"   class="{{(time.booked==true) ? 'btn btn-info':'btn btn-danger'}}" ng-click="schedule(time.interval,time.booked)">{{time.interval}}</button>  </span>
-
-
-
+                                                        <button type="button"   class="{{(time.booked==1) ? 'btn btn-info':(time.booked==0) ? 'btn btn-danger':'ng-hide'}}" ng-click="schedule(time.interval,time.booked)">{{time.interval}}</button>  </span>
                                                     </div>
+                                            </div>
 
 
-                                                </div>
 
 
                                            <%-- <div class="form-actions">
@@ -260,7 +257,7 @@
                                                 </div>
                                             </div>--%>
 
-                                        </div>
+
 
                                     </fieldset>
                                 </form>
@@ -319,7 +316,7 @@
                                             </thead>
                                             <tbody>
                                             <tr ng-repeat="x in inform">
-                                                <td ><a ng-click="valueGetId(x.patient_pId,x.first_name,x.last_name,x.contact_no)" class="und_ref"> {{x.patient_pId}}</a></td>
+                                                <td ><a ng-click="valueGetId(x.patient_id,x.first_name,x.last_name,x.contact_no)" class="und_ref"> {{x.patient_pId}}</a></td>
                                                 <td>{{x.first_name}}&nbsp;{{x.last_name}}</td>
                                                 <td>{{x.contact_no}}</td>
 

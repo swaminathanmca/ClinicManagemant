@@ -398,6 +398,7 @@ public class DoctorDaoImpl implements DoctorDao {
 
                 }
 
+
             platformTransactionManager.commit(status);
 
 

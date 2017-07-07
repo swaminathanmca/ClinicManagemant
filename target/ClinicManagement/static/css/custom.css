@@ -199,3 +199,13 @@ hr{
     border: 1px solid #555;
     color: #EEE;
 }
+.btn-black{
+    background-color: #333;
+    border-color: #333;
+    color: #ffffff;
+}
+.btn-grey{
+    background-color: #777777;
+    border-color: #777777;
+    color: #ffffff;
+}

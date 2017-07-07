@@ -10,7 +10,10 @@ app.controller('getDoctor',function($scope,$http,$window){
 
     $http.get("trackSession/" + $scope.email).
         then(function (response, status, headers, config) {
+            $scope.trackdata=response.data;
             $scope.branch_iid=response.data.branch_id;
+            $scope.clinic_name= $scope.trackdata.clinic_name;
+            $scope.branch_name=$scope.trackdata.branch_name;
         });
 
 
@@ -24,12 +27,10 @@ app.controller('getDoctor',function($scope,$http,$window){
 
     $scope.doctor=function(id){
         $scope.branch_id=id;
-
         $http.get("ViewDoctor/"+ $scope.branch_id +"/"+$scope.clinic_id)
             .then(function (response){
                 $scope.data = response.data.user;
             })
-
     }
 
     $http.get("ViewDoctor/"+$scope.branch_id+"/"+$scope.clinic_id)

@@ -11,12 +11,13 @@ app.controller('branchController',function($scope,$http,$window){
 
     $http.get("trackSession/" + $scope.email).
         then(function (response, status, headers, config) {
-            $scope.data = response.data;
-            $window.sessionStorage.clinic_id=$scope.data.clinic_id;
+            $scope.trackdata = response.data;
+            $window.sessionStorage.clinic_id=$scope.trackdata.clinic_id;
             $scope.clinic_id=$window.sessionStorage.clinic_id;
-            $window.sessionStorage.branch_id=$scope.data.branch_id;
-            $window.sessionStorage.clinic_name=$scope.data.clinic_name;
-
+            $window.sessionStorage.branch_id=$scope.trackdata.branch_id;
+            $window.sessionStorage.clinic_name=$scope.trackdata.clinic_name;
+            $scope.clinic_name= $window.sessionStorage.clinic_name;
+            $scope.branch_name=$scope.trackdata.branch_name;
         });
 
 

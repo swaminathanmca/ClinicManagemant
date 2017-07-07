@@ -30,9 +30,9 @@ app.controller('appointment',function($scope,$window,$http,$timeout){
 $scope.schedule=function(time,flag){
 
     $scope.time=time;
-    if(flag){
+    if(flag==1){
         $('#myModal').modal()
-    }else{
+    }else if(flag==0){
         $('#myModal1').modal()
     }
 
@@ -53,7 +53,7 @@ $scope.doctorschedule=function(id){
 
         function unavailable(date) {
             dmy = moment(date).format("MM/DD/YYYY");
-            if ($.inArray(dmy, unavailableDates) == -1) {
+            if ($.inArray(dmy, unavailableDates) != -1) {
                 return [true, "Highlighted"];
             } else {
                 return [false, "", "Unavailable"];
@@ -80,10 +80,33 @@ $scope.doctorschedule=function(id){
         $http.get("GetScheduleTime/"+$scope.dt_date+"/"+$scope.doctor_id+"/"+$scope.branch_id).then
         (function(response){
             $scope.schedule_time=response.data;
-            $scope.times=response.data.schedule;
-            $scope.times.sort(compare);
+            $scope.timesvalue=response.data.schedule;
+            $scope.datetime=response.data.date;
+            $scope.timesvalue.sort(compare);
+            $scope.times=[];
+            var times=[];
+            for(var i in $scope.timesvalue){
+                var now = new Date();
+                var date=new Date($scope.datetime);
+                var time1 = (date.getMonth()+1) + "/" + date.getDate() + "/" + date.getFullYear() + " "+ $scope.timesvalue[i].interval;
+                var time2 = (now.getMonth()+1) + "/" + now.getDate() + "/" + now.getFullYear() + " "+ now.toLocaleTimeString().replace(/:\d+ /, ' ');
+                var startDate = new Date(time1);
+                var toDate = new Date(time2);
+                var res = (toDate > startDate);
+                if(res && $scope.timesvalue[i].booked==1){
 
-
+                    times={
+                        interval:$scope.timesvalue[i].interval,
+                        booked:2
+                    }
+                }else{
+                     times={
+                         interval:$scope.timesvalue[i].interval,
+                         booked:$scope.timesvalue[i].booked
+                     }
+                }
+                $scope.times.push(times);
+            }
         });
     });
 
@@ -100,8 +123,8 @@ $scope.doctorschedule=function(id){
 
     }
 
-    $scope.valueGetId=function(patient_pId,first_name,last_name,contact_no){
-        $scope.patient_id=patient_pId;
+    $scope.valueGetId=function(patient_id,first_name,last_name,contact_no){
+        $scope.patient_id=patient_id;
         $scope.first_name=first_name;
         $scope.last_name=last_name;
         $scope.mobile_no=contact_no;
@@ -125,7 +148,7 @@ $scope.doctorschedule=function(id){
 
     $scope.submitt=function(){
         var appoinment={
-              name:$scope.first_name+""+$scope.last_name,
+              name:$scope.first_name+" "+$scope.last_name,
               patient_pid:$scope.patient_id,
               branch_id:$scope.branch_id,
               doctor_id:$scope.doctor_id,
@@ -140,6 +163,7 @@ $scope.doctorschedule=function(id){
                 location.href="AddAppointment";
             }
         })
+        console.log(appoinment);
     }
 
 });

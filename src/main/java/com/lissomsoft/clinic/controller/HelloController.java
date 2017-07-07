@@ -10,6 +10,7 @@ import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -1234,12 +1235,25 @@ public class HelloController {
     String editDoctor(@RequestBody DoctorUser doctorUser, HttpServletRequest request) throws JSONException {
 
         boolean flag;
-        flag = doctorService.editFrontDesk(doctorUser);
+        flag = doctorService.editDoctor(doctorUser);
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("status", flag);
         return jsonObject.toString();
     }
+
+    @RequestMapping(value = "/EditFrontDesk",method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String editFrontDesk(@RequestBody DoctorUser doctorUser,HttpServletRequest request)throws JSONException{
+        boolean flag;
+        flag=doctorService.editFrontDesk(doctorUser);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("status", flag);
+        return jsonObject.toString();
+    }
+
+
 
     @RequestMapping(value = "/EditComplaint/{complaint_id}", method = RequestMethod.POST)
     public
@@ -2524,6 +2538,12 @@ public class HelloController {
                 String scend_time = sc.getEnd_time();
 
                 if (schedule.getEnd_type() == 1) {
+                    Date date = new Date();
+                    Calendar calendar = Calendar.getInstance();
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                    calendar.setTime(date);
+                    calendar.add(Calendar.DATE, schedule.getNo_of_occurenes());
+                    schedule.setEnd_date(dateFormat.format(calendar.getTime()));
                     getDateCompare = getCurrentSchedule(schedule.getStart_date(), schedule.getEnd_date(), schedule.getDay_flag());
                 } else {
                     Date date = new Date();
@@ -2723,11 +2743,9 @@ public class HelloController {
         List<String> dates=null;
         HashSet<String> dates1=new HashSet<String>();
         HashSet<String> validateDates=null;
-
         scheduleList=scheduleService.getSchedule(doctor_id,st_date,branch_id);
-
         if(scheduleList.isEmpty()){
-            dates1=getOldSchedule(st_date,end_dt);
+           /* dates1=getOldSchedule(st_date,end_dt);*/
             jsonObject.put("flags","");
         }else{
             Iterator<Schedule> scheduleIterator=scheduleList.iterator();
@@ -2743,52 +2761,35 @@ public class HelloController {
                     validateDates=getOldSchedule(st_date,end_dt);
                     jsonObject.put("flags",sc.getDay_flags());
                 }
-
                 validateDates.removeAll(dates);
-
-                dates1.addAll(validateDates);
-
+                dates1.addAll(dates);
             }
         }
-
-
         Iterator<String> itr=dates1.iterator();
         while (itr.hasNext()){
             String disable_dates=itr.next();
             jsonArray.put(disable_dates);
         }
-
         jsonObject.put("disable_dates",jsonArray);
         jsonObject.put("status",true);
-
-
         return jsonObject.toString();
     }
-
     public static HashSet<String> getOldSchedule(String startDate, String endDate) {
-
-
         HashSet<String> datesInRange = new HashSet<String>();
         Calendar calendar = new GregorianCalendar();
         Calendar endCalendar = new GregorianCalendar();
-
         Date strtDate = new Date(startDate);
         Date edDate = new Date(endDate);
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         calendar.setTime(strtDate);
         endCalendar.setTime(edDate);
-
         while (calendar.before(endCalendar)) {
             Date result = calendar.getTime();
             datesInRange.add(dateFormat.format(result));
             calendar.add(Calendar.DATE, 1);
         }
-
-
         return datesInRange;
     }
-
-
     @RequestMapping(value = "GetScheduleTime/{date}/{doctor_id}/{branch_id}",method = RequestMethod.GET)
     public
     @ResponseBody
@@ -2804,13 +2805,9 @@ public class HelloController {
         DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
         DateFormat sdf1 = new SimpleDateFormat(" hh:mm aa");
         Set<String> time=new HashSet<String>();
-
         List<Appointment> appointments;
-
         scheduleList=scheduleService.getScheduleTime(doctor_id,branch_id);
-
         Iterator<Schedule> scheduleIterator=scheduleList.iterator();
-
         List<String> dates=new ArrayList<String>();
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         String st_date=dateFormat.format(new Date());
@@ -2823,7 +2820,8 @@ public class HelloController {
             if(sc.getEnd_type()==1){
                 dates=getOldSchedule(st_date,sc.getEnd_date(),sc.getDay_flags());
             }else{
-                dates=getOldSchedule(st_date,end_dt,sc.getDay_flags());}
+                dates=getOldSchedule(st_date,end_dt,sc.getDay_flags());
+            }
             date1=date+" "+sc.getStart_time();
             date2=date+" "+sc.getEnd_time();
             if(sc.getTime()==0){
@@ -2844,16 +2842,14 @@ public class HelloController {
                 time.add(sdf1.format(result));
                 calendar1.add(Calendar.MINUTE,interval);}
         }
-
         appointments=appointmentService.appoinmentDetails(doctor_id,branch_id,date);
-
         Iterator<Appointment> it=appointments.iterator();
         List<String> inter=new ArrayList<String>();
         while (it.hasNext()){
-             Appointment appointment=it.next();
-             String dt_sc=appointment.getDov()+" "+appointment.getTime();
-              Date date3=new Date(dt_sc);
-                inter.add(sdf1.format(date3));
+            Appointment appointment=it.next();
+            String dt_sc=appointment.getDov()+" "+appointment.getTime();
+            Date date3=new Date(dt_sc);
+            inter.add(sdf1.format(date3));
         }
         time.removeAll(inter);
         Iterator<String> itr=time.iterator();
@@ -2862,18 +2858,18 @@ public class HelloController {
             JSONObject data1=new JSONObject();
             String sh_time=itm.next();
             data1.put("interval",sh_time);
-            data1.put("booked",false);
+            data1.put("booked",0);
             jsonArray.put(data1);
         }
         while (itr.hasNext()){
             JSONObject data=new JSONObject();
             String sct_time=itr.next();
             data.put("interval",sct_time);
-            data.put("booked",true);
-            jsonArray.put(data);
-                }
+            data.put("booked",1);
+            jsonArray.put(data);}
 
             jsonObject.put("schedule",jsonArray);
+            jsonObject.put("date",date);
             jsonObject.put("status",true);
         return  jsonObject.toString();
     }
@@ -2905,6 +2901,7 @@ public class HelloController {
         date=date.replace("-","/");
         List<Appointment> appointments;
         appointments=appointmentService.viewAppoinment(branch_id,date);
+        String flag=updateStatus();
         Iterator<Appointment> itr=appointments.iterator();
         while (itr.hasNext()){
             JSONObject data=new JSONObject();
@@ -2921,12 +2918,9 @@ public class HelloController {
             jsonArray.put(data);
         }
         jsonObject.put("appoinments",jsonArray);
-
         return jsonObject.toString();
     }
-
-
-    @RequestMapping(value = "UpdateScheduleStatus/{status}/{appoinment_id}",method = RequestMethod.GET)
+    @RequestMapping(value = "UpdateScheduleStatus/{status}/{appoinment_id}",method = RequestMethod.POST)
     public
     @ResponseBody
     String updateScheduleStatus(@PathVariable Integer status,@PathVariable Integer appoinment_id)throws JSONException{
@@ -2936,5 +2930,45 @@ public class HelloController {
         jsonObject.put("status",flag);
         return  jsonObject.toString();
     }
+
+
+
+
+   public String updateStatus()throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        boolean flag;
+        List<Appointment> appointments;
+        DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
+        HashSet<Integer> appoimentId=new HashSet<Integer>();
+        String be_date=sdf.format(new Date());
+        appointments=appointmentService.getAppoinment();
+        Iterator<Appointment> it=appointments.iterator();
+        while (it.hasNext()){
+            Appointment appointment=it.next();
+            String date=appointment.getDov()+""+appointment.getTime();
+            Date dt=new Date(date);
+            date=sdf.format(dt);
+            Calendar calendar= new GregorianCalendar();
+            Calendar calendar1=new GregorianCalendar();
+            Date str_date=new Date(date);
+            Date end_date=new Date(be_date);
+            calendar.setTime(str_date);
+            calendar1.setTime(end_date);
+            if(!calendar.after(calendar1)){
+                if(appointment.getStatus()==0){
+                    appoimentId.add(appointment.getAppointment_id());
+                }
+            }
+        }
+
+        flag=appointmentService.setStatus(appoimentId);
+
+
+        jsonObject.put("status",flag);
+        return  jsonObject.toString();
+
+    }
+
+
 
 }

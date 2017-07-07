@@ -3,6 +3,7 @@ package com.lissomsoft.clinic.service;
 import com.lissomsoft.clinic.domain.Appointment;
 import com.lissomsoft.clinic.domain.Patient;
 
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -19,5 +20,8 @@ public interface AppointmentService {
      List<Appointment> viewAppoinment(Integer branch_id,String date);
 
     Boolean updateAppoinment(Integer status,Integer appoinment_id);
+    List<Appointment> getAppoinment();
+
+    boolean setStatus(HashSet appoimentId);
 
 }

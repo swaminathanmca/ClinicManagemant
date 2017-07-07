@@ -8,6 +8,18 @@ app.controller('Schedule',function($scope, $http, $window){
     $scope.branch_id=$window.sessionStorage.branch_id;
     $scope.day_flag=[];
 
+
+    $http.get("trackSession/" + $scope.email).
+        then(function (response, status, headers, config) {
+            $scope.trackdata = response.data;
+            $window.sessionStorage.clinic_id=response.data.clinic_id;
+            $window.sessionStorage.branch_id=response.data.branch_id;
+            $scope.clinic_name= $scope.trackdata.clinic_name;
+            $scope.branch_name=$scope.trackdata.branch_name;
+
+        });
+
+
     $scope.date = new Date();
     $scope.clear = function () {
         $scope.dt = null;

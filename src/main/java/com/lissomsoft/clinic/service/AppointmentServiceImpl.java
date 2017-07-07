@@ -4,7 +4,10 @@ import com.lissomsoft.clinic.dao.AppointmentDao;
 import com.lissomsoft.clinic.domain.Appointment;
 import com.lissomsoft.clinic.domain.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 
+
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -39,5 +42,17 @@ public class AppointmentServiceImpl implements AppointmentService{
     public Boolean updateAppoinment(Integer status,Integer appoinment_id) {
         return appointmentDao.updateAppoinment(status,appoinment_id);
     }
+
+    @Override
+    public List<Appointment> getAppoinment() {
+        return appointmentDao.getAppoinment();
+    }
+
+    @Override
+    public boolean setStatus(HashSet appoimentId) {
+        return appointmentDao.setStatus(appoimentId);
+    }
+
+
 
 }

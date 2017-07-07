@@ -7,13 +7,13 @@ import com.lissomsoft.clinic.rowmapper.AppoinmentDetMapper;
 import com.lissomsoft.clinic.rowmapper.AppointmentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Date;
+import java.util.*;
 
 /**
  * Created by Admin on 6/16/2017.
@@ -21,10 +21,13 @@ import java.util.Date;
 
 public class AppointmentDaoImpl implements AppointmentDao {
 
-    DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+    DateFormat dateFormat=new SimpleDateFormat("MM/dd/YYYY");
 
     @Autowired(required = false)
     private NamedParameterJdbcTemplate jdbcTemplate;
+    @Autowired(required = false)
+    private PlatformTransactionManager platformTransactionManager;
     @Override
     public boolean addAppointment(Appointment appointment) {
 
@@ -59,7 +62,7 @@ public class AppointmentDaoImpl implements AppointmentDao {
         List<Patient> patientappinfo=null;
 
         try{
-            String patientInfo="SELECT first_name,last_name,address1,address2,patient_pid,patient_id,mobile_no FROM patient_master where branch_id=:branch_id AND dob=:dob OR mobile_no=:contact_no ";
+            String patientInfo="SELECT first_name,last_name,address1,address2,patient_pid,patient_id,mobile_no FROM patient_master where branch_id=:branch_id  AND contact_no=:contact_no ";
             Map<String,Object> para = new HashMap<String, Object>();
             para.put("branch_id",branch_id);
             para.put("dob",dob);
@@ -81,7 +84,7 @@ public class AppointmentDaoImpl implements AppointmentDao {
 
         try{
 
-            String newpatient="SELECT first_name,last_name,address1,address2,new_appointment_id,new_appointment_pid from new_appointment where  branch_id=:branch_id AND dob=:dob OR mobile_no=:mobile_no";
+            String newpatient="SELECT first_name,last_name,address1,address2,new_appointment_id,new_appointment_pid from new_appointment where  branch_id=:branch_id  AND mobile_no=:mobile_no";
                 Map<String,Object> para = new HashMap<String, Object>();
             para.put("branch_id",branch_id);
             para.put("dob",dob);
@@ -156,6 +159,57 @@ public class AppointmentDaoImpl implements AppointmentDao {
         }
 
         return result>0 ?true:false;
+    }
+
+    @Override
+    public List<Appointment> getAppoinment() {
+        List<Appointment> appointments=null;
+        try {
+
+            String getAppoinment="SELECT * FROM appointment WHERE dov=:date";
+            Map<String,Object> parameter=new HashMap<String, Object>();
+            parameter.put("date",new SimpleDateFormat("MM/dd/YYYY").format(new Date()));
+            appointments=jdbcTemplate.query(getAppoinment,parameter,new AppoinmentDetMapper());
+
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }
+
+
+
+
+        return appointments;
+    }
+
+    @Override
+    public boolean setStatus(HashSet appoimentId) {
+
+        int result=0;
+        DefaultTransactionDefinition paramTransactionDefinition = new DefaultTransactionDefinition();
+        TransactionStatus status = platformTransactionManager.getTransaction(paramTransactionDefinition);
+        try {
+           Iterator itr=appoimentId.iterator();
+            while (itr.hasNext()){
+                Integer id= (Integer) itr.next();
+                String changeStatus="UPDATE appointment SET status=1 WHERE appointment_id=:appoinment_id";
+                Map<String,Object> params=new HashMap<String, Object>();
+                params.put("appoinment_id",id);
+                result=jdbcTemplate.update(changeStatus,params);
+            }
+
+            platformTransactionManager.commit(status);
+
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+            platformTransactionManager.rollback(status);
+        }
+
+
+
+        return result>0?true:false;
     }
 
 }

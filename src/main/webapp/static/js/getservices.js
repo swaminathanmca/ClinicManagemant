@@ -8,6 +8,16 @@ app.controller('getServices',function($scope,$http,$window){
     $scope.role=$window.sessionStorage.role_name;
     $scope.branch_id=$window.sessionStorage.branch_id;
 
+    $http.get("trackSession/" + $scope.email).
+        then(function (response, status, headers, config) {
+            $scope.trackdata=response.data;
+            $scope.branch_iid=response.data.branch_id;
+            $scope.clinic_name= $scope.trackdata.clinic_name;
+            $scope.branch_name=$scope.trackdata.branch_name;
+        });
+
+
+
     $http.get("GetServices/"+$scope.branch_id).
         then(function (response,status,headers,config){
 

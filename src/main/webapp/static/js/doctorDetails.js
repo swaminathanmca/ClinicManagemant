@@ -11,6 +11,15 @@ app.controller('doctorDetails',function($scope,$window,$http){
     $scope.email= $window.sessionStorage.email;
     $scope.chiefEmail="Taken";
     $scope.chiefError="Already Taken";
+
+    $http.get("trackSession/" + $scope.email)
+        .then(function (response, status, headers, config) {
+            $scope.trackdata = response.data;
+            $scope.clinic_name=$scope.trackdata.clinic_name;
+            $scope.branch_name=$scope.trackdata.branch_name;
+
+        });
+
     $http.get("doctorDetails/"+$window.sessionStorage.profile_id)
         .then(function(response){
             $scope.data=response.data.branch;
@@ -140,7 +149,7 @@ app.controller('doctorDetails',function($scope,$window,$http){
             })
     }
 
-    $scope.submit=function(){
+    $scope.submit=function(id){
         $scope.country=$('#countries2').val();
        var doctor={
            firstname:$scope.x.name,

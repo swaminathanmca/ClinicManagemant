@@ -10,6 +10,14 @@ app.controller('frontdeskdetail',function($scope,$window,$http){
     $scope.role=$window.sessionStorage.role_name;
     $scope.email= $window.sessionStorage.email;
 
+    $http.get("trackSession/" + $scope.email)
+        .then(function (response, status, headers, config) {
+            $scope.trackdata = response.data;
+            $scope.clinic_name=$scope.trackdata.clinic_name;
+            $scope.branch_name=$scope.trackdata.branch_name;
+        });
+
+
     $http.get("frontdeskDetails/"+$window.sessionStorage.profile_id)
         .then(function(response){
             $scope.data=response.data.frontdesk;
@@ -61,7 +69,7 @@ app.controller('frontdeskdetail',function($scope,$window,$http){
             doctor_id:$scope.x.doctor_id
         }
 
-        $http.post("EditDoctor",doctor).
+        $http.post("EditFrontDesk",doctor).
             then(function(response,status,header,config){
                 $scope.status=response.data;
                 location.href="FrontDeskDetail";

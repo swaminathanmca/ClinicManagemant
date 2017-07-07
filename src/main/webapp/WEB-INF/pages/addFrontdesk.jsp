@@ -131,11 +131,10 @@
     </nav>
 
     <div id="page-wrapper">
-
-        <br>
-
         <div class="row">
-            <p></p>
+            <div class="col-lg-12">
+                <h4 class="page-header"> {{clinic_name}} Hospital  <span></span> (Branch : &nbsp;{{branch_name}})</h4>
+            </div>
         </div>
         <div class="row">
             <div class="col-lg-12">

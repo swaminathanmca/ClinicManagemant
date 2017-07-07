@@ -8,7 +8,12 @@ app.controller('getAppoinment',function($scope,$window,$http,$interval) {
     $scope.date = new Date();
     $scope.date=moment($scope.date).format("MM-DD-YYYY");
 
+    $http.get("ViewAppoinment/"+$scope.branch_id+"/"+$scope.date).then
+    (function(response){
+        $scope.details=response.data.appoinments;
+        $scope.details.sort(compare);
 
+    })
     var getDate=function(){
         $http.get("ViewAppoinment/"+$scope.branch_id+"/"+$scope.date).then
         (function(response){
@@ -17,7 +22,7 @@ app.controller('getAppoinment',function($scope,$window,$http,$interval) {
 
         })
     }
-    $interval(getDate, 1000);
+    $interval(getDate, 5000);
 
     function compare(a,b) {
         var now = new Date();
@@ -37,22 +42,27 @@ app.controller('getAppoinment',function($scope,$window,$http,$interval) {
 
     $scope.showarrival=function(id,patient_pid){
         $scope.apoinment_id=id;
-        $scope.patient_pid=patient_pid;
+        $window.sessionStorage.patient_id=patient_pid;
         $scope.st_status=2;
        if($scope.patient_pid==null){
-
-           $http.get("UpdateScheduleStatus/"+$scope.st_status+"/"+$scope.apoinment_id).then
+           $http.post("UpdateScheduleStatus/"+$scope.st_status+"/"+$scope.apoinment_id).then
            (function(response){
-               $scope.st=response.data;
-           })
+               $scope.st=response.data.status;
+               if($scope.st){
+                   location.href="PatientVisit";
+               }
 
+           })
        }else{
-           $http.get("UpdateScheduleStatus/"+$scope.st_status+"/"+$scope.apoinment_id).then
+           $http.post("UpdateScheduleStatus/"+$scope.st_status+"/"+$scope.apoinment_id).then
            (function(response){
-               $scope.st=response.data;
-           })
+               $scope.st=response.data.status;
+               if($scope.st){
+                   location.href="PatientVisit";
+               }
 
-       }
+           })}
+
     }
 
     $scope.deletearrival=function(id,patient_pid){
