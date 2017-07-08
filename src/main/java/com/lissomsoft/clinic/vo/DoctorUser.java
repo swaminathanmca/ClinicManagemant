@@ -35,6 +35,7 @@ public class DoctorUser {
     private String contact_no;
     private String password;
     private Integer charge;
+    private Integer roomno;
 
 
     public int getDoctor_id() {
@@ -238,6 +239,14 @@ public class DoctorUser {
         this.charge = charge;
     }
 
+    public Integer getRoomno() {
+        return roomno;
+    }
+
+    public void setRoomno(Integer roomno) {
+        this.roomno = roomno;
+    }
+
     public String toString(){
         return "Doctor{"+
                 "doctor_id="+doctor_id+
@@ -264,6 +273,7 @@ public class DoctorUser {
                 ", contact_no="+contact_no+
                 ", password="+password+
                 ", charge="    +charge+
+                ", roomno="+roomno+
                 '}';
     }
 }

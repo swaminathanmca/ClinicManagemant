@@ -121,6 +121,17 @@
                         </li>
                     </ul>
                 </li>
+                <li ng-show="role=='BranchAdmin' || role=='Admin'">
+                    <a href=""><i class="fa fa-calendar-minus-o"></i>&nbsp;  Schedule <span class="fa arrow"></span> </a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="AddSchedule"> Add Schedule</a>
+                        </li>
+                        <li>
+                            <a href="#">View Schedule</a>
+                        </li>
+                    </ul>
+                </li>
 
 
 
@@ -269,7 +280,7 @@
                                          <div class="col-lg-6">
                                              <div class="input-group">
                                                  <span class="input-group-addon">Clinic Name</span>
-                                                 <label class="form-control" type="text" >{{data.clinic_name}}</label>
+                                                 <label class="form-control" type="text" >{{clinic_name}}</label>
                                              </div>
                                          </div>
                                        <%--  <div class="col-lg-3" ng-if="role=='BranchAdmin'">
@@ -338,6 +349,15 @@
                                              </div>
                                               <span class="text-danger wrapper text-center ng-binding"
                                                     ng-show="myform.password.$invalid &&  myform.password.$touched">Please Enter The Password</span>
+                                         </div>
+                                     </div>
+                                     <div class="form-group">
+                                         <div class="col-lg-3">
+                                             <div class="input-group">
+                                                 <span class="input-group-addon">Room No</span>
+                                                 <input class="form-control" type="text" name="roomno" ng-model="roomno" >
+
+                                             </div>
                                          </div>
                                      </div>
 

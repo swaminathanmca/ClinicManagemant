@@ -21,7 +21,6 @@ app.controller('User',function($scope,$http,$window){
             $window.sessionStorage.branch_name=response.data.branch_name;
             $scope.clinic_name= $scope.trackdata.clinic_name;
             $scope.branch_name=$scope.trackdata.branch_name;
-
         });
 
     $http.get("ViewBranch/"+ $window.sessionStorage.clinic_id)
@@ -108,12 +107,8 @@ if($scope.selectedList==""){
       branch_name: $window.sessionStorage.branch_name
   }
     $scope.selectedList.push(obj1)
-
 }
-
-
-
-    var Doctor={
+        var Doctor={
         firstname:$scope.firstname,
         address1:$scope.address1,
         address2:$scope.address2,
@@ -132,10 +127,7 @@ if($scope.selectedList==""){
         specialization:$scope.selectedlist,
         charge:$scope.fees
     }
-
-
-
-         $http.post('AddDoctor',Doctor).
+        $http.post('AddDoctor',Doctor).
         then(function (response,status,headers,config){
             location.href="ViewDoctor";
     });

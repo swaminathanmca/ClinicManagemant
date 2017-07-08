@@ -112,7 +112,17 @@
                             </li>
                         </ul>
                     </li>
-
+                    <li ng-show="role=='BranchAdmin' || role=='Admin'">
+                        <a href=""><i class="fa fa-calendar-minus-o"></i>&nbsp;  Schedule <span class="fa arrow"></span> </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="AddSchedule"> Add Schedule</a>
+                            </li>
+                            <li>
+                                <a href="#">View Schedule</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
 

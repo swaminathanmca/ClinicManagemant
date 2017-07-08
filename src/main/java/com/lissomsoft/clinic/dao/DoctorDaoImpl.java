@@ -91,7 +91,7 @@ public class DoctorDaoImpl implements DoctorDao {
         if((result_profile > 0)? true :false ){
 
             try {
-                String insertDoctorSql="INSERT INTO doctor_detail(user_id,clinic_id,branch_id,qualification,reg_id,type,charge,created_at,updated_at)  VALUES ((SELECT u.user_id FROM user u WHERE u.email=:email),:clinic_id,:branch_id,:qualification,:reg_id,1,:charges,:created_at,:created_at)";
+                String insertDoctorSql="INSERT INTO doctor_detail(user_id,clinic_id,branch_id,qualification,reg_id,type,charge,roomno,created_at,updated_at)  VALUES ((SELECT u.user_id FROM user u WHERE u.email=:email),:clinic_id,:branch_id,:qualification,:reg_id,1,:charges,:roomno,:created_at,:created_at)";
                 Map<String, Object> doctorParameter = new HashMap<String, Object>();
                 doctorParameter.put("email",doctorUser.getEmail_id());
                 doctorParameter.put("qualification",doctorUser.getQualification());
@@ -101,7 +101,9 @@ public class DoctorDaoImpl implements DoctorDao {
                 doctorParameter.put("reg_id",doctorUser.getReg_no());
                 doctorParameter.put("created_at",format.format(new Date()));
                 doctorParameter.put("charges",doctorUser.getCharge());
+                doctorParameter.put("roomno",doctorUser.getRoomno());
                 result=jdbcTemplate.update(insertDoctorSql,doctorParameter);
+
             }catch (Exception e){
                     e.printStackTrace();
                 platformTransactionManager.rollback(status);
@@ -149,6 +151,7 @@ public class DoctorDaoImpl implements DoctorDao {
                     Map<String,Object> DoctorMapperParameter=new HashMap<String, Object>();
                     DoctorMapperParameter.put("email",doctorUser.getEmail_id());
                     DoctorMapperParameter.put("branch_id",br.getBranch_id());
+                    DoctorMapperParameter.put("created_at",format.format(new Date()));
                     ressult_maper=jdbcTemplate.update(insertDoctorMapSql,DoctorMapperParameter);
 
                 }
@@ -227,10 +230,12 @@ public class DoctorDaoImpl implements DoctorDao {
 
     @Override
     public DoctorUser doctorDetails(Integer profile_id) {
+
         List<DoctorUser> doctordetails = null;
         DoctorUser doctorUser = new DoctorUser();
+
         try {
-            String doctorDetailsSql = "SELECT p.profile_id,p.name,p.address1,p.address2,p.city,p.state,p.country,p.pincode,p.gender,p.email,p.phone,c.clinic_name,c.clinic_id,d.doctor_detail_id,d.qualification,d.specialization,d.charge,d.reg_id,u.password FROM profile_master p INNER JOIN member_master m ON p.profile_id=m.profile_id INNER JOIN user u ON m.user_id=u.user_id INNER JOIN doctor_detail d ON u.user_id=d.user_id INNER JOIN clinic_master c ON c.clinic_id=d.clinic_id AND p.profile_id=:profile_id";
+            String doctorDetailsSql = "SELECT p.profile_id,p.name,p.address1,p.address2,p.city,p.state,p.country,p.pincode,p.gender,p.email,p.phone,c.clinic_name,c.clinic_id,d.doctor_detail_id,d.roomno,d.qualification,d.specialization,d.charge,d.reg_id,u.password FROM profile_master p INNER JOIN member_master m ON p.profile_id=m.profile_id INNER JOIN user u ON m.user_id=u.user_id INNER JOIN doctor_detail d ON u.user_id=d.user_id INNER JOIN clinic_master c ON c.clinic_id=d.clinic_id AND p.profile_id=:profile_id";
             String branchDetailsSql = "SELECT dm.branch_id,b.branch_name,b.address1,b.address2,b.city,b.state,b.country,b.description,b.clinic_id,b.pin_code,b.contact_no,b.ho,b.email FROM doctor_mapper dm INNER JOIN doctor_detail d ON d.doctor_detail_id=dm.doctor_detail_id INNER JOIN branch_master b ON b.branch_id=dm.branch_id INNER JOIN  user u ON u.user_id=d.user_id INNER JOIN member_master m ON m.user_id=u.user_id AND m.profile_id=:profile_id";
             String specializationSql="SELECT sm.speciality_id,s.speciality_name,s.description FROM doctor_speciality_mapper sm INNER JOIN  speciality s ON s.speciality_id=sm.speciality_id INNER JOIN doctor_detail d ON d.doctor_detail_id=sm.doctor_detail_id  INNER JOIN  user u ON u.user_id=d.user_id INNER JOIN member_master m ON m.user_id=u.user_id AND m.profile_id=:profile_id ";
             List<Branch> branch = null;
@@ -249,6 +254,7 @@ public class DoctorDaoImpl implements DoctorDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return doctorUser;
     }
 

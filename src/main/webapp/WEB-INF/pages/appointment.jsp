@@ -238,14 +238,10 @@
                                                     <div class="col-lg-12" >
                                                         <span ng-repeat="time in times" class="tag">&nbsp;&nbsp;
                                                         <span ng-if="!($index%8)"> <br/> &nbsp;&nbsp;</span>
-                                                        <button type="button"   class="{{(time.booked==1) ? 'btn btn-info':(time.booked==0) ? 'btn btn-danger':'ng-hide'}}" ng-click="schedule(time.interval,time.booked)">{{time.interval}}</button>  </span>
+                                                        <button type="button"   class="{{(time.booked==1) ? 'btn btn-info':(time.booked==0) ? 'btn btn-danger':'btn btn-grey'}}" ng-click="schedule(time.interval,time.booked)">{{time.interval}}</button>  </span>
                                                     </div>
                                             </div>
-
-
-
-
-                                           <%-- <div class="form-actions">
+                                          <%-- <div class="form-actions">
                                                 <div class="row">
                                                     <div class="col-lg-offset-4 col-lg-7">
                                                         <button type="submit" class="btn btn-success"
@@ -256,6 +252,7 @@
                                                     </div>
                                                 </div>
                                             </div>--%>
+
 
 
 
