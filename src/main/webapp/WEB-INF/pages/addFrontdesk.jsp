@@ -198,7 +198,7 @@
                                             <div class="col-lg-6">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">Clinic Name</span>
-                                                    <label class="form-control" type="text">{{data.clinic_name}}</label>
+                                                    <label class="form-control" type="text">{{clinic_name}}</label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4" ng-if="role=='BranchAdmin'">

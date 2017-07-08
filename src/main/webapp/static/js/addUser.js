@@ -125,11 +125,13 @@ if($scope.selectedList==""){
         reg_no:$scope.reg_no,
         qualification:$scope.qualification,
         specialization:$scope.selectedlist,
-        charge:$scope.fees
+            roomno:$scope.roomno,
+            charge:$scope.fees
+
     }
         $http.post('AddDoctor',Doctor).
         then(function (response,status,headers,config){
-            location.href="ViewDoctor";
+            /*location.href="ViewDoctor";*/
     });
 
 
