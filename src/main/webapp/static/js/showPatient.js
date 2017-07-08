@@ -3,21 +3,20 @@ app.controller('showpatient',function($scope,$http,$window){
     $scope.email= $window.sessionStorage.email;
 
 
-    $http.get("trackSessionBranch/" + $scope.email).
+    $http.get("trackSessionBranchDoctor/" + $scope.email).
         then(function (response, status, headers, config,data) {
-
+            $scope.data = response.data;
             $window.sessionStorage.clinic_id=response.data.clinic_id;
             $window.sessionStorage.doctor_id=response.data.doctor_id;
             $scope.clinic_id=response.data.clinic_id;
-            $scope.data = response.data;
+            $scope.clinic_name=response.data.clinic_name;
 
             $scope.branch_id= $window.sessionStorage.branch_id;
             $scope.branch_iid=parseInt($scope.branch_id);
 
 
-            $http.get("ShowPatient/"+ $scope.branch_id+"/"+$window.sessionStorage.doctor_id)
-
-                .then(function(response){
+            $http.get("ShowPatient/"+ $scope.branch_id+"/"+$window.sessionStorage.doctor_id).then
+            (function(response){
                     $scope.patientDetails=response.data.patient;
                 })
             if(response.status=200){

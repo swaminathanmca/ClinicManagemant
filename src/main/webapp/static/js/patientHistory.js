@@ -8,6 +8,13 @@ app.controller('PatientHistory',function($scope,$http,$window){
     $scope.doctor_id=$window.sessionStorage.doctor_id;
     $scope.branch_id= $window.sessionStorage.branch_id;
     $scope.branch_iid=parseInt($scope.branch_id);
+    $scope.email= $window.sessionStorage.email;
+
+    $http.get("trackSessionBranchDoctor/" + $scope.email).
+        then(function (response, status, headers, config,data) {
+
+            $scope.clinic_name = response.data.clinic_name;
+        });
 
     $http.get("patientHistory/"+$scope.doctor_id+"/"+$scope.branch_id)
 

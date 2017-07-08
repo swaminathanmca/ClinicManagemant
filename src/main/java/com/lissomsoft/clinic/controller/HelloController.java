@@ -1465,12 +1465,37 @@ public class HelloController {
         JSONObject jsonObject = new JSONObject();
         List<Doctor> trackDetails;
         trackDetails = doctorService.trackSeason(email);
+
         Iterator<Doctor> itr = trackDetails.iterator();
         while (itr.hasNext()) {
             Doctor track = itr.next();
             jsonObject.put("clinic_id", track.getClinic_id());
             jsonObject.put("branch_id", track.getBranch_id());
             jsonObject.put("doctor_id", track.getDoctor_id());
+            jsonObject.put("branch_name",track.getQualification());
+            jsonObject.put("clinic_name",track.getCreated_by());
+            jsonObject.put("status", true);
+        }
+
+
+        return jsonObject.toString();
+    }
+
+    @RequestMapping(value = "/trackSessionBranchDoctor/{email:.+}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String trackSessionBranchDoctor(@PathVariable String email)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        List<Doctor> trackDetails;
+        trackDetails = doctorService.trackSeasonDoctor(email);
+        Iterator<Doctor> itr = trackDetails.iterator();
+        while (itr.hasNext()) {
+            Doctor track = itr.next();
+            jsonObject.put("clinic_id", track.getClinic_id());
+            jsonObject.put("branch_id", track.getBranch_id());
+            jsonObject.put("doctor_id", track.getDoctor_id());
+            jsonObject.put("clinic_name",track.getQualification());
+
             jsonObject.put("status", true);
         }
 

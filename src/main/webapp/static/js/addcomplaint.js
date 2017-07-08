@@ -4,6 +4,13 @@
 app.controller('AddComplaint',function($scope,$http,$window) {
     $scope.role = $window.sessionStorage.role_name;
     $scope.email = $window.sessionStorage.email;
+
+
+    $http.get("trackSessionBranchDoctor/" + $scope.email).
+        then(function (response, status, headers, config,data) {
+            $scope.clinic_name = response.data.clinic_name;
+        });
+
     $scope.submit=function(){
         var complaint ={
             complaint_name:$scope.name,

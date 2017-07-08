@@ -66,6 +66,11 @@ import java.util.List;
     }
 
     @Override
+    public List<Doctor> trackSeasonDoctor(String email) {
+        return doctorDao.trackSeasonDoctor(email);
+    }
+
+    @Override
     public DoctorUser frontdeskDetails(Integer profile_id) {
 
 

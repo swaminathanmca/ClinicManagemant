@@ -21,6 +21,7 @@ public interface DoctorService {
     List<Profile> viewFrontDesk(String branch_id);
     List<Profile> viewFrontDeskAll(Integer clinic_id);
     List<Doctor> trackSeason(String email);
+    List<Doctor> trackSeasonDoctor(String email);
     DoctorUser frontdeskDetails(Integer profile_id);
     List<DoctorUser> doctorspecailities(String speciallity_id,String branch_id );
     List<DoctorUser> getDoctor(String branch_id);

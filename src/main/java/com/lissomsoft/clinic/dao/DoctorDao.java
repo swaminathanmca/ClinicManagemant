@@ -25,4 +25,5 @@ public interface DoctorDao {
     DoctorUser getDoctorCharges(Integer doctor_id);
     DoctorUser getDoctorProfile(Integer doctor_id);
     boolean editFrontDesk(DoctorUser doctorUser);
+    List<Doctor> trackSeasonDoctor(String email);
 }

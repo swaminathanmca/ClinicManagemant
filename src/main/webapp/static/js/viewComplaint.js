@@ -1,11 +1,17 @@
 app.controller('ViewComplaint', function ($scope, $http, $window){
+
+    $scope.email= $window.sessionStorage.email;
     $http.get("GetComplaint")
         .then(function (response) {
             $scope.complaint = response.data.complaint;
 
         });
 
+    $http.get("trackSessionBranchDoctor/" + $scope.email).
+        then(function (response, status, headers, config,data) {
 
+            $scope.clinic_name = response.data.clinic_name;
+        });
     $scope.Edit=function(id){
         $http.get("ComplaintDetail/"+id)
             .then(function (response){
