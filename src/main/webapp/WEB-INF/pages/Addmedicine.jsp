@@ -116,7 +116,7 @@
               </li>
             </ul>
           </li>
-          <li>
+          <li ng-show="role=='FrontDesk'">
             <a href="#"><i class="fa fa-phone"></i>&nbsp; Appointment<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <li>
@@ -164,7 +164,7 @@
     <br>
     <div class="row">
       <div class="col-lg-2"></div>
-      <div class="col-lg-8">
+      <div class="col-lg-8" ng-hide="role=='SuperAdmin'">
         <h4 class="page-header"> {{clinic_name}} Hospital  <span></span> (Branch : &nbsp;{{branch_name}})</h4>
       </div>
     </div>

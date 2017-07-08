@@ -10,6 +10,7 @@ app.controller('branchdetails',function($scope,$window,$http){
     $scope.chiefError="Already Taken";
     $scope.role=$window.sessionStorage.role_name;
     $scope.clinic_name=$window.sessionStorage.clinic_name;
+
 $http.get("BranchDetails/"+$window.sessionStorage.branch_id).
     then(function(response,status,headers,config){
         $scope.branch=response.data.branch;
@@ -138,7 +139,12 @@ $http.get("BranchDetails/"+$window.sessionStorage.branch_id).
     }
 
     $scope.back=function(){
-        location.href="GetBranch";
+        if($scope.role=='SuperAdmin'){
+            location.href="AdminBranch";
+        }else{
+            location.href="GetBranch";
+        }
+
     }
 
 });
