@@ -118,14 +118,14 @@
   </nav>
   <div id="page-wrapper">
     <div class="row">
-      <div class="col-lg-1"></div>
-      <div class="col-lg-10">
+
+      <div class="col-lg-12">
         <h4 class="page-header"> {{clinic_name}} Hospital  <span></span> (Branch : &nbsp;{{branch_name}})</h4>
       </div>
-    </div>
+
     <div class="row">
-      <div class="col-lg-1"></div>
-      <div class="col-lg-11 col-sm-11 col-md-11 col-xs-11">
+
+      <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
         <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title"> Doctor Schedule</h3>
@@ -138,7 +138,14 @@
                       novalidate>
                   <fieldset>
                     <div class="form-group">
-                      <div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">Branch</span>
+                          <select class="form-control" ng-options="b.branch_id as b.branch_name for b in branchDetails" ng-model="branch_idd" ng-change="getDoctor(branch_idd)">
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-lg-4">
                         <div class="input-group">
                           <span class="input-group-addon">Practitioner</span>
                           <%--<select class="form-control" ng-options="s.doctor_id as s.profile_name for s in profile" ng-model="doctor_id" name="doctor" ng-blur="change(doctor_id)" required></select>--%>
@@ -149,23 +156,25 @@
 
                       </div>
 
-                      <div class="col-lg-4">
+                      <div class="col-lg-3">
                         <div class="input-group">
-                          <span class="input-group-addon">Start DATE</span>
+                          <span class="input-group-addon">Start Date</span>
                           <input type="text" class="form-control" name="exp_date" placeholder="mm-dd-yyyy" ng-click="open2($event)" datepicker-popup="{{format}}" ng-model="from_date"  min-date="date"  max-date="dtmax" is-open="opened2" datepicker-options="dateOptions" close-text="Close" style="height: 37px" disabled="disabled" required/>
                       <span class="input-group-btn">
                          <button type="button" class="btn btn-default" ng-click="open2($event)" style="height: 37px"><i class="glyphicon glyphicon-calendar"></i></button>
                       </span>
                         </div>
                       </div>
+
+
+                    </div>
+                    <div class="form-group">
                       <div class="col-lg-3">
                         <div class="input-group">
                           <span class="input-group-addon">Start Time </span>
                           <input  type="text" class="form-control timer" placeholder="__:__ __" ng-model="start_time" ng-change="timeValidation()">
                         </div>
                       </div>
-                    </div>
-                    <div class="form-group">
                       <div class="col-lg-3">
                         <div class="input-group">
                           <span class="input-group-addon">End Time</span>
@@ -173,7 +182,8 @@
                         </div>
                         <span style="color: red"  ng-show="toTimeFlag" >To time should be greater than from time. </span>
                       </div>
-                      <div class="col-lg-7">
+
+                      <div class="col-lg-6">
                           <div class="input-group">
                             <span class="input-group-addon">Day Frequency</span>
                             <div class="checkbox fileRadioBox form-control">&nbsp;

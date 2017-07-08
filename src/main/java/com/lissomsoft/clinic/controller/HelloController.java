@@ -1084,7 +1084,7 @@ public class HelloController {
         jsonObject.put("password", doctorUser.getPassword());
         jsonObject.put("profile_id", doctorUser.getProfile_id());
         jsonObject.put("doctor_id", doctorUser.getDoctor_id());
-
+        jsonObject.put("roomno",doctorUser.getRoomno());
         List<Branch> branches = doctorUser.getBranch();
         Iterator<Branch> it = branches.iterator();
         while (it.hasNext()) {

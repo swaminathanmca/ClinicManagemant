@@ -147,7 +147,7 @@ public class DoctorDaoImpl implements DoctorDao {
                 while (it.hasNext()) {
                     Branch br=it.next();
 
-                    String insertDoctorMapSql="INSERT INTO role_mapper(user_id,role_id,created_at,updated_at) VALUES((SELECT user.user_id FROM user WHERE email=:email),4,:created_at,:created_at)";
+                    String insertDoctorMapSql="INSERT INTO doctor_mapper(doctor_detail_id,branch_id,created_at,updated_at) VALUES((SELECT d.doctor_detail_id FROM doctor_detail d INNER JOIN user u ON u.user_id=d.user_id WHERE u.email=:email),:branch_id,:created_at,:created_at)";
                     Map<String,Object> DoctorMapperParameter=new HashMap<String, Object>();
                     DoctorMapperParameter.put("email",doctorUser.getEmail_id());
                     DoctorMapperParameter.put("branch_id",br.getBranch_id());
@@ -273,13 +273,14 @@ public class DoctorDaoImpl implements DoctorDao {
         DefaultTransactionDefinition paramTransactionDefinition = new DefaultTransactionDefinition();
         TransactionStatus status = platformTransactionManager.getTransaction(paramTransactionDefinition);
         try {
-            String editDoctorSql  ="UPDATE doctor_detail SET qualification=:qualification,reg_id=:reg_id,charge=:charge,updated_at=:updated_at WHERE doctor_detail_id=:doctor_id";
+            String editDoctorSql  ="UPDATE doctor_detail SET qualification=:qualification,roomno=:roomno,reg_id=:reg_id,charge=:charge,updated_at=:updated_at WHERE doctor_detail_id=:doctor_id";
             Map<String,Object> parameter=new HashMap<String, Object>();
             parameter.put("doctor_id",doctorUser.getDoctor_id());
         /*    parameter.put("branch_id",doctorUser.getBranch_id());*/
             parameter.put("qualification",doctorUser.getQualification());
             parameter.put("charge",doctorUser.getCharge());
             parameter.put("reg_id",doctorUser.getReg_no());
+            parameter.put("roomno",doctorUser.getRoomno());
             parameter.put("updated_at",format.format(new Date()));
 
             result_doctor=jdbcTemplate.update(editDoctorSql,parameter);

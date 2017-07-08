@@ -254,6 +254,12 @@
            <label class="form-control">{{data.charges}}</label>
          </div>
        </div>
+       <div class="col-lg-3">
+         <div class="input-group">
+           <span class="input-group-addon">Room No</span>
+           <label class="form-control">{{data.roomno}}</label>
+         </div>
+       </div>
 
      </div>
                     <div class="form-group">
@@ -444,6 +450,12 @@
                     <div class="input-group">
                       <span class="input-group-addon">Consulting Fee</span>
                       <input type="text" class="form-control" ng-model="x.charges" required>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="input-group">
+                      <span class="input-group-addon">Room No</span>
+                      <input type="text" class="form-control" ng-model="x.roomno" >
                     </div>
                   </div>
 

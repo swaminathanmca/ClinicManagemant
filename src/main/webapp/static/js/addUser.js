@@ -131,7 +131,10 @@ if($scope.selectedList==""){
     }
         $http.post('AddDoctor',Doctor).
         then(function (response,status,headers,config){
-            /*location.href="ViewDoctor";*/
+             if(response.data.status){
+                 location.href="ViewDoctor";
+             }
+
     });
 
 

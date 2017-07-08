@@ -59,10 +59,19 @@ app.controller('Schedule',function($scope, $http, $window){
     $scope.to_date = moment().add(7, 'days').format("MM-DD-YYYY");
     $scope.toTimeFlag = false;
 
-    $http.get("ViewDoctorBranch/"+$scope.branch_id)
+    $http.get("ViewBranch/"+ $window.sessionStorage.clinic_id)
+        .then(function (response){
+            $scope.branchDetails=response.data.branch;
+
+        });
+$scope.getDoctor=function(id){
+
+    $http.get("ViewDoctorBranch/"+id)
         .then(function(response){
             $scope.profile=response.data.user;
         })
+}
+
 
     $('.timer').timepicker({
         template: false,

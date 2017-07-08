@@ -171,7 +171,8 @@ app.controller('doctorDetails',function($scope,$window,$http){
            branch_id:$scope.x.branch_id,
            branch:$scope.selectedList,
            doctor_id:$scope.x.doctor_id,
-           charge:$scope.x.charges
+           charge:$scope.x.charges,
+           roomno:$scope.x.roomno
        }
         $http.post("EditDoctor",doctor).
             then(function(response,status,header,config){
