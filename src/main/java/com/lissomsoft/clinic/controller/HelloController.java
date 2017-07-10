@@ -307,6 +307,11 @@ public class HelloController {
         return "addSchedule";
     }
 
+    @RequestMapping(value = "/ViewSchedule")
+    public String viewSchedule(HttpServletRequest request)throws Exception{
+        return "viewSchedule";
+    }
+
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
     public
     @ResponseBody
@@ -2546,6 +2551,7 @@ public class HelloController {
         List<String> getOld = new LinkedList<String>();
         scheduleList = scheduleService.getScheduleDoctor(schedule.getDoctor_id(), schedule.getStart_date());
 
+
         DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
 
         String schedulestart_time = schedule.getStart_time();
@@ -2615,15 +2621,15 @@ public class HelloController {
                                 data.put("end_time",sc.getEnd_time());
                                 jsonArray.put(data);
                                 jsonObject.put("conflict",jsonArray);*/
-                                jsonObject.put("status", true);
+                                jsonObject.put("status", false);
                                 return jsonObject.toString();
 
                             } else {
 
-                                jsonObject.put("status", false);
+                                jsonObject.put("status", true);
                             }
                         } else {
-                            jsonObject.put("status", false);
+                            jsonObject.put("status", true);
                         }
                     }
                 }
@@ -2955,11 +2961,7 @@ public class HelloController {
         jsonObject.put("status",flag);
         return  jsonObject.toString();
     }
-
-
-
-
-   public String updateStatus()throws JSONException{
+    public String updateStatus()throws JSONException{
         JSONObject jsonObject=new JSONObject();
         boolean flag;
         List<Appointment> appointments;
@@ -2985,13 +2987,39 @@ public class HelloController {
                 }
             }
         }
+       flag=appointmentService.setStatus(appoimentId);
+       jsonObject.put("status",flag);
+       return  jsonObject.toString();}
 
-        flag=appointmentService.setStatus(appoimentId);
-
-
-        jsonObject.put("status",flag);
-        return  jsonObject.toString();
-
+    @RequestMapping(value ="GetSchedule/{doctor_id}/{branch_id}",method = RequestMethod.GET)
+    public @ResponseBody String getSchedule(@PathVariable Integer doctor_id,@PathVariable Integer branch_id)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        JSONArray jsonArray=new JSONArray();
+        List<Schedule> scheduleList;
+        String date=format.format(new Date());
+        scheduleList=scheduleService.getSchedule(doctor_id,date,branch_id);
+        Iterator<Schedule> itr=scheduleList.iterator();
+        while (itr.hasNext()){
+            Schedule schedule=itr.next();
+            JSONObject data=new JSONObject();
+            if(schedule.getEnd_type()==1){
+                data.put("start_date",schedule.getStart_date());
+                data.put("end_date",schedule.getEnd_date());
+                data.put("start_time",schedule.getStart_time());
+                data.put("end_time",schedule.getEnd_time());
+                data.put("schedule_id",schedule.getSchedule_id());
+                jsonArray.put(data);
+            }else {
+                    data.put("start_date",schedule.getStart_date());
+                    data.put("end_date","Never End");
+                    data.put("start_time",schedule.getStart_time());
+                    data.put("end_time",schedule.getEnd_time());
+                    data.put("schedule_id",schedule.getSchedule_id());
+                    jsonArray.put(data);
+            }
+        }
+        jsonObject.put("schedule",jsonArray);
+        return jsonObject.toString();
     }
 
 

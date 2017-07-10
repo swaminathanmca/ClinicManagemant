@@ -108,7 +108,7 @@
                 <a href="AddSchedule"> Add Schedule</a>
               </li>
               <li>
-                <a href="#">View Schedule</a>
+                <a href="ViewSchedule">View Schedule</a>
               </li>
             </ul>
           </li>
@@ -292,7 +292,7 @@
                         <div class="col-lg-9">{{start_time}}&nbsp-&nbsp{{end_time}}</div>
                       </div>
                     </div>
-                    <div class="form-group" ng-show="con_status">
+                    <div class="form-group" ng-show="con_status==false">
                       <div class="col-lg-12">
                         <div class="alert alert-danger" role="alert">
                           <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>

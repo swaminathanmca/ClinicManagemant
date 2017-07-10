@@ -7,7 +7,7 @@ app.controller('Schedule',function($scope, $http, $window){
     $scope.role=$window.sessionStorage.role_name;
     $scope.branch_id=$window.sessionStorage.branch_id;
     $scope.day_flag=[];
-
+    $scope.con_status=true;
 
     $http.get("trackSession/" + $scope.email).
         then(function (response, status, headers, config) {
@@ -62,10 +62,10 @@ app.controller('Schedule',function($scope, $http, $window){
     $http.get("ViewBranch/"+ $window.sessionStorage.clinic_id)
         .then(function (response){
             $scope.branchDetails=response.data.branch;
-
         });
 $scope.getDoctor=function(id){
-
+    $scope.con_status=true;
+    $scope.selected="";
     $http.get("ViewDoctorBranch/"+id)
         .then(function(response){
             $scope.profile=response.data.user;
@@ -81,7 +81,7 @@ $scope.getDoctor=function(id){
 
     $scope.timeValidation = function ()
     {
-        $scope.con_status="";
+        $scope.con_status=true;
         var now = new Date();
         var startTime = (now.getMonth()+1) + "/" + now.getDate() + "/" + now.getFullYear() + " " + $scope.start_time;
         var toTime = (now.getMonth()+1) + "/" + now.getDate() + "/" + now.getFullYear() + " " + $scope.end_time;
@@ -93,7 +93,7 @@ $scope.getDoctor=function(id){
         {$scope.toTimeFlag = true;}
     };
     $scope.validate=function(){
-        $scope.con_status="";
+        $scope.con_status=true;
             if(typeof $scope.selected.doctor_id === 'number'){
                 $scope.validateDoctor = 0;
             }else{
@@ -144,7 +144,7 @@ $scope.getDoctor=function(id){
            end_date:$scope.end_date,
            start_time:$scope.start_time,
            end_time:$scope.end_time,
-           branch_id:$scope.branch_id,
+           branch_id:$scope.branch_idd,
            day_flag:day_flag,
            end_type:$scope.type,
            no_of_occurenes:$scope.adays,
@@ -157,12 +157,15 @@ $scope.getDoctor=function(id){
            then(function(response){
           $scope.data=response.data;
               $scope.con_status=$scope.data.status;
-              if($scope.data.status){
+              if($scope.data.status==false){
                   $scope.conflict=$scope.data.conflict;
               }else{
                   $http.post("AddSchedule",schedule).
                       then(function(response){
                           $scope.data=response.data;
+                          if(response.data.status){
+                              location.href="ViewSchedule";
+                          }
                       })
               }
 

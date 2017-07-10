@@ -238,7 +238,7 @@
                                                     <div class="col-lg-12" >
                                                         <span ng-repeat="time in times" class="tag">&nbsp;&nbsp;
                                                         <span ng-if="!($index%8)"> <br/> &nbsp;&nbsp;</span>
-                                                        <button type="button"   class="{{(time.booked==1) ? 'btn btn-info':(time.booked==0) ? 'btn btn-danger':'btn btn-grey'}}" ng-click="schedule(time.interval,time.booked)">{{time.interval}}</button>  </span>
+                                                        <button type="button"   class="{{(time.booked==1) ? 'btn btn-info':(time.booked==0) ? 'btn btn-danger':'btn btn-grey'}}" ng-click="schedule(time.interval,time.booked)" title="Time Expires" data-placement="top">{{time.interval}}</button>  </span>
                                                     </div>
                                             </div>
                                           <%-- <div class="form-actions">
@@ -382,20 +382,20 @@
     <div class="modal fade" id="myModal1" role="dialog">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
-               <%-- <div class="modal-header">
-
-                 &lt;%&ndash;   <h4 class="modal-title">Modal Header</h4>&ndash;%&gt;
-                </div>--%>
-
                 <div class="modal-body">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4>Schedule Already Booked.</h4>
-
                 </div>
-
-                <%--<div class="modal-footer">
-
-                </div>--%>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal2" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4>Schedule Time Expires.</h4>
+                </div>
             </div>
         </div>
     </div>

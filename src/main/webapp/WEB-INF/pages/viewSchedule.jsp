@@ -108,7 +108,7 @@
                 <a href="AddSchedule"> Add Schedule</a>
               </li>
               <li>
-                <a href="#">View Schedule</a>
+                <a href="ViewSchedule">View Schedule</a>
               </li>
             </ul>
           </li>
@@ -118,11 +118,29 @@
   </nav>
   <div id="page-wrapper">
     <div class="row">
-      <div class="col-lg-1"></div>
-      <div class="col-lg-10">
+      <div class="col-lg-12">
         <h4 class="page-header"> {{clinic_name}} Hospital  <span></span> (Branch : &nbsp;{{branch_name}})</h4>
       </div>
     </div>
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="input-group">
+          <span class="input-group-addon">Branch</span>
+          <select class="form-control" ng-options="b.branch_id as b.branch_name for b in branchDetails" name="branch" ng-model="branch_id" ng-change="getDoctor(branch_id)"></select>
+        </div>
+
+        </div>
+      <div class="col-lg-4">
+        <div class="input-group">
+          <span class="input-group-addon">Practitioner</span>
+          <select class="form-control" ng-options="p.doctor_id as p.profile_name for p in profile" name="doctor_name" ng-model="doctor_id" ng-change="getSchedule(doctor_id)">
+
+          </select>
+
+        </div>
+      </div>
+    </div>
+    <br>
     <div class="row">
       <div class="col-lg-12">
         <div class="panel panel-primary">
@@ -132,14 +150,30 @@
           <div class="panel-body">
             <div class="row">
               <div class="col-lg-12">
-                <form class="form-horizontal ng-invalid" role="form" name="myform" ng-submit="submit()"
-                      novalidate>
-                  <fieldset>
+               <div class="table-responsive">
+                 <table class="table table-striped table-bordered table-hover " id="dataTables-example">
+                     <thead>
+                     <tr>
 
+                       <th>Start Date</th>
+                       <th>End Date</th>
+                       <th>Start Time</th>
+                       <th>End Time</th>
+                     </tr>
 
+                     </thead>
+                     <tbody>
+                     <tr ng-repeat="x in schedule">
+                       <td>{{x.start_date}}</td>
+                       <td>{{x.end_date}}</td>
+                       <td>{{x.start_time}}</td>
+                       <td>{{x.end_time}}</td>
 
-                    </fieldset>
-                  </form>
+                     </tr>
+                     </tbody>
+                   </table>
+
+               </div>
               </div>
             </div>
           </div>

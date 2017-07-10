@@ -34,6 +34,8 @@ $scope.schedule=function(time,flag){
         $('#myModal').modal()
     }else if(flag==0){
         $('#myModal1').modal()
+    }else{
+        $('#myModal2').modal()
     }
 
 
@@ -99,6 +101,7 @@ $scope.doctorschedule=function(id){
                         interval:$scope.timesvalue[i].interval,
                         booked:2
                     }
+
                 }else{
                      times={
                          interval:$scope.timesvalue[i].interval,
