@@ -122,6 +122,25 @@
           </div>
           <div class="panel-body">
             <div class="row">
+              <div class="col-lg-4">
+                <div class="input-group">
+                  <span class="input-group-addon">Branch</span>
+                  <select class="form-control" name="doctor_name" ng-model="doctor_id" ng-options=" d.doctor_id as d.profile_name  for d in doctors"></select>
+                </div>
+
+              </div>
+              <div class="col-lg-4">
+                <div class="input-group">
+                  <span class="input-group-addon">Date</span>
+                  <input type="text" class="form-control" name="mfg_date" placeholder="mm-dd-yyyy" ng-click="open1($event)" datepicker-popup="{{format}}" ng-model="adate" min-date="date"  is-open="opened1" datepicker-options="dateOptions" close-text="Close" style="height: 37px" disabled="disabled" ng-change="getDoctor(adate)"  required/>
+                      <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open1($event)" style="height: 37px" ><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="row">
               <div class="col-lg-12">
                 <form class="form-horizontal ng-invalid" role="form" name="myform" novalidate>
                   <fieldset>
