@@ -53,6 +53,10 @@ public class AppointmentServiceImpl implements AppointmentService{
         return appointmentDao.setStatus(appoimentId);
     }
 
+    @Override
+    public List<Appointment> viewAppoinmentDoctor(Integer branch_id, String date, String doctor_id) {
+        return appointmentDao.viewAppoinmentDoctor(branch_id,date,doctor_id);
+    }
 
 
 }

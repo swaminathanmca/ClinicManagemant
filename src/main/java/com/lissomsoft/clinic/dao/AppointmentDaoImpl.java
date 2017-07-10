@@ -212,4 +212,24 @@ public class AppointmentDaoImpl implements AppointmentDao {
         return result>0?true:false;
     }
 
+    @Override
+    public List<Appointment> viewAppoinmentDoctor(Integer branch_id, String date, String doctor_id) {
+        List<Appointment> appointments=null;
+
+        try {
+
+            String appoinmentInfo="SELECT a.schedule_time,a.appointment_id,a.name,a.phone_no,a.dov,p.name created_at,a.doctor_id,a.branch_id,a.patient_pid,a.status FROM appointment a  INNER JOIN doctor_detail d ON a.doctor_id=d.doctor_detail_id INNER JOIN member_master m ON m.user_id=d.user_id INNER JOIN profile_master p ON m.profile_id=p.profile_id AND a.branch_id=:branch_id AND a.dov=:date AND a.doctor_id=:doctor_id";
+            Map<String,Object> parameter=new HashMap<String, Object>();
+            parameter.put("branch_id",branch_id);
+            parameter.put("date",date);
+            parameter.put("doctor_id",doctor_id);
+            appointments=jdbcTemplate.query(appoinmentInfo,parameter,new AppoinmentDetMapper());
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return appointments;
+    }
+
 }

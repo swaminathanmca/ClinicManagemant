@@ -3022,6 +3022,43 @@ public class HelloController {
         return jsonObject.toString();
     }
 
+    @RequestMapping(value ="ViewAppoinmentDoctor/{branch_id}/{date}/{doctor_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String viewAppoinmentDoctor(@PathVariable Integer branch_id,@PathVariable String date,@PathVariable String doctor_id)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        JSONArray jsonArray=new JSONArray();
+        date=date.replace("-","/");
+        List<Appointment> appointments;
+
+
+        if(doctor_id.equalsIgnoreCase("ALL")){
+            appointments=appointmentService.viewAppoinment(branch_id, date);
+        }else{
+            appointments=appointmentService.viewAppoinmentDoctor(branch_id, date, doctor_id);
+        }
+
+        String flag=updateStatus();
+        Iterator<Appointment> itr=appointments.iterator();
+        while (itr.hasNext()){
+            JSONObject data=new JSONObject();
+            Appointment appointment= itr.next();
+            data.put("appoinment_id",appointment.getAppointment_id());
+            data.put("patient_pid",appointment.getPatient_pid());
+            data.put("doctor_name",appointment.getDoctor_name());
+            data.put("name",appointment.getName());
+            data.put("time",appointment.getTime());
+            data.put("flag",appointment.getStatus());
+            data.put("contact_no",appointment.getContact_no());
+            data.put("date",appointment.getDov());
+            data.put("status",true);
+            jsonArray.put(data);
+        }
+        jsonObject.put("appoinments",jsonArray);
+        return jsonObject.toString();
+
+
+    }
 
 
 }

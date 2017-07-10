@@ -8,12 +8,53 @@ app.controller('getAppoinment',function($scope,$window,$http,$interval) {
     $scope.date = new Date();
     $scope.date=moment($scope.date).format("MM-DD-YYYY");
 
-    $http.get("ViewAppoinment/"+$scope.branch_id+"/"+$scope.date).then
+    $scope.clear = function () {
+        $scope.dt = null;
+    };
+
+    $scope.toggleMin = function() {
+        $scope.minDate = $scope.minDate ? null : new Date();
+    };
+    $scope.toggleMin();
+    $scope.open1 = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.opened1 = true;
+        $scope.opened2 = false;
+    };
+
+    $scope.dateOptions = {
+        formatYear: 'yy',
+        startingDay: 6,
+        showWeeks:'false',
+        class: 'datepicker'
+    };
+
+    $scope.toChange= function(){
+    }
+    $scope.initDate = new Date('2016-15-20');
+    $scope.formats = ['MM/dd/yyyy','MMMM-dd-yyyy','yyyy-MMMM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+    $scope.format = $scope.formats[0];
+    $scope.doctors=[];
+    $scope.dob = moment().format("MM/DD/YYYY");
+
+    $scope.my_date = moment();
+
+
+    /*$http.get("ViewAppoinment/"+$scope.branch_id+"/"+$scope.date).then
     (function(response){
         $scope.details=response.data.appoinments;
         $scope.details.sort(compare);
 
-    })
+    })*/
+
+    $http.get("ViewDoctorBranch/" + $scope.branch_id)
+        .then(function(respone){
+            var user={doctor_id:"ALL",profile_name:"ALL"}
+            $scope.doctors=respone.data.user;
+            $scope.doctors.push(user);
+        });
+
     var getDate=function(){
         $http.get("ViewAppoinment/"+$scope.branch_id+"/"+$scope.date).then
         (function(response){
@@ -22,7 +63,8 @@ app.controller('getAppoinment',function($scope,$window,$http,$interval) {
 
         })
     }
-    $interval(getDate, 5000);
+
+   /* $interval(getDate, 5000);*/
 
     function compare(a,b) {
         var now = new Date();
@@ -74,5 +116,17 @@ app.controller('getAppoinment',function($scope,$window,$http,$interval) {
             $scope.st=response.data;
         })
     }
+
+    $scope.getDoctor=function(adate){
+        $scope.adate=moment(adate).format("MM-DD-YYYY");
+
+        $http.get("ViewAppoinmentDoctor/"+$scope.branch_id+"/"+$scope.adate+"/"+$scope.doctor_id).then
+        (function(response){
+            $scope.details=response.data.appoinments;
+            $scope.details.sort(compare);
+        })
+
+    }
+
 
 });
