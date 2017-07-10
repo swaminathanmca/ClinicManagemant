@@ -124,7 +124,7 @@
             <div class="row">
               <div class="col-lg-4">
                 <div class="input-group">
-                  <span class="input-group-addon">Branch</span>
+                  <span class="input-group-addon">Doctor Name</span>
                   <select class="form-control" name="doctor_name" ng-model="doctor_id" ng-options=" d.doctor_id as d.profile_name  for d in doctors"></select>
                 </div>
 

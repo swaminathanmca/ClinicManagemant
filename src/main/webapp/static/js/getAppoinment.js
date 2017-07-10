@@ -111,7 +111,7 @@ app.controller('getAppoinment',function($scope,$window,$http,$interval) {
         $scope.apoinment_id=id;
         $scope.patient_pid=patient_pid;
         $scope.st_status=1;
-        $http.get("UpdateScheduleStatus/"+$scope.st_status+"/"+$scope.apoinment_id).then
+        $http.post("UpdateScheduleStatus/"+$scope.st_status+"/"+$scope.apoinment_id).then
         (function(response){
             $scope.st=response.data;
         })

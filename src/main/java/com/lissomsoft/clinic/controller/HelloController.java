@@ -2874,15 +2874,21 @@ public class HelloController {
                 calendar1.add(Calendar.MINUTE,interval);}
         }
         appointments=appointmentService.appoinmentDetails(doctor_id,branch_id,date);
+
         Iterator<Appointment> it=appointments.iterator();
         List<String> inter=new ArrayList<String>();
         while (it.hasNext()){
             Appointment appointment=it.next();
-            String dt_sc=appointment.getDov()+" "+appointment.getTime();
-            Date date3=new Date(dt_sc);
-            inter.add(sdf1.format(date3));
+            if(appointment.getStatus()==0 || appointment.getStatus()==2){
+                String dt_sc=appointment.getDov()+" "+appointment.getTime();
+                Date date3=new Date(dt_sc);
+                inter.add(sdf1.format(date3));
+
+            }
+
         }
         time.removeAll(inter);
+
         Iterator<String> itr=time.iterator();
         Iterator<String> itm=inter.iterator();
         while (itm.hasNext()){
