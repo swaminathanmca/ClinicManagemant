@@ -11,7 +11,7 @@ app.controller('patientComplaint',function($scope,$http,$window){
     var obj;
 
 $scope.addComplaint=function(){
-location.href="AddComplaint";
+    $("#myModal1").modal();
 }
 
     $scope.patientReport=function(){
@@ -33,7 +33,23 @@ location.href="AddComplaint";
         })
 
 
-
+        $scope.addComplaintModel=function(){
+            var complaint={
+                complaint_name:$scope.cname,
+                complaint_description:$scope.cdescription
+            }
+            $http.post('AddComplaint',complaint)
+                .then(function (response,status,headers,config){
+                    $scope.result=response.data;
+                    if(response.data.status){
+                        $http.get("GetComplaint")
+                            .then(function (response) {
+                                $scope.complaint = response.data.complaint;
+                                $("#myModal1").modal('hide');
+                            });
+                    }
+                });
+        }
 
     $scope.afterSelectItem = function(item){
         obj = {
@@ -41,9 +57,7 @@ location.href="AddComplaint";
             complaint_name:item.complaint_name,
             complaint_description:item.complaint_description
         };
-
         $scope.selectedlist.push(obj)
-
     }
 
     $scope.afterRemoveItem = function(item){

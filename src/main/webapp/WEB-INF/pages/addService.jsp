@@ -63,9 +63,7 @@
           <li>
             <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
           </li>
-          <li>
-            <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-          </li>
+
           <li ng-show="role=='Admin'">
             <a href="#"><i class="fa fa-table fa-fw"></i> Branch<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">

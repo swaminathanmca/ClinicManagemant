@@ -282,7 +282,7 @@
 
                                                 <textarea class="form-control"
                                                           placeholder="Write Clinic Description Here.." name="desc"
-                                                          type="text" value="" ng-model="desc"  ></textarea>
+                                                          type="text" value="" ng-model="desc" maxlength="50" ></textarea>
                                                     </div>
                                                 </div>
                                         </div>

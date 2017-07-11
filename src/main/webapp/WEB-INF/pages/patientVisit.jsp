@@ -84,6 +84,17 @@
               </li>
             </ul>
           </li>
+          <li>
+            <a href="#"><i class="fa fa-phone"></i>&nbsp; Appointment<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+              <li>
+                <a href="AddAppointment"> Add Appointment</a>
+              </li>
+              <li>
+                <a href="ViewAppointment"> View Appointment</a>
+              </li>
+            </ul>
+          </li>
 
 
         </ul>

@@ -205,7 +205,7 @@
                                             <div class="col-lg-6">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">Description</span>
-                                                    <label class="form-control" type="text">{{clinic.description}}</label>
+                                                    <textarea class="form-control" type="text" disabled>{{clinic.description}}</textarea>
                                                 </div>
                                             </div>
                                         </div>

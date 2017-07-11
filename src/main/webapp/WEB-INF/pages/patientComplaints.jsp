@@ -352,6 +352,65 @@
   </div>
 
 
+ <%--Add Complaint Popup--%>
+<div class="modal fade" id="myModal1" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <div class="row">
+          <div class="col-lg-12">
+            <form role="form" class="form-horizontal" name="myform2"  ng-submit="addComplaintModel()">
+              <fieldset>
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Add Complaint</h4>
+                </div>
+                <div class="modal-body">
+                 <div class="form-group">
+                   <div class="col-lg-12">
+                     <div class="input-group">
+                       <span class="input-group-addon">Complaint</span>
+                       <input type="text" class="form-control" ng-model="cname" required>
+                       </div>
+                   </div>
+                   </div>
+                  <div class="form-group">
+                    <div class="col-lg-12">
+                      <div class="input-group">
+                        <span class="input-group-addon">Description</span>
+                        <input type="text" class="form-control" ng-model="cdescription" required>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-actions">
+                  <div class="row">
+                    <div class="col-lg-offset-4 col-lg-7">
+                      <button type="submit" class="btn btn-success"
+                              ng-disabled="myform2.$invalid"   ng-click="submitted=true"  >Save
+                      </button>
+                      <button type="button" class="btn btn-inverse" data-dismiss="modal">Cancel</button>
+                    </div>
+                  </div>
+                </div>
+
+
+              </fieldset>
+            </form>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
 <script src="<%=request.getContextPath()%>/static/vendor/jquery/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/metisMenu/metisMenu.js"></script>
