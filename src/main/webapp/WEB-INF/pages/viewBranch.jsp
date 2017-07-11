@@ -116,7 +116,7 @@
                 <a href="AddSchedule"> Add Schedule</a>
               </li>
               <li>
-                <a href="#">View Schedule</a>
+                <a href="ViewSchedule">View Schedule</a>
               </li>
             </ul>
           </li>

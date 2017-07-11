@@ -119,13 +119,11 @@ app.controller('getAppoinment',function($scope,$window,$http,$interval) {
 
     $scope.getDoctor=function(adate){
         $scope.adate=moment(adate).format("MM-DD-YYYY");
-
         $http.get("ViewAppoinmentDoctor/"+$scope.branch_id+"/"+$scope.adate+"/"+$scope.doctor_id).then
         (function(response){
             $scope.details=response.data.appoinments;
             $scope.details.sort(compare);
         })
-
     }
 
 

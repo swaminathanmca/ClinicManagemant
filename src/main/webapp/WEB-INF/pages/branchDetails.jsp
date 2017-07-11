@@ -485,7 +485,7 @@
                                             <div class="input-group">
                                                 <span class="input-group-addon">PinCode</span>
                                                 <input class="form-control" type="text" ng-model="x.pin_code"
-                                                       ng-pattern="/^[0-9]*$/" name="pin_code" required/>
+                                                       ng-pattern="/^[0-9]*$/" ui-mask="999999" name="pin_code" required/>
                                             </div>
                                             <span class="text-danger wrapper text-center ng-binding"
                                                   ng-show="myform.pin_code.$invalid &&  myform.pin_code.$touched">Please Enter Pin Code</span>
@@ -631,7 +631,7 @@
                                             <div class="input-group">
                                                 <span class="input-group-addon">PinCode</span>
                                                 <input class="form-control" type="text" ng-model="x.Chief_pincode"
-                                                       ng-pattern="/^[0-9]*$/" name="cpincode" required/>
+                                                       ng-pattern="/^[0-9]*$/" ui-mask="999999" name="cpincode" required/>
                                             </div>
                                             <span class="text-danger wrapper text-center ng-binding"
                                                   ng-show="myform.cpincode.$invalid">Please  Enter PinCode </span>

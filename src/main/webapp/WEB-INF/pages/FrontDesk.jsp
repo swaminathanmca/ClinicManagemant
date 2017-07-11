@@ -119,6 +119,17 @@
               </li>
             </ul>
           </li>
+          <li>
+            <a href=""><i class="fa fa-calendar-minus-o"></i>&nbsp;  Schedule <span class="fa arrow"></span> </a>
+            <ul class="nav nav-second-level">
+              <li>
+                <a href="AddSchedule"> Add Schedule</a>
+              </li>
+              <li>
+                <a href="ViewSchedule">View Schedule</a>
+              </li>
+            </ul>
+          </li>
 
 
         </ul>
@@ -332,7 +343,7 @@
                   <span class="input-group-addon">
                     PinCode
                   </span>
-                        <input class="form-control" type="text" ng-model="x.pincode" name="pincode">
+                        <input class="form-control" type="text" ng-model="x.pincode" ng-pattern="/^[0-9]*$/" ui-mask="999999" name="pincode">
                       </div>
                     </div>
                   </div>

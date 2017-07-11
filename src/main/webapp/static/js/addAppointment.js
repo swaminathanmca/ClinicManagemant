@@ -25,7 +25,10 @@ app.controller('appointment',function($scope,$window,$http,$timeout){
         });
 
 
-
+$scope.newpatient=function(){
+    $scope.inform="";
+    $scope.contact_no="";
+}
 
 $scope.schedule=function(time,flag){
 
@@ -116,8 +119,8 @@ $scope.doctorschedule=function(id){
 
 
 
-    $scope.fromSubmit=function(){
-
+    $scope.fromSubmit=function(contact_no){
+        $scope.contact_no=contact_no;
 
         $http.get("PatientAppointmentInfo/"+$scope.dt_date+"/"+$scope.contact_no+"/"+$scope.branch_id).then
         (function(response){
@@ -126,11 +129,11 @@ $scope.doctorschedule=function(id){
 
     }
 
-    $scope.valueGetId=function(patient_id,first_name,last_name,contact_no){
+    $scope.valueGetId=function(patient_id,first_name,last_name,mobile_no){
         $scope.patient_id=patient_id;
         $scope.first_name=first_name;
         $scope.last_name=last_name;
-        $scope.mobile_no=contact_no;
+        $scope.mobile_no=mobile_no;
     }
 
     function compare(a,b) {
@@ -145,7 +148,6 @@ $scope.doctorschedule=function(id){
         }else{
             return 1
         }
-
         return 0;
     }
 
@@ -166,7 +168,7 @@ $scope.doctorschedule=function(id){
                 location.href="AddAppointment";
             }
         })
-        console.log(appoinment);
+
     }
 
 });

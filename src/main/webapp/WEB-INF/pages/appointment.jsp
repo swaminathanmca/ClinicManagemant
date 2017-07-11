@@ -238,7 +238,7 @@
                                                     <div class="col-lg-12" >
                                                         <span ng-repeat="time in times" class="tag">&nbsp;&nbsp;
                                                         <span ng-if="!($index%8)"> <br/> &nbsp;&nbsp;</span>
-                                                        <button type="button"   class="{{(time.booked==1) ? 'btn btn-info':(time.booked==0) ? 'btn btn-danger':'btn btn-grey'}}" ng-click="schedule(time.interval,time.booked)" title="Time Expires" data-placement="top">{{time.interval}}</button>  </span>
+                                                        <button type="button"   class="{{(time.booked==1) ? 'btn btn-info':(time.booked==0) ? 'btn btn-danger':'btn btn-grey'}}" ng-click="schedule(time.interval,time.booked)" >{{time.interval}}</button>  </span>
                                                     </div>
                                             </div>
                                           <%-- <div class="form-actions">
@@ -291,15 +291,40 @@
                                         <label class="form-control">{{time}}</label>
                                     </div>
                                 </div>
-                                <div class="col-lg-3">
-                                    <input class="form-control" name="search" placeholder="search" ng-model="contact_no">
-                                </div>
-                                    <div class="col-lg-1">
-                                        <img ng-click="fromSubmit()"  src="<%=request.getContextPath()%>/static/img/search.png" style="width: 20px;height: 20px;margin-left: 11px; margin-top: 10px;" class="ng-pristine ng-untouched ng-valid">
+
+                                <div class="col-lg-5">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Type</span>
+                                        <div class="checkbox pb10 fileRadioBox form-control">
+                                            <label>
+                                                <input type="radio" name="type"  value="0"   ng-model="type" ng-click="newpatient()" required>New
+                                            </label>
+
+                                            <label>
+                                                <input type="radio" name="type" value="1"  ng-model="type"  required>
+                                                Exiting
+                                            </label>
+                                        </div>
                                     </div>
 
+                                </div>
+                                </div>
+
+                            <div class="form-group" ng-if="type==1">
+                                <div class="col-lg-4">
+                                    <div class="input-group">
+
+                                        <input class="form-control" name="search" placeholder="Enter The Phone No" ng-model="contact_no">
+                                        <span class="input-group-addon" ng-click="fromSubmit(contact_no)" ><i class="fa fa-search"></i> </span>
+                                    </div>
 
                                 </div>
+
+                            </div>
+
+
+
+
                             <div class="form-group" ng-if="inform.length > 0">
                                 <div class="col-lg-12" >
                                     <div class="table-responsive">
