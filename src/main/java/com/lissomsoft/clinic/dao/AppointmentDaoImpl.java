@@ -34,7 +34,7 @@ public class AppointmentDaoImpl implements AppointmentDao {
         int result=0;
         try{
 
-            String insertSql="INSERT INTO appointment(patient_pid,name,branch_id,doctor_id,schedule_time,dov,phone_no,status,created_at,updated_at) values(:patient_pid,:name,:branch_id,:doctor_id,:time,:dov,:contact_no,0,:created_at,:created_at)";
+            String insertSql="INSERT INTO appointment(patient_pid,name,branch_id,doctor_id,schedule_time,type,dov,phone_no,status,created_at,updated_at) values(:patient_pid,:name,:branch_id,:doctor_id,:time,:type,:dov,:contact_no,0,:created_at,:created_at)";
             Map<String,Object> parameters =new HashMap<String, Object>();
             parameters.put("patient_pid",appointment.getPatient_pid());
             parameters.put("name",appointment.getName());
@@ -44,7 +44,7 @@ public class AppointmentDaoImpl implements AppointmentDao {
             parameters.put("time",appointment.getTime());
             parameters.put("contact_no",appointment.getContact_no());
             parameters.put("created_at",format.format(new Date()));
-
+            parameters.put("type",appointment.getType());
             result = jdbcTemplate.update(insertSql,parameters);
 
         }catch (Exception e){
@@ -128,7 +128,7 @@ public class AppointmentDaoImpl implements AppointmentDao {
 
             List<Appointment> appointments=null;
         try {
-            String appoinmentInfo="SELECT a.schedule_time,a.appointment_id,a.name,a.phone_no,a.dov,p.name created_at,a.doctor_id,a.branch_id,a.patient_pid,a.status FROM appointment a  INNER JOIN doctor_detail d ON a.doctor_id=d.doctor_detail_id INNER JOIN member_master m ON m.user_id=d.user_id INNER JOIN profile_master p ON m.profile_id=p.profile_id AND a.branch_id=:branch_id AND a.dov=:date";
+            String appoinmentInfo="SELECT a.schedule_time,a.appointment_id,a.name,a.phone_no,a.type,a.dov,p.name created_at,a.doctor_id,a.branch_id,a.patient_pid,a.status FROM appointment a  INNER JOIN doctor_detail d ON a.doctor_id=d.doctor_detail_id INNER JOIN member_master m ON m.user_id=d.user_id INNER JOIN profile_master p ON m.profile_id=p.profile_id AND a.branch_id=:branch_id AND a.dov=:date";
             Map<String,Object> parameter=new HashMap<String, Object>();
             parameter.put("branch_id",branch_id);
             parameter.put("date",date);
@@ -218,7 +218,7 @@ public class AppointmentDaoImpl implements AppointmentDao {
 
         try {
 
-            String appoinmentInfo="SELECT a.schedule_time,a.appointment_id,a.name,a.phone_no,a.dov,p.name created_at,a.doctor_id,a.branch_id,a.patient_pid,a.status FROM appointment a  INNER JOIN doctor_detail d ON a.doctor_id=d.doctor_detail_id INNER JOIN member_master m ON m.user_id=d.user_id INNER JOIN profile_master p ON m.profile_id=p.profile_id AND a.branch_id=:branch_id AND a.dov=:date AND a.doctor_id=:doctor_id";
+            String appoinmentInfo="SELECT a.schedule_time,a.appointment_id,a.type,a.name,a.phone_no,a.dov,p.name created_at,a.doctor_id,a.branch_id,a.patient_pid,a.status FROM appointment a  INNER JOIN doctor_detail d ON a.doctor_id=d.doctor_detail_id INNER JOIN member_master m ON m.user_id=d.user_id INNER JOIN profile_master p ON m.profile_id=p.profile_id AND a.branch_id=:branch_id AND a.dov=:date AND a.doctor_id=:doctor_id";
             Map<String,Object> parameter=new HashMap<String, Object>();
             parameter.put("branch_id",branch_id);
             parameter.put("date",date);
@@ -230,6 +230,25 @@ public class AppointmentDaoImpl implements AppointmentDao {
         }
 
         return appointments;
+    }
+
+    public Appointment getAppoinmentDetails(Integer appoinment_id){
+        Appointment appoinment = null;
+        try {
+
+            String getSqlById="SELECT a.schedule_time,a.appointment_id,a.type,a.name,a.phone_no,a.dov,p.name created_at,a.doctor_id,a.branch_id,a.patient_pid,a.status FROM appointment a  INNER JOIN doctor_detail d ON a.doctor_id=d.doctor_detail_id INNER JOIN member_master m ON m.user_id=d.user_id INNER JOIN profile_master p ON m.profile_id=p.profile_id AND appointment_id=:appoinment_id";
+            Map<String,Object> parameter=new HashMap<String, Object>();
+            parameter.put("appoinment_id",appoinment_id);
+            appoinment= (Appointment) jdbcTemplate.queryForObject(getSqlById,parameter,new AppoinmentDetMapper());
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+        return appoinment;
     }
 
 }

@@ -15,7 +15,7 @@
   <link href="<%=request.getContextPath()%>/static/vendor/bootstrap-helpers/css/bootstrap-formhelpers.min.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/vendor/bootstrap-timepicker/css/timepicker.less" rel="stylesheet">
   <%-- <link href="<%=request.getContextPath()%>/static/vendor/bootstrap-timepicker/assets/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">--%>
-
+  <link href="<%=request.getContextPath()%>/static/vendor/jquery-ui/jquery-ui.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title></title>
 </head>
@@ -125,17 +125,14 @@
               <div class="col-lg-4">
                 <div class="input-group">
                   <span class="input-group-addon">Doctor Name</span>
-                  <select class="form-control" name="doctor_name" ng-model="doctor_id" ng-options=" d.doctor_id as d.profile_name  for d in doctors"></select>
+                  <select class="form-control" name="doctor_name" ng-model="doctor_id" ng-options=" d.doctor_id as d.profile_name  for d in doctors" ng-change="doctorschedule(doctor_id)"></select>
                 </div>
 
               </div>
               <div class="col-lg-4">
                 <div class="input-group">
                   <span class="input-group-addon">Date</span>
-                  <input type="text" class="form-control" name="mfg_date" placeholder="mm-dd-yyyy" ng-click="open1($event)" datepicker-popup="{{format}}" ng-model="adate" min-date="date"  is-open="opened1" datepicker-options="dateOptions" close-text="Close" style="height: 37px" disabled="disabled" ng-change="getDoctor(adate)"  required/>
-                      <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open1($event)" style="height: 37px" ><i class="glyphicon glyphicon-calendar"></i></button>
-                      </span>
+                  <input type="text" id="datepicker" class="form-control">
                 </div>
               </div>
             </div>
@@ -148,20 +145,21 @@
                     <div class="alert alert-success" role="alert" dir-paginate="x in details | orderBy : time | itemsPerPage :3">
                       <div class="row">
                         <div class="col-lg-3">
-                          <a href="#" class="alert-link">{{x.name}}<br>{{x.contact_no}} </a>
+                          <strong>Patient Name</strong><br>
+                          <strong>{{x.name}}<br>Tel:{{x.contact_no}} </strong>
                         </div>
 
                         <div class="col-lg-3">
-                          <h6>APPOINMENTS</h6>
+                          <h5><b>APPOINTMENT</b></h5>
                           <p>{{x.date}}</p>
                           <p>{{x.time}}</p>
                         </div>
                         <div class="col-lg-3">
-                          <h6>CARE PROVIDER</h6>
+                          <h5><b>CARE PROVIDER</b></h5>
                           <p>DR.{{x.doctor_name}}</p>
                         </div>
                         <div class="col-lg-3" ng-if="x.flag==0">
-                             <button type="button" class="btn btn-info" ng-click="showarrival(x.appoinment_id,x.patient_pid)">Mark Arrival</button>
+                             <button type="button" class="btn btn-info" ng-click="showarrival(x.appoinment_id,x.patient_pid,x.type)">Mark Arrival</button>
                             <button type="button" class="btn btn-black" ng-click="deletearrival(x.appoinment_id,x.patient_pid)">Cancel</button>
                         </div>
                         <div class="col-lg-3" ng-if="x.flag==1">
@@ -207,6 +205,7 @@
 <script src="<%=request.getContextPath()%>/static/vendor/multiple-select/multiple-select.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/js-custom-select/customSelect.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="<%=request.getContextPath()%>/static/vendor/jquery-ui/jquery-ui.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/getAppoinment.js"></script>

@@ -16,6 +16,7 @@ public class Appointment {
     private String contact_no;
     private String doctor_name;
     private Integer status;
+    private Integer type;
 
     public Integer getBranch_id() {
         return branch_id;
@@ -97,6 +98,14 @@ public class Appointment {
         this.status = status;
     }
 
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
     public String toString(){
     return "Appointment {" +
             "  appointment_id = "+ appointment_id +
@@ -109,6 +118,7 @@ public class Appointment {
             ", contact_no="+contact_no+
             ", doctor_name="+doctor_name+
             ", status="+status+
+            ", type="+type+
             "}";
 }
 }

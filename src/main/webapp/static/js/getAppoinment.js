@@ -53,17 +53,70 @@ app.controller('getAppoinment',function($scope,$window,$http,$interval) {
             var user={doctor_id:"ALL",profile_name:"ALL"}
             $scope.doctors=respone.data.user;
             $scope.doctors.push(user);
+
         });
 
+$scope.doctorschedule=function(id){
+
+    if(id=="ALL"){
+        $("#datepicker").datepicker("destroy");
+        $("#datepicker").datepicker({
+
+        }).attr('readonly','readonly');
+
+    }else{
+        $http.get("GetDoctorSchedule/"+id+"/"+$scope.branch_id).then
+        (function(response,status,error,headers, config){
+            $scope.schedule_details=response.data;
+            $scope.status=response.data.status;
+            $scope.disable_dates=response.data.disable_dates;
+            $scope.flag=response.data.flags;
+            $scope.times="";
+            var unavailableDates=$scope.disable_dates;
+
+            function unavailable(date) {
+                dmy = moment(date).format("MM/DD/YYYY");
+                if ($.inArray(dmy, unavailableDates) != -1) {
+                    return [true, "Highlighted"];
+                } else {
+                    return [false, "", "Unavailable"];
+                }
+            }
+
+            $("#datepicker").datepicker("destroy");
+            $( "#datepicker" ).datepicker({
+                dateFormat: 'mm/dd/yy',
+                minDate:new Date(),
+                maxDate:moment().add(1, 'M').format('MM/DD/YYYY'),
+                beforeShowDay: unavailable
+            }).attr('readonly','readonly');
+        });
+    }
+
+
+}
+
     var getDate=function(){
-        $http.get("ViewAppoinment/"+$scope.branch_id+"/"+$scope.date).then
+        $http.get("ViewAppoinment/"+$scope.branch_id+"/"+$scope.date+"/"+$scope.doctor_id).then
         (function(response){
             $scope.details=response.data.appoinments;
             $scope.details.sort(compare);
 
         })
     }
+    $('#datepicker').change(function() {
+        $scope.dt_date=$('#datepicker').val();
+        $scope.dt_date=new Date($scope.dt_date);
+        $scope.dt_date=moment($scope.dt_date).format("MM-DD-YYYY");
 
+        $http.get("ViewAppoinmentDoctor/"+$scope.branch_id+"/"+$scope.dt_date+"/"+$scope.doctor_id).then
+        (function(response){
+            $scope.details=response.data.appoinments;
+            $scope.details.sort(compare);
+
+        })
+
+    });
    /* $interval(getDate, 5000);*/
 
     function compare(a,b) {
@@ -82,28 +135,22 @@ app.controller('getAppoinment',function($scope,$window,$http,$interval) {
         return 0;
     }
 
-    $scope.showarrival=function(id,patient_pid){
+    $scope.showarrival=function(id,patient_pid,type){
         $scope.apoinment_id=id;
         $window.sessionStorage.patient_id=patient_pid;
         $scope.st_status=2;
-       if($scope.patient_pid==null){
-           $http.post("UpdateScheduleStatus/"+$scope.st_status+"/"+$scope.apoinment_id).then
+        $http.post("UpdateScheduleStatus/"+$scope.st_status+"/"+$scope.apoinment_id).then
            (function(response){
                $scope.st=response.data.status;
                if($scope.st){
-                   location.href="PatientVisit";
+                  if(type==0){
+                            location.href="PatientVisit"
+                  }else{
+                      location.href="AddPatient";
+                  }
                }
 
            })
-       }else{
-           $http.post("UpdateScheduleStatus/"+$scope.st_status+"/"+$scope.apoinment_id).then
-           (function(response){
-               $scope.st=response.data.status;
-               if($scope.st){
-                   location.href="PatientVisit";
-               }
-
-           })}
 
     }
 

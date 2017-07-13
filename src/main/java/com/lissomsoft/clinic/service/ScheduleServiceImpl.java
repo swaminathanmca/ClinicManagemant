@@ -21,7 +21,7 @@ public class ScheduleServiceImpl implements ScheduleService{
     }
 
     @Override
-    public List<Schedule> getSchedule(int docor_id,String start_date,Integer branch_id) {
+    public List<Schedule> getSchedule(String docor_id,String start_date,Integer branch_id) {
         return scheduleDao.getSchedule(docor_id,start_date,branch_id);
     }
 

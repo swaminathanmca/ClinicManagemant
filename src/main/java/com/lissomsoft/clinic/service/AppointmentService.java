@@ -24,5 +24,6 @@ public interface AppointmentService {
 
     boolean setStatus(HashSet appoimentId);
     List<Appointment> viewAppoinmentDoctor(Integer branch_id,String date,String doctor_id);
+    Appointment getAppoinmentDetails(Integer appoinment_id);
 
 }

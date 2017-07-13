@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface ScheduleDao {
     Boolean addSchedule(Schedule schedule,StringBuilder sb);
-    public List<Schedule> getSchedule(int doctor_id,String start_date,Integer branch_id);
+    public List<Schedule> getSchedule(String doctor_id,String start_date,Integer branch_id);
     public List<Schedule> getScheduleTime(Integer doctor_id,Integer branch_id);
     public List<Schedule> getScheduleDoctor(Integer doctor_id,String start_date);
 }

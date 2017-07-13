@@ -209,3 +209,10 @@ hr{
     border-color: #777777;
     color: #ffffff;
 }
+.pa5 {
+    padding: 2px;
+}
+
+.fs12 {
+    font-size: 12px;
+}

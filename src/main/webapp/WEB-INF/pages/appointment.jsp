@@ -132,85 +132,10 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form class="form-horizontal ng-invalid" role="form" name="myform" ng-submit="submit()"
-                                      novalidate>
-                                    <fieldset>
-
-                                      <%--  <div class="form-group">
-
-                                            <div class="col-lg-4">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">Dob</span>
-                                                    <input type="text" class="form-control" name="dob"
-                                                           placeholder="mm-dd-yyyy" ng-click="open1($event)"
-                                                           datepicker-popup="{{format}}" ng-model="dob"
-                                                           is-open="opened1" datepicker-options="dateOptions"
-                                                           close-text="Close" style="height: 37px" max-date="date" disabled="disabled"/>
-                      <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open1($event)" style="height: 37px"><i
-                        class="glyphicon glyphicon-calendar"></i></button>
-                      </span>
-                                                </div>
-
-                                            </div>
-
-                                            <div class="col-lg-4">
-                                                <input type="text" ng-model="contact_no" class="form-control"
-                                                       placeholder="Search">
-                                            </div>
-                                            <div class="col-lg-1">
-                                                <img ng-click="fromSubmit()"
-                                                     src="<%=request.getContextPath()%>/static/img/search.png"
-                                                     style="width: 20px;height: 20px;margin-left: -20px; margin-top: 10px;"
-                                                     class="ng-pristine ng-untouched ng-valid">
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <input type="button" class="btn btn-primary" value="Add Appoinment"
-                                                       data-toggle="modal" data-target="#myModal"
-                                                       style="background-color: #ffffff;color: #333">
-                                            </div>
-
-                                        </div>--%>
-
-                                       <%-- <div class="row" ng-if="data.length">
-                                            <div class="col-lg-12">
-                                                <div class="table-responsive">
-                                                    <table class="table table-striped table-bordered">
-                                                        <thead>
-                                                        <tr class="success">
-                                                            <th>No</th>
-                                                            <th>Name</th>
-                                                            <th>Address</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        <tr ng-repeat="x in data | filter:search | orderBy : first_name">
-
-                                                            <td>{{$index+1}}</td>
-                                                            <td class="und_ref"><a ng-click="addAppointment(x.patient_pId)">{{x.first_name}}&nbsp;{{x.last_name}}</a>
-                                                            </td>
-                                                            <td>{{x.address1}},{{x.address2}}</td>
-
-                                                        </tr>
-                                                        </tbody>
-
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>--%>
-
-
-                                            <div class="form-group">
-                                                <%--<div class="col-lg-6">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">Name</span>
-                                                        <label class="form-control" type="text">{{y.first_name}}</label>
-                                                    </div>
-                                                </div>--%>
-                                                <div class="col-lg-6">
+                                <div class="form-group">
+                                    <div class="col-lg-6">
                                                     <div class="input-group">
                                                         <span class="input-group-addon">Doctor</span>
-
                                                         <div name="doctor_id"
                                                              custom-select="d.doctor_id as d.profile_name for d in doctors | filter: { profile_name: $searchTerm }"
                                                              ng-model="doctor_id" ng-change="doctorschedule(doctor_id); disabled(date, mode);" required>
@@ -220,53 +145,128 @@
                                                     <div class="col-lg-4">
                                                         <div class="input-group">
                                                         <span class="input-group-addon">Date</span>
-                                                            <%--<input type="text" class="form-control" name="exp_date" placeholder="mm-dd-yyyy"  datepicker-popup="{{format}}" ng-model="dt" min-date="date" max-date="dtmax" is-open="opened2" datepicker-options="{ formatYear: 'yy',startingDay: 6,showWeeks:'false',class: 'datepicker'}" datepicker-options="{dateOptions}" close-text="Close" style="height: 37px" date-disabled="disabled(date, mode)" readonly="true"
-                                                                   ng-change="select(dt)" required/>
-                                                        <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default" ng-click= "open2($event)"  style="height: 37px"><i class="glyphicon glyphicon-calendar"></i></button>
-                                        </span>--%>
+
                                                             <input type="text" id="datepicker" class="form-control">
                                                         </div>
 
                                                     </div>
                                             </div>
-
-                                            <div class="form-group">
-
-                                            </div>
-                                            <div class="form-group">
+                                <div class="form-group">
+                                </div>
+                                <div class="form-group">
                                                     <div class="col-lg-12" >
-                                                        <span ng-repeat="time in times" class="tag">&nbsp;&nbsp;
+                                                        <p ng-repeat="time in times" class="tag">&nbsp;&nbsp;
                                                         <span ng-if="!($index%8)"> <br/> &nbsp;&nbsp;</span>
-                                                        <button type="button"   class="{{(time.booked==1) ? 'btn btn-info':(time.booked==0) ? 'btn btn-danger':'btn btn-grey'}}" ng-click="schedule(time.interval,time.booked)" >{{time.interval}}</button>  </span>
+                                                        <button type="button"   class="{{(time.booked==1) ? 'btn btn-info fs12 ':(time.booked==0) ? 'btn btn-danger fs12 ':'btn btn-grey fs12 '}}" ng-click="schedule(time.interval,time.booked,time.appoinment_id)" ><i class="fa fa-clock-o"></i> {{time.interval}}<br>{{time.name}}</button>
+                                                        </p>
                                                     </div>
                                             </div>
-                                          <%-- <div class="form-actions">
-                                                <div class="row">
-                                                    <div class="col-lg-offset-4 col-lg-7">
-                                                        <button type="submit" class="btn btn-success"
-                                                                ng-disabled="myform.$invalid "
-                                                                ng-click="submitted=true">Save
-                                                        </button>
-                                                        <button type="button" class="btn btn-inverse">Cancel</button>
-                                                    </div>
-                                                </div>
-                                            </div>--%>
 
 
 
 
-                                    </fieldset>
-                                </form>
+
+
+
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+      <%--  <div class="row">
+            <div class="col-lg-1"></div>
+           <div class="col-lg-10">
+               <div class="alert alert-success" role="alert" ng-if="appoinment_details.status">
+                   <div class="row">
+                       <div class="col-lg-3">
+                           <strong>Patient Name</strong><br>
+                           <strong>{{appoinment_details.name}}<br>Tel:{{appoinment_details.contact_no}} </strong>
+                       </div>
+
+                       <div class="col-lg-3">
+                           <h5><b>APPOINTMENT</b></h5>
+                           <p>{{appoinment_details.dov}}</p>
+                           <p>{{appoinment_details.time}}</p>
+                       </div>
+                       <div class="col-lg-3">
+                           <h5><b>CARE PROVIDER</b></h5>
+                           <p>DR.{{appoinment_details.doctor_name}}</p>
+                       </div>
+                       <div class="col-lg-3" ng-if="appoinment_details.type==1">
+                           <span class="label label-default">Cancelled</span>
+                       </div>
+                       <div class="col-lg-3" ng-if="appoinment_details.type==2">
+                           <span class="label label-success">Arrival</span>
+                       </div>
+                   </div>
+               </div>
+               </div>
+            </div>--%>
+
         <div class="col-lg-1"></div>
     </div>
+<div class="modal fade" id="myModal3" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header panel-primary">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">  Appointment Detail</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" class="form-horizontal" name="myform4" >
 
+                    <div class="form-group">
+                        <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">Patient Name</span>
+                                <label class="form-control">{{appoinment_details.name}}</label>
+                                </div>
+                            </div>
+                        <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">Phone No</span>
+                                <label class="form-control">{{appoinment_details.contact_no}}</label>
+                                </div>
+                            </div>
+                        <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon"> Date</span>
+                                <label class="form-control">{{appoinment_details.dov}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">Time</span>
+                                <label class="form-control">{{appoinment_details.time}}</label>
+                                </div>
+                            </div>
+                        <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">Doctor Name</span>
+                                <label class="form-control">{{appoinment_details.doctor_name}}</label>
+                                </div>
+                            </div>
+                        <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">Type</span>
+                                <label class="form-control" ng-if="appoinment_details.type==1">New</label>
+                                <label class="form-control" ng-if="appoinment_details.type==0">Existing</label>
+                                </div>
+                            </div>
+                    </div>
+
+                    </form>
+
+                </div>
+
+        </div>
+    </div>
+
+    </div>
 
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog modal-lg">
@@ -276,55 +276,44 @@
                     <h4 class="modal-title">New Patient Appointment</h4>
                 </div>
                 <div class="modal-body">
-                    <form role="form" class="form-horizontal" name="myform1" ng-submit="submitt()">
-                        <fieldset>
+                    <form role="form" class="form-horizontal" name="myform1" >
                             <div class="form-group">
                                 <div class="col-lg-4">
                                     <div class="input-group">
                                         <span class="input-group-addon">Appoinment Date</span>
                                         <label class="form-control">{{dt_date}}</label>
                                     </div>
-                            </div>
+                                  </div>
                                 <div class="col-lg-3">
                                     <div class="input-group">
                                         <span class="input-group-addon"> Time</span>
                                         <label class="form-control">{{time}}</label>
                                     </div>
                                 </div>
-
                                 <div class="col-lg-5">
                                     <div class="input-group">
                                         <span class="input-group-addon">Type</span>
                                         <div class="checkbox pb10 fileRadioBox form-control">
                                             <label>
-                                                <input type="radio" name="type"  value="0"   ng-model="type" ng-click="newpatient()" required>New
+                                                <input type="radio" name="type"  value="1"   ng-model="type" ng-click="newpatient()" required>New
                                             </label>
 
                                             <label>
-                                                <input type="radio" name="type" value="1"  ng-model="type"  required>
-                                                Exiting
+                                                <input type="radio" name="type" value="0"  ng-model="type"  required>
+                                                Existing
                                             </label>
                                         </div>
                                     </div>
-
                                 </div>
                                 </div>
-
-                            <div class="form-group" ng-if="type==1">
+                            <div class="form-group" ng-if="type==0">
                                 <div class="col-lg-4">
                                     <div class="input-group">
-
                                         <input class="form-control" name="search" placeholder="Enter The Phone No" ng-model="contact_no">
                                         <span class="input-group-addon" ng-click="fromSubmit(contact_no)" ><i class="fa fa-search"></i> </span>
                                     </div>
-
                                 </div>
-
                             </div>
-
-
-
-
                             <div class="form-group" ng-if="inform.length > 0">
                                 <div class="col-lg-12" >
                                     <div class="table-responsive">
@@ -345,14 +334,14 @@
                                             </tr>
                                             </tbody>
                                         </table>
-
-
-
                                     </div>
-
                                 </div>
                             </div>
-                            <div class="form-group">
+
+                    </form>
+                    <form role="form" class="form-horizontal" name="myform" ng-submit="submit()" >
+                        <fieldset>
+                            <div class="form-group" >
                                 <div class="col-lg-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">First Name</span>
@@ -360,7 +349,7 @@
                                                ng-model="first_name" required>
                                     </div>
                                     <span class="text-danger wrapper text-center ng-binding"
-                                          ng-show="myform1.first_name.$invalid &&  myform1.first_name.$touched">Please Enter First Name</span>
+                                          ng-show="myform.first_name.$invalid &&  myform.first_name.$touched">Please Enter First Name</span>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="input-group">
@@ -369,7 +358,7 @@
                                                ng-model="last_name" required>
                                     </div>
                                     <span class="text-danger wrapper text-center ng-binding"
-                                          ng-show="myform1.last_name.$invalid &&  myform1.last_name.$touched">Please Enter Last Name</span>
+                                          ng-show="myform.last_name.$invalid &&  myform.last_name.$touched">Please Enter Last Name</span>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -380,7 +369,7 @@
                                                ng-model="mobile_no" required>
                                     </div>
                                     <span class="text-danger wrapper text-center ng-binding"
-                                          ng-show="myform1.mobile_no.$invalid &&  myform1.mobile_no.$touched">Please Enter Mobile No</span>
+                                          ng-show="myform.mobile_no.$invalid &&  myform.mobile_no.$touched">Please Enter Mobile No</span>
                                 </div>
 
                             </div>
@@ -388,7 +377,7 @@
                                 <div class="row">
                                     <div class="col-lg-offset-4 col-lg-7">
                                         <button type="submit" class="btn btn-success"
-                                                ng-disabled="myform1.$invalid " ng-click="submitted=true">Save
+                                                ng-disabled="myform1.$invalid || myform.$invalid" ng-click="submitted=true">Save
                                         </button>
                                         <button type="button" class="btn btn-inverse" data-dismiss="modal">Cancel
                                         </button>

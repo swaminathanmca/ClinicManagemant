@@ -30,14 +30,21 @@ $scope.newpatient=function(){
     $scope.contact_no="";
 }
 
-$scope.schedule=function(time,flag){
-
+$scope.schedule=function(time,flag,id){
+    $scope.id=id;
     $scope.time=time;
     if(flag==1){
+        $scope.appoinment_details="";
         $('#myModal').modal()
     }else if(flag==0){
-        $('#myModal1').modal()
+        $http.get("GetAppoinmentById/"+$scope.id).then
+        (function(response){
+            $scope.appoinment_details=response.data;
+            $('#myModal3').modal();
+        })
+
     }else{
+        $scope.appoinment_details="";
         $('#myModal2').modal()
     }
 
@@ -102,13 +109,17 @@ $scope.doctorschedule=function(id){
 
                     times={
                         interval:$scope.timesvalue[i].interval,
-                        booked:2
+                        booked:2,
+                        name:$scope.timesvalue[i].name,
+                        appoinment_id:$scope.timesvalue[i].appoinment_id
                     }
 
                 }else{
                      times={
                          interval:$scope.timesvalue[i].interval,
-                         booked:$scope.timesvalue[i].booked
+                         booked:$scope.timesvalue[i].booked,
+                         name:$scope.timesvalue[i].name,
+                         appoinment_id:$scope.timesvalue[i].appoinment_id
                      }
                 }
                 $scope.times.push(times);
@@ -121,7 +132,6 @@ $scope.doctorschedule=function(id){
 
     $scope.fromSubmit=function(contact_no){
         $scope.contact_no=contact_no;
-
         $http.get("PatientAppointmentInfo/"+$scope.dt_date+"/"+$scope.contact_no+"/"+$scope.branch_id).then
         (function(response){
             $scope.inform=response.data.patient;
@@ -151,7 +161,8 @@ $scope.doctorschedule=function(id){
         return 0;
     }
 
-    $scope.submitt=function(){
+    $scope.submit=function(){
+
         var appoinment={
               name:$scope.first_name+" "+$scope.last_name,
               patient_pid:$scope.patient_id,
@@ -159,7 +170,8 @@ $scope.doctorschedule=function(id){
               doctor_id:$scope.doctor_id,
               time:$scope.time,
               contact_no:$scope.mobile_no,
-              dov:$scope.dt_date
+              dov:$scope.dt_date,
+              type:$scope.type
         }
         $http.post("AddAppointment",appoinment).then
         (function(response){
@@ -168,6 +180,7 @@ $scope.doctorschedule=function(id){
                 location.href="AddAppointment";
             }
         })
+
 
     }
 

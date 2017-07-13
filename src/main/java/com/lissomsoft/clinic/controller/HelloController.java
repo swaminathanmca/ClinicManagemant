@@ -2761,7 +2761,7 @@ public class HelloController {
     @RequestMapping(value = "/GetDoctorSchedule/{doctor_id}/{branch_id}",method = RequestMethod.GET)
     public
     @ResponseBody
-    String getDoctorSchedule(@PathVariable Integer doctor_id,@PathVariable Integer branch_id)throws Exception{
+    String getDoctorSchedule(@PathVariable String doctor_id,@PathVariable Integer branch_id)throws Exception{
         JSONObject jsonObject=new JSONObject();
         JSONArray jsonArray=new JSONArray();
         List<Schedule> scheduleList=null;
@@ -2775,6 +2775,7 @@ public class HelloController {
         HashSet<String> dates1=new HashSet<String>();
         HashSet<String> validateDates=null;
         scheduleList=scheduleService.getSchedule(doctor_id,st_date,branch_id);
+
         if(scheduleList.isEmpty()){
            /* dates1=getOldSchedule(st_date,end_dt);*/
             jsonObject.put("flags","");
@@ -2877,33 +2878,54 @@ public class HelloController {
 
         Iterator<Appointment> it=appointments.iterator();
         List<String> inter=new ArrayList<String>();
+        List<Appointment> apptr=new ArrayList<Appointment>();
         while (it.hasNext()){
             Appointment appointment=it.next();
             if(appointment.getStatus()==0 || appointment.getStatus()==2){
                 String dt_sc=appointment.getDov()+" "+appointment.getTime();
+                String name=appointment.getName();
                 Date date3=new Date(dt_sc);
                 inter.add(sdf1.format(date3));
+                apptr.add(appointment);
+
 
             }
-
         }
-        time.removeAll(inter);
+
+
+
+        for (Appointment timere:apptr){
+            timere.getTime();
+            time.remove(timere.getTime());
+        }
 
         Iterator<String> itr=time.iterator();
         Iterator<String> itm=inter.iterator();
-        while (itm.hasNext()){
+        Iterator<Appointment> its=apptr.iterator();
+        while (its.hasNext()){
+            JSONObject data1=new JSONObject();
+            Appointment aptm=its.next();
+            data1.put("interval",aptm.getTime());
+            data1.put("booked",0);
+            data1.put("name",aptm.getName());
+            data1.put("appoinment_id",aptm.getAppointment_id());
+            jsonArray.put(data1);
+        }
+        /*while (itm.hasNext())
+        {
             JSONObject data1=new JSONObject();
             String sh_time=itm.next();
             data1.put("interval",sh_time);
             data1.put("booked",0);
             jsonArray.put(data1);
-        }
+        }*/
         while (itr.hasNext()){
             JSONObject data=new JSONObject();
             String sct_time=itr.next();
             data.put("interval",sct_time);
             data.put("booked",1);
-            jsonArray.put(data);}
+            jsonArray.put(data);
+        }
 
             jsonObject.put("schedule",jsonArray);
             jsonObject.put("date",date);
@@ -2998,7 +3020,7 @@ public class HelloController {
        return  jsonObject.toString();}
 
     @RequestMapping(value ="GetSchedule/{doctor_id}/{branch_id}",method = RequestMethod.GET)
-    public @ResponseBody String getSchedule(@PathVariable Integer doctor_id,@PathVariable Integer branch_id)throws JSONException{
+    public @ResponseBody String getSchedule(@PathVariable String doctor_id,@PathVariable Integer branch_id)throws JSONException{
         JSONObject jsonObject=new JSONObject();
         JSONArray jsonArray=new JSONArray();
         List<Schedule> scheduleList;
@@ -3035,20 +3057,19 @@ public class HelloController {
         JSONObject jsonObject=new JSONObject();
         JSONArray jsonArray=new JSONArray();
         date=date.replace("-","/");
+        SimpleDateFormat dtformat=new SimpleDateFormat("EEE, d MMM yyyy");
         List<Appointment> appointments;
-
-
         if(doctor_id.equalsIgnoreCase("ALL")){
             appointments=appointmentService.viewAppoinment(branch_id, date);
         }else{
             appointments=appointmentService.viewAppoinmentDoctor(branch_id, date, doctor_id);
         }
-
         String flag=updateStatus();
         Iterator<Appointment> itr=appointments.iterator();
         while (itr.hasNext()){
             JSONObject data=new JSONObject();
             Appointment appointment= itr.next();
+            Date date1=new Date(appointment.getDov());
             data.put("appoinment_id",appointment.getAppointment_id());
             data.put("patient_pid",appointment.getPatient_pid());
             data.put("doctor_name",appointment.getDoctor_name());
@@ -3056,14 +3077,35 @@ public class HelloController {
             data.put("time",appointment.getTime());
             data.put("flag",appointment.getStatus());
             data.put("contact_no",appointment.getContact_no());
-            data.put("date",appointment.getDov());
+            data.put("date",dtformat.format(date1));
+            data.put("type",appointment.getType());
             data.put("status",true);
             jsonArray.put(data);
         }
         jsonObject.put("appoinments",jsonArray);
         return jsonObject.toString();
+    }
 
 
+    @RequestMapping(value = "GetAppoinmentById/{appoinment_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getAppoinmentId(@PathVariable Integer appoinment_id)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        Appointment appointment;
+        appointment=appointmentService.getAppoinmentDetails(appoinment_id);
+        jsonObject.put("name",appointment.getName());
+        jsonObject.put("time",appointment.getTime());
+        jsonObject.put("patient_pid",appointment.getPatient_pid());
+        jsonObject.put("dov",appointment.getDov());
+        jsonObject.put("doctor_name",appointment.getDoctor_name());
+        jsonObject.put("type",appointment.getType());
+        jsonObject.put("status",appointment.getStatus());
+        jsonObject.put("contact_no",appointment.getContact_no());
+        jsonObject.put("status",true);
+
+
+        return jsonObject.toString();
     }
 
 

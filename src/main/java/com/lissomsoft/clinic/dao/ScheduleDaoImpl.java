@@ -61,7 +61,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
     }
 
     @Override
-    public List<Schedule> getSchedule(int doctor_id,String start_date,Integer branch_id) {
+    public List<Schedule> getSchedule(String doctor_id,String start_date,Integer branch_id) {
 
         List<Schedule> scheduleList=null;
         try {
