@@ -183,11 +183,6 @@
                         </div>
                       </div>
                     </div>
-
-
-
-
-
                     <div class="form-actions">
                       <div class="row">
                         <div class="col-lg-offset-4 col-lg-7">
