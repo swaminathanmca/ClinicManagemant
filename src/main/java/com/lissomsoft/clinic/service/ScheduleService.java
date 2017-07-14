@@ -18,4 +18,6 @@ public interface ScheduleService {
 
     public List<Schedule> getScheduleDoctor(Integer doctor_id,String start_date);
 
+    public Schedule getSchedulById(Integer schedule_id);
+
 }

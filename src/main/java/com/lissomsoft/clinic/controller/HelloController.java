@@ -1102,6 +1102,7 @@ public class HelloController {
         jsonObject.put("profile_id", doctorUser.getProfile_id());
         jsonObject.put("doctor_id", doctorUser.getDoctor_id());
         jsonObject.put("roomno",doctorUser.getRoomno());
+        jsonObject.put("status",doctorUser.getStatus());
         List<Branch> branches = doctorUser.getBranch();
         Iterator<Branch> it = branches.iterator();
         while (it.hasNext()) {
@@ -2494,7 +2495,6 @@ public class HelloController {
             return "login";
         }
 
-
     }
 
     @RequestMapping(value = "/ResetPassword/{token}/{password}", method = RequestMethod.POST)
@@ -3036,6 +3036,7 @@ public class HelloController {
         JSONObject jsonObject=new JSONObject();
         JSONArray jsonArray=new JSONArray();
         List<Schedule> scheduleList;
+        SimpleDateFormat dateFormat=new SimpleDateFormat("MM/dd/YYYY");
         String date=format.format(new Date());
         scheduleList=scheduleService.getSchedule(doctor_id,date,branch_id);
         Iterator<Schedule> itr=scheduleList.iterator();
@@ -3043,12 +3044,17 @@ public class HelloController {
             Schedule schedule=itr.next();
             JSONObject data=new JSONObject();
             if(schedule.getEnd_type()==1){
-                data.put("start_date",schedule.getStart_date());
-                data.put("end_date",schedule.getEnd_date());
-                data.put("start_time",schedule.getStart_time());
-                data.put("end_time",schedule.getEnd_time());
-                data.put("schedule_id",schedule.getSchedule_id());
-                jsonArray.put(data);
+               if(schedule.getEnd_date().compareTo(dateFormat.format(new Date()))>0){
+                   data.put("start_date",schedule.getStart_date());
+                   data.put("end_date",schedule.getEnd_date());
+                   data.put("start_time",schedule.getStart_time());
+                   data.put("end_time",schedule.getEnd_time());
+                   data.put("schedule_id",schedule.getSchedule_id());
+                   jsonArray.put(data);
+               }
+
+
+
             }else {
                     data.put("start_date",schedule.getStart_date());
                     data.put("end_date","Never End");
@@ -3116,10 +3122,29 @@ public class HelloController {
         jsonObject.put("status",appointment.getStatus());
         jsonObject.put("contact_no",appointment.getContact_no());
         jsonObject.put("status",true);
-
-
         return jsonObject.toString();
     }
+
+    @RequestMapping(value = "GetScheduleById/{schedule_id}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getSchedule(@PathVariable Integer schedule_id)throws JSONException{
+        JSONObject jsonObject=new JSONObject();
+        Schedule schedule;
+        schedule=scheduleService.getSchedulById(schedule_id);
+        jsonObject.put("schedule_id",schedule.getSchedule_id());
+        jsonObject.put("start_date",schedule.getStart_date());
+        jsonObject.put("end_date",schedule.getEnd_date());
+        jsonObject.put("start_time",schedule.getStart_time());
+        jsonObject.put("end_time",schedule.getEnd_time());
+        jsonObject.put("end_type",schedule.getEnd_type());
+        jsonObject.put("occurences",schedule.getNo_of_occurenes());
+        jsonObject.put("day_flag",schedule.getDay_flag());
+        jsonObject.put("status",true);
+        return  jsonObject.toString();
+    }
+
+
 
 
 }

@@ -108,21 +108,18 @@
                       <th>Complaint </th>
                       <th>Description</th>
                       <th>Options</th>
-
                     </tr>
                     </thead>
+
                     <tbody>
                     <tr dir-paginate="x in complaint | filter:search | orderBy : clinicName | itemsPerPage :5" >
                       <td>{{x.complaint_name}}</td>
                       <td>{{x.complaint_description}}</td>
                       <td><button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="Edit(x.complaint_id)"> Edit</button></td>
-
-
-
                     </tr>
                     </tbody>
-
                   </table>
+
                   <p class=" text-center">
                     <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" ></dir-pagination-controls>
                   </p>

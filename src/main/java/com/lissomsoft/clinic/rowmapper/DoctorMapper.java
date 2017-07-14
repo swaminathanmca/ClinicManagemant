@@ -37,6 +37,7 @@ public class DoctorMapper implements RowMapper<DoctorUser> {
         user.setPassword(resultSet.getString("password"));
         user.setCharge(resultSet.getInt("charge"));
         user.setRoomno(resultSet.getInt("roomno"));
+        user.setStatus(resultSet.getInt("status"));
         return user;
     }
 }

@@ -111,9 +111,6 @@ public class AppointmentDaoImpl implements AppointmentDao {
                     parameter.put("date",date);
                     appointments=jdbcTemplate.query(appoinmentInfo,parameter,new AppoinmentDetMapper());
 
-
-
-
         }catch (Exception e){
             e.printStackTrace();
         }

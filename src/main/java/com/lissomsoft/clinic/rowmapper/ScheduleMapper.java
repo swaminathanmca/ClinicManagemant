@@ -14,6 +14,7 @@ public class ScheduleMapper implements RowMapper{
     public Object mapRow(ResultSet resultSet, int i) throws SQLException {
 
         Schedule schedule=new Schedule();
+        schedule.setSchedule_id(resultSet.getInt("schedule_id"));
         schedule.setStart_date(resultSet.getString("start_date"));
         schedule.setEnd_date(resultSet.getString("end_date"));
         schedule.setEnd_type(resultSet.getInt("end_type"));
@@ -21,6 +22,8 @@ public class ScheduleMapper implements RowMapper{
         schedule.setEnd_time(resultSet.getString("end_time"));
         schedule.setDay_flags(resultSet.getString("day_flag"));
         schedule.setTime(resultSet.getInt("time"));
+        schedule.setNo_of_occurenes(resultSet.getInt("no_of_occurences"));
+
 
 
         return schedule;

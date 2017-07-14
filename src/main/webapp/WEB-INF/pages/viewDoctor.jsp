@@ -230,7 +230,6 @@
 <script src="<%=request.getContextPath()%>/static/vendor/jquery/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/metisMenu/metisMenu.js"></script>
-
 <script src="<%=request.getContextPath()%>/static/js/sb-admin-2.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/angular.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/multiple-select/multiple-select.js"></script>

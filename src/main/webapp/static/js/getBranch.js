@@ -19,8 +19,6 @@ app.controller('getBranch',function($scope,$window,$http){
     $http.get("ViewBranchAdmin/"+ $window.sessionStorage.clinic_id)
         .then(function (response){
             $scope.branch=response.data.branch;
-
-
         });
 
 

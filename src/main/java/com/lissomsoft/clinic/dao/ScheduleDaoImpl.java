@@ -120,4 +120,20 @@ public class ScheduleDaoImpl implements ScheduleDao {
 
         return scheduleList;
     }
+
+    @Override
+    public Schedule getSchedulById(Integer schedule_id) {
+        Schedule schedule=null;
+        try {
+
+            String scheduleSql="SELECT * FROM doctor_schedule where schedule_id=:schedule_id";
+            Map<String,Object> paramter=new HashMap<String, Object>();
+            paramter.put("schedule_id",schedule_id);
+            schedule= (Schedule) jdbcTemplate.queryForObject(scheduleSql,paramter,new ScheduleMapper());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return schedule;
+    }
 }

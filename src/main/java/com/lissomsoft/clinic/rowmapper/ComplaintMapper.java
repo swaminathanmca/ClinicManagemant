@@ -21,8 +21,6 @@ public class ComplaintMapper implements RowMapper {
         complaint.setComplaint_name(resultSet.getString("complaint_name"));
         complaint.setComplaint_description(resultSet.getString("complaint_description"));
 
-
-
         return complaint;
     }
 }

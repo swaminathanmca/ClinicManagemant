@@ -34,4 +34,9 @@ public class ScheduleServiceImpl implements ScheduleService{
     public List<Schedule> getScheduleDoctor(Integer doctor_id, String start_date) {
         return scheduleDao.getScheduleDoctor(doctor_id,start_date);
     }
+
+    @Override
+    public Schedule getSchedulById(Integer schedule_id) {
+        return scheduleDao.getSchedulById(schedule_id);
+    }
 }

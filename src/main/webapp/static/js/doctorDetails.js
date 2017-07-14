@@ -36,6 +36,8 @@ app.controller('doctorDetails',function($scope,$window,$http){
                 $scope.x=response.data.branch;
                 $scope.selectedList=$scope.x.branches;
                 $scope.selectSpecialization=$scope.x.specialization;
+                $scope.availstatus=$scope.x.status.toString();
+
                 var result=$scope.selectedList;
 
                 $('#countries2').bfhcountries({country: $scope.data.country})
@@ -172,7 +174,8 @@ app.controller('doctorDetails',function($scope,$window,$http){
            branch:$scope.selectedList,
            doctor_id:$scope.x.doctor_id,
            charge:$scope.x.charges,
-           roomno:$scope.x.roomno
+           roomno:$scope.x.roomno,
+           status:$scope.availstatus
        }
         $http.post("EditDoctor",doctor).
             then(function(response,status,header,config){

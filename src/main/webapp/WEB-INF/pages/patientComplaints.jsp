@@ -167,14 +167,7 @@
                         </div>
                       </div>
 
-                      <div class="col-lg-6">
-                        <div class="input-group">
-                          <span class="input-group-addon">Diagnosis</span>
-                          <textarea type="text" class="form-control" ng-model="diagnosis" name="diagnosis" rows="2" required> </textarea>
-                        </div>
-                      <span class="text-danger wrapper text-center ng-binding"
-                            ng-show="myform.diagnosis.$invalid &&  myform.diagnosis.$touched">Please Enter The Diagnosis</span>
-                      </div>
+
 
                     </div>
                     <div class="form-group">
@@ -195,6 +188,16 @@
 
                       </div>
 
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-12">
+                        <div class="input-group">
+                          <span class="input-group-addon">Diagnosis</span>
+                          <textarea type="text" class="form-control" ng-model="diagnosis" name="diagnosis" rows="2" required> </textarea>
+                        </div>
+                      <span class="text-danger wrapper text-center ng-binding"
+                            ng-show="myform.diagnosis.$invalid &&  myform.diagnosis.$touched">Please Enter The Diagnosis</span>
+                      </div>
                     </div>
                     <div class="form-group">
                       <div class="col-lg-12">

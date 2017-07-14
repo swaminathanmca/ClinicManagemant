@@ -36,7 +36,14 @@ $scope.getDoctor=function(id){
     })
 }
 
+$scope.edit=function(id){
+    $scope.schedule_id=id;
+$http.get("GetScheduleById/"+$scope.schedule_id).then
+(function(response){
+    $scope.scheduledetails=response.data;
+})
 
+}
 
 
 

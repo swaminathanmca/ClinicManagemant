@@ -137,8 +137,8 @@
                       <th> Name</th>
                       <th>Email</th>
                       <th>Contact No</th>
-
                     </tr>
+
                     </thead>
                     <tbody>
                     <tr dir-paginate="x in data | filter : search | orderBy : first_name | itemsPerPage :5" >
@@ -146,9 +146,7 @@
                       <td>{{x.first_name}} &nbsp {{x.last_name}}</td>
                       <td>{{x.email}}</td>
                       <td>{{x.contact_no}}</td>
-
                     </tr>
-
 
                     </tbody>
 

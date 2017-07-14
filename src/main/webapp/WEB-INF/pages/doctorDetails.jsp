@@ -405,7 +405,7 @@
               </div>
             </div>
                 <div class="form-group">
-                  <div class="col-lg-6">
+                  <div class="col-lg-4">
                     <div class="input-group">
                       <span class="input-group-addon">Phone No</span>
                       <input  type="text " class="form-control" ui-mask="9999-999-999" ng-model="x.phone" name="cphoneno" ng-blur="EditChiefContact(x.profile_id,x.phone)" required>
@@ -416,7 +416,7 @@
                                                        The Mobile Number Already Taken
                                                            </span>
                   </div>
-                  <div class="col-lg-6">
+                  <div class="col-lg-4">
                     <div class="input-group">
                       <span class="input-group-addon">Email Id</span>
                       <input  type="text " class="form-control" ng-model="x.email" name="email" ng-blur="EditCemail(x.profile_id,x.email)" required>
@@ -426,6 +426,15 @@
                                             <span class="text-danger wrapper text-center ng-binding" ng-show="err_chief_email==false">
                                                        The Email Already Taken
                                                            </span>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="input-group">
+                      <span class="input-group-addon">Status</span>
+                      <select class="form-control" ng-model="availstatus">
+                        <option value="0">Active</option>
+                        <option value="1">InActive</option>
+                      </select>
+                    </div>
                   </div>
                  <%-- <div class="col-lg-3">
                     <div class="input-group">
