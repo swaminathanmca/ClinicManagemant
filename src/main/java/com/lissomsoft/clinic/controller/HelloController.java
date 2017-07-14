@@ -312,6 +312,11 @@ public class HelloController {
         return "viewSchedule";
     }
 
+    @RequestMapping(value = "/AppoinmentVisit")
+    public String appoinmentVisit(HttpServletRequest request)throws Exception{
+        return "AppoinmentVisit";
+    }
+
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
     public
     @ResponseBody
@@ -3079,6 +3084,7 @@ public class HelloController {
             data.put("contact_no",appointment.getContact_no());
             data.put("date",dtformat.format(date1));
             data.put("type",appointment.getType());
+            data.put("doctor_id",appointment.getDoctor_id());
             data.put("status",true);
             jsonArray.put(data);
         }

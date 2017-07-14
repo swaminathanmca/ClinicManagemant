@@ -128,7 +128,7 @@ public class AppointmentDaoImpl implements AppointmentDao {
 
             List<Appointment> appointments=null;
         try {
-            String appoinmentInfo="SELECT a.schedule_time,a.appointment_id,a.name,a.phone_no,a.type,a.dov,p.name created_at,a.doctor_id,a.branch_id,a.patient_pid,a.status FROM appointment a  INNER JOIN doctor_detail d ON a.doctor_id=d.doctor_detail_id INNER JOIN member_master m ON m.user_id=d.user_id INNER JOIN profile_master p ON m.profile_id=p.profile_id AND a.branch_id=:branch_id AND a.dov=:date";
+            String appoinmentInfo="SELECT a.schedule_time,a.appointment_id,a.doctor_id,a.name,a.phone_no,a.type,a.dov,p.name created_at,a.doctor_id,a.branch_id,a.patient_pid,a.status FROM appointment a  INNER JOIN doctor_detail d ON a.doctor_id=d.doctor_detail_id INNER JOIN member_master m ON m.user_id=d.user_id INNER JOIN profile_master p ON m.profile_id=p.profile_id AND a.branch_id=:branch_id AND a.dov=:date";
             Map<String,Object> parameter=new HashMap<String, Object>();
             parameter.put("branch_id",branch_id);
             parameter.put("date",date);
@@ -218,7 +218,7 @@ public class AppointmentDaoImpl implements AppointmentDao {
 
         try {
 
-            String appoinmentInfo="SELECT a.schedule_time,a.appointment_id,a.type,a.name,a.phone_no,a.dov,p.name created_at,a.doctor_id,a.branch_id,a.patient_pid,a.status FROM appointment a  INNER JOIN doctor_detail d ON a.doctor_id=d.doctor_detail_id INNER JOIN member_master m ON m.user_id=d.user_id INNER JOIN profile_master p ON m.profile_id=p.profile_id AND a.branch_id=:branch_id AND a.dov=:date AND a.doctor_id=:doctor_id";
+            String appoinmentInfo="SELECT a.schedule_time,a.appointment_id,a.doctor_id,a.type,a.name,a.phone_no,a.dov,p.name created_at,a.doctor_id,a.branch_id,a.patient_pid,a.status FROM appointment a  INNER JOIN doctor_detail d ON a.doctor_id=d.doctor_detail_id INNER JOIN member_master m ON m.user_id=d.user_id INNER JOIN profile_master p ON m.profile_id=p.profile_id AND a.branch_id=:branch_id AND a.dov=:date AND a.doctor_id=:doctor_id";
             Map<String,Object> parameter=new HashMap<String, Object>();
             parameter.put("branch_id",branch_id);
             parameter.put("date",date);

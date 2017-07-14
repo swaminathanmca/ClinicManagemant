@@ -25,6 +25,7 @@ public class AppoinmentDetMapper implements RowMapper {
         appointment.setDoctor_name(resultSet.getString("created_at"));
         appointment.setStatus(resultSet.getInt("status"));
         appointment.setType(resultSet.getInt("type"));
+        appointment.setDoctor_id(resultSet.getInt("doctor_id"));
 
 
 

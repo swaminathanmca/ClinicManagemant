@@ -220,10 +220,6 @@
                           <span class="input-group-addon">
                              Category
                           </span>
-                          <%-- <select class="form-control" ng-model="vtype" name="vtype" required>
-                             <option value="0">Normal </option>
-                             <option value="1">Emergency</option>
-                           </select>--%>
                           <div class="checkbox pb10 fileRadioBox form-control">
                             <label>
                               <input type="radio" name="vtype"  value="0"   ng-model="vtype" required>Normal
