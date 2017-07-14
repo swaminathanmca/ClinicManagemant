@@ -316,6 +316,13 @@ public class HelloController {
     public String appoinmentVisit(HttpServletRequest request)throws Exception{
         return "AppoinmentVisit";
     }
+    @RequestMapping(value = "/ForgotPassword")
+    public String forgotPassword(HttpServletRequest request)throws Exception{
+        return "forgotpassword";
+    }
+
+
+
 
     @RequestMapping(value = "/SignIn", method = RequestMethod.POST)
     public
