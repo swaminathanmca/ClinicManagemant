@@ -117,4 +117,10 @@ $scope.getDoctor=function(id){
 $scope.change=function(){
     $scope.myform.exp_date.$untouched=false;
 }
+
+
+
+
+
+
 });
