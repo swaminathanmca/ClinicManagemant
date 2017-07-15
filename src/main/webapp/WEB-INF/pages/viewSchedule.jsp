@@ -197,22 +197,114 @@
               <form class="form-horizontal ng-invalid" role="form" name="myform" ng-submit="submit()" novalidate>
                 <fieldset>
               <div class="form-group">
+                <div class="col-lg-4">
                 <div class="input-group">
                   <span class="input-group-addon">Start Date</span>
-
+                  <input type="text" class="form-control" name="exp_date" placeholder="mm-dd-yyyy" ng-click="open2($event)" datepicker-popup="{{format}}" ng-model="scheduledetails.start_date"  ng-change="change()" min-date="date"  max-date="dtmax" is-open="opened2" datepicker-options="dateOptions" close-text="Close" style="height: 37px" disabled="disabled" required/>
+                      <span class="input-group-btn">
+                         <button type="button" class="btn btn-default" ng-click="open2($event)" style="height: 37px"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
+                </div>
+                  <span style="color: red"  ng-show="myform.exp_date.$untouched" >Start date should be greater than today. </span>
+                </div>
+                <div class="col-lg-4">
+                  <div class="input-group">
+                    <span class="input-group-addon">Start Time</span>
+                    <input  type="text" class="form-control timer" placeholder="__:__ __" ng-model="scheduledetails.start_time" ng-change="timeValidation()">
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="input-group">
+                    <span class="input-group-addon">End Time</span>
+                    <input  type="text" class="form-control timer" placeholder="__:__ __" ng-model="scheduledetails.end_time" ng-change="timeValidation()">
+                  </div>
+                  <span style="color: red"  ng-show="toTimeFlag" >To time should be greater than from time. </span>
                 </div>
               </div>
+                  <div class="form-group">
+                    <div class="col-lg-8">
+                      <div class="input-group">
+                        <span class="input-group-addon">Day Frequency</span>
+                        <div class="checkbox fileRadioBox form-control" >&nbsp;
+                          <label>
+                            <input type="checkbox"  ng-true-value="'2'"  ng-false-value="''"  ng-model="scheduledetails.day1"   class="ng-pristine ng-untouched" checked="checked" />MON
+                          </label>
+                          <label>
+                            <input type="checkbox"   ng-true-value="'3'"  ng-false-value="''"  ng-model="scheduledetails.day2"   class="ng-pristine ng-untouched" checked="checked" />TUE
+                          </label>
+                          <label>
+                            <input type="checkbox"   ng-true-value="'4'"  ng-false-value="''"  ng-model="scheduledetails.day3"   class="ng-pristine ng-untouched" checked="checked" />WED
+                          </label>
+                          <label>
+                            <input type="checkbox"   ng-true-value="'5'"  ng-false-value="''"  ng-model="scheduledetails.day4"   class="ng-pristine ng-untouched" checked="checked" />THU
+                          </label>
+                          <label>
+                            <input type="checkbox"   ng-true-value="'6'"  ng-false-value="''"  ng-model="scheduledetails.day5"   class="ng-pristine ng-untouched" checked="checked" />FRI
+                          </label>
+                          <label>
+                            <input type="checkbox"   ng-true-value="'7'"  ng-false-value="''"  ng-model="scheduledetails.day6"   class="ng-pristine ng-untouched" checked="checked" />SAT
+                          </label>
+                          <label>
+                            <input type="checkbox"   ng-true-value="'1'"  ng-false-value="''"  ng-model="scheduledetails.day7"   class="ng-pristine ng-untouched" checked="checked" />SUN
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="checkbox pb10 fileRadioBox">
+                        <label>
+                          <input type="radio" name="type"  value="0"   ng-model="scheduledetails.end_type" ng-click="changes()"  required>Never End
+                        </label>
+                        <label>
+                          <input type="radio" name="type" value="1"  ng-model="scheduledetails.end_type"   required>
+                          After
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-lg-3">
+                      <div class="input-group">
+                        <span class="input-group-addon">Occurences</span>
+                        <input class="form-control" type="text" ng-model="scheduledetails.occurences" ng-disabled="scheduledetails.end_type==0">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="input-group">
+                        <span class="input-group-addon">Time Duration </span>
+                        <div class="checkbox pb10 fileRadioBox">
+                          <label>
+                            <input type="radio" name="time"  value="0"   ng-model="scheduledetails.time"   required>15 Minutes
+                          </label>
+                          <label>
+                            <input type="radio" name="time" value="1"  ng-model="scheduledetails.time"      required> 30 Minutes
+                          </label>
+                          <label>
+                            <input type="radio" name="time" value="2"  ng-model="scheduledetails.time"      required> 1  Hour
+                          </label>
+                        </div>
 
+                      </div>
+                    </div>
+                  </div>
 
+                  <div class="form-actions">
+                    <div class="row">
+                      <div class="col-lg-offset-4 col-lg-7">
+                        <button type="submit" class="btn btn-success"
+                                ng-disabled="myform.$invalid || toTimeFlag  " ng-click="submitted=true">Add Schedule
+                        </button>
+                        <button type="button" class="btn btn-inverse" data-dismiss="modal" >Cancel</button>
+                      </div>
+                    </div>
+                  </div>
 
               </fieldset>
                 </form>
               </div>
               </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
+
       </div>
     </div>
   </div>
@@ -228,6 +320,8 @@
 <script src="<%=request.getContextPath()%>/static/vendor/multiple-select/multiple-select.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/js-custom-select/customSelect.js"></script>
 <script src="<%=request.getContextPath()%>/static/vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="<%=request.getContextPath()%>/static/vendor/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+<script src="<%=request.getContextPath()%>/static/vendor/moment/moment.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/index.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/mask.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/dirPagination.js"></script>

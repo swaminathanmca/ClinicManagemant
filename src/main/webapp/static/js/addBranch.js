@@ -17,7 +17,7 @@ app.controller('branchController',function($scope,$http,$window){
             $window.sessionStorage.branch_id=$scope.trackdata.branch_id;
             $window.sessionStorage.clinic_name=$scope.trackdata.clinic_name;
             $scope.clinic_name= $window.sessionStorage.clinic_name;
-            $scope.branch_name=$scope.trackdata.branch_name;
+            $scope.cbranch_name=$scope.trackdata.branch_name;
         });
 
 

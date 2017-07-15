@@ -85,6 +85,7 @@ public class Schedule {
         this.end_type = end_type;
     }
 
+
     public Integer getNo_of_occurenes() {
         return no_of_occurenes;
     }
@@ -92,7 +93,6 @@ public class Schedule {
     public void setNo_of_occurenes(Integer no_of_occurenes) {
         this.no_of_occurenes = no_of_occurenes;
     }
-
 
     public Schedule_day getDay_flag() {
         return day_flag;

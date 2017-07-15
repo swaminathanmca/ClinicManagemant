@@ -204,7 +204,7 @@
                                             <div class="col-lg-4" ng-if="role=='BranchAdmin'">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">Branch Name</span>
-                                                    <label class="form-control" type="text">{{data.branch_name}}</label>
+                                                    <label class="form-control" type="text">{{branch_name}}</label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4" ng-if="role=='Admin'">

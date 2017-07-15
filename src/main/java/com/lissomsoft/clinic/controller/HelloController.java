@@ -3130,8 +3130,10 @@ public class HelloController {
     @ResponseBody
     String getSchedule(@PathVariable Integer schedule_id)throws JSONException{
         JSONObject jsonObject=new JSONObject();
+        JSONArray jsonArray=new JSONArray();
         Schedule schedule;
         schedule=scheduleService.getSchedulById(schedule_id);
+
         jsonObject.put("schedule_id",schedule.getSchedule_id());
         jsonObject.put("start_date",schedule.getStart_date());
         jsonObject.put("end_date",schedule.getEnd_date());
@@ -3139,7 +3141,26 @@ public class HelloController {
         jsonObject.put("end_time",schedule.getEnd_time());
         jsonObject.put("end_type",schedule.getEnd_type());
         jsonObject.put("occurences",schedule.getNo_of_occurenes());
-        jsonObject.put("day_flag",schedule.getDay_flag());
+        jsonObject.put("time",schedule.getTime());
+        jsonObject.put("flags",schedule.getDay_flags());
+        String[] flags=schedule.getDay_flags().split(",");
+        for(String flag:flags){
+            if(flag.equals("1")){
+                jsonObject.put("day7",flag);
+            }else if(flag.equals("2")){
+                jsonObject.put("day1",flag);
+            }else  if(flag.equals("3")){
+                jsonObject.put("day2",flag);
+            }else  if(flag.equals("4")){
+                jsonObject.put("day3",flag);
+            }else  if(flag.equals("5")){
+                jsonObject.put("day4",flag);
+            }else  if(flag.equals("6")){
+                jsonObject.put("day5",flag);
+            }else  if(flag.equals("7")){
+                jsonObject.put("day6",flag);
+            }
+        }
         jsonObject.put("status",true);
         return  jsonObject.toString();
     }

@@ -132,7 +132,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h4 class="page-header"> {{clinic_name}} Hospital  <span></span> (Branch : &nbsp;{{branch_name}})</h4>
+                <h4 class="page-header"> {{clinic_name}} Hospital  <span></span> (Branch : &nbsp;{{cbranch_name}})</h4>
             </div>
         </div>
         <div class="row">
