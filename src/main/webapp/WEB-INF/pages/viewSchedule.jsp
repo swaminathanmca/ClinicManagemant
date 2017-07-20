@@ -194,7 +194,7 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-lg-12">
-              <form class="form-horizontal ng-invalid" role="form" name="myform" ng-submit="submit()" novalidate>
+              <form class="form-horizontal ng-invalid" role="form" name="myform" ng-submit="submit(scheduledetails.schedule_id)" novalidate>
                 <fieldset>
               <div class="form-group">
                 <div class="col-lg-4">
@@ -284,6 +284,15 @@
                           </label>
                         </div>
 
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group" ng-show="con_status==false">
+                    <div class="col-lg-12">
+                      <div class="alert alert-danger" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error: </span>
+                        Schedule Unavailable
                       </div>
                     </div>
                   </div>

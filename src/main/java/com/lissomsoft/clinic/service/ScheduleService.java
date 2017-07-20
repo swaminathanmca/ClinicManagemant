@@ -20,4 +20,8 @@ public interface ScheduleService {
 
     public Schedule getSchedulById(Integer schedule_id);
 
+    public List<Schedule> getScheduleDoctorId(Integer doctor_id,String start_date,Integer schedule_id);
+
+    Boolean editSchedule(Schedule schedule,StringBuilder sb);
+
 }

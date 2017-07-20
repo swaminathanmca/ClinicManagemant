@@ -11,6 +11,7 @@ import org.codehaus.jettison.json.JSONObject;
 import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -195,6 +196,7 @@ public class HelloController {
     }
 
     @RequestMapping(value = "/ViewPatientVisit")
+
     public String viewPatientVisit(HttpServletRequest request) throws Exception {
         return "viewVisit";
     }
@@ -2562,13 +2564,9 @@ public class HelloController {
         List<String> getDateCompare = new ArrayList<String>();
         List<String> getOld = new LinkedList<String>();
         scheduleList = scheduleService.getScheduleDoctor(schedule.getDoctor_id(), schedule.getStart_date());
-
-
         DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
-
         String schedulestart_time = schedule.getStart_time();
         String scheduleend_time = schedule.getEnd_time();
-
         if (scheduleList.isEmpty()) {
             jsonObject.put("status", true);
         } else {
@@ -2626,13 +2624,6 @@ public class HelloController {
                             Date d4 = sdf.parse(scheduleend_date);
 
                             if ((d3.before(d2) && (d3.after(d1))) || (d3.before(d1) && (d4.after(d1))) || (d3.equals(d1) && (d4.before(d2))) || (d3.equals(d1))) {
-                               /* JSONObject data=new JSONObject();
-                                data.put("start_date",sc.getStart_date());
-                                data.put("end_date",sc.getEnd_date());
-                                data.put("start_time",sc.getStart_time());
-                                data.put("end_time",sc.getEnd_time());
-                                jsonArray.put(data);
-                                jsonObject.put("conflict",jsonArray);*/
                                 jsonObject.put("status", false);
                                 return jsonObject.toString();
 
@@ -3164,6 +3155,140 @@ public class HelloController {
         jsonObject.put("status",true);
         return  jsonObject.toString();
     }
+
+
+
+    @RequestMapping(value = "/EditValidateSchedule", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String editvalidateSchedule(@RequestBody Schedule schedule) throws JSONException, ParseException {
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+        List<Schedule> scheduleList;
+        List<String> getDateCompare = new ArrayList<String>();
+        List<String> getOld = new LinkedList<String>();
+        scheduleList = scheduleService.getScheduleDoctorId(schedule.getDoctor_id(), schedule.getStart_date(),schedule.getSchedule_id());
+        DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
+        String schedulestart_time = schedule.getStart_time();
+        String scheduleend_time = schedule.getEnd_time();
+        if (scheduleList.isEmpty()) {
+            jsonObject.put("status", true);
+        } else {
+            Iterator<Schedule> scheduleIterator = scheduleList.iterator();
+            while (scheduleIterator.hasNext()) {
+                List<String> getOldDateCompare = new ArrayList<String>();
+                Schedule sc = scheduleIterator.next();
+
+                String scstart_time = sc.getStart_time();
+                String scend_time = sc.getEnd_time();
+
+                if (schedule.getEnd_type() == 1) {
+                    Date date = new Date();
+                    Calendar calendar = Calendar.getInstance();
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                    calendar.setTime(date);
+                    calendar.add(Calendar.DATE, schedule.getNo_of_occurenes());
+                    schedule.setEnd_date(dateFormat.format(calendar.getTime()));
+                    getDateCompare = getCurrentSchedule(schedule.getStart_date(), schedule.getEnd_date(), schedule.getDay_flag());
+                } else {
+                    Date date = new Date();
+                    Calendar calendar = Calendar.getInstance();
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                    calendar.setTime(date);
+                    calendar.add(Calendar.DATE, 30);
+                    schedule.setEnd_date(dateFormat.format(calendar.getTime()));
+                    String ed_date = dateFormat.format(calendar.getTime());
+                    getDateCompare = getCurrentSchedule(schedule.getStart_date(), ed_date, schedule.getDay_flag());
+                }
+
+                if (sc.getEnd_type() == 1) {
+                    getOldDateCompare = getOldSchedule(schedule.getStart_date(), sc.getEnd_date(), sc.getDay_flags());
+                } else {
+                    Date date1 = new Date();
+                    Calendar calendar1 = Calendar.getInstance();
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                    calendar1.setTime(date1);
+                    calendar1.add(Calendar.DATE, 30);
+                    String end_dt = dateFormat.format(calendar1.getTime());
+
+                    getOldDateCompare = getOldSchedule(schedule.getStart_date(), end_dt, sc.getDay_flags());
+
+                }
+                for (String date1 : getDateCompare) {
+                    for (String date2 : getOldDateCompare) {
+                        if (date1.equalsIgnoreCase(date2)) {
+
+                            String scstart_date = date2 + " " + scstart_time;
+                            String scend_date = date2 + "  " + scend_time;
+                            String schedulestart_date = date1 + "  " + schedulestart_time;
+                            String scheduleend_date = date1 + " " + scheduleend_time;
+                            Date d1 = sdf.parse(scstart_date);
+                            Date d2 = sdf.parse(scend_date);
+                            Date d3 = sdf.parse(schedulestart_date);
+                            Date d4 = sdf.parse(scheduleend_date);
+
+                            if ((d3.before(d2) && (d3.after(d1))) || (d3.before(d1) && (d4.after(d1))) || (d3.equals(d1) && (d4.before(d2))) || (d3.equals(d1))) {
+                                jsonObject.put("status", false);
+                                return jsonObject.toString();
+
+                            } else {
+
+                                jsonObject.put("status", true);
+                            }
+                        } else {
+                            jsonObject.put("status", true);
+                        }
+                    }
+                }
+            }
+        }
+        return jsonObject.toString();
+    }
+
+
+
+    @RequestMapping(value = "/EditSchedule", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String editSchedule(@RequestBody Schedule schedule) throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        Boolean flag;
+        StringBuilder sb = new StringBuilder();
+        boolean first = true;
+        Integer str[] = new Integer[7];
+        str[0] = schedule.getDay_flag().getDay1();
+        str[1] = schedule.getDay_flag().getDay2();
+        str[2] = schedule.getDay_flag().getDay3();
+        str[3] = schedule.getDay_flag().getDay4();
+        str[4] = schedule.getDay_flag().getDay5();
+        str[5] = schedule.getDay_flag().getDay6();
+        str[6] = schedule.getDay_flag().getDay7();
+        for (Integer word : str) {
+            if (word != null && word > 0) {
+                if (first) {
+                    first = false;
+                } else {
+                    sb.append(',');
+                }
+                sb.append(word);
+            }
+        }
+        if (schedule.getEnd_type() == 0) {
+            schedule.setEnd_date("0");
+        } else {
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+            Date date = new Date(schedule.getStart_date());
+            cal.setTime(date);
+            cal.add(Calendar.DATE, schedule.getNo_of_occurenes());
+            schedule.setEnd_date(dateFormat.format(cal.getTime()));
+        }
+        flag = scheduleService.editSchedule(schedule, sb);
+        jsonObject.put("status", flag);
+        return jsonObject.toString();
+    }
+
+
 
 
 

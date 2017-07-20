@@ -136,4 +136,55 @@ public class ScheduleDaoImpl implements ScheduleDao {
 
         return schedule;
     }
+
+    @Override
+    public List<Schedule> getScheduleDoctorId(Integer doctor_id, String start_date, Integer schedule_id) {
+        List<Schedule> scheduleList=null;
+        try {
+            String scheduleSql="SELECT * FROM doctor_schedule where doctor_id=:doctor_id AND schedule_id <> :schedule_id";
+            Map<String,Object> paramter=new HashMap<String, Object>();
+            paramter.put("schedule_id",schedule_id);
+            paramter.put("doctor_id",doctor_id);
+            scheduleList= jdbcTemplate.query(scheduleSql,paramter,new ScheduleMapper());
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return scheduleList;
+    }
+
+    @Override
+    public Boolean editSchedule(Schedule schedule, StringBuilder sb) {
+        int result=0;
+        try {
+
+            String editScheduleSql="UPDATE doctor_schedule SET doctor_id=:doctor_id,branch_id=:branch_id,start_date=:start_date,end_date=:end_date,start_time=:start_time,end_time=:end_time,end_type=:end_type,no_of_occurences=:occurences,time=:time,scount=:scount,day_flag=:days,updated_at=:created_at WHERE schedule_id=:schedule_id ";
+
+            Map<String,Object> parameter=new HashMap<String, Object>();
+            parameter.put("schedule_id",schedule.getSchedule_id());
+            parameter.put("doctor_id",schedule.getDoctor_id());
+            parameter.put("branch_id",schedule.getBranch_id());
+            parameter.put("start_date",schedule.getStart_date());
+            parameter.put("end_date",schedule.getEnd_date());
+            parameter.put("start_time",schedule.getStart_time());
+            parameter.put("end_time",schedule.getEnd_time());
+            parameter.put("end_type",schedule.getEnd_type());
+            parameter.put("occurences",schedule.getNo_of_occurenes());
+            parameter.put("time",schedule.getTime());
+            parameter.put("scount",schedule.getScount());
+            parameter.put("created_at",format.format(new Date()));
+            parameter.put("days",sb);
+
+            result=jdbcTemplate.update(editScheduleSql,parameter);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return result>0 ?true:false;
+    }
 }

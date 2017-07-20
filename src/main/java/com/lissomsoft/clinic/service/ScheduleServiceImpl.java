@@ -39,4 +39,14 @@ public class ScheduleServiceImpl implements ScheduleService{
     public Schedule getSchedulById(Integer schedule_id) {
         return scheduleDao.getSchedulById(schedule_id);
     }
+
+    @Override
+    public List<Schedule> getScheduleDoctorId(Integer doctor_id, String start_date, Integer schedule_id) {
+        return scheduleDao.getScheduleDoctorId(doctor_id,start_date,schedule_id);
+    }
+
+    @Override
+    public Boolean editSchedule(Schedule schedule, StringBuilder sb) {
+        return scheduleDao.editSchedule(schedule,sb);
+    }
 }
