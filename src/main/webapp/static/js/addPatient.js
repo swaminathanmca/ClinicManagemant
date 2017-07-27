@@ -72,8 +72,6 @@ $scope.validate=function(){
         })
 
 }
-
-
     $scope.cadd=function(id){
       if(id){
             $scope.emr_address1=$scope.address1;
@@ -82,7 +80,6 @@ $scope.validate=function(){
           $scope.emr_state=$scope.state;
           $scope.emr_pincode=$scope.pincode;
           $('#countries3').bfhcountries({country: $scope.country});
-
       }else
       {
           $scope.emr_address1="";
@@ -92,16 +89,12 @@ $scope.validate=function(){
           $scope.emr_pincode="";
       }
     }
-
     $scope.submit=function(id){
        $scope.branch_id=id;
-
         var satDate = new Date($scope.dob);
         $scope.to_date = moment(satDate).format("MM/DD/YYYY");
-
         $scope.ecountry=$('#countries3').val();
         var patient={
-
             fullName:$scope.first_name,
             lastName:$scope.last_name,
             gender:$scope.gender,
@@ -136,8 +129,6 @@ $scope.validate=function(){
        $http.post('AddPatient/'+$scope.branch_id,patient).
                then(function (response,status,headers,config){
                $scope.to_date=moment($scope.to_date).format("MM-DD-YYYY");
-
-
                if($scope.doctor_id==null){
                    location.href="GetPatient";
                }else{
@@ -149,15 +140,9 @@ $scope.validate=function(){
                                location.href="AppoinmentVisit"
                            }
                        })
-
                }
-
-
-
-
-         });
+           });
 }
-
     $scope.cancel=function(){
         location.href="GetPatient";
     }
