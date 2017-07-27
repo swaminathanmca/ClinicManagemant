@@ -172,7 +172,12 @@ $scope.change=function(){
                 }else{
                     $http.post("EditSchedule",schedule).
                         then(function(response){
-                            console.log(response.data.status);
+                            $('#myModal').modal('toggle');
+                            $http.get("GetSchedule/"+$scope.doctor_id+"/"+$scope.branch_id).then
+                                (function(response){
+                                    $scope.schedule=response.data.schedule;
+                                })
+
                         })
                 }
             });

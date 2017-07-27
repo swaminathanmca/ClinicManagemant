@@ -88,4 +88,8 @@ public class PatientServiceImpl implements PatientService {
     public List<PatientVisit> getAllEntry(String patient_pid, Integer doctor_id) {
         return patientDao.getAllEntry(patient_pid,doctor_id);
     }
+
+    public Patient getPatientId(String dob,String contact_no,String email_id){
+        return patientDao.getPatientId( dob, contact_no, email_id);
+    }
 }

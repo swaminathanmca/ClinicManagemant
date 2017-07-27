@@ -451,4 +451,30 @@ if((result >0 )? true :false){
 
         return patientVisits;
     }
+
+    @Override
+    public Patient getPatientId(String dob, String contact_no, String email_id) {
+
+        Patient patient=null;
+        try {
+
+
+            String getPatientSql="SELECT * FROM clinic.patient_master where dob=:dob AND email_id=:email_id AND contact_no=:contact_no";
+            Map<String,Object> parameter=new HashMap<String, Object>();
+            parameter.put("dob",dob);
+            parameter.put("contact_no",contact_no);
+            parameter.put("email_id",email_id);
+            patient= (Patient) jdbcTemplate.queryForObject(getPatientSql,parameter,new PatientMapper());
+
+
+        }catch(EmptyResultDataAccessException e){
+            return  null;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+        return patient;
+    }
 }

@@ -31,7 +31,7 @@ app.controller('AppoinmentVisit',function($scope,$window,$http){
             doctor_id:$scope.doctor_id,
             referal_details:$scope.rdetails
         }
-console.log(visit);
+
 
         $http.post("PatientVisit",visit).
             then(function (response,status,headers,config)

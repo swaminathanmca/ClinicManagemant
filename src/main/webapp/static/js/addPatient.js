@@ -5,13 +5,15 @@ app.controller('Patient',function($scope,$http,$window){
     $scope.role=$window.sessionStorage.role_name;
     $scope.email= $window.sessionStorage.email;
     $scope.clinic_id=$window.sessionStorage.clinic_id;
-    $scope.doctor_name=$window.sessionStorage.doctor_name;
+    $scope.patient_name=$window.sessionStorage.patient_name;
     $scope.doctor_id=$window.sessionStorage.doctor_id;
+
+
     $scope.date = new Date();
     $scope.clear = function () {
         $scope.dt = null;
     };
-
+    $scope.first_name=$scope.patient_name;
     $scope.toggleMin = function() {
         $scope.minDate = $scope.minDate ? null : new Date();
     };
@@ -133,7 +135,26 @@ $scope.validate=function(){
 
        $http.post('AddPatient/'+$scope.branch_id,patient).
                then(function (response,status,headers,config){
-               location.href="GetPatient";
+               $scope.to_date=moment($scope.to_date).format("MM-DD-YYYY");
+
+
+               if($scope.doctor_id==null){
+                   location.href="GetPatient";
+               }else{
+                   $http.get('GetPatientId/'+$scope.to_date+"/"+$scope.mobile_no+"/"+$scope.email_id).
+                       then(function(response,status){
+                           $scope.patient_id=response.data.patient_id;
+                           $window.sessionStorage.patient_id=$scope.patient_id;
+                           if(response.status){
+                               location.href="AppoinmentVisit"
+                           }
+                       })
+
+               }
+
+
+
+
          });
 }
 

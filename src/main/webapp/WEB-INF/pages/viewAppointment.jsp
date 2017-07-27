@@ -159,7 +159,7 @@
                           <p>DR.{{x.doctor_name}}</p>
                         </div>
                         <div class="col-lg-3" ng-if="x.flag==0">
-                             <button type="button" class="btn btn-info" ng-click="showarrival(x.appoinment_id,x.patient_pid,x.type,x.doctor_id,x.doctor_name)">Mark Arrival</button>
+                             <button type="button" class="btn btn-info" ng-click="showarrival(x.appoinment_id,x.patient_pid,x.type,x.doctor_id,x.name,x.doctor_name)">Mark Arrival</button>
                             <button type="button" class="btn btn-black" ng-click="deletearrival(x.appoinment_id,x.patient_pid)">Cancel</button>
                         </div>
                         <div class="col-lg-3" ng-if="x.flag==1">

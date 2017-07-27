@@ -135,12 +135,14 @@ $scope.doctorschedule=function(id){
         return 0;
     }
 
-    $scope.showarrival=function(id,patient_pid,type,doctor_id,doctor_name){
+    $scope.showarrival=function(id,patient_pid,type,doctor_id,name,doctor_name){
         $scope.apoinment_id=id;
         $window.sessionStorage.patient_id=patient_pid;
         $window.sessionStorage.doctor_id=doctor_id;
+        $window.sessionStorage.patient_name=name;
         $window.sessionStorage.doctor_name=doctor_name;
         $scope.st_status=2;
+
         $http.post("UpdateScheduleStatus/"+$scope.st_status+"/"+$scope.apoinment_id).then
            (function(response){
                $scope.st=response.data.status;
@@ -148,12 +150,11 @@ $scope.doctorschedule=function(id){
                   if(type==0){
                             location.href="AppoinmentVisit"
                   }else{
+
                       location.href="AddPatient";
                   }
                }
-
            })
-
     }
 
     $scope.deletearrival=function(id,patient_pid){

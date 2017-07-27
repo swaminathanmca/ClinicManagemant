@@ -1,5 +1,7 @@
 package com.lissomsoft.clinic.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.lissomsoft.clinic.domain.Speciality;
 import com.lissomsoft.clinic.rowmapper.UserLogin;
 import com.lissomsoft.clinic.service.*;
@@ -19,9 +21,14 @@ import org.springframework.web.bind.annotation.*;
 import com.lissomsoft.clinic.domain.*;
 import com.lissomsoft.clinic.vo.*;
 import org.springframework.web.context.annotation.RequestScope;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
@@ -453,9 +460,41 @@ public class HelloController {
         JSONObject jsonObject = new JSONObject();
         boolean flag;
         flag = doctorService.addDoctor(doctor);
+
         jsonObject.put("status", flag);
         return jsonObject.toString();
     }
+
+
+    @RequestMapping(value = "/AddImage",method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String addImage(MultipartHttpServletRequest request) throws JSONException, IOException, ServletException, ClassNotFoundException, IllegalAccessException, InstantiationException {
+        JSONObject jsonObject=new JSONObject();
+        DoctorUser doctorUser=new DoctorUser();
+
+        Iterator<String> itr =  request.getFileNames();
+        MultipartFile mpf = request.getFile(itr.next());
+        String uploadsDir = "/static/img/";
+        String realPathtoUploads =   request.getServletContext().getRealPath(uploadsDir);
+        String orgName = mpf.getOriginalFilename();
+        String filePath = realPathtoUploads + orgName;
+        File dest = new File(filePath);
+        mpf.transferTo(dest);
+        doctorUser.setFirstname(request.getParameter("firstname"));
+        doctorUser.setAddress1(request.getParameter("address1"));
+        doctorUser.setAddress2(request.getParameter("address2"));
+        doctorUser.setClinic_id(Integer.parseInt(request.getParameter("clinic_id")));
+        String brs=request.getParameter("branch");
+        System.out.println(brs);
+
+
+
+
+
+        return jsonObject.toString();
+    }
+
 
     @RequestMapping(value = "/AddService/{branch_id}", method = RequestMethod.POST)
     public
@@ -3288,7 +3327,20 @@ public class HelloController {
         return jsonObject.toString();
     }
 
+   @RequestMapping(value = "/GetPatientId/{dob}/{contact_no}/{email_id:.+}",method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getPatientId(@PathVariable String dob,@PathVariable String contact_no,@PathVariable String email_id) throws JSONException {
+       JSONObject jsonObject=new JSONObject();
+       Patient patient;
+       dob=dob.replace("-","/");
 
+       patient=patientService.getPatientId(dob,contact_no,email_id);
+       jsonObject.put("patient_id",patient.getPatientId());
+       jsonObject.put("status",true);
+
+       return jsonObject.toString();
+   }
 
 
 
