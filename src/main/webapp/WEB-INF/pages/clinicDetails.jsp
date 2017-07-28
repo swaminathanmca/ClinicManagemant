@@ -190,7 +190,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <div class="col-lg-3">
+                                            <div class="col-lg-4">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">E-Mail Id</span>
                                                     <label class="form-control" type="text">{{clinic.email_id}}</label>
@@ -202,7 +202,7 @@
                                                     <label class="form-control" type="text">{{clinic.contact_no}}</label>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-5">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">Description</span>
                                                     <textarea class="form-control" type="text" disabled>{{clinic.description}}</textarea>

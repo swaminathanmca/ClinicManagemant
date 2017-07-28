@@ -173,7 +173,7 @@
                       <div class="col-lg-6">
                         <div class="input-group">
                           <span class="input-group-addon">Address</span>
-                          <label class="form-control" type="text">{{data.address1}},{{data.address2}}</label>
+                          <textarea class="form-control" type="text">{{data.address1}},{{data.address2}}</textarea>
                         </div>
                       </div>
                     </div>
@@ -226,23 +226,24 @@
                           <label class="form-control" type="text">{{data.phone}}</label>
                         </div>
                       </div>
-                        <div class="col-lg-3">
-                          <div class="input-group">
-                            <span class="input-group-addon">Email Id</span>
-                            <label class="form-control" type="text">{{data.email}}</label>
-                          </div>
-                        </div>
+
 
 
                     </div>
                     <div class="form-group">
-                      <div class="col-lg-6">
+                      <div class="col-lg-4">
+                        <div class="input-group">
+                          <span class="input-group-addon">Email Id</span>
+                          <label class="form-control" type="text">{{data.email}}</label>
+                        </div>
+                      </div>
+                      <div class="col-lg-4">
                         <div class="input-group">
                           <span class="input-group-addon">Clinic Name</span>
                           <label class="form-control">{{data.clinic_name}}</label>
                         </div>
                       </div>
-                      <div class="col-lg-6">
+                      <div class="col-lg-4">
                         <div class="input-group">
                           <span class="input-group-addon">Branch Name</span>
                           <label class="form-control">{{data.branch_name}}</label>
